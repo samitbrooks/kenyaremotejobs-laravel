@@ -1,0 +1,313 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+:root {
+    --background: #fffaf5;
+    --foreground: #1f1a17;
+
+    /* Sunrise: warm coral/orange — hero gradients, CTAs, Kenya-Friendly accents. */
+    --color-sunrise-50: #fff4ed;
+    --color-sunrise-100: #ffe6d5;
+    --color-sunrise-200: #ffc9a8;
+    --color-sunrise-300: #ffa366;
+    --color-sunrise-400: #ff8142;
+    --color-sunrise-500: #ff6b35;
+    --color-sunrise-600: #f2540f;
+    --color-sunrise-700: #c2410c;
+    --color-sunrise-800: #9a3412;
+    --color-sunrise-900: #7c2d12;
+
+    /* Horizon: confident teal-blue — trust, links, secondary CTAs. */
+    --color-horizon-50: #eefcfc;
+    --color-horizon-100: #d3f5f6;
+    --color-horizon-200: #aaeaed;
+    --color-horizon-300: #71d8dd;
+    --color-horizon-400: #35bdc5;
+    --color-horizon-500: #0ea5ab;
+    --color-horizon-600: #0b838c;
+    --color-horizon-700: #0d6971;
+    --color-horizon-800: #10545b;
+    --color-horizon-900: #12464c;
+}
+
+@theme inline {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --font-sans: 'Comfortaa', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --color-sunrise-50: var(--color-sunrise-50);
+    --color-sunrise-100: var(--color-sunrise-100);
+    --color-sunrise-200: var(--color-sunrise-200);
+    --color-sunrise-300: var(--color-sunrise-300);
+    --color-sunrise-400: var(--color-sunrise-400);
+    --color-sunrise-500: var(--color-sunrise-500);
+    --color-sunrise-600: var(--color-sunrise-600);
+    --color-sunrise-700: var(--color-sunrise-700);
+    --color-sunrise-800: var(--color-sunrise-800);
+    --color-sunrise-900: var(--color-sunrise-900);
+
+    --color-horizon-50: var(--color-horizon-50);
+    --color-horizon-100: var(--color-horizon-100);
+    --color-horizon-200: var(--color-horizon-200);
+    --color-horizon-300: var(--color-horizon-300);
+    --color-horizon-400: var(--color-horizon-400);
+    --color-horizon-500: var(--color-horizon-500);
+    --color-horizon-600: var(--color-horizon-600);
+    --color-horizon-700: var(--color-horizon-700);
+    --color-horizon-800: var(--color-horizon-800);
+    --color-horizon-900: var(--color-horizon-900);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--background);
+    color: var(--foreground);
+}
+
+[x-cloak] {
+    display: none !important;
+}
+
+/* Desktop nav links — underline draws in on hover instead of just a color
+   swap, a small but noticeably more "designed" touch than a bare color
+   transition. */
+.nav-underline {
+    position: relative;
+}
+
+.nav-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 100%;
+    bottom: -3px;
+    height: 2px;
+    border-radius: 1px;
+    background: currentColor;
+    opacity: 0.9;
+    transition: right 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-underline:hover::after {
+    right: 0;
+}
+
+/* Shared card hover treatment — a soft brand-colored glow instead of a flat
+   gray shadow, used on job cards, category tiles, and testimonials. */
+.card-hover {
+    transition:
+        transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.2s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 12px 24px -8px rgba(255, 107, 53, 0.18),
+        0 4px 8px -2px rgba(15, 23, 42, 0.06);
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner {
+    animation: spin 0.7s linear infinite;
+}
+
+/* Utility for the hero / CTA gradient used across the site. */
+.gradient-sunrise {
+    background-image: linear-gradient(135deg, var(--color-sunrise-500) 0%, var(--color-sunrise-400) 45%, var(--color-horizon-500) 100%);
+}
+
+.text-gradient-sunrise {
+    background-image: linear-gradient(100deg, var(--color-sunrise-600) 0%, var(--color-horizon-600) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Animated variant of the hero gradient — slow color drift, hero section only. */
+.gradient-sunrise-live {
+    background-image: linear-gradient(120deg, var(--color-sunrise-500) 0%, var(--color-sunrise-400) 30%, var(--color-horizon-500) 70%, var(--color-sunrise-500) 100%);
+    background-size: 250% 250%;
+    animation: gradient-pan 12s ease-in-out infinite;
+}
+
+@keyframes gradient-pan {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float-slow {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* Scroll-reveal utility, paired with the x-reveal Blade/Alpine component. */
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.reveal.is-visible {
+    animation: fade-in-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-float {
+    animation: float-slow 4s ease-in-out infinite;
+}
+
+/* Hero headline typewriter — two lines typed in sequence, cursor hands off
+   from line one to line two, then blinks in place. Widths are in `ch` (tied
+   to the line's own character count) so the reveal always lands exactly on
+   the last letter regardless of font-size at each breakpoint. */
+.typewriter-line1 {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    vertical-align: bottom;
+    width: 0;
+    border-right: 0.08em solid transparent;
+    animation: type-line1 1.05s steps(19, end) forwards;
+}
+
+.typewriter-line2 {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    vertical-align: bottom;
+    width: 0;
+    border-right: 0.08em solid transparent;
+    animation:
+        type-line2 0.95s steps(17, end) 1.25s forwards,
+        caret-blink 0.8s step-end 2.2s infinite;
+}
+
+@keyframes type-line1 {
+    0% {
+        width: 0;
+        border-color: rgba(255, 255, 255, 0.85);
+    }
+    95% {
+        border-color: rgba(255, 255, 255, 0.85);
+    }
+    100% {
+        width: 19ch;
+        border-color: transparent;
+    }
+}
+
+@keyframes type-line2 {
+    0% {
+        width: 0;
+        border-color: transparent;
+    }
+    1% {
+        border-color: rgba(255, 255, 255, 0.85);
+    }
+    100% {
+        width: 17ch;
+        border-color: rgba(255, 255, 255, 0.85);
+    }
+}
+
+@keyframes caret-blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
+/* Tactile press/hover feedback for buttons and primary CTAs. */
+.btn-pop {
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.btn-pop:hover {
+    transform: translateY(-1px) scale(1.02);
+}
+
+.btn-pop:active {
+    transform: scale(0.96);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    .gradient-sunrise-live,
+    .animate-float {
+        animation: none !important;
+    }
+
+    .typewriter-line1,
+    .typewriter-line2 {
+        width: auto !important;
+        border-right: 0 !important;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-delay: 0s !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Site chrome (nav/footer) and any element marked .no-print never appear in
+   a printed page or "Save as PDF" — used by the resume/cover-letter builder
+   so what prints is just the document, not the whole website around it. */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+
+    body {
+        background: #fff;
+    }
+
+    .printable-page {
+        box-shadow: none !important;
+        border: none !important;
+        margin: 0 !important;
+        width: auto !important;
+    }
+}
