@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Model;
 
-#[Table(timestamps: false)]
+#[Table(name: 'sync_meta', timestamps: false)]
 #[Fillable(['id', 'last_synced_at'])]
 class SyncMeta extends Model
 {

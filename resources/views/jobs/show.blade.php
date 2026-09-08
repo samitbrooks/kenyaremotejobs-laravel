@@ -4,6 +4,10 @@
     $plainDescription = \App\Support\Format::stripHtml($job->description ?? '');
     $fullDescription = $unlocked ? $plainDescription : $redactor->redactEmployerIdentity($plainDescription, $job->company);
     $visibleTags = $unlocked ? ($job->tags ?? []) : $redactor->redactTags($job->tags ?? [], $job->company);
+    $rawDescriptionBlocks = \App\Support\DescriptionBlocks::parse($job->description ?? '');
+    $descriptionBlocks = $rawDescriptionBlocks
+        ? ($unlocked ? $rawDescriptionBlocks : \App\Support\DescriptionBlocks::redact($rawDescriptionBlocks, $job->company))
+        : null;
     $hourly = \App\Support\SalaryEstimate::estimateHourlyUsd($job->annual_salary_usd);
     $tierLabels = config('jobs.tier_labels');
     $creditPackages = config('jobs.credit_packages');
@@ -99,7 +103,11 @@
                  offering the role and the link to apply, not the role itself. --}}
             <div class="mt-4 rounded-2xl border border-black/5 bg-white p-6 shadow-sm">
                 <h2 class="mb-3 font-semibold">About this role</h2>
-                <div class="whitespace-pre-line text-sm leading-relaxed text-foreground/80">{{ $fullDescription }}</div>
+                @if ($descriptionBlocks)
+                    <x-description-blocks :blocks="$descriptionBlocks" />
+                @else
+                    <div class="whitespace-pre-line text-sm leading-relaxed text-foreground/80">{{ $fullDescription }}</div>
+                @endif
             </div>
 
             <div class="mt-6">
