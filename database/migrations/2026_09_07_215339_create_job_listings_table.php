@@ -37,10 +37,13 @@ return new class extends Migration
             // employer-paid listings so a resync never deletes one of those.
             $table->string('origin')->default('synced');
             $table->string('tier')->default('basic');
-            // A plain string default, not a JSON_ARRAY() expression — JSON
-            // columns store as text under both MySQL and SQLite, so a literal
-            // '[]' default is portable across both without a raw expression.
-            $table->json('audience_segments')->default('[]');
+            // No DB-level default — MariaDB rejects any DEFAULT clause on a
+            // JSON/BLOB/TEXT column outright (MySQL 8 and SQLite both allow
+            // it, which is what let this slip through local testing).
+            // Every write path (sync, manual, employer, admin) always sets
+            // this explicitly, so there's nothing that actually depends on
+            // a database-side default existing.
+            $table->json('audience_segments');
             $table->foreignId('posted_by_user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
 
