@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\JobListing;
 use App\Services\CreditsService;
 use App\Support\Audience;
+use App\Support\Matching;
 use Illuminate\Http\Request;
 
 class JobsController extends Controller
@@ -22,6 +23,9 @@ class JobsController extends Controller
             ? $request->query('audience')
             : null;
         $page = max(1, (int) $request->query('page', 1));
+
+        $profile = Matching::parseProfileCookie($request->cookie(Matching::COOKIE_NAME));
+        $sortByMatch = $request->query('sort') === 'match' && $profile !== null;
 
         $query = JobListing::query();
 
@@ -65,9 +69,20 @@ class JobsController extends Controller
         $totalPages = max(1, (int) ceil($total / self::PAGE_SIZE));
         $page = min($page, $totalPages);
 
-        $jobs = $query->latest('posted_at')
-            ->forPage($page, self::PAGE_SIZE)
-            ->get();
+        if ($sortByMatch) {
+            // A "best for you" ranking has to happen across the whole
+            // filtered catalog, not just within whatever page would've been
+            // shown by date — so this sorts in memory before slicing,
+            // rather than paginating in the database first.
+            $jobs = $query->get()
+                ->sortByDesc(fn (JobListing $job) => Matching::computeMatchPercent($profile, $job->only(['tags', 'title', 'description'])))
+                ->slice(($page - 1) * self::PAGE_SIZE, self::PAGE_SIZE)
+                ->values();
+        } else {
+            $jobs = $query->latest('posted_at')
+                ->forPage($page, self::PAGE_SIZE)
+                ->get();
+        }
 
         $tags = JobListing::pluck('tags')
             ->flatten()
@@ -88,6 +103,10 @@ class JobsController extends Controller
             || $job->is_free
             || (bool) $unlockedIds?->has($job->id);
 
+        $matchPercent = $profile
+            ? fn (JobListing $job) => Matching::computeMatchPercent($profile, $job->only(['tags', 'title', 'description']))
+            : fn () => null;
+
         return view('jobs.index', [
             'jobs' => $jobs,
             'tags' => $tags,
@@ -102,7 +121,10 @@ class JobsController extends Controller
             'kenyaFriendly' => $kenyaFriendly,
             'freeOnly' => $freeOnly,
             'audience' => $audience,
+            'sortByMatch' => $sortByMatch,
+            'hasProfile' => (bool) $profile,
             'isUnlocked' => $isUnlocked,
+            'matchPercent' => $matchPercent,
         ]);
     }
 
@@ -120,10 +142,14 @@ class JobsController extends Controller
 
         $remainingCredits = $user && ! $unlocked ? $credits->balances($user)[$job->tier]['remaining'] : 0;
 
+        $profile = Matching::parseProfileCookie($request->cookie(Matching::COOKIE_NAME));
+        $matchPercent = $profile ? Matching::computeMatchPercent($profile, $job->only(['tags', 'title', 'description'])) : null;
+
         return view('jobs.show', [
             'job' => $job,
             'unlocked' => $unlocked,
             'remainingCredits' => $remainingCredits,
+            'matchPercent' => $matchPercent,
         ]);
     }
 }

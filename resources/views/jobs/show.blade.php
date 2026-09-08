@@ -41,6 +41,11 @@
             </div>
 
             <div class="mt-4 flex flex-wrap items-center gap-2">
+                @if (is_int($matchPercent))
+                    <span class="inline-flex items-center gap-1 rounded-full bg-horizon-600 px-3 py-1 text-xs font-semibold text-white">
+                        <x-icon name="sparkle" class="h-3.5 w-3.5" /> {{ $matchPercent }}% match for you
+                    </span>
+                @endif
                 @if ($hourly)
                     <span class="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800" title="Estimated from the stated annual salary ÷ 2,080 hours/year — not a guaranteed rate">
                         <x-icon name="coin" class="h-3.5 w-3.5" /> ~${{ $hourly['min'] }}-{{ $hourly['max'] }}/hr
@@ -103,10 +108,12 @@
                  offering the role and the link to apply, not the role itself. --}}
             <div class="mt-4 rounded-2xl border border-black/5 bg-white p-6 shadow-sm">
                 <h2 class="mb-3 font-semibold">About this role</h2>
-                @if ($descriptionBlocks)
+                @if (\App\Support\Language::looksNonEnglish($fullDescription))
+                    <livewire:translate-toggle :text="$fullDescription" :blocks="$descriptionBlocks" />
+                @elseif ($descriptionBlocks)
                     <x-description-blocks :blocks="$descriptionBlocks" />
                 @else
-                    <div class="whitespace-pre-line text-sm leading-relaxed text-foreground/80">{{ $fullDescription }}</div>
+                    <div class="whitespace-pre-line text-sm leading-relaxed text-foreground/80">{!! \App\Support\Format::linkifyEmployerPlaceholder($fullDescription) !!}</div>
                 @endif
             </div>
 

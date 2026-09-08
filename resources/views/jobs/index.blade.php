@@ -35,11 +35,17 @@
             </p>
         @endif
 
-        <p class="mt-2 text-sm">
-            <a href="{{ url('/match') }}" class="inline-flex items-center gap-1 font-semibold text-sunrise-600 hover:underline">
-                <x-icon name="sparkle" class="h-4 w-4" /> Find your best-matching jobs &rarr;
-            </a>
-        </p>
+        @if ($sortByMatch)
+            <p class="mt-2 flex items-center gap-1 text-sm font-medium text-horizon-700">
+                <x-icon name="sparkle" class="h-4 w-4" /> Sorted by your best matches &mdash; <a href="{{ url('/match') }}" class="underline">update your profile</a>
+            </p>
+        @else
+            <p class="mt-2 text-sm">
+                <a href="{{ url('/match') }}" class="inline-flex items-center gap-1 font-semibold text-sunrise-600 hover:underline">
+                    <x-icon name="sparkle" class="h-4 w-4" /> Find your best-matching jobs &rarr;
+                </a>
+            </p>
+        @endif
 
         <form action="{{ url('/jobs') }}" method="GET" class="mt-6 grid gap-3 rounded-2xl border border-black/5 bg-white p-4 shadow-sm sm:grid-cols-[2fr_1fr_1fr_auto] sm:items-center">
             <input type="text" name="q" value="{{ $q }}" placeholder="Search job titles, skills, companies…" class="rounded-lg border border-black/10 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-sunrise-400">
@@ -82,7 +88,7 @@
             <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach ($jobs as $i => $job)
                     <x-reveal :delay="min($i, 8) * 60" class="h-full">
-                        <x-job-card :job="$job" :unlocked="$isUnlocked($job)" />
+                        <x-job-card :job="$job" :unlocked="$isUnlocked($job)" :match-percent="$matchPercent($job)" />
                     </x-reveal>
                 @endforeach
             </div>

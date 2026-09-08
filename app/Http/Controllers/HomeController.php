@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\JobListing;
 use App\Support\Audience;
+use App\Support\Matching;
 
 class HomeController extends Controller
 {
@@ -18,7 +19,17 @@ class HomeController extends Controller
             ->orWhere('posted_at', '<=', now()->subDays(config('jobs.premium_window_days')))
             ->count();
 
-        $feed = JobListing::where('kenya_friendly', true)->latest('posted_at')->limit(8)->get();
+        $profile = Matching::parseProfileCookie(request()->cookie(Matching::COOKIE_NAME));
+
+        if ($profile) {
+            $feed = JobListing::where('kenya_friendly', true)->get()
+                ->sortByDesc(fn (JobListing $job) => Matching::computeMatchPercent($profile, $job->only(['tags', 'title', 'description'])))
+                ->take(8)
+                ->values();
+        } else {
+            $feed = JobListing::where('kenya_friendly', true)->latest('posted_at')->limit(8)->get();
+        }
+
         if ($feed->isEmpty()) {
             $feed = JobListing::latest('posted_at')->limit(8)->get();
         }
@@ -32,6 +43,10 @@ class HomeController extends Controller
             || $job->origin === 'employer'
             || $job->is_free
             || (bool) $unlockedIds?->has($job->id);
+
+        $matchPercent = $profile
+            ? fn (JobListing $job) => Matching::computeMatchPercent($profile, $job->only(['tags', 'title', 'description']))
+            : fn () => null;
 
         $audienceCounts = collect(Audience::ORDER)
             ->map(fn ($segment) => [
@@ -48,6 +63,8 @@ class HomeController extends Controller
             'feed' => $feed,
             'heroPreview' => $heroPreview,
             'isUnlocked' => $isUnlocked,
+            'matchPercent' => $matchPercent,
+            'hasProfile' => (bool) $profile,
             'audienceCounts' => $audienceCounts,
         ]);
     }

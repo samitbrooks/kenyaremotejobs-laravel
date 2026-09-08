@@ -67,6 +67,29 @@ class Format
         return max(1, (int) round($words / 200));
     }
 
+    /**
+     * Turns every "[Employer]" redaction placeholder in a piece of
+     * description text into a link to the employer/recruiter side of the
+     * site — a low-friction way for the (likely occasional-recruiter-too)
+     * reader to notice that side of the product exists. Only use this on
+     * text that isn't already inside a link (the job cards wrap the whole
+     * card in a link to the job itself — nesting an anchor inside that
+     * would be invalid HTML), which is why it's applied on the job detail
+     * page only. Returns safe HTML — the surrounding text is escaped, only
+     * the anchor markup itself is raw.
+     */
+    public static function linkifyEmployerPlaceholder(string $text): string
+    {
+        $placeholder = '[Employer]';
+        if (! str_contains($text, $placeholder)) {
+            return e($text);
+        }
+
+        $link = '<a href="'.e(url('/employers')).'" title="Hiring? See how to post a role here" class="font-medium text-horizon-600 underline decoration-horizon-300 decoration-dotted underline-offset-2 hover:decoration-horizon-600">[Employer]</a>';
+
+        return implode($link, array_map('e', explode($placeholder, $text)));
+    }
+
     public static function timeAgo(CarbonInterface $date): string
     {
         $diffSec = now()->diffInSeconds($date);

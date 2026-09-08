@@ -149,7 +149,7 @@
     {{-- Find your next remote role — sidebar + feed, Jobicy-style --}}
     <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <x-reveal class="mb-8">
-            <h2 class="text-2xl font-bold">Find your next remote role</h2>
+            <h2 class="text-2xl font-bold">{{ $hasProfile ? 'Your best-matching jobs' : 'Find your next remote role' }}</h2>
         </x-reveal>
 
         <div class="grid gap-8 lg:grid-cols-[240px_1fr]">
@@ -195,7 +195,7 @@
                     <div class="grid gap-5 sm:grid-cols-2">
                         @foreach ($feed as $i => $job)
                             <x-reveal :delay="min($i, 6) * 70" class="h-full">
-                                <x-job-card :job="$job" :unlocked="$isUnlocked($job)" />
+                                <x-job-card :job="$job" :unlocked="$isUnlocked($job)" :match-percent="$matchPercent($job)" />
                             </x-reveal>
                         @endforeach
                     </div>

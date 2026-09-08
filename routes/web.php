@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobsController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\PricingController;
+use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\Webhooks\MpesaCallbackController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,14 @@ Route::post('/employers/jobs/{id}/remove', [EmployerController::class, 'removeJo
 
 Route::get('/journal', [JournalController::class, 'index']);
 Route::get('/journal/{blogPost}', [JournalController::class, 'show']);
+
+Route::view('/match', 'match');
+Route::view('/resume-builder', 'resume-builder');
+Route::view('/about', 'about');
+Route::view('/surveys', 'surveys');
+
+Route::get('/sitemap.xml', [SitemapController::class, 'sitemap']);
+Route::get('/robots.txt', [SitemapController::class, 'robots']);
 
 // The 'admin' middleware (App\Http\Middleware\EnsureUserIsAdmin) guards the
 // whole group; every mutation a page embeds still acts against the
