@@ -3,7 +3,6 @@
 use App\Services\Translator;
 use App\Support\Format;
 use Livewire\Component;
-use Throwable;
 
 new class extends Component
 {
