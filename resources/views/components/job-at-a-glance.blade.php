@@ -1,4 +1,4 @@
-@props(['job', 'unlocked', 'free', 'priceKes'])
+@props(['job', 'unlocked', 'priceKes'])
 
 @php
     $rows = [
@@ -13,9 +13,7 @@
         'label' => 'Access',
         'value' => $job->origin === 'employer'
             ? 'Direct listing — always open'
-            : ($free
-                ? 'Free to view'
-                : (config('jobs.tier_labels')[$job->tier] ?? $job->tier).' · from KES '.number_format($priceKes)),
+            : (config('jobs.tier_labels')[$job->tier] ?? $job->tier).' · from KES '.number_format($priceKes),
     ];
     if ($unlocked) {
         $rows[] = ['label' => 'Source', 'value' => $job->source_name];

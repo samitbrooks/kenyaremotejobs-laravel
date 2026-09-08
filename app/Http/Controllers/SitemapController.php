@@ -23,7 +23,7 @@ class SitemapController extends Controller
             ['loc' => "{$url}/about", 'changefreq' => 'monthly', 'priority' => '0.3'],
         ];
 
-        $jobRoutes = JobListing::select('id', 'posted_at', 'kenya_friendly')->get()
+        $jobRoutes = JobListing::visible()->select('id', 'posted_at', 'kenya_friendly')->get()
             ->map(fn (JobListing $job) => [
                 'loc' => "{$url}/jobs/{$job->id}",
                 'lastmod' => $job->posted_at->toAtomString(),

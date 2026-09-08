@@ -27,13 +27,10 @@ class JobsController extends Controller
         $profile = Matching::parseProfileCookie($request->cookie(Matching::COOKIE_NAME));
         $sortByMatch = $request->query('sort') === 'match' && $profile !== null;
 
-        $query = JobListing::query();
+        $query = JobListing::visible();
 
         $totalKenyaFriendly = (clone $query)->where('kenya_friendly', true)->count();
-        $totalFree = (clone $query)
-            ->where(fn ($w) => $w->where('origin', 'employer')
-                ->orWhere('posted_at', '<=', now()->subDays(config('jobs.premium_window_days'))))
-            ->count();
+        $totalFree = (clone $query)->where('origin', 'employer')->count();
 
         if ($q !== '') {
             $query->where(function ($w) use ($q) {
@@ -57,8 +54,7 @@ class JobsController extends Controller
         }
 
         if ($freeOnly) {
-            $query->where(fn ($w) => $w->where('origin', 'employer')
-                ->orWhere('posted_at', '<=', now()->subDays(config('jobs.premium_window_days'))));
+            $query->where('origin', 'employer');
         }
 
         if ($audience) {
@@ -100,7 +96,6 @@ class JobsController extends Controller
 
         $isUnlocked = fn (JobListing $job) => $admin
             || $job->origin === 'employer'
-            || $job->is_free
             || (bool) $unlockedIds?->has($job->id);
 
         $matchPercent = $profile
@@ -130,14 +125,17 @@ class JobsController extends Controller
 
     public function show(Request $request, string $id, CreditsService $credits)
     {
-        $job = JobListing::findOrFail($id);
-
         $user = $request->user();
         $admin = (bool) $user?->isAdmin();
+
+        // Admins can still open an expired listing directly (e.g. from the
+        // admin jobs list) — everyone else gets a 404 once it's aged out,
+        // same as if it had never existed.
+        $job = $admin ? JobListing::findOrFail($id) : JobListing::visible()->findOrFail($id);
+
         $unlocked = $admin
             || $job->origin === 'employer'
             || (bool) $user?->subscribed
-            || $job->is_free
             || (bool) ($user && $user->jobUnlocks()->where('job_listing_id', $job->id)->exists());
 
         $remainingCredits = $user && ! $unlocked ? $credits->balances($user)[$job->tier]['remaining'] : 0;

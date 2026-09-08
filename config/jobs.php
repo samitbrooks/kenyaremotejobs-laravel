@@ -16,9 +16,21 @@ return [
         explode(',', (string) env('ADMIN_EMAILS', ''))
     )),
 
-    // Every listing opens up free for everyone this many days after it's
-    // posted, credits or not.
+    // A non-employer listing (synced or admin-added) disappears from the
+    // site entirely once it's this many days old, unless someone unlocked
+    // it first — see JobListing::scopeVisible(). It never becomes free for
+    // everyone; unlocking is the only way to see the employer/apply link
+    // before it's gone.
     'premium_window_days' => 5,
+
+    // How long an employer-paid listing stays visible before it disappears
+    // the same way — matches the "30 days of visibility" every posting plan
+    // promises below. Not read from posting_plans directly: JobListing
+    // doesn't record which specific plan a listing was posted under (only
+    // JobPostingPayment does), and both current plans promise the same
+    // duration anyway. If a future plan promises a different duration,
+    // this needs to become a per-listing column instead.
+    'employer_listing_days' => 30,
 
     // A purchase grants N unlock credits for one tier, spendable on any job
     // of that tier. See App\Services\CreditsService for the ledger that

@@ -17,7 +17,7 @@
     $howItWorks = [
         ['title' => 'Search & filter', 'body' => 'Browse remote roles from trusted global job boards, all in one place — free to search.'],
         ['title' => 'Spot your match', 'body' => 'Every listing gets a Kenya-Friendly Match badge when it\'s realistically open to timezone and location.'],
-        ['title' => 'Unlock & apply', 'body' => 'Buy a credit package once — from KES 300 — and spend it on any job in that tier whenever you find one worth unlocking, or wait it out: every listing opens up free for everyone after '.config('jobs.premium_window_days').' days.'],
+        ['title' => 'Unlock & apply', 'body' => 'Buy a credit package once — from KES 300 — and spend it on any job in that tier whenever you find one worth unlocking. Listings don\'t stay up forever, so it\'s worth acting before one you want disappears.'],
     ];
 
     $testimonials = [
@@ -31,7 +31,7 @@
         ['question' => 'Can I really get a remote job while living in Kenya?', 'answer' => 'Yes — thousands of companies hire remote workers with no location restriction. The hard part is finding which listings actually mean it. That\'s what the Kenya-Friendly Match badge is for: we score every job for timezone overlap, location wording, and visa restrictions so you\'re not wasting time on roles that were never open to you.'],
         ['question' => 'Do these remote jobs require a US or EU visa?', 'answer' => 'Some do — and we flag those. Jobs that mention explicit US-only, EU-only, or visa-sponsorship restrictions are excluded from the Kenya-Friendly Match badge, so you can filter them out with one click on the jobs page.'],
         ['question' => 'What does \'Kenya-Friendly Match\' mean?', 'answer' => 'It\'s a badge we calculate automatically for every listing, based on whether the location is worldwide/global/Africa-open, whether the stated timezone window overlaps East Africa Time (UTC+3), and whether the description rules out candidates outside the US or EU.'],
-        ['question' => 'Is KenyaRemoteJobs free to use?', 'answer' => 'Yes. Job titles, full descriptions, and your match score are always free to see. What\'s gated is the employer\'s identity and the Apply link while a listing is new — a Basic package (KES 300) gets you 1 unlock, Intermediate (KES 599) gets you 2, and Premium (KES 999) gets you 3, spendable on any job in that tier. Or wait it out: every listing opens up completely free '.config('jobs.premium_window_days').' days after it\'s posted.'],
+        ['question' => 'Is KenyaRemoteJobs free to use?', 'answer' => 'Yes. Job titles, full descriptions, and your match score are always free to see. What\'s gated is the employer\'s identity and the Apply link while a listing is new — a Basic package (KES 300) gets you 1 unlock, Intermediate (KES 599) gets you 2, and Premium (KES 999) gets you 3, spendable on any job in that tier. Listings don\'t stay up forever, so unlock the ones you want before they disappear.'],
         ['question' => 'Where do the job listings come from?', 'answer' => 'We aggregate live listings from Arbeitnow, RemoteOK, Remotive, Jobicy, and Himalayas — established remote job boards — and credit and link back to the original source on every listing.'],
     ];
 

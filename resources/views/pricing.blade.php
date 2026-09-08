@@ -14,7 +14,7 @@
         <h1 class="text-3xl font-bold sm:text-4xl">Simple, honest pricing</h1>
         <p class="mx-auto mt-3 max-w-xl text-foreground/60">
             No per-job paywall. Buy a package once and spend its credits on any listing in that tier, whenever you find one worth unlocking &mdash; or go unlimited with a monthly subscription.
-            Every listing also opens up completely free {{ config('jobs.premium_window_days') }} days after it&rsquo;s posted, credits or not.
+            Listings don&rsquo;t stay up forever, so it&rsquo;s worth unlocking the ones you want before they&rsquo;re gone.
         </p>
 
         <div class="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-3">

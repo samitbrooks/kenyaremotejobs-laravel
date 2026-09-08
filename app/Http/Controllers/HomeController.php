@@ -13,25 +13,23 @@ class HomeController extends Controller
         $user = auth()->user();
         $admin = (bool) $user?->isAdmin();
 
-        $total = JobListing::count();
-        $totalKenyaFriendly = JobListing::where('kenya_friendly', true)->count();
-        $totalFree = JobListing::where('origin', 'employer')
-            ->orWhere('posted_at', '<=', now()->subDays(config('jobs.premium_window_days')))
-            ->count();
+        $total = JobListing::visible()->count();
+        $totalKenyaFriendly = JobListing::visible()->where('kenya_friendly', true)->count();
+        $totalFree = JobListing::visible()->where('origin', 'employer')->count();
 
         $profile = Matching::parseProfileCookie(request()->cookie(Matching::COOKIE_NAME));
 
         if ($profile) {
-            $feed = JobListing::where('kenya_friendly', true)->get()
+            $feed = JobListing::visible()->where('kenya_friendly', true)->get()
                 ->sortByDesc(fn (JobListing $job) => Matching::computeMatchPercent($profile, $job->only(['tags', 'title', 'description'])))
                 ->take(8)
                 ->values();
         } else {
-            $feed = JobListing::where('kenya_friendly', true)->latest('posted_at')->limit(8)->get();
+            $feed = JobListing::visible()->where('kenya_friendly', true)->latest('posted_at')->limit(8)->get();
         }
 
         if ($feed->isEmpty()) {
-            $feed = JobListing::latest('posted_at')->limit(8)->get();
+            $feed = JobListing::visible()->latest('posted_at')->limit(8)->get();
         }
         $heroPreview = $feed->take(3);
 
@@ -41,7 +39,6 @@ class HomeController extends Controller
 
         $isUnlocked = fn (JobListing $job) => $admin
             || $job->origin === 'employer'
-            || $job->is_free
             || (bool) $unlockedIds?->has($job->id);
 
         $matchPercent = $profile
@@ -51,7 +48,7 @@ class HomeController extends Controller
         $audienceCounts = collect(Audience::ORDER)
             ->map(fn ($segment) => [
                 'segment' => $segment,
-                'count' => JobListing::whereJsonContains('audience_segments', $segment)->count(),
+                'count' => JobListing::visible()->whereJsonContains('audience_segments', $segment)->count(),
             ])
             ->filter(fn ($a) => $a['count'] > 0)
             ->values();

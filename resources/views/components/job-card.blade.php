@@ -1,8 +1,7 @@
 @props(['job', 'unlocked' => null, 'matchPercent' => null])
 
 @php
-    $free = $job->is_free;
-    $isUnlocked = $unlocked ?? $free;
+    $isUnlocked = (bool) $unlocked;
     $redactor = app(\App\Services\Redactor::class);
     $plainDescription = \App\Support\Format::stripHtml($job->description ?? '');
     $safeDescription = $isUnlocked ? $plainDescription : $redactor->redactEmployerIdentity($plainDescription, $job->company);
@@ -49,10 +48,6 @@
         @if ($job->origin === 'employer')
             <span class="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-0.5 text-[11px] font-semibold text-emerald-800">
                 <x-icon name="announce" class="h-3 w-3" /> Direct listing
-            </span>
-        @elseif ($free)
-            <span class="inline-flex items-center gap-1 rounded-full bg-horizon-100 px-2 py-0.5 text-[11px] font-semibold text-horizon-800">
-                <x-icon name="unlock" class="h-3 w-3" /> Free to view
             </span>
         @else
             <span class="inline-flex items-center gap-1 rounded-full bg-sunrise-100 px-2 py-0.5 text-[11px] font-semibold text-sunrise-800">

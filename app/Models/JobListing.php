@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
-use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -42,13 +42,22 @@ class JobListing extends Model
     }
 
     /**
-     * True once PREMIUM_WINDOW_DAYS have passed since posting — every
-     * listing opens up free for everyone at that point, credits or not.
+     * Excludes listings that have aged out — a non-employer listing past
+     * premium_window_days, or an employer listing past employer_listing_days
+     * — so they stop appearing anywhere on the public site (they still exist
+     * for admin, payment history, etc., since nothing outside this scope
+     * filters on it). There's no auto-unlock-for-everyone at that point
+     * (unlike the old is_free behavior this replaces): a listing you never
+     * unlocked simply disappears instead of opening up for free.
      */
-    protected function isFree(): Attribute
+    public function scopeVisible(Builder $query): Builder
     {
-        return Attribute::get(
-            fn () => $this->posted_at->lt(now()->subDays(config('jobs.premium_window_days')))
-        );
+        return $query->where(function ($w) {
+            $w->where('origin', 'employer')
+                ->where('posted_at', '>=', now()->subDays(config('jobs.employer_listing_days')));
+        })->orWhere(function ($w) {
+            $w->where('origin', '!=', 'employer')
+                ->where('posted_at', '>=', now()->subDays(config('jobs.premium_window_days')));
+        });
     }
 }

@@ -4,7 +4,8 @@
         ['icon' => 'kenya-flag', 'title' => 'Kenya-first scoring', 'body' => 'Every listing is checked for location wording, timezone overlap with EAT, and hidden US/EU-only restrictions before it earns a Kenya-Friendly badge.'],
         ['icon' => 'handshake', 'title' => 'Fair to our sources', 'body' => "We don't scrape and hide where a job came from. Every listing credits and links back to the original board, as their terms require."],
     ];
-    $total = \App\Models\JobListing::count();
+    $total = \App\Models\JobListing::visible()->count();
+    $totalKenyaFriendly = \App\Models\JobListing::visible()->where('kenya_friendly', true)->count();
 @endphp
 
 <x-layouts.app
@@ -81,8 +82,8 @@
                     <p class="mt-1 text-sm text-foreground/60">job boards aggregated</p>
                 </div>
                 <div>
-                    <p class="text-4xl font-bold text-sunrise-600">{{ config('jobs.premium_window_days') }}d</p>
-                    <p class="mt-1 text-sm text-foreground/60">until every listing is free</p>
+                    <p class="text-4xl font-bold text-sunrise-600"><x-count-up :value="$totalKenyaFriendly" /></p>
+                    <p class="mt-1 text-sm text-foreground/60">Kenya-Friendly Match badges live now</p>
                 </div>
             </div>
         </x-reveal>

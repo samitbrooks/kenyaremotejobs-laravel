@@ -41,14 +41,15 @@ class Seo
      * Every field here must match what an anonymous crawler/visitor actually
      * sees on the page, or it counts as cloaking under Google's guidelines.
      * The full description is shown to everyone regardless of payment, but
-     * the employer's identity is withheld until the premium window lapses —
-     * both the description text (which can name-drop the employer on its
-     * own) and hiringOrganization.name have to reflect that.
+     * the employer's identity stays withheld for a non-employer listing
+     * until someone unlocks it — both the description text (which can
+     * name-drop the employer on its own) and hiringOrganization.name have to
+     * reflect that.
      */
     public static function jobPostingJsonLd(JobListing $job): string
     {
         $at = '@';
-        $employerVisible = $job->origin === 'employer' || $job->is_free;
+        $employerVisible = $job->origin === 'employer';
         $plainDescription = Format::stripHtml($job->description ?? '');
         $description = $employerVisible
             ? $plainDescription

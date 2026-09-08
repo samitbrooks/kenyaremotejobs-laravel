@@ -12,7 +12,7 @@ Browse open jobs
 A couple of things worth knowing:
 
 <x-mail::panel>
-Every listing opens up **completely free** {{ config('jobs.premium_window_days') }} days after it's posted — no account needed for that part, credits or not.
+New listings don't stay up forever — unlock the ones you want with credits (or go unlimited with a subscription) before they disappear.
 </x-mail::panel>
 
 Titles, companies, and full descriptions are always free to read. What's gated while a listing is new is just the employer's name and the apply link.

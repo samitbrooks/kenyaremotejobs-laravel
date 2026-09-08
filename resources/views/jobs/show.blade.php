@@ -1,5 +1,4 @@
 @php
-    $free = $job->is_free;
     $redactor = app(\App\Services\Redactor::class);
     $plainDescription = \App\Support\Format::stripHtml($job->description ?? '');
     $fullDescription = $unlocked ? $plainDescription : $redactor->redactEmployerIdentity($plainDescription, $job->company);
@@ -12,10 +11,10 @@
     $tierLabels = config('jobs.tier_labels');
     $creditPackages = config('jobs.credit_packages');
     $pkg = $creditPackages[$job->tier] ?? ['price_kes' => 0];
-    $employerVisible = $job->origin === 'employer' || $free;
+    $employerVisible = $job->origin === 'employer';
     $title = $job->title.($employerVisible ? " at {$job->company}" : '')." — Remote Job".($job->kenya_friendly ? ' (Kenya-Friendly)' : '');
     $preview = \App\Support\Format::truncate($fullDescription, 155);
-    $daysUntilFree = max(0, (int) now()->diffInDays($job->posted_at->copy()->addDays(config('jobs.premium_window_days')), false));
+    $daysUntilExpiry = max(0, (int) now()->diffInDays($job->posted_at->copy()->addDays(config('jobs.premium_window_days')), false));
 @endphp
 
 <x-layouts.app :title="$title" :description="$preview">
@@ -58,10 +57,6 @@
                     <span class="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800">
                         <x-icon name="announce" class="h-3.5 w-3.5" /> Direct listing from this employer
                     </span>
-                @elseif ($free)
-                    <span class="inline-flex items-center gap-1 rounded-full bg-horizon-100 px-3 py-1 text-xs font-semibold text-horizon-800">
-                        <x-icon name="unlock" class="h-3.5 w-3.5" /> Free to view
-                    </span>
                 @else
                     <span class="inline-flex items-center gap-1 rounded-full bg-sunrise-100 px-3 py-1 text-xs font-semibold text-sunrise-800">
                         <x-icon name="lock" class="h-3.5 w-3.5" /> {{ $tierLabels[$job->tier] ?? $job->tier }} &middot; from KES {{ number_format($pkg['price_kes']) }}
@@ -101,7 +96,7 @@
             @endif
 
             <div class="mt-8">
-                <x-job-at-a-glance :job="$job" :unlocked="$unlocked" :free="$free" :price-kes="$pkg['price_kes']" />
+                <x-job-at-a-glance :job="$job" :unlocked="$unlocked" :price-kes="$pkg['price_kes']" />
             </div>
 
             {{-- The full description is always shown — what's gated is who's
@@ -129,10 +124,10 @@
                             You&rsquo;ve already read the full description above &mdash; unlocking just reveals who&rsquo;s hiring and gets you the Apply link.
                         </p>
                         <p class="mt-3 text-xs text-foreground/50">
-                            @if ($daysUntilFree > 0)
-                                Opens free for everyone in {{ $daysUntilFree }} {{ Str::plural('day', $daysUntilFree) }}, or unlock now.
+                            @if ($daysUntilExpiry > 0)
+                                This listing comes down in {{ $daysUntilExpiry }} {{ Str::plural('day', $daysUntilExpiry) }} if it&rsquo;s not unlocked.
                             @else
-                                This listing is about to open free for everyone.
+                                This listing is about to come down &mdash; unlock it now to keep access.
                             @endif
                         </p>
                         <div class="mx-auto mt-4 max-w-xs">
