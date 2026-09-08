@@ -109,8 +109,13 @@ class AdminController extends Controller
 
     public function email(BulkMailer $mailer)
     {
-        $subscribed = User::where('subscribed', true)->count();
-        $total = User::count();
+        // Opted-out users are excluded from every count here so the numbers
+        // shown match what App\Services\BulkMailer will actually send —
+        // see the same whereNull('marketing_opt_out_at') filter in
+        // resources/views/components/⚡admin-email-composer.blade.php.
+        $mailable = User::whereNull('marketing_opt_out_at');
+        $subscribed = (clone $mailable)->where('subscribed', true)->count();
+        $total = $mailable->count();
 
         return view('admin.email', [
             'counts' => ['all' => $total, 'subscribed' => $subscribed, 'free' => $total - $subscribed],

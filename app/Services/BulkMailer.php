@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Mail\MarketingEmail;
+use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use RuntimeException;
 use Throwable;
@@ -32,12 +34,15 @@ class BulkMailer
     /**
      * Sends one at a time (not one big BCC) so a bad address doesn't block
      * the rest of the list, and so each recipient only ever sees their own
-     * address.
+     * address. Each send goes through App\Mail\MarketingEmail, which carries
+     * the List-Unsubscribe headers and a per-user signed unsubscribe link —
+     * callers are expected to have already filtered $recipients down to
+     * users where receivesMarketingEmail() is true.
      *
-     * @param  array<int, string>  $recipients
+     * @param  iterable<User>  $recipients
      * @return array{sent: int, failed: array<int, string>}
      */
-    public function sendBulk(array $recipients, string $subject, string $message): array
+    public function sendBulk(iterable $recipients, string $subject, string $message): array
     {
         if (! $this->isConfigured()) {
             throw new RuntimeException(
@@ -48,12 +53,12 @@ class BulkMailer
         $sent = 0;
         $failed = [];
 
-        foreach ($recipients as $to) {
+        foreach ($recipients as $user) {
             try {
-                Mail::raw($message, fn ($mail) => $mail->to($to)->subject($subject));
+                Mail::to($user)->send(new MarketingEmail($user, $subject, $message));
                 $sent++;
             } catch (Throwable) {
-                $failed[] = $to;
+                $failed[] = $user->email;
             }
         }
 

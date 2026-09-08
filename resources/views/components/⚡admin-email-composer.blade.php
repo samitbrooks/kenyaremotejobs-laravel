@@ -44,10 +44,10 @@ new class extends Component
 
         $recipients = User::query()
             ->when($this->audience !== 'all', fn ($q) => $q->where('subscribed', $this->audience === 'subscribed'))
-            ->pluck('email')
-            ->all();
+            ->whereNull('marketing_opt_out_at')
+            ->get();
 
-        if (count($recipients) === 0) {
+        if ($recipients->isEmpty()) {
             $this->error = 'No recipients match that audience.';
 
             return;

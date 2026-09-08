@@ -115,4 +115,22 @@ return [
         'name' => env('MAIL_FROM_NAME', env('APP_NAME', 'Laravel')),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Markdown Mail Settings
+    |--------------------------------------------------------------------------
+    |
+    | resources/views/vendor/mail/html/themes/kenyaremotejobs.css is the
+    | brand-matched theme (sunrise/horizon palette) for every markdown
+    | Mailable — see App\Mail\WelcomeEmail and App\Mail\MarketingEmail.
+    |
+    */
+
+    'markdown' => [
+        'theme' => 'kenyaremotejobs',
+        'paths' => [
+            resource_path('views/vendor/mail'),
+        ],
+    ],
+
 ];

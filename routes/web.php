@@ -8,6 +8,7 @@ use App\Http\Controllers\JobsController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\PricingController;
 use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\UnsubscribeController;
 use App\Http\Controllers\Webhooks\MpesaCallbackController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,14 @@ Route::view('/match', 'match');
 Route::view('/resume-builder', 'resume-builder');
 Route::view('/about', 'about');
 Route::view('/surveys', 'surveys');
+
+// Signed so it works cold from an email client with no session — both verbs
+// point at the same action: GET for a click from the footer link, POST for a
+// mailbox provider's own one-click "Unsubscribe" button (RFC 8058), which
+// fires List-Unsubscribe-Post as a bare POST with no confirmation page.
+Route::match(['get', 'post'], '/unsubscribe/{user}', UnsubscribeController::class)
+    ->name('unsubscribe')
+    ->middleware('signed');
 
 Route::get('/sitemap.xml', [SitemapController::class, 'sitemap']);
 Route::get('/robots.txt', [SitemapController::class, 'robots']);

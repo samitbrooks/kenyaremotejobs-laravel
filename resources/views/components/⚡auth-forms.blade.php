@@ -1,7 +1,10 @@
 <?php
 
+use App\Mail\WelcomeEmail;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 new class extends Component
@@ -51,6 +54,14 @@ new class extends Component
 
         $user = User::create(['email' => $email, 'password' => $this->password]);
         Auth::login($user, remember: true);
+
+        try {
+            Mail::to($user)->send(new WelcomeEmail($user));
+        } catch (\Throwable $e) {
+            // A mail failure shouldn't block account creation — the account
+            // already exists and the user is already logged in.
+            Log::warning('Welcome email failed to send: '.$e->getMessage(), ['user_id' => $user->id]);
+        }
 
         $this->redirect($this->redirectTo, navigate: false);
     }

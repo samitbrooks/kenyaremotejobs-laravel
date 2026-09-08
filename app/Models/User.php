@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password', 'subscribed', 'subscribed_at'])]
+#[Fillable(['name', 'email', 'password', 'subscribed', 'subscribed_at', 'marketing_opt_out_at'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -30,7 +30,13 @@ class User extends Authenticatable
             'password' => 'hashed',
             'subscribed' => 'boolean',
             'subscribed_at' => 'datetime',
+            'marketing_opt_out_at' => 'datetime',
         ];
+    }
+
+    public function receivesMarketingEmail(): bool
+    {
+        return $this->marketing_opt_out_at === null;
     }
 
     public function jobUnlocks(): HasMany
