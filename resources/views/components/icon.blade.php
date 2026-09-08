@@ -179,5 +179,10 @@
             <path d="M6 8h8M10 8v2.5l3.5 4M10 10.5 6.5 14.5" />
             <path d="M8 10.5H6a2.5 2.5 0 0 0 0 5h1.2" />
             @break
+
+        @case('mail')
+            <rect x="3.5" y="5.5" width="13" height="9" rx="1.5" />
+            <path d="M4 6.5l6 4.5 6-4.5" />
+            @break
     @endswitch
 </svg>

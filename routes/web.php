@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthLinkController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobsController;
@@ -21,6 +22,16 @@ Route::get('/pricing', [PricingController::class, 'index']);
 
 Route::get('/account', [AccountController::class, 'show']);
 Route::post('/logout', [AccountController::class, 'logout']);
+
+// The one destination every signup-confirmation and login-link email
+// points at — see App\Mail\LoginLinkEmail and
+// resources/views/components/⚡auth-forms.blade.php. Not single-use: some
+// mail clients (Outlook/Gmail link-scanners) pre-fetch links in email
+// bodies, which would silently burn a single-use token before the person
+// ever clicks it — a short expiry is the safer trade-off here.
+Route::get('/auth/link/{user}', AuthLinkController::class)
+    ->name('auth.link')
+    ->middleware('signed');
 
 Route::get('/employers', [EmployerController::class, 'index']);
 Route::get('/employers/post', [EmployerController::class, 'post']);
