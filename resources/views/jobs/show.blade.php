@@ -129,9 +129,13 @@
                             @endif
                         </p>
                         <div class="mx-auto mt-4 max-w-xs">
-                            <a href="{{ url('/pricing') }}" class="btn-pop inline-block w-full rounded-full gradient-sunrise px-6 py-2.5 text-center font-semibold text-white shadow-md transition hover:opacity-90">
-                                {{ $tierLabels[$job->tier] ?? $job->tier }} &middot; from KES {{ number_format($pkg['price_kes']) }}
-                            </a>
+                            <livewire:unlock-button
+                                :job-id="$job->id"
+                                :tier="$job->tier"
+                                :remaining-credits="$remainingCredits"
+                                :package-price-kes="$pkg['price_kes']"
+                                :is-authed="(bool) auth()->user()"
+                            />
                         </div>
                     </div>
                 @endif

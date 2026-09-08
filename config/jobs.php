@@ -61,12 +61,25 @@ return [
             'price_kes' => 2500,
             'listing_days' => 30,
             'featured' => false,
+            'features' => [
+                '1 job advertisement',
+                '30 days of visibility',
+                'Company logo and details',
+                'Reaches every Kenya-Friendly-Match candidate search',
+            ],
         ],
         'boost' => [
             'label' => 'Boost Job',
             'price_kes' => 5500,
             'listing_days' => 30,
             'featured' => true,
+            'features' => [
+                '1 featured job advertisement',
+                '30 days of visibility',
+                'Company logo and details',
+                'Highlighted and top-of-list placement',
+                'Included in the weekly candidate digest',
+            ],
         ],
     ],
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JobListing;
+use App\Services\CreditsService;
 use App\Support\Audience;
 use Illuminate\Http\Request;
 
@@ -105,7 +106,7 @@ class JobsController extends Controller
         ]);
     }
 
-    public function show(Request $request, string $id)
+    public function show(Request $request, string $id, CreditsService $credits)
     {
         $job = JobListing::findOrFail($id);
 
@@ -113,12 +114,16 @@ class JobsController extends Controller
         $admin = (bool) $user?->isAdmin();
         $unlocked = $admin
             || $job->origin === 'employer'
+            || (bool) $user?->subscribed
             || $job->is_free
             || (bool) ($user && $user->jobUnlocks()->where('job_listing_id', $job->id)->exists());
+
+        $remainingCredits = $user && ! $unlocked ? $credits->balances($user)[$job->tier]['remaining'] : 0;
 
         return view('jobs.show', [
             'job' => $job,
             'unlocked' => $unlocked,
+            'remainingCredits' => $remainingCredits,
         ]);
     }
 }

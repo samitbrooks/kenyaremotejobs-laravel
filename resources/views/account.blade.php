@@ -27,6 +27,32 @@
             </div>
 
             <div class="mt-8 rounded-3xl border border-black/5 bg-white p-6 text-left shadow-sm">
+                <div class="flex items-center justify-between">
+                    <h2 class="font-semibold">Your credits</h2>
+                    <a href="{{ url('/pricing') }}" class="text-sm font-semibold text-sunrise-600 hover:underline">Buy more &rarr;</a>
+                </div>
+                <div class="mt-3 grid grid-cols-3 gap-3">
+                    @foreach (config('jobs.tiers') as $tier)
+                        <div class="rounded-xl bg-horizon-50 p-3 text-center">
+                            <p class="text-2xl font-bold">{{ $balances[$tier]['remaining'] }}</p>
+                            <p class="text-xs text-foreground/50">{{ config('jobs.tier_labels')[$tier] }}</p>
+                        </div>
+                    @endforeach
+                </div>
+
+                @if ($purchases->isNotEmpty())
+                    <ul class="mt-4 divide-y divide-black/5 border-t border-black/5">
+                        @foreach ($purchases as $p)
+                            <li class="flex items-center justify-between py-2 text-xs text-foreground/50">
+                                <span>{{ config('jobs.tier_labels')[$p->tier] ?? $p->tier }} package &middot; +{{ $p->credits }} credit{{ $p->credits === 1 ? '' : 's' }}</span>
+                                <span>KES {{ number_format($p->amount_kes) }} &middot; {{ \App\Support\Format::timeAgo($p->purchased_at) }}</span>
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
+            </div>
+
+            <div class="mt-8 rounded-3xl border border-black/5 bg-white p-6 text-left shadow-sm">
                 <h2 class="font-semibold">Jobs you&rsquo;ve unlocked</h2>
                 @if ($unlocks->isEmpty())
                     <p class="mt-2 text-sm text-foreground/50">

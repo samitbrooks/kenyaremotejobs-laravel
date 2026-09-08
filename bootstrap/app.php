@@ -12,7 +12,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // Safaricom's M-Pesa Daraja callback has no browser session and
+        // sends no CSRF token — see routes/web.php's webhook route and
+        // App\Http\Controllers\Webhooks\MpesaCallbackController.
+        $middleware->preventRequestForgery(except: [
+            'webhooks/mpesa/callback',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

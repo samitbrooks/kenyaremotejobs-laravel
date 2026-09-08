@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\CreditsService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
 {
-    public function show(Request $request)
+    public function show(Request $request, CreditsService $credits)
     {
         $user = $request->user();
 
@@ -19,10 +20,13 @@ class AccountController extends Controller
         }
 
         $unlocks = $user->jobUnlocks()->with('jobListing')->latest('unlocked_at')->get();
+        $purchases = $user->creditPurchases()->latest('purchased_at')->get();
 
         return view('account', [
             'user' => $user,
             'unlocks' => $unlocks,
+            'balances' => $credits->balances($user),
+            'purchases' => $purchases,
         ]);
     }
 
