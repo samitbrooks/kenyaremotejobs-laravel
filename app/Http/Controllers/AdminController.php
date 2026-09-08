@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\BlogPost;
 use App\Models\JobListing;
 use App\Models\PageView;
+use App\Models\Payment;
 use App\Models\SyncMeta;
 use App\Models\User;
 use App\Services\BulkMailer;
+use App\Services\CreditsService;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -67,14 +69,42 @@ class AdminController extends Controller
         ]);
     }
 
+    public function jobEdit(JobListing $job)
+    {
+        return view('admin.job-edit', ['job' => $job]);
+    }
+
     public function users()
     {
         return view('admin.users', ['users' => User::latest()->get()]);
     }
 
+    public function userShow(User $user, CreditsService $credits)
+    {
+        return view('admin.user-show', [
+            'user' => $user,
+            'balances' => $credits->balances($user),
+            'purchases' => $user->creditPurchases()->latest('purchased_at')->get(),
+            'unlocks' => $user->jobUnlocks()->with('jobListing')->latest('unlocked_at')->get(),
+            'postedJobs' => $user->postedJobs()->latest('posted_at')->get(),
+        ]);
+    }
+
     public function blog()
     {
         return view('admin.blog', ['posts' => BlogPost::latest()->get()]);
+    }
+
+    public function blogEdit(BlogPost $post)
+    {
+        return view('admin.blog-edit', ['post' => $post]);
+    }
+
+    public function payments()
+    {
+        return view('admin.payments', [
+            'payments' => Payment::with('user')->latest()->paginate(self::PAGE_SIZE),
+        ]);
     }
 
     public function email(BulkMailer $mailer)

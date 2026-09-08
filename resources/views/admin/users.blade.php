@@ -15,7 +15,7 @@
             <tbody>
                 @forelse ($users as $user)
                     <tr class="border-b border-black/5 last:border-0">
-                        <td class="p-4">{{ $user->email }}</td>
+                        <td class="p-4"><a href="{{ url('/admin/users/'.$user->id) }}" class="hover:underline">{{ $user->email }}</a></td>
                         <td class="p-4">
                             @if ($user->subscribed)
                                 <span class="font-semibold text-emerald-700">Full access</span>

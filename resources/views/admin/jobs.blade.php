@@ -49,7 +49,10 @@
                         </td>
                         <td class="p-4 text-foreground/50">{{ \App\Support\Format::timeAgo($job->posted_at) }}</td>
                         <td class="p-4 text-right">
-                            <livewire:admin-remove-job-button :job-id="$job->id" :key="'remove-'.$job->id" />
+                            <div class="flex justify-end gap-2">
+                                <a href="{{ url('/admin/jobs/'.$job->id.'/edit') }}" class="btn-pop rounded-full border border-black/10 px-3 py-1 text-xs font-semibold transition hover:bg-black/5">Edit</a>
+                                <livewire:admin-remove-job-button :job-id="$job->id" :key="'remove-'.$job->id" />
+                            </div>
                         </td>
                     </tr>
                 @empty

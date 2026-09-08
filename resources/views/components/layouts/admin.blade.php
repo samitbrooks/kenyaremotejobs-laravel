@@ -6,6 +6,7 @@
         ['href' => '/admin/jobs', 'label' => 'Jobs'],
         ['href' => '/admin/blog', 'label' => 'Journal'],
         ['href' => '/admin/users', 'label' => 'Users'],
+        ['href' => '/admin/payments', 'label' => 'Payments'],
         ['href' => '/admin/email', 'label' => 'Email'],
     ];
 @endphp
@@ -15,7 +16,11 @@
         <nav class="mx-auto flex max-w-6xl items-center gap-5 px-4 py-3 text-sm font-medium sm:px-6">
             <span class="text-xs uppercase tracking-wide text-white/50">Admin</span>
             @foreach ($adminLinks as $link)
-                <a href="{{ url($link['href']) }}" class="transition hover:text-sunrise-300 {{ request()->is(ltrim($link['href'], '/')) ? 'text-sunrise-300' : '' }}">
+                @php
+                    $path = ltrim($link['href'], '/');
+                    $patterns = $path === 'admin' ? [$path] : [$path, $path.'/*'];
+                @endphp
+                <a href="{{ url($link['href']) }}" class="transition hover:text-sunrise-300 {{ request()->is(...$patterns) ? 'text-sunrise-300' : '' }}">
                     {{ $link['label'] }}
                 </a>
             @endforeach

@@ -24,6 +24,12 @@ new class extends Component
 ?>
 
 <div class="flex justify-end gap-2">
+    <a
+        href="{{ url('/admin/blog/'.$postId.'/edit') }}"
+        class="btn-pop rounded-full border border-black/10 px-3 py-1 text-xs font-semibold transition hover:bg-black/5"
+    >
+        Edit
+    </a>
     <button
         type="button"
         wire:click="togglePublished"

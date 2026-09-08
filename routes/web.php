@@ -43,9 +43,13 @@ Route::get('/robots.txt', [SitemapController::class, 'robots']);
 Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard']);
     Route::get('/jobs', [AdminController::class, 'jobs']);
+    Route::get('/jobs/{job}/edit', [AdminController::class, 'jobEdit']);
     Route::get('/blog', [AdminController::class, 'blog']);
+    Route::get('/blog/{post:id}/edit', [AdminController::class, 'blogEdit']);
     Route::get('/users', [AdminController::class, 'users']);
+    Route::get('/users/{user}', [AdminController::class, 'userShow']);
     Route::get('/email', [AdminController::class, 'email']);
+    Route::get('/payments', [AdminController::class, 'payments']);
 });
 
 // Safaricom posts here directly (no browser session, no CSRF token to send)
