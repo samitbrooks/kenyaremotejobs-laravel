@@ -15,6 +15,22 @@
 
         return url('/jobs').'?'.http_build_query($params);
     };
+
+    // Always show the first and last page plus a small window around the
+    // current page, collapsing any gap into a single "…" — keeps this
+    // readable even at 40+ pages instead of listing every page number.
+    $pageItems = [];
+    $window = 1;
+    $prevShown = null;
+    for ($p = 1; $p <= $totalPages; $p++) {
+        if ($p === 1 || $p === $totalPages || abs($p - $page) <= $window) {
+            if ($prevShown !== null && $p - $prevShown > 1) {
+                $pageItems[] = '…';
+            }
+            $pageItems[] = $p;
+            $prevShown = $p;
+        }
+    }
 @endphp
 
 <x-layouts.app :title="$title" :description="$description">
@@ -95,12 +111,32 @@
         @endif
 
         @if ($totalPages > 1)
-            <div class="mt-10 flex flex-wrap justify-center gap-2">
-                @for ($p = 1; $p <= $totalPages; $p++)
-                    <a href="{{ $buildPageHref($p) }}" class="rounded-full px-3.5 py-1.5 text-sm font-medium {{ $p === $page ? 'bg-sunrise-500 text-white' : 'bg-white text-foreground/70 hover:bg-horizon-50' }}">
-                        {{ $p }}
+            <div class="mt-10 flex flex-wrap items-center justify-center gap-2">
+                @if ($page > 1)
+                    <a href="{{ $buildPageHref($page - 1) }}" class="rounded-full px-3.5 py-1.5 text-sm font-medium text-foreground/70 hover:bg-horizon-50" aria-label="Previous page">
+                        &larr; Prev
                     </a>
-                @endfor
+                @endif
+
+                @foreach ($pageItems as $item)
+                    @if ($item === '…')
+                        <span class="px-1.5 text-sm text-foreground/40" aria-hidden="true">&hellip;</span>
+                    @else
+                        <a
+                            href="{{ $buildPageHref($item) }}"
+                            @if ($item === $page) aria-current="page" @endif
+                            class="rounded-full px-3.5 py-1.5 text-sm font-medium {{ $item === $page ? 'bg-sunrise-500 text-white' : 'bg-white text-foreground/70 hover:bg-horizon-50' }}"
+                        >
+                            {{ $item }}
+                        </a>
+                    @endif
+                @endforeach
+
+                @if ($page < $totalPages)
+                    <a href="{{ $buildPageHref($page + 1) }}" class="rounded-full px-3.5 py-1.5 text-sm font-medium text-foreground/70 hover:bg-horizon-50" aria-label="Next page">
+                        Next &rarr;
+                    </a>
+                @endif
             </div>
         @endif
     </div>
