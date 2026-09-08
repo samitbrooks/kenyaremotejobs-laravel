@@ -60,6 +60,13 @@ class Format
         return rtrim(mb_substr($text, 0, $maxLength)).'…';
     }
 
+    public static function estimateReadMinutes(string $content): int
+    {
+        $words = count(array_filter(preg_split('/\s+/', trim($content))));
+
+        return max(1, (int) round($words / 200));
+    }
+
     public static function timeAgo(CarbonInterface $date): string
     {
         $diffSec = now()->diffInSeconds($date);

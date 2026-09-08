@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobsController;
+use App\Http\Controllers\JournalController;
 use App\Http\Controllers\PricingController;
 use App\Http\Controllers\Webhooks\MpesaCallbackController;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +24,20 @@ Route::get('/employers', [EmployerController::class, 'index']);
 Route::get('/employers/post', [EmployerController::class, 'post']);
 Route::get('/employers/dashboard', [EmployerController::class, 'dashboard']);
 Route::post('/employers/jobs/{id}/remove', [EmployerController::class, 'removeJob']);
+
+Route::get('/journal', [JournalController::class, 'index']);
+Route::get('/journal/{blogPost}', [JournalController::class, 'show']);
+
+// The 'admin' middleware (App\Http\Middleware\EnsureUserIsAdmin) guards the
+// whole group; every mutation a page embeds still acts against the
+// authenticated user itself, never a value trusted from the request.
+Route::middleware('admin')->prefix('admin')->group(function () {
+    Route::get('/', [AdminController::class, 'dashboard']);
+    Route::get('/jobs', [AdminController::class, 'jobs']);
+    Route::get('/blog', [AdminController::class, 'blog']);
+    Route::get('/users', [AdminController::class, 'users']);
+    Route::get('/email', [AdminController::class, 'email']);
+});
 
 // Safaricom posts here directly (no browser session, no CSRF token to send)
 // once a DarajaGateway exists — see App\Http\Controllers\Webhooks\MpesaCallbackController.

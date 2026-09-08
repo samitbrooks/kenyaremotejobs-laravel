@@ -2,6 +2,7 @@
 
 namespace App\Support;
 
+use App\Models\BlogPost;
 use App\Models\JobListing;
 use App\Services\Redactor;
 
@@ -146,6 +147,22 @@ class Seo
                     ],
                 ],
             ],
+        ]);
+    }
+
+    public static function articleJsonLd(BlogPost $post): string
+    {
+        $at = '@';
+
+        return json_encode([
+            $at.'context' => 'https://schema.org',
+            $at.'type' => 'Article',
+            'headline' => $post->title,
+            'description' => $post->excerpt,
+            'author' => [$at.'type' => 'Person', 'name' => $post->author_name],
+            'datePublished' => $post->created_at->toIso8601String(),
+            'dateModified' => $post->updated_at->toIso8601String(),
+            'url' => config('site.url').'/journal/'.$post->slug,
         ]);
     }
 
