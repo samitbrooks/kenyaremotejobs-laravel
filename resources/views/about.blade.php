@@ -26,7 +26,7 @@
     </section>
 
     <section class="mx-auto max-w-5xl px-4 py-16 sm:px-6">
-        <div class="grid gap-6 sm:grid-cols-2">
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <x-reveal>
                 <div class="h-full rounded-2xl border-2 border-dashed border-black/10 bg-white p-6">
                     <p class="text-sm font-semibold uppercase tracking-wide text-foreground/40">The problem</p>
@@ -51,7 +51,7 @@
             <x-reveal>
                 <h2 class="mb-10 text-center text-2xl font-bold">What we stand for</h2>
             </x-reveal>
-            <div class="grid gap-8 sm:grid-cols-3">
+            <div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
                 @foreach ($pillars as $i => $pillar)
                     <x-reveal :delay="$i * 120" class="text-center">
                         <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full gradient-sunrise shadow-md">
@@ -71,7 +71,7 @@
 
     <section class="mx-auto max-w-5xl px-4 py-16 text-center sm:px-6">
         <x-reveal>
-            <div class="grid gap-6 rounded-3xl border border-black/5 bg-white p-8 shadow-sm sm:grid-cols-3 sm:p-10">
+            <div class="grid grid-cols-1 gap-6 rounded-3xl border border-black/5 bg-white p-8 shadow-sm sm:grid-cols-3 sm:p-10">
                 <div>
                     <p class="text-4xl font-bold text-sunrise-600"><x-count-up :value="$total" /></p>
                     <p class="mt-1 text-sm text-foreground/60">live listings right now</p>

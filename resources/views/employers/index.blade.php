@@ -47,7 +47,7 @@
             <x-reveal>
                 <h2 class="mb-10 text-center text-2xl font-bold">How it works</h2>
             </x-reveal>
-            <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
                 @foreach ($steps as $i => $step)
                     <x-reveal :delay="$i * 100" class="text-center">
                         <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full gradient-sunrise text-lg font-bold text-white shadow-md">
@@ -65,7 +65,7 @@
         <x-reveal class="mx-auto mb-10 max-w-2xl text-center">
             <h2 class="text-2xl font-bold">Why post here instead of a generic board</h2>
         </x-reveal>
-        <div class="grid gap-6 sm:grid-cols-3">
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
             @foreach ($reasons as $i => $r)
                 <x-reveal :delay="$i * 120">
                     <div class="card-hover h-full rounded-2xl border border-black/5 bg-white p-6 shadow-sm">
@@ -85,7 +85,7 @@
             <x-reveal>
                 <h2 class="mb-10 text-center text-2xl font-bold">Plans</h2>
             </x-reveal>
-            <div class="grid gap-4 sm:grid-cols-2">
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 @foreach (config('jobs.posting_plans') as $key => $pkg)
                     <x-reveal>
                         <div class="rounded-2xl border border-black/5 bg-white p-6 shadow-sm">

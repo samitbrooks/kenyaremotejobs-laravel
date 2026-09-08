@@ -17,7 +17,7 @@
             A curated directory of established paid-survey and get-paid-to platforms &mdash; completely free, as a side-income supplement while you look for your next remote role. This is not hosted content; every card links out to a third-party site.
         </p>
 
-        <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             @foreach (\App\Support\SurveyPlatforms::LIST as $i => $platform)
                 <x-reveal :delay="min($i, 8) * 60">
                     <div class="flex h-full flex-col gap-3 rounded-2xl border border-black/5 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg">

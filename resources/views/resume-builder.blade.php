@@ -27,7 +27,7 @@
             </div>
 
             {{-- CV editor --}}
-            <div x-show="tab === 'cv'" x-cloak class="grid gap-8 lg:grid-cols-2">
+            <div x-show="tab === 'cv'" x-cloak class="grid grid-cols-1 gap-8 lg:grid-cols-2">
                 <div class="no-print space-y-6">
                     <div class="grid grid-cols-2 gap-3">
                         <label class="block text-sm">
@@ -190,7 +190,7 @@
             </div>
 
             {{-- Cover letter editor --}}
-            <div x-show="tab === 'cover-letter'" x-cloak class="grid gap-8 lg:grid-cols-2">
+            <div x-show="tab === 'cover-letter'" x-cloak class="grid grid-cols-1 gap-8 lg:grid-cols-2">
                 <div class="no-print space-y-4">
                     <div class="grid grid-cols-2 gap-3">
                         <label class="block text-sm">

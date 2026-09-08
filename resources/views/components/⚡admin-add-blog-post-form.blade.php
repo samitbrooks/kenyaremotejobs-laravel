@@ -79,7 +79,7 @@ new class extends Component
 
             <div class="mt-4 grid gap-3">
                 <input wire:model="title" required placeholder="Title" class="rounded-lg border border-black/10 px-3 py-2 text-sm">
-                <div class="grid gap-3 sm:grid-cols-2">
+                <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
                     <input wire:model="category" required placeholder="Category (e.g. Career Development)" class="rounded-lg border border-black/10 px-3 py-2 text-sm">
                     <input wire:model="authorName" placeholder="Author (defaults to KenyaRemoteJobs Team)" class="rounded-lg border border-black/10 px-3 py-2 text-sm">
                 </div>

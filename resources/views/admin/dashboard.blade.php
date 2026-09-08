@@ -8,7 +8,7 @@
         Last synced {{ $lastSyncedAt ? \App\Support\Format::timeAgo($lastSyncedAt) : 'never' }}.
     </p>
 
-    <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <div class="rounded-2xl border border-black/5 bg-white p-5 shadow-sm">
             <p class="text-sm text-foreground/50">Total jobs live</p>
             <p class="mt-1 text-3xl font-bold">{{ $totalJobs }}</p>

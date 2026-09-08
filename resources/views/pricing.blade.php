@@ -17,7 +17,7 @@
             Every listing also opens up completely free {{ config('jobs.premium_window_days') }} days after it&rsquo;s posted, credits or not.
         </p>
 
-        <div class="mt-10 grid gap-5 sm:grid-cols-3">
+        <div class="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-3">
             @foreach (config('jobs.tiers') as $tier)
                 @php $pkg = config('jobs.credit_packages')[$tier]; $remaining = $balances[$tier]['remaining'] ?? 0; @endphp
                 <div class="flex flex-col rounded-3xl border border-black/5 bg-white p-6 text-left shadow-lg transition hover:shadow-xl">

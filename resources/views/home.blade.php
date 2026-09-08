@@ -50,7 +50,7 @@
             <div class="absolute -left-24 bottom-0 h-72 w-72 rounded-full bg-horizon-100 blur-3xl"></div>
         </div>
 
-        <div class="relative mx-auto grid max-w-6xl gap-12 md:grid-cols-2 md:items-center">
+        <div class="relative mx-auto grid max-w-6xl grid-cols-1 gap-12 md:grid-cols-2 md:items-center">
             <x-reveal>
                 <p class="text-xs font-semibold uppercase tracking-widest text-sunrise-600">— Online &amp; Remote Job Search</p>
                 <h1 class="mt-3 text-4xl font-bold leading-[1.1] text-horizon-900 sm:text-5xl">
@@ -105,7 +105,7 @@
 
         {{-- Search card — overlaps the hero's bottom edge, same field names as /jobs so it filters straight through. --}}
         <x-reveal :delay="80" class="relative z-10 mx-auto -mb-24 mt-12 max-w-5xl">
-            <form action="{{ url('/jobs') }}" method="GET" class="grid gap-3 rounded-2xl border border-black/5 bg-white p-5 shadow-2xl sm:grid-cols-[2fr_1fr_1fr_auto] sm:items-center">
+            <form action="{{ url('/jobs') }}" method="GET" class="grid grid-cols-1 gap-3 rounded-2xl border border-black/5 bg-white p-5 shadow-2xl sm:grid-cols-[2fr_1fr_1fr_auto] sm:items-center">
                 <input type="text" name="q" placeholder="Search job titles, skills, companies…" class="rounded-lg border border-black/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sunrise-400">
                 <select name="remoteType" class="rounded-lg border border-black/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sunrise-400">
                     <option value="">Any remote type</option>
@@ -152,7 +152,7 @@
             <h2 class="text-2xl font-bold">{{ $hasProfile ? 'Your best-matching jobs' : 'Find your next remote role' }}</h2>
         </x-reveal>
 
-        <div class="grid gap-8 lg:grid-cols-[240px_1fr]">
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-[240px_1fr]">
             <x-reveal class="space-y-8">
                 <div>
                     <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-foreground/40">Browse by audience</p>
@@ -192,7 +192,7 @@
                         Jobs are syncing — check back in a moment, or <a href="{{ url('/jobs') }}" class="underline">browse everything</a>.
                     </p>
                 @else
-                    <div class="grid gap-5 sm:grid-cols-2">
+                    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
                         @foreach ($feed as $i => $job)
                             <x-reveal :delay="min($i, 6) * 70" class="h-full">
                                 <x-job-card :job="$job" :unlocked="$isUnlocked($job)" :match-percent="$matchPercent($job)" />
@@ -213,7 +213,7 @@
             <x-reveal>
                 <h2 class="mb-10 text-center text-2xl font-bold">Start with the work you do best</h2>
             </x-reveal>
-            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach ($categories as $i => $cat)
                     <x-reveal :delay="$i * 60">
                         <a href="{{ url('/jobs') }}?q={{ urlencode($cat['q']) }}" class="card-hover flex items-center gap-4 rounded-2xl border border-black/5 bg-white p-5 shadow-sm">
@@ -234,7 +234,7 @@
             <h2 class="text-2xl font-bold">Not every &ldquo;remote&rdquo; job means Kenya</h2>
             <p class="mt-2 text-foreground/60">A lot of listings say &ldquo;remote&rdquo; and mean one country. Here&rsquo;s what we check on every single one before it earns the badge.</p>
         </x-reveal>
-        <div class="grid gap-6 sm:grid-cols-3">
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
             @foreach ($trustFeatures as $i => $f)
                 <x-reveal :delay="$i * 120">
                     <div class="card-hover h-full rounded-2xl border border-black/5 bg-white p-6 shadow-sm">
@@ -295,7 +295,7 @@
         <x-reveal>
             <h2 class="mb-10 text-center text-2xl font-bold">Success stories</h2>
         </x-reveal>
-        <div class="grid gap-6 sm:grid-cols-3">
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
             @foreach ($testimonials as $i => $t)
                 <x-reveal :delay="$i * 120">
                     <figure class="card-hover h-full rounded-2xl border border-black/5 bg-white p-6 shadow-sm">

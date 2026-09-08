@@ -1,6 +1,6 @@
 <footer class="bg-horizon-900 text-white/70">
     <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-        <div class="grid gap-8 sm:grid-cols-3">
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
             <div>
                 <p class="text-lg font-bold text-white">
                     Kenya<span class="text-sunrise-400">Remote</span>Jobs

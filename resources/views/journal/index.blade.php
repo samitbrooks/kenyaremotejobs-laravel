@@ -15,7 +15,7 @@
                 Nothing published yet &mdash; check back soon.
             </p>
         @else
-            <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach ($posts as $i => $post)
                     <x-reveal :delay="min($i, 8) * 60" class="h-full">
                         <a href="{{ url('/journal/'.$post->slug) }}" class="group flex h-full flex-col gap-3 rounded-2xl border border-black/5 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">

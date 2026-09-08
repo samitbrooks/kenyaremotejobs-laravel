@@ -107,7 +107,7 @@ new class extends Component
                 <button type="button" wire:click="hide" class="text-sm text-foreground/50 hover:underline">Cancel</button>
             </div>
 
-            <div class="mt-4 grid gap-3 sm:grid-cols-2">
+            <div class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <input wire:model="title" required placeholder="Job title" class="rounded-lg border border-black/10 px-3 py-2 text-sm sm:col-span-2">
                 <input wire:model="company" required placeholder="Company" class="rounded-lg border border-black/10 px-3 py-2 text-sm">
                 <input wire:model="location" required placeholder="Location (e.g. Worldwide)" class="rounded-lg border border-black/10 px-3 py-2 text-sm">
