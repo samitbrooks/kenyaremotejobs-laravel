@@ -137,7 +137,14 @@ class DescriptionBlocks
 
         return array_map(function ($block) use ($redactedLeaves, &$cursor) {
             if ($block['type'] === 'bullets' || $block['type'] === 'numbered') {
-                $block['items'] = array_map(fn () => $redactedLeaves[$cursor++], $block['items']);
+                // Not array_map(fn () => $redactedLeaves[$cursor++], ...): an
+                // arrow function captures $cursor by value at creation, so
+                // the increment doesn't persist across the multiple calls
+                // array_map makes to it — every item in the block ends up
+                // reading the same frozen index.
+                $itemCount = count($block['items']);
+                $block['items'] = array_slice($redactedLeaves, $cursor, $itemCount);
+                $cursor += $itemCount;
             } else {
                 $block['text'] = $redactedLeaves[$cursor++];
             }
