@@ -184,5 +184,11 @@
             <rect x="3.5" y="5.5" width="13" height="9" rx="1.5" />
             <path d="M4 6.5l6 4.5 6-4.5" />
             @break
+
+        @case('briefcase')
+            <rect x="3" y="7.5" width="14" height="9" rx="1.5" />
+            <path d="M7 7.5V6a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 13 6v1.5" />
+            <path d="M3 11.5h14" />
+            @break
     @endswitch
 </svg>

@@ -1,15 +1,15 @@
 @props(['company', 'size' => 48])
 
-@php
-    $gradients = ['from-sunrise-400 to-sunrise-600', 'from-horizon-400 to-horizon-600', 'from-sunrise-400 to-horizon-500'];
-    $initial = mb_strtoupper(mb_substr(trim($company), 0, 1)) ?: '?';
-    $gradient = $gradients[mb_strlen($company) % count($gradients)];
-@endphp
-
+{{--
+    Deliberately the same icon and gradient on every card, not a per-company
+    letter/color hash — a page of differently-colored, differently-lettered
+    circles read as visual noise rather than as company identity (there's no
+    real per-company logo system here to justify the variation).
+--}}
 <div
-    {{ $attributes->merge(['class' => "flex shrink-0 items-center justify-center rounded-xl bg-gradient-to-br {$gradient} font-bold text-white"]) }}
-    style="width: {{ $size }}px; height: {{ $size }}px; font-size: {{ $size * 0.4 }}px"
+    {{ $attributes->merge(['class' => 'flex shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-sunrise-400 to-horizon-500']) }}
+    style="width: {{ $size }}px; height: {{ $size }}px"
     aria-hidden="true"
 >
-    {{ $initial }}
+    <x-icon name="briefcase" class="text-white" style="width: {{ $size * 0.5 }}px; height: {{ $size * 0.5 }}px" />
 </div>
