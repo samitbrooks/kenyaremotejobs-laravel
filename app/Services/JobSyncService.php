@@ -13,6 +13,7 @@ use App\Services\JobSources\JobSource;
 use App\Services\JobSources\RemoteOkSource;
 use App\Services\JobSources\RemotiveSource;
 use App\Support\Audience;
+use App\Support\Format;
 use App\Support\JobTier;
 use App\Support\KenyaRelevance;
 use App\Support\Mojibake;
@@ -88,7 +89,7 @@ class JobSyncService
                     // its live catalog keeps changing) can hand back the
                     // same job twice in one sync, which would otherwise hit
                     // the primary key on insert.
-                    $jobs[$job['id']] = Mojibake::repairJob($job);
+                    $jobs[$job['id']] = Format::decodeEntitiesInJob(Mojibake::repairJob($job));
                 }
             } catch (Throwable $e) {
                 Log::warning('[job-sync] a job source failed', ['source' => $class, 'error' => $e->getMessage()]);

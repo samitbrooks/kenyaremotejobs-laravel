@@ -9,14 +9,42 @@ use Carbon\CarbonInterface;
  */
 class Format
 {
-    private const HTML_ENTITIES = [
-        '&amp;' => '&',
-        '&lt;' => '<',
-        '&gt;' => '>',
-        '&quot;' => '"',
-        '&#39;' => "'",
-        '&nbsp;' => ' ',
-    ];
+    /**
+     * Some upstream sources double- (or even triple-) encode entities, so a
+     * raw "&" can arrive as "&amp;amp;" — or, seen directly in a job title,
+     * a literal "(" as "&#x28;" with nothing downstream ever decoding it.
+     * Looping until a pass changes nothing unwinds any depth of encoding.
+     */
+    public static function decodeEntities(string $text): string
+    {
+        $decoded = $text;
+        for ($i = 0; $i < 3; $i++) {
+            $next = html_entity_decode($decoded, ENT_QUOTES | ENT_HTML5);
+            if ($next === $decoded) {
+                break;
+            }
+            $decoded = $next;
+        }
+
+        return $decoded;
+    }
+
+    /**
+     * @param  array<string, mixed>  $job
+     * @return array<string, mixed>
+     */
+    public static function decodeEntitiesInJob(array $job): array
+    {
+        $job['title'] = self::decodeEntities($job['title']);
+        $job['company'] = self::decodeEntities($job['company']);
+        // description keeps its HTML tags intact (DescriptionBlocks parses
+        // real markup later) — only the entities inside it get decoded.
+        $job['description'] = self::decodeEntities($job['description']);
+        $job['location'] = self::decodeEntities($job['location']);
+        $job['tags'] = array_map(fn ($tag) => self::decodeEntities($tag), $job['tags']);
+
+        return $job;
+    }
 
     /**
      * Job descriptions from upstream APIs are HTML, and some sources (e.g.
@@ -27,20 +55,7 @@ class Format
      */
     public static function stripHtml(string $html): string
     {
-        $decoded = $html;
-        for ($i = 0; $i < 3; $i++) {
-            $next = preg_replace_callback(
-                '/&[a-z#0-9]+;/i',
-                fn ($m) => self::HTML_ENTITIES[$m[0]] ?? $m[0],
-                $decoded
-            );
-            if ($next === $decoded) {
-                break;
-            }
-            $decoded = $next;
-        }
-
-        $withBreaks = preg_replace('#</(p|div|li|h[1-6])>#i', "\n\n", $decoded);
+        $withBreaks = preg_replace('#</(p|div|li|h[1-6])>#i', "\n\n", self::decodeEntities($html));
         $withBreaks = preg_replace('#<br\s*/?>#i', "\n", $withBreaks);
         $withBreaks = preg_replace('/<li>/i', '• ', $withBreaks);
 
