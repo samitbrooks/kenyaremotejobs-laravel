@@ -52,6 +52,16 @@ class JobSyncService
 
         $stored = collect($fetched)
             ->reject(fn ($job) => $hiddenIds->has($job['id']))
+            // Belt-and-suspenders, independent of whatever guard (or lack
+            // of one) each individual source adapter has: Redactor can only
+            // strip an employer's name from the description if it actually
+            // has one to match against. A job with a blank/whitespace-only
+            // company wouldn't just look broken — its employer identity
+            // would leak straight through the paywall, since there'd be
+            // nothing for the redactor to find and replace. Better to drop
+            // the listing than sell access to something that can't be
+            // redacted.
+            ->reject(fn ($job) => trim((string) ($job['title'] ?? '')) === '' || trim((string) ($job['company'] ?? '')) === '')
             ->map(fn ($job) => $this->score($job))
             ->values();
 

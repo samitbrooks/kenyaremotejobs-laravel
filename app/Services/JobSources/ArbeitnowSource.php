@@ -17,7 +17,7 @@ class ArbeitnowSource implements JobSource
         }
 
         return collect($response->json('data', []))
-            ->filter(fn ($job) => $job['remote'] ?? false)
+            ->filter(fn ($job) => ($job['remote'] ?? false) && trim((string) ($job['company_name'] ?? '')) !== '')
             ->map(fn ($job) => $this->normalize($job))
             ->values()
             ->all();

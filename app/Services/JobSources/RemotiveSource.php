@@ -17,6 +17,7 @@ class RemotiveSource implements JobSource
         }
 
         return collect($response->json('jobs', []))
+            ->filter(fn ($job) => trim((string) ($job['company_name'] ?? '')) !== '')
             ->map(fn ($job) => $this->normalize($job))
             ->values()
             ->all();

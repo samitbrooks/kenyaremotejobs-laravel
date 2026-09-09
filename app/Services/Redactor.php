@@ -30,12 +30,13 @@ class Redactor
         'gmbh', 'the', 'and', 'of',
     ];
 
-    // Words that can follow "About " without it being a company name —
-    // "About Us" / "About This Role" are near-universal job-posting
-    // headings, not an employer's name.
-    private const ABOUT_STOPWORDS = [
+    // Words that can open a sentence capitalized without being a company
+    // name — "About Us" / "About This Role" are near-universal job-posting
+    // headings, and "We are…" / "It is…" are common sentence starters, not
+    // an employer's name. Shared by both extractSelfDeclaredName() patterns.
+    private const NAME_STOPWORDS = [
         'us', 'the', 'this', 'our', 'me', 'you', 'we', 'role', 'position', 'job',
-        'company', 'team', 'opportunity',
+        'company', 'team', 'opportunity', 'it', 'they', 'i', 'here',
     ];
 
     public function redactEmployerIdentity(string $text, string $company): string
@@ -103,7 +104,11 @@ class Redactor
     // product brand). No amount of splitting the *registered* name into
     // words can catch an alias that shares none of its letters, so this
     // pulls the name the description gives for itself directly out of that
-    // heading instead.
+    // heading instead. Falls back to the even more common "{Name} is a
+    // mission-driven organization…" boilerplate company-bio opener when
+    // there's no "About" heading at all — e.g. a listing posted through a
+    // staffing agency, where the registered `company` field is the agency's
+    // name and the description's bio paragraph names the actual employer.
     private function extractSelfDeclaredName(string $text): ?string
     {
         // The continuation between words is deliberately [ \t]+, not \s+ —
@@ -117,14 +122,31 @@ class Redactor
         // simply isn't a character the match can continue through, so it
         // stops the capture there too, on either line endings or sentence
         // endings.
-        if (! preg_match("/\b[Aa]bout[ \t]+([A-Z][\w&'-]*(?:[ \t]+[A-Z][\w&'-]*){0,3})/", $text, $matches)) {
-            return null;
+        if (preg_match("/\b[Aa]bout[ \t]+([A-Z][\w&'-]*(?:[ \t]+[A-Z][\w&'-]*){0,3})/", $text, $matches)) {
+            $candidate = $this->cleanSelfDeclaredCandidate($matches[1]);
+            if ($candidate !== null) {
+                return $candidate;
+            }
         }
 
-        $candidate = preg_replace('/[.,:;!?]+$/', '', trim($matches[1]));
+        // Anchored to the start of a sentence (string start, a newline, or
+        // ". ") so it can't match a capitalized proper noun mentioned
+        // mid-sentence elsewhere — only an actual sentence opening like
+        // "Veeva Systems is a mission-driven organization…" or "Acme Corp
+        // is the leading provider of…".
+        if (preg_match("/(?:^|\\n|\\.[ \\t]+)([A-Z][\\w&'-]*(?:[ \\t]+[A-Z][\\w&'-]*){0,3})[ \\t]+(?:is|are)[ \\t]+(?:a|an|the)\\b/", $text, $matches)) {
+            return $this->cleanSelfDeclaredCandidate($matches[1]);
+        }
+
+        return null;
+    }
+
+    private function cleanSelfDeclaredCandidate(string $raw): ?string
+    {
+        $candidate = preg_replace('/[.,:;!?]+$/', '', trim($raw));
         $firstWord = strtolower(explode(' ', trim($candidate))[0] ?? '');
 
-        if ($firstWord === '' || in_array($firstWord, self::ABOUT_STOPWORDS, true)) {
+        if ($firstWord === '' || in_array($firstWord, self::NAME_STOPWORDS, true)) {
             return null;
         }
 
