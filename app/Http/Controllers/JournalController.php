@@ -9,7 +9,7 @@ class JournalController extends Controller
     public function index()
     {
         return view('journal.index', [
-            'posts' => BlogPost::where('published', true)->latest()->get(),
+            'posts' => BlogPost::where('published', true)->latest('published_at')->get(),
         ]);
     }
 

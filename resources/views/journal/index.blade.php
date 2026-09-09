@@ -19,12 +19,17 @@
                 @foreach ($posts as $i => $post)
                     <x-reveal :delay="min($i, 8) * 60" class="h-full">
                         <a href="{{ url('/journal/'.$post->slug) }}" class="group flex h-full flex-col gap-3 rounded-2xl border border-black/5 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
-                            <span class="w-fit rounded-full bg-horizon-100 px-2.5 py-1 text-[11px] font-semibold text-horizon-800">{{ $post->category }}</span>
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-fit rounded-full bg-horizon-100 px-2.5 py-1 text-[11px] font-semibold text-horizon-800">{{ $post->category }}</span>
+                                @if ($post->published_at && $post->published_at->gt(now()->subDays(7)))
+                                    <span class="w-fit rounded-full bg-sunrise-500 px-2.5 py-1 text-[11px] font-semibold text-white">New</span>
+                                @endif
+                            </div>
                             <h2 class="font-semibold text-foreground group-hover:text-sunrise-600">{{ $post->title }}</h2>
                             <p class="line-clamp-3 flex-1 text-sm text-foreground/60">{{ $post->excerpt }}</p>
                             <div class="flex items-center justify-between border-t border-black/5 pt-3 text-xs text-foreground/50">
                                 <span>{{ $post->author_name }}</span>
-                                <span>{{ \App\Support\Format::timeAgo($post->created_at) }} &middot; {{ \App\Support\Format::estimateReadMinutes($post->content) }} min read</span>
+                                <span>{{ $post->published_at ? \App\Support\Format::timeAgo($post->published_at) : '' }} &middot; {{ \App\Support\Format::estimateReadMinutes($post->content) }} min read</span>
                             </div>
                         </a>
                     </x-reveal>

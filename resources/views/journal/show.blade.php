@@ -8,7 +8,7 @@
             <span class="mt-4 inline-block rounded-full bg-horizon-100 px-2.5 py-1 text-[11px] font-semibold text-horizon-800">{{ $post->category }}</span>
             <h1 class="mt-3 text-2xl font-bold sm:text-3xl">{{ $post->title }}</h1>
             <p class="mt-2 text-sm text-foreground/50">
-                {{ $post->author_name }} &middot; {{ \App\Support\Format::timeAgo($post->created_at) }} &middot; {{ \App\Support\Format::estimateReadMinutes($post->content) }} min read
+                {{ $post->author_name }} &middot; {{ $post->published_at ? \App\Support\Format::timeAgo($post->published_at) : \App\Support\Format::timeAgo($post->created_at) }} &middot; {{ \App\Support\Format::estimateReadMinutes($post->content) }} min read
             </p>
 
             <div class="mt-8 whitespace-pre-line text-sm leading-relaxed text-foreground/80">{{ $post->content }}</div>

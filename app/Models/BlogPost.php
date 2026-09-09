@@ -20,6 +20,20 @@ class BlogPost extends Model
 
     protected function casts(): array
     {
-        return ['published' => 'boolean'];
+        return ['published' => 'boolean', 'published_at' => 'datetime'];
+    }
+
+    protected static function booted(): void
+    {
+        // Set once, on whichever save first flips published to true —
+        // covers the create form, the edit form, and the admin toggle
+        // action alike without duplicating this in all three. Deliberately
+        // never overwritten on a later republish: it means "first went
+        // live", not "last saved while published".
+        static::saving(function (BlogPost $post) {
+            if ($post->published && $post->published_at === null) {
+                $post->published_at = now();
+            }
+        });
     }
 }

@@ -11,8 +11,13 @@ new class extends Component
 
     public function togglePublished(): void
     {
-        BlogPost::where('id', $this->postId)->update(['published' => ! $this->published]);
-        $this->published = ! $this->published;
+        // A mass update() wouldn't fire BlogPost's saving() model event
+        // (which is what stamps published_at on first publish) — load and
+        // save instead so that still runs.
+        $post = BlogPost::findOrFail($this->postId);
+        $post->published = ! $this->published;
+        $post->save();
+        $this->published = $post->published;
     }
 
     public function delete(): void

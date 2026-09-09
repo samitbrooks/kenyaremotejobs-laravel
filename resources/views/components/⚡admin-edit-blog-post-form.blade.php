@@ -45,7 +45,9 @@ new class extends Component
             return;
         }
 
-        BlogPost::where('id', $this->postId)->update([
+        // Load and save (not a mass update()) so BlogPost's saving() model
+        // event — which stamps published_at on first publish — still fires.
+        BlogPost::findOrFail($this->postId)->update([
             'title' => trim($this->title),
             'category' => trim($this->category),
             'author_name' => trim($this->authorName) ?: 'KenyaRemoteJobs Team',

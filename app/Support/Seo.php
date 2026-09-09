@@ -161,7 +161,7 @@ class Seo
             'headline' => $post->title,
             'description' => $post->excerpt,
             'author' => [$at.'type' => 'Person', 'name' => $post->author_name],
-            'datePublished' => $post->created_at->toIso8601String(),
+            'datePublished' => ($post->published_at ?? $post->created_at)->toIso8601String(),
             'dateModified' => $post->updated_at->toIso8601String(),
             'url' => config('site.url').'/journal/'.$post->slug,
         ]);
