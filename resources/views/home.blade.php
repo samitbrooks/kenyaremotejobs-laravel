@@ -140,11 +140,50 @@
                 <p class="mt-1 text-xs font-medium uppercase tracking-wide text-foreground/50">Free to view now</p>
             </div>
             <div>
-                <p class="text-3xl font-bold text-horizon-900">5</p>
-                <p class="mt-1 text-xs font-medium uppercase tracking-wide text-foreground/50">Boards synced daily</p>
+                <p class="flex items-center justify-center gap-1.5 text-3xl font-bold text-horizon-900">
+                    @if ($lastSyncedAt)
+                        <span class="relative flex h-2.5 w-2.5" aria-hidden="true">
+                            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                            <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500"></span>
+                        </span>
+                    @endif
+                    {{ $lastSyncedAt ? \App\Support\Format::timeAgo($lastSyncedAt) : 'not yet' }}
+                </p>
+                <p class="mt-1 text-xs font-medium uppercase tracking-wide text-foreground/50">Last synced from 6 job boards</p>
             </div>
         </div>
     </section>
+
+    {{-- Just posted — a real, live feed of the newest listings (not a
+         canned/fake ticker), so the homepage visibly reflects that jobs
+         keep arriving even between visits. --}}
+    @if ($justPosted->isNotEmpty())
+        <section class="border-b border-black/5 bg-white px-4 py-6 sm:px-6">
+            <div class="mx-auto max-w-6xl">
+                <x-reveal class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-foreground/40">
+                    <span class="relative flex h-2 w-2" aria-hidden="true">
+                        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-sunrise-400 opacity-75"></span>
+                        <span class="relative inline-flex h-2 w-2 rounded-full bg-sunrise-500"></span>
+                    </span>
+                    Just posted
+                </x-reveal>
+                <div class="mt-3 flex gap-3 overflow-x-auto pb-1">
+                    @foreach ($justPosted as $i => $job)
+                        <x-reveal :delay="$i * 60" class="shrink-0">
+                            <a
+                                href="{{ url('/jobs/'.$job->id) }}"
+                                class="card-hover flex w-64 shrink-0 flex-col gap-1 rounded-xl border border-black/5 bg-white px-4 py-3 text-sm shadow-sm"
+                            >
+                                <span class="truncate font-semibold text-foreground">{{ $job->title }}</span>
+                                <span class="truncate text-xs text-foreground/50">{{ $isUnlocked($job) ? $job->company : 'Employer hidden until unlocked' }}</span>
+                                <span class="mt-1 text-xs font-medium text-sunrise-600">{{ \App\Support\Format::timeAgo($job->posted_at) }}</span>
+                            </a>
+                        </x-reveal>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
 
     {{-- Find your next remote role — sidebar + feed, Jobicy-style --}}
     <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">

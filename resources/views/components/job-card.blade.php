@@ -11,6 +11,7 @@
     $tierLabels = config('jobs.tier_labels');
     $creditPackages = config('jobs.credit_packages');
     $audienceSegments = $job->audience_segments ?? [];
+    $isNew = $job->posted_at->gt(now()->subDay());
 @endphp
 
 <a
@@ -32,6 +33,11 @@
     </div>
 
     <div class="flex flex-wrap gap-1.5">
+        @if ($isNew)
+            <span class="inline-flex items-center gap-1 rounded-full bg-sunrise-500 px-2 py-0.5 text-[11px] font-semibold text-white">
+                New
+            </span>
+        @endif
         @if (is_int($matchPercent))
             <span class="inline-flex items-center gap-1 rounded-full bg-horizon-600 px-2 py-0.5 text-[11px] font-semibold text-white">
                 <x-icon name="sparkle" class="h-3 w-3" /> {{ $matchPercent }}% match

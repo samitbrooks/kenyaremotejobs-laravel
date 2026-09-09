@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JobListing;
+use App\Models\SyncMeta;
 use App\Support\Audience;
 use App\Support\Matching;
 
@@ -53,12 +54,16 @@ class HomeController extends Controller
             ->filter(fn ($a) => $a['count'] > 0)
             ->values();
 
+        $justPosted = JobListing::visible()->latest('posted_at')->limit(5)->get();
+
         return view('home', [
             'total' => $total,
             'totalKenyaFriendly' => $totalKenyaFriendly,
             'totalFree' => $totalFree,
+            'lastSyncedAt' => SyncMeta::find(1)?->last_synced_at,
             'feed' => $feed,
             'heroPreview' => $heroPreview,
+            'justPosted' => $justPosted,
             'isUnlocked' => $isUnlocked,
             'matchPercent' => $matchPercent,
             'hasProfile' => (bool) $profile,
