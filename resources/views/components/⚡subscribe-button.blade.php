@@ -1,17 +1,27 @@
 <?php
 
+use App\Livewire\Concerns\HasPendingPayment;
 use App\Services\PaymentService;
 use Livewire\Component;
 
 new class extends Component
 {
+    use HasPendingPayment;
+
     public bool $isAuthed;
 
     public bool $alreadySubscribed;
 
     public string $period = 'monthly';
 
+    public string $phone = '';
+
     public ?string $error = null;
+
+    protected function paymentRedirectTo(): string
+    {
+        return '/pricing';
+    }
 
     public function selectPeriod(string $period): void
     {
@@ -27,14 +37,23 @@ new class extends Component
         }
 
         $this->error = null;
+        $this->paymentError = null;
+
+        if (config('payments.default') === 'mpesa' && ! \App\Support\KenyanPhone::normalize($this->phone)) {
+            $this->error = 'Enter a valid M-Pesa phone number (e.g. 07XXXXXXXX).';
+
+            return;
+        }
 
         try {
-            $payment = $payments->subscribe(auth()->user(), $this->period);
+            $payment = $payments->subscribe(auth()->user(), $this->period, $this->phone ?: null);
             if ($payment->isCompleted()) {
-                $this->redirect('/pricing', navigate: false);
+                $this->redirect($this->paymentRedirectTo(), navigate: false);
+            } elseif ($payment->isPending()) {
+                $this->pendingPaymentId = $payment->id;
             }
-        } catch (\Throwable) {
-            $this->error = 'Something went wrong. Please try again.';
+        } catch (\Throwable $e) {
+            $this->error = config('payments.default') === 'mpesa' ? $e->getMessage() : 'Something went wrong. Please try again.';
         }
     }
 };
@@ -45,6 +64,11 @@ new class extends Component
         <button type="button" disabled class="w-full rounded-full border-2 border-emerald-300 bg-emerald-50 px-6 py-3 font-semibold text-emerald-700">
             You&rsquo;re subscribed
         </button>
+    @elseif ($pendingPaymentId)
+        <div wire:poll.3s="checkPaymentStatus" class="rounded-2xl border border-sunrise-200 bg-sunrise-50 p-4 text-center text-sm">
+            <p class="font-semibold text-sunrise-800">Check your phone</p>
+            <p class="mt-1 text-foreground/60">Enter your M-Pesa PIN on the prompt sent to {{ $phone }} to complete the subscription.</p>
+        </div>
     @else
         <div class="mb-3 flex gap-1.5 rounded-full bg-black/5 p-1">
             @foreach (config('jobs.subscription_plans') as $key => $plan)
@@ -61,6 +85,15 @@ new class extends Component
             @endforeach
         </div>
 
+        @if (config('payments.default') === 'mpesa' && $isAuthed)
+            <input
+                type="tel"
+                wire:model="phone"
+                placeholder="M-Pesa phone (07XXXXXXXX)"
+                class="mb-2 w-full rounded-lg border border-black/10 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sunrise-400"
+            >
+        @endif
+
         <button
             type="button"
             wire:click="subscribe"
@@ -73,6 +106,9 @@ new class extends Component
         </button>
         @if ($error)
             <p class="mt-2 text-center text-sm text-red-600">{{ $error }}</p>
+        @endif
+        @if ($paymentError)
+            <p class="mt-2 text-center text-sm text-red-600">{{ $paymentError }}</p>
         @endif
     @endif
 </div>

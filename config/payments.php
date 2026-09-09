@@ -21,7 +21,13 @@ return [
         'shortcode' => env('MPESA_SHORTCODE'),
         'passkey' => env('MPESA_PASSKEY'),
         'environment' => env('MPESA_ENVIRONMENT', 'sandbox'),
+        // The full callback URL Safaricom posts STK push results to — must
+        // end with /webhooks/mpesa/callback/{MPESA_CALLBACK_SECRET}. Daraja
+        // sends no signature to verify a callback is genuinely from
+        // Safaricom, so this random path segment is what stands in for one —
+        // see Webhooks\MpesaCallbackController.
         'callback_url' => env('MPESA_CALLBACK_URL'),
+        'callback_secret' => env('MPESA_CALLBACK_SECRET'),
     ],
 
 ];

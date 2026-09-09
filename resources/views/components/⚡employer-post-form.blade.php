@@ -1,10 +1,13 @@
 <?php
 
+use App\Livewire\Concerns\HasPendingPayment;
 use App\Services\PaymentService;
 use Livewire\Component;
 
 new class extends Component
 {
+    use HasPendingPayment;
+
     public string $plan = 'basic';
 
     public string $title = '';
@@ -23,7 +26,14 @@ new class extends Component
 
     public string $description = '';
 
+    public string $phone = '';
+
     public ?string $error = null;
+
+    protected function paymentRedirectTo(): string
+    {
+        return '/employers/dashboard';
+    }
 
     public function selectPlan(string $plan): void
     {
@@ -33,6 +43,7 @@ new class extends Component
     public function publish(PaymentService $payments): void
     {
         $this->error = null;
+        $this->paymentError = null;
 
         if (! $this->title || ! $this->company || ! $this->description || ! $this->location || ! $this->remoteType || ! $this->sourceUrl) {
             $this->error = 'Title, company, description, location, remote type, and apply link are required.';
@@ -42,6 +53,12 @@ new class extends Component
 
         if (! preg_match('#^https?://#i', $this->sourceUrl)) {
             $this->error = 'Apply link must be a full URL.';
+
+            return;
+        }
+
+        if (config('payments.default') === 'mpesa' && ! \App\Support\KenyanPhone::normalize($this->phone)) {
+            $this->error = 'Enter a valid M-Pesa phone number (e.g. 07XXXXXXXX).';
 
             return;
         }
@@ -58,18 +75,26 @@ new class extends Component
                 'salary' => trim($this->salary) ?: null,
                 'source_url' => trim($this->sourceUrl),
                 'tags' => $tags,
-            ], $this->plan);
+            ], $this->plan, $this->phone ?: null);
 
             if ($payment->isCompleted()) {
-                $this->redirect('/employers/dashboard', navigate: false);
+                $this->redirect($this->paymentRedirectTo(), navigate: false);
+            } elseif ($payment->isPending()) {
+                $this->pendingPaymentId = $payment->id;
             }
-        } catch (\Throwable) {
-            $this->error = 'Something went wrong. Please try again.';
+        } catch (\Throwable $e) {
+            $this->error = config('payments.default') === 'mpesa' ? $e->getMessage() : 'Something went wrong. Please try again.';
         }
     }
 };
 ?>
 
+@if ($pendingPaymentId)
+    <div wire:poll.3s="checkPaymentStatus" class="rounded-2xl border border-sunrise-200 bg-sunrise-50 p-8 text-center">
+        <p class="font-semibold text-sunrise-800">Check your phone</p>
+        <p class="mt-1 text-sm text-foreground/60">Enter your M-Pesa PIN on the prompt sent to {{ $phone }} to publish this listing.</p>
+    </div>
+@else
 <form wire:submit="publish" class="space-y-8">
     <div class="rounded-2xl border border-black/5 bg-white p-6 shadow-sm">
         <h2 class="font-semibold">Choose a plan</h2>
@@ -116,11 +141,17 @@ new class extends Component
             <input wire:model="tags" placeholder="Skills/tags, comma-separated" class="rounded-lg border border-black/10 px-3 py-2 text-sm sm:col-span-2">
             <input wire:model="sourceUrl" required type="url" placeholder="Where candidates should apply (https://…)" class="rounded-lg border border-black/10 px-3 py-2 text-sm sm:col-span-2">
             <textarea wire:model="description" required rows="8" placeholder="Full job description" class="rounded-lg border border-black/10 px-3 py-2 text-sm sm:col-span-2"></textarea>
+            @if (config('payments.default') === 'mpesa')
+                <input wire:model="phone" type="tel" required placeholder="M-Pesa phone (07XXXXXXXX)" class="rounded-lg border border-black/10 px-3 py-2 text-sm sm:col-span-2">
+            @endif
         </div>
     </div>
 
     @if ($error)
         <p class="text-sm text-red-600">{{ $error }}</p>
+    @endif
+    @if ($paymentError)
+        <p class="text-sm text-red-600">{{ $paymentError }}</p>
     @endif
 
     <button
@@ -132,7 +163,5 @@ new class extends Component
         <span wire:loading.remove wire:target="publish">Publish for KES {{ number_format(config('jobs.posting_plans')[$plan]['price_kes']) }}</span>
         <span wire:loading wire:target="publish">Publishing&hellip;</span>
     </button>
-    <p class="text-center text-xs text-foreground/40">
-        Payments aren&rsquo;t live yet &mdash; publishing today is free while we finish integrating a payment gateway.
-    </p>
 </form>
+@endif

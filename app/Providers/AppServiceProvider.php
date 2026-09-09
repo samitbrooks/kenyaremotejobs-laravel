@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Payments\DarajaGateway;
 use App\Payments\MockGateway;
 use App\Payments\PaymentGateway;
 use App\Support\NoInlineMarkdown;
@@ -15,10 +16,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // Swap this match for a real gateway (e.g. 'mpesa' => new
-        // DarajaGateway(...)) once one exists — every call site depends on
-        // PaymentGateway, not a concrete class.
+        // Every call site depends on PaymentGateway, not a concrete class —
+        // this is the only place that knows which implementation is live.
         $this->app->bind(PaymentGateway::class, fn () => match (config('payments.default')) {
+            'mpesa' => new DarajaGateway,
             default => new MockGateway,
         });
     }

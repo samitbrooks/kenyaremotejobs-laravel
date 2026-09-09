@@ -18,7 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // sends no CSRF token — see routes/web.php's webhook route and
         // App\Http\Controllers\Webhooks\MpesaCallbackController.
         $middleware->preventRequestForgery(except: [
-            'webhooks/mpesa/callback',
+            'webhooks/mpesa/callback/*',
         ]);
 
         $middleware->alias(['admin' => EnsureUserIsAdmin::class]);

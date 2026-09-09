@@ -73,8 +73,11 @@ Route::middleware('admin')->prefix('admin')->group(function () {
 });
 
 // Safaricom posts here directly (no browser session, no CSRF token to send)
-// once a DarajaGateway exists — see App\Http\Controllers\Webhooks\MpesaCallbackController.
+// — see App\Http\Controllers\Webhooks\MpesaCallbackController. {secret} is
+// the callback's only defense against a forged request (Daraja sends no
+// signature); it must match MPESA_CALLBACK_SECRET, which is also baked into
+// the CallBackURL sent with every STK push (config('payments.mpesa.callback_url')).
 // Exempted from CSRF via preventRequestForgery(except:) in bootstrap/app.php,
 // not a route-level withoutMiddleware() — Laravel 13's CSRF middleware
 // (PreventRequestForgery) reads its exclusion list from there.
-Route::post('/webhooks/mpesa/callback', MpesaCallbackController::class);
+Route::post('/webhooks/mpesa/callback/{secret}', MpesaCallbackController::class);

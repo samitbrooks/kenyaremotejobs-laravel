@@ -28,4 +28,14 @@ class Payment extends Model
     {
         return $this->status === 'completed';
     }
+
+    public function isFailed(): bool
+    {
+        return $this->status === 'failed';
+    }
+
+    public function isPending(): bool
+    {
+        return $this->status === 'pending';
+    }
 }

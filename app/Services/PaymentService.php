@@ -29,7 +29,7 @@ class PaymentService
 {
     public function __construct(private PaymentGateway $gateway) {}
 
-    public function purchaseCreditPackage(User $user, string $tier): Payment
+    public function purchaseCreditPackage(User $user, string $tier, ?string $phone = null): Payment
     {
         if (! in_array($tier, config('jobs.tiers'), true)) {
             throw new InvalidArgumentException("Invalid tier: {$tier}");
@@ -41,13 +41,14 @@ class PaymentService
             'purpose' => 'credit_package',
             'payload' => ['tier' => $tier],
             'amount_kes' => config('jobs.credit_packages')[$tier]['price_kes'],
+            'phone' => $phone,
             'status' => 'pending',
         ]);
 
         return $this->initiateAndMaybeFulfill($payment);
     }
 
-    public function subscribe(User $user, string $period): Payment
+    public function subscribe(User $user, string $period, ?string $phone = null): Payment
     {
         $plans = config('jobs.subscription_plans');
         if (! array_key_exists($period, $plans)) {
@@ -60,6 +61,7 @@ class PaymentService
             'purpose' => 'subscription',
             'payload' => ['period' => $period],
             'amount_kes' => $plans[$period]['price_kes'],
+            'phone' => $phone,
             'status' => 'pending',
         ]);
 
@@ -69,7 +71,7 @@ class PaymentService
     /**
      * @param  array{title: string, company: string, description: string, tags: array<int, string>, location: string, remote_type: string, salary: ?string, source_url: string}  $jobInput
      */
-    public function postEmployerJob(User $user, array $jobInput, string $plan): Payment
+    public function postEmployerJob(User $user, array $jobInput, string $plan, ?string $phone = null): Payment
     {
         $plans = config('jobs.posting_plans');
         if (! array_key_exists($plan, $plans)) {
@@ -82,6 +84,7 @@ class PaymentService
             'purpose' => 'employer_job_post',
             'payload' => ['job' => $jobInput, 'plan' => $plan],
             'amount_kes' => $plans[$plan]['price_kes'],
+            'phone' => $phone,
             'status' => 'pending',
         ]);
 

@@ -3,40 +3,76 @@
 namespace App\Http\Controllers\Webhooks;
 
 use App\Http\Controllers\Controller;
+use App\Models\Payment;
 use App\Services\PaymentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 /**
- * Not wired to a live gateway yet — this is the landing spot for Safaricom's
- * Daraja STK push callback once a DarajaGateway exists (see
- * App\Payments\PaymentGateway and config/payments.php). Route is already
- * registered (routes/web.php) and public — Safaricom calls it directly, not
- * through a browser session — so it's ready to point the Daraja app's
- * callback URL at as soon as the gateway itself is built.
+ * Safaricom posts here once an STK push (started in DarajaGateway::initiate())
+ * resolves — approved, cancelled, or timed out on the buyer's phone. Daraja
+ * has no signature header to verify a callback actually came from Safaricom,
+ * and this site sits behind Cloudflare, so the origin never even sees
+ * Safaricom's real source IP for an allowlist check to work against —
+ * instead, $secret is a random value baked into the CallBackURL itself
+ * (config('payments.mpesa.callback_url')), checked before anything else.
  *
- * When that gateway is added, DarajaGateway::initiate() will:
- *   1. Request an OAuth token and send the STK push for $payment->amount_kes
- *      to $payment->phone.
- *   2. Store Safaricom's CheckoutRequestID on $payment->external_reference
- *      and leave $payment->status as 'pending'.
- *
- * This method then needs to:
- *   1. Verify the request is genuinely from Safaricom (IP allowlist and/or
- *      a shared secret in the callback URL — Daraja has no signature
- *      header to check).
- *   2. Look up the Payment by the CheckoutRequestID in the callback body.
- *   3. On ResultCode 0, mark it completed (with the MpesaReceiptNumber as
- *      a second reference) and call PaymentService::fulfill($payment).
- *   4. On any other ResultCode, mark it failed.
- *   5. Always return a 200 with {"ResultCode": 0} — Daraja retries
- *      indefinitely on anything else.
+ * Always returns 200 with ResultCode 0 regardless of what's inside — that's
+ * what tells Daraja "received, stop retrying"; it isn't a statement about
+ * whether the payment succeeded.
  */
 class MpesaCallbackController extends Controller
 {
-    public function __invoke(Request $request, PaymentService $payments)
+    public function __invoke(Request $request, PaymentService $payments, string $secret)
     {
-        Log::info('[mpesa-callback] received but no gateway is wired up yet', $request->all());
+        if (! hash_equals((string) config('payments.mpesa.callback_secret'), $secret)) {
+            Log::warning('[mpesa-callback] rejected — bad secret');
+
+            return response()->json(['ResultCode' => 1, 'ResultDesc' => 'Rejected'], 403);
+        }
+
+        $stk = $request->input('Body.stkCallback', []);
+        $checkoutRequestId = $stk['CheckoutRequestID'] ?? null;
+        $resultCode = $stk['ResultCode'] ?? null;
+
+        Log::info('[mpesa-callback] received', ['checkout_request_id' => $checkoutRequestId, 'result_code' => $resultCode]);
+
+        if (! $checkoutRequestId) {
+            return response()->json(['ResultCode' => 0, 'ResultDesc' => 'Accepted']);
+        }
+
+        $payment = Payment::where('external_reference', $checkoutRequestId)->first();
+
+        if (! $payment) {
+            Log::warning('[mpesa-callback] no matching payment', ['checkout_request_id' => $checkoutRequestId]);
+
+            return response()->json(['ResultCode' => 0, 'ResultDesc' => 'Accepted']);
+        }
+
+        // Safaricom can retry a callback delivery — a payment already
+        // resolved (by an earlier delivery of this same callback) shouldn't
+        // be resolved a second time.
+        if (! $payment->isPending()) {
+            return response()->json(['ResultCode' => 0, 'ResultDesc' => 'Accepted']);
+        }
+
+        if ((int) $resultCode === 0) {
+            $receipt = collect($stk['CallbackMetadata']['Item'] ?? [])
+                ->firstWhere('Name', 'MpesaReceiptNumber')['Value'] ?? null;
+
+            $payment->update([
+                'status' => 'completed',
+                'completed_at' => now(),
+                'external_reference' => $receipt ?? $payment->external_reference,
+            ]);
+            $payments->fulfill($payment);
+        } else {
+            $payment->update(['status' => 'failed']);
+            Log::info('[mpesa-callback] payment failed/cancelled', [
+                'payment_id' => $payment->id,
+                'result_desc' => $stk['ResultDesc'] ?? null,
+            ]);
+        }
 
         return response()->json(['ResultCode' => 0, 'ResultDesc' => 'Accepted']);
     }
