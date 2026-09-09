@@ -126,7 +126,7 @@
 
     {{-- Stat bar --}}
     <section class="border-b border-black/5 bg-horizon-50 px-4 pb-10 pt-32 sm:px-6">
-        <div class="mx-auto grid max-w-6xl grid-cols-2 gap-6 text-center sm:grid-cols-4">
+        <div class="mx-auto grid max-w-4xl grid-cols-1 gap-6 text-center sm:grid-cols-3">
             <div>
                 <p class="text-3xl font-bold text-horizon-900"><x-count-up :value="$total" /></p>
                 <p class="mt-1 text-xs font-medium uppercase tracking-wide text-foreground/50">Live listings</p>
@@ -139,18 +139,6 @@
                 <p class="text-3xl font-bold text-horizon-900"><x-count-up :value="$totalFree" /></p>
                 <p class="mt-1 text-xs font-medium uppercase tracking-wide text-foreground/50">Free to view now</p>
             </div>
-            <div>
-                <p class="flex items-center justify-center gap-1.5 text-3xl font-bold text-horizon-900">
-                    @if ($lastSyncedAt)
-                        <span class="relative flex h-2.5 w-2.5" aria-hidden="true">
-                            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-                            <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500"></span>
-                        </span>
-                    @endif
-                    {{ $lastSyncedAt ? \App\Support\Format::timeAgo($lastSyncedAt) : 'not yet' }}
-                </p>
-                <p class="mt-1 text-xs font-medium uppercase tracking-wide text-foreground/50">Last synced from 6 job boards</p>
-            </div>
         </div>
     </section>
 
@@ -158,7 +146,7 @@
          canned/fake ticker), so the homepage visibly reflects that jobs
          keep arriving even between visits. --}}
     @if ($justPosted->isNotEmpty())
-        <section class="border-b border-black/5 bg-white px-4 py-6 sm:px-6">
+        <section class="border-b border-black/5 bg-white px-4 py-10 sm:px-6">
             <div class="mx-auto max-w-6xl">
                 <x-reveal class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-foreground/40">
                     <span class="relative flex h-2 w-2" aria-hidden="true">
@@ -167,19 +155,23 @@
                     </span>
                     Just posted
                 </x-reveal>
-                <div class="mt-3 flex gap-3 overflow-x-auto pb-1">
-                    @foreach ($justPosted as $i => $job)
-                        <x-reveal :delay="$i * 60" class="shrink-0">
-                            <a
-                                href="{{ url('/jobs/'.$job->id) }}"
-                                class="card-hover flex w-64 shrink-0 flex-col gap-1 rounded-xl border border-black/5 bg-white px-4 py-3 text-sm shadow-sm"
-                            >
-                                <span class="truncate font-semibold text-foreground">{{ $job->title }}</span>
-                                <span class="truncate text-xs text-foreground/50">{{ $isUnlocked($job) ? $job->company : 'Employer hidden until unlocked' }}</span>
-                                <span class="mt-1 text-xs font-medium text-sunrise-600">{{ \App\Support\Format::timeAgo($job->posted_at) }}</span>
-                            </a>
-                        </x-reveal>
-                    @endforeach
+                <div class="relative mt-5">
+                    <div class="flex gap-4 overflow-x-auto pb-2">
+                        @foreach ($justPosted as $i => $job)
+                            <x-reveal :delay="$i * 60" class="shrink-0">
+                                <a
+                                    href="{{ url('/jobs/'.$job->id) }}"
+                                    class="card-hover flex w-64 shrink-0 flex-col gap-1.5 rounded-xl border border-black/5 bg-white px-4 py-3.5 text-sm shadow-sm"
+                                >
+                                    <span class="truncate font-semibold text-foreground">{{ $job->title }}</span>
+                                    <span class="truncate text-xs text-foreground/50">{{ $isUnlocked($job) ? $job->company : 'Employer hidden until unlocked' }}</span>
+                                    <span class="mt-1 text-xs font-medium text-sunrise-600">{{ \App\Support\Format::timeAgo($job->posted_at) }}</span>
+                                </a>
+                            </x-reveal>
+                        @endforeach
+                    </div>
+                    {{-- Fades the right edge to hint there's more to scroll to, without needing a visible scrollbar --}}
+                    <div class="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-white to-transparent" aria-hidden="true"></div>
                 </div>
             </div>
         </section>

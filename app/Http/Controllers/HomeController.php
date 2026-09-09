@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\JobListing;
-use App\Models\SyncMeta;
 use App\Support\Audience;
 use App\Support\Matching;
 
@@ -60,7 +59,6 @@ class HomeController extends Controller
             'total' => $total,
             'totalKenyaFriendly' => $totalKenyaFriendly,
             'totalFree' => $totalFree,
-            'lastSyncedAt' => SyncMeta::find(1)?->last_synced_at,
             'feed' => $feed,
             'heroPreview' => $heroPreview,
             'justPosted' => $justPosted,
