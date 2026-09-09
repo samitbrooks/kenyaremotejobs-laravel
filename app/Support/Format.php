@@ -92,7 +92,10 @@ class Format
 
     public static function timeAgo(CarbonInterface $date): string
     {
-        $diffSec = now()->diffInSeconds($date);
+        // Carbon 3's diff*() methods default to signed results (negative
+        // for a date in the past), unlike Carbon 2 — absolute: true
+        // restores the "how long ago" behavior every caller here expects.
+        $diffSec = (int) now()->diffInSeconds($date, absolute: true);
 
         if ($diffSec < 60) {
             return 'just now';
