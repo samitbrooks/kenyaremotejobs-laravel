@@ -71,11 +71,11 @@
                                     <p class="mb-2 mt-4 px-2.5 text-[11px] font-semibold uppercase tracking-wide text-neutral-400">Resources</p>
                                     @foreach ([
                                         ['href' => '/jobs', 'icon' => 'globe', 'label' => 'All Opportunities'],
-                                        ['href' => '/success-stories', 'icon' => 'trophy', 'label' => 'Success Stories'],
                                         ['href' => '/match', 'icon' => 'sparkle', 'label' => 'Get Your Match Score'],
                                         ['href' => '/resume-builder', 'icon' => 'pen', 'label' => 'CV & Cover Letter Builder'],
                                         ['href' => '/journal', 'icon' => 'newspaper', 'label' => 'The Journal'],
                                         ['href' => '/pricing', 'icon' => 'card', 'label' => 'Pricing'],
+                                        ['href' => '/surveys', 'icon' => 'coin', 'label' => 'Earn While You Search'],
                                     ] as $r)
                                         <a href="{{ url($r['href']) }}" @click="jobsMenuOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-2 text-sm transition hover:bg-horizon-50">
                                             <x-icon :name="$r['icon']" class="h-4 w-4 text-horizon-600" /> {{ $r['label'] }}
@@ -99,11 +99,7 @@
                         </div>
                     </div>
 
-                    <a href="{{ url('/journal') }}" class="nav-underline transition hover:text-sunrise-300">Journal</a>
-                    <a href="{{ url('/success-stories') }}" class="nav-underline transition hover:text-sunrise-300">Success Stories</a>
-                    <a href="{{ url('/pricing') }}" class="nav-underline transition hover:text-sunrise-300">Pricing</a>
                     <a href="{{ url('/about') }}" class="nav-underline transition hover:text-sunrise-300">About</a>
-                    <a href="{{ url('/surveys') }}" class="text-xs text-white/60 transition hover:text-sunrise-300">Earn while you search</a>
                 @endif
 
                 @if ($user?->isAdmin())
@@ -164,12 +160,23 @@
                         <x-icon :name="\App\Support\Audience::ICONS[$segment]" class="h-4 w-4" /> {{ \App\Support\Audience::LABELS[$segment] }}
                     </a>
                 @endforeach
+                <a href="{{ url('/match') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-1.5 rounded px-2 py-2 text-white/80 hover:bg-horizon-800">
+                    <x-icon name="sparkle" class="h-4 w-4" /> Get Your Match Score
+                </a>
+                <a href="{{ url('/resume-builder') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-1.5 rounded px-2 py-2 text-white/80 hover:bg-horizon-800">
+                    <x-icon name="pen" class="h-4 w-4" /> CV & Cover Letter Builder
+                </a>
+                <a href="{{ url('/journal') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-1.5 rounded px-2 py-2 text-white/80 hover:bg-horizon-800">
+                    <x-icon name="newspaper" class="h-4 w-4" /> The Journal
+                </a>
+                <a href="{{ url('/pricing') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-1.5 rounded px-2 py-2 text-white/80 hover:bg-horizon-800">
+                    <x-icon name="card" class="h-4 w-4" /> Pricing
+                </a>
+                <a href="{{ url('/surveys') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-1.5 rounded px-2 py-2 text-white/80 hover:bg-horizon-800">
+                    <x-icon name="coin" class="h-4 w-4" /> Earn While You Search
+                </a>
             </div>
-            <a href="{{ url('/journal') }}" @click="open = false" class="rounded px-2 py-2 hover:bg-horizon-800">Journal</a>
-            <a href="{{ url('/success-stories') }}" @click="open = false" class="rounded px-2 py-2 hover:bg-horizon-800">Success Stories</a>
-            <a href="{{ url('/pricing') }}" @click="open = false" class="rounded px-2 py-2 hover:bg-horizon-800">Pricing</a>
             <a href="{{ url('/about') }}" @click="open = false" class="rounded px-2 py-2 hover:bg-horizon-800">About</a>
-            <a href="{{ url('/surveys') }}" @click="open = false" class="rounded px-2 py-2 text-white/60 hover:bg-horizon-800">Earn while you search</a>
         @endif
 
         @if ($user?->isAdmin())
