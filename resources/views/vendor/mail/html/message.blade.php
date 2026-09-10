@@ -2,7 +2,7 @@
 {{-- Header --}}
 <x-slot:header>
 <x-mail::header :url="config('app.url')">
-{{ config('app.name') }}
+<span style="color:#12464c;">Kenya</span><span style="color:#ff6b35;">Remote</span><span style="color:#12464c;">Jobs</span>
 </x-mail::header>
 </x-slot:header>
 

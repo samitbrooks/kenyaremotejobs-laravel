@@ -28,6 +28,11 @@ class LoginLinkEmail extends Mailable
             subject: $this->isNewAccount
                 ? 'Confirm your '.config('site.name').' account'
                 : 'Your '.config('site.name').' login link',
+            // The body invites a reply ("a real person reads it") — make
+            // that literally true rather than relying on mail clients'
+            // reply-to-From default, which some treat inconsistently for
+            // mail that looks automated.
+            replyTo: [config('mail.from.address')],
         );
     }
 

@@ -22,6 +22,7 @@ class WelcomeEmail extends Mailable
     {
         return new Envelope(
             subject: 'Welcome to '.config('site.name'),
+            replyTo: [config('mail.from.address')],
         );
     }
 
