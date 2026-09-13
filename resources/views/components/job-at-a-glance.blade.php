@@ -12,7 +12,7 @@
     $rows[] = ['label' => 'Posted', 'value' => \App\Support\Format::timeAgo($job->posted_at)];
 
     if ($job->origin === 'employer') {
-        $rows[] = ['label' => 'Application Status', 'value' => 'Direct employer listing — Open to all'];
+        $rows[] = ['label' => 'Application Status', 'value' => '🇰🇪 Direct Employer (Seeking Kenyan Talent — Pro Exclusive)'];
     } elseif ($job->isEarlyAccess()) {
         $rows[] = ['label' => 'Application Status', 'value' => '⚡ 48-Hour Early Access Window (Pro Members)'];
     } else {

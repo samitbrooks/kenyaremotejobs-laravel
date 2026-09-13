@@ -131,11 +131,11 @@ class JobsController extends Controller
         $job = $admin ? JobListing::findOrFail($id) : JobListing::visible()->findOrFail($id);
 
         $isEarlyAccess = $job->isEarlyAccess();
+        $isEmployerDirect = $job->origin === 'employer';
         $canApply = $admin
-            || $job->origin === 'employer'
-            || ! $isEarlyAccess
             || (bool) $user?->subscribed
-            || (bool) ($user && $user->jobUnlocks()->where('job_listing_id', $job->id)->exists());
+            || (bool) ($user && $user->jobUnlocks()->where('job_listing_id', $job->id)->exists())
+            || (! $isEmployerDirect && ! $isEarlyAccess);
 
         $profile = Matching::parseProfileCookie($request->cookie(Matching::COOKIE_NAME));
         $matchPercent = $profile ? Matching::computeMatchPercent($profile, $job->only(['tags', 'title', 'description'])) : null;

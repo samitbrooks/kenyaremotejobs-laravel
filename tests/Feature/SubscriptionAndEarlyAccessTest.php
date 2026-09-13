@@ -96,6 +96,49 @@ class SubscriptionAndEarlyAccessTest extends TestCase
         $proResponse->assertSee('Apply Directly at CloudScale Ltd');
     }
 
+    public function test_direct_employer_listing_applications_are_exclusive_to_pro_members(): void
+    {
+        $employerJob = JobListing::create([
+            'id' => 'test-employer-job',
+            'origin' => 'employer', // Direct submission
+            'tier' => 'basic',
+            'title' => 'Nairobi Remote Lead Engineer',
+            'company' => 'KenyanFintech Co',
+            'location' => 'Kenya / Remote',
+            'remote_type' => 'Full-time',
+            'description' => 'Direct employer seeking Kenyan software engineers.',
+            'source_id' => 'emp-101',
+            'source_name' => 'Direct Employer',
+            'source_url' => 'https://kenyanfintech.com/careers/apply',
+            'posted_at' => now()->subDays(10), // even if older than 48h, employer direct is Pro exclusive
+            'kenya_friendly' => true,
+            'kenya_score' => 100,
+            'kenya_reasons' => ['Direct employer in Kenya'],
+            'tags' => ['engineering'],
+            'audience_segments' => [],
+        ]);
+
+        // Free visitor sees company name, but cannot apply without Pro
+        $response = $this->get('/jobs/'.$employerJob->id);
+        $response->assertStatus(200);
+        $response->assertSee('KenyanFintech Co');
+        $response->assertSee('Verified Employer Actively Seeking Kenyan Talent');
+        $response->assertSee('Unlock Direct Apply with Pro (KES 1,499/mo)');
+        $response->assertDontSee('Apply Directly at KenyanFintech Co');
+
+        // Pro member can apply directly
+        $proUser = User::factory()->create([
+            'subscribed' => true,
+            'subscribed_at' => now(),
+        ]);
+
+        $proResponse = $this->actingAs($proUser)->get('/jobs/'.$employerJob->id);
+        $proResponse->assertStatus(200);
+        $proResponse->assertSee('Verified Direct Employer');
+        $proResponse->assertSee('Apply Directly at KenyanFintech Co');
+        $proResponse->assertSee('https://kenyanfintech.com/careers/apply');
+    }
+
     public function test_user_can_track_applications_in_crm(): void
     {
         $user = User::factory()->create();

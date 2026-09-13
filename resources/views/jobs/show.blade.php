@@ -113,7 +113,11 @@
             <div class="mt-8">
                 @if ($canApply)
                     <div class="rounded-3xl border border-emerald-200 bg-gradient-to-br from-emerald-50/60 to-white p-6 sm:p-8 text-center shadow-md">
-                        @if ($isEarlyAccess)
+                        @if ($job->origin === 'employer')
+                            <p class="mb-3 inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800">
+                                🇰🇪 Verified Direct Employer &middot; Pro Access Active
+                            </p>
+                        @elseif ($isEarlyAccess)
                             <p class="mb-3 inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800">
                                 <x-icon name="check" class="h-4 w-4 text-emerald-600" /> Pro Member Early Access Active
                             </p>
@@ -135,6 +139,47 @@
                         </div>
                         <p class="mt-4 text-xs text-foreground/40">
                             Sourced via <a href="{{ $job->source_url }}" target="_blank" rel="noopener noreferrer" class="underline hover:text-sunrise-600">{{ $job->source_name }}</a> &middot; Make sure to tailor your CV before submitting!
+                        </p>
+                    </div>
+                @elseif ($job->origin === 'employer')
+                    {{-- Direct Employer Listing Seeking Kenyan Talent (Pro Exclusive) --}}
+                    <div class="rounded-3xl border-2 border-emerald-300 bg-gradient-to-br from-emerald-50 via-white to-teal-50 p-6 sm:p-8 text-center shadow-lg">
+                        <div class="inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-1 text-xs font-bold uppercase tracking-wider text-emerald-900 mb-3">
+                            🇰🇪 Verified Employer Actively Seeking Kenyan Talent &middot; Pro Exclusive
+                        </div>
+                        <h3 class="text-xl sm:text-2xl font-bold text-foreground">
+                            {{ $job->company }} is Exclusively Hiring in Kenya
+                        </h3>
+                        <p class="mt-2 text-sm text-foreground/70 max-w-lg mx-auto">
+                            This employer submitted this listing directly on KenyaRemoteJobs specifically to recruit Kenyan professionals. Direct application access is exclusive to Pro members.
+                        </p>
+
+                        <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-lg mx-auto text-left text-xs font-medium text-foreground/80">
+                            <div class="rounded-xl bg-white/90 p-3 border border-emerald-100 shadow-xs">
+                                <p class="font-bold text-emerald-900">🇰🇪 No Visa Hurdles</p>
+                                <p class="text-foreground/60 mt-0.5">Employer is already set up to hire Kenyan remote contractors.</p>
+                            </div>
+                            <div class="rounded-xl bg-white/90 p-3 border border-emerald-100 shadow-xs">
+                                <p class="font-bold text-emerald-900">🎯 Direct Hiring Manager</p>
+                                <p class="text-foreground/60 mt-0.5">Your application is delivered directly to their hiring inbox.</p>
+                            </div>
+                            <div class="rounded-xl bg-white/90 p-3 border border-emerald-100 shadow-xs">
+                                <p class="font-bold text-emerald-900">✨ AI CV Copilot</p>
+                                <p class="text-foreground/60 mt-0.5">Tailor your CV for {{ $job->company }} in 1 click.</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+                            <a
+                                href="{{ url('/pricing') }}"
+                                class="btn-pop w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-horizon-800 px-8 py-3.5 text-sm font-bold text-white shadow-md hover:bg-horizon-900 transition"
+                            >
+                                Unlock Direct Apply with Pro (KES 1,499/mo)
+                            </a>
+                            <livewire:ai-tailor-modal :job-id="$job->id" />
+                        </div>
+                        <p class="mt-3 text-xs text-foreground/50">
+                            Instant M-Pesa STK push &middot; Cancel anytime
                         </p>
                     </div>
                 @else

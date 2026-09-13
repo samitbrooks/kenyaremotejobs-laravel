@@ -29,7 +29,11 @@
                 New
             </span>
         @endif
-        @if ($isEarlyAccess)
+        @if ($job->origin === 'employer')
+            <span class="inline-flex items-center gap-1 rounded-full bg-emerald-100 border border-emerald-300 px-2 py-0.5 text-[11px] font-bold text-emerald-900">
+                <x-icon name="announce" class="h-3 w-3 text-emerald-700" /> 🇰🇪 Direct Employer &middot; Pro Exclusive
+            </span>
+        @elseif ($isEarlyAccess)
             <span class="inline-flex items-center gap-1 rounded-full bg-amber-100 border border-amber-200 px-2 py-0.5 text-[11px] font-semibold text-amber-900">
                 <x-icon name="sparkle" class="h-3 w-3 text-amber-600" /> Early Access ({{ $job->earlyAccessHoursRemaining() }}h left)
             </span>
@@ -50,11 +54,6 @@
         @endif
         @if ($job->kenya_friendly)
             <x-kenya-badge compact />
-        @endif
-        @if ($job->origin === 'employer')
-            <span class="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-0.5 text-[11px] font-semibold text-emerald-800">
-                <x-icon name="announce" class="h-3 w-3" /> Direct employer listing
-            </span>
         @endif
     </div>
 
