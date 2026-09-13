@@ -35,6 +35,8 @@
 
         <div class="no-print">
             <x-footer />
+            <livewire:scroll-conversion-popup />
+            <livewire:action-center />
         </div>
 
         @livewireScripts
