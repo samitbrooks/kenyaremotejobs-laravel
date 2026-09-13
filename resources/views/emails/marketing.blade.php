@@ -2,7 +2,7 @@
 {!! nl2br(e($body)) !!}
 
 Thanks,<br>
-The {{ config('site.name') }} team
+Ivy from Kenya Remote Jobs
 
 <x-slot:subcopy>
 You're receiving this because you have an account at {{ config('site.name') }}.

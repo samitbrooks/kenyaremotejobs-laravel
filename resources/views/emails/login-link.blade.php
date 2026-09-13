@@ -24,7 +24,7 @@ This link is valid for 30 minutes and can only be used to access your own accoun
 Questions or something not working right? Just reply to this email — a real person reads it.
 
 Thanks,<br>
-The {{ config('site.name') }} team
+Ivy from Kenya Remote Jobs
 
 <x-slot:subcopy>
 Trouble with the button above? Copy and paste this URL into your browser: [{{ $url }}]({{ $url }})

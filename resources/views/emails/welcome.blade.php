@@ -18,5 +18,5 @@ New listings don't stay up forever — unlock the ones you want with credits (or
 Titles, companies, and full descriptions are always free to read. What's gated while a listing is new is just the employer's name and the apply link.
 
 Thanks,<br>
-The {{ config('site.name') }} team
+Ivy from Kenya Remote Jobs
 </x-mail::message>

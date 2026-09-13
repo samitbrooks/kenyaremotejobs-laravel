@@ -73,6 +73,11 @@ new class extends Component
         </div>
     @endif
 
+    <div class="mb-4 flex flex-wrap items-center justify-between gap-2 rounded-xl bg-horizon-50 border border-horizon-200/80 px-4 py-2.5 text-xs text-horizon-900">
+        <span class="font-medium">Sender: <strong class="font-bold text-horizon-950">Ivy from Kenya Remote Jobs</strong> &lt;{{ config('mail.from.address') }}&gt;</span>
+        <span class="text-foreground/50">One-click unsubscribe attached automatically</span>
+    </div>
+
     <label class="block text-sm font-semibold">Audience</label>
     <select wire:model.live="audience" class="mt-1 w-full max-w-sm rounded-lg border border-black/10 px-3 py-2 text-sm">
         <option value="all">Everyone with an account ({{ $counts['all'] }})</option>

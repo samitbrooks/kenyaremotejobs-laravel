@@ -2,6 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Mail\LoginLinkEmail;
+use App\Mail\MarketingEmail;
+use App\Mail\WelcomeEmail;
+use App\Models\User;
 use App\Services\KenyaCareerBotService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -14,12 +18,12 @@ class ActionCenterAndScrollPopupTest extends TestCase
     {
         $response = $this->get('/');
         $response->assertStatus(200);
-        $response->assertSee('Ask Kariuki AI');
+        $response->assertSee('Ask Ivy AI');
         $response->assertSee('80% of Remote Hires Apply in the First 48 Hours');
 
         $jobsResponse = $this->get('/jobs');
         $jobsResponse->assertStatus(200);
-        $jobsResponse->assertSee('Ask Kariuki AI');
+        $jobsResponse->assertSee('Ask Ivy AI');
     }
 
     public function test_career_bot_service_answers_foreign_payments(): void
@@ -67,6 +71,14 @@ class ActionCenterAndScrollPopupTest extends TestCase
         $this->assertStringContainsString('M-Pesa', $response->json('reply'));
     }
 
+    public function test_career_bot_service_identifies_as_ivy_ai(): void
+    {
+        $bot = app(KenyaCareerBotService::class);
+        $result = $bot->ask('Hello, who are you?');
+
+        $this->assertStringContainsString('Ivy AI', $result['reply']);
+    }
+
     public function test_career_bot_api_validation(): void
     {
         $response = $this->postJson('/api/career-bot', [
@@ -75,5 +87,30 @@ class ActionCenterAndScrollPopupTest extends TestCase
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['message']);
+    }
+
+    public function test_marketing_email_is_from_ivy_from_kenya_remote_jobs(): void
+    {
+        $user = User::factory()->create();
+        $mail = new MarketingEmail($user, 'Weekly Remote Jobs', 'Here are your top jobs.');
+
+        $envelope = $mail->envelope();
+        $this->assertNotNull($envelope->from);
+        $this->assertSame('Ivy from Kenya Remote Jobs', $envelope->from->name);
+
+        $mail->assertSeeInHtml('Ivy from Kenya Remote Jobs');
+    }
+
+    public function test_welcome_and_login_emails_are_from_ivy(): void
+    {
+        $user = User::factory()->create();
+
+        $welcomeMail = new WelcomeEmail($user);
+        $this->assertSame('Ivy from Kenya Remote Jobs', $welcomeMail->envelope()->from->name);
+        $welcomeMail->assertSeeInHtml('Ivy from Kenya Remote Jobs');
+
+        $loginMail = new LoginLinkEmail($user, 'https://kenyaremotejobs.com/auth/verify', true);
+        $this->assertSame('Ivy from Kenya Remote Jobs', $loginMail->envelope()->from->name);
+        $loginMail->assertSeeInHtml('Ivy from Kenya Remote Jobs');
     }
 }

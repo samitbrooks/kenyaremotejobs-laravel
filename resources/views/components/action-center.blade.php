@@ -7,7 +7,7 @@
         messages: [
             {
                 role: 'assistant',
-                content: 'Hello! 👋 I am **Kariuki AI**, your free KenyaRemoteJobs career copilot.\n\nAsk me anything about landing US/UK/EU remote jobs, getting paid via Wise & M-Pesa, or claiming 0% US withholding tax with your KRA PIN.',
+                content: 'Hello! 👋 I am **Ivy AI**, your free KenyaRemoteJobs career advisor.\n\nAsk me anything about landing US/UK/EU remote jobs, getting paid via Wise & M-Pesa, or claiming 0% US withholding tax with your KRA PIN.',
                 actions: [
                     { label: '💸 Wise & M-Pesa Pay', query: 'How do I receive payments from foreign clients in Kenya via Wise and M-Pesa?' },
                     { label: '📑 W-8BEN Tax Form', query: 'How do I fill Form W-8BEN with my KRA PIN to avoid 30% US tax?' },
@@ -113,7 +113,7 @@
         <button
             type="button"
             @click="toggle"
-            aria-label="Open Remote Career Copilot"
+            aria-label="Open Ivy AI Career Advisor"
             class="btn-pop group fixed bottom-5 right-5 z-50 flex items-center gap-2.5 rounded-full border-2 border-horizon-400/80 bg-gradient-to-r from-horizon-900 via-horizon-800 to-horizon-900 px-4 py-2.5 text-white shadow-xl transition hover:border-sunrise-400 hover:shadow-2xl hover:scale-105"
         >
             <span class="relative flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-tr from-sunrise-500 to-amber-400 text-white shadow-xs">
@@ -125,7 +125,7 @@
             </span>
             <div class="text-left">
                 <p class="text-xs font-bold leading-tight tracking-wide flex items-center gap-1.5">
-                    Ask Kariuki AI <span class="hidden sm:inline text-[10px] uppercase font-extrabold tracking-wider text-sunrise-300">🇰🇪 Free Copilot</span>
+                    Ask Ivy AI <span class="hidden sm:inline text-[10px] uppercase font-extrabold tracking-wider text-sunrise-300">🇰🇪 Free Advisor</span>
                 </p>
                 <p class="text-[10px] text-white/70 leading-none mt-0.5 hidden sm:block">
                     Remote Career, Wise &amp; Tax Guide
@@ -155,7 +155,7 @@
                 </span>
                 <div class="min-w-0">
                     <div class="flex items-center gap-1.5">
-                        <p class="text-sm font-bold truncate">Kariuki AI Copilot</p>
+                        <p class="text-sm font-bold truncate">Ivy AI Career Advisor</p>
                         <span class="inline-flex items-center gap-1 rounded-full bg-emerald-500/20 px-1.5 py-0.2 text-[9px] font-bold text-emerald-300 border border-emerald-400/30">
                             <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span> Online
                         </span>
@@ -293,7 +293,7 @@
                         <input
                             type="text"
                             x-model="inputMessage"
-                            placeholder="Ask about remote jobs, Wise, taxes, Pro..."
+                            placeholder="Ask Ivy about remote jobs, Wise, taxes, Pro..."
                             class="flex-1 rounded-xl border border-black/10 bg-horizon-50/40 px-3 py-2 text-xs focus:bg-white focus:border-horizon-500 focus:outline-none focus:ring-1 focus:ring-horizon-500"
                             autocomplete="off"
                         />
@@ -308,7 +308,7 @@
                         </button>
                     </form>
                     <div class="mt-1.5 flex items-center justify-between text-[10px] text-foreground/40 px-1">
-                        <span>Free AI Career Assistant</span>
+                        <span>Ivy AI &bull; Free Career Assistant</span>
                         <a href="{{ url('/pricing') }}" class="text-horizon-700 font-semibold hover:underline">Get Pro Early Access &rarr;</a>
                     </div>
                 </div>
