@@ -142,7 +142,7 @@
                                 <span class="block text-xs text-foreground/50">USD-to-Mpesa invoice template, W-8BEN cheat sheet, EAT timezone pitch</span>
                             </td>
                             <td class="p-4 text-center text-foreground/40">—</td>
-                            <td class="p-4 text-center text-emerald-700 font-bold bg-horizon-50/20">✓ Included Free</td>
+                            <td class="p-4 text-center text-emerald-700 font-bold bg-horizon-50/20">✓ Included with Pro</td>
                         </tr>
                         <tr>
                             <td class="p-4 font-medium text-foreground">
@@ -157,30 +157,66 @@
             </div>
         </div>
 
-        {{-- Kenyan Contractor Toolkit Feature Highlight --}}
-        <div class="mt-14 rounded-3xl border border-black/5 bg-white p-6 sm:p-8 shadow-sm">
-            <div class="flex items-center gap-3">
-                <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-100 text-emerald-800 font-bold">
-                    🇰🇪
-                </span>
-                <div>
-                    <h3 class="text-xl font-bold text-foreground">Included Free: The Kenyan Remote Contractor Toolkit</h3>
-                    <p class="text-xs text-foreground/60">Practical resources designed specifically for Kenyan remote professionals working with US/UK/EU clients.</p>
+        {{-- Employers Seeking Kenyan Talent & Contractor Toolkit (Pro Exclusive) --}}
+        <div class="mt-14 rounded-3xl border-2 border-emerald-300 bg-gradient-to-br from-emerald-50/40 via-white to-horizon-50/40 p-6 sm:p-8 shadow-md">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-black/5 pb-5">
+                <div class="flex items-center gap-3">
+                    <span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-800 text-2xl font-bold shadow-xs">
+                        🇰🇪
+                    </span>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h3 class="text-xl font-bold text-foreground">Pro Exclusive: Employers Actively Seeking Kenyan Talent</h3>
+                            <span class="rounded-full bg-emerald-100 px-2.5 py-0.5 text-[11px] font-bold text-emerald-800 border border-emerald-200">
+                                Pro Only
+                            </span>
+                        </div>
+                        <p class="text-xs text-foreground/60 mt-0.5">Direct hiring manager pipelines with zero foreign visa barriers, plus your complete remote contractor setup.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div class="rounded-2xl border border-black/5 bg-horizon-50/50 p-4">
-                    <p class="font-bold text-sm text-horizon-900">📄 USD Invoice Template</p>
-                    <p class="text-xs text-foreground/70 mt-1">Professional contractor invoice format pre-configured for receiving foreign payments via Wise, Payoneer, or direct Wire to Kenyan banks.</p>
+            <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="rounded-2xl border border-black/5 bg-white p-5 shadow-xs">
+                    <p class="font-bold text-sm text-emerald-950 flex items-center gap-1.5">
+                        <span>🤝</span> Direct Employer Inboxes
+                    </p>
+                    <p class="text-xs text-foreground/70 mt-2 leading-relaxed">Companies post directly on KenyaRemoteJobs specifically to recruit Kenyan professionals. Pro members apply directly to hiring decision-makers.</p>
                 </div>
-                <div class="rounded-2xl border border-black/5 bg-horizon-50/50 p-4">
-                    <p class="font-bold text-sm text-horizon-900">📑 US W-8BEN Form Cheat Sheet</p>
-                    <p class="text-xs text-foreground/70 mt-1">Step-by-step guidance on filling out IRS W-8BEN for US remote clients without being double-taxed.</p>
+
+                <div class="rounded-2xl border border-black/5 bg-white p-5 shadow-xs">
+                    <p class="font-bold text-sm text-emerald-950 flex items-center gap-1.5">
+                        <span>🎯</span> Kenya-Matching (No Visa Hurdles)
+                    </p>
+                    <p class="text-xs text-foreground/70 mt-2 leading-relaxed">Roles verified to accept East African residents without requiring US/EU work permits, pre-screened for friendly payment terms.</p>
                 </div>
-                <div class="rounded-2xl border border-black/5 bg-horizon-50/50 p-4">
-                    <p class="font-bold text-sm text-horizon-900">⏰ EAT Timezone Advantage Pitch</p>
-                    <p class="text-xs text-foreground/70 mt-1">Proven email scripts framing Nairobi (GMT+3) as the ideal timezone overlap for European and East Coast US teams.</p>
+
+                <div class="rounded-2xl border border-black/5 bg-white p-5 shadow-xs">
+                    <p class="font-bold text-sm text-emerald-950 flex items-center gap-1.5">
+                        <span>⏰</span> EAT Timezone Advantage Pitch
+                    </p>
+                    <p class="text-xs text-foreground/70 mt-2 leading-relaxed">Proven cover letter scripts framing Nairobi (GMT+3) as an advantageous 4–5 hour daily overlap for European and US East Coast teams.</p>
+                </div>
+
+                <div class="rounded-2xl border border-black/5 bg-white p-5 shadow-xs">
+                    <p class="font-bold text-sm text-horizon-950 flex items-center gap-1.5">
+                        <span>📄</span> USD Invoice Template
+                    </p>
+                    <p class="text-xs text-foreground/70 mt-2 leading-relaxed">Professional international contractor invoice pre-configured for receiving foreign payments via Wise, Payoneer, or direct Wire to Kenyan banks.</p>
+                </div>
+
+                <div class="rounded-2xl border border-black/5 bg-white p-5 shadow-xs">
+                    <p class="font-bold text-sm text-horizon-950 flex items-center gap-1.5">
+                        <span>📑</span> US W-8BEN Form Cheat Sheet
+                    </p>
+                    <p class="text-xs text-foreground/70 mt-2 leading-relaxed">Step-by-step instructions on filling out IRS W-8BEN using your KRA PIN to avoid 30% US withholding tax under international treaties.</p>
+                </div>
+
+                <div class="rounded-2xl border border-black/5 bg-white p-5 shadow-xs">
+                    <p class="font-bold text-sm text-horizon-950 flex items-center gap-1.5">
+                        <span>💼</span> Candidate CRM &amp; Tracking
+                    </p>
+                    <p class="text-xs text-foreground/70 mt-2 leading-relaxed">In-app interview tracking pipeline with recruiter notes, salary discussed, and follow-up reminders in your personal dashboard.</p>
                 </div>
             </div>
         </div>

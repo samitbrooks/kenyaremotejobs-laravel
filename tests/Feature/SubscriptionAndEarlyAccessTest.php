@@ -21,7 +21,8 @@ class SubscriptionAndEarlyAccessTest extends TestCase
         $response->assertSee('Remote Career Accelerator');
         $response->assertSee('M-Pesa Supported');
         $response->assertSee('Free vs Pro Membership');
-        $response->assertSee('Kenyan Remote Contractor Toolkit');
+        $response->assertSee('Pro Exclusive: Employers Actively Seeking Kenyan Talent');
+        $response->assertSee('Included with Pro');
     }
 
     public function test_job_listing_shows_transparent_company_details(): void
