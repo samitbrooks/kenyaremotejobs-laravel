@@ -99,7 +99,8 @@
                         </div>
                     </div>
 
-                    <a href="{{ url('/about') }}" class="nav-underline transition hover:text-sunrise-300">About</a>
+                    <a href="{{ url('/pricing') }}" class="nav-underline transition hover:text-sunrise-300 {{ request()->is('pricing') ? 'text-sunrise-300 font-semibold' : '' }}">Pricing</a>
+                    <a href="{{ url('/about') }}" class="nav-underline transition hover:text-sunrise-300 {{ request()->is('about') ? 'text-sunrise-300 font-semibold' : '' }}">About</a>
                 @endif
 
                 @if ($user?->isAdmin())
@@ -176,7 +177,8 @@
                     <x-icon name="coin" class="h-4 w-4" /> Earn While You Search
                 </a>
             </div>
-            <a href="{{ url('/about') }}" @click="open = false" class="rounded px-2 py-2 hover:bg-horizon-800">About</a>
+            <a href="{{ url('/pricing') }}" @click="open = false" class="rounded px-2 py-2 hover:bg-horizon-800 {{ request()->is('pricing') ? 'text-sunrise-300 font-semibold' : '' }}">Pricing</a>
+            <a href="{{ url('/about') }}" @click="open = false" class="rounded px-2 py-2 hover:bg-horizon-800 {{ request()->is('about') ? 'text-sunrise-300 font-semibold' : '' }}">About</a>
         @endif
 
         @if ($user?->isAdmin())
