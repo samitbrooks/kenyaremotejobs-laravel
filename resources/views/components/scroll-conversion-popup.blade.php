@@ -1,12 +1,3 @@
-<?php
-
-use Livewire\Component;
-
-new class extends Component
-{
-    //
-}; ?>
-
 <div
     x-data="{
         visible: false,

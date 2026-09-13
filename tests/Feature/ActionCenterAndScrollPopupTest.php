@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Services\KenyaCareerBotService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Livewire\Livewire;
 use Tests\TestCase;
 
 class ActionCenterAndScrollPopupTest extends TestCase
@@ -52,14 +51,29 @@ class ActionCenterAndScrollPopupTest extends TestCase
         $this->assertStringContainsString('Full Access to All 800+ Jobs', $result['reply']);
     }
 
-    public function test_action_center_livewire_component_interactivity(): void
+    public function test_career_bot_api_endpoint_returns_json_response(): void
     {
-        Livewire::test('action-center')
-            ->assertSet('isOpen', false)
-            ->call('toggle')
-            ->assertSet('isOpen', true)
-            ->call('send', 'How do I get paid via Wise?')
-            ->assertSee('Wise (Recommended)')
-            ->assertSee('M-Pesa');
+        $response = $this->postJson('/api/career-bot', [
+            'message' => 'How do I receive payments from foreign clients in Kenya via Wise and M-Pesa?',
+        ]);
+
+        $response->assertStatus(200)
+            ->assertJsonStructure([
+                'reply',
+                'suggested_actions',
+            ]);
+
+        $this->assertStringContainsString('Wise', $response->json('reply'));
+        $this->assertStringContainsString('M-Pesa', $response->json('reply'));
+    }
+
+    public function test_career_bot_api_validation(): void
+    {
+        $response = $this->postJson('/api/career-bot', [
+            'message' => '',
+        ]);
+
+        $response->assertStatus(422)
+            ->assertJsonValidationErrors(['message']);
     }
 }

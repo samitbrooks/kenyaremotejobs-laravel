@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthLinkController;
+use App\Http\Controllers\CareerBotController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobsController;
@@ -56,6 +57,7 @@ Route::match(['get', 'post'], '/unsubscribe/{user}', UnsubscribeController::clas
 
 Route::get('/sitemap.xml', [SitemapController::class, 'sitemap']);
 Route::get('/robots.txt', [SitemapController::class, 'robots']);
+Route::post('/api/career-bot', [CareerBotController::class, 'ask'])->middleware('throttle:60,1');
 
 // The 'admin' middleware (App\Http\Middleware\EnsureUserIsAdmin) guards the
 // whole group; every mutation a page embeds still acts against the
