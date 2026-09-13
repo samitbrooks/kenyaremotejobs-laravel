@@ -63,7 +63,21 @@
             </p>
         @endif
 
-        <form action="{{ url('/jobs') }}" method="GET" class="mt-6 grid grid-cols-1 gap-3 rounded-2xl border border-black/5 bg-white p-4 shadow-sm sm:grid-cols-[2fr_1fr_1fr_auto] sm:items-center">
+        <div class="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-amber-200/80 bg-gradient-to-r from-amber-50/90 via-white to-orange-50/60 p-3.5 sm:px-5 text-xs sm:text-sm text-foreground/80 shadow-xs">
+            <div class="flex items-center gap-2.5">
+                <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-xl bg-amber-500 text-white shadow-xs">
+                    <x-icon name="sparkle" class="h-4 w-4" />
+                </span>
+                <p>
+                    <strong class="font-bold text-foreground">Pro Early Access:</strong> Full access to apply to all 800+ remote jobs immediately &mdash; no 48-hour wait on newly posted roles.
+                </p>
+            </div>
+            <a href="{{ url('/pricing') }}" class="inline-flex items-center gap-1 rounded-full bg-horizon-800 px-3.5 py-1.5 text-xs font-bold text-white hover:bg-horizon-900 transition shrink-0">
+                Unlock All Jobs &rarr;
+            </a>
+        </div>
+
+        <form action="{{ url('/jobs') }}" method="GET" class="mt-5 grid grid-cols-1 gap-3 rounded-2xl border border-black/5 bg-white p-4 shadow-sm sm:grid-cols-[2fr_1fr_1fr_auto] sm:items-center">
             <input type="text" name="q" value="{{ $q }}" placeholder="Search job titles, skills, companies…" class="rounded-lg border border-black/10 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-sunrise-400">
 
             <select name="tag" class="rounded-lg border border-black/10 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-sunrise-400">

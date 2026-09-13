@@ -21,6 +21,7 @@ class SubscriptionAndEarlyAccessTest extends TestCase
         $response->assertSee('Remote Career Accelerator');
         $response->assertSee('M-Pesa Supported');
         $response->assertSee('Free vs Pro Membership');
+        $response->assertSee('Full Access to Apply to All 800+ Jobs');
         $response->assertSee('Pro Exclusive: Employers Actively Seeking Kenyan Talent');
         $response->assertSee('Included with Pro');
     }
@@ -82,8 +83,10 @@ class SubscriptionAndEarlyAccessTest extends TestCase
         $response = $this->get('/jobs/'.$freshJob->id);
         $response->assertStatus(200);
         $response->assertSee('CloudScale Ltd');
-        $response->assertSee('Pro Exclusive: First 48-Hour Recruiter Window');
-        $response->assertSee('Unlock Early Access (KES 1,499/mo)');
+        $response->assertSee('Early Access');
+        $response->assertSee('Full Access to All 800+ Jobs');
+        $response->assertSee('full access to apply to all 800+ jobs immediately');
+        $response->assertSee('Get Full Access to All Jobs (KES 1,499/mo)');
 
         // Subscribed Pro member
         $proUser = User::factory()->create([
@@ -124,7 +127,7 @@ class SubscriptionAndEarlyAccessTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('KenyanFintech Co');
         $response->assertSee('Verified Employer Actively Seeking Kenyan Talent');
-        $response->assertSee('Unlock Direct Apply with Pro (KES 1,499/mo)');
+        $response->assertSee('Get Full Access to All Jobs (KES 1,499/mo)');
         $response->assertDontSee('Apply Directly at KenyanFintech Co');
 
         // Pro member can apply directly

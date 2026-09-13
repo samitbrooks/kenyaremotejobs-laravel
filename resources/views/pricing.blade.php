@@ -17,7 +17,7 @@
                 <span class="text-transparent bg-clip-text gradient-sunrise">Invest Just KES 50 a Day.</span>
             </h1>
             <p class="mx-auto mt-4 max-w-2xl text-base sm:text-lg text-foreground/70 leading-relaxed">
-                When global remote jobs open up, <strong class="text-foreground">over 500 applicants apply within 72 hours</strong>. KenyaRemoteJobs Pro gives you the unfair advantage: 48-hour early access, an AI-tailored resume that passes ATS screener bots, and <strong class="text-foreground">exclusive direct applications to employers actively seeking Kenyan talent</strong>.
+                When global remote jobs open up, <strong class="text-foreground">over 500 applicants apply within 72 hours</strong>. KenyaRemoteJobs Pro gives you <strong class="text-foreground">full, immediate access to apply to all 800+ remote jobs</strong> with 48-hour early access, direct Kenyan employer listings, and AI CV tailoring.
             </p>
         </div>
 
@@ -30,7 +30,10 @@
             <div class="text-center">
                 <p class="text-xs font-bold uppercase tracking-wider text-horizon-700">Choose Your Plan</p>
                 <h2 class="text-2xl font-bold mt-1 text-foreground">KenyaRemoteJobs Pro Membership</h2>
-                <p class="text-xs text-foreground/60 mt-1">Instant STK push to your Safaricom line &middot; Cancel anytime</p>
+                <div class="mt-2 inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-3.5 py-1 text-xs font-bold text-emerald-800">
+                    <x-icon name="check" class="h-3.5 w-3.5 text-emerald-600" /> Early Access Gives Full Access to All 800+ Jobs
+                </div>
+                <p class="text-xs text-foreground/60 mt-1.5">Instant STK push to your Safaricom line &middot; Cancel anytime</p>
             </div>
 
             <div class="mt-6">
@@ -51,14 +54,14 @@
         <div class="mt-12 rounded-3xl bg-gradient-to-r from-horizon-900 to-horizon-800 p-6 sm:p-8 text-white shadow-lg">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center md:text-left items-center">
                 <div>
-                    <p class="text-xs font-bold uppercase tracking-wider text-horizon-300">The Math</p>
-                    <p class="text-xl font-bold mt-1">100x ROI</p>
-                    <p class="text-xs text-horizon-200 mt-1">An entry remote role pays $1,500/mo (~KES 195,000). A single offer covers your membership for years.</p>
+                    <p class="text-xs font-bold uppercase tracking-wider text-horizon-300">All 800+ Jobs</p>
+                    <p class="text-xl font-bold mt-1">Full Access</p>
+                    <p class="text-xs text-horizon-200 mt-1">Apply immediately to all listings — no 48h wait or locked apply buttons.</p>
                 </div>
                 <div class="md:border-l md:border-horizon-700/60 md:pl-6">
                     <p class="text-xs font-bold uppercase tracking-wider text-horizon-300">First 48 Hours</p>
                     <p class="text-xl font-bold mt-1">4x Callbacks</p>
-                    <p class="text-xs text-horizon-200 mt-1">Hiring managers interview candidates on a rolling basis. Applying in the first 48h gets you reviewed first.</p>
+                    <p class="text-xs text-horizon-200 mt-1">Hiring managers interview candidates on a rolling basis. Applying early gets you reviewed first.</p>
                 </div>
                 <div class="md:border-l md:border-horizon-700/60 md:pl-6">
                     <p class="text-xs font-bold uppercase tracking-wider text-horizon-300">ATS Optimization</p>
@@ -88,6 +91,14 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-black/5">
+                        <tr>
+                            <td class="p-4 font-medium text-foreground">
+                                Full Access to Apply to All 800+ Jobs
+                                <span class="block text-xs text-foreground/50">Early Access gives you immediate apply links on all roles — fresh 48h listings, direct employer postings, and the full catalog</span>
+                            </td>
+                            <td class="p-4 text-center text-foreground/40 font-medium">Partial (Wait 48h on new)</td>
+                            <td class="p-4 text-center text-emerald-700 font-bold bg-horizon-50/20">✓ 100% Full Access</td>
+                        </tr>
                         <tr>
                             <td class="p-4 font-medium text-foreground">
                                 Browse all 800+ remote jobs
@@ -230,6 +241,13 @@
                     <h3 class="font-semibold text-foreground">What are Direct Employer Listings &amp; Kenya-Matched Roles?</h3>
                     <p class="mt-2 text-sm text-foreground/70 leading-relaxed">
                         These are companies that post directly on KenyaRemoteJobs specifically to recruit Kenyan and East African professionals. Because these employers are actively seeking local talent (meaning zero visa rejections and verified timezone compatibility), direct application access is reserved exclusively for Pro members.
+                    </p>
+                </div>
+
+                <div class="rounded-2xl border border-black/5 bg-white p-5 shadow-xs">
+                    <h3 class="font-semibold text-foreground">Does Early Access give me full access to all jobs?</h3>
+                    <p class="mt-2 text-sm text-foreground/70 leading-relaxed">
+                        Yes. Early Access gives you 100% full, immediate access to apply to all 800+ remote jobs on the platform &mdash; skipping the 48-hour wait on fresh listings and unlocking direct employer applications.
                     </p>
                 </div>
 

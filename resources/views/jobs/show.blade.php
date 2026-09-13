@@ -145,13 +145,13 @@
                     {{-- Direct Employer Listing Seeking Kenyan Talent (Pro Exclusive) --}}
                     <div class="rounded-3xl border-2 border-emerald-300 bg-gradient-to-br from-emerald-50 via-white to-teal-50 p-6 sm:p-8 text-center shadow-lg">
                         <div class="inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-1 text-xs font-bold uppercase tracking-wider text-emerald-900 mb-3">
-                            🇰🇪 Verified Employer Actively Seeking Kenyan Talent &middot; Pro Exclusive
+                            🇰🇪 Verified Employer Actively Seeking Kenyan Talent &middot; Full Access with Pro
                         </div>
                         <h3 class="text-xl sm:text-2xl font-bold text-foreground">
                             {{ $job->company }} is Exclusively Hiring in Kenya
                         </h3>
                         <p class="mt-2 text-sm text-foreground/70 max-w-lg mx-auto">
-                            This employer submitted this listing directly on KenyaRemoteJobs specifically to recruit Kenyan professionals. Direct application access is exclusive to Pro members.
+                            {{ $job->company }} is specifically recruiting Kenyan talent. <strong class="text-foreground">Pro Early Access gives you full access to apply to all direct employer and remote listings</strong> across the site.
                         </p>
 
                         <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-lg mx-auto text-left text-xs font-medium text-foreground/80">
@@ -174,7 +174,7 @@
                                 href="{{ url('/pricing') }}"
                                 class="btn-pop w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-horizon-800 px-8 py-3.5 text-sm font-bold text-white shadow-md hover:bg-horizon-900 transition"
                             >
-                                Unlock Direct Apply with Pro (KES 1,499/mo)
+                                Get Full Access to All Jobs (KES 1,499/mo)
                             </a>
                             <livewire:ai-tailor-modal :job-id="$job->id" />
                         </div>
@@ -186,13 +186,13 @@
                     {{-- 48-Hour Early Access High-Converting Box --}}
                     <div class="rounded-3xl border-2 border-amber-200 bg-gradient-to-br from-amber-50 via-white to-orange-50 p-6 sm:p-8 text-center shadow-lg">
                         <div class="inline-flex items-center gap-2 rounded-full bg-amber-100 px-4 py-1 text-xs font-bold uppercase tracking-wider text-amber-900 mb-3">
-                            <x-icon name="sparkle" class="h-4 w-4 text-amber-600" /> Pro Exclusive: First 48-Hour Recruiter Window
+                            <x-icon name="sparkle" class="h-4 w-4 text-amber-600" /> Early Access &middot; Full Access to All 800+ Jobs
                         </div>
                         <h3 class="text-xl sm:text-2xl font-bold text-foreground">
                             Beat 500+ Applicants to {{ $job->company }}
                         </h3>
                         <p class="mt-2 text-sm text-foreground/70 max-w-lg mx-auto">
-                            This remote role was published {{ \App\Support\Format::timeAgo($job->posted_at) }}. Pro members get exclusive 48-hour head-start access to apply directly to recruiters before general public release in <span class="font-bold text-amber-900">{{ $job->earlyAccessHoursRemaining() }} hours</span>.
+                            This role was published {{ \App\Support\Format::timeAgo($job->posted_at) }}. <strong class="text-foreground">Early Access gives you full access to apply to all 800+ jobs immediately</strong> &mdash; public access opens in <span class="font-bold text-amber-900">{{ $job->earlyAccessHoursRemaining() }} hours</span>.
                         </p>
 
                         <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-lg mx-auto text-left text-xs font-medium text-foreground/80">
@@ -215,7 +215,7 @@
                                 href="{{ url('/pricing') }}"
                                 class="btn-pop w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-horizon-800 px-8 py-3.5 text-sm font-bold text-white shadow-md hover:bg-horizon-900 transition"
                             >
-                                Unlock Early Access (KES 1,499/mo)
+                                Get Full Access to All Jobs (KES 1,499/mo)
                             </a>
                             <livewire:ai-tailor-modal :job-id="$job->id" />
                         </div>

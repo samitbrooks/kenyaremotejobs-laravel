@@ -17,7 +17,7 @@
     $howItWorks = [
         ['title' => 'Search & filter', 'body' => 'Browse remote roles from trusted global job boards, all in one place — 100% free to search and view company names.'],
         ['title' => 'Spot your match', 'body' => 'Every listing gets a Kenya-Friendly Match badge when it\'s realistically open to your timezone and location.'],
-        ['title' => 'Pro Early Access & AI Tailoring', 'body' => 'Upgrade to Pro for 48-Hour Early Access to beat 500+ applicants to the recruiter\'s inbox, plus unlimited AI CV tailoring for 94%+ ATS match.'],
+        ['title' => 'Early Access: Full Job Access', 'body' => 'Pro Early Access gives you full access to apply to all 800+ remote jobs immediately — bypassing the 48-hour wait, with 1-click AI CV tailoring.'],
     ];
 
     $testimonials = [
@@ -31,7 +31,7 @@
         ['question' => 'Can I really get a remote job while living in Kenya?', 'answer' => 'Yes — thousands of companies hire remote workers with no location restriction. The hard part is finding which listings actually mean it. That\'s what the Kenya-Friendly Match badge is for: we score every job for timezone overlap, location wording, and visa restrictions so you\'re not wasting time on roles that were never open to you.'],
         ['question' => 'Do these remote jobs require a US or EU visa?', 'answer' => 'Some do — and we flag those. Jobs that mention explicit US-only, EU-only, or visa-sponsorship restrictions are excluded from the Kenya-Friendly Match badge, so you can filter them out with one click on the jobs page.'],
         ['question' => 'What does \'Kenya-Friendly Match\' mean?', 'answer' => 'It\'s a badge we calculate automatically for every listing, based on whether the location is worldwide/global/Africa-open, whether the stated timezone window overlaps East Africa Time (UTC+3), and whether the description rules out candidates outside the US or EU.'],
-        ['question' => 'Is KenyaRemoteJobs free to use?', 'answer' => 'Yes! Job titles, company names, full descriptions, and your Kenya-friendly match score are always 100% free to view. Serious candidates can upgrade to Pro (from KES 1,499/mo via M-Pesa) for 48-Hour Early Access to apply ahead of the 500+ applicant crowd, unlimited AI CV tailoring, and our complete Kenyan Remote Contractor Toolkit.'],
+        ['question' => 'Is KenyaRemoteJobs free to use?', 'answer' => 'Yes! Browsing jobs, company names, and descriptions is 100% free. Pro Early Access gives you full access to apply to all 800+ remote jobs immediately (no 48h wait on fresh roles), direct Kenyan employer listings, and unlimited AI CV tailoring for KES 1,499/mo via M-Pesa.'],
         ['question' => 'Where do the job listings come from?', 'answer' => 'We aggregate live listings from Arbeitnow, RemoteOK, Remotive, Jobicy, and Himalayas — established remote job boards — and credit and link back to the original source on every listing.'],
     ];
 
