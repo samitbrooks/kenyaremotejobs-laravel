@@ -128,25 +128,22 @@ class JobsController extends Controller
         $user = $request->user();
         $admin = (bool) $user?->isAdmin();
 
-        // Admins can still open an expired listing directly (e.g. from the
-        // admin jobs list) — everyone else gets a 404 once it's aged out,
-        // same as if it had never existed.
         $job = $admin ? JobListing::findOrFail($id) : JobListing::visible()->findOrFail($id);
 
-        $unlocked = $admin
+        $isEarlyAccess = $job->isEarlyAccess();
+        $canApply = $admin
             || $job->origin === 'employer'
+            || ! $isEarlyAccess
             || (bool) $user?->subscribed
             || (bool) ($user && $user->jobUnlocks()->where('job_listing_id', $job->id)->exists());
-
-        $remainingCredits = $user && ! $unlocked ? $credits->balances($user)[$job->tier]['remaining'] : 0;
 
         $profile = Matching::parseProfileCookie($request->cookie(Matching::COOKIE_NAME));
         $matchPercent = $profile ? Matching::computeMatchPercent($profile, $job->only(['tags', 'title', 'description'])) : null;
 
         return view('jobs.show', [
             'job' => $job,
-            'unlocked' => $unlocked,
-            'remainingCredits' => $remainingCredits,
+            'canApply' => $canApply,
+            'isEarlyAccess' => $isEarlyAccess,
             'matchPercent' => $matchPercent,
         ]);
     }

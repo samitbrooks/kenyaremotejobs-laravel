@@ -42,7 +42,7 @@
             {{ $title }}
         </h1>
         <p class="mt-1 text-foreground/60">
-            {{ $total }} listings &middot; {{ $totalFree }} fully free to view right now &middot; titles, companies, and short descriptions are always free to browse.
+            {{ $total }} listings &middot; 100% transparent employer details &middot; Verified remote roles open to Kenyan applicants.
         </p>
 
         @if ($audience)
@@ -91,7 +91,7 @@
                 </label>
                 <label class="flex items-center gap-2 text-sm font-medium">
                     <input type="checkbox" name="freeOnly" value="true" @checked($freeOnly) class="h-4 w-4 accent-horizon-600">
-                    Show only jobs free to view now <x-icon name="unlock" class="h-4 w-4" />
+                    Direct employer listings only <x-icon name="announce" class="h-4 w-4" />
                 </label>
             </div>
         </form>

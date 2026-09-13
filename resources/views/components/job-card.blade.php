@@ -2,16 +2,13 @@
 
 @php
     $isUnlocked = (bool) $unlocked;
-    $redactor = app(\App\Services\Redactor::class);
     $plainDescription = \App\Support\Format::stripHtml($job->description ?? '');
-    $safeDescription = $isUnlocked ? $plainDescription : $redactor->redactEmployerIdentity($plainDescription, $job->company);
-    $preview = \App\Support\Format::truncate($safeDescription, 140);
-    $visibleTags = $isUnlocked ? ($job->tags ?? []) : $redactor->redactTags($job->tags ?? [], $job->company);
+    $preview = \App\Support\Format::truncate($plainDescription, 140);
+    $visibleTags = $job->tags ?? [];
     $hourly = \App\Support\SalaryEstimate::estimateHourlyUsd($job->annual_salary_usd);
-    $tierLabels = config('jobs.tier_labels');
-    $creditPackages = config('jobs.credit_packages');
     $audienceSegments = $job->audience_segments ?? [];
     $isNew = $job->posted_at->gt(now()->subDay());
+    $isEarlyAccess = $job->isEarlyAccess();
 @endphp
 
 <a
@@ -19,16 +16,10 @@
     class="group flex h-full flex-col gap-3 rounded-2xl border border-black/5 bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-sunrise-500/10"
 >
     <div class="flex items-start gap-3">
-        @if ($isUnlocked)
-            <x-company-logo :company="$job->company" />
-        @else
-            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-black/5" aria-hidden="true">
-                <x-icon name="lock" class="h-5 w-5 text-foreground/40" />
-            </div>
-        @endif
+        <x-company-logo :company="$job->company" />
         <div class="min-w-0 flex-1">
             <h3 class="truncate font-semibold text-foreground group-hover:text-sunrise-600">{{ $job->title }}</h3>
-            <p class="truncate text-sm text-foreground/60">{{ $isUnlocked ? $job->company : 'Employer hidden until unlocked' }}</p>
+            <p class="truncate text-sm text-foreground/60">{{ $job->company }}</p>
         </div>
     </div>
 
@@ -36,6 +27,15 @@
         @if ($isNew)
             <span class="inline-flex items-center gap-1 rounded-full bg-sunrise-500 px-2 py-0.5 text-[11px] font-semibold text-white">
                 New
+            </span>
+        @endif
+        @if ($isEarlyAccess)
+            <span class="inline-flex items-center gap-1 rounded-full bg-amber-100 border border-amber-200 px-2 py-0.5 text-[11px] font-semibold text-amber-900">
+                <x-icon name="sparkle" class="h-3 w-3 text-amber-600" /> Early Access ({{ $job->earlyAccessHoursRemaining() }}h left)
+            </span>
+        @else
+            <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-700">
+                <x-icon name="check" class="h-3 w-3 text-emerald-600" /> Open to Apply
             </span>
         @endif
         @if (is_int($matchPercent))
@@ -53,11 +53,7 @@
         @endif
         @if ($job->origin === 'employer')
             <span class="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-0.5 text-[11px] font-semibold text-emerald-800">
-                <x-icon name="announce" class="h-3 w-3" /> Direct listing
-            </span>
-        @else
-            <span class="inline-flex items-center gap-1 rounded-full bg-sunrise-100 px-2 py-0.5 text-[11px] font-semibold text-sunrise-800">
-                <x-icon name="lock" class="h-3 w-3" /> {{ $tierLabels[$job->tier] ?? $job->tier }} &middot; from KES {{ number_format($creditPackages[$job->tier]['price_kes'] ?? 0) }}
+                <x-icon name="announce" class="h-3 w-3" /> Direct employer listing
             </span>
         @endif
     </div>

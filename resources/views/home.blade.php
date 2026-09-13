@@ -15,9 +15,9 @@
     ];
 
     $howItWorks = [
-        ['title' => 'Search & filter', 'body' => 'Browse remote roles from trusted global job boards, all in one place — free to search.'],
-        ['title' => 'Spot your match', 'body' => 'Every listing gets a Kenya-Friendly Match badge when it\'s realistically open to timezone and location.'],
-        ['title' => 'Unlock & apply', 'body' => 'Buy a credit package once — from KES 300 — and spend it on any job in that tier whenever you find one worth unlocking. Listings don\'t stay up forever, so it\'s worth acting before one you want disappears.'],
+        ['title' => 'Search & filter', 'body' => 'Browse remote roles from trusted global job boards, all in one place — 100% free to search and view company names.'],
+        ['title' => 'Spot your match', 'body' => 'Every listing gets a Kenya-Friendly Match badge when it\'s realistically open to your timezone and location.'],
+        ['title' => 'Pro Early Access & AI Tailoring', 'body' => 'Upgrade to Pro for 48-Hour Early Access to beat 500+ applicants to the recruiter\'s inbox, plus unlimited AI CV tailoring for 94%+ ATS match.'],
     ];
 
     $testimonials = [
@@ -31,7 +31,7 @@
         ['question' => 'Can I really get a remote job while living in Kenya?', 'answer' => 'Yes — thousands of companies hire remote workers with no location restriction. The hard part is finding which listings actually mean it. That\'s what the Kenya-Friendly Match badge is for: we score every job for timezone overlap, location wording, and visa restrictions so you\'re not wasting time on roles that were never open to you.'],
         ['question' => 'Do these remote jobs require a US or EU visa?', 'answer' => 'Some do — and we flag those. Jobs that mention explicit US-only, EU-only, or visa-sponsorship restrictions are excluded from the Kenya-Friendly Match badge, so you can filter them out with one click on the jobs page.'],
         ['question' => 'What does \'Kenya-Friendly Match\' mean?', 'answer' => 'It\'s a badge we calculate automatically for every listing, based on whether the location is worldwide/global/Africa-open, whether the stated timezone window overlaps East Africa Time (UTC+3), and whether the description rules out candidates outside the US or EU.'],
-        ['question' => 'Is KenyaRemoteJobs free to use?', 'answer' => 'Yes. Job titles, full descriptions, and your match score are always free to see. What\'s gated is the employer\'s identity and the Apply link while a listing is new — a Basic package (KES 300) gets you 1 unlock, Intermediate (KES 599) gets you 2, and Premium (KES 999) gets you 3, spendable on any job in that tier. Listings don\'t stay up forever, so unlock the ones you want before they disappear.'],
+        ['question' => 'Is KenyaRemoteJobs free to use?', 'answer' => 'Yes! Job titles, company names, full descriptions, and your Kenya-friendly match score are always 100% free to view. Serious candidates can upgrade to Pro (from KES 1,499/mo via M-Pesa) for 48-Hour Early Access to apply ahead of the 500+ applicant crowd, unlimited AI CV tailoring, and our complete Kenyan Remote Contractor Toolkit.'],
         ['question' => 'Where do the job listings come from?', 'answer' => 'We aggregate live listings from Arbeitnow, RemoteOK, Remotive, Jobicy, and Himalayas — established remote job boards — and credit and link back to the original source on every listing.'],
     ];
 
@@ -93,9 +93,9 @@
                                 @endif
                             </div>
                             <p class="mt-2 line-clamp-2 text-sm font-semibold text-foreground">{{ $job->title }}</p>
-                            <p class="mt-1 text-xs text-foreground/50">Employer hidden until unlocked</p>
+                            <p class="mt-1 text-xs font-medium text-foreground/70">{{ $job->company }}</p>
                             <p class="mt-2 line-clamp-2 text-xs text-foreground/50">
-                                {{ \App\Support\Format::truncate(app(\App\Services\Redactor::class)->redactEmployerIdentity(\App\Support\Format::stripHtml($job->description ?? ''), $job->company), 90) }}
+                                {{ \App\Support\Format::truncate(\App\Support\Format::stripHtml($job->description ?? ''), 90) }}
                             </p>
                         </div>
                     @endforeach
@@ -164,7 +164,7 @@
                                     class="card-hover flex w-64 shrink-0 flex-col gap-1.5 rounded-xl border border-black/5 bg-white px-4 py-3.5 text-sm shadow-sm"
                                 >
                                     <span class="truncate font-semibold text-foreground">{{ $job->title }}</span>
-                                    <span class="truncate text-xs text-foreground/50">{{ $isUnlocked($job) ? $job->company : 'Employer hidden until unlocked' }}</span>
+                                    <span class="truncate text-xs font-medium text-foreground/70">{{ $job->company }}</span>
                                     <span class="mt-1 text-xs font-medium text-sunrise-600">{{ \App\Support\Format::timeAgo($job->posted_at) }}</span>
                                 </a>
                             </x-reveal>

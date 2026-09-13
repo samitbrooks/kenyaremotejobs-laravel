@@ -41,23 +41,40 @@ class JobListing extends Model
         return $this->hasMany(JobUnlock::class);
     }
 
+    public function applications(): HasMany
+    {
+        return $this->hasMany(JobApplication::class, 'job_listing_id');
+    }
+
+    public function isEarlyAccess(): bool
+    {
+        if ($this->origin === 'employer') {
+            return false;
+        }
+
+        $hours = config('jobs.early_access_hours', 48);
+
+        return $this->posted_at && $this->posted_at->isAfter(now()->subHours($hours));
+    }
+
+    public function earlyAccessHoursRemaining(): int
+    {
+        if (! $this->isEarlyAccess()) {
+            return 0;
+        }
+
+        $unlockTime = $this->posted_at->copy()->addHours(config('jobs.early_access_hours', 48));
+
+        return max(1, (int) ceil(now()->diffInRealHours($unlockTime, false)));
+    }
+
     /**
-     * Excludes listings that have aged out — a non-employer listing past
-     * premium_window_days, or an employer listing past employer_listing_days
-     * — so they stop appearing anywhere on the public site (they still exist
-     * for admin, payment history, etc., since nothing outside this scope
-     * filters on it). There's no auto-unlock-for-everyone at that point
-     * (unlike the old is_free behavior this replaces): a listing you never
-     * unlocked simply disappears instead of opening up for free.
+     * Shows all listings posted within the configured listing lifetime (30 days).
      */
     public function scopeVisible(Builder $query): Builder
     {
-        return $query->where(function ($w) {
-            $w->where('origin', 'employer')
-                ->where('posted_at', '>=', now()->subDays(config('jobs.employer_listing_days')));
-        })->orWhere(function ($w) {
-            $w->where('origin', '!=', 'employer')
-                ->where('posted_at', '>=', now()->subDays(config('jobs.premium_window_days')));
-        });
+        $days = config('jobs.listing_days', 30);
+
+        return $query->where('posted_at', '>=', now()->subDays($days));
     }
 }

@@ -1,7 +1,8 @@
-@props(['job', 'unlocked', 'priceKes'])
+@props(['job', 'canApply' => true])
 
 @php
     $rows = [
+        ['label' => 'Company', 'value' => $job->company],
         ['label' => 'Location', 'value' => $job->location],
         ['label' => 'Remote type', 'value' => $job->remote_type],
     ];
@@ -9,13 +10,16 @@
         $rows[] = ['label' => 'Salary', 'value' => $job->salary];
     }
     $rows[] = ['label' => 'Posted', 'value' => \App\Support\Format::timeAgo($job->posted_at)];
-    $rows[] = [
-        'label' => 'Access',
-        'value' => $job->origin === 'employer'
-            ? 'Direct listing — always open'
-            : (config('jobs.tier_labels')[$job->tier] ?? $job->tier).' · from KES '.number_format($priceKes),
-    ];
-    if ($unlocked) {
+
+    if ($job->origin === 'employer') {
+        $rows[] = ['label' => 'Application Status', 'value' => 'Direct employer listing — Open to all'];
+    } elseif ($job->isEarlyAccess()) {
+        $rows[] = ['label' => 'Application Status', 'value' => '⚡ 48-Hour Early Access Window (Pro Members)'];
+    } else {
+        $rows[] = ['label' => 'Application Status', 'value' => 'Public listing — Open to all'];
+    }
+
+    if ($job->source_name) {
         $rows[] = ['label' => 'Source', 'value' => $job->source_name];
     }
 @endphp
@@ -29,7 +33,7 @@
             @foreach ($rows as $i => $row)
                 <tr @class(['bg-horizon-50/40' => $i % 2 === 1])>
                     <th scope="row" class="w-2/5 px-5 py-2.5 text-left font-medium text-foreground/50">{{ $row['label'] }}</th>
-                    <td class="px-5 py-2.5 text-foreground/80">{{ $row['value'] }}</td>
+                    <td class="px-5 py-2.5 text-foreground/80 font-medium">{{ $row['value'] }}</td>
                 </tr>
             @endforeach
         </tbody>

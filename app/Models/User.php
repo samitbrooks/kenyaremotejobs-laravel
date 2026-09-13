@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password', 'subscribed', 'subscribed_at', 'marketing_opt_out_at'])]
+#[Fillable(['name', 'email', 'password', 'subscribed', 'subscribed_at', 'marketing_opt_out_at', 'free_tailors_remaining'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -31,12 +31,30 @@ class User extends Authenticatable
             'subscribed' => 'boolean',
             'subscribed_at' => 'datetime',
             'marketing_opt_out_at' => 'datetime',
+            'free_tailors_remaining' => 'integer',
         ];
     }
 
     public function receivesMarketingEmail(): bool
     {
         return $this->marketing_opt_out_at === null;
+    }
+
+    public function jobApplications(): HasMany
+    {
+        return $this->hasMany(JobApplication::class);
+    }
+
+    public function canUseAiTailor(): bool
+    {
+        return $this->subscribed || ($this->free_tailors_remaining ?? 0) > 0;
+    }
+
+    public function useAiTailor(): void
+    {
+        if (! $this->subscribed && ($this->free_tailors_remaining ?? 0) > 0) {
+            $this->decrement('free_tailors_remaining');
+        }
     }
 
     public function jobUnlocks(): HasMany
