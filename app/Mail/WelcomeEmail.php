@@ -22,7 +22,7 @@ class WelcomeEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address(config('mail.from.address'), 'Ivy from Kenya Remote Jobs'),
+            from: new Address(config('mail.from.address'), 'Daisy from Kenya Remote Jobs'),
             subject: 'Welcome to '.config('site.name'),
             replyTo: [config('mail.from.address')],
         );

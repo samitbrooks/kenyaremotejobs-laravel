@@ -26,7 +26,7 @@ class LoginLinkEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address(config('mail.from.address'), 'Ivy from Kenya Remote Jobs'),
+            from: new Address(config('mail.from.address'), 'Daisy from Kenya Remote Jobs'),
             subject: $this->isNewAccount
                 ? 'Confirm your '.config('site.name').' account'
                 : 'Your '.config('site.name').' login link',

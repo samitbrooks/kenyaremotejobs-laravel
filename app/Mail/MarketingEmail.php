@@ -32,7 +32,7 @@ class MarketingEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address(config('mail.from.address'), 'Ivy from Kenya Remote Jobs'),
+            from: new Address(config('mail.from.address'), 'Daisy from Kenya Remote Jobs'),
             subject: $this->emailSubject,
         );
     }

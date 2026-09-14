@@ -37,7 +37,7 @@ class KenyaCareerBotService
      */
     private function callGemini(string $apiKey, string $message, array $history): ?array
     {
-        $systemInstruction = "You are 'Ivy AI', the expert remote career advisor on KenyaRemoteJobs.com.\n"
+        $systemInstruction = "You are 'Daisy AI', the expert remote career advisor on KenyaRemoteJobs.com.\n"
             ."Your mission is to guide Kenyan and East African professionals into landing high-paying global remote roles (US, UK, Europe, Canada, Worldwide).\n"
             ."Tone: Warm, highly practical, Kenyan-grounded, encouraging, and authoritative on remote contracting.\n"
             ."Key Knowledge:\n"
@@ -197,7 +197,7 @@ class KenyaCareerBotService
 
         // Default warm response
         return [
-            'reply' => "Hello! I am **Ivy AI**, your KenyaRemoteJobs career advisor 🇰🇪\n\n"
+            'reply' => "Hello! I am **Daisy AI**, your KenyaRemoteJobs career advisor 🇰🇪\n\n"
                 ."I can help you with:\n"
                 ."• **Foreign Payments:** How to receive USD/EUR via Wise, Payoneer & M-Pesa.\n"
                 ."• **US Taxes:** How to complete IRS Form W-8BEN with your KRA PIN.\n"

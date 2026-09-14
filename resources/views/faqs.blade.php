@@ -58,7 +58,7 @@
         <div class="mt-16 rounded-3xl border border-horizon-200 bg-gradient-to-r from-horizon-900 via-horizon-800 to-slate-900 p-8 text-center text-white shadow-xl">
             <h2 class="text-2xl font-bold">Have a specific question not covered here?</h2>
             <p class="mt-2 text-sm text-white/70 max-w-lg mx-auto">
-                Ask our Kariuki AI Career Copilot in the Action Center (bottom right) or explore our curated career guides in The Journal.
+                Ask our Daisy AI Career Copilot in the Action Center (bottom right) or explore our curated career guides in The Journal.
             </p>
             <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
                 <a href="{{ url('/journal') }}" class="btn-pop rounded-full bg-sunrise-500 px-6 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-sunrise-600">
