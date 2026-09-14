@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Mail\MarketingEmail;
 use App\Models\JobListing;
+use App\Models\User;
 use App\Services\BulkMailer;
 use Database\Seeders\SeoPillarContentSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -324,5 +325,39 @@ class SeoEngineTest extends TestCase
         $response->assertSee('New York (EST / EDT)');
         $response->assertSee('Simple, Transparent Job Posting Plans');
         $response->assertSee('/employers/post', false);
+    }
+
+    public function test_user_can_sign_up_and_be_instantly_authenticated(): void
+    {
+        $response = $this->post('/account/login', [
+            'name' => 'Samit Brooks',
+            'email' => 'samitbrooks@gmail.com',
+            'redirectTo' => '/jobs/himalayas--professional-services-engineer',
+        ]);
+
+        $response->assertRedirect('/jobs/himalayas--professional-services-engineer');
+        $this->assertAuthenticated();
+
+        $user = User::where('email', 'samitbrooks@gmail.com')->first();
+        $this->assertNotNull($user);
+        $this->assertEquals('Samit Brooks', $user->name);
+    }
+
+    public function test_existing_user_can_log_in_instantly(): void
+    {
+        $user = User::create([
+            'name' => 'Existing User',
+            'email' => 'existing@example.com',
+            'password' => 'secret',
+            'email_verified_at' => now(),
+        ]);
+
+        $response = $this->post('/account/login', [
+            'email' => 'existing@example.com',
+            'redirectTo' => '/account',
+        ]);
+
+        $response->assertRedirect('/account');
+        $this->assertAuthenticatedAs($user);
     }
 }

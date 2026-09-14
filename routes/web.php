@@ -33,6 +33,7 @@ Route::get('/collections/{slug}', [CollectionController::class, 'show'])->name('
 Route::get('/pricing', [PricingController::class, 'index']);
 
 Route::get('/account', [AccountController::class, 'show']);
+Route::post('/account/login', [AccountController::class, 'login'])->name('account.login');
 Route::post('/logout', [AccountController::class, 'logout']);
 
 // The one destination every signup-confirmation and login-link email
