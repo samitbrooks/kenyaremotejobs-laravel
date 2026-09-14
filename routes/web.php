@@ -4,7 +4,11 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthLinkController;
 use App\Http\Controllers\CareerBotController;
+use App\Http\Controllers\CategoryLandingController;
+use App\Http\Controllers\CollectionController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployerController;
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobsController;
 use App\Http\Controllers\JournalController;
@@ -18,6 +22,13 @@ Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/jobs', [JobsController::class, 'index']);
 Route::get('/jobs/{id}', [JobsController::class, 'show']);
+Route::get('/remote-jobs/{slug}', [CategoryLandingController::class, 'show'])->name('jobs.category');
+
+Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
+Route::get('/companies/{slug}', [CompanyController::class, 'show'])->name('companies.show');
+
+Route::get('/collections', [CollectionController::class, 'index'])->name('collections.index');
+Route::get('/collections/{slug}', [CollectionController::class, 'show'])->name('collections.show');
 
 Route::get('/pricing', [PricingController::class, 'index']);
 
@@ -46,6 +57,8 @@ Route::view('/match', 'match');
 Route::view('/resume-builder', 'resume-builder');
 Route::view('/about', 'about');
 Route::view('/surveys', 'surveys');
+Route::get('/faqs', [FaqController::class, 'index'])->name('faqs');
+Route::permanentRedirect('/faq', '/faqs');
 
 // Signed so it works cold from an email client with no session — both verbs
 // point at the same action: GET for a click from the footer link, POST for a

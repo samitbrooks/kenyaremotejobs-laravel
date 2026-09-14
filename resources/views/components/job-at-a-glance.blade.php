@@ -19,8 +19,10 @@
         $rows[] = ['label' => 'Application Status', 'value' => 'Public listing — Open to all'];
     }
 
-    if ($job->source_name) {
-        $rows[] = ['label' => 'Source', 'value' => $job->source_name];
+    if ($job->origin === 'employer') {
+        $rows[] = ['label' => 'Vetting', 'value' => 'Verified Direct Employer (Seeking Kenyan Talent)'];
+    } elseif ($job->kenya_friendly) {
+        $rows[] = ['label' => 'Vetting', 'value' => 'Verified Kenya-Friendly Match (EAT Timezone & Visa Cleared)'];
     }
 @endphp
 

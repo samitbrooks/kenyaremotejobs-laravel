@@ -140,11 +140,32 @@ class JobsController extends Controller
         $profile = Matching::parseProfileCookie($request->cookie(Matching::COOKIE_NAME));
         $matchPercent = $profile ? Matching::computeMatchPercent($profile, $job->only(['tags', 'title', 'description'])) : null;
 
+        $firstTag = is_array($job->tags) && ! empty($job->tags) ? $job->tags[0] : null;
+        $relatedQuery = JobListing::visible()->where('id', '!=', $job->id);
+
+        $relatedJobs = $firstTag
+            ? (clone $relatedQuery)->whereJsonContains('tags', $firstTag)->latest('posted_at')->take(3)->get()
+            : collect();
+
+        if ($relatedJobs->isEmpty()) {
+            $relatedJobs = (clone $relatedQuery)->latest('posted_at')->take(3)->get();
+        }
+
+        $unlockedIds = $user && ! $admin
+            ? $user->jobUnlocks()->pluck('job_listing_id')->flip()
+            : null;
+
+        $isUnlocked = fn (JobListing $j) => $admin
+            || $j->origin === 'employer'
+            || (bool) $unlockedIds?->has($j->id);
+
         return view('jobs.show', [
             'job' => $job,
             'canApply' => $canApply,
             'isEarlyAccess' => $isEarlyAccess,
             'matchPercent' => $matchPercent,
+            'relatedJobs' => $relatedJobs,
+            'isUnlocked' => $isUnlocked,
         ]);
     }
 }

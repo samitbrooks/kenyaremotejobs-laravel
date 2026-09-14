@@ -19,6 +19,7 @@ return new class extends Migration
             $table->longText('content');
             $table->string('category');
             $table->string('author_name');
+            $table->string('image_url', 500)->nullable();
             $table->boolean('published')->default(false);
             $table->timestamps();
 

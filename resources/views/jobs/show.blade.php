@@ -4,11 +4,12 @@
     $rawDescriptionBlocks = \App\Support\DescriptionBlocks::parse($job->description ?? '');
     $descriptionBlocks = $rawDescriptionBlocks;
     $hourly = \App\Support\SalaryEstimate::estimateHourlyUsd($job->annual_salary_usd);
+    $kesMonthly = \App\Support\SalaryEstimate::estimateMonthlyKes($job->annual_salary_usd, $job->salary);
     $title = $job->title." at {$job->company} — Remote Job".($job->kenya_friendly ? ' (Kenya-Friendly)' : '');
     $preview = \App\Support\Format::truncate($plainDescription, 155);
 @endphp
 
-<x-layouts.app :title="$title" :description="$preview">
+<x-layouts.app :title="$title" :description="$preview" :canonical="url('/jobs/'.$job->id)">
     <script type="application/ld+json">{!! \App\Support\Seo::jobPostingJsonLd($job) !!}</script>
     <script type="application/ld+json">{!! \App\Support\Seo::breadcrumbJsonLd($job) !!}</script>
 
@@ -39,8 +40,13 @@
                         <x-icon name="sparkle" class="h-3.5 w-3.5" /> {{ $matchPercent }}% match for you
                     </span>
                 @endif
+                @if ($kesMonthly)
+                    <span class="inline-flex items-center gap-1 rounded-full bg-emerald-100 border border-emerald-300 px-3 py-1 text-xs font-bold text-emerald-950" title="Estimated monthly take-home in Kenyan Shillings (~130 KES/USD)">
+                        <x-icon name="coin" class="h-3.5 w-3.5 text-emerald-700" /> {{ $kesMonthly }}
+                    </span>
+                @endif
                 @if ($hourly)
-                    <span class="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800" title="Estimated from stated salary ÷ 2,080 hours/year">
+                    <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-800" title="Estimated from stated salary ÷ 2,080 hours/year">
                         <x-icon name="coin" class="h-3.5 w-3.5" /> ~${{ $hourly['min'] }}-{{ $hourly['max'] }}/hr
                     </span>
                 @endif
@@ -138,7 +144,7 @@
                             <livewire:track-application-button :job-id="$job->id" />
                         </div>
                         <p class="mt-4 text-xs text-foreground/40">
-                            Sourced via <a href="{{ $job->source_url }}" target="_blank" rel="noopener noreferrer" class="underline hover:text-sunrise-600">{{ $job->source_name }}</a> &middot; Make sure to tailor your CV before submitting!
+                            Verified for remote applicants in Kenya &middot; Remember to tailor your CV with our AI Copilot before submitting!
                         </p>
                     </div>
                 @elseif ($job->origin === 'employer')
@@ -226,5 +232,26 @@
                 @endif
             </div>
         </x-reveal>
+
+        @if (isset($relatedJobs) && $relatedJobs->isNotEmpty())
+            <section class="mt-14 border-t border-black/5 pt-10">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-xl font-bold text-foreground">Related Remote Jobs Open to Kenya</h2>
+                        <p class="text-xs text-foreground/50 mt-0.5">Explore similar international remote opportunities</p>
+                    </div>
+                    <a href="{{ url('/jobs') }}" class="text-xs font-semibold text-sunrise-600 hover:underline">
+                        See all jobs &rarr;
+                    </a>
+                </div>
+                <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+                    @foreach ($relatedJobs as $relJob)
+                        <div class="h-full">
+                            <x-job-card :job="$relJob" :unlocked="$isUnlocked($relJob)" :match-percent="$matchPercent ? $matchPercent($relJob) : null" />
+                        </div>
+                    @endforeach
+                </div>
+            </section>
+        @endif
     </div>
 </x-layouts.app>

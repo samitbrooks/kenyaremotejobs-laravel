@@ -157,8 +157,8 @@
                         </tr>
                         <tr>
                             <td class="p-4 font-medium text-foreground">
-                                Public Scraped Job Applications (after 48h)
-                                <span class="block text-xs text-foreground/50">General public listings from international job boards</span>
+                                Public Global Job Listings (after 48h window)
+                                <span class="block text-xs text-foreground/50">Standard remote openings from international companies</span>
                             </td>
                             <td class="p-4 text-center text-emerald-600 font-bold">✓ Included</td>
                             <td class="p-4 text-center text-emerald-600 font-bold bg-horizon-50/20">✓ Included</td>

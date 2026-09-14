@@ -71,10 +71,13 @@
                                     <p class="mb-2 mt-4 px-2.5 text-[11px] font-semibold uppercase tracking-wide text-neutral-400">Resources</p>
                                     @foreach ([
                                         ['href' => '/jobs', 'icon' => 'globe', 'label' => 'All Opportunities'],
+                                        ['href' => '/companies', 'icon' => 'globe', 'label' => 'Hiring Companies Directory'],
+                                        ['href' => '/collections', 'icon' => 'sparkle', 'label' => 'Curated Job Collections'],
                                         ['href' => '/match', 'icon' => 'sparkle', 'label' => 'Get Your Match Score'],
                                         ['href' => '/resume-builder', 'icon' => 'pen', 'label' => 'CV & Cover Letter Builder'],
                                         ['href' => '/journal', 'icon' => 'newspaper', 'label' => 'The Journal'],
                                         ['href' => '/pricing', 'icon' => 'card', 'label' => 'Pricing'],
+                                        ['href' => '/faqs', 'icon' => 'bulb', 'label' => 'Frequently Asked Questions'],
                                         ['href' => '/surveys', 'icon' => 'coin', 'label' => 'Earn While You Search'],
                                     ] as $r)
                                         <a href="{{ url($r['href']) }}" @click="jobsMenuOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-2 text-sm transition hover:bg-horizon-50">
@@ -99,7 +102,11 @@
                         </div>
                     </div>
 
+                    <a href="{{ url('/companies') }}" class="nav-underline transition hover:text-sunrise-300 {{ request()->is('companies*') ? 'text-sunrise-300 font-semibold' : '' }}">Companies</a>
+                    <a href="{{ url('/collections') }}" class="nav-underline transition hover:text-sunrise-300 {{ request()->is('collections*') ? 'text-sunrise-300 font-semibold' : '' }}">Collections</a>
+                    <a href="{{ url('/journal') }}" class="nav-underline transition hover:text-sunrise-300 {{ request()->is('journal*') ? 'text-sunrise-300 font-semibold' : '' }}">Journal</a>
                     <a href="{{ url('/pricing') }}" class="nav-underline transition hover:text-sunrise-300 {{ request()->is('pricing') ? 'text-sunrise-300 font-semibold' : '' }}">Pricing</a>
+                    <a href="{{ url('/faqs') }}" class="nav-underline transition hover:text-sunrise-300 {{ request()->is('faqs*') ? 'text-sunrise-300 font-semibold' : '' }}">FAQs</a>
                     <a href="{{ url('/about') }}" class="nav-underline transition hover:text-sunrise-300 {{ request()->is('about') ? 'text-sunrise-300 font-semibold' : '' }}">About</a>
                 @endif
 
@@ -156,6 +163,12 @@
                 <a href="{{ url('/jobs') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-1.5 rounded px-2 py-2 text-white/80 hover:bg-horizon-800">
                     <x-icon name="globe" class="h-4 w-4" /> All Opportunities
                 </a>
+                <a href="{{ url('/companies') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-1.5 rounded px-2 py-2 text-white/80 hover:bg-horizon-800">
+                    <x-icon name="globe" class="h-4 w-4" /> Hiring Companies
+                </a>
+                <a href="{{ url('/collections') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-1.5 rounded px-2 py-2 text-white/80 hover:bg-horizon-800">
+                    <x-icon name="sparkle" class="h-4 w-4" /> Curated Collections
+                </a>
                 @foreach (\App\Support\Audience::ORDER as $segment)
                     <a href="{{ url('/jobs') }}?audience={{ $segment }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-1.5 rounded px-2 py-2 text-white/80 hover:bg-horizon-800">
                         <x-icon :name="\App\Support\Audience::ICONS[$segment]" class="h-4 w-4" /> {{ \App\Support\Audience::LABELS[$segment] }}
@@ -173,11 +186,18 @@
                 <a href="{{ url('/pricing') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-1.5 rounded px-2 py-2 text-white/80 hover:bg-horizon-800">
                     <x-icon name="card" class="h-4 w-4" /> Pricing
                 </a>
+                <a href="{{ url('/faqs') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-1.5 rounded px-2 py-2 text-white/80 hover:bg-horizon-800">
+                    <x-icon name="bulb" class="h-4 w-4" /> FAQs
+                </a>
                 <a href="{{ url('/surveys') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-1.5 rounded px-2 py-2 text-white/80 hover:bg-horizon-800">
                     <x-icon name="coin" class="h-4 w-4" /> Earn While You Search
                 </a>
             </div>
+            <a href="{{ url('/companies') }}" @click="open = false" class="rounded px-2 py-2 hover:bg-horizon-800 {{ request()->is('companies*') ? 'text-sunrise-300 font-semibold' : '' }}">Companies</a>
+            <a href="{{ url('/collections') }}" @click="open = false" class="rounded px-2 py-2 hover:bg-horizon-800 {{ request()->is('collections*') ? 'text-sunrise-300 font-semibold' : '' }}">Collections</a>
+            <a href="{{ url('/journal') }}" @click="open = false" class="rounded px-2 py-2 hover:bg-horizon-800 {{ request()->is('journal*') ? 'text-sunrise-300 font-semibold' : '' }}">Journal</a>
             <a href="{{ url('/pricing') }}" @click="open = false" class="rounded px-2 py-2 hover:bg-horizon-800 {{ request()->is('pricing') ? 'text-sunrise-300 font-semibold' : '' }}">Pricing</a>
+            <a href="{{ url('/faqs') }}" @click="open = false" class="rounded px-2 py-2 hover:bg-horizon-800 {{ request()->is('faqs*') ? 'text-sunrise-300 font-semibold' : '' }}">FAQs</a>
             <a href="{{ url('/about') }}" @click="open = false" class="rounded px-2 py-2 hover:bg-horizon-800 {{ request()->is('about') ? 'text-sunrise-300 font-semibold' : '' }}">About</a>
         @endif
 

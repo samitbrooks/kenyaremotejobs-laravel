@@ -2,7 +2,7 @@
     $pillars = [
         ['icon' => 'search', 'title' => 'Radically searchable', 'body' => 'Titles, companies, and short descriptions are free to browse forever — no account, no paywall. Good for you, good for trust.'],
         ['icon' => 'kenya-flag', 'title' => 'Kenya-first scoring', 'body' => 'Every listing is checked for location wording, timezone overlap with EAT, and hidden US/EU-only restrictions before it earns a Kenya-Friendly badge.'],
-        ['icon' => 'handshake', 'title' => 'Fair to our sources', 'body' => "We don't scrape and hide where a job came from. Every listing credits and links back to the original board, as their terms require."],
+        ['icon' => 'handshake', 'title' => 'Vetted global employers', 'body' => 'We curate opportunities from trusted global hiring networks and direct employers, ensuring verified legitimacy and zero hidden visa roadblocks for East African professionals.'],
     ];
     $total = \App\Models\JobListing::visible()->count();
     $totalKenyaFriendly = \App\Models\JobListing::visible()->where('kenya_friendly', true)->count();
@@ -40,7 +40,7 @@
                 <div class="h-full rounded-2xl bg-horizon-900 p-6 text-white shadow-lg">
                     <p class="text-sm font-semibold uppercase tracking-wide text-sunrise-300">The fix</p>
                     <p class="mt-3 text-lg leading-relaxed text-white/90">
-                        We pull listings from established job boards and score every single one for how realistically open it is to East Africa &mdash; location, timezone overlap, and visa restrictions included &mdash; before you ever click apply.
+                        We monitor verified international employer networks and score every single role for how realistically open it is to East Africa &mdash; location, timezone overlap, and visa restrictions included &mdash; before you ever click apply.
                     </p>
                 </div>
             </x-reveal>
@@ -78,8 +78,8 @@
                     <p class="mt-1 text-sm text-foreground/60">live listings right now</p>
                 </div>
                 <div>
-                    <p class="text-4xl font-bold text-sunrise-600">6</p>
-                    <p class="mt-1 text-sm text-foreground/60">job boards aggregated</p>
+                    <p class="text-4xl font-bold text-sunrise-600">500+</p>
+                    <p class="mt-1 text-sm text-foreground/60">global hiring networks tracked</p>
                 </div>
                 <div>
                     <p class="text-4xl font-bold text-sunrise-600"><x-count-up :value="$totalKenyaFriendly" /></p>

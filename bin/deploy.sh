@@ -38,9 +38,11 @@ git pull origin main
 
 echo "-> Syncing public build assets to public_html..."
 cp -r public/build /home/kenyarem/public_html/
+cp -r public/images /home/kenyarem/public_html/ 2>/dev/null || true
 
-echo "-> Running database migrations..."
+echo "-> Running database migrations & seeders..."
 php artisan migrate --force
+php artisan db:seed --class="Database\\Seeders\\SeoPillarContentSeeder" --force || true
 
 echo "-> Optimizing application cache..."
 php artisan optimize:clear

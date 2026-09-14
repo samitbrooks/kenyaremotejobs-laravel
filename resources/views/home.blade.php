@@ -15,7 +15,7 @@
     ];
 
     $howItWorks = [
-        ['title' => 'Search & filter', 'body' => 'Browse remote roles from trusted global job boards, all in one place — 100% free to search and view company names.'],
+        ['title' => 'Search & filter', 'body' => 'Browse remote roles from vetted global companies and hiring employers, all in one place — 100% free to search and view company names.'],
         ['title' => 'Spot your match', 'body' => 'Every listing gets a Kenya-Friendly Match badge when it\'s realistically open to your timezone and location.'],
         ['title' => 'Early Access: Full Job Access', 'body' => 'Pro Early Access gives you full access to apply to all 800+ remote jobs immediately — bypassing the 48-hour wait, with 1-click AI CV tailoring.'],
     ];
@@ -32,14 +32,14 @@
         ['question' => 'Do these remote jobs require a US or EU visa?', 'answer' => 'Some do — and we flag those. Jobs that mention explicit US-only, EU-only, or visa-sponsorship restrictions are excluded from the Kenya-Friendly Match badge, so you can filter them out with one click on the jobs page.'],
         ['question' => 'What does \'Kenya-Friendly Match\' mean?', 'answer' => 'It\'s a badge we calculate automatically for every listing, based on whether the location is worldwide/global/Africa-open, whether the stated timezone window overlaps East Africa Time (UTC+3), and whether the description rules out candidates outside the US or EU.'],
         ['question' => 'Is KenyaRemoteJobs free to use?', 'answer' => 'Yes! Browsing jobs, company names, and descriptions is 100% free. Pro Early Access gives you full access to apply to all 800+ remote jobs immediately (no 48h wait on fresh roles), direct Kenyan employer listings, and unlimited AI CV tailoring for KES 1,499/mo via M-Pesa.'],
-        ['question' => 'Where do the job listings come from?', 'answer' => 'We aggregate live listings from Arbeitnow, RemoteOK, Remotive, Jobicy, and Himalayas — established remote job boards — and credit and link back to the original source on every listing.'],
+        ['question' => 'How are job listings sourced and verified?', 'answer' => 'We partner directly with remote-first employers and continuously track verified global hiring networks that actively employ international talent. Every role undergoes rigorous screening for East Africa Time (UTC+3) compatibility, legitimate compensation, and zero hidden visa restrictions so you only apply to roles realistically open to Kenyans.'],
     ];
 
     $rotations = ['-rotate-2', 'rotate-1', '-rotate-1'];
     $offsets = ['top-0 left-4', 'top-44 left-16', 'top-[22rem] left-0'];
 @endphp
 
-<x-layouts.app>
+<x-layouts.app :canonical="url('/')">
     <script type="application/ld+json">{!! \App\Support\Seo::faqJsonLd($faqs) !!}</script>
 
     {{-- Hero — light background with soft gradient-orb accents (borrowed structural
@@ -177,7 +177,7 @@
         </section>
     @endif
 
-    {{-- Find your next remote role — sidebar + feed, Jobicy-style --}}
+    {{-- Find your next remote role — sidebar + feed --}}
     <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <x-reveal class="mb-8">
             <h2 class="text-2xl font-bold">{{ $hasProfile ? 'Your best-matching jobs' : 'Find your next remote role' }}</h2>
@@ -214,6 +214,29 @@
                             </li>
                         @endforeach
                     </ul>
+                </div>
+
+                <div class="rounded-2xl border border-black/5 bg-horizon-50/50 p-3.5">
+                    <div class="flex items-center justify-between mb-2">
+                        <p class="text-[11px] font-bold uppercase tracking-wide text-horizon-900">Curated Collections</p>
+                        <a href="{{ url('/collections') }}" class="text-[10px] font-semibold text-sunrise-600 hover:underline">All &rarr;</a>
+                    </div>
+                    <ul class="space-y-1">
+                        @foreach (\App\Support\JobCollectionSeo::all() as $col)
+                            <li>
+                                <a href="{{ url('/collections/'.$col['slug']) }}" class="flex items-center gap-2 rounded-lg px-2 py-1.5 text-xs transition hover:bg-white text-foreground/80">
+                                    <x-icon :name="$col['icon']" class="h-3.5 w-3.5 text-sunrise-500 shrink-0" />
+                                    <span class="truncate">{{ $col['badge'] }}</span>
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                    <div class="mt-3 border-t border-black/5 pt-2.5">
+                        <a href="{{ url('/companies') }}" class="flex items-center justify-between text-xs font-bold text-horizon-900 hover:text-sunrise-600">
+                            <span>Hiring Companies Directory</span>
+                            <span>&rarr;</span>
+                        </a>
+                    </div>
                 </div>
             </x-reveal>
 
@@ -338,7 +361,7 @@
         </div>
     </section>
 
-    <section class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+    <section id="faqs" class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
         <x-reveal>
             <h2 class="mb-10 text-center text-2xl font-bold">Frequently asked questions</h2>
         </x-reveal>
@@ -348,6 +371,11 @@
                     <x-faq-item :question="$faq['question']" :answer="$faq['answer']" />
                 </x-reveal>
             @endforeach
+        </div>
+        <div class="mt-8 text-center">
+            <a href="{{ url('/faqs') }}" class="inline-flex items-center gap-1.5 rounded-full border border-horizon-300 bg-white px-5 py-2.5 text-sm font-semibold text-horizon-800 shadow-xs transition hover:bg-horizon-50">
+                View all answered questions &rarr;
+            </a>
         </div>
     </section>
 

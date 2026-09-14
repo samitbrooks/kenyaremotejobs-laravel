@@ -1,6 +1,6 @@
 @php
     $title = $audience ? (\App\Support\Audience::LABELS[$audience] ?? $audience).' jobs' : 'Browse Online & Remote Jobs Open to Kenya';
-    $description = 'Search and filter online and remote jobs from Arbeitnow, RemoteOK, Remotive, Jobicy, and Himalayas — filter by category, remote type, or Kenya-Friendly Match to find roles realistically open to you.';
+    $description = 'Search and filter online and remote jobs from verified global employers and distributed teams — filter by category, remote type, or Kenya-Friendly Match to find roles realistically open to you.';
 
     $buildPageHref = function (int $targetPage) use ($q, $tag, $remoteType, $kenyaFriendly, $freeOnly, $audience) {
         $params = array_filter([
@@ -33,7 +33,8 @@
     }
 @endphp
 
-<x-layouts.app :title="$title" :description="$description">
+<x-layouts.app :title="$title" :description="$description" :canonical="url('/jobs')">
+    <script type="application/ld+json">{!! \App\Support\Seo::itemListJsonLd($jobs, $title, $description) !!}</script>
     <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
         <h1 class="flex items-center gap-2 text-3xl font-bold">
             @if ($audience)

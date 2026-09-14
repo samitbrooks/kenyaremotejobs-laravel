@@ -6,6 +6,7 @@
     $preview = \App\Support\Format::truncate($plainDescription, 140);
     $visibleTags = $job->tags ?? [];
     $hourly = \App\Support\SalaryEstimate::estimateHourlyUsd($job->annual_salary_usd);
+    $kesMonthly = \App\Support\SalaryEstimate::estimateMonthlyKes($job->annual_salary_usd, $job->salary);
     $audienceSegments = $job->audience_segments ?? [];
     $isNew = $job->posted_at->gt(now()->subDay());
     $isEarlyAccess = $job->isEarlyAccess();
@@ -47,7 +48,11 @@
                 <x-icon name="sparkle" class="h-3 w-3" /> {{ $matchPercent }}% match
             </span>
         @endif
-        @if ($hourly)
+        @if ($kesMonthly)
+            <span class="inline-flex items-center gap-1 rounded-full bg-emerald-100 border border-emerald-300 px-2 py-0.5 text-[11px] font-bold text-emerald-950" title="Estimated monthly take-home in Kenyan Shillings at ~130 KES/USD">
+                <x-icon name="coin" class="h-3 w-3 text-emerald-700" /> {{ $kesMonthly }}
+            </span>
+        @elseif ($hourly)
             <span class="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-0.5 text-[11px] font-semibold text-emerald-800" title="Estimated from the stated annual salary ÷ 2,080 hours/year — not a guaranteed rate">
                 <x-icon name="coin" class="h-3 w-3" /> ~${{ $hourly['min'] }}-{{ $hourly['max'] }}/hr
             </span>
