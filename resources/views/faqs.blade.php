@@ -15,14 +15,14 @@
 
         {{-- Hero Header --}}
         <x-reveal class="text-center max-w-2xl mx-auto">
-            <span class="inline-flex items-center gap-1 rounded-full bg-sunrise-100 px-3 py-1 text-xs font-bold text-sunrise-800">
-                <x-icon name="sparkle" class="h-3.5 w-3.5 text-sunrise-600" />
+            <span class="inline-flex items-center gap-1 rounded-full bg-teal-50 border border-teal-200 px-3 py-1 text-xs font-bold text-teal-800">
+                <x-icon name="sparkle" class="h-3.5 w-3.5 text-teal-600" />
                 Help &amp; Documentation
             </span>
-            <h1 class="mt-4 text-3xl font-extrabold tracking-tight text-horizon-950 sm:text-4xl lg:text-5xl">
+            <h1 class="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
                 Frequently Asked Questions
             </h1>
-            <p class="mt-4 text-base text-foreground/70 sm:text-lg">
+            <p class="mt-4 text-base text-slate-600 sm:text-lg">
                 Practical answers to common questions about landing legit remote work, receiving foreign currency payments, and using KenyaRemoteJobs.
             </p>
         </x-reveal>
@@ -30,16 +30,16 @@
         {{-- FAQ Categories Grid --}}
         <div class="mt-12 space-y-12">
             @foreach ($categories as $catKey => $category)
-                <section id="{{ $catKey }}" class="rounded-3xl border border-black/5 bg-white p-6 sm:p-8 shadow-xs">
-                    <div class="flex items-center gap-3 border-b border-black/5 pb-4">
-                        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-horizon-100 text-horizon-800">
+                <section id="{{ $catKey }}" class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-2xs">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-teal-700">
                             <x-icon :name="$category['icon']" class="h-5 w-5" />
                         </div>
                         <div>
-                            <h2 class="text-xl font-bold text-horizon-950 sm:text-2xl">
+                            <h2 class="text-xl font-bold text-slate-900 sm:text-2xl">
                                 {{ $category['title'] }}
                             </h2>
-                            <p class="text-xs text-foreground/50">
+                            <p class="text-xs text-slate-500">
                                 {{ count($category['items']) }} questions answered
                             </p>
                         </div>
@@ -55,16 +55,16 @@
         </div>
 
         {{-- Still have questions CTA --}}
-        <div class="mt-16 rounded-3xl border border-horizon-200 bg-gradient-to-r from-horizon-900 via-horizon-800 to-slate-900 p-8 text-center text-white shadow-xl">
+        <div class="mt-16 rounded-2xl border border-slate-800 bg-slate-900 p-8 text-center text-white shadow-lg">
             <h2 class="text-2xl font-bold">Have a specific question not covered here?</h2>
-            <p class="mt-2 text-sm text-white/70 max-w-lg mx-auto">
+            <p class="mt-2 text-sm text-slate-300 max-w-lg mx-auto">
                 Ask our Daisy AI Career Copilot in the Action Center (bottom right) or explore our curated career guides in The Journal.
             </p>
             <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
-                <a href="{{ url('/journal') }}" class="btn-pop rounded-full bg-sunrise-500 px-6 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-sunrise-600">
+                <a href="{{ url('/journal') }}" class="btn-pop rounded-full bg-teal-600 px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-teal-700">
                     Read The Journal &rarr;
                 </a>
-                <a href="{{ url('/jobs') }}" class="rounded-full border border-white/20 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10">
+                <a href="{{ url('/jobs') }}" class="rounded-full border border-slate-700 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800">
                     Browse All Remote Jobs
                 </a>
             </div>

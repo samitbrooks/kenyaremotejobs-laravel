@@ -14,47 +14,47 @@
 
 <a
     href="{{ url('/jobs/'.$job->id) }}"
-    class="group flex h-full flex-col gap-3 rounded-2xl border border-black/5 bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-sunrise-500/10"
+    class="group flex h-full flex-col gap-3 rounded-xl border border-slate-200/90 bg-white p-5 shadow-xs transition-all duration-150 hover:-translate-y-0.5 hover:border-teal-500 hover:shadow-md"
 >
-    <div class="flex items-start gap-3">
+    <div class="flex items-start gap-3.5">
         <x-company-logo :company="$job->company" />
         <div class="min-w-0 flex-1">
-            <h3 class="truncate font-semibold text-foreground group-hover:text-sunrise-600">{{ $job->title }}</h3>
-            <p class="truncate text-sm text-foreground/60">{{ $job->company }}</p>
+            <h3 class="truncate font-bold text-slate-900 group-hover:text-teal-600 transition-colors text-base">{{ $job->title }}</h3>
+            <p class="truncate text-sm font-medium text-slate-500">{{ $job->company }}</p>
         </div>
     </div>
 
-    <div class="flex flex-wrap gap-1.5">
+    <div class="flex flex-wrap gap-1.5 items-center">
         @if ($isNew)
-            <span class="inline-flex items-center gap-1 rounded-full bg-sunrise-500 px-2 py-0.5 text-[11px] font-semibold text-white">
+            <span class="inline-flex items-center gap-1 rounded-md bg-teal-600 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
                 New
             </span>
         @endif
         @if ($job->origin === 'employer')
-            <span class="inline-flex items-center gap-1 rounded-full bg-emerald-100 border border-emerald-300 px-2 py-0.5 text-[11px] font-bold text-emerald-900">
-                <x-icon name="announce" class="h-3 w-3 text-emerald-700" /> 🇰🇪 Direct Employer &middot; Pro Exclusive
+            <span class="inline-flex items-center gap-1 rounded-md bg-emerald-50 border border-emerald-200 px-2 py-0.5 text-[11px] font-bold text-emerald-900">
+                <x-icon name="announce" class="h-3 w-3 text-emerald-700" /> 🇰🇪 Direct Employer
             </span>
         @elseif ($isEarlyAccess)
-            <span class="inline-flex items-center gap-1 rounded-full bg-amber-100 border border-amber-200 px-2 py-0.5 text-[11px] font-semibold text-amber-900">
+            <span class="inline-flex items-center gap-1 rounded-md bg-amber-50 border border-amber-200 px-2 py-0.5 text-[11px] font-semibold text-amber-900">
                 <x-icon name="sparkle" class="h-3 w-3 text-amber-600" /> Early Access ({{ $job->earlyAccessHoursRemaining() }}h left)
             </span>
         @else
-            <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-700">
-                <x-icon name="check" class="h-3 w-3 text-emerald-600" /> Open to Apply
+            <span class="inline-flex items-center gap-1 rounded-md bg-slate-100 px-2 py-0.5 text-[11px] font-medium text-slate-700">
+                <x-icon name="check" class="h-3 w-3 text-teal-600" /> Open
             </span>
         @endif
         @if (is_int($matchPercent))
-            <span class="inline-flex items-center gap-1 rounded-full bg-horizon-600 px-2 py-0.5 text-[11px] font-semibold text-white">
-                <x-icon name="sparkle" class="h-3 w-3" /> {{ $matchPercent }}% match
+            <span class="inline-flex items-center gap-1 rounded-md bg-teal-50 border border-teal-200 px-2 py-0.5 text-[11px] font-bold text-teal-800">
+                <x-icon name="sparkle" class="h-3 w-3 text-teal-600" /> {{ $matchPercent }}% match
             </span>
         @endif
         @if ($kesMonthly)
-            <span class="inline-flex items-center gap-1 rounded-full bg-emerald-100 border border-emerald-300 px-2 py-0.5 text-[11px] font-bold text-emerald-950" title="Estimated monthly take-home in Kenyan Shillings at ~130 KES/USD">
+            <span class="inline-flex items-center gap-1 rounded-md bg-emerald-50 border border-emerald-200 px-2 py-0.5 text-[11px] font-bold text-emerald-900" title="Estimated monthly take-home in Kenyan Shillings at ~130 KES/USD">
                 <x-icon name="coin" class="h-3 w-3 text-emerald-700" /> {{ $kesMonthly }}
             </span>
         @elseif ($hourly)
-            <span class="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-0.5 text-[11px] font-semibold text-emerald-800" title="Estimated from the stated annual salary ÷ 2,080 hours/year — not a guaranteed rate">
-                <x-icon name="coin" class="h-3 w-3" /> ~${{ $hourly['min'] }}-{{ $hourly['max'] }}/hr
+            <span class="inline-flex items-center gap-1 rounded-md bg-emerald-50 border border-emerald-200 px-2 py-0.5 text-[11px] font-semibold text-emerald-800" title="Estimated from stated annual salary ÷ 2,080 hours/year">
+                <x-icon name="coin" class="h-3 w-3 text-emerald-700" /> ~${{ $hourly['min'] }}-{{ $hourly['max'] }}/hr
             </span>
         @endif
         @if ($job->kenya_friendly)
@@ -62,7 +62,7 @@
         @endif
     </div>
 
-    <p class="line-clamp-2 text-sm text-foreground/70">{{ $preview }}</p>
+    <p class="line-clamp-2 text-sm text-slate-600 leading-relaxed">{{ $preview }}</p>
 
     <div class="flex flex-wrap gap-1.5">
         @foreach (array_slice($visibleTags, 0, 4) as $i => $tag)
@@ -70,17 +70,17 @@
         @endforeach
     </div>
 
-    <div class="mt-auto flex items-center justify-between gap-2 border-t border-black/5 pt-3 text-xs text-foreground/50">
+    <div class="mt-auto flex items-center justify-between gap-2 border-t border-slate-100 pt-3 text-xs text-slate-500 font-medium">
         <span class="flex items-center gap-2">
-            <span>{{ $job->remote_type }}</span>
+            <span class="inline-flex items-center rounded-md bg-slate-100 px-2 py-0.5 text-xs text-slate-600 font-medium">{{ $job->remote_type }}</span>
             @if (count($audienceSegments) > 0)
                 <span class="flex items-center gap-1" title="{{ collect($audienceSegments)->map(fn ($s) => \App\Support\Audience::LABELS[$s] ?? $s)->join(', ') }}">
                     @foreach (array_slice($audienceSegments, 0, 2) as $segment)
-                        <x-icon :name="\App\Support\Audience::ICONS[$segment] ?? 'globe'" class="h-3.5 w-3.5" />
+                        <x-icon :name="\App\Support\Audience::ICONS[$segment] ?? 'globe'" class="h-3.5 w-3.5 text-slate-400" />
                     @endforeach
                 </span>
             @endif
         </span>
-        <span>{{ \App\Support\Format::timeAgo($job->posted_at) }}</span>
+        <span class="text-slate-400">{{ \App\Support\Format::timeAgo($job->posted_at) }}</span>
     </div>
 </a>

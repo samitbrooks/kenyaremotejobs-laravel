@@ -4,39 +4,38 @@
 @source '../../storage/framework/views/*.php';
 
 :root {
-    --background: #fffaf5;
-    --foreground: #1f1a17;
+    --background: #ffffff;
+    --foreground: #0f172a;
 
-    /* Sunrise: warm coral/orange — hero gradients, CTAs, Kenya-Friendly accents. */
-    --color-sunrise-50: #fff4ed;
-    --color-sunrise-100: #ffe6d5;
-    --color-sunrise-200: #ffc9a8;
-    --color-sunrise-300: #ffa366;
-    --color-sunrise-400: #ff8142;
-    --color-sunrise-500: #ff6b35;
-    --color-sunrise-600: #f2540f;
-    --color-sunrise-700: #c2410c;
-    --color-sunrise-800: #9a3412;
-    --color-sunrise-900: #7c2d12;
+    /* Remote.co Teal / Primary Brand Accents */
+    --color-sunrise-50: #f0fdfa;
+    --color-sunrise-100: #ccfbf1;
+    --color-sunrise-200: #99f6e4;
+    --color-sunrise-300: #5eead4;
+    --color-sunrise-400: #2dd4bf;
+    --color-sunrise-500: #0d9488;
+    --color-sunrise-600: #0f766e;
+    --color-sunrise-700: #115e59;
+    --color-sunrise-800: #134e4a;
+    --color-sunrise-900: #042f2e;
 
-    /* Horizon: confident teal-blue — trust, links, secondary CTAs. */
-    --color-horizon-50: #eefcfc;
-    --color-horizon-100: #d3f5f6;
-    --color-horizon-200: #aaeaed;
-    --color-horizon-300: #71d8dd;
-    --color-horizon-400: #35bdc5;
-    --color-horizon-500: #0ea5ab;
-    --color-horizon-600: #0b838c;
-    --color-horizon-700: #0d6971;
-    --color-horizon-800: #10545b;
-    --color-horizon-900: #12464c;
+    /* Remote.co Clean Slate & Deep Navy Scale */
+    --color-horizon-50: #f8fafc;
+    --color-horizon-100: #f1f5f9;
+    --color-horizon-200: #e2e8f0;
+    --color-horizon-300: #cbd5e1;
+    --color-horizon-400: #94a3b8;
+    --color-horizon-500: #64748b;
+    --color-horizon-600: #0d9488;
+    --color-horizon-700: #0f766e;
+    --color-horizon-800: #1e293b;
+    --color-horizon-900: #0f172a;
 }
 
 @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
-    --font-sans: 'Comfortaa', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
     --color-sunrise-50: var(--color-sunrise-50);
     --color-sunrise-100: var(--color-sunrise-100);
@@ -74,9 +73,7 @@ body {
     display: none !important;
 }
 
-/* Desktop nav links — underline draws in on hover instead of just a color
-   swap, a small but noticeably more "designed" touch than a bare color
-   transition. */
+/* Desktop nav links — clean teal underline on hover */
 .nav-underline {
     position: relative;
 }
@@ -98,19 +95,20 @@ body {
     right: 0;
 }
 
-/* Shared card hover treatment — a soft brand-colored glow instead of a flat
-   gray shadow, used on job cards, category tiles, and testimonials. */
+/* Shared card hover treatment — Remote.co crisp shadow + teal border */
 .card-hover {
     transition:
         transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-        box-shadow 0.2s ease;
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
 }
 
 .card-hover:hover {
-    transform: translateY(-3px);
+    transform: translateY(-2px);
     box-shadow:
-        0 12px 24px -8px rgba(255, 107, 53, 0.18),
-        0 4px 8px -2px rgba(15, 23, 42, 0.06);
+        0 10px 25px -5px rgba(15, 23, 42, 0.08),
+        0 8px 10px -6px rgba(15, 23, 42, 0.04);
+    border-color: #0d9488;
 }
 
 @keyframes spin {
@@ -123,21 +121,21 @@ body {
     animation: spin 0.7s linear infinite;
 }
 
-/* Utility for the hero / CTA gradient used across the site. */
+/* Remote.co Teal gradient utilities */
 .gradient-sunrise {
-    background-image: linear-gradient(135deg, var(--color-sunrise-500) 0%, var(--color-sunrise-400) 45%, var(--color-horizon-500) 100%);
+    background-image: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
 }
 
 .text-gradient-sunrise {
-    background-image: linear-gradient(100deg, var(--color-sunrise-600) 0%, var(--color-horizon-600) 100%);
+    background-image: linear-gradient(100deg, #0d9488 0%, #0f766e 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
 }
 
-/* Animated variant of the hero gradient — slow color drift, hero section only. */
+/* Animated variant — subtle teal drift */
 .gradient-sunrise-live {
-    background-image: linear-gradient(120deg, var(--color-sunrise-500) 0%, var(--color-sunrise-400) 30%, var(--color-horizon-500) 70%, var(--color-sunrise-500) 100%);
+    background-image: linear-gradient(120deg, #0d9488 0%, #14b8a6 35%, #0f766e 70%, #0d9488 100%);
     background-size: 250% 250%;
     animation: gradient-pan 12s ease-in-out infinite;
 }

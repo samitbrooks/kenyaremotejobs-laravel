@@ -13,35 +13,35 @@
 
         {{-- Hero Header --}}
         <x-reveal class="text-center max-w-3xl mx-auto">
-            <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-100 border border-emerald-200 px-3.5 py-1 text-xs font-bold text-emerald-900">
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-3.5 py-1 text-xs font-bold text-emerald-800">
                 <x-icon name="check" class="h-3.5 w-3.5 text-emerald-600" />
                 Verified Employer Directory
             </span>
-            <h1 class="mt-4 text-3xl font-extrabold tracking-tight text-horizon-950 sm:text-4xl lg:text-5xl leading-tight">
+            <h1 class="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl leading-tight">
                 Top Global Companies Hiring Remotely in Kenya
             </h1>
-            <p class="mt-4 text-base text-foreground/70 sm:text-lg leading-relaxed">
+            <p class="mt-4 text-base text-slate-600 sm:text-lg leading-relaxed">
                 Skip the guesswork. These international remote-first companies explicitly hire across East Africa with competitive USD salaries, zero visa hurdles, and reliable payment rails.
             </p>
         </x-reveal>
 
         {{-- Quick Stats Banner --}}
         <div class="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
-            <div class="rounded-2xl border border-black/5 bg-white p-4 text-center shadow-xs">
-                <p class="text-2xl font-black text-sunrise-600">100%</p>
-                <p class="text-xs text-foreground/60 mt-0.5">Vetted for Kenya</p>
+            <div class="rounded-2xl border border-slate-200 bg-white p-4 text-center shadow-2xs">
+                <p class="text-2xl font-black text-teal-700">100%</p>
+                <p class="text-xs text-slate-500 mt-0.5">Vetted for Kenya</p>
             </div>
-            <div class="rounded-2xl border border-black/5 bg-white p-4 text-center shadow-xs">
-                <p class="text-2xl font-black text-horizon-900">USD &amp; Wise</p>
-                <p class="text-xs text-foreground/60 mt-0.5">Reliable Payments</p>
+            <div class="rounded-2xl border border-slate-200 bg-white p-4 text-center shadow-2xs">
+                <p class="text-2xl font-black text-slate-900">USD &amp; Wise</p>
+                <p class="text-xs text-slate-500 mt-0.5">Reliable Payments</p>
             </div>
-            <div class="rounded-2xl border border-black/5 bg-white p-4 text-center shadow-xs">
+            <div class="rounded-2xl border border-slate-200 bg-white p-4 text-center shadow-2xs">
                 <p class="text-2xl font-black text-emerald-700">0 Visa</p>
-                <p class="text-xs text-foreground/60 mt-0.5">No Relocation Needed</p>
+                <p class="text-xs text-slate-500 mt-0.5">No Relocation Needed</p>
             </div>
-            <div class="rounded-2xl border border-black/5 bg-white p-4 text-center shadow-xs">
-                <p class="text-2xl font-black text-horizon-800">EAT Fit</p>
-                <p class="text-xs text-foreground/60 mt-0.5">UTC+3 Timezone Aligned</p>
+            <div class="rounded-2xl border border-slate-200 bg-white p-4 text-center shadow-2xs">
+                <p class="text-2xl font-black text-slate-800">EAT Fit</p>
+                <p class="text-xs text-slate-500 mt-0.5">UTC+3 Timezone Aligned</p>
             </div>
         </div>
 
@@ -51,47 +51,47 @@
                 <x-reveal :delay="min($i, 9) * 50" class="h-full">
                     <a
                         href="{{ url('/companies/'.$company['slug']) }}"
-                        class="group flex h-full flex-col justify-between rounded-3xl border border-black/5 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-horizon-300 hover:shadow-xl"
+                        class="group flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-6 shadow-2xs transition-all duration-200 hover:-translate-y-1 hover:border-teal-500 hover:shadow-md"
                     >
                         <div>
                             <div class="flex items-start justify-between gap-3">
                                 <div class="flex items-center gap-3">
-                                    <div class="flex h-12 w-12 items-center justify-center rounded-2xl border border-black/5 bg-horizon-50 text-xl font-bold text-horizon-900 shadow-xs">
+                                    <div class="flex h-12 w-12 items-center justify-center rounded-xl border border-slate-200 bg-slate-100 text-xl font-bold text-teal-800 shadow-2xs">
                                         {{ substr($company['name'], 0, 1) }}
                                     </div>
                                     <div>
-                                        <h2 class="font-bold text-lg text-foreground group-hover:text-sunrise-600 transition-colors">
+                                        <h2 class="font-bold text-lg text-slate-900 group-hover:text-teal-700 transition-colors">
                                             {{ $company['name'] }}
                                         </h2>
-                                        <p class="text-xs text-foreground/50">{{ $company['industry'] }}</p>
+                                        <p class="text-xs text-slate-500">{{ $company['industry'] }}</p>
                                     </div>
                                 </div>
-                                <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-800">
+                                <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-200 px-2 py-0.5 text-[11px] font-semibold text-emerald-800">
                                     ✓ Kenya Open
                                 </span>
                             </div>
 
-                            <p class="mt-4 text-xs font-semibold text-horizon-800">{{ $company['headline'] }}</p>
-                            <p class="mt-2 line-clamp-3 text-xs text-foreground/70 leading-relaxed">{{ $company['description'] }}</p>
+                            <p class="mt-4 text-xs font-semibold text-slate-800">{{ $company['headline'] }}</p>
+                            <p class="mt-2 line-clamp-3 text-xs text-slate-600 leading-relaxed">{{ $company['description'] }}</p>
 
-                            <div class="mt-4 space-y-2 border-t border-black/5 pt-3 text-[11px]">
-                                <div class="flex items-center justify-between text-foreground/60">
+                            <div class="mt-4 space-y-2 border-t border-slate-100 pt-3 text-[11px]">
+                                <div class="flex items-center justify-between text-slate-500">
                                     <span>Hiring Model:</span>
-                                    <strong class="text-foreground/80 font-medium truncate max-w-[150px]">{{ $company['hiring_model'] }}</strong>
+                                    <strong class="text-slate-700 font-medium truncate max-w-[150px]">{{ $company['hiring_model'] }}</strong>
                                 </div>
-                                <div class="flex items-center justify-between text-foreground/60">
+                                <div class="flex items-center justify-between text-slate-500">
                                     <span>Payment Rails:</span>
-                                    <strong class="text-foreground/80 font-medium truncate max-w-[150px]">{{ implode(', ', $company['payment_methods']) }}</strong>
+                                    <strong class="text-slate-700 font-medium truncate max-w-[150px]">{{ implode(', ', $company['payment_methods']) }}</strong>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="mt-6 flex items-center justify-between border-t border-black/5 pt-3">
-                            <span class="text-xs font-semibold text-sunrise-600 group-hover:underline">
+                        <div class="mt-6 flex items-center justify-between border-t border-slate-100 pt-3">
+                            <span class="text-xs font-semibold text-teal-700 group-hover:underline">
                                 Explore Company Profile &rarr;
                             </span>
                             @if ($company['open_jobs_count'] > 0)
-                                <span class="rounded-full bg-horizon-100 px-2.5 py-0.5 text-[11px] font-bold text-horizon-800">
+                                <span class="rounded-full bg-slate-100 px-2.5 py-0.5 text-[11px] font-bold text-slate-800">
                                     {{ $company['open_jobs_count'] }} open {{ \Illuminate\Support\Str::plural('role', $company['open_jobs_count']) }}
                                 </span>
                             @endif

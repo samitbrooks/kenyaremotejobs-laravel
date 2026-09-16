@@ -36,83 +36,85 @@
 <x-layouts.app :title="$title" :description="$description" :canonical="url('/jobs')">
     <script type="application/ld+json">{!! \App\Support\Seo::itemListJsonLd($jobs, $title, $description) !!}</script>
     <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-        <h1 class="flex items-center gap-2 text-3xl font-bold">
+        <h1 class="flex items-center gap-2.5 text-3xl font-extrabold text-slate-900">
             @if ($audience)
-                <x-icon :name="\App\Support\Audience::ICONS[$audience] ?? 'globe'" class="h-7 w-7" />
+                <x-icon :name="\App\Support\Audience::ICONS[$audience] ?? 'globe'" class="h-7 w-7 text-teal-600" />
             @endif
             {{ $title }}
         </h1>
-        <p class="mt-1 text-foreground/60">
+        <p class="mt-1 text-sm text-slate-500">
             {{ $total }} listings &middot; 100% transparent employer details &middot; Verified remote roles open to Kenyan applicants.
         </p>
 
         @if ($audience)
             <p class="mt-2 text-sm">
-                <a href="{{ url('/jobs') }}" class="font-semibold text-sunrise-600 hover:underline">&larr; Clear filter, see all jobs</a>
+                <a href="{{ url('/jobs') }}" class="font-bold text-teal-700 hover:underline">&larr; Clear filter, see all jobs</a>
             </p>
         @endif
 
         @if ($sortByMatch)
-            <p class="mt-2 flex items-center gap-1 text-sm font-medium text-horizon-700">
-                <x-icon name="sparkle" class="h-4 w-4" /> Sorted by your best matches &mdash; <a href="{{ url('/match') }}" class="underline">update your profile</a>
+            <p class="mt-2 flex items-center gap-1.5 text-sm font-semibold text-teal-700">
+                <x-icon name="sparkle" class="h-4 w-4 text-teal-600" /> Sorted by your best matches &mdash; <a href="{{ url('/match') }}" class="underline">update your profile</a>
             </p>
         @else
             <p class="mt-2 text-sm">
-                <a href="{{ url('/match') }}" class="inline-flex items-center gap-1 font-semibold text-sunrise-600 hover:underline">
-                    <x-icon name="sparkle" class="h-4 w-4" /> Find your best-matching jobs &rarr;
+                <a href="{{ url('/match') }}" class="inline-flex items-center gap-1 font-bold text-teal-700 hover:underline">
+                    <x-icon name="sparkle" class="h-4 w-4 text-teal-600" /> Find your best-matching jobs &rarr;
                 </a>
             </p>
         @endif
 
-        <div class="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-amber-200/80 bg-gradient-to-r from-amber-50/90 via-white to-orange-50/60 p-3.5 sm:px-5 text-xs sm:text-sm text-foreground/80 shadow-xs">
+        <div class="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-amber-200 bg-amber-50/60 p-4 text-xs sm:text-sm text-slate-800 shadow-xs">
             <div class="flex items-center gap-2.5">
-                <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-xl bg-amber-500 text-white shadow-xs">
+                <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-amber-500 text-white shadow-xs">
                     <x-icon name="sparkle" class="h-4 w-4" />
                 </span>
                 <p>
-                    <strong class="font-bold text-foreground">Pro Early Access:</strong> Full access to apply to all 800+ remote jobs immediately &mdash; no 48-hour wait on newly posted roles.
+                    <strong class="font-bold text-slate-900">Pro Early Access:</strong> Full access to apply to all 800+ remote jobs immediately &mdash; no 48-hour wait on newly posted roles.
                 </p>
             </div>
-            <a href="{{ url('/pricing') }}" class="inline-flex items-center gap-1 rounded-full bg-horizon-800 px-3.5 py-1.5 text-xs font-bold text-white hover:bg-horizon-900 transition shrink-0">
+            <a href="{{ url('/pricing') }}" class="inline-flex items-center gap-1 rounded-lg bg-slate-900 px-3.5 py-1.5 text-xs font-bold text-white hover:bg-slate-800 transition shrink-0 shadow-xs">
                 Unlock All Jobs &rarr;
             </a>
         </div>
 
-        <form action="{{ url('/jobs') }}" method="GET" class="mt-5 grid grid-cols-1 gap-3 rounded-2xl border border-black/5 bg-white p-4 shadow-sm sm:grid-cols-[2fr_1fr_1fr_auto] sm:items-center">
-            <input type="text" name="q" value="{{ $q }}" placeholder="Search job titles, skills, companies…" class="rounded-lg border border-black/10 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-sunrise-400">
+        <form action="{{ url('/jobs') }}" method="GET" class="mt-5 grid grid-cols-1 gap-3 rounded-xl border border-slate-200 bg-white p-4 shadow-xs sm:grid-cols-[2fr_1fr_1fr_auto] sm:items-center">
+            <input type="text" name="q" value="{{ $q }}" placeholder="Search job titles, skills, companies…" class="rounded-lg border border-slate-200 bg-slate-50/50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-teal-500 focus:bg-white focus:outline-none focus:ring-1 focus:ring-teal-500">
 
-            <select name="tag" class="rounded-lg border border-black/10 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-sunrise-400">
+            <select name="tag" class="rounded-lg border border-slate-200 bg-slate-50/50 px-4 py-2.5 text-sm text-slate-700 focus:border-teal-500 focus:bg-white focus:outline-none focus:ring-1 focus:ring-teal-500">
                 <option value="">All categories</option>
                 @foreach ($tags as $t)
                     <option value="{{ $t }}" @selected($tag === $t)>{{ $t }}</option>
                 @endforeach
             </select>
 
-            <select name="remoteType" class="rounded-lg border border-black/10 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-sunrise-400">
+            <select name="remoteType" class="rounded-lg border border-slate-200 bg-slate-50/50 px-4 py-2.5 text-sm text-slate-700 focus:border-teal-500 focus:bg-white focus:outline-none focus:ring-1 focus:ring-teal-500">
                 <option value="">Any remote type</option>
                 <option value="remote" @selected($remoteType === 'remote')>Remote</option>
                 <option value="full-time" @selected($remoteType === 'full-time')>Full-time</option>
                 <option value="contract" @selected($remoteType === 'contract')>Contract</option>
             </select>
 
-            <button type="submit" class="btn-pop rounded-lg bg-sunrise-500 px-5 py-2.5 font-semibold text-white transition hover:bg-sunrise-600">
+            <button type="submit" class="btn-pop rounded-lg bg-teal-600 px-6 py-2.5 text-sm font-bold text-white shadow-xs transition hover:bg-teal-700">
                 Filter
             </button>
 
-            <div class="flex flex-wrap gap-x-6 gap-y-2 sm:col-span-4">
-                <label class="flex items-center gap-2 text-sm font-medium">
-                    <input type="checkbox" name="kenyaFriendly" value="true" @checked($kenyaFriendly) class="h-4 w-4 accent-emerald-600">
-                    Show only Kenya-Friendly Matches <x-icon.kenya-flag class="h-4 w-4" />
+            <div class="flex flex-wrap gap-x-6 gap-y-2 sm:col-span-4 pt-1">
+                <label class="flex items-center gap-2 text-xs font-semibold text-slate-700 cursor-pointer">
+                    <input type="checkbox" name="kenyaFriendly" value="true" @checked($kenyaFriendly) class="h-4 w-4 rounded border-slate-300 text-teal-600 focus:ring-teal-500">
+                    <span>Show only Kenya-Friendly Matches</span>
+                    <x-icon.kenya-flag class="h-3.5 w-3.5" />
                 </label>
-                <label class="flex items-center gap-2 text-sm font-medium">
-                    <input type="checkbox" name="freeOnly" value="true" @checked($freeOnly) class="h-4 w-4 accent-horizon-600">
-                    Direct employer listings only <x-icon name="announce" class="h-4 w-4" />
+                <label class="flex items-center gap-2 text-xs font-semibold text-slate-700 cursor-pointer">
+                    <input type="checkbox" name="freeOnly" value="true" @checked($freeOnly) class="h-4 w-4 rounded border-slate-300 text-teal-600 focus:ring-teal-500">
+                    <span>Direct employer listings only</span>
+                    <x-icon name="announce" class="h-3.5 w-3.5 text-emerald-600" />
                 </label>
             </div>
         </form>
 
         @if ($jobs->isEmpty())
-            <p class="mt-10 rounded-xl bg-horizon-50 p-8 text-center text-foreground/60">
+            <p class="mt-10 rounded-xl border border-slate-200 bg-white p-8 text-center text-slate-500">
                 No jobs match those filters yet. Try widening your search.
             </p>
         @else
@@ -126,21 +128,21 @@
         @endif
 
         @if ($totalPages > 1)
-            <div class="mt-10 flex flex-wrap items-center justify-center gap-2">
+            <div class="mt-10 flex flex-wrap items-center justify-center gap-1.5">
                 @if ($page > 1)
-                    <a href="{{ $buildPageHref($page - 1) }}" class="rounded-full px-3.5 py-1.5 text-sm font-medium text-foreground/70 hover:bg-horizon-50" aria-label="Previous page">
+                    <a href="{{ $buildPageHref($page - 1) }}" class="rounded-lg border border-slate-200 bg-white px-3.5 py-1.5 text-sm font-semibold text-slate-700 shadow-xs hover:bg-slate-50 hover:border-teal-500 hover:text-teal-700" aria-label="Previous page">
                         &larr; Prev
                     </a>
                 @endif
 
                 @foreach ($pageItems as $item)
                     @if ($item === '…')
-                        <span class="px-1.5 text-sm text-foreground/40" aria-hidden="true">&hellip;</span>
+                        <span class="px-2 text-sm text-slate-400" aria-hidden="true">&hellip;</span>
                     @else
                         <a
                             href="{{ $buildPageHref($item) }}"
                             @if ($item === $page) aria-current="page" @endif
-                            class="rounded-full px-3.5 py-1.5 text-sm font-medium {{ $item === $page ? 'bg-sunrise-500 text-white' : 'bg-white text-foreground/70 hover:bg-horizon-50' }}"
+                            class="rounded-lg px-3.5 py-1.5 text-sm font-bold {{ $item === $page ? 'bg-teal-600 text-white shadow-xs' : 'border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 hover:border-teal-500 hover:text-teal-700' }}"
                         >
                             {{ $item }}
                         </a>
@@ -148,7 +150,7 @@
                 @endforeach
 
                 @if ($page < $totalPages)
-                    <a href="{{ $buildPageHref($page + 1) }}" class="rounded-full px-3.5 py-1.5 text-sm font-medium text-foreground/70 hover:bg-horizon-50" aria-label="Next page">
+                    <a href="{{ $buildPageHref($page + 1) }}" class="rounded-lg border border-slate-200 bg-white px-3.5 py-1.5 text-sm font-semibold text-slate-700 shadow-xs hover:bg-slate-50 hover:border-teal-500 hover:text-teal-700" aria-label="Next page">
                         Next &rarr;
                     </a>
                 @endif

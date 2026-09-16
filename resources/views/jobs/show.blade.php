@@ -14,56 +14,56 @@
     <script type="application/ld+json">{!! \App\Support\Seo::breadcrumbJsonLd($job) !!}</script>
 
     <div class="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-        <a href="{{ url('/jobs') }}" class="text-sm text-foreground/50 hover:underline">&larr; Back to all jobs</a>
+        <a href="{{ url('/jobs') }}" class="text-sm font-semibold text-teal-700 hover:underline">&larr; Back to all jobs</a>
 
         <x-reveal>
             <div class="mt-4 flex items-start gap-4">
                 <x-company-logo :company="$job->company" :size="64" />
                 <div class="min-w-0 flex-1">
-                    <h1 class="text-2xl font-bold sm:text-3xl text-foreground">{{ $job->title }}</h1>
-                    <p class="mt-1 text-base font-medium text-foreground/70">{{ $job->company }}</p>
+                    <h1 class="text-2xl font-extrabold sm:text-3xl text-slate-900">{{ $job->title }}</h1>
+                    <p class="mt-1 text-base font-medium text-slate-500">{{ $job->company }}</p>
                 </div>
             </div>
 
             <div class="mt-4 flex flex-wrap items-center gap-2">
                 @if ($isEarlyAccess)
-                    <span class="inline-flex items-center gap-1 rounded-full bg-amber-100 border border-amber-200 px-3 py-1 text-xs font-semibold text-amber-900">
+                    <span class="inline-flex items-center gap-1 rounded-md bg-amber-50 border border-amber-200 px-3 py-1 text-xs font-semibold text-amber-900">
                         <x-icon name="sparkle" class="h-3.5 w-3.5 text-amber-600" /> Early Access ({{ $job->earlyAccessHoursRemaining() }}h left)
                     </span>
                 @else
-                    <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
-                        <x-icon name="check" class="h-3.5 w-3.5 text-emerald-600" /> Open to Apply
+                    <span class="inline-flex items-center gap-1 rounded-md bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">
+                        <x-icon name="check" class="h-3.5 w-3.5 text-teal-600" /> Open to Apply
                     </span>
                 @endif
                 @if (is_int($matchPercent))
-                    <span class="inline-flex items-center gap-1 rounded-full bg-horizon-600 px-3 py-1 text-xs font-semibold text-white">
-                        <x-icon name="sparkle" class="h-3.5 w-3.5" /> {{ $matchPercent }}% match for you
+                    <span class="inline-flex items-center gap-1 rounded-md bg-teal-50 border border-teal-200 px-3 py-1 text-xs font-bold text-teal-800">
+                        <x-icon name="sparkle" class="h-3.5 w-3.5 text-teal-600" /> {{ $matchPercent }}% match for you
                     </span>
                 @endif
                 @if ($kesMonthly)
-                    <span class="inline-flex items-center gap-1 rounded-full bg-emerald-100 border border-emerald-300 px-3 py-1 text-xs font-bold text-emerald-950" title="Estimated monthly take-home in Kenyan Shillings (~130 KES/USD)">
+                    <span class="inline-flex items-center gap-1 rounded-md bg-emerald-50 border border-emerald-200 px-3 py-1 text-xs font-bold text-emerald-950" title="Estimated monthly take-home in Kenyan Shillings (~130 KES/USD)">
                         <x-icon name="coin" class="h-3.5 w-3.5 text-emerald-700" /> {{ $kesMonthly }}
                     </span>
                 @endif
                 @if ($hourly)
-                    <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-800" title="Estimated from stated salary ÷ 2,080 hours/year">
-                        <x-icon name="coin" class="h-3.5 w-3.5" /> ~${{ $hourly['min'] }}-{{ $hourly['max'] }}/hr
+                    <span class="inline-flex items-center gap-1 rounded-md bg-emerald-50 border border-emerald-200 px-3 py-1 text-xs font-semibold text-emerald-800" title="Estimated from stated salary ÷ 2,080 hours/year">
+                        <x-icon name="coin" class="h-3.5 w-3.5 text-emerald-700" /> ~${{ $hourly['min'] }}-{{ $hourly['max'] }}/hr
                     </span>
                 @endif
                 @if ($job->kenya_friendly)
                     <x-kenya-badge />
                 @endif
                 @if ($job->origin === 'employer')
-                    <span class="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800">
-                        <x-icon name="announce" class="h-3.5 w-3.5" /> Direct employer listing
+                    <span class="inline-flex items-center gap-1 rounded-md bg-emerald-50 border border-emerald-200 px-3 py-1 text-xs font-bold text-emerald-800">
+                        <x-icon name="announce" class="h-3.5 w-3.5 text-emerald-700" /> Direct employer listing
                     </span>
                 @endif
-                <span class="text-sm text-foreground/50">{{ $job->remote_type }}</span>
-                <span class="text-sm text-foreground/50">&middot; {{ $job->location }}</span>
+                <span class="text-sm font-medium text-slate-500">{{ $job->remote_type }}</span>
+                <span class="text-sm font-medium text-slate-500">&middot; {{ $job->location }}</span>
                 @if ($job->salary)
-                    <span class="text-sm text-foreground/50">&middot; {{ $job->salary }}</span>
+                    <span class="text-sm font-medium text-slate-500">&middot; {{ $job->salary }}</span>
                 @endif
-                <span class="text-sm text-foreground/50">&middot; Posted {{ \App\Support\Format::timeAgo($job->posted_at) }}</span>
+                <span class="text-sm font-medium text-slate-400">&middot; Posted {{ \App\Support\Format::timeAgo($job->posted_at) }}</span>
             </div>
 
             <div class="mt-4 flex flex-wrap gap-1.5">
@@ -75,22 +75,22 @@
             @if (! empty($job->audience_segments))
                 <div class="mt-3 flex flex-wrap gap-1.5">
                     @foreach ($job->audience_segments as $segment)
-                        <a href="{{ url('/jobs') }}?audience={{ $segment }}" class="inline-flex items-center gap-1 rounded-full bg-indigo-100 px-2.5 py-1 text-xs font-semibold text-indigo-800 transition hover:bg-indigo-200">
-                            <x-icon :name="\App\Support\Audience::ICONS[$segment] ?? 'globe'" class="h-3.5 w-3.5" /> {{ \App\Support\Audience::LABELS[$segment] ?? $segment }}
+                        <a href="{{ url('/jobs') }}?audience={{ $segment }}" class="inline-flex items-center gap-1 rounded-md bg-slate-100 border border-slate-200 px-2.5 py-1 text-xs font-semibold text-slate-700 transition hover:bg-slate-200">
+                            <x-icon :name="\App\Support\Audience::ICONS[$segment] ?? 'globe'" class="h-3.5 w-3.5 text-teal-600" /> {{ \App\Support\Audience::LABELS[$segment] ?? $segment }}
                         </a>
                     @endforeach
                 </div>
             @endif
 
             {{-- Smart Career Tools Bar: AI CV Tailoring & Application Tracker --}}
-            <div class="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-horizon-200 bg-gradient-to-r from-horizon-50/70 via-white to-amber-50/50 p-4 shadow-xs">
+            <div class="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 bg-slate-50/70 p-4 shadow-xs">
                 <div class="flex items-center gap-3">
-                    <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-horizon-100 text-horizon-700">
+                    <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-teal-50 text-teal-700 border border-teal-100">
                         <x-icon name="sparkle" class="h-5 w-5" />
                     </div>
                     <div>
-                        <p class="text-xs font-bold uppercase tracking-wider text-horizon-800">AI Application Copilot</p>
-                        <p class="text-xs text-foreground/60">Generate role-tailored resume bullets & cover letter to pass ATS</p>
+                        <p class="text-xs font-bold uppercase tracking-wider text-slate-900">AI Application Copilot</p>
+                        <p class="text-xs text-slate-500">Generate role-tailored resume bullets & cover letter to pass ATS</p>
                     </div>
                 </div>
                 <div class="flex flex-wrap items-center gap-2">
@@ -104,32 +104,32 @@
             </div>
 
             {{-- Full Unredacted Role Description --}}
-            <div class="mt-6 rounded-2xl border border-black/5 bg-white p-6 shadow-sm">
-                <h2 class="mb-3 font-semibold text-foreground">About this role at {{ $job->company }}</h2>
+            <div class="mt-6 rounded-xl border border-slate-200 bg-white p-6 shadow-xs">
+                <h2 class="mb-3 font-bold text-slate-900 text-lg">About this role at {{ $job->company }}</h2>
                 @if (\App\Support\Language::looksNonEnglish($plainDescription))
                     <livewire:translate-toggle :text="$plainDescription" :blocks="$descriptionBlocks" />
                 @elseif ($descriptionBlocks)
                     <x-description-blocks :blocks="$descriptionBlocks" />
                 @else
-                    <div class="whitespace-pre-line text-sm leading-relaxed text-foreground/80">{!! nl2br(e($plainDescription)) !!}</div>
+                    <div class="whitespace-pre-line text-sm leading-relaxed text-slate-700">{!! nl2br(e($plainDescription)) !!}</div>
                 @endif
             </div>
 
             {{-- Application Section --}}
             <div class="mt-8">
                 @if ($canApply)
-                    <div class="rounded-3xl border border-emerald-200 bg-gradient-to-br from-emerald-50/60 to-white p-6 sm:p-8 text-center shadow-md">
+                    <div class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 text-center shadow-md">
                         @if ($job->origin === 'employer')
-                            <p class="mb-3 inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800">
+                            <p class="mb-3 inline-flex items-center gap-1.5 rounded-md bg-emerald-50 border border-emerald-200 px-3 py-1 text-xs font-bold text-emerald-800">
                                 🇰🇪 Verified Direct Employer &middot; Pro Access Active
                             </p>
                         @elseif ($isEarlyAccess)
-                            <p class="mb-3 inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800">
+                            <p class="mb-3 inline-flex items-center gap-1.5 rounded-md bg-emerald-50 border border-emerald-200 px-3 py-1 text-xs font-bold text-emerald-800">
                                 <x-icon name="check" class="h-4 w-4 text-emerald-600" /> Pro Member Early Access Active
                             </p>
                         @endif
-                        <h3 class="text-xl font-bold text-foreground">Ready to submit your application?</h3>
-                        <p class="mt-1 text-sm text-foreground/60 max-w-md mx-auto">
+                        <h3 class="text-xl font-extrabold text-slate-900">Ready to submit your application?</h3>
+                        <p class="mt-1 text-sm text-slate-500 max-w-md mx-auto">
                             Apply directly through {{ $job->company }}'s official recruitment portal.
                         </p>
                         <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -137,95 +137,95 @@
                                 href="{{ $job->source_url }}"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="btn-pop inline-flex items-center justify-center gap-2 rounded-full gradient-sunrise px-8 py-3.5 text-center font-bold text-white shadow-lg transition hover:opacity-95 hover:scale-[1.02]"
+                                class="btn-pop inline-flex items-center justify-center gap-2 rounded-lg bg-teal-600 px-8 py-3.5 text-center font-bold text-white shadow-xs transition hover:bg-teal-700"
                             >
                                 Apply Directly at {{ $job->company }} &#8599;
                             </a>
                             <livewire:track-application-button :job-id="$job->id" />
                         </div>
-                        <p class="mt-4 text-xs text-foreground/40">
+                        <p class="mt-4 text-xs text-slate-400">
                             Verified for remote applicants in Kenya &middot; Remember to tailor your CV with our AI Copilot before submitting!
                         </p>
                     </div>
                 @elseif ($job->origin === 'employer')
                     {{-- Direct Employer Listing Seeking Kenyan Talent (Pro Exclusive) --}}
-                    <div class="rounded-3xl border-2 border-emerald-300 bg-gradient-to-br from-emerald-50 via-white to-teal-50 p-6 sm:p-8 text-center shadow-lg">
-                        <div class="inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-1 text-xs font-bold uppercase tracking-wider text-emerald-900 mb-3">
+                    <div class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 text-center shadow-lg">
+                        <div class="inline-flex items-center gap-2 rounded-md bg-emerald-50 border border-emerald-200 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-emerald-900 mb-3">
                             🇰🇪 Verified Employer Actively Seeking Kenyan Talent &middot; Full Access with Pro
                         </div>
-                        <h3 class="text-xl sm:text-2xl font-bold text-foreground">
+                        <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900">
                             {{ $job->company }} is Exclusively Hiring in Kenya
                         </h3>
-                        <p class="mt-2 text-sm text-foreground/70 max-w-lg mx-auto">
-                            {{ $job->company }} is specifically recruiting Kenyan talent. <strong class="text-foreground">Pro Early Access gives you full access to apply to all direct employer and remote listings</strong> across the site.
+                        <p class="mt-2 text-sm text-slate-600 max-w-lg mx-auto">
+                            {{ $job->company }} is specifically recruiting Kenyan talent. <strong class="text-slate-900">Pro Early Access gives you full access to apply to all direct employer and remote listings</strong> across the site.
                         </p>
 
-                        <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-lg mx-auto text-left text-xs font-medium text-foreground/80">
-                            <div class="rounded-xl bg-white/90 p-3 border border-emerald-100 shadow-xs">
-                                <p class="font-bold text-emerald-900">🇰🇪 No Visa Hurdles</p>
-                                <p class="text-foreground/60 mt-0.5">Employer is already set up to hire Kenyan remote contractors.</p>
+                        <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-lg mx-auto text-left text-xs font-medium text-slate-700">
+                            <div class="rounded-xl bg-slate-50 p-3.5 border border-slate-200 shadow-xs">
+                                <p class="font-bold text-slate-900">🇰🇪 No Visa Hurdles</p>
+                                <p class="text-slate-500 mt-0.5">Employer is already set up to hire Kenyan remote contractors.</p>
                             </div>
-                            <div class="rounded-xl bg-white/90 p-3 border border-emerald-100 shadow-xs">
-                                <p class="font-bold text-emerald-900">🎯 Direct Hiring Manager</p>
-                                <p class="text-foreground/60 mt-0.5">Your application is delivered directly to their hiring inbox.</p>
+                            <div class="rounded-xl bg-slate-50 p-3.5 border border-slate-200 shadow-xs">
+                                <p class="font-bold text-slate-900">🎯 Direct Hiring Manager</p>
+                                <p class="text-slate-500 mt-0.5">Your application is delivered directly to their hiring inbox.</p>
                             </div>
-                            <div class="rounded-xl bg-white/90 p-3 border border-emerald-100 shadow-xs">
-                                <p class="font-bold text-emerald-900">✨ AI CV Copilot</p>
-                                <p class="text-foreground/60 mt-0.5">Tailor your CV for {{ $job->company }} in 1 click.</p>
+                            <div class="rounded-xl bg-slate-50 p-3.5 border border-slate-200 shadow-xs">
+                                <p class="font-bold text-slate-900">✨ AI CV Copilot</p>
+                                <p class="text-slate-500 mt-0.5">Tailor your CV for {{ $job->company }} in 1 click.</p>
                             </div>
                         </div>
 
                         <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
                             <a
                                 href="{{ url('/pricing') }}"
-                                class="btn-pop w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-horizon-800 px-8 py-3.5 text-sm font-bold text-white shadow-md hover:bg-horizon-900 transition"
+                                class="btn-pop w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-teal-600 px-8 py-3.5 text-sm font-bold text-white shadow-xs hover:bg-teal-700 transition"
                             >
                                 Get Full Access to All Jobs (KES 1,499/mo)
                             </a>
                             <livewire:ai-tailor-modal :job-id="$job->id" />
                         </div>
-                        <p class="mt-3 text-xs text-foreground/50">
+                        <p class="mt-3 text-xs text-slate-400">
                             Instant M-Pesa STK push &middot; Cancel anytime
                         </p>
                     </div>
                 @else
                     {{-- 48-Hour Early Access High-Converting Box --}}
-                    <div class="rounded-3xl border-2 border-amber-200 bg-gradient-to-br from-amber-50 via-white to-orange-50 p-6 sm:p-8 text-center shadow-lg">
-                        <div class="inline-flex items-center gap-2 rounded-full bg-amber-100 px-4 py-1 text-xs font-bold uppercase tracking-wider text-amber-900 mb-3">
+                    <div class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 text-center shadow-lg">
+                        <div class="inline-flex items-center gap-2 rounded-md bg-amber-50 border border-amber-200 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-amber-900 mb-3">
                             <x-icon name="sparkle" class="h-4 w-4 text-amber-600" /> Early Access &middot; Full Access to All 800+ Jobs
                         </div>
-                        <h3 class="text-xl sm:text-2xl font-bold text-foreground">
+                        <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900">
                             Beat 500+ Applicants to {{ $job->company }}
                         </h3>
-                        <p class="mt-2 text-sm text-foreground/70 max-w-lg mx-auto">
-                            This role was published {{ \App\Support\Format::timeAgo($job->posted_at) }}. <strong class="text-foreground">Early Access gives you full access to apply to all 800+ jobs immediately</strong> &mdash; public access opens in <span class="font-bold text-amber-900">{{ $job->earlyAccessHoursRemaining() }} hours</span>.
+                        <p class="mt-2 text-sm text-slate-600 max-w-lg mx-auto">
+                            This role was published {{ \App\Support\Format::timeAgo($job->posted_at) }}. <strong class="text-slate-900">Early Access gives you full access to apply to all 800+ jobs immediately</strong> &mdash; public access opens in <span class="font-bold text-amber-900">{{ $job->earlyAccessHoursRemaining() }} hours</span>.
                         </p>
 
-                        <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-lg mx-auto text-left text-xs font-medium text-foreground/80">
-                            <div class="rounded-xl bg-white/90 p-3 border border-amber-100 shadow-xs">
-                                <p class="font-bold text-amber-900">⚡ Top of Recruiter Inbox</p>
-                                <p class="text-foreground/60 mt-0.5">First 20 applicants receive 80% of recruiter interviews.</p>
+                        <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-lg mx-auto text-left text-xs font-medium text-slate-700">
+                            <div class="rounded-xl bg-slate-50 p-3.5 border border-slate-200 shadow-xs">
+                                <p class="font-bold text-slate-900">⚡ Top of Recruiter Inbox</p>
+                                <p class="text-slate-500 mt-0.5">First 20 applicants receive 80% of recruiter interviews.</p>
                             </div>
-                            <div class="rounded-xl bg-white/90 p-3 border border-amber-100 shadow-xs">
-                                <p class="font-bold text-amber-900">🎯 AI ATS Match Tailoring</p>
-                                <p class="text-foreground/60 mt-0.5">Instant role-targeted bullets & cover letters.</p>
+                            <div class="rounded-xl bg-slate-50 p-3.5 border border-slate-200 shadow-xs">
+                                <p class="font-bold text-slate-900">🎯 AI ATS Match Tailoring</p>
+                                <p class="text-slate-500 mt-0.5">Instant role-targeted bullets & cover letters.</p>
                             </div>
-                            <div class="rounded-xl bg-white/90 p-3 border border-amber-100 shadow-xs">
-                                <p class="font-bold text-amber-900">💼 Remote Contractor Toolkit</p>
-                                <p class="text-foreground/60 mt-0.5">USD invoices, W-8BEN guide & CRM pipeline.</p>
+                            <div class="rounded-xl bg-slate-50 p-3.5 border border-slate-200 shadow-xs">
+                                <p class="font-bold text-slate-900">💼 Remote Contractor Toolkit</p>
+                                <p class="text-slate-500 mt-0.5">USD invoices, W-8BEN guide & CRM pipeline.</p>
                             </div>
                         </div>
 
                         <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
                             <a
                                 href="{{ url('/pricing') }}"
-                                class="btn-pop w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-horizon-800 px-8 py-3.5 text-sm font-bold text-white shadow-md hover:bg-horizon-900 transition"
+                                class="btn-pop w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-teal-600 px-8 py-3.5 text-sm font-bold text-white shadow-xs hover:bg-teal-700 transition"
                             >
                                 Get Full Access to All Jobs (KES 1,499/mo)
                             </a>
                             <livewire:ai-tailor-modal :job-id="$job->id" />
                         </div>
-                        <p class="mt-3 text-xs text-foreground/50">
+                        <p class="mt-3 text-xs text-slate-400">
                             Instant M-Pesa STK push &middot; Cancel anytime &middot; Public apply opens in {{ $job->earlyAccessHoursRemaining() }} hours
                         </p>
                     </div>
@@ -234,13 +234,13 @@
         </x-reveal>
 
         @if (isset($relatedJobs) && $relatedJobs->isNotEmpty())
-            <section class="mt-14 border-t border-black/5 pt-10">
+            <section class="mt-14 border-t border-slate-200 pt-10">
                 <div class="flex items-center justify-between">
                     <div>
-                        <h2 class="text-xl font-bold text-foreground">Related Remote Jobs Open to Kenya</h2>
-                        <p class="text-xs text-foreground/50 mt-0.5">Explore similar international remote opportunities</p>
+                        <h2 class="text-xl font-extrabold text-slate-900">Related Remote Jobs Open to Kenya</h2>
+                        <p class="text-xs text-slate-500 mt-0.5">Explore similar international remote opportunities</p>
                     </div>
-                    <a href="{{ url('/jobs') }}" class="text-xs font-semibold text-sunrise-600 hover:underline">
+                    <a href="{{ url('/jobs') }}" class="text-xs font-bold text-teal-700 hover:underline">
                         See all jobs &rarr;
                     </a>
                 </div>
