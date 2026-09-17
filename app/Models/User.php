@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password', 'subscribed', 'subscribed_at', 'marketing_opt_out_at', 'free_tailors_remaining'])]
+#[Fillable(['name', 'email', 'password', 'subscribed', 'subscribed_at', 'marketing_opt_out_at', 'last_job_digest_at', 'free_tailors_remaining'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -31,8 +31,23 @@ class User extends Authenticatable
             'subscribed' => 'boolean',
             'subscribed_at' => 'datetime',
             'marketing_opt_out_at' => 'datetime',
+            'last_job_digest_at' => 'datetime',
             'free_tailors_remaining' => 'integer',
         ];
+    }
+
+    public function firstName(): string
+    {
+        $name = trim($this->name ?? '');
+        if ($name !== '') {
+            $parts = preg_split('/\s+/', $name);
+
+            return $parts[0] ?? $name;
+        }
+
+        $emailParts = explode('@', (string) $this->email);
+
+        return ucwords(str_replace(['.', '_', '-'], ' ', $emailParts[0] ?? 'there'));
     }
 
     public function receivesMarketingEmail(): bool

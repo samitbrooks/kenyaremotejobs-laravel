@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\WelcomeEmail;
 use App\Models\User;
 use App\Services\CreditsService;
+use App\Services\JobRecommendationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -85,6 +86,12 @@ class AccountController extends Controller
                 Mail::to($user)->send(new WelcomeEmail($user));
             } catch (\Throwable $e) {
                 Log::warning('Welcome email failed to send: '.$e->getMessage(), ['user_id' => $user->id]);
+            }
+
+            try {
+                app(JobRecommendationService::class)->sendDigestToUser($user);
+            } catch (\Throwable $e) {
+                Log::warning('Initial job matches digest failed to send: '.$e->getMessage(), ['user_id' => $user->id]);
             }
         }
 

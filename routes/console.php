@@ -13,3 +13,11 @@ Artisan::command('inspire', function () {
 // natively, so a real scheduled task is a better fit than a workaround built
 // to avoid needing one.
 Schedule::command('jobs:sync')->everySixHours()->onOneServer()->withoutOverlapping();
+
+// Automatically sends personalized job matches digest to registered users twice a week
+// (Tuesdays & Fridays at 8:00 AM East Africa Time / 05:00 UTC)
+Schedule::command('jobs:send-digest')
+    ->days([2, 5])
+    ->at('05:00')
+    ->onOneServer()
+    ->withoutOverlapping();

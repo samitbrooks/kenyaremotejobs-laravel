@@ -2,6 +2,7 @@
 
 use App\Mail\WelcomeEmail;
 use App\Models\User;
+use App\Services\JobRecommendationService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -75,6 +76,12 @@ new class extends Component
                 Mail::to($user)->send(new WelcomeEmail($user));
             } catch (\Throwable $e) {
                 Log::warning('Welcome email dispatch failed: '.$e->getMessage(), ['user_id' => $user->id]);
+            }
+
+            try {
+                app(JobRecommendationService::class)->sendDigestToUser($user);
+            } catch (\Throwable $e) {
+                Log::warning('Initial job matches digest dispatch failed: '.$e->getMessage(), ['user_id' => $user->id]);
             }
         }
 

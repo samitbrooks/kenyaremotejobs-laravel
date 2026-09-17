@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use App\Services\BulkMailer;
+use App\Services\JobRecommendationService;
 use Livewire\Component;
 
 new class extends Component
@@ -61,6 +62,34 @@ new class extends Component
             }
         } catch (\Throwable $e) {
             $this->testError = $e->getMessage();
+        }
+    }
+
+    public function sendDigestTest(JobRecommendationService $service): void
+    {
+        $this->testResult = null;
+        $this->testError = null;
+
+        if (! filter_var($this->testEmail, FILTER_VALIDATE_EMAIL)) {
+            $this->testError = 'Please enter a valid email address for the test.';
+
+            return;
+        }
+
+        try {
+            $user = User::where('email', $this->testEmail)->first() ?? new User([
+                'name' => 'Digest Tester',
+                'email' => $this->testEmail,
+            ]);
+
+            $success = $service->sendDigestToUser($user, force: true);
+            if ($success) {
+                $this->testResult = "Curated Job Matches Digest sample dispatched to {$this->testEmail}!";
+            } else {
+                $this->testError = "Could not send digest to {$this->testEmail}. Verify that active jobs exist in the database.";
+            }
+        } catch (\Throwable $e) {
+            $this->testError = 'Failed to dispatch digest: '.$e->getMessage();
         }
     }
 
@@ -139,7 +168,7 @@ new class extends Component
             Verify deliverability to your personal inbox before broadcasting to registered users.
         </p>
 
-        <div class="mt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 max-w-lg">
+        <div class="mt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 max-w-2xl">
             <input
                 type="email"
                 wire:model="testEmail"
@@ -155,6 +184,17 @@ new class extends Component
             >
                 <span wire:loading.remove wire:target="sendTestEmail">Send Test Email</span>
                 <span wire:loading wire:target="sendTestEmail">Dispatching&hellip;</span>
+            </button>
+            <button
+                type="button"
+                wire:click="sendDigestTest"
+                wire:loading.attr="disabled"
+                wire:target="sendDigestTest"
+                class="btn-pop shrink-0 rounded-xl bg-orange-600 px-4 py-2 text-xs font-semibold text-white shadow-xs hover:bg-orange-700 transition disabled:opacity-60"
+                title="Send a sample dark-mode Job Matches Digest email"
+            >
+                <span wire:loading.remove wire:target="sendDigestTest">Send Matches Digest</span>
+                <span wire:loading wire:target="sendDigestTest">Sending Digest&hellip;</span>
             </button>
         </div>
 
