@@ -39,6 +39,7 @@ git pull origin main
 echo "-> Syncing public build assets to public_html..."
 cp -r public/build /home/kenyarem/public_html/
 cp -r public/images /home/kenyarem/public_html/ 2>/dev/null || true
+cp -f public/favicon.ico /home/kenyarem/public_html/favicon.ico 2>/dev/null || true
 
 echo "-> Running database migrations & seeders..."
 php artisan migrate --force

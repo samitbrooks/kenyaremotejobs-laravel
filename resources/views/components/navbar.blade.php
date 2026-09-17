@@ -10,11 +10,19 @@
     class="sticky top-0 z-40 bg-white/90 border-b border-slate-200/70 text-slate-800 shadow-2xs backdrop-blur-md"
 >
     <div class="relative mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        <a href="{{ url('/') }}" class="shrink-0 text-xl font-bold tracking-tight text-slate-900 flex items-center gap-2">
-            <span class="flex h-9 w-9 items-center justify-center rounded-2xl bg-gradient-to-tr from-teal-600 to-teal-500 text-white font-black text-base shadow-sm">
-                K
-            </span>
-            <span>Kenya<span class="text-teal-600 font-extrabold">Remote</span>Jobs</span>
+        <a href="{{ url('/') }}" class="shrink-0 flex items-center group transition-transform duration-150 active:scale-95" aria-label="KenyaRemoteJobs Home">
+            <picture>
+                <source srcset="{{ asset('images/logo.webp') }}" type="image/webp">
+                <img
+                    src="{{ asset('images/logo.png') }}"
+                    alt="KenyaRemoteJobs"
+                    class="h-9 sm:h-10 w-auto object-contain"
+                    width="152"
+                    height="40"
+                    loading="eager"
+                    decoding="async"
+                />
+            </picture>
         </a>
 
         <div class="flex flex-1 items-center justify-end gap-4">
@@ -117,7 +125,7 @@
                     <a href="{{ url('/admin') }}" class="text-xs font-bold text-teal-700 hover:underline">Admin</a>
                 @endif
 
-                <a href="{{ url('/account') }}" class="btn-pop rounded-full bg-gradient-to-r from-teal-600 to-teal-700 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:shadow-md hover:shadow-teal-600/20 transition hover:from-teal-700 hover:to-teal-800">
+                <a href="{{ url('/account') }}" class="btn-pop rounded-full bg-gradient-to-r from-[#2e3760] to-[#ff3131] px-5 py-2 text-sm font-semibold text-white shadow-sm hover:shadow-md hover:shadow-[#ff3131]/20 transition hover:from-[#232b4b] hover:to-[#e11d27]">
                     @if ($user?->subscribed)
                         <span class="inline-flex items-center gap-1.5">My Account <x-icon name="star" class="h-3.5 w-3.5 text-amber-300" /></span>
                     @else

@@ -42,14 +42,14 @@
 <x-layouts.app :canonical="url('/')">
     <script type="application/ld+json">{!! \App\Support\Seo::faqJsonLd($faqs) !!}</script>
 
-    {{-- Hero — Remote.co aesthetic with unified floating pill search bar and spacious modern layout --}}
-    <section class="relative bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(13,148,136,0.12),rgba(255,255,255,0))] px-4 pt-14 pb-16 sm:px-6 sm:pt-20">
+    {{-- Hero — KenyaRemoteJobs brand aesthetic with unified floating pill search bar and spacious modern layout --}}
+    <section class="relative bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(255,49,49,0.08),rgba(46,55,96,0.05),rgba(255,255,255,0))] px-4 pt-14 pb-16 sm:px-6 sm:pt-20">
         <div class="relative mx-auto max-w-4xl text-center">
             <x-reveal>
-                <div class="inline-flex items-center gap-2 rounded-full bg-teal-50 border border-teal-200/80 px-4 py-1.5 text-xs font-bold text-teal-800 shadow-2xs">
+                <div class="inline-flex items-center gap-2 rounded-full bg-rose-50/80 border border-rose-200/70 px-4 py-1.5 text-xs font-bold text-[#be121c] shadow-2xs">
                     <span class="relative flex h-2 w-2">
-                        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal-400 opacity-75"></span>
-                        <span class="relative inline-flex h-2 w-2 rounded-full bg-teal-600"></span>
+                        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#ff3131] opacity-75"></span>
+                        <span class="relative inline-flex h-2 w-2 rounded-full bg-[#ff3131]"></span>
                     </span>
                     <span>Kenya's #1 Verified Remote Job Board</span>
                 </div>
@@ -57,7 +57,7 @@
                 <h1 class="mt-5 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-6xl sm:leading-[1.12]">
                     Remote jobs from employers
                     <br class="hidden sm:inline">
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 via-teal-700 to-emerald-600">who actually want Kenyan talent.</span>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#2e3760] via-[#ff3131] to-[#e11d27]">who actually want Kenyan talent.</span>
                 </h1>
 
                 <p class="mx-auto mt-5 max-w-2xl text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
@@ -67,7 +67,7 @@
 
             {{-- Remote.co signature unified floating pill search bar --}}
             <x-reveal :delay="80" class="relative z-10 mx-auto mt-10">
-                <div class="rounded-3xl sm:rounded-full border border-slate-200/80 bg-white p-2 sm:p-2.5 shadow-[0_8px_30px_rgba(15,23,42,0.06)] hover:shadow-[0_12px_40px_rgba(13,148,136,0.1)] transition-shadow">
+                <div class="rounded-3xl sm:rounded-full border border-slate-200/80 bg-white p-2 sm:p-2.5 shadow-[0_8px_30px_rgba(46,55,96,0.06)] hover:shadow-[0_12px_40px_rgba(255,49,49,0.12)] transition-shadow">
                     <form action="{{ url('/jobs') }}" method="GET" class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
                         {{-- Keyword input --}}
                         <div class="relative flex-1 flex items-center pl-4">
@@ -99,7 +99,7 @@
 
                         {{-- Kenya Friendly Toggle Pill --}}
                         <label class="flex items-center justify-center gap-2 rounded-full bg-slate-50 hover:bg-slate-100/80 border border-slate-200/70 py-2 px-3.5 text-xs font-semibold text-slate-700 cursor-pointer transition shrink-0">
-                            <input type="checkbox" name="kenyaFriendly" value="true" class="h-4 w-4 rounded-full border-slate-300 text-teal-600 focus:ring-teal-500">
+                            <input type="checkbox" name="kenyaFriendly" value="true" class="h-4 w-4 rounded-full border-slate-300 text-[#ff3131] focus:ring-[#ff3131]">
                             <span class="text-slate-700">Kenya-Friendly</span>
                             <x-icon.kenya-flag class="h-3.5 w-3.5 shrink-0" />
                         </label>
@@ -107,7 +107,7 @@
                         {{-- Search CTA button --}}
                         <button
                             type="submit"
-                            class="btn-pop rounded-full bg-teal-600 px-7 py-3 text-sm font-bold text-white shadow-md shadow-teal-600/20 hover:bg-teal-700 hover:shadow-lg transition-all shrink-0 text-center"
+                            class="btn-pop rounded-full bg-[#ff3131] px-7 py-3 text-sm font-bold text-white shadow-md shadow-[#ff3131]/25 hover:bg-[#e11d27] hover:shadow-lg transition-all shrink-0 text-center"
                         >
                             Find Jobs
                         </button>

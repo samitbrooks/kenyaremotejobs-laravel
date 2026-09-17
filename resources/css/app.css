@@ -5,37 +5,54 @@
 
 :root {
     --background: #ffffff;
-    --foreground: #0f172a;
+    --foreground: #181c33;
 
-    /* Remote.co Teal / Primary Brand Accents */
-    --color-sunrise-50: #f0fdfa;
-    --color-sunrise-100: #ccfbf1;
-    --color-sunrise-200: #99f6e4;
-    --color-sunrise-300: #5eead4;
-    --color-sunrise-400: #2dd4bf;
-    --color-sunrise-500: #0d9488;
-    --color-sunrise-600: #0f766e;
-    --color-sunrise-700: #115e59;
-    --color-sunrise-800: #134e4a;
-    --color-sunrise-900: #042f2e;
+    /* Brand Vibrant Coral-Red (#ff3131) Scale / Primary Brand Accents */
+    --color-sunrise-50: #fff1f2;
+    --color-sunrise-100: #ffe4e6;
+    --color-sunrise-200: #fecdd3;
+    --color-sunrise-300: #fda4af;
+    --color-sunrise-400: #fb7185;
+    --color-sunrise-500: #ff3131;
+    --color-sunrise-600: #e11d27;
+    --color-sunrise-700: #be121c;
+    --color-sunrise-800: #9f121a;
+    --color-sunrise-900: #881318;
 
-    /* Remote.co Clean Slate & Deep Navy Scale */
-    --color-horizon-50: #f8fafc;
-    --color-horizon-100: #f1f5f9;
-    --color-horizon-200: #e2e8f0;
-    --color-horizon-300: #cbd5e1;
-    --color-horizon-400: #94a3b8;
-    --color-horizon-500: #64748b;
-    --color-horizon-600: #0d9488;
-    --color-horizon-700: #0f766e;
-    --color-horizon-800: #1e293b;
-    --color-horizon-900: #0f172a;
+    /* Brand Deep Navy (#2e3760) Scale */
+    --color-horizon-50: #f5f6fa;
+    --color-horizon-100: #eaedf5;
+    --color-horizon-200: #d5dcee;
+    --color-horizon-300: #abb7dc;
+    --color-horizon-400: #788cc1;
+    --color-horizon-500: #4f66a3;
+    --color-horizon-600: #3b4d82;
+    --color-horizon-700: #2e3760;
+    --color-horizon-800: #222949;
+    --color-horizon-900: #181c33;
+    --color-horizon-950: #0e1120;
 }
 
 @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
     --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+    /* Brand direct aliases */
+    --color-brand-red: #ff3131;
+    --color-brand-navy: #2e3760;
+
+    /* Re-map teal utility tokens to brand coral-red so all buttons, pills, chips and borders harmonize */
+    --color-teal-50: var(--color-sunrise-50);
+    --color-teal-100: var(--color-sunrise-100);
+    --color-teal-200: var(--color-sunrise-200);
+    --color-teal-300: var(--color-sunrise-300);
+    --color-teal-400: var(--color-sunrise-400);
+    --color-teal-500: var(--color-sunrise-500);
+    --color-teal-600: var(--color-sunrise-600);
+    --color-teal-700: var(--color-sunrise-700);
+    --color-teal-800: var(--color-sunrise-800);
+    --color-teal-900: var(--color-sunrise-900);
 
     --color-sunrise-50: var(--color-sunrise-50);
     --color-sunrise-100: var(--color-sunrise-100);
@@ -58,6 +75,7 @@
     --color-horizon-700: var(--color-horizon-700);
     --color-horizon-800: var(--color-horizon-800);
     --color-horizon-900: var(--color-horizon-900);
+    --color-horizon-950: var(--color-horizon-950);
 }
 
 html {
@@ -73,7 +91,7 @@ body {
     display: none !important;
 }
 
-/* Desktop nav links — clean teal underline on hover */
+/* Desktop nav links — clean brand underline on hover */
 .nav-underline {
     position: relative;
 }
@@ -95,7 +113,7 @@ body {
     right: 0;
 }
 
-/* Shared card hover treatment — Remote.co crisp shadow + teal border */
+/* Shared card hover treatment — crisp shadow + brand red border */
 .card-hover {
     transition:
         transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
@@ -106,9 +124,9 @@ body {
 .card-hover:hover {
     transform: translateY(-2px);
     box-shadow:
-        0 10px 25px -5px rgba(15, 23, 42, 0.08),
-        0 8px 10px -6px rgba(15, 23, 42, 0.04);
-    border-color: #0d9488;
+        0 10px 25px -5px rgba(46, 55, 96, 0.1),
+        0 8px 10px -6px rgba(46, 55, 96, 0.05);
+    border-color: #ff3131;
 }
 
 @keyframes spin {
@@ -121,21 +139,21 @@ body {
     animation: spin 0.7s linear infinite;
 }
 
-/* Remote.co Teal gradient utilities */
+/* KenyaRemoteJobs Brand gradient utilities */
 .gradient-sunrise {
-    background-image: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+    background-image: linear-gradient(135deg, #2e3760 0%, #ff3131 100%);
 }
 
 .text-gradient-sunrise {
-    background-image: linear-gradient(100deg, #0d9488 0%, #0f766e 100%);
+    background-image: linear-gradient(100deg, #2e3760 0%, #ff3131 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
 }
 
-/* Animated variant — subtle teal drift */
+/* Animated variant — subtle coral drift */
 .gradient-sunrise-live {
-    background-image: linear-gradient(120deg, #0d9488 0%, #14b8a6 35%, #0f766e 70%, #0d9488 100%);
+    background-image: linear-gradient(120deg, #ff3131 0%, #ff5c5c 35%, #e11d27 70%, #2e3760 100%);
     background-size: 250% 250%;
     animation: gradient-pan 12s ease-in-out infinite;
 }
