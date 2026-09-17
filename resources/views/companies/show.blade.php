@@ -181,11 +181,9 @@
                     </div>
                 </div>
             @else
-                <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <div class="mt-6 space-y-3">
                     @foreach ($jobs as $job)
-                        <div class="h-full">
-                            <x-job-card :job="$job" :unlocked="true" />
-                        </div>
+                        <x-job-card :job="$job" :unlocked="true" />
                     @endforeach
                 </div>
             @endif

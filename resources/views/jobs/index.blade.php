@@ -64,34 +64,34 @@
             </p>
         @endif
 
-        <div class="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-3xl border border-amber-200/80 bg-gradient-to-r from-amber-50/90 via-orange-50/40 to-amber-50/90 p-5 sm:p-6 text-xs sm:text-sm text-slate-800 shadow-sm">
+        <div class="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-amber-200/70 bg-gradient-to-r from-amber-50/80 via-orange-50/30 to-amber-50/80 p-4 sm:p-5 text-xs sm:text-sm text-slate-800 shadow-2xs">
             <div class="flex items-center gap-3">
-                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-amber-500 text-white shadow-xs">
+                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-amber-500 text-white shadow-2xs">
                     <x-icon name="sparkle" class="h-4 w-4" />
                 </span>
                 <p class="leading-relaxed">
                     <strong class="font-bold text-slate-900">Pro Early Access:</strong> Full access to apply to all 800+ remote jobs immediately &mdash; no 48-hour wait on newly posted roles.
                 </p>
             </div>
-            <a href="{{ url('/pricing') }}" class="btn-pop inline-flex items-center gap-1.5 rounded-full bg-slate-900 px-5 py-2.5 text-xs font-bold text-white hover:bg-slate-800 transition shrink-0 shadow-sm">
+            <a href="{{ url('/pricing') }}" class="btn-pop inline-flex items-center gap-1.5 rounded-full bg-slate-900 px-5 py-2.5 text-xs font-bold text-white hover:bg-slate-800 transition shrink-0 shadow-2xs">
                 Unlock All Jobs &rarr;
             </a>
         </div>
 
-        <form action="{{ url('/jobs') }}" method="GET" class="mt-6 grid grid-cols-1 gap-3.5 rounded-3xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] sm:grid-cols-[2fr_1fr_1fr_auto] sm:items-center">
+        <form action="{{ url('/jobs') }}" method="GET" class="mt-6 grid grid-cols-1 gap-3 rounded-2xl border border-slate-200/70 bg-white p-4 sm:p-5 shadow-xs sm:grid-cols-[2fr_1fr_1fr_auto] sm:items-center">
             <div class="relative flex items-center">
                 <x-icon name="search" class="pointer-events-none absolute left-3.5 h-4 w-4 text-slate-400" />
-                <input type="text" name="q" value="{{ $q }}" placeholder="Search job titles, skills, companies…" class="w-full rounded-full border border-slate-200/90 bg-slate-50/60 pl-10 pr-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-teal-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500/20 transition">
+                <input type="text" name="q" value="{{ $q }}" placeholder="Search job titles, skills, companies…" class="w-full rounded-full border border-slate-200/80 bg-slate-50/50 pl-10 pr-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-teal-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500/20 transition">
             </div>
 
-            <select name="tag" class="rounded-full border border-slate-200/90 bg-slate-50/60 px-4 py-2.5 text-sm text-slate-700 focus:border-teal-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500/20 transition cursor-pointer">
+            <select name="tag" class="rounded-full border border-slate-200/80 bg-slate-50/50 px-4 py-2.5 text-sm text-slate-700 focus:border-teal-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500/20 transition cursor-pointer">
                 <option value="">All categories</option>
                 @foreach ($tags as $t)
                     <option value="{{ $t }}" @selected($tag === $t)>{{ $t }}</option>
                 @endforeach
             </select>
 
-            <select name="remoteType" class="rounded-full border border-slate-200/90 bg-slate-50/60 px-4 py-2.5 text-sm text-slate-700 focus:border-teal-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500/20 transition cursor-pointer">
+            <select name="remoteType" class="rounded-full border border-slate-200/80 bg-slate-50/50 px-4 py-2.5 text-sm text-slate-700 focus:border-teal-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500/20 transition cursor-pointer">
                 <option value="">Any remote type</option>
                 <option value="remote" @selected($remoteType === 'remote')>Remote</option>
                 <option value="full-time" @selected($remoteType === 'full-time')>Full-time</option>
@@ -102,13 +102,13 @@
                 Filter
             </button>
 
-            <div class="flex flex-wrap gap-2.5 sm:col-span-4 pt-1">
-                <label class="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-slate-50/80 px-4 py-1.5 text-xs font-semibold text-slate-700 hover:bg-teal-50 hover:border-teal-300 hover:text-teal-800 cursor-pointer transition shadow-2xs">
+            <div class="flex flex-wrap gap-2 sm:col-span-4 pt-1">
+                <label class="inline-flex items-center gap-2 rounded-full border border-slate-200/70 bg-slate-50/70 px-3.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-teal-50 hover:border-teal-300 hover:text-teal-800 cursor-pointer transition shadow-2xs">
                     <input type="checkbox" name="kenyaFriendly" value="true" @checked($kenyaFriendly) class="h-4 w-4 rounded-full border-slate-300 text-teal-600 focus:ring-teal-500">
                     <span>Show only Kenya-Friendly Matches</span>
                     <x-icon.kenya-flag class="h-3.5 w-3.5" />
                 </label>
-                <label class="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-slate-50/80 px-4 py-1.5 text-xs font-semibold text-slate-700 hover:bg-teal-50 hover:border-teal-300 hover:text-teal-800 cursor-pointer transition shadow-2xs">
+                <label class="inline-flex items-center gap-2 rounded-full border border-slate-200/70 bg-slate-50/70 px-3.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-teal-50 hover:border-teal-300 hover:text-teal-800 cursor-pointer transition shadow-2xs">
                     <input type="checkbox" name="freeOnly" value="true" @checked($freeOnly) class="h-4 w-4 rounded-full border-slate-300 text-teal-600 focus:ring-teal-500">
                     <span>Direct employer listings only</span>
                     <x-icon name="announce" class="h-3.5 w-3.5 text-emerald-600" />
@@ -117,13 +117,14 @@
         </form>
 
         @if ($jobs->isEmpty())
-            <p class="mt-10 rounded-3xl border border-slate-200/80 bg-white p-12 text-center text-slate-500 shadow-sm">
+            <p class="mt-8 rounded-2xl border border-slate-200/70 bg-white p-12 text-center text-slate-500 shadow-xs">
                 No jobs match those filters yet. Try widening your search.
             </p>
         @else
-            <div class="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {{-- Remote.co style streamlined vertical list feed --}}
+            <div class="mt-6 space-y-3">
                 @foreach ($jobs as $i => $job)
-                    <x-reveal :delay="min($i, 8) * 60" class="h-full">
+                    <x-reveal :delay="min($i, 8) * 40">
                         <x-job-card :job="$job" :unlocked="$isUnlocked($job)" :match-percent="$matchPercent($job)" />
                     </x-reveal>
                 @endforeach

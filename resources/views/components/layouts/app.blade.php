@@ -43,7 +43,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @livewireStyles
     </head>
-    <body class="min-h-full flex flex-col font-sans bg-slate-50 text-slate-900 antialiased">
+    <body class="min-h-full flex flex-col font-sans bg-white text-slate-900 antialiased">
         <div class="no-print">
             <x-navbar />
         </div>

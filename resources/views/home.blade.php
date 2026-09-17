@@ -43,7 +43,7 @@
     <script type="application/ld+json">{!! \App\Support\Seo::faqJsonLd($faqs) !!}</script>
 
     {{-- Hero — Remote.co aesthetic with unified floating pill search bar and spacious modern layout --}}
-    <section class="relative bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(13,148,136,0.12),rgba(255,255,255,0))] border-b border-slate-200/70 px-4 pt-14 pb-20 sm:px-6 sm:pt-20">
+    <section class="relative bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(13,148,136,0.12),rgba(255,255,255,0))] px-4 pt-14 pb-16 sm:px-6 sm:pt-20">
         <div class="relative mx-auto max-w-4xl text-center">
             <x-reveal>
                 <div class="inline-flex items-center gap-2 rounded-full bg-teal-50 border border-teal-200/80 px-4 py-1.5 text-xs font-bold text-teal-800 shadow-2xs">
@@ -67,7 +67,7 @@
 
             {{-- Remote.co signature unified floating pill search bar --}}
             <x-reveal :delay="80" class="relative z-10 mx-auto mt-10">
-                <div class="rounded-3xl sm:rounded-full border border-slate-200/90 bg-white p-2 sm:p-2.5 shadow-[0_12px_40px_rgba(15,23,42,0.08)] hover:shadow-[0_16px_48px_rgba(13,148,136,0.12)] transition-shadow">
+                <div class="rounded-3xl sm:rounded-full border border-slate-200/80 bg-white p-2 sm:p-2.5 shadow-[0_8px_30px_rgba(15,23,42,0.06)] hover:shadow-[0_12px_40px_rgba(13,148,136,0.1)] transition-shadow">
                     <form action="{{ url('/jobs') }}" method="GET" class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
                         {{-- Keyword input --}}
                         <div class="relative flex-1 flex items-center pl-4">
@@ -98,7 +98,7 @@
                         <div class="hidden sm:block h-7 w-px bg-slate-200/80"></div>
 
                         {{-- Kenya Friendly Toggle Pill --}}
-                        <label class="flex items-center justify-center gap-2 rounded-full bg-slate-50/90 hover:bg-slate-100 border border-slate-200/70 py-2 px-3.5 text-xs font-semibold text-slate-700 cursor-pointer transition shrink-0">
+                        <label class="flex items-center justify-center gap-2 rounded-full bg-slate-50 hover:bg-slate-100/80 border border-slate-200/70 py-2 px-3.5 text-xs font-semibold text-slate-700 cursor-pointer transition shrink-0">
                             <input type="checkbox" name="kenyaFriendly" value="true" class="h-4 w-4 rounded-full border-slate-300 text-teal-600 focus:ring-teal-500">
                             <span class="text-slate-700">Kenya-Friendly</span>
                             <x-icon.kenya-flag class="h-3.5 w-3.5 shrink-0" />
@@ -117,25 +117,25 @@
                 {{-- Popular search tags as soft floating pills --}}
                 <div class="mt-4 flex flex-wrap items-center justify-center gap-1.5 text-xs text-slate-500">
                     <span class="font-medium text-slate-400 mr-1">Trending:</span>
-                    <a href="{{ url('/jobs') }}?q=Customer+Support" class="rounded-full bg-white/80 border border-slate-200/80 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-white transition shadow-2xs">Customer Support</a>
-                    <a href="{{ url('/jobs') }}?q=Virtual+Assistant" class="rounded-full bg-white/80 border border-slate-200/80 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-white transition shadow-2xs">Virtual Assistant</a>
-                    <a href="{{ url('/jobs') }}?q=Developer" class="rounded-full bg-white/80 border border-slate-200/80 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-white transition shadow-2xs">Software Engineer</a>
-                    <a href="{{ url('/jobs') }}?q=Data+Entry" class="rounded-full bg-white/80 border border-slate-200/80 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-white transition shadow-2xs">Data Entry</a>
-                    <a href="{{ url('/jobs') }}?q=Writing" class="rounded-full bg-white/80 border border-slate-200/80 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-white transition shadow-2xs">Writing & Content</a>
-                    <a href="{{ url('/jobs') }}?q=Marketing" class="rounded-full bg-white/80 border border-slate-200/80 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-white transition shadow-2xs">Marketing</a>
+                    <a href="{{ url('/jobs') }}?q=Customer+Support" class="rounded-full bg-white border border-slate-200/70 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50/30 transition shadow-2xs">Customer Support</a>
+                    <a href="{{ url('/jobs') }}?q=Virtual+Assistant" class="rounded-full bg-white border border-slate-200/70 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50/30 transition shadow-2xs">Virtual Assistant</a>
+                    <a href="{{ url('/jobs') }}?q=Developer" class="rounded-full bg-white border border-slate-200/70 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50/30 transition shadow-2xs">Software Engineer</a>
+                    <a href="{{ url('/jobs') }}?q=Data+Entry" class="rounded-full bg-white border border-slate-200/70 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50/30 transition shadow-2xs">Data Entry</a>
+                    <a href="{{ url('/jobs') }}?q=Writing" class="rounded-full bg-white border border-slate-200/70 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50/30 transition shadow-2xs">Writing & Content</a>
+                    <a href="{{ url('/jobs') }}?q=Marketing" class="rounded-full bg-white border border-slate-200/70 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50/30 transition shadow-2xs">Marketing</a>
                 </div>
 
                 {{-- Quick Trust Highlights Pill Bar --}}
                 <div class="mt-8 flex flex-wrap items-center justify-center gap-4 text-xs font-medium text-slate-600">
-                    <span class="inline-flex items-center gap-1.5 rounded-full bg-white/90 border border-slate-200/80 px-3.5 py-1.5 shadow-2xs">
+                    <span class="inline-flex items-center gap-1.5 rounded-full bg-white/90 border border-slate-200/70 px-3.5 py-1.5 shadow-2xs">
                         <x-icon name="check" class="h-3.5 w-3.5 text-emerald-600" />
                         UTC+3 Timezone Aligned
                     </span>
-                    <span class="inline-flex items-center gap-1.5 rounded-full bg-white/90 border border-slate-200/80 px-3.5 py-1.5 shadow-2xs">
+                    <span class="inline-flex items-center gap-1.5 rounded-full bg-white/90 border border-slate-200/70 px-3.5 py-1.5 shadow-2xs">
                         <x-icon name="check" class="h-3.5 w-3.5 text-emerald-600" />
                         Zero Foreign Visa Roadblocks
                     </span>
-                    <span class="inline-flex items-center gap-1.5 rounded-full bg-white/90 border border-slate-200/80 px-3.5 py-1.5 shadow-2xs">
+                    <span class="inline-flex items-center gap-1.5 rounded-full bg-white/90 border border-slate-200/70 px-3.5 py-1.5 shadow-2xs">
                         <x-icon name="check" class="h-3.5 w-3.5 text-emerald-600" />
                         Verified USD, M-Pesa &amp; Wise Rails
                     </span>
@@ -144,18 +144,18 @@
         </div>
     </section>
 
-    {{-- Stat bar --}}
-    <section class="border-b border-slate-200/80 bg-white px-4 py-8 sm:px-6">
-        <div class="mx-auto grid max-w-4xl grid-cols-1 divide-y sm:divide-y-0 sm:divide-x divide-slate-100 gap-6 text-center sm:grid-cols-3">
-            <div>
+    {{-- Stat bar — clean borderless metric cards --}}
+    <section class="px-4 py-8 sm:px-6">
+        <div class="mx-auto grid max-w-4xl grid-cols-1 gap-4 text-center sm:grid-cols-3">
+            <div class="rounded-2xl border border-slate-200/60 bg-white/80 p-5 shadow-xs">
                 <p class="text-3xl font-extrabold text-slate-900"><x-count-up :value="$total" /></p>
                 <p class="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">Live listings</p>
             </div>
-            <div>
+            <div class="rounded-2xl border border-slate-200/60 bg-white/80 p-5 shadow-xs">
                 <p class="text-3xl font-extrabold text-slate-900"><x-count-up :value="$totalKenyaFriendly" /></p>
                 <p class="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">Kenya-Friendly Matches</p>
             </div>
-            <div>
+            <div class="rounded-2xl border border-slate-200/60 bg-white/80 p-5 shadow-xs">
                 <p class="text-3xl font-extrabold text-slate-900"><x-count-up :value="$totalFree" /></p>
                 <p class="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">Free to view now</p>
             </div>
@@ -164,7 +164,7 @@
 
     {{-- Just posted — a real, live feed of the newest listings --}}
     @if ($justPosted->isNotEmpty())
-        <section class="border-b border-slate-200/80 bg-slate-50/70 px-4 py-8 sm:px-6">
+        <section class="px-4 py-6 sm:px-6">
             <div class="mx-auto max-w-6xl">
                 <x-reveal class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-700">
                     <span class="relative flex h-2 w-2" aria-hidden="true">
@@ -179,7 +179,7 @@
                             <x-reveal :delay="$i * 60" class="shrink-0">
                                 <a
                                     href="{{ url('/jobs/'.$job->id) }}"
-                                    class="card-hover flex w-72 shrink-0 flex-col gap-1.5 rounded-2xl border border-slate-200/80 bg-white p-4 text-sm shadow-sm hover:border-teal-500/70 hover:shadow-md hover:-translate-y-0.5 transition-all"
+                                    class="card-hover flex w-72 shrink-0 flex-col gap-1.5 rounded-2xl border border-slate-200/70 bg-white p-4 text-sm shadow-xs hover:border-teal-500/70 hover:shadow-md hover:-translate-y-0.5 transition-all"
                                 >
                                     <span class="truncate font-bold text-slate-900">{{ $job->title }}</span>
                                     <span class="truncate text-xs font-medium text-slate-500">{{ $job->company }}</span>
@@ -188,19 +188,20 @@
                             </x-reveal>
                         @endforeach
                     </div>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-slate-50/70 to-transparent" aria-hidden="true"></div>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-white to-transparent" aria-hidden="true"></div>
                 </div>
             </div>
         </section>
     @endif
 
-    {{-- Find your next remote role — sidebar + feed --}}
-    <section class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
-        <x-reveal class="mb-8">
+    {{-- Find your next remote role — sidebar + sleek horizontal list feed --}}
+    <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+        <x-reveal class="mb-6 flex items-center justify-between">
             <h2 class="text-2xl font-extrabold text-slate-900">{{ $hasProfile ? 'Your best-matching jobs' : 'Find your next remote role' }}</h2>
+            <span class="text-xs font-medium text-slate-400">Verified & updated hourly</span>
         </x-reveal>
 
-        <div class="grid grid-cols-1 gap-8 lg:grid-cols-[240px_1fr]">
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-[250px_1fr]">
             <x-reveal class="space-y-6">
                 <div>
                     <p class="mb-3 text-xs font-bold uppercase tracking-wider text-slate-400">Browse by audience</p>
@@ -233,7 +234,7 @@
                     </ul>
                 </div>
 
-                <div class="rounded-3xl border border-slate-200/80 bg-white p-5 shadow-sm">
+                <div class="rounded-2xl border border-slate-200/70 bg-white p-5 shadow-xs">
                     <div class="flex items-center justify-between mb-3">
                         <p class="text-xs font-bold uppercase tracking-wider text-slate-900">Curated Collections</p>
                         <a href="{{ url('/collections') }}" class="text-[11px] font-bold text-teal-600 hover:underline">All &rarr;</a>
@@ -259,20 +260,21 @@
 
             <div>
                 @if ($feed->isEmpty())
-                    <p class="rounded-3xl border border-slate-200 bg-white p-8 text-center text-slate-500">
+                    <p class="rounded-2xl border border-slate-200/70 bg-white p-8 text-center text-slate-500 shadow-xs">
                         Jobs are syncing — check back in a moment, or <a href="{{ url('/jobs') }}" class="text-teal-600 font-semibold underline">browse everything</a>.
                     </p>
                 @else
-                    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                    {{-- Remote.co style streamlined vertical list feed --}}
+                    <div class="space-y-3">
                         @foreach ($feed as $i => $job)
-                            <x-reveal :delay="min($i, 6) * 70" class="h-full">
+                            <x-reveal :delay="min($i, 6) * 40">
                                 <x-job-card :job="$job" :unlocked="$isUnlocked($job)" :match-percent="$matchPercent($job)" />
                             </x-reveal>
                         @endforeach
                     </div>
                 @endif
-                <div class="mt-10 text-center">
-                    <a href="{{ url('/jobs') }}" class="btn-pop inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white px-8 py-3 text-sm font-bold text-slate-800 shadow-sm hover:bg-teal-50 hover:border-teal-500 hover:text-teal-700 transition">
+                <div class="mt-8 text-center">
+                    <a href="{{ url('/jobs') }}" class="btn-pop inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white px-8 py-3 text-sm font-bold text-slate-800 shadow-xs hover:bg-teal-50 hover:border-teal-500 hover:text-teal-700 transition">
                         See all {{ $total }} remote jobs &rarr;
                     </a>
                 </div>
@@ -281,7 +283,7 @@
     </section>
 
     {{-- Start with the work you do best — Remote.co Category Grid --}}
-    <section class="bg-slate-50/70 border-y border-slate-200/80 px-4 py-14 sm:px-6">
+    <section class="px-4 py-16 sm:px-6">
         <div class="mx-auto max-w-6xl">
             <x-reveal>
                 <h2 class="mb-8 text-center text-2xl font-extrabold text-slate-900">Browse Remote Jobs by Category</h2>
@@ -289,9 +291,9 @@
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach ($categories as $i => $cat)
                     <x-reveal :delay="$i * 60">
-                        <a href="{{ url('/jobs') }}?q={{ urlencode($cat['q']) }}" class="card-hover flex items-center justify-between gap-4 rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:border-teal-500 hover:shadow-xl hover:shadow-teal-950/5 hover:-translate-y-1 transition-all duration-200">
+                        <a href="{{ url('/jobs') }}?q={{ urlencode($cat['q']) }}" class="card-hover flex items-center justify-between gap-4 rounded-2xl border border-slate-200/70 bg-white p-5 shadow-xs hover:border-teal-500/60 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200">
                             <div class="flex items-center gap-4">
-                                <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-teal-50 text-teal-700 border border-teal-100 shadow-2xs">
+                                <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-teal-50 text-teal-700 border border-teal-100 shadow-2xs">
                                     <x-icon :name="$cat['icon']" class="h-5 w-5" />
                                 </span>
                                 <span class="font-bold text-slate-800 text-sm hover:text-teal-700 transition-colors">{{ $cat['label'] }}</span>
@@ -305,7 +307,7 @@
     </section>
 
     {{-- Not every "remote" job means Kenya — trust section --}}
-    <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+    <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <x-reveal class="mx-auto mb-12 max-w-2xl text-center">
             <span class="inline-flex items-center gap-1.5 rounded-full bg-teal-50 border border-teal-200/70 px-3.5 py-1 text-xs font-bold text-teal-800 mb-3">
                 <x-icon name="shield" class="h-3.5 w-3.5 text-teal-600" />
@@ -317,17 +319,17 @@
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
             @foreach ($trustFeatures as $i => $f)
                 <x-reveal :delay="$i * 120">
-                    <div class="card-hover h-full rounded-3xl border border-slate-200/80 bg-white p-8 shadow-sm hover:border-teal-500 hover:shadow-xl hover:shadow-teal-950/5 transition-all duration-200">
-                        <span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-teal-50 text-teal-700 border border-teal-100 shadow-2xs">
-                            <x-icon :name="$f['icon']" class="h-6 w-6" />
+                    <div class="card-hover h-full rounded-2xl border border-slate-200/60 bg-white p-7 shadow-xs hover:border-teal-500/60 hover:shadow-md transition-all duration-200">
+                        <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-teal-50 text-teal-700 border border-teal-100 shadow-2xs">
+                            <x-icon :name="$f['icon']" class="h-5 w-5" />
                         </span>
                         <h3 class="mt-5 font-bold text-slate-900 text-lg">{{ $f['title'] }}</h3>
-                        <p class="mt-2.5 text-sm text-slate-600 leading-relaxed">{{ $f['body'] }}</p>
+                        <p class="mt-2 text-sm text-slate-600 leading-relaxed font-normal">{{ $f['body'] }}</p>
                     </div>
                 </x-reveal>
             @endforeach
         </div>
-        <x-reveal class="mt-10 text-center">
+        <x-reveal class="mt-8 text-center">
             <a href="{{ url('/match') }}" class="inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-50/60 px-5 py-2.5 text-sm font-bold text-teal-800 hover:bg-teal-100 transition shadow-2xs">
                 <span>See how the Kenya-Friendly Match score works</span>
                 <span>&rarr;</span>
@@ -335,10 +337,10 @@
         </x-reveal>
     </section>
 
-    {{-- How it works — Remote.co clean step layout --}}
-    <section class="bg-slate-50/70 border-y border-slate-200/80 px-4 py-16 sm:px-6">
-        <div class="mx-auto max-w-4xl">
-            <x-reveal class="text-center mb-10">
+    {{-- How it works — Open 3-step visual journey --}}
+    <section class="px-4 py-16 sm:px-6">
+        <div class="mx-auto max-w-5xl">
+            <x-reveal class="text-center mb-12">
                 <span class="inline-flex items-center gap-1.5 rounded-full bg-teal-50 border border-teal-200/70 px-3.5 py-1 text-xs font-bold text-teal-800 mb-2.5">
                     <x-icon name="sparkle" class="h-3.5 w-3.5 text-teal-600" />
                     Simple Process
@@ -346,38 +348,27 @@
                 <h2 class="text-3xl font-extrabold text-slate-900">How KenyaRemoteJobs Works</h2>
             </x-reveal>
 
-            <x-reveal>
-                <div x-data="{ tab: 0 }">
-                    <div class="mx-auto flex max-w-xl items-center justify-center gap-2 rounded-full border border-slate-200/80 bg-white p-1.5 shadow-sm">
-                        @foreach ($howItWorks as $i => $step)
-                            <button
-                                type="button"
-                                @click="tab = {{ $i }}"
-                                class="flex-1 rounded-full px-4 py-2.5 text-xs sm:text-sm font-bold transition-all"
-                                :class="tab === {{ $i }} ? 'bg-teal-600 text-white shadow-sm' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'"
-                            >
-                                {{ $i + 1 }}. {{ $step['title'] }}
-                            </button>
-                        @endforeach
-                    </div>
-
-                    <div class="relative mt-8 min-h-[9rem] rounded-3xl border border-slate-200/80 bg-white p-8 sm:p-12 shadow-sm text-center">
-                        @foreach ($howItWorks as $i => $step)
-                            <div x-show="tab === {{ $i }}" x-cloak x-transition.opacity class="max-w-lg mx-auto">
-                                <div class="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-teal-600 text-lg font-bold text-white shadow-md shadow-teal-600/25">
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+                @foreach ($howItWorks as $i => $step)
+                    <x-reveal :delay="$i * 100">
+                        <div class="relative h-full rounded-2xl border border-slate-200/70 bg-white p-7 shadow-xs hover:border-teal-500/60 hover:shadow-md transition-all">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-600 font-black text-white text-sm shadow-sm shadow-teal-600/30">
                                     {{ $i + 1 }}
-                                </div>
-                                <h3 class="mb-3 font-bold text-slate-900 text-xl">{{ $step['title'] }}</h3>
-                                <p class="text-sm text-slate-600 leading-relaxed">{{ $step['body'] }}</p>
+                                </span>
+                                <span class="text-xs font-bold uppercase tracking-wider text-teal-700">Step 0{{ $i + 1 }}</span>
                             </div>
-                        @endforeach
-                    </div>
-                </div>
-            </x-reveal>
+                            <h3 class="font-bold text-slate-900 text-lg">{{ $step['title'] }}</h3>
+                            <p class="mt-2 text-sm text-slate-600 leading-relaxed font-normal">{{ $step['body'] }}</p>
+                        </div>
+                    </x-reveal>
+                @endforeach
+            </div>
         </div>
     </section>
 
-    <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+    {{-- Testimonials --}}
+    <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <x-reveal class="text-center mb-12">
             <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-3.5 py-1 text-xs font-bold text-emerald-800 mb-2.5">
                 <x-icon name="check" class="h-3.5 w-3.5 text-emerald-600" />
@@ -388,8 +379,8 @@
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
             @foreach ($testimonials as $i => $t)
                 <x-reveal :delay="$i * 120">
-                    <figure class="card-hover h-full rounded-3xl border border-slate-200/80 bg-white p-8 shadow-sm hover:border-teal-500 hover:shadow-xl hover:shadow-teal-950/5 transition-all duration-200 flex flex-col justify-between">
-                        <blockquote class="text-sm sm:text-base text-slate-700 leading-relaxed">&ldquo;{{ $t['quote'] }}&rdquo;</blockquote>
+                    <figure class="card-hover h-full rounded-2xl border border-slate-200/60 bg-white p-7 shadow-xs hover:border-teal-500/60 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+                        <blockquote class="text-sm sm:text-base text-slate-700 leading-relaxed font-normal">&ldquo;{{ $t['quote'] }}&rdquo;</blockquote>
                         <figcaption class="mt-6 pt-4 border-t border-slate-100 text-xs font-bold uppercase tracking-wider text-teal-700 flex items-center gap-2">
                             <span class="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
                                 <x-icon name="check" class="h-3.5 w-3.5" />
@@ -402,6 +393,7 @@
         </div>
     </section>
 
+    {{-- FAQs --}}
     <section id="faqs" class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
         <x-reveal class="text-center mb-10">
             <h2 class="text-3xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
@@ -414,7 +406,7 @@
             @endforeach
         </div>
         <div class="mt-10 text-center">
-            <a href="{{ url('/faqs') }}" class="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 shadow-xs transition hover:bg-slate-50 hover:border-teal-500 hover:text-teal-700">
+            <a href="{{ url('/faqs') }}" class="inline-flex items-center gap-1.5 rounded-full border border-slate-200/80 bg-white px-6 py-3 text-sm font-semibold text-slate-700 shadow-xs transition hover:bg-slate-50 hover:border-teal-500 hover:text-teal-700">
                 View all answered questions &rarr;
             </a>
         </div>
@@ -428,7 +420,7 @@
 
             <div class="relative z-10">
                 <h2 class="text-3xl font-extrabold sm:text-4xl text-white">Make it easier for the right opportunity to find you.</h2>
-                <p class="mx-auto mt-4 max-w-xl text-slate-300 leading-relaxed">Get a match score against every listing, no CV upload required — takes under a minute.</p>
+                <p class="mx-auto mt-4 max-w-xl text-slate-300 leading-relaxed font-normal">Get a match score against every listing, no CV upload required — takes under a minute.</p>
                 <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
                     <a href="{{ url('/match') }}" class="btn-pop rounded-full bg-teal-600 px-8 py-3.5 font-bold text-white shadow-md shadow-teal-600/30 transition hover:bg-teal-700">Get my match score &rarr;</a>
                     <a href="{{ url('/jobs') }}" class="rounded-full border border-slate-700 bg-slate-800/80 px-8 py-3.5 font-semibold text-slate-200 transition hover:bg-slate-800 hover:text-white">Browse all jobs</a>
@@ -439,7 +431,7 @@
 
     <section class="mx-auto max-w-6xl px-4 pb-16 sm:px-6">
         <x-reveal>
-            <a href="{{ url('/surveys') }}" class="flex flex-col items-start justify-between gap-4 rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-7 shadow-sm transition-all hover:border-teal-500/70 hover:shadow-lg hover:-translate-y-0.5 sm:flex-row sm:items-center">
+            <a href="{{ url('/surveys') }}" class="flex flex-col items-start justify-between gap-4 rounded-2xl border border-slate-200/70 bg-white p-6 sm:p-7 shadow-xs transition-all hover:border-teal-500/70 hover:shadow-md hover:-translate-y-0.5 sm:flex-row sm:items-center">
                 <div>
                     <p class="flex items-center gap-2.5 font-bold text-slate-900 text-base">
                         <span class="flex h-8 w-8 items-center justify-center rounded-xl bg-teal-50 text-teal-600 border border-teal-100/80 shadow-2xs">
@@ -447,7 +439,7 @@
                         </span>
                         <span>Earn while you search</span>
                     </p>
-                    <p class="text-sm text-slate-500 mt-1 pl-10.5 leading-relaxed">A curated list of legit paid-survey platforms as a side-income supplement.</p>
+                    <p class="text-sm text-slate-500 mt-1 pl-10.5 leading-relaxed font-normal">A curated list of legit paid-survey platforms as a side-income supplement.</p>
                 </div>
                 <span class="shrink-0 text-sm font-bold text-teal-700">Explore &rarr;</span>
             </a>

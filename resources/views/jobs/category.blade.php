@@ -81,9 +81,9 @@
                     No active {{ $category['name'] }} listings right this second. Check back shortly as new roles sync hourly.
                 </p>
             @else
-                <div class="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                <div class="mt-6 space-y-3">
                     @foreach ($jobs as $i => $job)
-                        <x-reveal :delay="min($i, 8) * 50" class="h-full">
+                        <x-reveal :delay="min($i, 8) * 40">
                             <x-job-card :job="$job" :unlocked="$isUnlocked($job)" :match-percent="$matchPercent($job)" />
                         </x-reveal>
                     @endforeach

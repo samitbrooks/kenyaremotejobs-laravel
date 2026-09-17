@@ -244,11 +244,9 @@
                         See all jobs &rarr;
                     </a>
                 </div>
-                <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+                <div class="mt-6 space-y-3">
                     @foreach ($relatedJobs as $relJob)
-                        <div class="h-full">
-                            <x-job-card :job="$relJob" :unlocked="$isUnlocked($relJob)" :match-percent="$matchPercent ? $matchPercent($relJob) : null" />
-                        </div>
+                        <x-job-card :job="$relJob" :unlocked="$isUnlocked($relJob)" :match-percent="$matchPercent ? $matchPercent($relJob) : null" />
                     @endforeach
                 </div>
             </section>
