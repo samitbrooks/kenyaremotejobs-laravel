@@ -20,14 +20,14 @@
         </nav>
 
         {{-- Category Hero --}}
-        <x-reveal class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-10 shadow-sm">
+        <x-reveal class="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-10 shadow-sm">
             <div class="max-w-3xl">
                 <div class="flex flex-wrap items-center gap-2.5">
-                    <span class="inline-flex items-center gap-1 rounded-full bg-teal-50 border border-teal-200 px-3 py-1 text-xs font-bold text-teal-800">
+                    <span class="inline-flex items-center gap-1 rounded-full bg-teal-50 border border-teal-200/80 px-3.5 py-1 text-xs font-bold text-teal-800">
                         <x-icon name="sparkle" class="h-3.5 w-3.5 text-teal-600" />
                         {{ $category['badge'] }}
                     </span>
-                    <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-200 px-3 py-1 text-xs font-semibold text-emerald-800">
+                    <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-200/80 px-3.5 py-1 text-xs font-semibold text-emerald-800">
                         <x-icon name="check" class="h-3.5 w-3.5 text-emerald-600" />
                         Verified for Kenya &amp; EAT Timezone
                     </span>
@@ -37,22 +37,22 @@
                     {{ $category['h1'] }}
                 </h1>
 
-                <p class="mt-4 text-base leading-relaxed text-slate-600 sm:text-lg">
+                <p class="mt-4 text-base leading-relaxed text-slate-600 sm:text-lg font-normal">
                     {{ $category['intro'] }}
                 </p>
 
                 <div class="mt-6 flex flex-wrap items-center gap-4 text-sm">
-                    <div class="rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-2.5 shadow-2xs">
+                    <div class="rounded-2xl border border-slate-200/80 bg-slate-50/60 px-5 py-3 shadow-2xs">
                         <span class="block text-xs font-medium text-slate-500">Typical Compensation</span>
                         <strong class="font-bold text-emerald-700">{{ $category['salary_range'] }}</strong>
                     </div>
 
-                    <div class="rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-2.5 shadow-2xs">
+                    <div class="rounded-2xl border border-slate-200/80 bg-slate-50/60 px-5 py-3 shadow-2xs">
                         <span class="block text-xs font-medium text-slate-500">Open Positions</span>
                         <strong class="font-bold text-slate-900">{{ $totalJobs }} Active Listings</strong>
                     </div>
 
-                    <div class="rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-2.5 shadow-2xs">
+                    <div class="rounded-2xl border border-slate-200/80 bg-slate-50/60 px-5 py-3 shadow-2xs">
                         <span class="block text-xs font-medium text-slate-500">Location Reality</span>
                         <strong class="font-bold text-slate-900">No US/EU Visa Needed</strong>
                     </div>

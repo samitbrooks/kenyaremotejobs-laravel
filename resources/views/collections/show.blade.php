@@ -15,7 +15,7 @@
         </nav>
 
         {{-- Hero Header --}}
-        <x-reveal class="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm sm:p-12">
+        <x-reveal class="rounded-3xl border border-slate-200/80 bg-white p-8 shadow-sm sm:p-12">
             <div class="max-w-3xl">
                 <div class="flex flex-wrap items-center gap-2.5">
                     <span class="inline-flex items-center gap-1.5 rounded-full bg-teal-50 border border-teal-200 px-3 py-0.5 text-xs font-bold text-teal-800">

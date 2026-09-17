@@ -22,27 +22,29 @@
         </div>
 
         {{-- Main Checkout Card --}}
-        <div class="mt-10 mx-auto max-w-xl rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm relative overflow-hidden">
-            <div class="absolute top-0 right-0 bg-teal-700 px-4 py-1 text-[11px] font-bold uppercase tracking-widest text-white rounded-bl-xl shadow-2xs">
-                M-Pesa Supported
+        <div class="mt-10 mx-auto max-w-xl rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-10 shadow-xl relative overflow-hidden">
+            <div class="flex justify-center mb-3">
+                <span class="inline-flex items-center gap-1 rounded-full bg-teal-50 border border-teal-200/90 px-4 py-1 text-[11px] font-bold uppercase tracking-widest text-teal-800 shadow-2xs">
+                    M-Pesa Supported
+                </span>
             </div>
 
             <div class="text-center">
                 <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Choose Your Plan</p>
-                <h2 class="text-2xl font-bold mt-1 text-slate-900">KenyaRemoteJobs Pro Membership</h2>
-                <div class="mt-2 inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-3.5 py-1 text-xs font-bold text-emerald-800">
+                <h2 class="text-2xl sm:text-3xl font-bold mt-1 text-slate-900">KenyaRemoteJobs Pro Membership</h2>
+                <div class="mt-2.5 inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-4 py-1 text-xs font-bold text-emerald-800">
                     <x-icon name="check" class="h-3.5 w-3.5 text-emerald-600" /> Early Access Gives Full Access to All 800+ Jobs
                 </div>
-                <p class="text-xs text-slate-500 mt-1.5">Instant STK push to your Safaricom line &middot; Cancel anytime</p>
+                <p class="text-xs text-slate-500 mt-2">Instant STK push to your Safaricom line &middot; Cancel anytime</p>
             </div>
 
             <div class="mt-6">
                 <livewire:subscribe-button :is-authed="(bool) $user" :already-subscribed="(bool) $user?->subscribed" />
             </div>
 
-            <div class="mt-6 border-t border-slate-200 pt-4 text-center">
+            <div class="mt-6 border-t border-slate-100 pt-4 text-center">
                 <p class="text-xs text-slate-500 flex items-center justify-center gap-2">
-                    <svg class="h-4 w-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg class="h-4 w-4 text-emerald-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                     </svg>
                     Official Safaricom Daraja M-Pesa Integration &middot; Secure & Instant
@@ -51,37 +53,37 @@
         </div>
 
         {{-- ROI / Value Callout --}}
-        <div class="mt-12 rounded-2xl bg-slate-900 p-6 sm:p-8 text-white shadow-md border border-slate-800">
+        <div class="mt-14 rounded-3xl bg-slate-900 p-8 sm:p-10 text-white shadow-2xl border border-slate-800">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center md:text-left items-center">
                 <div>
                     <p class="text-xs font-bold uppercase tracking-wider text-teal-400">All 800+ Jobs</p>
                     <p class="text-xl font-bold mt-1">Full Access</p>
-                    <p class="text-xs text-slate-300 mt-1">Apply immediately to all listings — no 48h wait or locked apply buttons.</p>
+                    <p class="text-xs text-slate-300 mt-1 leading-relaxed">Apply immediately to all listings — no 48h wait or locked apply buttons.</p>
                 </div>
                 <div class="md:border-l md:border-slate-800 md:pl-6">
                     <p class="text-xs font-bold uppercase tracking-wider text-teal-400">First 48 Hours</p>
                     <p class="text-xl font-bold mt-1">4x Callbacks</p>
-                    <p class="text-xs text-slate-300 mt-1">Hiring managers interview candidates on a rolling basis. Applying early gets you reviewed first.</p>
+                    <p class="text-xs text-slate-300 mt-1 leading-relaxed">Hiring managers interview candidates on a rolling basis. Applying early gets you reviewed first.</p>
                 </div>
                 <div class="md:border-l md:border-slate-800 md:pl-6">
                     <p class="text-xs font-bold uppercase tracking-wider text-teal-400">ATS Optimization</p>
                     <p class="text-xl font-bold mt-1">94%+ Match</p>
-                    <p class="text-xs text-slate-300 mt-1">75% of CVs are rejected by automated bots. Our AI CV Tailor optimizes your bullets to pass.</p>
+                    <p class="text-xs text-slate-300 mt-1 leading-relaxed">75% of CVs are rejected by automated bots. Our AI CV Tailor optimizes your bullets to pass.</p>
                 </div>
                 <div class="md:border-l md:border-slate-800 md:pl-6">
                     <p class="text-xs font-bold uppercase tracking-wider text-emerald-400">🇰🇪 Kenya Focus</p>
                     <p class="text-xl font-bold mt-1">Direct Employers</p>
-                    <p class="text-xs text-slate-300 mt-1">Direct access to companies actively seeking Kenyan talent with zero foreign visa barriers.</p>
+                    <p class="text-xs text-slate-300 mt-1 leading-relaxed">Direct access to companies actively seeking Kenyan talent with zero foreign visa barriers.</p>
                 </div>
             </div>
         </div>
 
         {{-- Feature Comparison Table --}}
-        <div class="mt-14">
-            <h2 class="text-2xl font-bold text-center text-slate-900">Free vs Pro Membership</h2>
-            <p class="text-sm text-center text-slate-500 mt-1">Everything you need to compete with global talent</p>
+        <div class="mt-16">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center text-slate-900">Free vs Pro Membership</h2>
+            <p class="text-sm text-center text-slate-500 mt-1.5">Everything you need to compete with global talent</p>
 
-            <div class="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xs">
+            <div class="mt-8 overflow-hidden rounded-3xl border border-slate-200/80 bg-white shadow-sm">
                 <table class="w-full text-left text-sm">
                     <thead>
                         <tr class="border-b border-slate-200 bg-slate-50/80">
@@ -195,86 +197,91 @@
                     <p class="text-xs text-slate-600 mt-2 leading-relaxed">Companies post directly on KenyaRemoteJobs specifically to recruit Kenyan professionals. Pro members apply directly to hiring decision-makers.</p>
                 </div>
 
-                <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs">
-                    <p class="font-bold text-sm text-emerald-950 flex items-center gap-1.5">
-                        <span>🎯</span> Kenya-Matching (No Visa Hurdles)
+                <div class="rounded-3xl border border-slate-200/80 bg-white p-6 shadow-sm hover:border-teal-500/50 hover:shadow-md transition-all">
+                    <p class="font-bold text-sm text-emerald-950 flex items-center gap-2">
+                        <span class="flex h-7 w-7 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700">🎯</span>
+                        <span>Kenya-Matching (No Visa Hurdles)</span>
                     </p>
-                    <p class="text-xs text-slate-600 mt-2 leading-relaxed">Roles verified to accept East African residents without requiring US/EU work permits, pre-screened for friendly payment terms.</p>
+                    <p class="text-xs text-slate-600 mt-2.5 leading-relaxed">Roles verified to accept East African residents without requiring US/EU work permits, pre-screened for friendly payment terms.</p>
                 </div>
 
-                <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs">
-                    <p class="font-bold text-sm text-emerald-950 flex items-center gap-1.5">
-                        <span>⏰</span> EAT Timezone Advantage Pitch
+                <div class="rounded-3xl border border-slate-200/80 bg-white p-6 shadow-sm hover:border-teal-500/50 hover:shadow-md transition-all">
+                    <p class="font-bold text-sm text-emerald-950 flex items-center gap-2">
+                        <span class="flex h-7 w-7 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700">⏰</span>
+                        <span>EAT Timezone Advantage Pitch</span>
                     </p>
-                    <p class="text-xs text-slate-600 mt-2 leading-relaxed">Proven cover letter scripts framing Nairobi (GMT+3) as an advantageous 4–5 hour daily overlap for European and US East Coast teams.</p>
+                    <p class="text-xs text-slate-600 mt-2.5 leading-relaxed">Proven cover letter scripts framing Nairobi (GMT+3) as an advantageous 4–5 hour daily overlap for European and US East Coast teams.</p>
                 </div>
 
-                <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs">
-                    <p class="font-bold text-sm text-slate-900 flex items-center gap-1.5">
-                        <span>📄</span> USD Invoice Template
+                <div class="rounded-3xl border border-slate-200/80 bg-white p-6 shadow-sm hover:border-teal-500/50 hover:shadow-md transition-all">
+                    <p class="font-bold text-sm text-slate-900 flex items-center gap-2">
+                        <span class="flex h-7 w-7 items-center justify-center rounded-xl bg-teal-50 text-teal-700">📄</span>
+                        <span>USD Invoice Template</span>
                     </p>
-                    <p class="text-xs text-slate-600 mt-2 leading-relaxed">Professional international contractor invoice pre-configured for receiving foreign payments via Wise, Payoneer, or direct Wire to Kenyan banks.</p>
+                    <p class="text-xs text-slate-600 mt-2.5 leading-relaxed">Professional international contractor invoice pre-configured for receiving foreign payments via Wise, Payoneer, or direct Wire to Kenyan banks.</p>
                 </div>
 
-                <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs">
-                    <p class="font-bold text-sm text-slate-900 flex items-center gap-1.5">
-                        <span>📑</span> US W-8BEN Form Cheat Sheet
+                <div class="rounded-3xl border border-slate-200/80 bg-white p-6 shadow-sm hover:border-teal-500/50 hover:shadow-md transition-all">
+                    <p class="font-bold text-sm text-slate-900 flex items-center gap-2">
+                        <span class="flex h-7 w-7 items-center justify-center rounded-xl bg-teal-50 text-teal-700">📑</span>
+                        <span>US W-8BEN Form Cheat Sheet</span>
                     </p>
-                    <p class="text-xs text-slate-600 mt-2 leading-relaxed">Step-by-step instructions on filling out IRS W-8BEN using your KRA PIN to avoid 30% US withholding tax under international treaties.</p>
+                    <p class="text-xs text-slate-600 mt-2.5 leading-relaxed">Step-by-step instructions on filling out IRS W-8BEN using your KRA PIN to avoid 30% US withholding tax under international treaties.</p>
                 </div>
 
-                <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs">
-                    <p class="font-bold text-sm text-slate-900 flex items-center gap-1.5">
-                        <span>💼</span> Candidate CRM &amp; Tracking
+                <div class="rounded-3xl border border-slate-200/80 bg-white p-6 shadow-sm hover:border-teal-500/50 hover:shadow-md transition-all">
+                    <p class="font-bold text-sm text-slate-900 flex items-center gap-2">
+                        <span class="flex h-7 w-7 items-center justify-center rounded-xl bg-teal-50 text-teal-700">💼</span>
+                        <span>Candidate CRM &amp; Tracking</span>
                     </p>
-                    <p class="text-xs text-slate-600 mt-2 leading-relaxed">In-app interview tracking pipeline with recruiter notes, salary discussed, and follow-up reminders in your personal dashboard.</p>
+                    <p class="text-xs text-slate-600 mt-2.5 leading-relaxed">In-app interview tracking pipeline with recruiter notes, salary discussed, and follow-up reminders in your personal dashboard.</p>
                 </div>
             </div>
         </div>
 
         {{-- Frequently Asked Questions --}}
-        <div class="mt-14 max-w-3xl mx-auto">
-            <h2 class="text-2xl font-bold text-center text-slate-900">Frequently Asked Questions</h2>
+        <div class="mt-16 max-w-3xl mx-auto">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center text-slate-900">Frequently Asked Questions</h2>
 
-            <div class="mt-6 space-y-4">
-                <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs">
-                    <h3 class="font-semibold text-slate-900">What are Direct Employer Listings &amp; Kenya-Matched Roles?</h3>
-                    <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+            <div class="mt-8 space-y-4">
+                <div class="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-7 shadow-sm">
+                    <h3 class="font-semibold text-slate-900 text-base">What are Direct Employer Listings &amp; Kenya-Matched Roles?</h3>
+                    <p class="mt-2.5 text-sm text-slate-600 leading-relaxed">
                         These are companies that post directly on KenyaRemoteJobs specifically to recruit Kenyan and East African professionals. Because these employers are actively seeking local talent (meaning zero visa rejections and verified timezone compatibility), direct application access is reserved exclusively for Pro members.
                     </p>
                 </div>
 
-                <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs">
-                    <h3 class="font-semibold text-slate-900">Does Early Access give me full access to all jobs?</h3>
-                    <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+                <div class="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-7 shadow-sm">
+                    <h3 class="font-semibold text-slate-900 text-base">Does Early Access give me full access to all jobs?</h3>
+                    <p class="mt-2.5 text-sm text-slate-600 leading-relaxed">
                         Yes. Early Access gives you 100% full, immediate access to apply to all 800+ remote jobs on the platform &mdash; skipping the 48-hour wait on fresh listings and unlocking direct employer applications.
                     </p>
                 </div>
 
-                <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs">
-                    <h3 class="font-semibold text-slate-900">Why do you offer 48-Hour Early Access?</h3>
-                    <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+                <div class="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-7 shadow-sm">
+                    <h3 class="font-semibold text-slate-900 text-base">Why do you offer 48-Hour Early Access?</h3>
+                    <p class="mt-2.5 text-sm text-slate-600 leading-relaxed">
                         International remote companies receive 500+ applications within 3–4 days of posting. Recruiters frequently review the first 20–30 candidates and close applications early. Pro members get an exclusive 48-hour head start to apply before the position is opened to the public.
                     </p>
                 </div>
 
-                <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs">
-                    <h3 class="font-semibold text-slate-900">How does the 1-Click AI CV Tailoring work?</h3>
-                    <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+                <div class="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-7 shadow-sm">
+                    <h3 class="font-semibold text-slate-900 text-base">How does the 1-Click AI CV Tailoring work?</h3>
+                    <p class="mt-2.5 text-sm text-slate-600 leading-relaxed">
                         Our AI analyzes the exact technical requirements, keywords, and tone in the job description, then extracts matching achievements from your background to generate high-impact resume bullets and an aligned cover letter with a 94%+ ATS pass rate.
                     </p>
                 </div>
 
-                <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs">
-                    <h3 class="font-semibold text-slate-900">How do I pay with M-Pesa?</h3>
-                    <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+                <div class="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-7 shadow-sm">
+                    <h3 class="font-semibold text-slate-900 text-base">How do I pay with M-Pesa?</h3>
+                    <p class="mt-2.5 text-sm text-slate-600 leading-relaxed">
                         Select your plan above, enter your Safaricom phone number, and click Subscribe. You will receive an instant M-Pesa STK push prompt on your phone. Enter your M-Pesa PIN and your Pro membership activates immediately.
                     </p>
                 </div>
 
-                <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs">
-                    <h3 class="font-semibold text-slate-900">Can I cancel anytime?</h3>
-                    <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+                <div class="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-7 shadow-sm">
+                    <h3 class="font-semibold text-slate-900 text-base">Can I cancel anytime?</h3>
+                    <p class="mt-2.5 text-sm text-slate-600 leading-relaxed">
                         Yes! There are no contracts or hidden renewal commitments. You keep full Pro benefits for the entirety of the duration you paid for.
                     </p>
                 </div>

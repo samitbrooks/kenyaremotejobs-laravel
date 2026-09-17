@@ -42,99 +42,106 @@
 <x-layouts.app :canonical="url('/')">
     <script type="application/ld+json">{!! \App\Support\Seo::faqJsonLd($faqs) !!}</script>
 
-    {{-- Hero — Remote.co clean aesthetic with unified multi-input search bar --}}
-    <section class="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/50 border-b border-slate-200/80 px-4 pt-12 pb-16 sm:px-6 sm:pt-16">
-        <div class="relative mx-auto grid max-w-6xl grid-cols-1 gap-12 md:grid-cols-2 md:items-center">
+    {{-- Hero — Remote.co aesthetic with unified floating pill search bar and spacious modern layout --}}
+    <section class="relative bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(13,148,136,0.12),rgba(255,255,255,0))] border-b border-slate-200/70 px-4 pt-14 pb-20 sm:px-6 sm:pt-20">
+        <div class="relative mx-auto max-w-4xl text-center">
             <x-reveal>
-                <p class="inline-flex items-center gap-1.5 rounded-full bg-teal-50 border border-teal-200/90 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-teal-800">
-                    <x-icon name="sparkle" class="h-3.5 w-3.5 text-teal-600" /> Kenya's Verified Remote Career Platform
-                </p>
-                <h1 class="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-5xl leading-[1.15]">
-                    Remote jobs from employers
-                    <br>
-                    <span class="text-teal-600">who actually want Kenyan talent.</span>
-                </h1>
-                <p class="mt-4 max-w-xl text-base sm:text-lg text-slate-600 leading-relaxed">
-                    Every listing here comes from international companies that specifically want to hire Kenyan and East African talent — pre-screened for timezone, location, and visa reality, so you&rsquo;re never wasting time on a role that was never open to you.
-                </p>
-
-                <div class="mt-7 flex flex-wrap items-center gap-3">
-                    <a href="{{ url('/jobs') }}" class="btn-pop rounded-lg bg-teal-600 px-6 py-3 font-semibold text-white shadow-xs transition hover:bg-teal-700">
-                        Browse open jobs &rarr;
-                    </a>
-                    <a href="{{ url('/employers') }}" class="rounded-lg border border-slate-300 bg-white px-6 py-3 font-semibold text-slate-700 shadow-xs transition hover:bg-slate-50">
-                        Post a job
-                    </a>
+                <div class="inline-flex items-center gap-2 rounded-full bg-teal-50 border border-teal-200/80 px-4 py-1.5 text-xs font-bold text-teal-800 shadow-2xs">
+                    <span class="relative flex h-2 w-2">
+                        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal-400 opacity-75"></span>
+                        <span class="relative inline-flex h-2 w-2 rounded-full bg-teal-600"></span>
+                    </span>
+                    <span>Kenya's #1 Verified Remote Job Board</span>
                 </div>
 
-                <p class="mt-5 text-sm">
-                    <a href="{{ url('/match') }}" class="inline-flex items-center gap-1.5 font-semibold text-teal-700 hover:text-teal-800 hover:underline">
-                        <x-icon name="sparkle" class="h-4 w-4 text-teal-600" /> No CV needed — get a match score for every job in under a minute &rarr;
-                    </a>
+                <h1 class="mt-5 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-6xl sm:leading-[1.12]">
+                    Remote jobs from employers
+                    <br class="hidden sm:inline">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 via-teal-700 to-emerald-600">who actually want Kenyan talent.</span>
+                </h1>
+
+                <p class="mx-auto mt-5 max-w-2xl text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+                    Discover hand-curated international remote opportunities screened for East Africa Time (UTC+3) compatibility, competitive USD compensation, and zero foreign visa barriers.
                 </p>
             </x-reveal>
 
-            <x-reveal :delay="120" class="relative hidden md:block">
-                <div class="relative mx-auto h-[28rem] w-full max-w-sm">
-                    @foreach ($heroPreview as $i => $job)
-                        <div class="absolute {{ $offsets[$i % 3] }} w-72 {{ $rotations[$i % 3] }} rounded-xl border border-slate-200 bg-white p-4 shadow-lg transition hover:-translate-y-1 hover:rotate-0 hover:border-teal-500">
-                            <div class="flex items-center justify-between">
-                                <span class="rounded-md bg-slate-100 px-2 py-0.5 text-[10px] font-semibold text-slate-700">
-                                    {{ $job->remote_type ?: 'Remote' }}
-                                </span>
-                                @if ($job->kenya_friendly)
-                                    <span class="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700">
-                                        <x-icon.kenya-flag class="h-3 w-3" /> Match
-                                    </span>
-                                @endif
-                            </div>
-                            <p class="mt-2 line-clamp-1 text-sm font-bold text-slate-900">{{ $job->title }}</p>
-                            <p class="mt-0.5 text-xs font-medium text-slate-500">{{ $job->company }}</p>
-                            <p class="mt-2 line-clamp-2 text-xs text-slate-500 leading-relaxed">
-                                {{ \App\Support\Format::truncate(\App\Support\Format::stripHtml($job->description ?? ''), 90) }}
-                            </p>
+            {{-- Remote.co signature unified floating pill search bar --}}
+            <x-reveal :delay="80" class="relative z-10 mx-auto mt-10">
+                <div class="rounded-3xl sm:rounded-full border border-slate-200/90 bg-white p-2 sm:p-2.5 shadow-[0_12px_40px_rgba(15,23,42,0.08)] hover:shadow-[0_16px_48px_rgba(13,148,136,0.12)] transition-shadow">
+                    <form action="{{ url('/jobs') }}" method="GET" class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                        {{-- Keyword input --}}
+                        <div class="relative flex-1 flex items-center pl-4">
+                            <x-icon name="search" class="h-4 w-4 text-slate-400 shrink-0" />
+                            <input
+                                type="text"
+                                name="q"
+                                placeholder="Job title, skill, or company…"
+                                class="w-full bg-transparent py-2.5 pl-3 pr-2 text-sm text-slate-900 placeholder:text-slate-400 border-none focus:outline-none focus:ring-0"
+                            />
                         </div>
-                    @endforeach
+
+                        <div class="hidden sm:block h-7 w-px bg-slate-200/80"></div>
+
+                        {{-- Remote type dropdown --}}
+                        <div class="sm:w-44 px-2">
+                            <select
+                                name="remoteType"
+                                class="w-full bg-transparent py-2.5 px-2 text-sm text-slate-700 border-none focus:outline-none focus:ring-0 cursor-pointer"
+                            >
+                                <option value="">Any remote type</option>
+                                <option value="remote">Remote (Anywhere)</option>
+                                <option value="full-time">Full-time Remote</option>
+                                <option value="contract">Contract Remote</option>
+                            </select>
+                        </div>
+
+                        <div class="hidden sm:block h-7 w-px bg-slate-200/80"></div>
+
+                        {{-- Kenya Friendly Toggle Pill --}}
+                        <label class="flex items-center justify-center gap-2 rounded-full bg-slate-50/90 hover:bg-slate-100 border border-slate-200/70 py-2 px-3.5 text-xs font-semibold text-slate-700 cursor-pointer transition shrink-0">
+                            <input type="checkbox" name="kenyaFriendly" value="true" class="h-4 w-4 rounded-full border-slate-300 text-teal-600 focus:ring-teal-500">
+                            <span class="text-slate-700">Kenya-Friendly</span>
+                            <x-icon.kenya-flag class="h-3.5 w-3.5 shrink-0" />
+                        </label>
+
+                        {{-- Search CTA button --}}
+                        <button
+                            type="submit"
+                            class="btn-pop rounded-full bg-teal-600 px-7 py-3 text-sm font-bold text-white shadow-md shadow-teal-600/20 hover:bg-teal-700 hover:shadow-lg transition-all shrink-0 text-center"
+                        >
+                            Find Jobs
+                        </button>
+                    </form>
+                </div>
+
+                {{-- Popular search tags as soft floating pills --}}
+                <div class="mt-4 flex flex-wrap items-center justify-center gap-1.5 text-xs text-slate-500">
+                    <span class="font-medium text-slate-400 mr-1">Trending:</span>
+                    <a href="{{ url('/jobs') }}?q=Customer+Support" class="rounded-full bg-white/80 border border-slate-200/80 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-white transition shadow-2xs">Customer Support</a>
+                    <a href="{{ url('/jobs') }}?q=Virtual+Assistant" class="rounded-full bg-white/80 border border-slate-200/80 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-white transition shadow-2xs">Virtual Assistant</a>
+                    <a href="{{ url('/jobs') }}?q=Developer" class="rounded-full bg-white/80 border border-slate-200/80 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-white transition shadow-2xs">Software Engineer</a>
+                    <a href="{{ url('/jobs') }}?q=Data+Entry" class="rounded-full bg-white/80 border border-slate-200/80 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-white transition shadow-2xs">Data Entry</a>
+                    <a href="{{ url('/jobs') }}?q=Writing" class="rounded-full bg-white/80 border border-slate-200/80 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-white transition shadow-2xs">Writing & Content</a>
+                    <a href="{{ url('/jobs') }}?q=Marketing" class="rounded-full bg-white/80 border border-slate-200/80 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-white transition shadow-2xs">Marketing</a>
+                </div>
+
+                {{-- Quick Trust Highlights Pill Bar --}}
+                <div class="mt-8 flex flex-wrap items-center justify-center gap-4 text-xs font-medium text-slate-600">
+                    <span class="inline-flex items-center gap-1.5 rounded-full bg-white/90 border border-slate-200/80 px-3.5 py-1.5 shadow-2xs">
+                        <x-icon name="check" class="h-3.5 w-3.5 text-emerald-600" />
+                        UTC+3 Timezone Aligned
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 rounded-full bg-white/90 border border-slate-200/80 px-3.5 py-1.5 shadow-2xs">
+                        <x-icon name="check" class="h-3.5 w-3.5 text-emerald-600" />
+                        Zero Foreign Visa Roadblocks
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 rounded-full bg-white/90 border border-slate-200/80 px-3.5 py-1.5 shadow-2xs">
+                        <x-icon name="check" class="h-3.5 w-3.5 text-emerald-600" />
+                        Verified USD, M-Pesa &amp; Wise Rails
+                    </span>
                 </div>
             </x-reveal>
         </div>
-
-        {{-- Remote.co signature unified multi-input search box --}}
-        <x-reveal :delay="80" class="relative z-10 mx-auto mt-12 max-w-5xl">
-            <div class="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 shadow-xl shadow-slate-200/60">
-                <form action="{{ url('/jobs') }}" method="GET" class="grid grid-cols-1 gap-2.5 sm:grid-cols-[2fr_1.2fr_auto_auto] sm:items-center">
-                    <div class="relative">
-                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
-                            <x-icon name="globe" class="h-4 w-4" />
-                        </div>
-                        <input type="text" name="q" placeholder="Job title, skill, or keyword…" class="w-full rounded-lg border border-slate-200 bg-slate-50/50 py-2.5 pl-9 pr-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-teal-500 focus:bg-white focus:outline-none focus:ring-1 focus:ring-teal-500">
-                    </div>
-                    <select name="remoteType" class="rounded-lg border border-slate-200 bg-slate-50/50 py-2.5 px-3 text-sm text-slate-700 focus:border-teal-500 focus:bg-white focus:outline-none focus:ring-1 focus:ring-teal-500">
-                        <option value="">Any remote type</option>
-                        <option value="remote">Remote (Anywhere)</option>
-                        <option value="full-time">Full-time Remote</option>
-                        <option value="contract">Contract Remote</option>
-                    </select>
-                    <label class="flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50/50 py-2.5 px-3.5 text-xs font-semibold text-slate-700 cursor-pointer hover:bg-slate-100 transition">
-                        <input type="checkbox" name="kenyaFriendly" value="true" class="h-4 w-4 rounded border-slate-300 text-teal-600 focus:ring-teal-500">
-                        <span>Kenya-Friendly</span>
-                        <x-icon.kenya-flag class="h-3.5 w-3.5 shrink-0" />
-                    </label>
-                    <button type="submit" class="btn-pop rounded-lg bg-teal-600 px-6 py-2.5 text-sm font-bold text-white shadow-xs hover:bg-teal-700 transition">
-                        Search Jobs
-                    </button>
-                </form>
-                <div class="mt-3 flex flex-wrap items-center gap-2 border-t border-slate-100 pt-3 text-xs text-slate-500">
-                    <span class="font-semibold text-slate-700">Popular:</span>
-                    <a href="{{ url('/jobs') }}?q=Customer+Support" class="rounded-md bg-slate-100 px-2 py-0.5 text-slate-600 hover:bg-teal-50 hover:text-teal-700 transition">Customer Support</a>
-                    <a href="{{ url('/jobs') }}?q=Virtual+Assistant" class="rounded-md bg-slate-100 px-2 py-0.5 text-slate-600 hover:bg-teal-50 hover:text-teal-700 transition">Virtual Assistant</a>
-                    <a href="{{ url('/jobs') }}?q=Developer" class="rounded-md bg-slate-100 px-2 py-0.5 text-slate-600 hover:bg-teal-50 hover:text-teal-700 transition">Software Engineer</a>
-                    <a href="{{ url('/jobs') }}?q=Data+Entry" class="rounded-md bg-slate-100 px-2 py-0.5 text-slate-600 hover:bg-teal-50 hover:text-teal-700 transition">Data Entry</a>
-                    <a href="{{ url('/jobs') }}?q=Writing" class="rounded-md bg-slate-100 px-2 py-0.5 text-slate-600 hover:bg-teal-50 hover:text-teal-700 transition">Writing & Content</a>
-                    <a href="{{ url('/jobs') }}?q=Marketing" class="rounded-md bg-slate-100 px-2 py-0.5 text-slate-600 hover:bg-teal-50 hover:text-teal-700 transition">Marketing</a>
-                </div>
-            </div>
-        </x-reveal>
     </section>
 
     {{-- Stat bar --}}
@@ -172,7 +179,7 @@
                             <x-reveal :delay="$i * 60" class="shrink-0">
                                 <a
                                     href="{{ url('/jobs/'.$job->id) }}"
-                                    class="card-hover flex w-64 shrink-0 flex-col gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm shadow-xs hover:border-teal-500 transition"
+                                    class="card-hover flex w-72 shrink-0 flex-col gap-1.5 rounded-2xl border border-slate-200/80 bg-white p-4 text-sm shadow-sm hover:border-teal-500/70 hover:shadow-md hover:-translate-y-0.5 transition-all"
                                 >
                                     <span class="truncate font-bold text-slate-900">{{ $job->title }}</span>
                                     <span class="truncate text-xs font-medium text-slate-500">{{ $job->company }}</span>
@@ -200,7 +207,7 @@
                     <ul class="space-y-1">
                         @foreach ($audienceCounts as $a)
                             <li>
-                                <a href="{{ url('/jobs') }}?audience={{ $a['segment'] }}" class="flex items-center justify-between rounded-lg px-2.5 py-2 text-sm text-slate-700 transition hover:bg-slate-100 hover:text-teal-700">
+                                <a href="{{ url('/jobs') }}?audience={{ $a['segment'] }}" class="flex items-center justify-between rounded-full px-3.5 py-2 text-sm text-slate-700 transition hover:bg-teal-50/70 hover:text-teal-800">
                                     <span class="flex items-center gap-2 font-medium">
                                         <x-icon :name="\App\Support\Audience::ICONS[$a['segment']]" class="h-4 w-4 text-teal-600" />
                                         {{ \App\Support\Audience::LABELS[$a['segment']] }}
@@ -217,7 +224,7 @@
                     <ul class="space-y-1">
                         @foreach ($categories as $cat)
                             <li>
-                                <a href="{{ url('/jobs') }}?q={{ urlencode($cat['q']) }}" class="flex items-center gap-2 rounded-lg px-2.5 py-2 text-sm text-slate-700 font-medium transition hover:bg-slate-100 hover:text-teal-700">
+                                <a href="{{ url('/jobs') }}?q={{ urlencode($cat['q']) }}" class="flex items-center gap-2.5 rounded-full px-3.5 py-2 text-sm text-slate-700 font-medium transition hover:bg-teal-50/70 hover:text-teal-800">
                                     <x-icon :name="$cat['icon']" class="h-4 w-4 text-teal-600" />
                                     {{ $cat['label'] }}
                                 </a>
@@ -226,22 +233,22 @@
                     </ul>
                 </div>
 
-                <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-xs">
-                    <div class="flex items-center justify-between mb-2.5">
+                <div class="rounded-3xl border border-slate-200/80 bg-white p-5 shadow-sm">
+                    <div class="flex items-center justify-between mb-3">
                         <p class="text-xs font-bold uppercase tracking-wider text-slate-900">Curated Collections</p>
                         <a href="{{ url('/collections') }}" class="text-[11px] font-bold text-teal-600 hover:underline">All &rarr;</a>
                     </div>
                     <ul class="space-y-1">
                         @foreach (\App\Support\JobCollectionSeo::all() as $col)
                             <li>
-                                <a href="{{ url('/collections/'.$col['slug']) }}" class="flex items-center gap-2 rounded-lg px-2 py-1.5 text-xs text-slate-700 font-medium transition hover:bg-slate-50 hover:text-teal-700">
+                                <a href="{{ url('/collections/'.$col['slug']) }}" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-xs text-slate-700 font-medium transition hover:bg-slate-50 hover:text-teal-700">
                                     <x-icon :name="$col['icon']" class="h-3.5 w-3.5 text-teal-600 shrink-0" />
                                     <span class="truncate">{{ $col['badge'] }}</span>
                                 </a>
                             </li>
                         @endforeach
                     </ul>
-                    <div class="mt-3 border-t border-slate-100 pt-2.5">
+                    <div class="mt-3 border-t border-slate-100 pt-3">
                         <a href="{{ url('/companies') }}" class="flex items-center justify-between text-xs font-bold text-slate-900 hover:text-teal-600 transition">
                             <span>Hiring Companies Directory</span>
                             <span>&rarr;</span>
@@ -252,7 +259,7 @@
 
             <div>
                 @if ($feed->isEmpty())
-                    <p class="rounded-xl border border-slate-200 bg-white p-8 text-center text-slate-500">
+                    <p class="rounded-3xl border border-slate-200 bg-white p-8 text-center text-slate-500">
                         Jobs are syncing — check back in a moment, or <a href="{{ url('/jobs') }}" class="text-teal-600 font-semibold underline">browse everything</a>.
                     </p>
                 @else
@@ -264,8 +271,8 @@
                         @endforeach
                     </div>
                 @endif
-                <div class="mt-8 text-center">
-                    <a href="{{ url('/jobs') }}" class="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-bold text-slate-700 shadow-xs hover:bg-slate-50 hover:border-teal-500 hover:text-teal-700 transition">
+                <div class="mt-10 text-center">
+                    <a href="{{ url('/jobs') }}" class="btn-pop inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white px-8 py-3 text-sm font-bold text-slate-800 shadow-sm hover:bg-teal-50 hover:border-teal-500 hover:text-teal-700 transition">
                         See all {{ $total }} remote jobs &rarr;
                     </a>
                 </div>
@@ -282,14 +289,14 @@
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach ($categories as $i => $cat)
                     <x-reveal :delay="$i * 60">
-                        <a href="{{ url('/jobs') }}?q={{ urlencode($cat['q']) }}" class="card-hover flex items-center justify-between gap-4 rounded-xl border border-slate-200 bg-white p-4 shadow-xs hover:border-teal-500 transition">
-                            <div class="flex items-center gap-3.5">
-                                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-teal-50 text-teal-700 border border-teal-100">
+                        <a href="{{ url('/jobs') }}?q={{ urlencode($cat['q']) }}" class="card-hover flex items-center justify-between gap-4 rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:border-teal-500 hover:shadow-xl hover:shadow-teal-950/5 hover:-translate-y-1 transition-all duration-200">
+                            <div class="flex items-center gap-4">
+                                <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-teal-50 text-teal-700 border border-teal-100 shadow-2xs">
                                     <x-icon :name="$cat['icon']" class="h-5 w-5" />
                                 </span>
-                                <span class="font-bold text-slate-800 text-sm hover:text-teal-700">{{ $cat['label'] }}</span>
+                                <span class="font-bold text-slate-800 text-sm hover:text-teal-700 transition-colors">{{ $cat['label'] }}</span>
                             </div>
-                            <span class="text-slate-400 text-sm font-semibold">&rarr;</span>
+                            <span class="flex h-8 w-8 items-center justify-center rounded-full bg-slate-50 text-slate-400 group-hover:bg-teal-50 group-hover:text-teal-700 transition-colors text-sm font-semibold">&rarr;</span>
                         </a>
                     </x-reveal>
                 @endforeach
@@ -298,59 +305,70 @@
     </section>
 
     {{-- Not every "remote" job means Kenya — trust section --}}
-    <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <x-reveal class="mx-auto mb-10 max-w-2xl text-center">
-            <h2 class="text-2xl font-extrabold text-slate-900">Not every &ldquo;remote&rdquo; job means Kenya</h2>
-            <p class="mt-2 text-slate-600">A lot of listings say &ldquo;remote&rdquo; and mean one country. Here&rsquo;s what we check on every single listing before it earns the badge.</p>
+    <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <x-reveal class="mx-auto mb-12 max-w-2xl text-center">
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-teal-50 border border-teal-200/70 px-3.5 py-1 text-xs font-bold text-teal-800 mb-3">
+                <x-icon name="shield" class="h-3.5 w-3.5 text-teal-600" />
+                Vetting Standards
+            </span>
+            <h2 class="text-3xl font-extrabold text-slate-900">Not every &ldquo;remote&rdquo; job means Kenya</h2>
+            <p class="mt-3 text-slate-600 leading-relaxed">A lot of listings say &ldquo;remote&rdquo; and mean one country. Here&rsquo;s what we check on every single listing before it earns the badge.</p>
         </x-reveal>
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
             @foreach ($trustFeatures as $i => $f)
                 <x-reveal :delay="$i * 120">
-                    <div class="card-hover h-full rounded-xl border border-slate-200 bg-white p-6 shadow-xs hover:border-teal-500 transition">
-                        <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-teal-50 text-teal-700 border border-teal-100">
-                            <x-icon :name="$f['icon']" class="h-5 w-5" />
+                    <div class="card-hover h-full rounded-3xl border border-slate-200/80 bg-white p-8 shadow-sm hover:border-teal-500 hover:shadow-xl hover:shadow-teal-950/5 transition-all duration-200">
+                        <span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-teal-50 text-teal-700 border border-teal-100 shadow-2xs">
+                            <x-icon :name="$f['icon']" class="h-6 w-6" />
                         </span>
-                        <h3 class="mt-4 font-bold text-slate-900">{{ $f['title'] }}</h3>
-                        <p class="mt-2 text-sm text-slate-600 leading-relaxed">{{ $f['body'] }}</p>
+                        <h3 class="mt-5 font-bold text-slate-900 text-lg">{{ $f['title'] }}</h3>
+                        <p class="mt-2.5 text-sm text-slate-600 leading-relaxed">{{ $f['body'] }}</p>
                     </div>
                 </x-reveal>
             @endforeach
         </div>
-        <x-reveal class="mt-8 text-center">
-            <a href="{{ url('/match') }}" class="text-sm font-bold text-teal-700 hover:underline">See how the Kenya-Friendly Match score works &rarr;</a>
+        <x-reveal class="mt-10 text-center">
+            <a href="{{ url('/match') }}" class="inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-50/60 px-5 py-2.5 text-sm font-bold text-teal-800 hover:bg-teal-100 transition shadow-2xs">
+                <span>See how the Kenya-Friendly Match score works</span>
+                <span>&rarr;</span>
+            </a>
         </x-reveal>
     </section>
 
     {{-- How it works — Remote.co clean step layout --}}
-    <section class="bg-slate-50/70 border-y border-slate-200/80 px-4 py-14 sm:px-6">
+    <section class="bg-slate-50/70 border-y border-slate-200/80 px-4 py-16 sm:px-6">
         <div class="mx-auto max-w-4xl">
-            <x-reveal>
-                <h2 class="mb-8 text-center text-2xl font-extrabold text-slate-900">How It Works</h2>
+            <x-reveal class="text-center mb-10">
+                <span class="inline-flex items-center gap-1.5 rounded-full bg-teal-50 border border-teal-200/70 px-3.5 py-1 text-xs font-bold text-teal-800 mb-2.5">
+                    <x-icon name="sparkle" class="h-3.5 w-3.5 text-teal-600" />
+                    Simple Process
+                </span>
+                <h2 class="text-3xl font-extrabold text-slate-900">How KenyaRemoteJobs Works</h2>
             </x-reveal>
 
             <x-reveal>
                 <div x-data="{ tab: 0 }">
-                    <div class="mx-auto flex max-w-xl items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white p-1.5 shadow-xs">
+                    <div class="mx-auto flex max-w-xl items-center justify-center gap-2 rounded-full border border-slate-200/80 bg-white p-1.5 shadow-sm">
                         @foreach ($howItWorks as $i => $step)
                             <button
                                 type="button"
                                 @click="tab = {{ $i }}"
-                                class="flex-1 rounded-lg px-3 py-2 text-sm font-bold transition"
-                                :class="tab === {{ $i }} ? 'bg-teal-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'"
+                                class="flex-1 rounded-full px-4 py-2.5 text-xs sm:text-sm font-bold transition-all"
+                                :class="tab === {{ $i }} ? 'bg-teal-600 text-white shadow-sm' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'"
                             >
                                 {{ $i + 1 }}. {{ $step['title'] }}
                             </button>
                         @endforeach
                     </div>
 
-                    <div class="relative mt-6 min-h-[9rem] rounded-xl border border-slate-200 bg-white p-8 shadow-xs">
+                    <div class="relative mt-8 min-h-[9rem] rounded-3xl border border-slate-200/80 bg-white p-8 sm:p-12 shadow-sm text-center">
                         @foreach ($howItWorks as $i => $step)
-                            <div x-show="tab === {{ $i }}" x-cloak x-transition.opacity class="text-center">
-                                <div class="mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-teal-600 text-base font-bold text-white shadow-xs">
+                            <div x-show="tab === {{ $i }}" x-cloak x-transition.opacity class="max-w-lg mx-auto">
+                                <div class="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-teal-600 text-lg font-bold text-white shadow-md shadow-teal-600/25">
                                     {{ $i + 1 }}
                                 </div>
-                                <h3 class="mb-2 font-bold text-slate-900 text-lg">{{ $step['title'] }}</h3>
-                                <p class="mx-auto max-w-md text-sm text-slate-600 leading-relaxed">{{ $step['body'] }}</p>
+                                <h3 class="mb-3 font-bold text-slate-900 text-xl">{{ $step['title'] }}</h3>
+                                <p class="text-sm text-slate-600 leading-relaxed">{{ $step['body'] }}</p>
                             </div>
                         @endforeach
                     </div>
@@ -359,17 +377,23 @@
         </div>
     </section>
 
-    <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <x-reveal>
-            <h2 class="mb-8 text-center text-2xl font-extrabold text-slate-900">Success Stories</h2>
+    <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <x-reveal class="text-center mb-12">
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-3.5 py-1 text-xs font-bold text-emerald-800 mb-2.5">
+                <x-icon name="check" class="h-3.5 w-3.5 text-emerald-600" />
+                Proven Results
+            </span>
+            <h2 class="text-3xl font-extrabold text-slate-900">Success Stories from Kenyan Talent</h2>
         </x-reveal>
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
             @foreach ($testimonials as $i => $t)
                 <x-reveal :delay="$i * 120">
-                    <figure class="card-hover h-full rounded-xl border border-slate-200 bg-white p-6 shadow-xs hover:border-teal-500 transition flex flex-col justify-between">
-                        <blockquote class="text-sm text-slate-700 leading-relaxed">&ldquo;{{ $t['quote'] }}&rdquo;</blockquote>
-                        <figcaption class="mt-4 text-xs font-bold uppercase tracking-wider text-teal-700 flex items-center gap-1.5">
-                            <x-icon name="check" class="h-3.5 w-3.5 text-emerald-600" />
+                    <figure class="card-hover h-full rounded-3xl border border-slate-200/80 bg-white p-8 shadow-sm hover:border-teal-500 hover:shadow-xl hover:shadow-teal-950/5 transition-all duration-200 flex flex-col justify-between">
+                        <blockquote class="text-sm sm:text-base text-slate-700 leading-relaxed">&ldquo;{{ $t['quote'] }}&rdquo;</blockquote>
+                        <figcaption class="mt-6 pt-4 border-t border-slate-100 text-xs font-bold uppercase tracking-wider text-teal-700 flex items-center gap-2">
+                            <span class="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
+                                <x-icon name="check" class="h-3.5 w-3.5" />
+                            </span>
                             {{ $t['name'] }}
                         </figcaption>
                     </figure>
@@ -379,8 +403,8 @@
     </section>
 
     <section id="faqs" class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
-        <x-reveal>
-            <h2 class="mb-8 text-center text-2xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
+        <x-reveal class="text-center mb-10">
+            <h2 class="text-3xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
         </x-reveal>
         <div class="space-y-4">
             @foreach ($faqs as $i => $faq)
@@ -389,8 +413,8 @@
                 </x-reveal>
             @endforeach
         </div>
-        <div class="mt-8 text-center">
-            <a href="{{ url('/faqs') }}" class="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-xs transition hover:bg-slate-50 hover:border-teal-500 hover:text-teal-700">
+        <div class="mt-10 text-center">
+            <a href="{{ url('/faqs') }}" class="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 shadow-xs transition hover:bg-slate-50 hover:border-teal-500 hover:text-teal-700">
                 View all answered questions &rarr;
             </a>
         </div>
@@ -398,24 +422,32 @@
 
     {{-- Final CTA banner --}}
     <section class="px-4 pb-12 sm:px-6">
-        <x-reveal class="mx-auto max-w-6xl rounded-2xl bg-slate-900 border border-slate-800 px-8 py-12 text-center text-white shadow-xl">
-            <h2 class="text-2xl font-bold sm:text-3xl text-white">Make it easier for the right opportunity to find you.</h2>
-            <p class="mx-auto mt-3 max-w-xl text-slate-400">Get a match score against every listing, no CV upload required — takes under a minute.</p>
-            <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
-                <a href="{{ url('/match') }}" class="btn-pop rounded-lg bg-teal-600 px-6 py-3 font-semibold text-white shadow-xs transition hover:bg-teal-700">Get my match score &rarr;</a>
-                <a href="{{ url('/jobs') }}" class="rounded-lg border border-slate-700 bg-slate-800 px-6 py-3 font-semibold text-slate-200 transition hover:bg-slate-700">Browse all jobs</a>
+        <x-reveal class="relative mx-auto max-w-6xl rounded-3xl bg-slate-900 border border-slate-800 px-8 py-16 text-center text-white shadow-2xl overflow-hidden">
+            <div class="pointer-events-none absolute -right-16 -bottom-16 h-64 w-64 rounded-full bg-teal-500/10 blur-3xl"></div>
+            <div class="pointer-events-none absolute -left-16 -top-16 h-64 w-64 rounded-full bg-indigo-500/10 blur-3xl"></div>
+
+            <div class="relative z-10">
+                <h2 class="text-3xl font-extrabold sm:text-4xl text-white">Make it easier for the right opportunity to find you.</h2>
+                <p class="mx-auto mt-4 max-w-xl text-slate-300 leading-relaxed">Get a match score against every listing, no CV upload required — takes under a minute.</p>
+                <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+                    <a href="{{ url('/match') }}" class="btn-pop rounded-full bg-teal-600 px-8 py-3.5 font-bold text-white shadow-md shadow-teal-600/30 transition hover:bg-teal-700">Get my match score &rarr;</a>
+                    <a href="{{ url('/jobs') }}" class="rounded-full border border-slate-700 bg-slate-800/80 px-8 py-3.5 font-semibold text-slate-200 transition hover:bg-slate-800 hover:text-white">Browse all jobs</a>
+                </div>
             </div>
         </x-reveal>
     </section>
 
     <section class="mx-auto max-w-6xl px-4 pb-16 sm:px-6">
         <x-reveal>
-            <a href="{{ url('/surveys') }}" class="flex flex-col items-start justify-between gap-4 rounded-xl border border-slate-200 bg-white p-6 shadow-xs transition hover:border-teal-500 hover:shadow-md sm:flex-row sm:items-center">
+            <a href="{{ url('/surveys') }}" class="flex flex-col items-start justify-between gap-4 rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-7 shadow-sm transition-all hover:border-teal-500/70 hover:shadow-lg hover:-translate-y-0.5 sm:flex-row sm:items-center">
                 <div>
-                    <p class="flex items-center gap-1.5 font-bold text-slate-900">
-                        <x-icon name="bulb" class="h-4 w-4 text-teal-600" /> Earn while you search
+                    <p class="flex items-center gap-2.5 font-bold text-slate-900 text-base">
+                        <span class="flex h-8 w-8 items-center justify-center rounded-xl bg-teal-50 text-teal-600 border border-teal-100/80 shadow-2xs">
+                            <x-icon name="bulb" class="h-4 w-4" />
+                        </span>
+                        <span>Earn while you search</span>
                     </p>
-                    <p class="text-sm text-slate-500 mt-0.5">A curated list of legit paid-survey platforms as a side-income supplement.</p>
+                    <p class="text-sm text-slate-500 mt-1 pl-10.5 leading-relaxed">A curated list of legit paid-survey platforms as a side-income supplement.</p>
                 </div>
                 <span class="shrink-0 text-sm font-bold text-teal-700">Explore &rarr;</span>
             </a>

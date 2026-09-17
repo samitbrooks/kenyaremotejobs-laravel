@@ -30,16 +30,16 @@
         {{-- FAQ Categories Grid --}}
         <div class="mt-12 space-y-12">
             @foreach ($categories as $catKey => $category)
-                <section id="{{ $catKey }}" class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-2xs">
-                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
-                        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-teal-700">
+                <section id="{{ $catKey }}" class="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-10 shadow-sm">
+                    <div class="flex items-center gap-3.5 border-b border-slate-100 pb-5">
+                        <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-teal-50 text-teal-700 border border-teal-100 shadow-2xs">
                             <x-icon :name="$category['icon']" class="h-5 w-5" />
                         </div>
                         <div>
                             <h2 class="text-xl font-bold text-slate-900 sm:text-2xl">
                                 {{ $category['title'] }}
                             </h2>
-                            <p class="text-xs text-slate-500">
+                            <p class="text-xs text-slate-500 mt-0.5">
                                 {{ count($category['items']) }} questions answered
                             </p>
                         </div>
@@ -55,17 +55,17 @@
         </div>
 
         {{-- Still have questions CTA --}}
-        <div class="mt-16 rounded-2xl border border-slate-800 bg-slate-900 p-8 text-center text-white shadow-lg">
-            <h2 class="text-2xl font-bold">Have a specific question not covered here?</h2>
-            <p class="mt-2 text-sm text-slate-300 max-w-lg mx-auto">
-                Ask our Daisy AI Career Copilot in the Action Center (bottom right) or explore our curated career guides in The Journal.
+        <div class="mt-16 rounded-3xl border border-slate-800 bg-slate-900 p-8 sm:p-12 text-center text-white shadow-2xl">
+            <h2 class="text-2xl sm:text-3xl font-bold">Have a specific question not covered here?</h2>
+            <p class="mt-2.5 text-sm text-slate-300 max-w-lg mx-auto leading-relaxed">
+                Daisy AI, our free Kenyan contractor advisor, can answer questions about tax withholding, Wise accounts, or tailoring your CV.
             </p>
             <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
-                <a href="{{ url('/journal') }}" class="btn-pop rounded-full bg-teal-600 px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-teal-700">
-                    Read The Journal &rarr;
+                <a href="{{ url('/pricing') }}" class="btn-pop rounded-full bg-teal-600 px-8 py-3.5 text-sm font-bold text-white shadow-md shadow-teal-600/20 hover:bg-teal-700 transition">
+                    Explore Pro Membership &rarr;
                 </a>
-                <a href="{{ url('/jobs') }}" class="rounded-full border border-slate-700 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800">
-                    Browse All Remote Jobs
+                <a href="{{ url('/journal') }}" class="rounded-full border border-slate-700 bg-slate-800/80 px-8 py-3.5 text-sm font-semibold text-slate-200 hover:bg-slate-800 hover:text-white transition">
+                    Read The Journal &rarr;
                 </a>
             </div>
         </div>

@@ -26,16 +26,16 @@
     }
 @endphp
 
-<div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xs">
+<div class="overflow-hidden rounded-3xl border border-slate-200/80 bg-white shadow-sm">
     <table class="w-full text-sm">
-        <caption class="border-b border-slate-200 bg-slate-100/70 px-5 py-2.5 text-left text-xs font-bold uppercase tracking-wider text-slate-700">
+        <caption class="border-b border-slate-200/70 bg-slate-50/80 px-6 py-3.5 text-left text-xs font-bold uppercase tracking-wider text-slate-700">
             Job at a glance
         </caption>
         <tbody class="divide-y divide-slate-100">
             @foreach ($rows as $i => $row)
-                <tr @class(['bg-slate-50/50' => $i % 2 === 1])>
-                    <th scope="row" class="w-2/5 px-5 py-2.5 text-left font-medium text-slate-500">{{ $row['label'] }}</th>
-                    <td class="px-5 py-2.5 text-slate-800 font-medium">{{ $row['value'] }}</td>
+                <tr @class(['bg-slate-50/40' => $i % 2 === 1])>
+                    <th scope="row" class="w-2/5 px-6 py-3 text-left font-medium text-slate-500">{{ $row['label'] }}</th>
+                    <td class="px-6 py-3 text-slate-800 font-medium">{{ $row['value'] }}</td>
                 </tr>
             @endforeach
         </tbody>

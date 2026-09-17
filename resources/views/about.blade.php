@@ -29,17 +29,17 @@
     <section class="mx-auto max-w-5xl px-4 py-16 sm:px-6">
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <x-reveal>
-                <div class="h-full rounded-2xl border border-slate-200 bg-white p-6 shadow-2xs">
-                    <p class="text-sm font-semibold uppercase tracking-wide text-slate-400">The problem</p>
-                    <p class="mt-3 text-lg leading-relaxed text-slate-600">
+                <div class="h-full rounded-3xl border border-slate-200/80 bg-white p-8 sm:p-10 shadow-sm">
+                    <p class="text-xs font-bold uppercase tracking-wider text-slate-400">The problem</p>
+                    <p class="mt-3 text-lg leading-relaxed text-slate-600 font-normal">
                         Listings say &ldquo;remote&rdquo; and then bury a &ldquo;US applicants only&rdquo; clause three paragraphs down. Timezone requirements assume everyone is a few hours from New York. You find out you never qualified after the application.
                     </p>
                 </div>
             </x-reveal>
             <x-reveal :delay="120">
-                <div class="h-full rounded-2xl bg-slate-900 p-6 text-white shadow-md border border-slate-800">
-                    <p class="text-sm font-semibold uppercase tracking-wide text-teal-400">The fix</p>
-                    <p class="mt-3 text-lg leading-relaxed text-slate-200">
+                <div class="h-full rounded-3xl bg-slate-900 p-8 sm:p-10 text-white shadow-xl border border-slate-800">
+                    <p class="text-xs font-bold uppercase tracking-wider text-teal-400">The fix</p>
+                    <p class="mt-3 text-lg leading-relaxed text-slate-200 font-normal">
                         We monitor verified international employer networks and score every single role for how realistically open it is to East Africa &mdash; location, timezone overlap, and visa restrictions included &mdash; before you ever click apply.
                     </p>
                 </div>
@@ -47,7 +47,7 @@
         </div>
     </section>
 
-    <section class="bg-slate-100/70 border-y border-slate-200 px-4 py-16 sm:px-6">
+    <section class="bg-slate-100/70 border-y border-slate-200/80 px-4 py-16 sm:px-6">
         <div class="mx-auto max-w-5xl">
             <x-reveal>
                 <h2 class="mb-10 text-center text-2xl font-bold text-slate-900">What we stand for</h2>
@@ -63,7 +63,7 @@
                             @endif
                         </div>
                         <h3 class="mb-2 font-bold text-slate-900">{{ $pillar['title'] }}</h3>
-                        <p class="text-sm text-slate-600">{{ $pillar['body'] }}</p>
+                        <p class="text-sm text-slate-600 leading-relaxed">{{ $pillar['body'] }}</p>
                     </x-reveal>
                 @endforeach
             </div>
@@ -72,7 +72,7 @@
 
     <section class="mx-auto max-w-5xl px-4 py-16 text-center sm:px-6">
         <x-reveal>
-            <div class="grid grid-cols-1 gap-6 rounded-2xl border border-slate-200 bg-white p-8 shadow-2xs sm:grid-cols-3 sm:p-10">
+            <div class="grid grid-cols-1 gap-6 rounded-3xl border border-slate-200/80 bg-white p-8 shadow-sm sm:grid-cols-3 sm:p-10">
                 <div>
                     <p class="text-4xl font-bold text-teal-700"><x-count-up :value="$total" /></p>
                     <p class="mt-1 text-sm text-slate-500">live listings right now</p>

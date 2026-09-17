@@ -19,10 +19,10 @@
 
         {{-- Company Hero Card --}}
         <x-reveal>
-            <div class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
+            <div class="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-10 shadow-sm">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6 border-b border-slate-100 pb-6">
                     <div class="flex items-center gap-4">
-                        <div class="flex h-16 w-16 items-center justify-center rounded-2xl border border-slate-200 bg-slate-900 text-2xl font-black text-white shadow-2xs">
+                        <div class="flex h-16 w-16 items-center justify-center rounded-2xl border border-slate-200/80 bg-slate-900 text-2xl font-black text-white shadow-2xs">
                             {{ substr($company['name'], 0, 1) }}
                         </div>
                         <div>
@@ -42,13 +42,13 @@
                             href="{{ $company['website'] }}"
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-50"
+                            class="inline-flex items-center gap-1.5 rounded-full border border-slate-200/80 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-50"
                         >
                             Official Website &#8599;
                         </a>
                         <a
                             href="#open-jobs"
-                            class="inline-flex items-center gap-1.5 rounded-full bg-teal-600 px-5 py-2 text-xs font-bold text-white shadow-sm hover:bg-teal-700 transition"
+                            class="btn-pop inline-flex items-center gap-1.5 rounded-full bg-teal-600 px-5 py-2 text-xs font-bold text-white shadow-sm hover:bg-teal-700 transition"
                         >
                             View Open Jobs &darr;
                         </a>
@@ -57,19 +57,19 @@
 
                 {{-- Key Facts Grid --}}
                 <div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4 text-xs">
-                    <div class="rounded-xl bg-slate-50/80 p-4 border border-slate-200">
+                    <div class="rounded-2xl bg-slate-50/70 p-4 border border-slate-200/70 shadow-2xs">
                         <p class="font-semibold text-slate-400 uppercase tracking-wider text-[10px]">Headquarters</p>
                         <p class="mt-1 font-bold text-slate-900">{{ $company['headquarters'] }}</p>
                     </div>
-                    <div class="rounded-xl bg-slate-50/80 p-4 border border-slate-200">
+                    <div class="rounded-2xl bg-slate-50/70 p-4 border border-slate-200/70 shadow-2xs">
                         <p class="font-semibold text-slate-400 uppercase tracking-wider text-[10px]">Industry</p>
                         <p class="mt-1 font-bold text-slate-900">{{ $company['industry'] }}</p>
                     </div>
-                    <div class="rounded-xl bg-slate-50/80 p-4 border border-slate-200">
+                    <div class="rounded-2xl bg-slate-50/70 p-4 border border-slate-200/70 shadow-2xs">
                         <p class="font-semibold text-slate-400 uppercase tracking-wider text-[10px]">Company Size</p>
                         <p class="mt-1 font-bold text-slate-900">{{ $company['size'] }}</p>
                     </div>
-                    <div class="rounded-xl bg-slate-50/80 p-4 border border-slate-200">
+                    <div class="rounded-2xl bg-slate-50/70 p-4 border border-slate-200/70 shadow-2xs">
                         <p class="font-semibold text-slate-400 uppercase tracking-wider text-[10px]">Timezone Alignment</p>
                         <p class="mt-1 font-bold text-emerald-800">EAT Compatible (UTC+3)</p>
                     </div>
@@ -81,7 +81,7 @@
         <div class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
             <div class="md:col-span-2 space-y-6">
                 {{-- Overview & Why They Hire in Kenya --}}
-                <div class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-xs">
+                <div class="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-8 shadow-sm">
                     <h2 class="text-xl font-bold text-slate-900">About {{ $company['name'] }}'s Remote Culture</h2>
                     <p class="mt-3 text-sm leading-relaxed text-slate-600">{{ $company['description'] }}</p>
 

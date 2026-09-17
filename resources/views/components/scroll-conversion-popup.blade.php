@@ -42,7 +42,7 @@
     x-transition:leave="transition ease-in duration-200"
     x-transition:leave-start="opacity-100 translate-y-0 scale-100"
     x-transition:leave-end="opacity-0 translate-y-4 scale-95"
-    class="fixed bottom-6 left-4 sm:left-6 z-40 max-w-sm rounded-2xl border border-slate-200 bg-white/95 backdrop-blur-md p-5 shadow-2xl"
+    class="fixed bottom-6 left-4 sm:left-6 z-40 max-w-sm rounded-3xl border border-slate-200/80 bg-white/95 backdrop-blur-md p-6 shadow-2xl"
     role="dialog"
     aria-label="Early Access Tip"
 >
