@@ -9,6 +9,7 @@ use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\FeedController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobsController;
 use App\Http\Controllers\JournalController;
@@ -71,6 +72,9 @@ Route::match(['get', 'post'], '/unsubscribe/{user}', UnsubscribeController::clas
 
 Route::get('/sitemap.xml', [SitemapController::class, 'sitemap']);
 Route::get('/robots.txt', [SitemapController::class, 'robots']);
+Route::get('/feed/featured.rss', [FeedController::class, 'featured'])->name('feed.featured');
+Route::get('/feed/jobs.rss', [FeedController::class, 'featured']);
+Route::get('/feed/featured-jobs.rss', [FeedController::class, 'featured']);
 Route::post('/api/career-bot', [CareerBotController::class, 'ask'])->middleware('throttle:60,1');
 
 // The 'admin' middleware (App\Http\Middleware\EnsureUserIsAdmin) guards the
