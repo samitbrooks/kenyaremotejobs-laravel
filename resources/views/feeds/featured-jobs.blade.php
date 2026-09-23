@@ -24,7 +24,8 @@
             @foreach ($item['categories'] as $cat)
             <category><![CDATA[{{ $cat }}]]></category>
             @endforeach
-            <media:content url="{{ $siteUrl }}/images/og-banner.svg" medium="image" />
+            <enclosure url="{{ $siteUrl }}/images/og-banner.png" length="124500" type="image/png" />
+            <media:content url="{{ $siteUrl }}/images/og-banner.png" medium="image" type="image/png" />
         </item>
         @endforeach
     </channel>
