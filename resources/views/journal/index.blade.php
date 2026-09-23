@@ -3,6 +3,9 @@
     description="Practical guidance for finding good remote work, building a career, and understanding how hiring for Kenya and East Africa actually works."
     :canonical="url('/journal')"
 >
+    <script type="application/ld+json">{!! \App\Support\Seo::journalIndexBreadcrumbJsonLd() !!}</script>
+    <script type="application/ld+json">{!! \App\Support\Seo::journalBlogJsonLd($posts) !!}</script>
+
     <div class="mx-auto max-w-5xl px-4 py-14 sm:px-6">
         <x-reveal>
             <h1 class="text-3xl font-bold sm:text-4xl">Ideas for better work.</h1>

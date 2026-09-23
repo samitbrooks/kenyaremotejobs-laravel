@@ -31,10 +31,16 @@
             $prevShown = $p;
         }
     }
+
+    $canonicalUrl = $page > 1 ? url('/jobs').'?page='.$page : url('/jobs');
+    if ($audience) {
+        $canonicalUrl = url('/jobs').'?audience='.$audience.($page > 1 ? '&page='.$page : '');
+    }
 @endphp
 
-<x-layouts.app :title="$title" :description="$description" :canonical="url('/jobs')">
+<x-layouts.app :title="$title" :description="$description" :canonical="$canonicalUrl">
     <script type="application/ld+json">{!! \App\Support\Seo::itemListJsonLd($jobs, $title, $description) !!}</script>
+    <script type="application/ld+json">{!! \App\Support\Seo::jobsIndexBreadcrumbJsonLd($audience ? $title : null, $canonicalUrl) !!}</script>
     <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
         <h1 class="flex items-center gap-2.5 text-3xl font-extrabold text-slate-900">
             @if ($audience)

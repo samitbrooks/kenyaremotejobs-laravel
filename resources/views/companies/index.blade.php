@@ -3,6 +3,9 @@
     description="Browse verified international remote-first companies actively hiring Kenyan talent. View hiring models (EOR vs B2B), USD payment methods (Wise/M-Pesa), and live job openings."
     :canonical="url('/companies')"
 >
+    <script type="application/ld+json">{!! \App\Support\Seo::companiesIndexBreadcrumbJsonLd() !!}</script>
+    <script type="application/ld+json">{!! \App\Support\Seo::companiesItemListJsonLd($companies) !!}</script>
+
     <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
         {{-- Breadcrumb --}}
         <nav aria-label="Breadcrumb" class="mb-6 flex items-center gap-2 text-xs text-foreground/50">

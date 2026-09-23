@@ -1,5 +1,26 @@
 @php
-    $canonicalUrl = url('/remote-jobs/'.$category['slug']);
+    $page = $page ?? 1;
+    $totalPages = $totalPages ?? 1;
+    $canonicalUrl = $page > 1 ? url('/remote-jobs/'.$category['slug']).'?page='.$page : url('/remote-jobs/'.$category['slug']);
+
+    $buildPageHref = function (int $targetPage) use ($category) {
+        return $targetPage > 1
+            ? url('/remote-jobs/'.$category['slug']).'?page='.$targetPage
+            : url('/remote-jobs/'.$category['slug']);
+    };
+
+    $pageItems = [];
+    $window = 1;
+    $prevShown = null;
+    for ($p = 1; $p <= $totalPages; $p++) {
+        if ($p === 1 || $p === $totalPages || abs($p - $page) <= $window) {
+            if ($prevShown !== null && $p - $prevShown > 1) {
+                $pageItems[] = '…';
+            }
+            $pageItems[] = $p;
+            $prevShown = $p;
+        }
+    }
 @endphp
 
 <x-layouts.app
@@ -87,6 +108,36 @@
                             <x-job-card :job="$job" :unlocked="$isUnlocked($job)" :match-percent="$matchPercent($job)" />
                         </x-reveal>
                     @endforeach
+                </div>
+            @endif
+
+            @if ($totalPages > 1)
+                <div class="mt-10 flex flex-wrap items-center justify-center gap-2">
+                    @if ($page > 1)
+                        <a href="{{ $buildPageHref($page - 1) }}" class="btn-pop rounded-full border border-slate-200/80 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-2xs hover:bg-teal-50 hover:border-teal-500 hover:text-teal-700 transition" aria-label="Previous page">
+                            &larr; Prev
+                        </a>
+                    @endif
+
+                    @foreach ($pageItems as $item)
+                        @if ($item === '…')
+                            <span class="px-2 text-sm text-slate-400" aria-hidden="true">&hellip;</span>
+                        @else
+                            <a
+                                href="{{ $buildPageHref($item) }}"
+                                @if ($item === $page) aria-current="page" @endif
+                                class="btn-pop rounded-full px-4 py-2 text-sm font-bold transition {{ $item === $page ? 'bg-teal-600 text-white shadow-sm shadow-teal-600/25' : 'border border-slate-200/80 bg-white text-slate-700 shadow-2xs hover:bg-teal-50 hover:border-teal-500 hover:text-teal-700' }}"
+                            >
+                                {{ $item }}
+                            </a>
+                        @endif
+                    @endforeach
+
+                    @if ($page < $totalPages)
+                        <a href="{{ $buildPageHref($page + 1) }}" class="btn-pop rounded-full border border-slate-200/80 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-2xs hover:bg-teal-50 hover:border-teal-500 hover:text-teal-700 transition" aria-label="Next page">
+                            Next &rarr;
+                        </a>
+                    @endif
                 </div>
             @endif
         </section>

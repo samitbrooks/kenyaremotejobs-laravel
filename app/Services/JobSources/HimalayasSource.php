@@ -103,7 +103,7 @@ class HimalayasSource implements JobSource
         ];
     }
 
-    private function formatOffset(int $offset): string
+    private function formatOffset(int|float $offset): string
     {
         return $offset >= 0 ? "+{$offset}" : (string) $offset;
     }

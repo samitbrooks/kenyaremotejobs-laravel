@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'google_indexing' => [
+        'key_path' => env('GOOGLE_INDEXING_KEY_PATH', storage_path('app/google-indexing-key.json')),
+        'credentials_json' => env('GOOGLE_INDEXING_CREDENTIALS'),
+    ],
+
 ];

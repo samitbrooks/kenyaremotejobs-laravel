@@ -5,6 +5,7 @@ namespace App\Support;
 use App\Models\BlogPost;
 use App\Models\JobListing;
 use App\Services\Redactor;
+use Illuminate\Support\Str;
 
 /**
  * JSON-LD builders live in a plain .php file, not a .blade.php one — Blade's
@@ -68,11 +69,24 @@ class Seo
             'datePosted' => $job->posted_at->toIso8601String(),
             'validThrough' => $job->posted_at->copy()->addDays(self::ESTIMATED_LISTING_LIFETIME_DAYS)->toIso8601String(),
             'employmentType' => self::EMPLOYMENT_TYPE_MAP[strtolower(str_replace(' ', '_', trim($job->remote_type ?? '')))] ?? 'OTHER',
-            'hiringOrganization' => [
-                $at.'type' => 'Organization',
-                'name' => $employerVisible ? $job->company : 'Verified Remote Employer (via '.config('site.name').')',
-                'sameAs' => config('site.url'),
-            ],
+            'hiringOrganization' => (function () use ($at, $employerVisible, $job) {
+                $org = [
+                    $at.'type' => 'Organization',
+                    'name' => $employerVisible ? $job->company : 'Verified Remote Employer (via '.config('site.name').')',
+                    'sameAs' => config('site.url'),
+                ];
+                if ($employerVisible) {
+                    $matchedCompany = CompanyDirectory::find(Str::slug($job->company));
+                    if ($matchedCompany) {
+                        $org['sameAs'] = $matchedCompany['website'];
+                        if (! empty($matchedCompany['logo'])) {
+                            $org['logo'] = $matchedCompany['logo'];
+                        }
+                    }
+                }
+
+                return $org;
+            })(),
             'jobLocationType' => 'TELECOMMUTE',
             // Every job on this board is pitched to a Kenya-based audience, so
             // Kenya is always a valid applicant location even when the
@@ -80,6 +94,13 @@ class Seo
             'applicantLocationRequirements' => [
                 $at.'type' => 'Country',
                 'name' => 'Kenya',
+            ],
+            'jobLocation' => [
+                $at.'type' => 'Place',
+                'address' => [
+                    $at.'type' => 'PostalAddress',
+                    'addressCountry' => 'Kenya',
+                ],
             ],
             'directApply' => true,
             'url' => config('site.url').'/jobs/'.$job->id,
@@ -229,7 +250,14 @@ class Seo
                     $at.'id' => config('site.url').'/#organization',
                     'name' => config('site.name'),
                     'url' => config('site.url'),
+                    'logo' => [
+                        $at.'type' => 'ImageObject',
+                        'url' => config('site.url').'/images/logo.png',
+                    ],
                     'description' => config('site.default_description'),
+                    'sameAs' => array_values(array_filter([
+                        config('site.twitter_handle') ? 'https://x.com/'.ltrim(config('site.twitter_handle'), '@') : null,
+                    ])),
                 ],
                 [
                     $at.'type' => 'WebSite',
@@ -395,6 +423,174 @@ class Seo
         return json_encode([
             $at.'context' => 'https://schema.org',
             $at.'graph' => $graph,
+        ]);
+    }
+
+    public static function jobsIndexBreadcrumbJsonLd(?string $pageTitle = null, ?string $pageUrl = null): string
+    {
+        $at = '@';
+        $baseUrl = config('site.url');
+
+        $elements = [
+            [$at.'type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => $baseUrl],
+            [$at.'type' => 'ListItem', 'position' => 2, 'name' => 'Remote Jobs', 'item' => $baseUrl.'/jobs'],
+        ];
+
+        if ($pageTitle && $pageUrl && $pageUrl !== $baseUrl.'/jobs') {
+            $elements[] = [$at.'type' => 'ListItem', 'position' => 3, 'name' => $pageTitle, 'item' => $pageUrl];
+        }
+
+        return json_encode([
+            $at.'context' => 'https://schema.org',
+            $at.'type' => 'BreadcrumbList',
+            'itemListElement' => $elements,
+        ]);
+    }
+
+    public static function companiesIndexBreadcrumbJsonLd(): string
+    {
+        $at = '@';
+        $baseUrl = config('site.url');
+
+        return json_encode([
+            $at.'context' => 'https://schema.org',
+            $at.'type' => 'BreadcrumbList',
+            'itemListElement' => [
+                [$at.'type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => $baseUrl],
+                [$at.'type' => 'ListItem', 'position' => 2, 'name' => 'Companies', 'item' => $baseUrl.'/companies'],
+            ],
+        ]);
+    }
+
+    public static function collectionsIndexBreadcrumbJsonLd(): string
+    {
+        $at = '@';
+        $baseUrl = config('site.url');
+
+        return json_encode([
+            $at.'context' => 'https://schema.org',
+            $at.'type' => 'BreadcrumbList',
+            'itemListElement' => [
+                [$at.'type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => $baseUrl],
+                [$at.'type' => 'ListItem', 'position' => 2, 'name' => 'Collections', 'item' => $baseUrl.'/collections'],
+            ],
+        ]);
+    }
+
+    public static function journalIndexBreadcrumbJsonLd(): string
+    {
+        $at = '@';
+        $baseUrl = config('site.url');
+
+        return json_encode([
+            $at.'context' => 'https://schema.org',
+            $at.'type' => 'BreadcrumbList',
+            'itemListElement' => [
+                [$at.'type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => $baseUrl],
+                [$at.'type' => 'ListItem', 'position' => 2, 'name' => 'The Journal', 'item' => $baseUrl.'/journal'],
+            ],
+        ]);
+    }
+
+    public static function faqsBreadcrumbJsonLd(): string
+    {
+        $at = '@';
+        $baseUrl = config('site.url');
+
+        return json_encode([
+            $at.'context' => 'https://schema.org',
+            $at.'type' => 'BreadcrumbList',
+            'itemListElement' => [
+                [$at.'type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => $baseUrl],
+                [$at.'type' => 'ListItem', 'position' => 2, 'name' => 'FAQs', 'item' => $baseUrl.'/faqs'],
+            ],
+        ]);
+    }
+
+    /**
+     * @param  iterable<int|string, array{name: string, slug: string, description?: string, logo?: string}>  $companies
+     */
+    public static function companiesItemListJsonLd(iterable $companies): string
+    {
+        $at = '@';
+        $baseUrl = config('site.url');
+        $items = [];
+        $pos = 1;
+
+        foreach ($companies as $company) {
+            $items[] = [
+                $at.'type' => 'ListItem',
+                'position' => $pos++,
+                'name' => $company['name'],
+                'url' => $baseUrl.'/companies/'.$company['slug'],
+            ];
+        }
+
+        return json_encode([
+            $at.'context' => 'https://schema.org',
+            $at.'type' => 'ItemList',
+            'name' => 'Top Global Remote Companies Hiring in Kenya',
+            'description' => 'Verified international remote-first employers actively hiring Kenyan professionals.',
+            'numberOfItems' => count($items),
+            'itemListElement' => $items,
+        ]);
+    }
+
+    /**
+     * @param  iterable<int|string, array{title: string, slug: string, intro?: string}>  $collections
+     */
+    public static function collectionsItemListJsonLd(iterable $collections): string
+    {
+        $at = '@';
+        $baseUrl = config('site.url');
+        $items = [];
+        $pos = 1;
+
+        foreach ($collections as $collection) {
+            $items[] = [
+                $at.'type' => 'ListItem',
+                'position' => $pos++,
+                'name' => $collection['title'],
+                'url' => $baseUrl.'/collections/'.$collection['slug'],
+            ];
+        }
+
+        return json_encode([
+            $at.'context' => 'https://schema.org',
+            $at.'type' => 'ItemList',
+            'name' => 'Curated Remote Job Collections for Kenya',
+            'description' => 'Hand-curated collections of remote jobs vetted for Kenyan professionals.',
+            'numberOfItems' => count($items),
+            'itemListElement' => $items,
+        ]);
+    }
+
+    /**
+     * @param  iterable<BlogPost>  $posts
+     */
+    public static function journalBlogJsonLd(iterable $posts): string
+    {
+        $at = '@';
+        $baseUrl = config('site.url');
+        $items = [];
+        $pos = 1;
+
+        foreach ($posts as $post) {
+            $items[] = [
+                $at.'type' => 'ListItem',
+                'position' => $pos++,
+                'name' => $post->title,
+                'url' => $baseUrl.'/journal/'.$post->slug,
+            ];
+        }
+
+        return json_encode([
+            $at.'context' => 'https://schema.org',
+            $at.'type' => 'Blog',
+            'name' => 'The Kenya Remote Jobs Journal',
+            'description' => 'Practical guidance for finding good remote work and career development in Kenya.',
+            'url' => $baseUrl.'/journal',
+            'blogPost' => $items,
         ]);
     }
 }

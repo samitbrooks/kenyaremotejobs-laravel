@@ -3,6 +3,9 @@
     description="Explore handpicked remote job collections tailored for Kenya: USD payment via Wise/M-Pesa, zero visa restrictions, entry-level opportunities, high-paying $3,000+ roles, and EAT-friendly hours."
     :canonical="url('/collections')"
 >
+    <script type="application/ld+json">{!! \App\Support\Seo::collectionsIndexBreadcrumbJsonLd() !!}</script>
+    <script type="application/ld+json">{!! \App\Support\Seo::collectionsItemListJsonLd($collections) !!}</script>
+
     <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
         {{-- Breadcrumb --}}
         <nav aria-label="Breadcrumb" class="mb-6 flex items-center gap-2 text-xs text-foreground/50">

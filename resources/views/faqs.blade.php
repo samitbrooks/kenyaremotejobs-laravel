@@ -3,6 +3,7 @@
     description="Everything you need to know about finding legitimate remote jobs in Kenya, receiving international payments via M-Pesa or Wise, and avoiding online scams."
     :canonical="url('/faqs')"
 >
+    <script type="application/ld+json">{!! \App\Support\Seo::faqsBreadcrumbJsonLd() !!}</script>
     <script type="application/ld+json">{!! \App\Support\Seo::faqJsonLd($allFaqs) !!}</script>
 
     <div class="mx-auto max-w-5xl px-4 py-12 sm:px-6">
