@@ -1,8 +1,11 @@
 <?php
 
+use App\Mail\FreeTrialInvitationEmail;
+use App\Models\Payment;
 use App\Models\User;
 use App\Services\BulkMailer;
 use App\Services\JobRecommendationService;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 new class extends Component
@@ -93,6 +96,78 @@ new class extends Component
         }
     }
 
+    public function sendFreeTrialTest(): void
+    {
+        $this->testResult = null;
+        $this->testError = null;
+
+        if (! filter_var($this->testEmail, FILTER_VALIDATE_EMAIL)) {
+            $this->testError = 'Please enter a valid email address for the test.';
+
+            return;
+        }
+
+        try {
+            $user = User::where('email', $this->testEmail)->first() ?? new User([
+                'name' => 'Trial Tester',
+                'email' => $this->testEmail,
+            ]);
+
+            if (! $user->exists) {
+                $user->id = 1;
+            }
+
+            Mail::to($this->testEmail)->send(new FreeTrialInvitationEmail($user));
+            $this->testResult = "FlexJobs-style 24-Hour Free Trial invitation sample sent to {$this->testEmail}!";
+        } catch (\Throwable $e) {
+            $this->testError = 'Failed to dispatch free trial test: '.$e->getMessage();
+        }
+    }
+
+    public function broadcastFreeTrial(string $target = 'pending'): void
+    {
+        $this->result = null;
+        $this->error = null;
+
+        $query = User::query()
+            ->whereNull('marketing_opt_out_at')
+            ->where('subscribed', false);
+
+        if ($target === 'pending') {
+            $pendingUserIds = Payment::query()
+                ->where('purpose', 'subscription')
+                ->where('status', 'pending')
+                ->whereNotNull('user_id')
+                ->pluck('user_id')
+                ->unique()
+                ->all();
+
+            $query->whereIn('id', $pendingUserIds);
+        }
+
+        $recipients = $query->get();
+
+        if ($recipients->isEmpty()) {
+            $this->error = 'No eligible recipients found in this audience.';
+
+            return;
+        }
+
+        $sent = 0;
+        $failed = 0;
+
+        foreach ($recipients as $user) {
+            try {
+                Mail::to($user->email)->send(new FreeTrialInvitationEmail($user));
+                $sent++;
+            } catch (\Throwable $e) {
+                $failed++;
+            }
+        }
+
+        $this->result = "Free trial campaign complete: dispatched to {$sent} recipient(s)".($failed > 0 ? " ({$failed} failed)" : '').'.';
+    }
+
     public function send(BulkMailer $mailer): void
     {
         $this->result = null;
@@ -168,7 +243,7 @@ new class extends Component
             Verify deliverability to your personal inbox before broadcasting to registered users.
         </p>
 
-        <div class="mt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 max-w-2xl">
+        <div class="mt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 max-w-3xl">
             <input
                 type="email"
                 wire:model="testEmail"
@@ -177,13 +252,14 @@ new class extends Component
             />
             <button
                 type="button"
-                wire:click="sendTestEmail"
+                wire:click="sendFreeTrialTest"
                 wire:loading.attr="disabled"
-                wire:target="sendTestEmail"
-                class="btn-pop shrink-0 rounded-xl bg-horizon-800 px-4 py-2 text-xs font-semibold text-white shadow-xs hover:bg-horizon-900 transition disabled:opacity-60"
+                wire:target="sendFreeTrialTest"
+                class="btn-pop shrink-0 rounded-xl bg-gradient-to-r from-orange-600 to-rose-600 px-4 py-2 text-xs font-bold text-white shadow-xs hover:from-orange-700 hover:to-rose-700 transition disabled:opacity-60"
+                title="Send FlexJobs-style 24-hour free trial sample"
             >
-                <span wire:loading.remove wire:target="sendTestEmail">Send Test Email</span>
-                <span wire:loading wire:target="sendTestEmail">Dispatching&hellip;</span>
+                <span wire:loading.remove wire:target="sendFreeTrialTest">Send Trial Invite</span>
+                <span wire:loading wire:target="sendFreeTrialTest">Sending&hellip;</span>
             </button>
             <button
                 type="button"
@@ -193,8 +269,18 @@ new class extends Component
                 class="btn-pop shrink-0 rounded-xl bg-orange-600 px-4 py-2 text-xs font-semibold text-white shadow-xs hover:bg-orange-700 transition disabled:opacity-60"
                 title="Send a sample dark-mode Job Matches Digest email"
             >
-                <span wire:loading.remove wire:target="sendDigestTest">Send Matches Digest</span>
-                <span wire:loading wire:target="sendDigestTest">Sending Digest&hellip;</span>
+                <span wire:loading.remove wire:target="sendDigestTest">Matches Digest</span>
+                <span wire:loading wire:target="sendDigestTest">Sending&hellip;</span>
+            </button>
+            <button
+                type="button"
+                wire:click="sendTestEmail"
+                wire:loading.attr="disabled"
+                wire:target="sendTestEmail"
+                class="btn-pop shrink-0 rounded-xl bg-horizon-800 px-4 py-2 text-xs font-semibold text-white shadow-xs hover:bg-horizon-900 transition disabled:opacity-60"
+            >
+                <span wire:loading.remove wire:target="sendTestEmail">Text Test</span>
+                <span wire:loading wire:target="sendTestEmail">Sending&hellip;</span>
             </button>
         </div>
 
@@ -208,6 +294,98 @@ new class extends Component
                 ✕ {{ $testError }}
             </p>
         @endif
+    </div>
+
+    {{-- FlexJobs-Style 24-Hour Free Trial Invite Campaign Card --}}
+    <div class="rounded-2xl border-2 border-orange-200 bg-gradient-to-br from-orange-50/70 via-white to-amber-50/50 p-6 shadow-sm">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+                <span class="inline-flex h-7 w-7 items-center justify-center rounded-xl bg-orange-500 text-white font-extrabold text-sm shadow-xs">
+                    ⚡
+                </span>
+                <div>
+                    <h2 class="text-base font-bold text-slate-900">FlexJobs-Style 24-Hour Free Trial Campaign</h2>
+                    <p class="text-xs text-slate-600 mt-0.5">
+                        Invite registered users who haven't subscribed yet to enjoy a 24-hour free pass with a 1-click magic activation link.
+                    </p>
+                </div>
+            </div>
+            <span class="rounded-full bg-orange-100 border border-orange-300 px-3 py-1 text-xs font-bold text-orange-800">
+                1-Click Activation Link
+            </span>
+        </div>
+
+        <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {{-- Target 1: Pending checkout users (the visitors who tried M-Pesa checkout) --}}
+            <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-2xs flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Checkout Drop-Offs</span>
+                        <span class="rounded-full bg-rose-100 text-rose-800 font-extrabold text-xs px-2.5 py-0.5">
+                            {{ $counts['pending'] ?? 0 }} visitors
+                        </span>
+                    </div>
+                    <h3 class="text-sm font-bold text-slate-900 mt-1.5">Pending Subscription Visitors</h3>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                        These users reached the M-Pesa subscription checkout screen. Send them a complimentary 24h pass to win them back!
+                    </p>
+                </div>
+
+                <div class="mt-4 pt-3 border-t border-slate-100">
+                    <button
+                        type="button"
+                        wire:click="broadcastFreeTrial('pending')"
+                        wire:confirm="Send 24-hour Free Trial invitations to {{ $counts['pending'] ?? 0 }} pending visitor(s)?"
+                        wire:loading.attr="disabled"
+                        wire:target="broadcastFreeTrial('pending')"
+                        @if (($counts['pending'] ?? 0) === 0) disabled @endif
+                        class="btn-pop w-full rounded-xl bg-rose-600 px-4 py-2.5 text-xs font-bold text-white shadow-xs hover:bg-rose-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        <span wire:loading.remove wire:target="broadcastFreeTrial('pending')">
+                            Send Free Trial to {{ $counts['pending'] ?? 0 }} Pending Visitor(s)
+                        </span>
+                        <span wire:loading wire:target="broadcastFreeTrial('pending')">
+                            Dispatching Free Trial Invites&hellip;
+                        </span>
+                    </button>
+                </div>
+            </div>
+
+            {{-- Target 2: All free registered users --}}
+            <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-2xs flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">All Registered Accounts</span>
+                        <span class="rounded-full bg-slate-100 text-slate-800 font-extrabold text-xs px-2.5 py-0.5">
+                            {{ $counts['free'] ?? 0 }} users
+                        </span>
+                    </div>
+                    <h3 class="text-sm font-bold text-slate-900 mt-1.5">All Free Registered Users</h3>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                        Every registered user in the database without an active subscription.
+                    </p>
+                </div>
+
+                <div class="mt-4 pt-3 border-t border-slate-100">
+                    <button
+                        type="button"
+                        wire:click="broadcastFreeTrial('free')"
+                        wire:confirm="Send 24-hour Free Trial invitations to {{ $counts['free'] ?? 0 }} registered user(s)?"
+                        wire:loading.attr="disabled"
+                        wire:target="broadcastFreeTrial('free')"
+                        @if (($counts['free'] ?? 0) === 0) disabled @endif
+                        class="btn-pop w-full rounded-xl bg-slate-900 px-4 py-2.5 text-xs font-bold text-white shadow-xs hover:bg-slate-800 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        <span wire:loading.remove wire:target="broadcastFreeTrial('free')">
+                            Send Free Trial to {{ $counts['free'] ?? 0 }} Registered User(s)
+                        </span>
+                        <span wire:loading wire:target="broadcastFreeTrial('free')">
+                            Dispatching Free Trial Invites&hellip;
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     {{-- Broadcast Composer Form --}}

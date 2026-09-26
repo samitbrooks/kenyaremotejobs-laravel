@@ -10,6 +10,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\FeedController;
+use App\Http\Controllers\FreeTrialController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobsController;
 use App\Http\Controllers\JournalController;
@@ -20,6 +21,11 @@ use App\Http\Controllers\Webhooks\MpesaCallbackController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
+
+Route::match(['get', 'post'], '/trial/activate', [FreeTrialController::class, 'activate'])->name('trial.activate');
+Route::get('/trial/claim/{user}', [FreeTrialController::class, 'claimViaSignedLink'])
+    ->name('trial.claim')
+    ->middleware('signed');
 
 Route::middleware('subscribed')->group(function () {
     Route::get('/jobs', [JobsController::class, 'index'])->name('jobs.index');

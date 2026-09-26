@@ -52,6 +52,18 @@
             {{ $total }} listings &middot; 100% transparent employer details &middot; Verified remote roles open to Kenyan applicants.
         </p>
 
+        @if (auth()->user()?->onTrial())
+            <div class="mt-4 rounded-2xl border border-teal-200 bg-gradient-to-r from-teal-50 via-emerald-50 to-teal-50 p-4 shadow-xs flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center gap-2.5 text-xs text-teal-950 font-semibold">
+                    <span class="inline-flex h-2.5 w-2.5 rounded-full bg-teal-500 animate-pulse shrink-0"></span>
+                    <span><strong>24-Hour Free Pass Active:</strong> You have unrestricted access to browse, search, and apply to all roles until <strong>{{ auth()->user()->trial_ends_at?->format('M j, g:i A') }}</strong> ({{ auth()->user()->trialRemainingHuman() }} left).</span>
+                </div>
+                <a href="{{ route('pricing') }}" class="btn-pop rounded-full bg-teal-700 px-4 py-1.5 text-xs font-bold text-white hover:bg-teal-800 shadow-2xs transition">
+                    Lock In Pro Membership &rarr;
+                </a>
+            </div>
+        @endif
+
         @if ($audience)
             <p class="mt-2 text-sm">
                 <a href="{{ url('/jobs') }}" class="font-bold text-teal-700 hover:underline">&larr; Clear filter, see all jobs</a>

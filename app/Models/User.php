@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password', 'subscribed', 'subscribed_at', 'marketing_opt_out_at', 'last_job_digest_at', 'free_tailors_remaining'])]
+#[Fillable(['name', 'email', 'password', 'subscribed', 'subscribed_at', 'trial_started_at', 'trial_ends_at', 'marketing_opt_out_at', 'last_job_digest_at', 'free_tailors_remaining'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -30,10 +30,66 @@ class User extends Authenticatable
             'password' => 'hashed',
             'subscribed' => 'boolean',
             'subscribed_at' => 'datetime',
+            'trial_started_at' => 'datetime',
+            'trial_ends_at' => 'datetime',
             'marketing_opt_out_at' => 'datetime',
             'last_job_digest_at' => 'datetime',
             'free_tailors_remaining' => 'integer',
         ];
+    }
+
+    public function onTrial(): bool
+    {
+        return $this->trial_ends_at !== null && $this->trial_ends_at->isFuture();
+    }
+
+    public function hasUsedTrial(): bool
+    {
+        return $this->trial_started_at !== null;
+    }
+
+    public function trialRemainingHours(): int
+    {
+        if (! $this->onTrial()) {
+            return 0;
+        }
+
+        return max(0, (int) now()->diffInHours($this->trial_ends_at, false));
+    }
+
+    public function trialRemainingHuman(): string
+    {
+        if (! $this->onTrial()) {
+            return 'Expired';
+        }
+
+        $hours = (int) now()->diffInHours($this->trial_ends_at, false);
+        if ($hours >= 1) {
+            return $hours.' '.($hours === 1 ? 'hour' : 'hours');
+        }
+
+        $minutes = max(1, (int) now()->diffInMinutes($this->trial_ends_at, false));
+
+        return $minutes.' '.($minutes === 1 ? 'minute' : 'minutes');
+    }
+
+    public function hasActiveAccess(): bool
+    {
+        return $this->isAdmin() || $this->subscribed || $this->onTrial();
+    }
+
+    public function startFreeTrial(int $hours = 24): bool
+    {
+        if ($this->hasUsedTrial() && ! $this->isAdmin()) {
+            return false;
+        }
+
+        $this->forceFill([
+            'trial_started_at' => now(),
+            'trial_ends_at' => now()->addHours($hours),
+        ])->save();
+
+        return true;
     }
 
     public function firstName(): string

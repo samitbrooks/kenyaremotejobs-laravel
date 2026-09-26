@@ -155,7 +155,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public function email(BulkMailer $mailer)
+    public function email(BulkMailer $mailer): View
     {
         // Opted-out users are excluded from every count here so the numbers
         // shown match what App\Services\BulkMailer will actually send —
@@ -165,8 +165,20 @@ class AdminController extends Controller
         $subscribed = (clone $mailable)->where('subscribed', true)->count();
         $total = $mailable->count();
 
+        $pendingUserIds = Payment::where('purpose', 'subscription')
+            ->where('status', 'pending')
+            ->whereNotNull('user_id')
+            ->pluck('user_id')
+            ->unique();
+        $pending = (clone $mailable)->whereIn('id', $pendingUserIds)->count();
+
         return view('admin.email', [
-            'counts' => ['all' => $total, 'subscribed' => $subscribed, 'free' => $total - $subscribed],
+            'counts' => [
+                'all' => $total,
+                'subscribed' => $subscribed,
+                'free' => $total - $subscribed,
+                'pending' => $pending,
+            ],
             'configured' => $mailer->isConfigured(),
         ]);
     }

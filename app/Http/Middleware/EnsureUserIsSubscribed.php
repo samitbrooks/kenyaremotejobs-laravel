@@ -15,8 +15,8 @@ class EnsureUserIsSubscribed
     {
         $user = $request->user();
 
-        // Admins and active subscribers have full access to the jobs section
-        if ($user && ($user->isAdmin() || $user->subscribed)) {
+        // Admins, active subscribers, and users with an active 24-hour trial have full access
+        if ($user && ($user->isAdmin() || $user->subscribed || $user->onTrial())) {
             return $next($request);
         }
 
@@ -25,10 +25,11 @@ class EnsureUserIsSubscribed
             return $next($request);
         }
 
-        return redirect()->route('pricing')->with(
-            'info',
-            'KenyaRemoteJobs is a membership-only platform. Subscribe to unlock full access to browse and apply to our curated remote jobs board.'
-        );
+        $message = ($user && $user->hasUsedTrial())
+            ? 'Your 24-hour free trial has ended. Subscribe below to continue browsing and applying to all remote jobs.'
+            : 'KenyaRemoteJobs is a membership-only platform. Start your 24-hour free trial or subscribe to browse and apply to all remote jobs.';
+
+        return redirect()->route('pricing')->with('info', $message);
     }
 
     private function isSearchEngineBot(Request $request): bool

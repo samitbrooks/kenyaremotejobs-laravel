@@ -13,6 +13,18 @@
                 <span>{{ session('info') }}</span>
             </div>
         @endif
+        @if (session('error'))
+            <div class="mb-8 rounded-2xl border border-rose-200 bg-rose-50/95 p-4 text-center text-sm font-semibold text-rose-900 shadow-sm flex items-center justify-center gap-2.5">
+                <span class="text-rose-600 font-bold text-base">&times;</span>
+                <span>{{ session('error') }}</span>
+            </div>
+        @endif
+        @if (session('success'))
+            <div class="mb-8 rounded-2xl border border-emerald-200 bg-emerald-50/95 p-4 text-center text-sm font-semibold text-emerald-900 shadow-sm flex items-center justify-center gap-2.5">
+                <x-icon name="check" class="h-5 w-5 text-emerald-600 shrink-0" />
+                <span>{{ session('success') }}</span>
+            </div>
+        @endif
 
         {{-- Hero Header --}}
         <div class="text-center">
@@ -26,6 +38,44 @@
             <p class="mx-auto mt-4 max-w-2xl text-base sm:text-lg text-slate-600 leading-relaxed">
                 Like FlexJobs, KenyaRemoteJobs is a verified, subscription-only platform. Subscribe to unlock <strong class="text-slate-900">full, immediate access to browse and apply to all 800+ remote jobs</strong> with 48-hour early access, direct Kenyan employer listings, and unlimited AI CV tailoring.
             </p>
+        </div>
+
+        {{-- 24-Hour Free Trial Callout Banner --}}
+        <div class="mt-8 mx-auto max-w-xl rounded-3xl border-2 border-dashed border-teal-300 bg-gradient-to-r from-teal-50/90 via-emerald-50/80 to-teal-50/90 p-5 sm:p-6 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="text-center sm:text-left">
+                <div class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-teal-800">
+                    <span class="inline-block h-2 w-2 rounded-full bg-teal-500 animate-pulse"></span>
+                    Complimentary 24-Hour Trial Pass
+                </div>
+                <h3 class="text-base font-extrabold text-slate-900 mt-1">Want to explore before subscribing?</h3>
+                <p class="text-xs text-slate-600 mt-0.5 leading-relaxed">
+                    Activate a <strong>free 24-hour pass</strong> to browse and apply to every remote role. No card or payment required.
+                </p>
+            </div>
+            <div class="shrink-0 w-full sm:w-auto">
+                @if ($user?->subscribed)
+                    <a href="{{ route('jobs.index') }}" class="btn-pop block text-center rounded-xl bg-teal-700 px-5 py-2.5 text-xs font-bold text-white shadow-xs hover:bg-teal-800 transition">
+                        Browse Jobs &rarr;
+                    </a>
+                @elseif ($user?->onTrial())
+                    <div class="text-center sm:text-right">
+                        <span class="inline-flex items-center gap-1 rounded-full bg-emerald-100 border border-emerald-300 px-3 py-1 text-xs font-bold text-emerald-800">
+                            ✓ Trial Active ({{ $user->trialRemainingHuman() }} left)
+                        </span>
+                        <a href="{{ route('jobs.index') }}" class="btn-pop mt-2 block text-center rounded-xl bg-slate-900 px-4 py-2 text-xs font-bold text-white shadow-xs hover:bg-slate-800 transition">
+                            Access Jobs &rarr;
+                        </a>
+                    </div>
+                @elseif ($user?->hasUsedTrial())
+                    <span class="inline-block rounded-xl bg-slate-100 border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-500 text-center w-full sm:w-auto">
+                        Trial Pass Redeemed
+                    </span>
+                @else
+                    <a href="{{ route('trial.activate') }}" class="btn-pop block text-center rounded-xl bg-gradient-to-r from-teal-700 to-emerald-700 px-5 py-3 text-xs font-bold text-white shadow-md hover:from-teal-800 hover:to-emerald-800 transition">
+                        Start 24h Free Trial &rarr;
+                    </a>
+                @endif
+            </div>
         </div>
 
         {{-- Main Checkout Card --}}

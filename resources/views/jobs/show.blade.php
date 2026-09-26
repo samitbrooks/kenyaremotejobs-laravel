@@ -14,6 +14,18 @@
     <script type="application/ld+json">{!! \App\Support\Seo::breadcrumbJsonLd($job) !!}</script>
 
     <div class="mx-auto max-w-3xl px-4 py-10 sm:px-6">
+        @if (auth()->user()?->onTrial())
+            <div class="mb-4 rounded-2xl border border-teal-200 bg-gradient-to-r from-teal-50 via-emerald-50 to-teal-50 p-3.5 shadow-xs flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center gap-2 text-xs text-teal-950 font-semibold">
+                    <span class="inline-flex h-2 w-2 rounded-full bg-teal-500 animate-pulse shrink-0"></span>
+                    <span><strong>24-Hour Free Pass Active:</strong> Unrestricted access to view company details and apply directly. Expires in {{ auth()->user()->trialRemainingHuman() }}.</span>
+                </div>
+                <a href="{{ route('pricing') }}" class="btn-pop rounded-full bg-teal-700 px-3 py-1 text-xs font-bold text-white hover:bg-teal-800 shadow-2xs transition">
+                    Keep Access with Pro &rarr;
+                </a>
+            </div>
+        @endif
+
         <a href="{{ url('/jobs') }}" class="text-sm font-semibold text-teal-700 hover:underline">&larr; Back to all jobs</a>
 
         <x-reveal>

@@ -42,4 +42,20 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+    public function onTrial(int $hoursRemaining = 24): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'trial_started_at' => now(),
+            'trial_ends_at' => now()->addHours($hoursRemaining),
+        ]);
+    }
+
+    public function expiredTrial(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'trial_started_at' => now()->subDays(2),
+            'trial_ends_at' => now()->subDay(),
+        ]);
+    }
 }
