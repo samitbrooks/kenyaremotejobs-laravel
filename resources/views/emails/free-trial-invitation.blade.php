@@ -20,15 +20,26 @@
                     
                     <!-- Header Section: Brand & Tagline -->
                     <tr>
-                        <td style="padding: 28px 30px 20px 30px; border-bottom: 2px solid #282a33; background-color: #16181d;">
+                        <td style="padding: 24px 30px 20px 30px; border-bottom: 2px solid #282a33; background-color: #16181d;">
                             <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
                                 <tr>
                                     <td>
-                                        <a href="{{ url('/') }}" style="text-decoration: none; display: inline-block;">
-                                            <span style="font-size: 22px; font-weight: 900; letter-spacing: -0.5px; color: #ffffff;">
-                                                Kenya<span style="color: #ff4820;">RemoteJobs</span>
-                                            </span>
-                                        </a>
+                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                                            <tr>
+                                                <td style="vertical-align: middle; padding-right: 12px;">
+                                                    <a href="{{ url('/') }}" style="text-decoration: none; display: block;">
+                                                        <img src="{{ url('images/logo-icon.png') }}" alt="KenyaRemoteJobs Icon" width="38" height="38" style="width: 38px; height: 38px; display: block; border-radius: 8px; border: 0; outline: none;" />
+                                                    </a>
+                                                </td>
+                                                <td style="vertical-align: middle;">
+                                                    <a href="{{ url('/') }}" style="text-decoration: none; display: block;">
+                                                        <span style="font-size: 21px; font-weight: 900; letter-spacing: -0.5px; color: #ffffff;">
+                                                            Kenya<span style="color: #ff4820;">RemoteJobs</span>
+                                                        </span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </td>
                                     <td align="right" style="vertical-align: middle;">
                                         <span style="font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: #38bdf8;">

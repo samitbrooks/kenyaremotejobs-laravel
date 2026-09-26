@@ -21,9 +21,22 @@
                         <td style="padding: 36px 30px 24px 30px;">
                             <!-- Brand Header -->
                             <div style="margin-bottom: 24px;">
-                                <a href="{{ url('/') }}" style="text-decoration: none; display: inline-flex; align-items: center; color: #ffffff; font-size: 20px; font-weight: 800; letter-spacing: -0.5px;">
-                                    <span style="color: #ffffff;">Kenya</span><span style="color: #ff3131; margin-left: 2px;">RemoteJobs</span>
-                                </a>
+                                <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                                    <tr>
+                                        <td style="vertical-align: middle; padding-right: 12px;">
+                                            <a href="{{ url('/') }}" style="text-decoration: none; display: block;">
+                                                <img src="{{ url('images/logo-icon.png') }}" alt="KenyaRemoteJobs Icon" width="36" height="36" style="width: 36px; height: 36px; display: block; border-radius: 8px; border: 0; outline: none;" />
+                                            </a>
+                                        </td>
+                                        <td style="vertical-align: middle;">
+                                            <a href="{{ url('/') }}" style="text-decoration: none; display: block;">
+                                                <span style="font-size: 20px; font-weight: 800; letter-spacing: -0.5px; color: #ffffff;">
+                                                    Kenya<span style="color: #ff3131;">RemoteJobs</span>
+                                                </span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
 
                             <!-- Job Matches Pill Badge -->
