@@ -30,3 +30,11 @@ Schedule::call(function () {
     ->at('05:00')
     ->onOneServer()
     ->withoutOverlapping();
+
+// Process queued jobs (like broadcast emails) in background without blocking web requests
+Schedule::call(function () {
+    Artisan::call('queue:work', ['--stop-when-empty' => true, '--max-time' => 50]);
+})
+    ->name('queue:work')
+    ->everyMinute()
+    ->withoutOverlapping();

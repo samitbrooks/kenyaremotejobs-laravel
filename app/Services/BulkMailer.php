@@ -65,7 +65,7 @@ class BulkMailer
 
         foreach ($recipients as $user) {
             try {
-                Mail::to($user->email)->send(new MarketingEmail($user, $subject, $message));
+                Mail::to($user->email)->queue(new MarketingEmail($user, $subject, $message));
                 $sent++;
             } catch (Throwable $e) {
                 $failed[] = "{$user->email}: {$e->getMessage()}";
@@ -98,7 +98,7 @@ class BulkMailer
         }
 
         try {
-            Mail::to($email)->send(new MarketingEmail($user, $subject, $message));
+            Mail::to($email)->sendNow(new MarketingEmail($user, $subject, $message));
 
             return [
                 'success' => true,

@@ -4,6 +4,7 @@ namespace App\Mail;
 
 use App\Models\User;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\URL;
 // already filtered to exclude anyone who's opted out — see
 // App\Services\BulkMailer — this header is what lets a provider act on a
 // fresh unsubscribe without waiting for that filter to run again.
-class MarketingEmail extends Mailable
+class MarketingEmail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 

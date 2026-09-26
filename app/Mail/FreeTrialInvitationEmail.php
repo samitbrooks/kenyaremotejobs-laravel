@@ -5,6 +5,7 @@ namespace App\Mail;
 use App\Models\JobListing;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
@@ -14,7 +15,7 @@ use Illuminate\Mail\Mailables\Headers;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\URL;
 
-class FreeTrialInvitationEmail extends Mailable
+class FreeTrialInvitationEmail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 

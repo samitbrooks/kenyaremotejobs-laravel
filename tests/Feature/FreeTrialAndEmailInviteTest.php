@@ -185,11 +185,11 @@ class FreeTrialAndEmailInviteTest extends TestCase
         $this->artisan('email:send-free-trial-invites', ['--pending-only' => true])
             ->assertSuccessful();
 
-        Mail::assertSent(FreeTrialInvitationEmail::class, function (FreeTrialInvitationEmail $mail) use ($pendingUser) {
+        Mail::assertQueued(FreeTrialInvitationEmail::class, function (FreeTrialInvitationEmail $mail) use ($pendingUser) {
             return $mail->user->id === $pendingUser->id;
         });
 
-        Mail::assertNotSent(FreeTrialInvitationEmail::class, function (FreeTrialInvitationEmail $mail) use ($otherUser) {
+        Mail::assertNotQueued(FreeTrialInvitationEmail::class, function (FreeTrialInvitationEmail $mail) use ($otherUser) {
             return $mail->user->id === $otherUser->id;
         });
     }
