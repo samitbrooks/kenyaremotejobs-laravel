@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password', 'subscribed', 'subscribed_at', 'trial_started_at', 'trial_ends_at', 'marketing_opt_out_at', 'last_job_digest_at', 'free_tailors_remaining'])]
+#[Fillable(['name', 'email', 'password', 'subscribed', 'subscribed_at', 'trial_started_at', 'trial_ends_at', 'marketing_opt_out_at', 'last_job_digest_at', 'follow_up_sent_at', 'free_tailors_remaining'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -34,8 +34,14 @@ class User extends Authenticatable
             'trial_ends_at' => 'datetime',
             'marketing_opt_out_at' => 'datetime',
             'last_job_digest_at' => 'datetime',
+            'follow_up_sent_at' => 'datetime',
             'free_tailors_remaining' => 'integer',
         ];
+    }
+
+    public function hasReceivedFollowUp(): bool
+    {
+        return $this->follow_up_sent_at !== null;
     }
 
     public function onTrial(): bool

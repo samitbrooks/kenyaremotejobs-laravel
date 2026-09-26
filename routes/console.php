@@ -31,6 +31,16 @@ Schedule::call(function () {
     ->onOneServer()
     ->withoutOverlapping();
 
+// Automatically sends FlexJobs-style follow-up emails ("Still thinking about finding a remote job?")
+// to non-subscribed users who registered or completed their trial
+Schedule::call(function () {
+    Artisan::call('email:send-follow-ups');
+})
+    ->name('email:send-follow-ups')
+    ->dailyAt('06:00')
+    ->onOneServer()
+    ->withoutOverlapping();
+
 // Process queued jobs (like broadcast emails) in background without blocking web requests
 Schedule::call(function () {
     Artisan::call('queue:work', ['--stop-when-empty' => true, '--max-time' => 50]);

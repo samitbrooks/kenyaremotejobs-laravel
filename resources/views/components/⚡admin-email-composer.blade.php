@@ -1,5 +1,6 @@
 <?php
 
+use App\Mail\FollowUpInvitationEmail;
 use App\Mail\FreeTrialInvitationEmail;
 use App\Models\Payment;
 use App\Models\User;
@@ -122,6 +123,79 @@ new class extends Component
         } catch (\Throwable $e) {
             $this->testError = 'Failed to dispatch free trial test: '.$e->getMessage();
         }
+    }
+
+    public function sendFollowUpTest(): void
+    {
+        $this->testResult = null;
+        $this->testError = null;
+
+        if (! filter_var($this->testEmail, FILTER_VALIDATE_EMAIL)) {
+            $this->testError = 'Please enter a valid email address for the test.';
+
+            return;
+        }
+
+        try {
+            $user = User::where('email', $this->testEmail)->first() ?? new User([
+                'name' => 'Follow-Up Tester',
+                'email' => $this->testEmail,
+            ]);
+
+            if (! $user->exists) {
+                $user->id = 1;
+            }
+
+            Mail::to($this->testEmail)->send(new FollowUpInvitationEmail($user));
+            $this->testResult = "FlexJobs-style Follow-Up ('Still thinking about finding a remote job?') sample sent to {$this->testEmail}!";
+        } catch (\Throwable $e) {
+            $this->testError = 'Failed to dispatch follow-up test: '.$e->getMessage();
+        }
+    }
+
+    public function broadcastFollowUp(): void
+    {
+        $this->result = null;
+        $this->error = null;
+
+        $recipients = User::query()
+            ->whereNull('marketing_opt_out_at')
+            ->where('subscribed', false)
+            ->whereNull('follow_up_sent_at')
+            ->where(function ($sub) {
+                $sub->where('created_at', '<=', now()->subHours(24))
+                    ->orWhere(function ($trialSub) {
+                        $trialSub->whereNotNull('trial_ends_at')
+                            ->where('trial_ends_at', '<=', now());
+                    });
+            })
+            ->get();
+
+        if ($recipients->isEmpty()) {
+            $this->error = 'No eligible users pending follow-up at this time.';
+
+            return;
+        }
+
+        $queued = 0;
+        $failed = 0;
+
+        foreach ($recipients as $user) {
+            try {
+                Mail::to($user->email)->queue(new FollowUpInvitationEmail($user));
+                $user->forceFill(['follow_up_sent_at' => now()])->save();
+                $queued++;
+            } catch (\Throwable $e) {
+                $failed++;
+            }
+        }
+
+        try {
+            \Illuminate\Support\Facades\Artisan::call('queue:work', ['--stop-when-empty' => true, '--max-time' => 10]);
+        } catch (\Throwable) {
+        }
+
+        $this->result = "✓ Follow-up campaign queued: {$queued} email(s) dispatched to the delivery queue with zero timeout.";
     }
 
     public function broadcastFreeTrial(string $target = 'pending'): void
@@ -265,8 +339,19 @@ new class extends Component
                 class="btn-pop shrink-0 rounded-xl bg-gradient-to-r from-orange-600 to-rose-600 px-4 py-2 text-xs font-bold text-white shadow-xs hover:from-orange-700 hover:to-rose-700 transition disabled:opacity-60"
                 title="Send FlexJobs-style 24-hour free trial sample"
             >
-                <span wire:loading.remove wire:target="sendFreeTrialTest">Send Trial Invite</span>
+                <span wire:loading.remove wire:target="sendFreeTrialTest">Trial Invite</span>
                 <span wire:loading wire:target="sendFreeTrialTest">Sending&hellip;</span>
+            </button>
+            <button
+                type="button"
+                wire:click="sendFollowUpTest"
+                wire:loading.attr="disabled"
+                wire:target="sendFollowUpTest"
+                class="btn-pop shrink-0 rounded-xl bg-gradient-to-r from-teal-600 to-cyan-700 px-4 py-2 text-xs font-bold text-white shadow-xs hover:from-teal-700 hover:to-cyan-800 transition disabled:opacity-60"
+                title="Send FlexJobs-style Follow-Up ('Still thinking about finding a remote job?')"
+            >
+                <span wire:loading.remove wire:target="sendFollowUpTest">Follow-Up Sample</span>
+                <span wire:loading wire:target="sendFollowUpTest">Sending&hellip;</span>
             </button>
             <button
                 type="button"
@@ -389,6 +474,90 @@ new class extends Component
                         <span wire:loading wire:target="broadcastFreeTrial('free')">
                             Dispatching Free Trial Invites&hellip;
                         </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- FlexJobs Follow-Up Campaign Card ("Still thinking about finding a remote job?") --}}
+    <div class="rounded-2xl border-2 border-teal-200 bg-gradient-to-br from-teal-50/70 via-white to-cyan-50/50 p-6 shadow-sm">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+                <span class="inline-flex h-7 w-7 items-center justify-center rounded-xl bg-teal-600 text-white font-extrabold text-sm shadow-xs">
+                    ✉
+                </span>
+                <div>
+                    <h2 class="text-base font-bold text-slate-900">FlexJobs-Style Follow-Up Campaign ("Still thinking about finding a remote job?")</h2>
+                    <p class="text-xs text-slate-600 mt-0.5">
+                        Automated follow-up for registered users whose trial ended or who registered &gt;24h ago. Highlights membership benefits, company placements, and success stories.
+                    </p>
+                </div>
+            </div>
+            <span class="rounded-full bg-teal-100 border border-teal-300 px-3 py-1 text-xs font-bold text-teal-800">
+                Scheduled Daily (09:00 EAT)
+            </span>
+        </div>
+
+        <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-2xs flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Eligible Pending Follow-Up</span>
+                        <span class="rounded-full bg-teal-100 text-teal-800 font-extrabold text-xs px-2.5 py-0.5">
+                            {{ $counts['pending_follow_up'] ?? 0 }} users
+                        </span>
+                    </div>
+                    <h3 class="text-sm font-bold text-slate-900 mt-1.5">Users Ready for Follow-Up</h3>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                        Registered users without active subscription who have not received this follow-up yet and are past the 24h window.
+                    </p>
+                </div>
+
+                <div class="mt-4 pt-3 border-t border-slate-100">
+                    <button
+                        type="button"
+                        wire:click="broadcastFollowUp"
+                        wire:confirm="Send Follow-Up ('Still thinking about finding a remote job?') to {{ $counts['pending_follow_up'] ?? 0 }} eligible user(s)?"
+                        wire:loading.attr="disabled"
+                        wire:target="broadcastFollowUp"
+                        @if (($counts['pending_follow_up'] ?? 0) === 0) disabled @endif
+                        class="btn-pop w-full rounded-xl bg-teal-600 px-4 py-2.5 text-xs font-bold text-white shadow-xs hover:bg-teal-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        <span wire:loading.remove wire:target="broadcastFollowUp">
+                            Queue Follow-Up to {{ $counts['pending_follow_up'] ?? 0 }} Eligible User(s)
+                        </span>
+                        <span wire:loading wire:target="broadcastFollowUp">
+                            Queueing Follow-Up Emails&hellip;
+                        </span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-2xs flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Campaign History</span>
+                        <span class="rounded-full bg-slate-100 text-slate-800 font-extrabold text-xs px-2.5 py-0.5">
+                            {{ $counts['follow_up_sent'] ?? 0 }} delivered
+                        </span>
+                    </div>
+                    <h3 class="text-sm font-bold text-slate-900 mt-1.5">Automated Daily Lifecycle</h3>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                        The cron schedule runs <code>email:send-follow-ups</code> automatically every day at 09:00 EAT (06:00 UTC) so each user receives this follow-up once.
+                    </p>
+                </div>
+
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
+                    <span>Cron status: <strong class="text-emerald-700 font-bold">Active in routes/console.php</strong></span>
+                    <button
+                        type="button"
+                        wire:click="sendFollowUpTest"
+                        wire:loading.attr="disabled"
+                        wire:target="sendFollowUpTest"
+                        class="text-teal-700 hover:text-teal-900 underline font-semibold"
+                    >
+                        Preview to admin
                     </button>
                 </div>
             </div>

@@ -172,12 +172,27 @@ class AdminController extends Controller
             ->unique();
         $pending = (clone $mailable)->whereIn('id', $pendingUserIds)->count();
 
+        $pendingFollowUp = (clone $mailable)
+            ->where('subscribed', false)
+            ->whereNull('follow_up_sent_at')
+            ->where(function ($sub) {
+                $sub->where('created_at', '<=', now()->subHours(24))
+                    ->orWhere(function ($trialSub) {
+                        $trialSub->whereNotNull('trial_ends_at')
+                            ->where('trial_ends_at', '<=', now());
+                    });
+            })
+            ->count();
+        $followUpSent = (clone $mailable)->whereNotNull('follow_up_sent_at')->count();
+
         return view('admin.email', [
             'counts' => [
                 'all' => $total,
                 'subscribed' => $subscribed,
                 'free' => $total - $subscribed,
                 'pending' => $pending,
+                'pending_follow_up' => $pendingFollowUp,
+                'follow_up_sent' => $followUpSent,
             ],
             'configured' => $mailer->isConfigured(),
         ]);
