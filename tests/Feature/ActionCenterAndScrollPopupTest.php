@@ -21,7 +21,8 @@ class ActionCenterAndScrollPopupTest extends TestCase
         $response->assertSee('Ask Daisy AI');
         $response->assertSee('80% of Remote Hires Apply in the First 48 Hours');
 
-        $jobsResponse = $this->get('/jobs');
+        $subscriber = User::factory()->create(['subscribed' => true]);
+        $jobsResponse = $this->actingAs($subscriber)->get('/jobs');
         $jobsResponse->assertStatus(200);
         $jobsResponse->assertSee('Ask Daisy AI');
     }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\EnsureUserIsAdmin;
+use App\Http\Middleware\EnsureUserIsSubscribed;
 use App\Http\Middleware\TrackPageView;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -21,7 +22,10 @@ return Application::configure(basePath: dirname(__DIR__))
             'webhooks/mpesa/callback/*',
         ]);
 
-        $middleware->alias(['admin' => EnsureUserIsAdmin::class]);
+        $middleware->alias([
+            'admin' => EnsureUserIsAdmin::class,
+            'subscribed' => EnsureUserIsSubscribed::class,
+        ]);
 
         $middleware->web(append: [TrackPageView::class]);
     })

@@ -10,28 +10,27 @@ use App\Models\SyncMeta;
 use App\Models\User;
 use App\Services\BulkMailer;
 use App\Services\CreditsService;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class AdminController extends Controller
 {
     private const PAGE_SIZE = 25;
 
-    public function dashboard()
+    public function dashboard(Request $request): View
     {
-        $bySource = JobListing::selectRaw('source_name, count(*) as c')
-            ->groupBy('source_name')
-            ->orderByDesc('c')
-            ->pluck('c', 'source_name');
-
+        $filteredJobs = $this->getFilteredJobs($request);
         $now = now();
 
         return view('admin.dashboard', [
+            ...$filteredJobs,
             'totalJobs' => JobListing::count(),
-            'kenyaFriendly' => JobListing::where('kenya_friendly', true)->count(),
+            'kenyaFriendlyTotal' => JobListing::where('kenya_friendly', true)->count(),
             'totalUsers' => User::count(),
             'subscribed' => User::where('subscribed', true)->count(),
             'lastSyncedAt' => SyncMeta::find(1)?->last_synced_at,
-            'bySource' => $bySource,
+            'bySource' => $filteredJobs['sources'],
             'pageViews' => [
                 'total' => PageView::count(),
                 'last7Days' => PageView::where('created_at', '>=', $now->copy()->subDays(7))->count(),
@@ -40,12 +39,36 @@ class AdminController extends Controller
         ]);
     }
 
-    public function jobs(Request $request)
+    public function jobs(Request $request): View
+    {
+        $filteredJobs = $this->getFilteredJobs($request);
+
+        return view('admin.jobs', $filteredJobs);
+    }
+
+    /**
+     * @return array{
+     *     jobs: Collection<int, JobListing>,
+     *     total: int,
+     *     page: int,
+     *     totalPages: int,
+     *     q: string,
+     *     source: string,
+     *     order: string,
+     *     kenyaFriendly: bool,
+     *     sources: array<string, int>,
+     * }
+     */
+    private function getFilteredJobs(Request $request): array
     {
         $q = trim((string) $request->query('q', ''));
+        $source = trim((string) $request->query('source', ''));
+        $order = trim((string) $request->query('order', 'newest'));
+        $kenyaFriendly = $request->query('kenya_friendly') === 'true' || $request->query('kenya_friendly') === '1';
         $page = max(1, (int) $request->query('page', 1));
 
         $query = JobListing::query();
+
         if ($q !== '') {
             $query->where(function ($w) use ($q) {
                 $w->where('title', 'like', "%{$q}%")
@@ -54,19 +77,44 @@ class AdminController extends Controller
             });
         }
 
+        if ($source !== '') {
+            $query->where('source_name', $source);
+        }
+
+        if ($kenyaFriendly) {
+            $query->where('kenya_friendly', true);
+        }
+
+        match ($order) {
+            'oldest' => $query->orderBy('posted_at', 'asc'),
+            'recent_sync' => $query->orderByDesc('updated_at'),
+            'title' => $query->orderBy('title', 'asc'),
+            default => $query->orderByDesc('posted_at'),
+        };
+
         $total = (clone $query)->count();
         $totalPages = max(1, (int) ceil($total / self::PAGE_SIZE));
         $page = min($page, $totalPages);
 
-        $jobs = $query->latest('posted_at')->forPage($page, self::PAGE_SIZE)->get();
+        $jobs = $query->forPage($page, self::PAGE_SIZE)->get();
 
-        return view('admin.jobs', [
+        $bySource = JobListing::selectRaw('source_name, count(*) as c')
+            ->groupBy('source_name')
+            ->orderByDesc('c')
+            ->pluck('c', 'source_name')
+            ->all();
+
+        return [
             'jobs' => $jobs,
             'total' => $total,
             'page' => $page,
             'totalPages' => $totalPages,
             'q' => $q,
-        ]);
+            'source' => $source,
+            'order' => $order,
+            'kenyaFriendly' => $kenyaFriendly,
+            'sources' => $bySource,
+        ];
     }
 
     public function jobEdit(JobListing $job)

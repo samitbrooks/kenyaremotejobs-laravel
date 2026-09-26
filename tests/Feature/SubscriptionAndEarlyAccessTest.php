@@ -26,7 +26,40 @@ class SubscriptionAndEarlyAccessTest extends TestCase
         $response->assertSee('Included with Pro');
     }
 
-    public function test_job_listing_shows_transparent_company_details(): void
+    public function test_unsubscribed_visitor_is_redirected_to_pricing_from_jobs_and_job_details(): void
+    {
+        $job = JobListing::create([
+            'id' => 'test-job-gated',
+            'origin' => 'synced',
+            'tier' => 'basic',
+            'title' => 'Remote Python Developer',
+            'company' => 'PyCorp Ltd',
+            'location' => 'Worldwide',
+            'remote_type' => 'Full-time Remote',
+            'description' => 'Python developer needed.',
+            'source_id' => 'py-1',
+            'source_name' => 'RemoteOK',
+            'source_url' => 'https://example.com/jobs/py-1',
+            'posted_at' => now()->subDay(),
+            'kenya_friendly' => true,
+            'kenya_score' => 95,
+            'kenya_reasons' => ['Global remote'],
+            'tags' => ['python'],
+            'audience_segments' => [],
+        ]);
+
+        // Visiting /jobs redirects to /pricing with info message
+        $jobsResponse = $this->get('/jobs');
+        $jobsResponse->assertRedirect('/pricing');
+        $jobsResponse->assertSessionHas('info');
+
+        // Visiting /jobs/{id} redirects to /pricing with info message
+        $detailResponse = $this->get('/jobs/'.$job->id);
+        $detailResponse->assertRedirect('/pricing');
+        $detailResponse->assertSessionHas('info');
+    }
+
+    public function test_subscribed_user_can_view_jobs_and_transparent_company_details(): void
     {
         $job = JobListing::create([
             'id' => 'test-job-1',
@@ -40,7 +73,7 @@ class SubscriptionAndEarlyAccessTest extends TestCase
             'source_id' => '123',
             'source_name' => 'RemoteOK',
             'source_url' => 'https://example.com/jobs/123',
-            'posted_at' => now()->subDays(3), // past 48h early access window
+            'posted_at' => now()->subDays(3),
             'kenya_friendly' => true,
             'kenya_score' => 90,
             'kenya_reasons' => ['Global remote'],
@@ -48,16 +81,20 @@ class SubscriptionAndEarlyAccessTest extends TestCase
             'audience_segments' => [],
         ]);
 
-        $response = $this->get('/jobs/'.$job->id);
+        $proUser = User::factory()->create([
+            'subscribed' => true,
+            'subscribed_at' => now(),
+        ]);
+
+        $response = $this->actingAs($proUser)->get('/jobs/'.$job->id);
 
         $response->assertStatus(200);
         $response->assertSee('Acme Global Corp');
-        $response->assertDontSee('Employer hidden until unlocked');
         $response->assertSee('Apply Directly at Acme Global Corp');
         $response->assertSee('https://example.com/jobs/123');
     }
 
-    public function test_fresh_job_listing_displays_early_access_window_for_free_users(): void
+    public function test_fresh_job_listing_displays_early_access_for_subscribed_users(): void
     {
         $freshJob = JobListing::create([
             'id' => 'test-job-2',
@@ -79,16 +116,10 @@ class SubscriptionAndEarlyAccessTest extends TestCase
             'audience_segments' => [],
         ]);
 
-        // Unauthenticated visitor
-        $response = $this->get('/jobs/'.$freshJob->id);
-        $response->assertStatus(200);
-        $response->assertSee('CloudScale Ltd');
-        $response->assertSee('Early Access');
-        $response->assertSee('Full Access to All 800+ Jobs');
-        $response->assertSee('full access to apply to all 800+ jobs immediately');
-        $response->assertSee('Get Full Access to All Jobs (KES 1,499/mo)');
+        // Unauthenticated visitor is redirected to /pricing
+        $this->get('/jobs/'.$freshJob->id)->assertRedirect('/pricing');
 
-        // Subscribed Pro member
+        // Subscribed Pro member can access and see early access indicator
         $proUser = User::factory()->create([
             'subscribed' => true,
             'subscribed_at' => now(),
@@ -100,7 +131,7 @@ class SubscriptionAndEarlyAccessTest extends TestCase
         $proResponse->assertSee('Apply Directly at CloudScale Ltd');
     }
 
-    public function test_direct_employer_listing_applications_are_exclusive_to_pro_members(): void
+    public function test_direct_employer_listing_applications_accessible_to_pro_members(): void
     {
         $employerJob = JobListing::create([
             'id' => 'test-employer-job',
@@ -114,7 +145,7 @@ class SubscriptionAndEarlyAccessTest extends TestCase
             'source_id' => 'emp-101',
             'source_name' => 'Direct Employer',
             'source_url' => 'https://kenyanfintech.com/careers/apply',
-            'posted_at' => now()->subDays(10), // even if older than 48h, employer direct is Pro exclusive
+            'posted_at' => now()->subDays(10),
             'kenya_friendly' => true,
             'kenya_score' => 100,
             'kenya_reasons' => ['Direct employer in Kenya'],
@@ -122,15 +153,10 @@ class SubscriptionAndEarlyAccessTest extends TestCase
             'audience_segments' => [],
         ]);
 
-        // Free visitor sees company name, but cannot apply without Pro
-        $response = $this->get('/jobs/'.$employerJob->id);
-        $response->assertStatus(200);
-        $response->assertSee('KenyanFintech Co');
-        $response->assertSee('Verified Employer Actively Seeking Kenyan Talent');
-        $response->assertSee('Get Full Access to All Jobs (KES 1,499/mo)');
-        $response->assertDontSee('Apply Directly at KenyanFintech Co');
+        // Free visitor is redirected to pricing
+        $this->get('/jobs/'.$employerJob->id)->assertRedirect('/pricing');
 
-        // Pro member can apply directly
+        // Pro member can access and apply directly
         $proUser = User::factory()->create([
             'subscribed' => true,
             'subscribed_at' => now(),

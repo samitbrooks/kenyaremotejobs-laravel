@@ -17,8 +17,15 @@ class EnsureUserIsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (! $request->user()?->isAdmin()) {
-            return redirect('/');
+        $user = $request->user();
+
+        if (! $user) {
+            return redirect()->guest('/account?next='.urlencode($request->getRequestUri()))
+                ->with('info', 'Please log in with your administrator account to access the Admin Panel.');
+        }
+
+        if (! $user->isAdmin()) {
+            return redirect('/')->with('error', 'Access denied. You must be an administrator to access the Admin Panel.');
         }
 
         return $next($request);

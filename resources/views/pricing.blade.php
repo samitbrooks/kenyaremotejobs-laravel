@@ -7,6 +7,13 @@
     description="Accelerate your remote career. Get 48-Hour Early Access to top international remote jobs, exclusive access to direct employers actively seeking Kenyan talent, unlimited AI CV & cover letter tailoring, and our complete Kenyan Remote Contractor Toolkit. Pay conveniently via M-Pesa."
 >
     <div class="mx-auto max-w-5xl px-4 py-12 sm:px-6">
+        @if (session('info'))
+            <div class="mb-8 rounded-2xl border border-teal-200 bg-teal-50/95 p-4 text-center text-sm font-semibold text-teal-900 shadow-sm flex items-center justify-center gap-2.5">
+                <x-icon name="sparkle" class="h-5 w-5 text-teal-600 shrink-0" />
+                <span>{{ session('info') }}</span>
+            </div>
+        @endif
+
         {{-- Hero Header --}}
         <div class="text-center">
             <span class="inline-flex items-center gap-1.5 rounded-full bg-teal-50 border border-teal-200 px-4 py-1 text-xs font-bold uppercase tracking-wider text-teal-800">
@@ -17,7 +24,7 @@
                 <span class="text-teal-700">Invest Just KES 50 a Day.</span>
             </h1>
             <p class="mx-auto mt-4 max-w-2xl text-base sm:text-lg text-slate-600 leading-relaxed">
-                When global remote jobs open up, <strong class="text-slate-900">over 500 applicants apply within 72 hours</strong>. KenyaRemoteJobs Pro gives you <strong class="text-slate-900">full, immediate access to apply to all 800+ remote jobs</strong> with 48-hour early access, direct Kenyan employer listings, and AI CV tailoring.
+                Like FlexJobs, KenyaRemoteJobs is a verified, subscription-only platform. Subscribe to unlock <strong class="text-slate-900">full, immediate access to browse and apply to all 800+ remote jobs</strong> with 48-hour early access, direct Kenyan employer listings, and unlimited AI CV tailoring.
             </p>
         </div>
 
@@ -33,7 +40,7 @@
                 <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Choose Your Plan</p>
                 <h2 class="text-2xl sm:text-3xl font-bold mt-1 text-slate-900">KenyaRemoteJobs Pro Membership</h2>
                 <div class="mt-2.5 inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-4 py-1 text-xs font-bold text-emerald-800">
-                    <x-icon name="check" class="h-3.5 w-3.5 text-emerald-600" /> Early Access Gives Full Access to All 800+ Jobs
+                    <x-icon name="check" class="h-3.5 w-3.5 text-emerald-600" /> Full Access to All 800+ Remote Jobs
                 </div>
                 <p class="text-xs text-slate-500 mt-2">Instant STK push to your Safaricom line &middot; Cancel anytime</p>
             </div>
@@ -58,7 +65,7 @@
                 <div>
                     <p class="text-xs font-bold uppercase tracking-wider text-teal-400">All 800+ Jobs</p>
                     <p class="text-xl font-bold mt-1">Full Access</p>
-                    <p class="text-xs text-slate-300 mt-1 leading-relaxed">Apply immediately to all listings — no 48h wait or locked apply buttons.</p>
+                    <p class="text-xs text-slate-300 mt-1 leading-relaxed">Search, browse, and apply directly to all active curated remote listings.</p>
                 </div>
                 <div class="md:border-l md:border-slate-800 md:pl-6">
                     <p class="text-xs font-bold uppercase tracking-wider text-teal-400">First 48 Hours</p>
@@ -96,25 +103,25 @@
                         <tr>
                             <td class="p-4 font-medium text-slate-900">
                                 Full Access to Apply to All 800+ Jobs
-                                <span class="block text-xs text-slate-500 font-normal">Early Access gives you immediate apply links on all roles — fresh 48h listings, direct employer postings, and the full catalog</span>
+                                <span class="block text-xs text-slate-500 font-normal">Browse and search full job descriptions, salaries, and company requirements</span>
                             </td>
-                            <td class="p-4 text-center text-slate-400 font-medium">Partial (Wait 48h on new)</td>
-                            <td class="p-4 text-center text-emerald-700 font-bold bg-teal-50/20">✓ 100% Full Access</td>
+                            <td class="p-4 text-center text-slate-400 font-medium">Locked (Pro Only)</td>
+                            <td class="p-4 text-center text-emerald-700 font-bold bg-teal-50/20">✓ Full Access</td>
                         </tr>
                         <tr>
                             <td class="p-4 font-medium text-slate-900">
-                                Browse all 800+ remote jobs
-                                <span class="block text-xs text-slate-500 font-normal">Transparent companies, verified logos, requirements & salaries</span>
+                                Direct Official Application Links
+                                <span class="block text-xs text-slate-500 font-normal">Immediate direct link to apply to employers' hiring portals</span>
                             </td>
-                            <td class="p-4 text-center text-emerald-600 font-bold">✓ Included</td>
-                            <td class="p-4 text-center text-emerald-600 font-bold bg-teal-50/20">✓ Included</td>
+                            <td class="p-4 text-center text-slate-400 font-medium">Locked</td>
+                            <td class="p-4 text-center text-emerald-700 font-bold bg-teal-50/20">✓ Instant Apply Links</td>
                         </tr>
                         <tr>
                             <td class="p-4 font-medium text-slate-900">
-                                48-Hour Early Access Window
-                                <span class="block text-xs text-slate-500 font-normal">Apply to brand new listings before the 500+ general applicant crowd</span>
+                                48-Hour Early Access Recruiter Window
+                                <span class="block text-xs text-slate-500 font-normal">Apply to brand new listings before the general public applicant crowd</span>
                             </td>
-                            <td class="p-4 text-center text-slate-400">Wait 48 Hours</td>
+                            <td class="p-4 text-center text-slate-400">—</td>
                             <td class="p-4 text-center text-emerald-700 font-bold bg-teal-50/20">✓ Instant Access</td>
                         </tr>
                         <tr>
@@ -122,29 +129,29 @@
                                 Direct Employer Listing Applications 🇰🇪
                                 <span class="block text-xs text-slate-500 font-normal">Direct submissions from verified companies specifically looking for Kenyan candidates</span>
                             </td>
-                            <td class="p-4 text-center text-slate-400 font-medium">View only</td>
+                            <td class="p-4 text-center text-slate-400 font-medium">—</td>
                             <td class="p-4 text-center text-emerald-700 font-bold bg-teal-50/20">✓ Included (Pro Exclusive 🇰🇪)</td>
                         </tr>
                         <tr>
                             <td class="p-4 font-medium text-slate-900">
                                 Kenya-Targeted Matching Pipeline 🇰🇪
-                                <span class="block text-xs text-slate-500 font-normal">Employers actively seeking Kenyan populations with zero foreign visa barriers & compatible EAT timezone</span>
+                                <span class="block text-xs text-slate-500 font-normal">Roles screened for zero foreign visa barriers & compatible EAT timezone</span>
                             </td>
-                            <td class="p-4 text-center text-slate-400 font-medium">Preview only</td>
+                            <td class="p-4 text-center text-slate-400 font-medium">—</td>
                             <td class="p-4 text-center text-emerald-700 font-bold bg-teal-50/20">✓ Full Access 🇰🇪</td>
                         </tr>
                         <tr>
                             <td class="p-4 font-medium text-slate-900">
                                 1-Click AI CV & Cover Letter Tailoring
-                                <span class="block text-xs text-slate-500 font-normal">Generates custom ATS bullet points & cover letters for each role</span>
+                                <span class="block text-xs text-slate-500 font-normal">Generates custom ATS bullet points & cover letters tailored for each role</span>
                             </td>
                             <td class="p-4 text-center text-slate-500">1 Free Taste</td>
                             <td class="p-4 text-center text-emerald-700 font-bold bg-teal-50/20">✓ Unlimited</td>
                         </tr>
                         <tr>
                             <td class="p-4 font-medium text-slate-900">
-                                In-App Application CRM & Notes
-                                <span class="block text-xs text-slate-500 font-normal">Track Saved, Applied, Interviewing, and recruiter contacts</span>
+                                In-App Application CRM & Pipeline Tracker
+                                <span class="block text-xs text-slate-500 font-normal">Track Saved, Applied, Interviewing, and recruiter notes</span>
                             </td>
                             <td class="p-4 text-center text-slate-400">Limited</td>
                             <td class="p-4 text-center text-emerald-700 font-bold bg-teal-50/20">✓ Full CRM</td>
@@ -159,8 +166,8 @@
                         </tr>
                         <tr>
                             <td class="p-4 font-medium text-slate-900">
-                                Public Global Job Listings (after 48h window)
-                                <span class="block text-xs text-slate-500 font-normal">Standard remote openings from international companies</span>
+                                Remote Work Journal & Career Guides
+                                <span class="block text-xs text-slate-500 font-normal">Guides on interviews, payment setups, and remote careers</span>
                             </td>
                             <td class="p-4 text-center text-emerald-600 font-bold">✓ Included</td>
                             <td class="p-4 text-center text-emerald-600 font-bold bg-teal-50/20">✓ Included</td>

@@ -130,7 +130,7 @@ class SeoEngineTest extends TestCase
             'posted_at' => now(),
         ]);
 
-        $response = $this->get('/jobs/'.$job->id);
+        $response = $this->withHeaders(['User-Agent' => 'Googlebot/2.1 (+http://www.google.com/bot.html)'])->get('/jobs/'.$job->id);
 
         $response->assertStatus(200);
         $response->assertSee('JobPosting', false);
@@ -306,7 +306,7 @@ class SeoEngineTest extends TestCase
             'posted_at' => now(),
         ]);
 
-        $response = $this->get('/jobs/'.$job->id);
+        $response = $this->withHeaders(['User-Agent' => 'Googlebot'])->get('/jobs/'.$job->id);
 
         $response->assertStatus(200);
         $response->assertSee('~KES 910,000 - 1,300,000/mo', false);

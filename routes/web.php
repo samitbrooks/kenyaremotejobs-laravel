@@ -21,8 +21,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/jobs', [JobsController::class, 'index']);
-Route::get('/jobs/{id}', [JobsController::class, 'show']);
+Route::middleware('subscribed')->group(function () {
+    Route::get('/jobs', [JobsController::class, 'index'])->name('jobs.index');
+    Route::get('/jobs/{id}', [JobsController::class, 'show'])->name('jobs.show');
+});
+
 Route::get('/remote-jobs/{slug}', [CategoryLandingController::class, 'show'])->name('jobs.category');
 
 Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
@@ -31,7 +34,7 @@ Route::get('/companies/{slug}', [CompanyController::class, 'show'])->name('compa
 Route::get('/collections', [CollectionController::class, 'index'])->name('collections.index');
 Route::get('/collections/{slug}', [CollectionController::class, 'show'])->name('collections.show');
 
-Route::get('/pricing', [PricingController::class, 'index']);
+Route::get('/pricing', [PricingController::class, 'index'])->name('pricing');
 
 Route::get('/account', [AccountController::class, 'show']);
 Route::post('/account/login', [AccountController::class, 'login'])->name('account.login');

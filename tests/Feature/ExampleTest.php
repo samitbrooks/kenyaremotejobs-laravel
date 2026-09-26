@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -18,7 +19,13 @@ class ExampleTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('Pricing');
 
-        $this->get('/jobs')->assertStatus(200);
+        // Unsubscribed guest is redirected to pricing (FlexJobs subscription model)
+        $this->get('/jobs')->assertRedirect('/pricing');
+
+        // Subscribed user can access jobs
+        $subscriber = User::factory()->create(['subscribed' => true]);
+        $this->actingAs($subscriber)->get('/jobs')->assertStatus(200);
+
         $this->get('/pricing')->assertStatus(200);
         $this->get('/companies')->assertStatus(200);
         $this->get('/collections')->assertStatus(200);

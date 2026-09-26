@@ -37,18 +37,18 @@ class SeoRichResultsTest extends TestCase
             ]);
         }
 
-        $responsePage1 = $this->get('/jobs');
+        $responsePage1 = $this->withHeaders(['User-Agent' => 'Googlebot'])->get('/jobs');
         $responsePage1->assertStatus(200);
         $responsePage1->assertSee('<link rel="canonical" href="'.url('/jobs').'">', false);
 
-        $responsePage2 = $this->get('/jobs?page=2');
+        $responsePage2 = $this->withHeaders(['User-Agent' => 'Googlebot'])->get('/jobs?page=2');
         $responsePage2->assertStatus(200);
         $responsePage2->assertSee('<link rel="canonical" href="'.url('/jobs').'?page=2">', false);
     }
 
     public function test_jobs_page_renders_item_list_and_breadcrumb_schemas(): void
     {
-        $response = $this->get('/jobs');
+        $response = $this->withHeaders(['User-Agent' => 'Googlebot'])->get('/jobs');
 
         $response->assertStatus(200);
         $response->assertSee('"@type":"ItemList"', false);
@@ -117,7 +117,7 @@ class SeoRichResultsTest extends TestCase
             'tier' => 'featured',
         ]);
 
-        $response = $this->get('/jobs/'.$job->id);
+        $response = $this->withHeaders(['User-Agent' => 'Googlebot'])->get('/jobs/'.$job->id);
 
         $response->assertStatus(200);
         $response->assertSee('"@type":"JobPosting"', false);
