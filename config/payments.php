@@ -27,7 +27,7 @@ return [
         // Safaricom, so this random path segment is what stands in for one —
         // see Webhooks\MpesaCallbackController.
         'callback_url' => env('MPESA_CALLBACK_URL'),
-        'callback_secret' => env('MPESA_CALLBACK_SECRET'),
+        'callback_secret' => trim((string) env('MPESA_CALLBACK_SECRET')),
     ],
 
 ];
