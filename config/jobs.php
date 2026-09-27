@@ -51,9 +51,9 @@ return [
     // every tier for a flat price. Quarterly/yearly are the same plan
     // prepaid at a discount against paying monthly the whole way through.
     'subscription_plans' => [
-        'monthly' => ['label' => 'Monthly', 'price_kes' => 1499, 'months' => 1, 'save_label' => null],
-        'quarterly' => ['label' => 'Quarterly', 'price_kes' => 3999, 'months' => 3, 'save_label' => 'Save 11%'],
-        'yearly' => ['label' => 'Yearly', 'price_kes' => 12999, 'months' => 12, 'save_label' => 'Save 28%'],
+        'monthly' => ['label' => 'Monthly', 'price_kes' => 299, 'months' => 1, 'save_label' => null],
+        'quarterly' => ['label' => 'Quarterly', 'price_kes' => 499, 'months' => 3, 'save_label' => 'Save 44%'],
+        'yearly' => ['label' => 'Yearly', 'price_kes' => 899, 'months' => 12, 'save_label' => 'Save 75%'],
     ],
 
     // Employer job-posting plans — a completely separate revenue stream

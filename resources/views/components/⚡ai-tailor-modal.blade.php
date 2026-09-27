@@ -103,7 +103,7 @@ new class extends Component
                         </p>
                         <div class="mx-auto mt-6 max-w-xs">
                             <a href="{{ url('/pricing') }}" class="btn-pop block rounded-full gradient-sunrise px-6 py-3 font-semibold text-white shadow-lg">
-                                Upgrade to Pro &mdash; KES 1,499
+                                Upgrade to Pro &mdash; From KES 299
                             </a>
                         </div>
                     </div>

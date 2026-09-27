@@ -120,7 +120,7 @@
                                 </tr>
                             </table>
                             <p style="margin: 0; text-align: center; color: #64748b; font-size: 11px;">
-                                Starting from KES 499 &bull; Cancel anytime &bull; Instant full access to all verified listings
+                                Starting from KES 299 &bull; Cancel anytime &bull; Instant full access to all verified listings
                             </p>
                         </td>
                     </tr>

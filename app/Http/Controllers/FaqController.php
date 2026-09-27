@@ -30,7 +30,7 @@ class FaqController extends Controller
                     ],
                     [
                         'question' => 'Is KenyaRemoteJobs free to use?',
-                        'answer' => 'Yes! Searching jobs, viewing company names, reading descriptions, and applying to direct employer listings is 100% free. We also offer Pro Early Access for KES 1,499/month (via M-Pesa), which gives you full instant access to apply to freshly posted remote jobs during the 48-hour recruiter early-look window, plus unlimited AI CV tailoring.',
+                        'answer' => 'Yes! Searching jobs, viewing company names, reading descriptions, and applying to direct employer listings is 100% free. We also offer Pro Early Access starting from KES 299/month (via M-Pesa), which gives you full instant access to apply to freshly posted remote jobs during the 48-hour recruiter early-look window, plus unlimited AI CV tailoring.',
                     ],
                     [
                         'question' => 'How are job listings sourced and verified?',

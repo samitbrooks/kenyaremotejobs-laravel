@@ -170,7 +170,7 @@ class FreeTrialAndEmailInviteTest extends TestCase
             'user_id' => $pendingUser->id,
             'gateway' => 'mpesa',
             'purpose' => 'subscription',
-            'amount_kes' => 1499,
+            'amount_kes' => 299,
             'status' => 'pending',
             'phone' => '254712345678',
             'payload' => [],

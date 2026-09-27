@@ -44,7 +44,7 @@ class KenyaCareerBotService
             ."- Payment methods: Wise (fastest, best rate), Payoneer, direct Wire to Kenyan bank accounts (Equity, KCB, Absa, Stanbic USD accounts), and local M-Pesa withdrawals via Wise/Payoneer.\n"
             ."- Tax / Forms: For US clients, Kenyan remote contractors fill IRS Form W-8BEN to claim 0% US withholding tax as non-resident foreign contractors (enter your Kenyan KRA PIN in Part I Line 6a).\n"
             ."- Timezone Advantage: Nairobi is East Africa Time (EAT / UTC+3), giving 4-5 hours daily working overlap with London, Berlin, Amsterdam and 3 hours with New York/Boston mornings. Frame this as superior to Asian timezones.\n"
-            ."- KenyaRemoteJobs Pro: Monthly KES 1,499 (via M-Pesa). Unlocks 48-Hour Early Access (apply before 500+ applicants flood recruiter inboxes), full access to all 800+ remote listings, direct Kenyan employer postings, and unlimited AI CV ATS tailoring.\n"
+            ."- KenyaRemoteJobs Pro: Plans start at KES 299/month (via M-Pesa). Unlocks 48-Hour Early Access (apply before 500+ applicants flood recruiter inboxes), full access to all 800+ remote listings, direct Kenyan employer postings, and unlimited AI CV ATS tailoring.\n"
             ."- Keep responses concise, formatted in clean Markdown with bullet points, under 180 words.\n"
             .'- Always suggest relevant platform links: /jobs, /pricing, /match, /resume-builder.';
 
@@ -136,7 +136,7 @@ class KenyaCareerBotService
                     ."• **Direct Kenyan Employer Roles:** Apply to companies actively recruiting local talent.\n"
                     ."• **1-Click AI CV & Cover Letter Tailoring:** 94%+ ATS keyword alignment.\n"
                     ."• **Remote Contractor Toolkit:** USD invoice generator & W-8BEN guide.\n\n"
-                    .'*Plans start at KES 1,499/mo (just KES 50/day) via instant M-Pesa STK push.*',
+                    .'*Plans start at KES 299/mo (just KES 10/day) via instant M-Pesa STK push.*',
                 'suggested_actions' => [
                     ['label' => 'Get Full Access to All Jobs', 'url' => '/pricing'],
                     ['label' => 'Browse Jobs First', 'url' => '/jobs'],

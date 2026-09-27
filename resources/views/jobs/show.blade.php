@@ -192,7 +192,7 @@
                                 href="{{ url('/pricing') }}"
                                 class="btn-pop w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-teal-600 px-8 py-3.5 text-sm font-bold text-white shadow-md shadow-teal-600/20 hover:bg-teal-700 transition"
                             >
-                                Get Full Access to All Jobs (KES 1,499/mo)
+                                Get Full Access to All Jobs (From KES 299/mo)
                             </a>
                             <livewire:ai-tailor-modal :job-id="$job->id" />
                         </div>
@@ -233,7 +233,7 @@
                                 href="{{ url('/pricing') }}"
                                 class="btn-pop w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-teal-600 px-8 py-3.5 text-sm font-bold text-white shadow-md shadow-teal-600/20 hover:bg-teal-700 transition"
                             >
-                                Get Full Access to All Jobs (KES 1,499/mo)
+                                Get Full Access to All Jobs (From KES 299/mo)
                             </a>
                             <livewire:ai-tailor-modal :job-id="$job->id" />
                         </div>

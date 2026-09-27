@@ -187,7 +187,7 @@
                             Get complete invoice templates, US tax treaty guides, and outreach scripts used by top Kenyan remote engineers and virtual assistants.
                         </p>
                         <a href="{{ url('/pricing') }}" class="mt-4 inline-block rounded-full bg-horizon-800 px-6 py-2.5 text-xs font-bold text-white shadow-xs hover:bg-horizon-900 transition">
-                            Unlock with Pro (KES 1,499/mo)
+                            Unlock with Pro (From KES 299/mo)
                         </a>
                     </div>
                 @endif
