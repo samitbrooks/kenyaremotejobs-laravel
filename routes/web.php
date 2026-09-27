@@ -97,7 +97,12 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/blog/{post:id}/edit', [AdminController::class, 'blogEdit']);
     Route::get('/users', [AdminController::class, 'users']);
     Route::get('/users/{user}', [AdminController::class, 'userShow']);
-    Route::get('/email', [AdminController::class, 'email']);
+    Route::get('/email', [AdminController::class, 'email'])->name('admin.email');
+    Route::post('/email/trial', [AdminController::class, 'sendFreeTrialBroadcast'])->name('admin.email.trial');
+    Route::post('/email/follow-up', [AdminController::class, 'sendFollowUpBroadcast'])->name('admin.email.follow-up');
+    Route::post('/email/digest', [AdminController::class, 'sendDigestBroadcast'])->name('admin.email.digest');
+    Route::post('/email/test', [AdminController::class, 'sendTestEmail'])->name('admin.email.test');
+    Route::post('/email/broadcast', [AdminController::class, 'sendCustomBroadcast'])->name('admin.email.broadcast');
     Route::get('/payments', [AdminController::class, 'payments']);
 });
 

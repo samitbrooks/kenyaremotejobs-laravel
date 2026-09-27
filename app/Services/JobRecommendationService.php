@@ -41,8 +41,9 @@ class JobRecommendationService
 
     /**
      * Dispatches the personalized Job Matches Digest email to a user.
+     * Uses background queueing by default for bulk campaigns, with immediate dispatch for test previews.
      */
-    public function sendDigestToUser(User $user, bool $force = false): bool
+    public function sendDigestToUser(User $user, bool $force = false, bool $immediate = false): bool
     {
         if (! $force && ! $user->receivesMarketingEmail()) {
             return false;
@@ -56,7 +57,14 @@ class JobRecommendationService
         $totalCount = $this->getTotalOpenRolesCount();
 
         try {
-            Mail::to($user->email)->send(new JobMatchesDigestEmail($user, $jobs, $totalCount));
+            $mailable = new JobMatchesDigestEmail($user, $jobs, $totalCount);
+
+            if ($immediate) {
+                Mail::to($user->email)->send($mailable);
+            } else {
+                Mail::to($user->email)->queue($mailable);
+            }
+
             if ($user->exists) {
                 $user->updateQuietly(['last_job_digest_at' => now()]);
             }

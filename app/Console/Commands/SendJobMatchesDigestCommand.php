@@ -55,7 +55,7 @@ class SendJobMatchesDigestCommand extends Command
                 return Command::SUCCESS;
             }
 
-            $success = $recommendationService->sendDigestToUser($previewUser, force: true);
+            $success = $recommendationService->sendDigestToUser($previewUser, force: true, immediate: true);
 
             if ($success) {
                 $this->info("✓ Test digest successfully delivered to {$testEmail}");
@@ -75,7 +75,7 @@ class SendJobMatchesDigestCommand extends Command
             ->when(! $isForce, function ($q) {
                 $q->where(function ($sub) {
                     $sub->whereNull('last_job_digest_at')
-                        ->orWhere('last_job_digest_at', '<=', now()->subDays(2));
+                        ->orWhere('last_job_digest_at', '<=', now()->subHours(20));
                 });
             });
 

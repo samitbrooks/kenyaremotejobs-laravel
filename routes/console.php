@@ -20,14 +20,13 @@ Schedule::call(function () {
     ->onOneServer()
     ->withoutOverlapping();
 
-// Automatically sends personalized job matches digest to registered users twice a week
-// (Tuesdays & Fridays at 8:00 AM East Africa Time / 05:00 UTC)
+// Automatically sends daily personalized job matches digest to all registered users every morning
+// at 8:00 AM East Africa Time (05:00 UTC)
 Schedule::call(function () {
     Artisan::call('jobs:send-digest');
 })
     ->name('jobs:send-digest')
-    ->days([2, 5])
-    ->at('05:00')
+    ->dailyAt('05:00')
     ->onOneServer()
     ->withoutOverlapping();
 

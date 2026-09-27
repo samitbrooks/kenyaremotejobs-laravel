@@ -5,6 +5,7 @@ namespace App\Mail;
 use App\Models\JobListing;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
@@ -14,7 +15,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\URL;
 
-class JobMatchesDigestEmail extends Mailable
+class JobMatchesDigestEmail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 

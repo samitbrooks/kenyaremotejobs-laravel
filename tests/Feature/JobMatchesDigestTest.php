@@ -78,12 +78,12 @@ class JobMatchesDigestTest extends TestCase
         $sent = $service->sendDigestToUser($optedOutUser);
 
         $this->assertFalse($sent);
-        Mail::assertNothingSent();
+        Mail::assertNothingQueued();
 
         // Forced sending (e.g. admin test preview) ignores opt-out
         $sentForced = $service->sendDigestToUser($optedOutUser, force: true);
         $this->assertTrue($sentForced);
-        Mail::assertSent(JobMatchesDigestEmail::class, function ($mail) use ($optedOutUser) {
+        Mail::assertQueued(JobMatchesDigestEmail::class, function ($mail) use ($optedOutUser) {
             return $mail->hasTo($optedOutUser->email);
         });
     }
@@ -105,7 +105,7 @@ class JobMatchesDigestTest extends TestCase
             ->expectsOutputToContain('DRY RUN MODE')
             ->assertExitCode(0);
 
-        Mail::assertNothingSent();
+        Mail::assertNothingQueued();
 
         // Send to specific user via flag
         $this->artisan('jobs:send-digest', [
@@ -113,7 +113,7 @@ class JobMatchesDigestTest extends TestCase
             '--force' => true,
         ])->assertExitCode(0);
 
-        Mail::assertSent(JobMatchesDigestEmail::class, function ($mail) use ($activeUser) {
+        Mail::assertQueued(JobMatchesDigestEmail::class, function ($mail) use ($activeUser) {
             return $mail->hasTo($activeUser->email);
         });
 
@@ -137,7 +137,7 @@ class JobMatchesDigestTest extends TestCase
             'email' => 'newuser@example.com',
         ]);
 
-        Mail::assertSent(JobMatchesDigestEmail::class, function ($mail) {
+        Mail::assertQueued(JobMatchesDigestEmail::class, function ($mail) {
             return $mail->hasTo('newuser@example.com')
                 && str_contains($mail->envelope()->subject, 'Wanjiku');
         });
