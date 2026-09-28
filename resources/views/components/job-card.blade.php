@@ -54,8 +54,12 @@
 
                 @if ($job->kenya_friendly)
                     <span class="text-slate-300">•</span>
-                    <span class="inline-flex items-center gap-1 text-teal-700 font-semibold">
+                    <span class="inline-flex items-center gap-1 text-teal-700 font-semibold" title="Scored for East Africa Time (UTC+3) compatibility & zero foreign visa requirements">
                         <x-icon.kenya-flag class="h-3 w-3" /> Kenya-Friendly
+                    </span>
+                    <span class="text-slate-300 hidden sm:inline">•</span>
+                    <span class="hidden sm:inline-flex items-center gap-1 rounded-md bg-teal-50/80 border border-teal-200/50 px-1.5 py-0.5 text-[10px] font-bold text-teal-800" title="Core working hours overlap with Nairobi time">
+                        ⏱ EAT (UTC+3)
                     </span>
                 @endif
 
@@ -74,13 +78,23 @@
     {{-- Right: Compensation + Recency + Action --}}
     <div class="flex items-center sm:flex-col sm:items-end justify-between sm:justify-center shrink-0 gap-1.5 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 text-right">
         @if ($kesMonthly)
-            <span class="text-xs sm:text-sm font-bold text-emerald-700" title="Estimated monthly take-home in Kenyan Shillings at ~130 KES/USD">
-                {{ $kesMonthly }}
-            </span>
+            <div class="flex items-center gap-1.5">
+                <span class="hidden sm:inline-flex items-center text-[10px] text-emerald-800 font-bold bg-emerald-50 border border-emerald-200/60 rounded px-1.5 py-0.5" title="International payout supported: Wire, Wise, Payoneer, or direct to M-Pesa">
+                    USD/Wire
+                </span>
+                <span class="text-xs sm:text-sm font-bold text-emerald-700" title="Estimated monthly take-home in Kenyan Shillings at ~130 KES/USD">
+                    {{ $kesMonthly }}
+                </span>
+            </div>
         @elseif ($hourly)
-            <span class="text-xs sm:text-sm font-bold text-emerald-700" title="Estimated from stated annual salary ÷ 2,080 hours/year">
-                ~${{ $hourly['min'] }}-{{ $hourly['max'] }}/hr
-            </span>
+            <div class="flex items-center gap-1.5">
+                <span class="hidden sm:inline-flex items-center text-[10px] text-emerald-800 font-bold bg-emerald-50 border border-emerald-200/60 rounded px-1.5 py-0.5" title="International payout supported">
+                    USD
+                </span>
+                <span class="text-xs sm:text-sm font-bold text-emerald-700" title="Estimated from stated annual salary ÷ 2,080 hours/year">
+                    ~${{ $hourly['min'] }}-{{ $hourly['max'] }}/hr
+                </span>
+            </div>
         @endif
 
         <div class="flex items-center gap-2">

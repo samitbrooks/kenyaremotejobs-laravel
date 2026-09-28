@@ -42,6 +42,9 @@
 <x-layouts.app :canonical="url('/')">
     <script type="application/ld+json">{!! \App\Support\Seo::faqJsonLd($faqs) !!}</script>
 
+    {{-- Live Activity Ticker --}}
+    <x-live-ticker />
+
     {{-- Hero — KenyaRemoteJobs brand aesthetic with unified floating pill search bar and spacious modern layout --}}
     <section class="relative bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(255,49,49,0.08),rgba(46,55,96,0.05),rgba(255,255,255,0))] px-4 pt-14 pb-16 sm:px-6 sm:pt-20">
         <div class="relative mx-auto max-w-4xl text-center">
@@ -144,6 +147,9 @@
         </div>
     </section>
 
+    {{-- Verified Global Hiring Companies Logo Marquee --}}
+    <x-company-marquee />
+
     {{-- Stat bar — clean borderless metric cards --}}
     <section class="px-4 py-8 sm:px-6">
         <div class="mx-auto grid max-w-4xl grid-cols-1 gap-4 text-center sm:grid-cols-3">
@@ -159,6 +165,13 @@
                 <p class="text-3xl font-extrabold text-slate-900"><x-count-up :value="$totalFree" /></p>
                 <p class="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">Free to view now</p>
             </div>
+        </div>
+    </section>
+
+    {{-- USD to KES Remote Salary Multiplier Slider --}}
+    <section class="px-4 py-4 sm:px-6">
+        <div class="mx-auto max-w-6xl">
+            <x-salary-slider />
         </div>
     </section>
 
@@ -282,6 +295,13 @@
         </div>
     </section>
 
+    {{-- 60-Second Remote Job Match Quiz --}}
+    <section class="px-4 py-10 sm:px-6 bg-slate-50/60 border-y border-slate-200/70">
+        <div class="mx-auto max-w-4xl">
+            <x-match-quiz />
+        </div>
+    </section>
+
     {{-- Start with the work you do best — Remote.co Category Grid --}}
     <section class="px-4 py-16 sm:px-6">
         <div class="mx-auto max-w-6xl">
@@ -364,6 +384,13 @@
                     </x-reveal>
                 @endforeach
             </div>
+        </div>
+    </section>
+
+    {{-- Why Pro Pays For Itself On Day 1 ROI Box --}}
+    <section class="px-4 py-12 sm:px-6">
+        <div class="mx-auto max-w-6xl">
+            <x-roi-card />
         </div>
     </section>
 

@@ -20,6 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // App\Http\Controllers\Webhooks\MpesaCallbackController.
         $middleware->preventRequestForgery(except: [
             'webhooks/mpesa/callback/*',
+            'webhooks/whatsapp',
         ]);
 
         $middleware->alias([

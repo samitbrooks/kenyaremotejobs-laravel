@@ -8,6 +8,7 @@
         ['href' => '/admin/users', 'label' => 'Users'],
         ['href' => '/admin/payments', 'label' => 'Payments'],
         ['href' => '/admin/email', 'label' => 'Email'],
+        ['href' => '/admin/whatsapp', 'label' => 'WhatsApp'],
     ];
 @endphp
 

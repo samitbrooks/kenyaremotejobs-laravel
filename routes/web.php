@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminWhatsAppController;
 use App\Http\Controllers\AuthLinkController;
 use App\Http\Controllers\CareerBotController;
 use App\Http\Controllers\CategoryLandingController;
@@ -19,6 +20,7 @@ use App\Http\Controllers\PricingController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\UnsubscribeController;
 use App\Http\Controllers\Webhooks\MpesaCallbackController;
+use App\Http\Controllers\Webhooks\WhatsAppWebhookController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
@@ -112,7 +114,16 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::post('/email/test', [AdminController::class, 'sendTestEmail'])->name('admin.email.test');
     Route::post('/email/broadcast', [AdminController::class, 'sendCustomBroadcast'])->name('admin.email.broadcast');
     Route::get('/payments', [AdminController::class, 'payments']);
+
+    // WhatsApp Business Hub (Meta Cloud API Web-Based Command Center)
+    Route::get('/whatsapp', [AdminWhatsAppController::class, 'index'])->name('admin.whatsapp');
+    Route::post('/whatsapp/send', [AdminWhatsAppController::class, 'send'])->name('admin.whatsapp.send');
+    Route::post('/whatsapp/job-alert', [AdminWhatsAppController::class, 'sendJobAlert'])->name('admin.whatsapp.job-alert');
 });
+
+// Meta WhatsApp Business Cloud API Webhook (Verification & Inbound Ingestion)
+Route::get('/webhooks/whatsapp', [WhatsAppWebhookController::class, 'verify']);
+Route::post('/webhooks/whatsapp', [WhatsAppWebhookController::class, 'receive']);
 
 // Safaricom posts here directly (no browser session, no CSRF token to send)
 // — see App\Http\Controllers\Webhooks\MpesaCallbackController. {secret} is

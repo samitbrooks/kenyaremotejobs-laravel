@@ -64,6 +64,7 @@
             <x-footer />
             <x-scroll-conversion-popup />
             <x-action-center />
+            <x-whatsapp-alert-modal />
         </div>
 
         @livewireScripts
