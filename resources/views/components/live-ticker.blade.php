@@ -17,16 +17,25 @@
     class="relative z-20 border-b border-slate-200/80 bg-gradient-to-r from-slate-900 via-slate-950 to-[#1f274a] text-white py-2 px-4 shadow-inner"
 >
     <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 text-xs">
-        {{-- Left: Live Activity Pill --}}
-        <div class="flex items-center gap-2.5">
-            <span class="relative flex h-2 w-2">
-                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-                <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
-            </span>
-            <span class="font-bold uppercase tracking-wider text-emerald-400 text-[10px] hidden sm:inline">LIVE PLATFORM PULSE:</span>
+        {{-- Left: Live Activity Pill with Authentic Animated ECG Heartbeat Pulse --}}
+        <div class="flex items-center gap-3">
+            <div class="inline-flex items-center gap-2 rounded-full bg-emerald-500/15 border border-emerald-500/30 px-2.5 py-0.5 text-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.25)]">
+                {{-- Radar / Ping Beacon --}}
+                <span class="relative flex h-2 w-2">
+                    <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-400"></span>
+                </span>
+
+                {{-- Heartbeat Pulse Waveform (ECG Monitor SVG) --}}
+                <svg class="h-3.5 w-7 text-emerald-400 shrink-0" viewBox="0 0 32 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 7h6l2.5-5 3.5 10 3-8 2.5 5.5 2-2.5h7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="animate-pulse" />
+                </svg>
+
+                <span class="text-[10px] font-black uppercase tracking-wider text-emerald-300">LIVE</span>
+            </div>
             
             {{-- Rotating Activity Stream with Smooth Transition --}}
-            <div class="relative h-5 overflow-hidden text-slate-200 font-medium max-w-xs sm:max-w-md">
+            <div class="relative h-5 overflow-hidden text-slate-200 font-medium max-w-[220px] sm:max-w-md md:max-w-lg">
                 <template x-for="(act, idx) in activities" :key="idx">
                     <div
                         x-show="currentIndex === idx"
