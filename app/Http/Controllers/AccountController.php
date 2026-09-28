@@ -58,6 +58,13 @@ class AccountController extends Controller
         $name = trim((string) $request->input('name', ''));
         $redirectTo = (string) $request->input('redirectTo', '/account');
 
+        // Administrator accounts must authenticate with credentials at /admin/login
+        $adminEmails = config('jobs.admin_emails', []);
+        if (in_array($email, $adminEmails, true)) {
+            return redirect()->route('admin.login', ['next' => $redirectTo])
+                ->with('info', 'Administrator accounts must authenticate via the secure Admin Portal with credentials.');
+        }
+
         $user = User::where('email', $email)->first();
         $isNewAccount = ! $user;
 

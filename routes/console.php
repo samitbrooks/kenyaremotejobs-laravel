@@ -13,10 +13,10 @@ Artisan::command('inspire', function () {
 // Uses Schedule::call() to run in-process via Artisan::call() because cPanel/shared
 // hosting environments disable `proc_open`, which crashes Symfony's Process component.
 Schedule::call(function () {
-    Artisan::call('jobs:sync');
+    Artisan::call('jobs:sync', ['--notify-pro' => true]);
 })
     ->name('jobs:sync')
-    ->everySixHours()
+    ->hourly()
     ->onOneServer()
     ->withoutOverlapping();
 

@@ -15,12 +15,16 @@ class SalaryEstimate
     private const MIN_PLAUSIBLE_ANNUAL_USD = 3000;
 
     /**
-     * @param  array{min: ?float, max: ?float}|null  $annual
+     * @param  array{min: ?float, max: ?float}|int|float|null  $annual
      * @return array{min: float, max: float}|null
      */
-    public static function estimateHourlyUsd(?array $annual): ?array
+    public static function estimateHourlyUsd(array|int|float|null $annual): ?array
     {
-        if (! $annual) {
+        if (is_numeric($annual)) {
+            $annual = ['min' => (float) $annual, 'max' => (float) $annual];
+        }
+
+        if (! is_array($annual)) {
             return null;
         }
 
@@ -43,12 +47,16 @@ class SalaryEstimate
      * Estimates the gross monthly compensation in Kenyan Shillings (KES)
      * using current average mid-market conversion rates (~130 KES / 1 USD).
      *
-     * @param  array{min: ?float, max: ?float}|null  $annual
+     * @param  array{min: ?float, max: ?float}|int|float|null  $annual
      */
-    public static function estimateMonthlyKes(?array $annual, ?string $salaryString = null, float $usdToKesRate = 130.0): ?string
+    public static function estimateMonthlyKes(array|int|float|null $annual, ?string $salaryString = null, float $usdToKesRate = 130.0): ?string
     {
-        $minAnnual = $annual['min'] ?? null;
-        $maxAnnual = $annual['max'] ?? null;
+        if (is_numeric($annual)) {
+            $annual = ['min' => (float) $annual, 'max' => (float) $annual];
+        }
+
+        $minAnnual = is_array($annual) ? ($annual['min'] ?? null) : null;
+        $maxAnnual = is_array($annual) ? ($annual['max'] ?? null) : null;
 
         if ($minAnnual !== null && $minAnnual < self::MIN_PLAUSIBLE_ANNUAL_USD) {
             $minAnnual = null;

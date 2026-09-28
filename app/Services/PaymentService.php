@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Payments\PaymentGateway;
 use App\Support\Audience;
 use App\Support\KenyaRelevance;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 
@@ -145,6 +146,12 @@ class PaymentService
     private function fulfillSubscription(Payment $payment): void
     {
         $payment->user->update(['subscribed' => true, 'subscribed_at' => $payment->completed_at]);
+
+        try {
+            app(JobRecommendationService::class)->sendProRecommendationsToUser($payment->user, force: true);
+        } catch (\Throwable $e) {
+            Log::warning('Failed sending initial VIP pro recommendations on payment: '.$e->getMessage(), ['user_id' => $payment->user_id]);
+        }
     }
 
     private function fulfillEmployerJobPost(Payment $payment): void

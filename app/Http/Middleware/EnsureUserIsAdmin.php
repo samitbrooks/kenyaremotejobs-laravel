@@ -20,12 +20,13 @@ class EnsureUserIsAdmin
         $user = $request->user();
 
         if (! $user) {
-            return redirect()->guest('/account?next='.urlencode($request->getRequestUri()))
-                ->with('info', 'Please log in with your administrator account to access the Admin Panel.');
+            return redirect()->guest(route('admin.login', ['next' => $request->getRequestUri()]))
+                ->with('info', 'Please log in with your administrator credentials to access the Admin Panel.');
         }
 
         if (! $user->isAdmin()) {
-            return redirect('/')->with('error', 'Access denied. You must be an administrator to access the Admin Panel.');
+            return redirect()->route('admin.login')
+                ->with('error', 'Access denied. You must be an administrator to access the Admin Panel.');
         }
 
         return $next($request);

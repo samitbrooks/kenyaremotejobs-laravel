@@ -16,6 +16,9 @@ return [
         explode(',', (string) env('ADMIN_EMAILS', ''))
     )),
 
+    // Optional environment fallback password for initial admin portal setup/bootstrap
+    'admin_password' => env('ADMIN_PASSWORD'),
+
     // All listings remain active on the site for 30 days.
     'listing_days' => 30,
 

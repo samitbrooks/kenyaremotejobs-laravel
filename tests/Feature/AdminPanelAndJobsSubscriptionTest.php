@@ -81,10 +81,10 @@ class AdminPanelAndJobsSubscriptionTest extends TestCase
         $detailResponse->assertSee('Apply Directly at Design Studio');
     }
 
-    public function test_guest_accessing_admin_is_redirected_to_account_login(): void
+    public function test_guest_accessing_admin_is_redirected_to_admin_credentials_login(): void
     {
         $response = $this->get('/admin');
-        $response->assertRedirect('/account?next=%2Fadmin');
+        $response->assertRedirect(route('admin.login', ['next' => '/admin']));
         $response->assertSessionHas('info');
     }
 
@@ -96,7 +96,7 @@ class AdminPanelAndJobsSubscriptionTest extends TestCase
         ]);
 
         $response = $this->actingAs($regularUser)->get('/admin');
-        $response->assertRedirect('/');
+        $response->assertRedirect(route('admin.login'));
         $response->assertSessionHas('error');
     }
 

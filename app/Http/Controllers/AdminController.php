@@ -13,6 +13,7 @@ use App\Models\User;
 use App\Services\BulkMailer;
 use App\Services\CreditsService;
 use App\Services\JobRecommendationService;
+use App\Services\JobSyncService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -313,11 +314,37 @@ class AdminController extends Controller
         return redirect()->route('admin.email')->with('success', "✓ Daily Job Matches Digest campaign queued: {$queued} personalized digest(s) dispatched to users.");
     }
 
+    public function syncJobsRealtime(JobSyncService $syncService): RedirectResponse
+    {
+        try {
+            $count = $syncService->sync(notifyPro: true);
+
+            if ($count === 0) {
+                return back()->with('error', 'Sync skipped — every upstream source failed or returned nothing. Existing listings preserved.');
+            }
+
+            return back()->with('success', "✓ Real-time sync complete: {$count} jobs synchronized and scored. Real-time Pro alerts processed.");
+        } catch (Throwable $e) {
+            return back()->with('error', 'Real-time job sync failed: '.$e->getMessage());
+        }
+    }
+
+    public function sendProBroadcast(Request $request, JobRecommendationService $recommendationService): RedirectResponse
+    {
+        $sent = $recommendationService->sendRealtimeAlertsToSubscribers(immediate: false);
+
+        if ($sent === 0) {
+            return redirect()->route('admin.email')->with('error', 'No active Pro subscribers found to receive real-time alerts at this time.');
+        }
+
+        return redirect()->route('admin.email')->with('success', "✓ VIP Pro real-time recommendations campaign queued: {$sent} email(s) dispatched to paying subscribers.");
+    }
+
     public function sendTestEmail(Request $request, BulkMailer $mailer, JobRecommendationService $recommendationService): RedirectResponse
     {
         $validated = $request->validate([
             'test_email' => 'required|email',
-            'test_type' => 'required|in:trial,follow_up,digest,custom',
+            'test_type' => 'required|in:trial,follow_up,digest,pro,custom',
             'custom_subject' => 'nullable|string|max:255',
             'custom_message' => 'nullable|string',
         ]);
@@ -354,6 +381,16 @@ class AdminController extends Controller
                 }
 
                 return redirect()->route('admin.email')->with('error', "Could not dispatch digest to {$email}. Ensure active job listings exist.");
+            }
+
+            if ($type === 'pro') {
+                $user->subscribed = true;
+                $ok = $recommendationService->sendProRecommendationsToUser($user, force: true, immediate: true);
+                if ($ok) {
+                    return redirect()->route('admin.email')->with('success', "✓ VIP Pro Real-Time Matches sample (+ Concierge Offers) sent immediately to {$email}!");
+                }
+
+                return redirect()->route('admin.email')->with('error', "Could not dispatch Pro matches to {$email}. Ensure active job listings exist.");
             }
 
             if ($type === 'custom') {

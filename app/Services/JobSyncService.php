@@ -45,7 +45,7 @@ class JobSyncService
         ];
     }
 
-    public function sync(): int
+    public function sync(bool $notifyPro = false): int
     {
         $fetched = $this->fetchAllSources();
         $hiddenIds = HiddenJob::pluck('id')->flip();
@@ -80,6 +80,14 @@ class JobSyncService
         $this->upsertSyncedJobs($stored);
 
         SyncMeta::where('id', 1)->update(['last_synced_at' => now()]);
+
+        if ($notifyPro) {
+            try {
+                app(JobRecommendationService::class)->sendRealtimeAlertsToSubscribers();
+            } catch (Throwable $e) {
+                Log::warning('[job-sync] failed dispatching real-time Pro alerts: '.$e->getMessage());
+            }
+        }
 
         return $stored->count();
     }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthLinkController;
 use App\Http\Controllers\CareerBotController;
@@ -86,11 +87,17 @@ Route::get('/feed/jobs.rss', [FeedController::class, 'featured']);
 Route::get('/feed/featured-jobs.rss', [FeedController::class, 'featured']);
 Route::post('/api/career-bot', [CareerBotController::class, 'ask'])->middleware('throttle:60,1');
 
+// Administrator Authentication (Protected with dedicated credentials and IP rate-limiting)
+Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
+Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.submit')->middleware('throttle:5,1');
+Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+
 // The 'admin' middleware (App\Http\Middleware\EnsureUserIsAdmin) guards the
 // whole group; every mutation a page embeds still acts against the
 // authenticated user itself, never a value trusted from the request.
 Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard']);
+    Route::post('/sync-jobs', [AdminController::class, 'syncJobsRealtime'])->name('admin.sync-jobs');
     Route::get('/jobs', [AdminController::class, 'jobs']);
     Route::get('/jobs/{job}/edit', [AdminController::class, 'jobEdit']);
     Route::get('/blog', [AdminController::class, 'blog']);
@@ -101,6 +108,7 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::post('/email/trial', [AdminController::class, 'sendFreeTrialBroadcast'])->name('admin.email.trial');
     Route::post('/email/follow-up', [AdminController::class, 'sendFollowUpBroadcast'])->name('admin.email.follow-up');
     Route::post('/email/digest', [AdminController::class, 'sendDigestBroadcast'])->name('admin.email.digest');
+    Route::post('/email/pro', [AdminController::class, 'sendProBroadcast'])->name('admin.email.pro');
     Route::post('/email/test', [AdminController::class, 'sendTestEmail'])->name('admin.email.test');
     Route::post('/email/broadcast', [AdminController::class, 'sendCustomBroadcast'])->name('admin.email.broadcast');
     Route::get('/payments', [AdminController::class, 'payments']);

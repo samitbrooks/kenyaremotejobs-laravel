@@ -121,6 +121,15 @@
                         <button
                             type="submit"
                             name="test_type"
+                            value="pro"
+                            class="btn-pop rounded-xl bg-amber-500 px-3.5 py-2 text-xs font-bold text-slate-950 shadow-xs hover:bg-amber-400 transition"
+                            title="Send VIP Pro real-time matches + concierge offers sample"
+                        >
+                            👑 Pro VIP Sample
+                        </button>
+                        <button
+                            type="submit"
+                            name="test_type"
                             value="custom"
                             class="btn-pop rounded-xl bg-horizon-800 px-3.5 py-2 text-xs font-bold text-white shadow-xs hover:bg-horizon-900 transition"
                             title="Send raw text test"
@@ -130,6 +139,57 @@
                     </div>
                 </div>
             </form>
+        </div>
+
+        {{-- Campaign 0: VIP Pro Real-Time Matches & Concierge Offerings --}}
+        <div class="rounded-2xl border-2 border-amber-500/70 bg-gradient-to-br from-slate-950 via-slate-900 to-amber-950/40 p-6 shadow-md text-white">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+                <div class="flex items-center gap-2.5">
+                    <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-amber-400 to-red-600 text-white font-black text-base shadow-md">
+                        👑
+                    </span>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h2 class="text-base font-extrabold text-white">VIP Pro Real-Time Matches &amp; Concierge Support</h2>
+                            <span class="rounded-full bg-amber-400/20 border border-amber-400/50 px-2.5 py-0.5 text-[10px] font-extrabold text-amber-300 uppercase tracking-wider">
+                                Paying Clients First
+                            </span>
+                        </div>
+                        <p class="text-xs text-slate-300 mt-0.5">
+                            Delivers the premium dark-mode VIP alert featuring real-time suited job suggestions, early recruiter access roles, and our 5 concierge offerings (1-on-1 CV review, custom niche scouting, tailored pitches, priority employer shortlisting, and direct VIP desk access).
+                        </p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="rounded-full bg-amber-500/20 border border-amber-500/40 px-3 py-1 text-xs font-bold text-amber-300 flex items-center gap-1.5">
+                        <span class="h-2 w-2 rounded-full bg-amber-400 animate-pulse"></span> {{ $counts['subscribed'] }} Paying Pro Subscriber(s)
+                    </span>
+                </div>
+            </div>
+
+            <div class="mt-5 rounded-xl border border-slate-800 bg-slate-950/80 p-5 shadow-inner">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                            <span>Dispatch Real-Time Pro Matches &amp; Retention Offers</span>
+                            <span class="rounded-md bg-emerald-950 border border-emerald-700/50 px-2 py-0.5 text-[10px] font-bold text-emerald-300">High Conversion / Retention</span>
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-1 max-w-2xl leading-relaxed">
+                            Ensures your paying clients feel extraordinary value from day one and become recurring subscribers. Automatically dispatched upon successful subscription payment and during real-time job syncs.
+                        </p>
+                    </div>
+
+                    <form method="POST" action="{{ route('admin.email.pro') }}" onsubmit="return confirm('Send the VIP Pro Real-Time Matches & Concierge offerings to all {{ $counts['subscribed'] }} paying subscriber(s) now?');" class="shrink-0">
+                        @csrf
+                        <button
+                            type="submit"
+                            class="btn-pop rounded-xl bg-gradient-to-r from-amber-500 to-red-600 px-5 py-2.5 text-xs font-extrabold text-white shadow-lg shadow-red-600/20 hover:from-amber-400 hover:to-red-500 transition active:scale-95"
+                        >
+                            ⚡ Send VIP Pro Matches Now &rarr;
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
 
         {{-- Campaign 1: Daily Job Matches Digest --}}
