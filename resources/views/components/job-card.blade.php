@@ -20,7 +20,7 @@
 
     {{-- Main Content Column --}}
     <div class="flex items-start sm:items-center gap-3.5 sm:gap-4 min-w-0 flex-1">
-        {{-- Custom Brand Monogram Logo --}}
+        {{-- Harmonized Graphic Vector Illustration --}}
         <x-company-logo :company="$job->company" :size="48" class="shrink-0" />
 
         <div class="min-w-0 flex-1 space-y-1.5">
