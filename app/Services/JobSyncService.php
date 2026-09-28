@@ -6,7 +6,9 @@ use App\Models\HiddenJob;
 use App\Models\JobListing;
 use App\Models\SyncMeta;
 use App\Services\JobSources\ArbeitnowSource;
+use App\Services\JobSources\AshbySource;
 use App\Services\JobSources\GreenhouseSource;
+use App\Services\JobSources\HackerNewsSource;
 use App\Services\JobSources\HimalayasSource;
 use App\Services\JobSources\JobicySource;
 use App\Services\JobSources\JobSource;
@@ -42,6 +44,8 @@ class JobSyncService
             JobicySource::class => new JobicySource,
             HimalayasSource::class => new HimalayasSource,
             GreenhouseSource::class => new GreenhouseSource,
+            AshbySource::class => new AshbySource,
+            HackerNewsSource::class => new HackerNewsSource,
         ];
     }
 

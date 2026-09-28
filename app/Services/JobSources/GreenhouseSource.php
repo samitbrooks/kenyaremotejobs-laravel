@@ -20,6 +20,10 @@ class GreenhouseSource implements JobSource
     private const BOARDS = [
         ['slug' => 'gitlab', 'source_name' => 'GitLab'],
         ['slug' => 'turing', 'source_name' => 'Turing'],
+        ['slug' => 'canonical', 'source_name' => 'Canonical'],
+        ['slug' => 'mozilla', 'source_name' => 'Mozilla'],
+        ['slug' => 'wikimedia', 'source_name' => 'Wikimedia Foundation'],
+        ['slug' => 'elastic', 'source_name' => 'Elastic'],
         // Moniepoint's own listings name its former legal entity and
         // Nigerian subsidiary in passing ("...Moniepoint MFB, and TeamApt
         // Ltd..."), a leak the standard company-name redaction can't catch
