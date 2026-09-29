@@ -19,6 +19,16 @@ class AuthLinkController extends Controller
 {
     public function __invoke(Request $request, User $user)
     {
+        $redirectTo = $request->query('redirectTo', '/account');
+        if (! is_string($redirectTo) || ! str_starts_with($redirectTo, '/') || str_starts_with($redirectTo, '//')) {
+            $redirectTo = '/account';
+        }
+
+        if ($user->isConfiguredAdmin()) {
+            return redirect()->route('admin.login', ['next' => $redirectTo])
+                ->with('info', 'Administrator accounts must authenticate via the secure Admin Portal with credentials.');
+        }
+
         $firstConfirmation = $user->email_verified_at === null;
 
         if ($firstConfirmation) {

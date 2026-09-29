@@ -30,10 +30,8 @@ Route::get('/trial/claim/{user}', [FreeTrialController::class, 'claimViaSignedLi
     ->name('trial.claim')
     ->middleware('signed');
 
-Route::middleware('subscribed')->group(function () {
-    Route::get('/jobs', [JobsController::class, 'index'])->name('jobs.index');
-    Route::get('/jobs/{id}', [JobsController::class, 'show'])->name('jobs.show');
-});
+Route::get('/jobs', [JobsController::class, 'index'])->name('jobs.index');
+Route::get('/jobs/{id}', [JobsController::class, 'show'])->name('jobs.show');
 
 Route::get('/remote-jobs/{slug}', [CategoryLandingController::class, 'show'])->name('jobs.category');
 

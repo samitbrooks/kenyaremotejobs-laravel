@@ -154,8 +154,13 @@ class User extends Authenticatable
         return $this->hasMany(JobListing::class, 'posted_by_user_id');
     }
 
+    public function isConfiguredAdmin(): bool
+    {
+        return in_array(strtolower($this->email), config('jobs.admin_emails', []), true);
+    }
+
     public function isAdmin(): bool
     {
-        return in_array(strtolower($this->email), config('jobs.admin_emails'), true);
+        return in_array(strtolower($this->email), config('jobs.admin_emails', []), true);
     }
 }

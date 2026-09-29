@@ -41,6 +41,7 @@ class AccountController extends Controller
 
     public function logout(Request $request)
     {
+        $request->session()->forget('admin_authenticated');
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

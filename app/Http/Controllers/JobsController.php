@@ -134,6 +134,7 @@ class JobsController extends Controller
         $isEmployerDirect = $job->origin === 'employer';
         $canApply = $admin
             || (bool) $user?->subscribed
+            || (bool) $user?->onTrial()
             || (bool) ($user && $user->jobUnlocks()->where('job_listing_id', $job->id)->exists())
             || (! $isEmployerDirect && ! $isEarlyAccess);
 

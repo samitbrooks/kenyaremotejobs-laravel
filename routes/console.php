@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\GoogleIndexingService;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schedule;
@@ -46,4 +47,15 @@ Schedule::call(function () {
 })
     ->name('queue:work')
     ->everyMinute()
+    ->withoutOverlapping();
+
+// Automatically pushes latest job URLs directly to Google Indexing API daily
+Schedule::call(function () {
+    if (app(GoogleIndexingService::class)->isConfigured()) {
+        Artisan::call('seo:google-index', ['--limit' => 150]);
+    }
+})
+    ->name('seo:google-index')
+    ->dailyAt('04:00')
+    ->onOneServer()
     ->withoutOverlapping();

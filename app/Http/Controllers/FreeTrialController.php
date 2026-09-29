@@ -61,6 +61,11 @@ class FreeTrialController extends Controller
      */
     public function claimViaSignedLink(Request $request, User $user): RedirectResponse
     {
+        if ($user->isConfiguredAdmin()) {
+            return redirect()->route('admin.login', ['next' => '/jobs'])
+                ->with('info', 'Administrator accounts must authenticate via the secure Admin Portal with credentials.');
+        }
+
         Auth::login($user, remember: true);
         $request->session()->regenerate();
 

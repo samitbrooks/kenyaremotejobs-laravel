@@ -19,8 +19,8 @@ class ExampleTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('Pricing');
 
-        // Unsubscribed guest is redirected to pricing (FlexJobs subscription model)
-        $this->get('/jobs')->assertRedirect('/pricing');
+        // Unsubscribed guest can browse jobs
+        $this->get('/jobs')->assertStatus(200);
 
         // Subscribed user can access jobs
         $subscriber = User::factory()->create(['subscribed' => true]);

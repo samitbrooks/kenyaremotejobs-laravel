@@ -150,7 +150,7 @@ class WhatsAppService
     {
         $kes = SalaryEstimate::estimateMonthlyKes($job->annual_salary_usd, $job->salary);
         $hourly = SalaryEstimate::estimateHourlyUsd($job->annual_salary_usd);
-        $compString = $kes ? "💰 Est. Salary: {$kes}" : ($hourly ? "💰 Est. Rate: ~\$" . $hourly['min'] . "-\$" . $hourly['max'] . "/hr" : '💰 Competitive International Pay');
+        $compString = $kes ? "💰 Est. Salary: {$kes}" : ($hourly ? '💰 Est. Rate: ~$'.$hourly['min'].'-$'.$hourly['max'].'/hr' : '💰 Competitive International Pay');
 
         $message = "⚡ *New Remote Opportunity for Kenya!* \n\n"
             ."📌 *Role:* {$job->title}\n"

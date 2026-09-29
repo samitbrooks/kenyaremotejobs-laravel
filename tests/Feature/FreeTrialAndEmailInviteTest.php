@@ -98,10 +98,9 @@ class FreeTrialAndEmailInviteTest extends TestCase
         $this->assertFalse($user->onTrial());
         $this->assertTrue($user->hasUsedTrial());
 
-        // Visiting /jobs redirects to /pricing with expired notice
+        // Visiting /jobs succeeds with 200 OK
         $response = $this->actingAs($user)->get('/jobs');
-        $response->assertRedirect(route('pricing'));
-        $response->assertSessionHas('info');
+        $response->assertStatus(200);
 
         // Trying to activate trial again fails and directs to pricing
         $activateResponse = $this->actingAs($user)->get(route('trial.activate'));

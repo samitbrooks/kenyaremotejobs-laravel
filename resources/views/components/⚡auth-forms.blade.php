@@ -47,6 +47,13 @@ new class extends Component
             return;
         }
 
+        if (in_array($email, config('jobs.admin_emails', []), true)) {
+            session()->flash('info', 'Administrator accounts must log in through the Administrator Portal.');
+            $this->redirect(route('admin.login', ['next' => $this->redirectTo ?: '/admin']), navigate: true);
+
+            return;
+        }
+
         // Clear any previous throttle locks on this email
         RateLimiter::clear('auth-link:'.$email);
 
@@ -69,7 +76,9 @@ new class extends Component
         }
 
         Auth::login($user, remember: true);
-        request()->session()->regenerate();
+        if (request()->hasSession()) {
+            request()->session()->regenerate();
+        }
 
         if ($isNewAccount) {
             try {

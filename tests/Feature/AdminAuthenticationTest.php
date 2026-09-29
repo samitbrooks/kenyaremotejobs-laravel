@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\URL;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 class AdminAuthenticationTest extends TestCase
@@ -115,5 +117,68 @@ class AdminAuthenticationTest extends TestCase
         $user = User::where('email', 'superadmin@kenyaremotejobs.com')->first();
         $this->assertNotNull($user);
         $this->assertTrue(Hash::check('ArtisanCreatedPass123', $user->password));
+    }
+
+    public function test_admin_email_on_livewire_auth_forms_is_blocked_and_redirected_to_admin_login(): void
+    {
+        Livewire::test('auth-forms', ['redirectTo' => '/account'])
+            ->set('email', 'superadmin@kenyaremotejobs.com')
+            ->call('submit')
+            ->assertRedirect(route('admin.login', ['next' => '/account']))
+            ->assertSessionHas('info');
+
+        $this->assertGuest();
+    }
+
+    public function test_admin_email_on_magic_auth_link_is_redirected_to_admin_login(): void
+    {
+        $admin = User::factory()->create([
+            'email' => 'superadmin@kenyaremotejobs.com',
+            'password' => Hash::make('secure-pass-456'),
+        ]);
+
+        $signedUrl = URL::temporarySignedRoute(
+            'auth.link',
+            now()->addMinutes(30),
+            ['user' => $admin->id, 'redirectTo' => '/account']
+        );
+
+        $response = $this->get($signedUrl);
+
+        $response->assertRedirect(route('admin.login', ['next' => '/account']));
+        $this->assertGuest();
+    }
+
+    public function test_admin_email_on_free_trial_claim_link_is_redirected_to_admin_login(): void
+    {
+        $admin = User::factory()->create([
+            'email' => 'superadmin@kenyaremotejobs.com',
+            'password' => Hash::make('secure-pass-456'),
+        ]);
+
+        $signedUrl = URL::temporarySignedRoute(
+            'trial.claim',
+            now()->addMinutes(30),
+            ['user' => $admin->id]
+        );
+
+        $response = $this->get($signedUrl);
+
+        $response->assertRedirect(route('admin.login', ['next' => '/jobs']));
+        $this->assertGuest();
+    }
+
+    public function test_admin_session_is_required_for_admin_rights(): void
+    {
+        $admin = User::factory()->create([
+            'email' => 'superadmin@kenyaremotejobs.com',
+            'password' => Hash::make('secure-pass-456'),
+        ]);
+
+        // Explicitly simulate a session that is NOT admin-authenticated
+        $this->withSession(['admin_authenticated' => false]);
+        $response = $this->actingAs($admin)->get('/admin');
+
+        $response->assertRedirect(route('admin.login', ['next' => '/admin']));
     }
 }

@@ -74,7 +74,7 @@
                                 type="email"
                                 autocomplete="email"
                                 required
-                                value="{{ old('email') }}"
+                                value="{{ old('email', request()->query('email', auth()->user()?->email)) }}"
                                 placeholder="admin@kenyaremotejobs.com"
                                 class="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white placeholder-slate-500 shadow-inner outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-500/20"
                             />

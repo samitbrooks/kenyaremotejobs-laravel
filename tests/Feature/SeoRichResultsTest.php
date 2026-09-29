@@ -181,6 +181,11 @@ class SeoRichResultsTest extends TestCase
 
     public function test_google_indexing_service_returns_not_configured_when_no_credentials(): void
     {
+        config([
+            'services.google_indexing.key_path' => null,
+            'services.google_indexing.credentials_json' => null,
+        ]);
+
         $service = new GoogleIndexingService;
         $this->assertFalse($service->isConfigured());
 

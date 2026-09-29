@@ -22,7 +22,9 @@ class GoogleIndexJobsCommand extends Command
             $urls = [(string) $customUrl];
         } else {
             $limit = max(1, (int) $this->option('limit'));
-            $urlPrefix = config('site.url');
+            $urlPrefix = str_starts_with(config('site.url'), 'http://localhost')
+                ? 'https://kenyaremotejobs.com'
+                : config('site.url');
 
             // Select visible jobs ordered by latest posted
             $urls = JobListing::visible()

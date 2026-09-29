@@ -112,6 +112,7 @@ class AdminAuthController extends Controller
 
         Auth::login($user, $remember);
         $request->session()->regenerate();
+        $request->session()->put('admin_authenticated', true);
 
         if (! str_starts_with($redirectTo, '/') || str_starts_with($redirectTo, '//')) {
             $redirectTo = '/admin';
@@ -125,6 +126,7 @@ class AdminAuthController extends Controller
      */
     public function logout(Request $request): RedirectResponse
     {
+        $request->session()->forget('admin_authenticated');
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

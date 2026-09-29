@@ -26,7 +26,7 @@ class SubscriptionAndEarlyAccessTest extends TestCase
         $response->assertSee('Included with Pro');
     }
 
-    public function test_unsubscribed_visitor_is_redirected_to_pricing_from_jobs_and_job_details(): void
+    public function test_unsubscribed_visitor_can_view_jobs_and_job_details_with_gated_apply_action(): void
     {
         $job = JobListing::create([
             'id' => 'test-job-gated',
@@ -48,15 +48,19 @@ class SubscriptionAndEarlyAccessTest extends TestCase
             'audience_segments' => [],
         ]);
 
-        // Visiting /jobs redirects to /pricing with info message
+        // Visiting /jobs returns 200 and shows listing
         $jobsResponse = $this->get('/jobs');
-        $jobsResponse->assertRedirect('/pricing');
-        $jobsResponse->assertSessionHas('info');
+        $jobsResponse->assertStatus(200);
+        $jobsResponse->assertSee('Remote Python Developer');
 
-        // Visiting /jobs/{id} redirects to /pricing with info message
+        // Visiting /jobs/{id} returns 200, displays role description, but gates the apply action
         $detailResponse = $this->get('/jobs/'.$job->id);
-        $detailResponse->assertRedirect('/pricing');
-        $detailResponse->assertSessionHas('info');
+        $detailResponse->assertStatus(200);
+        $detailResponse->assertSee('Remote Python Developer');
+        $detailResponse->assertSee('PyCorp Ltd');
+        $detailResponse->assertSee('Python developer needed.');
+        $detailResponse->assertSee('Early Access');
+        $detailResponse->assertDontSee('https://example.com/jobs/py-1');
     }
 
     public function test_subscribed_user_can_view_jobs_and_transparent_company_details(): void
@@ -116,8 +120,11 @@ class SubscriptionAndEarlyAccessTest extends TestCase
             'audience_segments' => [],
         ]);
 
-        // Unauthenticated visitor is redirected to /pricing
-        $this->get('/jobs/'.$freshJob->id)->assertRedirect('/pricing');
+        // Unauthenticated visitor can view job details, but apply action is gated behind Early Access
+        $guestResponse = $this->get('/jobs/'.$freshJob->id);
+        $guestResponse->assertStatus(200);
+        $guestResponse->assertDontSee('Apply Directly at CloudScale Ltd');
+        $guestResponse->assertSee('Early Access');
 
         // Subscribed Pro member can access and see early access indicator
         $proUser = User::factory()->create([
@@ -153,8 +160,10 @@ class SubscriptionAndEarlyAccessTest extends TestCase
             'audience_segments' => [],
         ]);
 
-        // Free visitor is redirected to pricing
-        $this->get('/jobs/'.$employerJob->id)->assertRedirect('/pricing');
+        // Free visitor can see job details, but apply action is gated
+        $guestResponse = $this->get('/jobs/'.$employerJob->id);
+        $guestResponse->assertStatus(200);
+        $guestResponse->assertDontSee('https://kenyanfintech.com/careers/apply');
 
         // Pro member can access and apply directly
         $proUser = User::factory()->create([

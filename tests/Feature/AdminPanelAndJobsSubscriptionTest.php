@@ -11,7 +11,7 @@ class AdminPanelAndJobsSubscriptionTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_unsubscribed_guest_is_redirected_to_pricing_when_navigating_to_jobs(): void
+    public function test_unsubscribed_guest_can_view_jobs_and_job_details(): void
     {
         $job = JobListing::create([
             'id' => 'gated-job-1',
@@ -33,15 +33,17 @@ class AdminPanelAndJobsSubscriptionTest extends TestCase
             'audience_segments' => [],
         ]);
 
-        // Attempting to visit /jobs redirects to /pricing
+        // Attempting to visit /jobs succeeds with 200 OK
         $response = $this->get('/jobs');
-        $response->assertRedirect(route('pricing'));
-        $response->assertSessionHas('info');
+        $response->assertStatus(200);
+        $response->assertSee('Software Engineer');
 
-        // Attempting to visit /jobs/{id} redirects to /pricing
+        // Attempting to visit /jobs/{id} succeeds with 200 OK, details visible, apply url gated
         $detailResponse = $this->get('/jobs/'.$job->id);
-        $detailResponse->assertRedirect(route('pricing'));
-        $detailResponse->assertSessionHas('info');
+        $detailResponse->assertStatus(200);
+        $detailResponse->assertSee('Software Engineer');
+        $detailResponse->assertSee('Tech Corp');
+        $detailResponse->assertDontSee('https://example.com/apply');
     }
 
     public function test_subscribed_user_can_navigate_to_jobs_and_job_details(): void
