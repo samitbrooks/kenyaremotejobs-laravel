@@ -21,6 +21,8 @@ return [
 
     'webhook_verify_token' => env('WHATSAPP_WEBHOOK_VERIFY_TOKEN', 'krj-wa-verify-token'),
 
+    'app_secret' => env('WHATSAPP_APP_SECRET'),
+
     'api_version' => env('WHATSAPP_API_VERSION', 'v21.0'),
 
     'default_channel_phone' => env('WHATSAPP_CHANNEL_PHONE', '+254700000000'),

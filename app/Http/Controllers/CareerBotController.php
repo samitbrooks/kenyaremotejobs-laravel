@@ -12,7 +12,9 @@ class CareerBotController extends Controller
     {
         $validated = $request->validate([
             'message' => 'required|string|max:1000',
-            'history' => 'nullable|array',
+            'history' => 'nullable|array|max:10',
+            'history.*.role' => 'required_with:history|string|in:user,model,assistant',
+            'history.*.content' => 'required_with:history|string|max:2000',
         ]);
 
         $result = $bot->ask($validated['message'], $validated['history'] ?? []);

@@ -193,4 +193,57 @@ class SeoRichResultsTest extends TestCase
         $this->assertFalse($result['success']);
         $this->assertSame(401, $result['status']);
     }
+
+    public function test_indexnow_command_dry_run_executes_successfully(): void
+    {
+        $this->artisan('seo:indexnow', ['--dry-run' => true, '--limit' => 3])
+            ->expectsOutputToContain('Preparing to submit')
+            ->expectsOutputToContain('Running in --dry-run mode')
+            ->assertExitCode(0);
+    }
+
+    public function test_indexnow_key_endpoint_serves_text_plain_key(): void
+    {
+        $key = config('services.indexnow.key');
+
+        $response1 = $this->get('/indexnow-key.txt');
+        $response1->assertStatus(200);
+        $response1->assertHeader('Content-Type', 'text/plain; charset=utf-8');
+        $response1->assertSee($key, false);
+
+        $response2 = $this->get("/{$key}.txt");
+        $response2->assertStatus(200);
+        $response2->assertHeader('Content-Type', 'text/plain; charset=utf-8');
+        $response2->assertSee($key, false);
+    }
+
+    public function test_job_posting_json_ld_schema_reflects_actual_company_for_synced_jobs(): void
+    {
+        $job = JobListing::create([
+            'id' => 'synced-schema-job',
+            'source_name' => 'himalayas',
+            'source_id' => 'him-123',
+            'source_url' => 'https://himalayas.app/jobs/123',
+            'title' => 'Senior Support Engineer',
+            'company' => 'GitLab',
+            'description' => '<p>Direct role for engineers in Kenya.</p>',
+            'tags' => ['Support', 'Remote'],
+            'location' => 'Worldwide',
+            'remote_type' => 'full_time',
+            'posted_at' => now(),
+            'kenya_friendly' => true,
+            'kenya_score' => 95,
+            'kenya_reasons' => ['Open to Kenya'],
+            'audience_segments' => ['tech'],
+            'origin' => 'synced',
+            'tier' => 'standard',
+        ]);
+
+        $response = $this->get('/jobs/'.$job->id);
+        $response->assertStatus(200);
+
+        // Ensures schema matches visible HTML and does not cloak company name
+        $response->assertSee('"name":"GitLab"', false);
+        $response->assertDontSee('Verified Remote Employer (via', false);
+    }
 }

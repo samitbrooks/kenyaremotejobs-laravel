@@ -1,10 +1,13 @@
 <?php
 
+use App\Livewire\Concerns\RequiresAdmin;
 use App\Models\CreditPurchase;
 use Livewire\Component;
 
 new class extends Component
 {
+    use RequiresAdmin;
+
     public string $userId;
 
     public string $tier = 'basic';

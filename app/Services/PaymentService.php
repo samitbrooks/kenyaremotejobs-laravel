@@ -92,6 +92,23 @@ class PaymentService
         return $this->initiateAndMaybeFulfill($payment);
     }
 
+    public function purchaseSurveyPass(User $user, ?string $phone = null): Payment
+    {
+        $amount = 199;
+
+        $payment = Payment::create([
+            'user_id' => $user->id,
+            'gateway' => config('payments.default'),
+            'purpose' => 'survey_pass',
+            'payload' => ['item' => 'survey_vault_pass', 'price_kes' => $amount],
+            'amount_kes' => $amount,
+            'phone' => $phone,
+            'status' => 'pending',
+        ]);
+
+        return $this->initiateAndMaybeFulfill($payment);
+    }
+
     private function initiateAndMaybeFulfill(Payment $payment): Payment
     {
         $this->gateway->initiate($payment);
@@ -120,6 +137,7 @@ class PaymentService
             'credit_package' => $this->fulfillCreditPackage($payment),
             'subscription' => $this->fulfillSubscription($payment),
             'employer_job_post' => $this->fulfillEmployerJobPost($payment),
+            'survey_pass' => $this->fulfillSurveyPass($payment),
             default => null,
         };
     }
@@ -196,5 +214,13 @@ class PaymentService
             'amount_kes' => $payment->amount_kes,
             'posted_at' => $payment->completed_at,
         ]);
+    }
+
+    private function fulfillSurveyPass(Payment $payment): void
+    {
+        $user = User::find($payment->user_id);
+        if ($user) {
+            $user->update(['survey_pass_purchased_at' => $payment->completed_at ?? now()]);
+        }
     }
 }

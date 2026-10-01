@@ -27,7 +27,7 @@ new class extends Component
     // else to decrement here.
     public function unlock(CreditsService $credits): void
     {
-        if (! $this->isAuthed) {
+        if (! auth()->check()) {
             $this->redirect("/account?next=/jobs/{$this->jobId}", navigate: false);
 
             return;
@@ -35,6 +35,13 @@ new class extends Component
 
         $this->error = null;
         $user = auth()->user();
+
+        if ($user->jobUnlocks()->where('job_listing_id', $this->jobId)->exists()) {
+            $this->unlocked = true;
+            $this->redirect("/jobs/{$this->jobId}", navigate: false);
+
+            return;
+        }
 
         if (! $credits->hasAvailableCredit($user, $this->tier)) {
             $this->error = "No {$this->tier} credits available. Buy a package first.";

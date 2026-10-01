@@ -1,10 +1,13 @@
 <?php
 
+use App\Livewire\Concerns\RequiresAdmin;
 use App\Models\User;
 use Livewire\Component;
 
 new class extends Component
 {
+    use RequiresAdmin;
+
     public string $userId;
 
     public bool $subscribed;

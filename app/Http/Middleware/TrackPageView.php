@@ -20,7 +20,8 @@ class TrackPageView
     public function handle(Request $request, Closure $next): Response
     {
         if ($request->isMethod('get') && ! Str::startsWith($request->path(), self::UNTRACKED_PREFIXES)) {
-            PageView::create(['path' => '/'.ltrim($request->path(), '/'), 'created_at' => now()]);
+            $path = Str::limit('/'.ltrim($request->path(), '/'), 250, '');
+            PageView::create(['path' => $path, 'created_at' => now()]);
         }
 
         return $next($request);

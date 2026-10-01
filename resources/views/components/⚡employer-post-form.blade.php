@@ -45,6 +45,12 @@ new class extends Component
         $this->error = null;
         $this->paymentError = null;
 
+        if (! auth()->check()) {
+            $this->error = 'Please log in or create an account to post a job listing.';
+
+            return;
+        }
+
         if (! $this->title || ! $this->company || ! $this->description || ! $this->location || ! $this->remoteType || ! $this->sourceUrl) {
             $this->error = 'Title, company, description, location, remote type, and apply link are required.';
 

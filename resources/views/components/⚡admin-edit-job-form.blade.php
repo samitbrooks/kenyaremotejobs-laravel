@@ -1,10 +1,13 @@
 <?php
 
+use App\Livewire\Concerns\RequiresAdmin;
 use App\Models\JobListing;
 use Livewire\Component;
 
 new class extends Component
 {
+    use RequiresAdmin;
+
     public string $jobId;
 
     public string $origin;

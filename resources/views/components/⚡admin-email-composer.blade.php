@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Concerns\RequiresAdmin;
 use App\Mail\FollowUpInvitationEmail;
 use App\Mail\FreeTrialInvitationEmail;
 use App\Models\Payment;
@@ -11,6 +12,8 @@ use Livewire\Component;
 
 new class extends Component
 {
+    use RequiresAdmin;
+
     public array $counts;
 
     public bool $configured;

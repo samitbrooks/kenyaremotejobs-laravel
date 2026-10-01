@@ -59,3 +59,21 @@ Schedule::call(function () {
     ->dailyAt('04:00')
     ->onOneServer()
     ->withoutOverlapping();
+
+// Automatically submits updated URLs to IndexNow (Bing, Yahoo, Naver, Seznam) daily
+Schedule::call(function () {
+    Artisan::call('seo:indexnow', ['--limit' => 100]);
+})
+    ->name('seo:indexnow')
+    ->dailyAt('04:30')
+    ->onOneServer()
+    ->withoutOverlapping();
+
+// Automatically verifies paid survey platforms and pings Google/IndexNow for fresh indexing
+Schedule::call(function () {
+    Artisan::call('surveys:sync', ['--notify' => true]);
+})
+    ->name('surveys:sync')
+    ->dailyAt('05:30')
+    ->onOneServer()
+    ->withoutOverlapping();

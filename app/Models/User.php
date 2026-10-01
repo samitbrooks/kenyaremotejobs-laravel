@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password', 'subscribed', 'subscribed_at', 'trial_started_at', 'trial_ends_at', 'marketing_opt_out_at', 'last_job_digest_at', 'follow_up_sent_at', 'free_tailors_remaining'])]
+#[Fillable(['name', 'email', 'password', 'subscribed', 'subscribed_at', 'survey_pass_purchased_at', 'trial_started_at', 'trial_ends_at', 'marketing_opt_out_at', 'last_job_digest_at', 'follow_up_sent_at', 'free_tailors_remaining'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -30,6 +30,7 @@ class User extends Authenticatable
             'password' => 'hashed',
             'subscribed' => 'boolean',
             'subscribed_at' => 'datetime',
+            'survey_pass_purchased_at' => 'datetime',
             'trial_started_at' => 'datetime',
             'trial_ends_at' => 'datetime',
             'marketing_opt_out_at' => 'datetime',
@@ -82,6 +83,14 @@ class User extends Authenticatable
     public function hasActiveAccess(): bool
     {
         return $this->isAdmin() || $this->subscribed || $this->onTrial();
+    }
+
+    public function hasSurveyAccess(): bool
+    {
+        return $this->isAdmin()
+            || $this->subscribed
+            || $this->onTrial()
+            || $this->survey_pass_purchased_at !== null;
     }
 
     public function startFreeTrial(int $hours = 24): bool

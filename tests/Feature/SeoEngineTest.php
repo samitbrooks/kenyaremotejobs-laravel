@@ -6,6 +6,7 @@ use App\Mail\MarketingEmail;
 use App\Models\JobListing;
 use App\Models\User;
 use App\Services\BulkMailer;
+use App\Services\PaymentService;
 use Database\Seeders\SeoPillarContentSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
@@ -52,6 +53,74 @@ class SeoEngineTest extends TestCase
         $response->assertSee('Disallow: /account');
         $response->assertSee('Sitemap:');
         $response->assertSee('sitemap.xml');
+        $response->assertSee('llms.txt');
+        $response->assertSee('llms-full.txt');
+    }
+
+    public function test_home_page_contains_llms_txt_discovery_tag(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+        $response->assertSee('<link rel="alternate" type="text/markdown" title="LLMs.txt"', false);
+    }
+
+    public function test_llms_txt_returns_curated_markdown_documentation(): void
+    {
+        $response = $this->get('/llms.txt');
+
+        $response->assertStatus(200);
+        $response->assertHeader('Content-Type', 'text/plain; charset=utf-8');
+        $response->assertSee('# KenyaRemoteJobs', false);
+        $response->assertSee('## Core Platform & Tools', false);
+        $response->assertSee('## Remote Roles by Discipline', false);
+        $response->assertSee('## Machine-Readable Feeds & Endpoints', false);
+        $response->assertSee('/llms-full.txt', false);
+
+        $wellKnownResponse = $this->get('/.well-known/llms.txt');
+        $wellKnownResponse->assertStatus(200);
+        $wellKnownResponse->assertSee('# KenyaRemoteJobs', false);
+    }
+
+    public function test_llms_full_txt_returns_complete_kenyan_contracting_context_and_jobs(): void
+    {
+        JobListing::create([
+            'id' => 'test-llm-job',
+            'source_name' => 'employer',
+            'source_id' => 'test-llm-1',
+            'source_url' => 'https://example.com/jobs/1',
+            'tier' => 'standard',
+            'title' => 'Senior Remote Laravel Engineer',
+            'company' => 'Acme Global',
+            'description' => 'Test job description',
+            'tags' => ['Laravel', 'PHP'],
+            'origin' => 'employer',
+            'remote_type' => 'Full Remote',
+            'location' => 'Worldwide',
+            'salary' => '$90,000 - $120,000 USD/yr',
+            'kenya_friendly' => true,
+            'kenya_score' => 98,
+            'kenya_reasons' => ['Worldwide remote'],
+            'audience_segments' => [],
+            'posted_at' => now(),
+        ]);
+
+        $response = $this->get('/llms-full.txt');
+
+        $response->assertStatus(200);
+        $response->assertHeader('Content-Type', 'text/plain; charset=utf-8');
+        $response->assertSee('# KenyaRemoteJobs — Full System & Knowledge Context', false);
+        $response->assertSee('## 1. Remote Contracting Context for Kenya', false);
+        $response->assertSee('Timezone Advantage: Nairobi is on East Africa Time (EAT / UTC+3)', false);
+        $response->assertSee('IRS Form W-8BEN', false);
+        $response->assertSee('KRA PIN', false);
+        $response->assertSee('Payout Methods', false);
+        $response->assertSee('Wise', false);
+        $response->assertSee('## 2. Active Verified Kenya-Friendly Roles', false);
+        $response->assertSee('Senior Remote Laravel Engineer at Acme Global', false);
+        $response->assertSee('## 3. Remote Companies Vetted for Kenya', false);
+        $response->assertSee('GitLab', false);
+        $response->assertSee('Automattic', false);
     }
 
     public function test_programmatic_category_landing_page_renders_with_seo_and_schemas(): void
@@ -359,5 +428,87 @@ class SeoEngineTest extends TestCase
 
         $response->assertRedirect('/account');
         $this->assertAuthenticatedAs($user);
+    }
+
+    public function test_surveys_page_renders_with_item_list_and_faq_schemas(): void
+    {
+        $response = $this->get('/surveys');
+
+        $response->assertStatus(200);
+        $response->assertSee('Earn While You Search');
+        $response->assertSee('ySense');
+        $response->assertSee('Freecash');
+        $response->assertSee('"@type":"ItemList"', false);
+        $response->assertSee('"@type":"FAQPage"', false);
+        $response->assertSee('How do I withdraw survey earnings to M-Pesa in Kenya?');
+    }
+
+    public function test_surveys_page_filters_by_payout_and_category(): void
+    {
+        $mpesaResponse = $this->get('/surveys?payout=mpesa');
+        $mpesaResponse->assertStatus(200);
+        $mpesaResponse->assertSee('ySense');
+
+        $researchResponse = $this->get('/surveys?category=research');
+        $researchResponse->assertStatus(200);
+        $researchResponse->assertSee('Respondent.io');
+    }
+
+    public function test_sitemap_xml_contains_daily_surveys_entry(): void
+    {
+        $response = $this->get('/sitemap.xml');
+
+        $response->assertStatus(200);
+        $response->assertSee('/surveys</loc>', false);
+        $response->assertSee('<changefreq>daily</changefreq>', false);
+    }
+
+    public function test_guest_sees_free_previews_and_kes_199_unlock_button(): void
+    {
+        $response = $this->get('/surveys');
+
+        $response->assertStatus(200);
+        $response->assertSee('Free Preview');
+        $response->assertSee('KES 199');
+        $response->assertSee('Unlock Vault (KES 199)');
+        $response->assertSee('Sign In to Unlock with M-Pesa');
+    }
+
+    public function test_unlocked_user_sees_all_survey_platforms_without_locks(): void
+    {
+        $user = User::create([
+            'name' => 'Paid User',
+            'email' => 'paid@example.com',
+            'password' => 'secret',
+            'survey_pass_purchased_at' => now(),
+        ]);
+
+        $response = $this->actingAs($user)->get('/surveys');
+
+        $response->assertStatus(200);
+        $response->assertSee('VIP Vault Unlocked');
+        $response->assertSee('Sign Up on Respondent.io');
+        $response->assertSee('Sign Up on Outlier AI (Remotasks)');
+        $response->assertDontSee('Unlock Vault (KES 199)');
+    }
+
+    public function test_purchase_survey_pass_fulfills_and_grants_access(): void
+    {
+        $user = User::create([
+            'name' => 'Buyer User',
+            'email' => 'buyer@example.com',
+            'password' => 'secret',
+        ]);
+
+        $this->assertFalse($user->hasSurveyAccess());
+
+        $paymentService = app(PaymentService::class);
+        $payment = $paymentService->purchaseSurveyPass($user, '0712345678');
+
+        $this->assertEquals(199, $payment->amount_kes);
+        $this->assertEquals('survey_pass', $payment->purpose);
+
+        $user->refresh();
+        $this->assertTrue($user->hasSurveyAccess());
     }
 }

@@ -4,7 +4,6 @@ namespace App\Support;
 
 use App\Models\BlogPost;
 use App\Models\JobListing;
-use App\Services\Redactor;
 use Illuminate\Support\Str;
 
 /**
@@ -50,17 +49,24 @@ class Seo
     public static function jobPostingJsonLd(JobListing $job): string
     {
         $at = '@';
-        $employerVisible = $job->origin === 'employer';
         $plainDescription = Format::stripHtml($job->description ?? '');
-        $description = $employerVisible
-            ? $plainDescription
-            : app(Redactor::class)->redactEmployerIdentity($plainDescription, $job->company);
+        $matchedCompany = CompanyDirectory::find(Str::slug($job->company));
+
+        $hiringOrg = [
+            $at.'type' => 'Organization',
+            'name' => $job->company,
+            'sameAs' => $matchedCompany['website'] ?? config('site.url'),
+        ];
+
+        if (! empty($matchedCompany['logo'])) {
+            $hiringOrg['logo'] = $matchedCompany['logo'];
+        }
 
         $data = [
             $at.'context' => 'https://schema.org',
             $at.'type' => 'JobPosting',
             'title' => $job->title,
-            'description' => $description,
+            'description' => $plainDescription,
             'identifier' => [
                 $at.'type' => 'PropertyValue',
                 'name' => config('site.name'),
@@ -69,24 +75,7 @@ class Seo
             'datePosted' => $job->posted_at->toIso8601String(),
             'validThrough' => $job->posted_at->copy()->addDays(self::ESTIMATED_LISTING_LIFETIME_DAYS)->toIso8601String(),
             'employmentType' => self::EMPLOYMENT_TYPE_MAP[strtolower(str_replace(' ', '_', trim($job->remote_type ?? '')))] ?? 'OTHER',
-            'hiringOrganization' => (function () use ($at, $employerVisible, $job) {
-                $org = [
-                    $at.'type' => 'Organization',
-                    'name' => $employerVisible ? $job->company : 'Verified Remote Employer (via '.config('site.name').')',
-                    'sameAs' => config('site.url'),
-                ];
-                if ($employerVisible) {
-                    $matchedCompany = CompanyDirectory::find(Str::slug($job->company));
-                    if ($matchedCompany) {
-                        $org['sameAs'] = $matchedCompany['website'];
-                        if (! empty($matchedCompany['logo'])) {
-                            $org['logo'] = $matchedCompany['logo'];
-                        }
-                    }
-                }
-
-                return $org;
-            })(),
+            'hiringOrganization' => $hiringOrg,
             'jobLocationType' => 'TELECOMMUTE',
             // Every job on this board is pitched to a Kenya-based audience, so
             // Kenya is always a valid applicant location even when the

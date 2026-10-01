@@ -6,6 +6,7 @@ use App\Mail\WelcomeEmail;
 use App\Models\User;
 use App\Services\CreditsService;
 use App\Services\JobRecommendationService;
+use App\Support\SafeUrl;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -22,7 +23,7 @@ class AccountController extends Controller
         if (! $user) {
             return view('account', [
                 'user' => null,
-                'redirectTo' => $request->query('next', '/account'),
+                'redirectTo' => SafeUrl::redirectPath($request->query('next'), '/account'),
             ]);
         }
 
@@ -103,10 +104,6 @@ class AccountController extends Controller
             }
         }
 
-        if (! str_starts_with($redirectTo, '/') || str_starts_with($redirectTo, '//')) {
-            $redirectTo = '/account';
-        }
-
-        return redirect($redirectTo);
+        return redirect(SafeUrl::redirectPath($redirectTo, '/account'));
     }
 }

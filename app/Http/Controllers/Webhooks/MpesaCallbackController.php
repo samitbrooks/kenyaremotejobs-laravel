@@ -25,7 +25,8 @@ class MpesaCallbackController extends Controller
 {
     public function __invoke(Request $request, PaymentService $payments, string $secret)
     {
-        if (! hash_equals((string) config('payments.mpesa.callback_secret'), $secret)) {
+        $configuredSecret = (string) config('payments.mpesa.callback_secret');
+        if ($configuredSecret === '' || $secret === '' || ! hash_equals($configuredSecret, $secret)) {
             Log::warning('[mpesa-callback] rejected — bad secret');
 
             return response()->json(['ResultCode' => 1, 'ResultDesc' => 'Rejected'], 403);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\WelcomeEmail;
 use App\Models\User;
 use App\Services\JobRecommendationService;
+use App\Support\SafeUrl;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -19,10 +20,7 @@ class AuthLinkController extends Controller
 {
     public function __invoke(Request $request, User $user)
     {
-        $redirectTo = $request->query('redirectTo', '/account');
-        if (! is_string($redirectTo) || ! str_starts_with($redirectTo, '/') || str_starts_with($redirectTo, '//')) {
-            $redirectTo = '/account';
-        }
+        $redirectTo = SafeUrl::redirectPath($request->query('redirectTo'), '/account');
 
         if ($user->isConfiguredAdmin()) {
             return redirect()->route('admin.login', ['next' => $redirectTo])
@@ -36,6 +34,9 @@ class AuthLinkController extends Controller
         }
 
         Auth::login($user, remember: true);
+        if ($request->hasSession()) {
+            $request->session()->regenerate();
+        }
 
         if ($firstConfirmation) {
             try {
@@ -49,11 +50,6 @@ class AuthLinkController extends Controller
             } catch (Throwable $e) {
                 Log::warning('Initial job matches digest failed to send: '.$e->getMessage(), ['user_id' => $user->id]);
             }
-        }
-
-        $redirectTo = $request->query('redirectTo', '/account');
-        if (! is_string($redirectTo) || ! str_starts_with($redirectTo, '/') || str_starts_with($redirectTo, '//')) {
-            $redirectTo = '/account';
         }
 
         return redirect($redirectTo);

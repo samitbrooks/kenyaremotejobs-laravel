@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Support\SafeUrl;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +26,7 @@ class AdminAuthController extends Controller
         }
 
         return view('admin.login', [
-            'redirectTo' => $request->query('next', '/admin'),
+            'redirectTo' => SafeUrl::redirectPath($request->query('next'), '/admin'),
         ]);
     }
 
@@ -114,9 +115,7 @@ class AdminAuthController extends Controller
         $request->session()->regenerate();
         $request->session()->put('admin_authenticated', true);
 
-        if (! str_starts_with($redirectTo, '/') || str_starts_with($redirectTo, '//')) {
-            $redirectTo = '/admin';
-        }
+        $redirectTo = SafeUrl::redirectPath($redirectTo, '/admin');
 
         return redirect()->intended($redirectTo)->with('success', 'Logged in to Administrator Panel successfully.');
     }

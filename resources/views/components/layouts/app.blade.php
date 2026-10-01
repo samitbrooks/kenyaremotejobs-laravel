@@ -41,6 +41,7 @@
         <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon-16x16.png') }}">
         <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/apple-touch-icon.png') }}">
         <link rel="alternate" type="application/rss+xml" title="{{ config('site.name') }} — Featured Remote Jobs" href="{{ url('/feed/featured.rss') }}">
+        <link rel="alternate" type="text/markdown" title="LLMs.txt" href="{{ url('/llms.txt') }}">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

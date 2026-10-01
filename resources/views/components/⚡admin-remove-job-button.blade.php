@@ -1,11 +1,14 @@
 <?php
 
+use App\Livewire\Concerns\RequiresAdmin;
 use App\Models\HiddenJob;
 use App\Models\JobListing;
 use Livewire\Component;
 
 new class extends Component
 {
+    use RequiresAdmin;
+
     public string $jobId;
 
     // A synced job's id also goes on the hidden list so the next resync

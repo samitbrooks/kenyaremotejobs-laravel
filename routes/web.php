@@ -18,6 +18,7 @@ use App\Http\Controllers\JobsController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\PricingController;
 use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\UnsubscribeController;
 use App\Http\Controllers\Webhooks\MpesaCallbackController;
 use App\Http\Controllers\Webhooks\WhatsAppWebhookController;
@@ -25,7 +26,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::match(['get', 'post'], '/trial/activate', [FreeTrialController::class, 'activate'])->name('trial.activate');
+Route::match(['get', 'post'], '/trial/activate', [FreeTrialController::class, 'activate'])
+    ->name('trial.activate')
+    ->middleware('throttle:15,1');
 Route::get('/trial/claim/{user}', [FreeTrialController::class, 'claimViaSignedLink'])
     ->name('trial.claim')
     ->middleware('signed');
@@ -44,7 +47,9 @@ Route::get('/collections/{slug}', [CollectionController::class, 'show'])->name('
 Route::get('/pricing', [PricingController::class, 'index'])->name('pricing');
 
 Route::get('/account', [AccountController::class, 'show']);
-Route::post('/account/login', [AccountController::class, 'login'])->name('account.login');
+Route::post('/account/login', [AccountController::class, 'login'])
+    ->name('account.login')
+    ->middleware('throttle:10,1');
 Route::post('/logout', [AccountController::class, 'logout']);
 
 // The one destination every signup-confirmation and login-link email
@@ -68,7 +73,7 @@ Route::get('/journal/{blogPost}', [JournalController::class, 'show']);
 Route::view('/match', 'match');
 Route::view('/resume-builder', 'resume-builder');
 Route::view('/about', 'about');
-Route::view('/surveys', 'surveys');
+Route::get('/surveys', [SurveyController::class, 'index'])->name('surveys');
 Route::get('/faqs', [FaqController::class, 'index'])->name('faqs');
 Route::permanentRedirect('/faq', '/faqs');
 
@@ -82,6 +87,11 @@ Route::match(['get', 'post'], '/unsubscribe/{user}', UnsubscribeController::clas
 
 Route::get('/sitemap.xml', [SitemapController::class, 'sitemap']);
 Route::get('/robots.txt', [SitemapController::class, 'robots']);
+Route::get('/indexnow-key.txt', [SitemapController::class, 'indexNowKey']);
+Route::get('/{key}.txt', [SitemapController::class, 'indexNowKey'])->where('key', '^[a-f0-9]{16,64}$');
+Route::get('/llms.txt', [SitemapController::class, 'llms'])->name('llms.txt');
+Route::get('/.well-known/llms.txt', [SitemapController::class, 'llms']);
+Route::get('/llms-full.txt', [SitemapController::class, 'llmsFull'])->name('llms-full.txt');
 Route::get('/feed/featured.rss', [FeedController::class, 'featured'])->name('feed.featured');
 Route::get('/feed/jobs.rss', [FeedController::class, 'featured']);
 Route::get('/feed/featured-jobs.rss', [FeedController::class, 'featured']);

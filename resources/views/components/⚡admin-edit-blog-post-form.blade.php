@@ -1,10 +1,13 @@
 <?php
 
+use App\Livewire\Concerns\RequiresAdmin;
 use App\Models\BlogPost;
 use Livewire\Component;
 
 new class extends Component
 {
+    use RequiresAdmin;
+
     public string $postId;
 
     public string $title = '';

@@ -25,7 +25,7 @@ new class extends Component
 
     public function buy(PaymentService $payments): void
     {
-        if (! $this->isAuthed) {
+        if (! auth()->check()) {
             $this->redirect('/account?next=/pricing', navigate: false);
 
             return;

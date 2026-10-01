@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Concerns\RequiresAdmin;
 use App\Models\JobListing;
 use App\Support\Audience;
 use App\Support\KenyaRelevance;
@@ -8,6 +9,8 @@ use Livewire\Component;
 
 new class extends Component
 {
+    use RequiresAdmin;
+
     public bool $open = false;
 
     public string $title = '';

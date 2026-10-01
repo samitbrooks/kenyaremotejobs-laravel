@@ -1,11 +1,14 @@
 <?php
 
+use App\Livewire\Concerns\RequiresAdmin;
 use App\Models\BlogPost;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
 new class extends Component
 {
+    use RequiresAdmin;
+
     public bool $open = false;
 
     public string $title = '';

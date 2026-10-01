@@ -3,6 +3,7 @@
 use App\Mail\WelcomeEmail;
 use App\Models\User;
 use App\Services\JobRecommendationService;
+use App\Support\SafeUrl;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -24,7 +25,7 @@ new class extends Component
 
     public function mount(string $redirectTo = '/account'): void
     {
-        $this->redirectTo = $redirectTo;
+        $this->redirectTo = SafeUrl::redirectPath($redirectTo, '/account');
         if (request()->query('mode') === 'login') {
             $this->mode = 'login';
         }
@@ -39,6 +40,16 @@ new class extends Component
     public function submit(): void
     {
         $this->error = null;
+
+        $throttleKey = 'auth-forms:'.request()->ip();
+        if (RateLimiter::tooManyAttempts($throttleKey, 10)) {
+            $seconds = RateLimiter::availableIn($throttleKey);
+            $this->error = "Too many login attempts. Please wait {$seconds} seconds.";
+
+            return;
+        }
+        RateLimiter::hit($throttleKey, 60);
+
         $email = strtolower(trim($this->email));
 
         if (! $email || ! str_contains($email, '@') || ! filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -94,12 +105,7 @@ new class extends Component
             }
         }
 
-        $target = $this->redirectTo;
-        if (! is_string($target) || ! str_starts_with($target, '/') || str_starts_with($target, '//')) {
-            $target = '/account';
-        }
-
-        $this->redirect($target);
+        $this->redirect(SafeUrl::redirectPath($this->redirectTo, '/account'));
     }
 };
 ?>

@@ -1,10 +1,13 @@
 <?php
 
+use App\Livewire\Concerns\RequiresAdmin;
 use App\Services\JobSyncService;
 use Livewire\Component;
 
 new class extends Component
 {
+    use RequiresAdmin;
+
     public ?string $result = null;
 
     public ?string $error = null;
