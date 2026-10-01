@@ -41,7 +41,7 @@
                 </span>
             @else
                 <span class="inline-flex items-center gap-1.5 rounded-full bg-white/90 border border-teal-200 px-3 py-1 text-xs font-bold text-teal-800 shadow-2xs">
-                    🇰🇪 4 Free Previews &middot; 16 in VIP Vault
+                    🇰🇪 4 Free Previews &middot; 18 in Premium Vault
                 </span>
             @endif
         </div>
@@ -181,12 +181,13 @@
                             @if ($isLocked)
                                 <a
                                     href="#unlock-vault"
-                                    class="btn-pop flex w-full items-center justify-center gap-2 rounded-full bg-slate-900 hover:bg-teal-700 px-4 py-2.5 text-xs font-bold text-white shadow-md transition"
+                                    onclick="document.getElementById('unlock-vault')?.scrollIntoView({behavior: 'smooth'}); setTimeout(() => document.querySelector('#unlock-vault input[type=tel]')?.focus(), 300);"
+                                    class="btn-pop flex w-full items-center justify-center gap-2 rounded-full bg-slate-900 hover:bg-teal-700 px-4 py-2.5 text-xs font-extrabold text-white shadow-md transition"
                                 >
-                                    <span>🔒 Unlock Vault (KES {{ $priceKes ?? 199 }})</span>
+                                    <span>🔒 Unlock Premium Paid Surveys (KES {{ $priceKes ?? 199 }})</span>
                                 </a>
-                                <p class="mt-2 text-center text-[10px] text-slate-400 font-medium">
-                                    Includes 16 high-yield survey &amp; AI hubs
+                                <p class="mt-2 text-center text-[10px] text-slate-500 font-medium">
+                                    Flat KES 199 unlocks <strong>all</strong> 18+ premium platforms (not per survey)
                                 </p>
                             @else
                                 <a

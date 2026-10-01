@@ -470,8 +470,8 @@ class SeoEngineTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('Free Preview');
         $response->assertSee('KES 199');
-        $response->assertSee('Unlock Vault (KES 199)');
-        $response->assertSee('Sign In to Unlock with M-Pesa');
+        $response->assertSee('Unlock Premium Paid Surveys (KES 199)');
+        $response->assertSee('Sign In to Unlock All Surveys with M-Pesa');
     }
 
     public function test_unlocked_user_sees_all_survey_platforms_without_locks(): void

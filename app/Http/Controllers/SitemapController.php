@@ -27,7 +27,7 @@ class SitemapController extends Controller
             ['loc' => "{$url}/companies", 'changefreq' => 'weekly', 'priority' => '0.8'],
             ['loc' => "{$url}/collections", 'changefreq' => 'weekly', 'priority' => '0.8'],
             ['loc' => "{$url}/pricing", 'changefreq' => 'monthly', 'priority' => '0.5'],
-            ['loc' => "{$url}/surveys", 'changefreq' => 'daily', 'priority' => '0.8'],
+            ['loc' => "{$url}/surveys", 'changefreq' => 'daily', 'priority' => '0.9', 'lastmod' => now()->toDateString()],
             ['loc' => "{$url}/about", 'changefreq' => 'monthly', 'priority' => '0.3'],
         ];
 
@@ -87,11 +87,22 @@ class SitemapController extends Controller
         $lines = [
             'User-agent: *',
             'Allow: /',
+            'Allow: /surveys',
+            'Allow: /jobs',
+            'Allow: /companies',
+            'Allow: /collections',
+            'Allow: /journal',
+            'Allow: /resume-builder',
+            'Allow: /match',
+            'Allow: /pricing',
+            'Allow: /faqs',
+            'Allow: /about',
             'Disallow: /admin/',
             'Disallow: /account',
             'Disallow: /auth/',
             'Disallow: /unsubscribe/',
             '',
+            '# Search Engine Sitemaps',
             "Sitemap: {$url}/sitemap.xml",
             '',
             '# LLM Documentation & Machine-Readable Feeds (https://llmstxt.org/)',
@@ -99,7 +110,7 @@ class SitemapController extends Controller
             "# llms-full.txt: {$url}/llms-full.txt",
         ];
 
-        return Response::make(implode("\n", $lines), 200, ['Content-Type' => 'text/plain']);
+        return Response::make(implode("\n", $lines), 200, ['Content-Type' => 'text/plain; charset=utf-8']);
     }
 
     /**
@@ -128,7 +139,7 @@ class SitemapController extends Controller
             "- [Employer Job Posting]({$url}/employers): Verified hiring portal for international distributed teams and local companies recruiting Kenyan remote talent.",
             "- [Remote Work Journal & Guides]({$url}/journal): Practical tutorials on international remote contracting, W-8BEN tax filing, and interview prep.",
             "- [Frequently Asked Questions]({$url}/faqs): Essential answers regarding taxes, contracts, currency conversion, and working remotely from Kenya.",
-            "- [Paid Surveys & Side Income in Kenya]({$url}/surveys): Curated, daily-verified directory of legitimate survey and microtask platforms with confirmed Kenyan payout rails (PayPal to M-Pesa, Airtime, Crypto).",
+            "- [Paid Surveys & Side Income in Kenya]({$url}/surveys): Curated, daily-verified directory of 22 legitimate survey, AI training, and microtask platforms (including ySense, Freecash, Outlier AI, Prolific, Respondent, AfriSight direct M-Pesa, MetroOpinion) with confirmed Kenyan payout rails (PayPal to M-Pesa, Airtime, Direct Mobile Money). 4 platforms available as free public previews, and full directory unlocked via a flat KES 199 Lipa Na M-Pesa pass.",
             '',
             '## Remote Roles by Discipline',
         ];
@@ -141,7 +152,7 @@ class SitemapController extends Controller
         $lines[] = '## Machine-Readable Feeds & Endpoints';
         $lines[] = "- [Featured Jobs RSS Feed]({$url}/feed/featured.rss): Real-time XML RSS feed of newest verified Kenya-friendly roles.";
         $lines[] = "- [XML Sitemap]({$url}/sitemap.xml): Full search engine crawler indexing map.";
-        $lines[] = "- [Comprehensive LLM Context (llms-full.txt)]({$url}/llms-full.txt): Deep context including active job listings, company profiles, and contractor tax/payment guides.";
+        $lines[] = "- [Comprehensive LLM Context (llms-full.txt)]({$url}/llms-full.txt): Deep context including active job listings, company profiles, survey directory, and contractor tax/payment guides.";
         $lines[] = '';
         $lines[] = '## Optional';
         $lines[] = "- [About {$siteName}]({$url}/about): Mission, background, and platform overview.";
@@ -211,6 +222,39 @@ class SitemapController extends Controller
             $lines[] = "- Overview: {$cat['intro']}";
             $lines[] = '';
         }
+
+        $lines[] = '## 5. Verified Paid Surveys & Side-Income Directory for Kenyans';
+        $lines[] = 'KenyaRemoteJobs maintains a daily-updated directory of 22 legitimate paid-survey and get-paid-to platforms open to Kenyan residents. Every platform is tested for Kenyan IP eligibility (no VPNs allowed), legitimate payout history, and verified payout rails.';
+        $lines[] = '';
+        $lines[] = '### Tier 1: Free Public Previews';
+        $lines[] = '- ySense (https://www.ysense.com): Established African rewards panel. Payouts via PayPal to M-Pesa, Payoneer, Skrill ($10 min). Pay: $0.50 – $4.00/survey.';
+        $lines[] = '- Freecash (https://freecash.com): Instant payouts in PayPal, Crypto (LTC/USDT), Visa. Pay: $0.80 – $5.00/offer. Min payout: $0.50.';
+        $lines[] = '- Toluna Influencers Kenya (https://www.toluna.com): Local consumer brand studies. Payouts via PayPal to M-Pesa & Safaricom airtime ($10 min).';
+        $lines[] = '- Swagbucks (https://www.swagbucks.com): Global GPT platform. Daily polls, web surveys. Payouts via PayPal to M-Pesa ($5 min).';
+        $lines[] = '';
+        $lines[] = '### Tier 2: Premium Survey & Side-Income Vault (Unlocked via Flat KES 199 Lipa Na M-Pesa Pass)';
+        $lines[] = '- Prolific (https://www.prolific.com): High-paying academic research studies (Oxford/Cambridge/Stanford). Zero screenouts once invited. Payouts via PayPal to M-Pesa (£6 min). Pay: $6 – $15/study.';
+        $lines[] = '- Outlier AI / Remotasks (https://outlier.ai): Scale AI RLHF model training and reasoning reviews. Pay: $8.00 – $25.00/hr via PayPal/AirTM to M-Pesa.';
+        $lines[] = '- Respondent.io (https://www.respondent.io): Executive & professional user research interviews. Pay: $50 – $200 per 45-min study via PayPal.';
+        $lines[] = '- UserTesting (https://www.usertesting.com): Website and mobile app audio usability feedback. Pay: $10 – $60/test via PayPal.';
+        $lines[] = '- Clickworker & UHRS (https://www.clickworker.com): Search engine evaluation and AI training tasks. Pay: $4 – $12/hr via PayPal/Payoneer.';
+        $lines[] = '- AfriSight Panel (https://afrisight.com): Dedicated Pan-African market research panel. Direct M-Pesa payouts (KES 500 min). Pay: KES 50 – KES 350/survey.';
+        $lines[] = '- MetroOpinion Kenya (https://www.metroopinion.com/ke/): Dedicated Kenyan survey portal. Payouts via PayPal to M-Pesa ($5 min). Pay: KES 100 – KES 450/survey.';
+        $lines[] = '- TGM Panel Kenya (https://tgmpanel.co.ke): Dedicated Kenyan research hub for telecoms & digital banking opinions. Payouts via PayPal ($10 min).';
+        $lines[] = '- Triaba Kenya (https://www.triaba.com/ke): Norwegian Cint-partnered Kenyan portal. Payouts via PayPal ($10 min). Pay: $0.50 – $2.25/survey.';
+        $lines[] = '- OneForma (https://www.oneforma.com): Centific AI transcription, translation, and data collection. Pay: $5 – $15/hr via Payoneer/PayPal.';
+        $lines[] = '- Timebucks (https://timebucks.com): Micro-tasks & surveys with automatic weekly payouts via AirTM/Crypto ($5 min).';
+        $lines[] = '- Surveytime (https://surveytime.io): Instant flat $1.00 payment per completed survey directly to PayPal with $0 minimum.';
+        $lines[] = '- Toloka AI (https://toloka.ai): Global crowdsourced AI data labeling tasks. Payouts via AirTM to M-Pesa ($1 min). Pay: $2 – $8/hr.';
+        $lines[] = '- Mobrog Kenya (https://www.mobrog.com/ke): German consumer panel with mobile app surveys for Kenyans. Payouts via PayPal/Skrill ($6.25 min).';
+        $lines[] = '- TestingTime (https://www.testingtime.com): Live European 1-on-1 usability sessions. Pay: €20 – €50/study via PayPal.';
+        $lines[] = '- Prime Opinion (https://www.primeopinion.com): High survey completion rates with instant PayPal cashouts ($5 min).';
+        $lines[] = '- Attapoll (https://www.attapoll.app): Mobile-first poll app with $3 low cashout threshold via PayPal to M-Pesa.';
+        $lines[] = '- PrizeRebel (https://www.prizerebel.com): Daily survey routers (Dynata, Cint, BitLabs) with 24h PayPal payouts ($5 min).';
+        $lines[] = '';
+        $lines[] = '### M-Pesa Withdrawal Mechanism';
+        $lines[] = 'Most international survey sites pay in USD to PayPal. Kenyan users can instantly withdraw their USD balance to Safaricom M-Pesa using the official PayPal-to-M-Pesa service (https://www.paypal-mobilemoney.com/m-pesa) powered by Thunes. Withdrawals reflect in M-Pesa within 2 minutes.';
+        $lines[] = '';
 
         return Response::make(implode("\n", $lines), 200, [
             'Content-Type' => 'text/plain; charset=utf-8',
