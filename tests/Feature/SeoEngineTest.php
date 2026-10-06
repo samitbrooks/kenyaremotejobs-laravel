@@ -511,4 +511,41 @@ class SeoEngineTest extends TestCase
         $user->refresh();
         $this->assertTrue($user->hasSurveyAccess());
     }
+
+    public function test_seo_gsc_sitemap_command_fails_gracefully_when_unconfigured(): void
+    {
+        $this->artisan('seo:gsc-sitemap submit')
+            ->expectsOutputToContain('Google Search Console Property:')
+            ->assertExitCode(1);
+    }
+
+    public function test_company_show_page_masks_company_identity_on_job_cards_for_guests(): void
+    {
+        JobListing::create([
+            'id' => 'test-gitlab-sre',
+            'origin' => 'synced',
+            'tier' => 'basic',
+            'title' => 'Senior Site Reliability Engineer',
+            'company' => 'GitLab',
+            'location' => 'Worldwide',
+            'remote_type' => 'Full Remote',
+            'description' => 'Help maintain global cloud infrastructure.',
+            'source_id' => 'gl-1',
+            'source_name' => 'GitLab Careers',
+            'source_url' => 'https://gitlab.com/careers/apply-now',
+            'posted_at' => now()->subDay(),
+            'kenya_friendly' => true,
+            'kenya_score' => 95,
+            'kenya_reasons' => ['Worldwide remote'],
+            'tags' => ['DevOps', 'Kubernetes'],
+            'audience_segments' => [],
+        ]);
+
+        $response = $this->get('/companies/gitlab');
+
+        $response->assertStatus(200);
+        $response->assertSee('Verified Employer');
+        $response->assertSee('Pro Only');
+        $response->assertSee('View &amp; Unlock', false);
+    }
 }

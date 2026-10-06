@@ -183,7 +183,7 @@
             @else
                 <div class="mt-6 space-y-3">
                     @foreach ($jobs as $job)
-                        <x-job-card :job="$job" :unlocked="true" />
+                        <x-job-card :job="$job" :unlocked="$isUnlocked($job)" />
                     @endforeach
                 </div>
             @endif

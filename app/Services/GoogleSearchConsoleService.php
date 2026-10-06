@@ -11,7 +11,7 @@ class GoogleSearchConsoleService
 {
     private const TOKEN_ENDPOINT = 'https://oauth2.googleapis.com/token';
 
-    private const SCOPE = 'https://www.googleapis.com/auth/webmasters.readonly';
+    private const SCOPE = 'https://www.googleapis.com/auth/webmasters';
 
     private const API_BASE = 'https://searchconsole.googleapis.com/webmasters/v3';
 
@@ -71,6 +71,81 @@ class GoogleSearchConsoleService
             Log::error('Search Console listSites failed: '.$e->getMessage());
 
             return ['success' => false, 'sites' => [], 'message' => $e->getMessage()];
+        }
+    }
+
+    /**
+     * List all submitted sitemaps for the configured or specified site property.
+     *
+     * @return array{success: bool, sitemaps: array, message: ?string}
+     */
+    public function listSitemaps(?string $siteUrl = null): array
+    {
+        $token = $this->getAccessToken();
+        if (! $token) {
+            return ['success' => false, 'sitemaps' => [], 'message' => 'Failed to obtain Google OAuth access token.'];
+        }
+
+        $site = urlencode($siteUrl ?: $this->getSiteUrl());
+
+        try {
+            $response = Http::withToken($token)->get(self::API_BASE."/sites/{$site}/sitemaps");
+
+            if ($response->successful()) {
+                $data = $response->json();
+
+                return [
+                    'success' => true,
+                    'sitemaps' => $data['sitemap'] ?? [],
+                    'message' => null,
+                ];
+            }
+
+            return [
+                'success' => false,
+                'sitemaps' => [],
+                'message' => $response->json('error.message') ?? $response->body(),
+            ];
+        } catch (Exception $e) {
+            Log::error('Search Console listSitemaps failed: '.$e->getMessage());
+
+            return ['success' => false, 'sitemaps' => [], 'message' => $e->getMessage()];
+        }
+    }
+
+    /**
+     * Submit a sitemap to Google Search Console via Webmasters API v3.
+     *
+     * @return array{success: bool, message: ?string}
+     */
+    public function submitSitemap(string $feedpath, ?string $siteUrl = null): array
+    {
+        $token = $this->getAccessToken();
+        if (! $token) {
+            return ['success' => false, 'message' => 'Failed to obtain Google OAuth access token.'];
+        }
+
+        $site = urlencode($siteUrl ?: $this->getSiteUrl());
+        $encodedFeedpath = urlencode($feedpath);
+
+        try {
+            $response = Http::withToken($token)->put(self::API_BASE."/sites/{$site}/sitemaps/{$encodedFeedpath}");
+
+            if ($response->successful() || $response->status() === 204) {
+                return [
+                    'success' => true,
+                    'message' => 'Sitemap successfully submitted to Google Search Console.',
+                ];
+            }
+
+            return [
+                'success' => false,
+                'message' => $response->json('error.message') ?? $response->body(),
+            ];
+        } catch (Exception $e) {
+            Log::error('Search Console submitSitemap failed: '.$e->getMessage());
+
+            return ['success' => false, 'message' => $e->getMessage()];
         }
     }
 

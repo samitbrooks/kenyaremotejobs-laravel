@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\JobListing;
 use App\Support\CompanyDirectory;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class CompanyController extends Controller
@@ -30,11 +31,22 @@ class CompanyController extends Controller
         ]);
     }
 
-    public function show(string $slug): View
+    public function show(Request $request, string $slug): View
     {
         $company = CompanyDirectory::find($slug);
 
         abort_if(! $company, 404);
+
+        $user = $request->user();
+        $admin = (bool) $user?->isAdmin();
+        $hasActiveAccess = (bool) $user?->hasActiveAccess();
+        $unlockedIds = $user && ! $admin && ! $hasActiveAccess
+            ? $user->jobUnlocks()->pluck('job_listing_id')->flip()
+            : null;
+
+        $isUnlocked = fn (JobListing $job) => $admin
+            || $hasActiveAccess
+            || (bool) $unlockedIds?->has($job->id);
 
         $terms = $company['search_terms'];
         $jobs = JobListing::visible()
@@ -56,6 +68,7 @@ class CompanyController extends Controller
         return view('companies.show', [
             'company' => $company,
             'jobs' => $jobs,
+            'isUnlocked' => $isUnlocked,
             'otherCompanies' => $otherCompanies,
         ]);
     }
