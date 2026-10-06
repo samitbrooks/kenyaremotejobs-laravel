@@ -54,9 +54,59 @@ return [
     // every tier for a flat price. Quarterly/yearly are the same plan
     // prepaid at a discount against paying monthly the whole way through.
     'subscription_plans' => [
-        'monthly' => ['label' => 'Monthly', 'price_kes' => 299, 'months' => 1, 'save_label' => null],
-        'quarterly' => ['label' => 'Quarterly', 'price_kes' => 499, 'months' => 3, 'save_label' => 'Save 44%'],
-        'yearly' => ['label' => 'Yearly', 'price_kes' => 899, 'months' => 12, 'save_label' => 'Save 75%'],
+        'pro' => [
+            'key' => 'pro',
+            'label' => 'Pro Membership',
+            'tagline' => 'Everything unlocked. Instant 0-second apply access.',
+            'description' => 'The complete remote career accelerator for Kenyan professionals targeting USD contracts.',
+            'price_kes' => 250,
+            'months' => 1,
+            'recommended' => true,
+            'button_text' => 'Get Pro Access — KES 250/mo',
+            'note' => 'Instant M-Pesa STK push • 7-day money-back guarantee',
+            'features' => [
+                'Instant 0-second apply access to all 800+ verified remote jobs (bypass the 48h wait).',
+                'Direct Kenyan employer listings actively seeking talent in Nairobi & across Kenya.',
+                'Unlimited AI CV & ATS tailoring copilot (beat screening algorithms).',
+                'Tailored cover letters generated for every role you apply to.',
+                'Kenya Remote Contractor Toolkit: USD invoicing templates, Wise/Payoneer setup, W-8BEN tax guide.',
+                'VIP WhatsApp support & application CRM tracker.',
+            ],
+        ],
+        'starter' => [
+            'key' => 'starter',
+            'label' => 'Starter',
+            'tagline' => 'See the jobs. Apply.',
+            'description' => 'Legacy tier for basic application access.',
+            'price_kes' => 100,
+            'months' => 1,
+            'recommended' => false,
+            'button_text' => 'Choose Starter',
+            'features' => [
+                'Standard job details & requirements.',
+                '5 Fit Score checks.',
+                '2 Cover Letters.',
+            ],
+        ],
+        'elite' => [
+            'key' => 'elite',
+            'label' => 'Elite',
+            'tagline' => 'Apply more. Prepare for interviews.',
+            'description' => 'Legacy tier with interview practice sessions.',
+            'price_kes' => 500,
+            'months' => 1,
+            'recommended' => false,
+            'button_text' => 'Choose Elite',
+            'features' => [
+                'All Pro features included.',
+                '5 CV Revamps & 15 Cover Letters.',
+                '2 Live Interview Practice simulations.',
+            ],
+        ],
+        // Duration billing options
+        'monthly' => ['key' => 'monthly', 'label' => 'Monthly', 'price_kes' => 250, 'months' => 1, 'save_label' => null],
+        'quarterly' => ['key' => 'quarterly', 'label' => 'Quarterly', 'price_kes' => 499, 'months' => 3, 'save_label' => 'Save 33%'],
+        'yearly' => ['key' => 'yearly', 'label' => 'Yearly', 'price_kes' => 899, 'months' => 12, 'save_label' => 'Save 70%'],
     ],
 
     // Employer job-posting plans — a completely separate revenue stream

@@ -40,6 +40,10 @@ return [
         'credentials_json' => env('GOOGLE_INDEXING_CREDENTIALS'),
     ],
 
+    'google_search_console' => [
+        'site_url' => env('GOOGLE_SEARCH_CONSOLE_SITE_URL', 'sc-domain:kenyaremotejobs.com'),
+    ],
+
     'indexnow' => [
         'key' => env('INDEXNOW_KEY', '7b4e07a3c39542a39281a8b34f71a0dc'),
     ],

@@ -176,3 +176,10 @@ This project has domain-specific skills available in `**/skills/**`. You MUST ac
 
 </laravel-boost-guidelines>
 
+=== user constraints ===
+
+# Strict User Directives & Constraints
+
+- **STRICT BAN ON CHROMIUM / BROWSER AUTOMATION**: NEVER launch Chromium, Chrome DevTools browser subagents (`browser_subagent`), or automated browser sessions in any workspace. Doing so crashes the IDE. Rely exclusively on direct file inspection, static analysis, command-line tools (curl, php artisan, etc.), and automated tests.
+- **STRICT BAN ON "GOALS" MODE**: NEVER invoke, recommend, or trigger `/goal` or autonomous background goal loops. Execute user tasks directly, predictably, and synchronously without autonomous goal loops.
+

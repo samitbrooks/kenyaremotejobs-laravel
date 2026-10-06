@@ -12,6 +12,7 @@ use App\Models\SyncMeta;
 use App\Models\User;
 use App\Services\BulkMailer;
 use App\Services\CreditsService;
+use App\Services\GoogleSearchConsoleService;
 use App\Services\JobRecommendationService;
 use App\Services\JobSyncService;
 use Illuminate\Database\Eloquent\Collection;
@@ -26,10 +27,21 @@ class AdminController extends Controller
 {
     private const PAGE_SIZE = 25;
 
-    public function dashboard(Request $request): View
+    public function dashboard(Request $request, GoogleSearchConsoleService $gsc): View
     {
         $filteredJobs = $this->getFilteredJobs($request);
         $now = now();
+
+        $gscMetrics = null;
+        if ($gsc->isConfigured()) {
+            $gscMetrics = $gsc->queryAnalytics(
+                null,
+                now()->subDays(30)->format('Y-m-d'),
+                now()->subDays(2)->format('Y-m-d'),
+                ['query'],
+                10
+            );
+        }
 
         return view('admin.dashboard', [
             ...$filteredJobs,
@@ -44,6 +56,9 @@ class AdminController extends Controller
                 'last7Days' => PageView::where('created_at', '>=', $now->copy()->subDays(7))->count(),
                 'last30Days' => PageView::where('created_at', '>=', $now->copy()->subDays(30))->count(),
             ],
+            'gscMetrics' => $gscMetrics,
+            'gscConfigured' => $gsc->isConfigured(),
+            'gscSiteUrl' => $gsc->getSiteUrl(),
         ]);
     }
 

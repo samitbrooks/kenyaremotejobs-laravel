@@ -28,17 +28,17 @@
                         <span class="text-slate-400 font-bold uppercase tracking-wider text-[10px]">Standard Free</span>
                         <p class="text-base font-extrabold text-white mt-1">KES 0</p>
                         <ul class="mt-3 space-y-2 text-slate-400">
-                            <li class="flex items-center gap-2"><span>&bull;</span> 48-hour wait on fresh roles</li>
-                            <li class="flex items-center gap-2"><span>&bull;</span> Standard application queue</li>
+                            <li class="flex items-center gap-2"><span>&bull;</span> Redacted recruiter links & emails</li>
+                            <li class="flex items-center gap-2"><span>&bull;</span> Locked direct apply on remote roles</li>
                             <li class="flex items-center gap-2"><span>&bull;</span> Basic job board browsing</li>
                         </ul>
                     </div>
 
                     {{-- Pro Box --}}
                     <div class="rounded-2xl border border-amber-400/60 bg-gradient-to-b from-amber-950/30 to-slate-900 p-4 relative">
-                        <span class="rounded-full bg-amber-400 text-slate-950 font-black text-[9px] px-2 py-0.5 uppercase tracking-wider absolute top-3 right-3">836x ROI</span>
+                        <span class="rounded-full bg-amber-400 text-slate-950 font-black text-[9px] px-2 py-0.5 uppercase tracking-wider absolute top-3 right-3">1,000x ROI</span>
                         <span class="text-amber-300 font-bold uppercase tracking-wider text-[10px]">VIP Pro Early Access</span>
-                        <p class="text-base font-extrabold text-white mt-1">KES 299 <span class="text-xs text-slate-400 font-normal">/ month</span></p>
+                        <p class="text-base font-extrabold text-white mt-1">KES 250 <span class="text-xs text-slate-400 font-normal">/ month</span></p>
                         <ul class="mt-3 space-y-2 text-slate-200">
                             <li class="flex items-center gap-2 text-amber-300 font-semibold"><span>&check;</span> Instant 0-second apply access</li>
                             <li class="flex items-center gap-2 text-amber-300 font-semibold"><span>&check;</span> 1-on-1 CV review to beat ATS</li>
@@ -54,7 +54,7 @@
                 <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">The Simple Math</span>
                 <div class="mt-3">
                     <p class="text-xs text-slate-400">Average Remote Offer (Gross):</p>
-                    <p class="text-2xl sm:text-3xl font-black text-emerald-400 mt-0.5">KES 350,000<span class="text-xs text-slate-400 font-normal">/mo</span></p>
+                    <p class="text-2xl sm:text-3xl font-black text-emerald-400 mt-0.5">KES 250,000<span class="text-xs text-slate-400 font-normal">/mo</span></p>
                 </div>
 
                 <div class="my-3 flex items-center justify-center gap-2 text-slate-500 text-xs">
@@ -65,18 +65,18 @@
 
                 <div>
                     <p class="text-xs text-slate-400">Pro Plan Cost:</p>
-                    <p class="text-xl font-black text-white mt-0.5">KES 299 <span class="text-xs text-slate-400 font-normal">(price of a coffee)</span></p>
+                    <p class="text-xl font-black text-white mt-0.5">KES 250 <span class="text-xs text-slate-400 font-normal">(less than lunch)</span></p>
                 </div>
 
                 <p class="mt-4 text-xs text-slate-300 leading-relaxed">
-                    A single remote job interview pays for <strong>over 10 years</strong> of Pro membership.
+                    A single remote job interview pays for <strong>over 80 years</strong> of Pro membership (1,000x ROI).
                 </p>
 
                 <a
                     href="{{ url('/pricing') }}"
                     class="btn-pop mt-5 block w-full rounded-xl bg-gradient-to-r from-amber-400 to-[#ff3131] py-3 text-center text-xs font-black uppercase tracking-wider text-slate-950 shadow-lg shadow-amber-400/20 hover:from-amber-300 hover:to-[#ff4545] transition"
                 >
-                    Unlock Pro Early Access (KES 299) &rarr;
+                    Unlock Pro Early Access (KES 250) &rarr;
                 </a>
             </div>
         </div>

@@ -1,8 +1,14 @@
 @php
+    $redactor = app(\App\Services\Redactor::class);
     $plainDescription = \App\Support\Format::stripHtml($job->description ?? '');
     $visibleTags = $job->tags ?? [];
     $rawDescriptionBlocks = \App\Support\DescriptionBlocks::parse($job->description ?? '');
-    $descriptionBlocks = $rawDescriptionBlocks;
+    $descriptionBlocks = $canApply || ! $rawDescriptionBlocks
+        ? $rawDescriptionBlocks
+        : \App\Support\DescriptionBlocks::redact($rawDescriptionBlocks, $job->company);
+    $displayPlainDescription = $canApply
+        ? $plainDescription
+        : $redactor->redactEmployerIdentity($plainDescription, $job->company);
     $hourly = \App\Support\SalaryEstimate::estimateHourlyUsd($job->annual_salary_usd);
     $kesMonthly = \App\Support\SalaryEstimate::estimateMonthlyKes($job->annual_salary_usd, $job->salary);
     $title = $job->title." at {$job->company} — Remote Job".($job->kenya_friendly ? ' (Kenya-Friendly)' : '');
@@ -115,15 +121,15 @@
                 <x-job-at-a-glance :job="$job" :can-apply="$canApply" />
             </div>
 
-            {{-- Full Unredacted Role Description --}}
+            {{-- Full Role Description --}}
             <div class="mt-8 rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-8 shadow-sm">
                 <h2 class="mb-4 font-bold text-slate-900 text-lg sm:text-xl">About this role at {{ $job->company }}</h2>
                 @if (\App\Support\Language::looksNonEnglish($plainDescription))
-                    <livewire:translate-toggle :text="$plainDescription" :blocks="$descriptionBlocks" />
+                    <livewire:translate-toggle :text="$displayPlainDescription" :blocks="$descriptionBlocks" />
                 @elseif ($descriptionBlocks)
                     <x-description-blocks :blocks="$descriptionBlocks" />
                 @else
-                    <div class="whitespace-pre-line text-sm leading-relaxed text-slate-700 font-normal">{!! nl2br(e($plainDescription)) !!}</div>
+                    <div class="whitespace-pre-line text-sm leading-relaxed text-slate-700 font-normal">{!! nl2br(e($displayPlainDescription)) !!}</div>
                 @endif
             </div>
 
@@ -192,16 +198,24 @@
                                 href="{{ url('/pricing') }}"
                                 class="btn-pop w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-teal-600 px-8 py-3.5 text-sm font-bold text-white shadow-md shadow-teal-600/20 hover:bg-teal-700 transition"
                             >
-                                Get Full Access to All Jobs (From KES 299/mo)
+                                Get Full Access to All Jobs (KES 250/mo)
                             </a>
+                            @if (auth()->guest() || ! auth()->user()->hasUsedTrial())
+                                <a
+                                    href="{{ route('trial.activate') }}"
+                                    class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-teal-600 bg-teal-50/70 px-6 py-3.5 text-sm font-bold text-teal-800 hover:bg-teal-100 transition"
+                                >
+                                    Start 24-Hour Free Pass &rarr;
+                                </a>
+                            @endif
                             <livewire:ai-tailor-modal :job-id="$job->id" />
                         </div>
                         <p class="mt-3.5 text-xs text-slate-400">
-                            Instant M-Pesa STK push &middot; Cancel anytime
+                            Instant M-Pesa STK push &middot; Cancel anytime &middot; 7-day money-back guarantee
                         </p>
                     </div>
                 @else
-                    {{-- 48-Hour Early Access High-Converting Box --}}
+                    {{-- Early Access High-Converting Box --}}
                     <div class="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-10 text-center shadow-xl">
                         <div class="inline-flex items-center gap-2 rounded-full bg-amber-50 border border-amber-200 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-amber-900 mb-4">
                             <x-icon name="sparkle" class="h-4 w-4 text-amber-600" /> Early Access &middot; Full Access to All 800+ Jobs
@@ -210,7 +224,7 @@
                             Beat 500+ Applicants to {{ $job->company }}
                         </h3>
                         <p class="mt-2.5 text-sm text-slate-600 max-w-lg mx-auto leading-relaxed">
-                            This role was published {{ \App\Support\Format::timeAgo($job->posted_at) }}. <strong class="text-slate-900">Early Access gives you full access to apply to all 800+ jobs immediately</strong> &mdash; public access opens in <span class="font-bold text-amber-900">{{ $job->earlyAccessHoursRemaining() }} hours</span>.
+                            This role was published {{ \App\Support\Format::timeAgo($job->posted_at) }}. <strong class="text-slate-900">Global recruiters typically freeze applications after receiving the first 50 CVs.</strong> Pro members get immediate 0-second apply access today before public queues open and positions fill.
                         </p>
 
                         <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3.5 max-w-lg mx-auto text-left text-xs font-medium text-slate-700">
@@ -233,12 +247,20 @@
                                 href="{{ url('/pricing') }}"
                                 class="btn-pop w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-teal-600 px-8 py-3.5 text-sm font-bold text-white shadow-md shadow-teal-600/20 hover:bg-teal-700 transition"
                             >
-                                Get Full Access to All Jobs (From KES 299/mo)
+                                Unlock Immediate Apply Access (KES 250) &rarr;
                             </a>
+                            @if (auth()->guest() || ! auth()->user()->hasUsedTrial())
+                                <a
+                                    href="{{ route('trial.activate') }}"
+                                    class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-teal-600 bg-teal-50/70 px-6 py-3.5 text-sm font-bold text-teal-800 hover:bg-teal-100 transition"
+                                >
+                                    Start 24-Hour Free Pass &rarr;
+                                </a>
+                            @endif
                             <livewire:ai-tailor-modal :job-id="$job->id" />
                         </div>
                         <p class="mt-3.5 text-xs text-slate-400">
-                            Instant M-Pesa STK push &middot; Cancel anytime &middot; Public apply opens in {{ $job->earlyAccessHoursRemaining() }} hours
+                            Instant M-Pesa STK push &middot; 7-Day Money-Back Guarantee &middot; Be in the first 20 applicants
                         </p>
                     </div>
                 @endif

@@ -13,10 +13,10 @@
 
     if ($job->origin === 'employer') {
         $rows[] = ['label' => 'Application Status', 'value' => '🇰🇪 Direct Employer (Seeking Kenyan Talent — Pro Exclusive)'];
-    } elseif ($job->isEarlyAccess()) {
-        $rows[] = ['label' => 'Application Status', 'value' => '⚡ 48-Hour Early Access Window (Pro Members)'];
+    } elseif ($canApply) {
+        $rows[] = ['label' => 'Application Status', 'value' => '✓ Unlocked — Ready to Apply'];
     } else {
-        $rows[] = ['label' => 'Application Status', 'value' => 'Public listing — Open to all'];
+        $rows[] = ['label' => 'Application Status', 'value' => '🔒 Pro Membership & Free Pass Access'];
     }
 
     if ($job->origin === 'employer') {

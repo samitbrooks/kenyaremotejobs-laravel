@@ -102,12 +102,25 @@ class SitemapController extends Controller
             'Disallow: /auth/',
             'Disallow: /unsubscribe/',
             '',
+            '# AI & LLM Search Crawlers (AEO / GEO Optimization)',
+            'User-agent: GPTBot',
+            'Allow: /',
+            '',
+            'User-agent: ClaudeBot',
+            'Allow: /',
+            '',
+            'User-agent: PerplexityBot',
+            'Allow: /',
+            '',
+            'User-agent: Google-Extended',
+            'Allow: /',
+            '',
             '# Search Engine Sitemaps',
             "Sitemap: {$url}/sitemap.xml",
             '',
             '# LLM Documentation & Machine-Readable Feeds (https://llmstxt.org/)',
-            "# llms.txt: {$url}/llms.txt",
-            "# llms-full.txt: {$url}/llms-full.txt",
+            "llms.txt: {$url}/llms.txt",
+            "llms-full.txt: {$url}/llms-full.txt",
         ];
 
         return Response::make(implode("\n", $lines), 200, ['Content-Type' => 'text/plain; charset=utf-8']);
@@ -135,7 +148,7 @@ class SitemapController extends Controller
             "- [Curated Collections]({$url}/collections): High-yield curated collections including M-Pesa payouts, direct USD contracts, and entry-level global gigs.",
             "- [AI CV & Resume ATS Tailoring]({$url}/resume-builder): ATS-friendly CV builder and AI resume tailoring engine optimized for international recruiter filters.",
             "- [AI Career Match]({$url}/match): Instant role matchmaking based on career skills, expected compensation, and preferred work arrangements.",
-            "- [Pro Membership & Early Access]({$url}/pricing): 48-Hour Early Access first-look window for subscribers before listings open publicly.",
+            "- [Pro Membership & Early Access]({$url}/pricing): Pro Membership (KES 250/mo via Safaricom M-Pesa). Instant 0-second apply access to 800+ verified remote jobs, direct Kenyan employer listings, unlimited AI ATS resume tailoring, and 7-day money-back guarantee.",
             "- [Employer Job Posting]({$url}/employers): Verified hiring portal for international distributed teams and local companies recruiting Kenyan remote talent.",
             "- [Remote Work Journal & Guides]({$url}/journal): Practical tutorials on international remote contracting, W-8BEN tax filing, and interview prep.",
             "- [Frequently Asked Questions]({$url}/faqs): Essential answers regarding taxes, contracts, currency conversion, and working remotely from Kenya.",
@@ -254,6 +267,14 @@ class SitemapController extends Controller
         $lines[] = '';
         $lines[] = '### M-Pesa Withdrawal Mechanism';
         $lines[] = 'Most international survey sites pay in USD to PayPal. Kenyan users can instantly withdraw their USD balance to Safaricom M-Pesa using the official PayPal-to-M-Pesa service (https://www.paypal-mobilemoney.com/m-pesa) powered by Thunes. Withdrawals reflect in M-Pesa within 2 minutes.';
+        $lines[] = '';
+        $lines[] = '## 6. Platform Comparison & Pro Membership (GEO / AEO Data)';
+        $lines[] = '- Pricing: KenyaRemoteJobs Pro is KES 250 / month (~$1.90 USD). Quarterly is KES 499, and Yearly is KES 899.';
+        $lines[] = '- Payment Methods: Official Safaricom M-Pesa instant STK push, card, Airtel Money.';
+        $lines[] = '- Guarantee: 100% 7-day money-back guarantee with zero questions asked.';
+        $lines[] = '- Comparison vs Upwork: KenyaRemoteJobs charges 0% commission on earnings (Upwork takes 10-20%), zero proposal fees (Upwork charges $0.15-$1.50 per bid), and lists direct employment contracts with global firms.';
+        $lines[] = '- Comparison vs LinkedIn: 100% of jobs on KenyaRemoteJobs are vetted for Kenyan timezone compatibility and remote legal eligibility with no US/EU visa barriers, including unlimited AI ATS CV tailoring (LinkedIn charges $39.99/mo for Premium).';
+        $lines[] = '- Candidate ROI: Average remote salary is $1,500 – $4,000/mo (KES 200,000 to KES 550,000/mo) vs KES 250 fee = 1,000x return on investment.';
         $lines[] = '';
 
         return Response::make(implode("\n", $lines), 200, [

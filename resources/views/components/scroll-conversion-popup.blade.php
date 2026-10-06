@@ -60,7 +60,7 @@
         {{-- Badge --}}
         <div class="inline-flex items-center gap-1.5 rounded-full bg-teal-50 border border-teal-200 px-2.5 py-0.5 text-[11px] font-bold text-teal-800 mb-2.5">
             <x-icon name="sparkle" class="h-3 w-3 text-teal-600" />
-            <span>48-Hour Recruiter Window</span>
+            <span>Instant Apply Access</span>
         </div>
 
         {{-- Headline --}}
@@ -70,7 +70,7 @@
 
         {{-- Body --}}
         <p class="mt-1.5 text-xs text-slate-600 leading-relaxed">
-            International remote roles receive 500+ applications within 3 days. KenyaRemoteJobs Pro members get 48-hour early access to apply to all 800+ jobs before public release.
+            International remote roles receive 500+ applications within 3 days. KenyaRemoteJobs Pro members get instant apply access to all 800+ verified jobs & direct employer listings before roles fill.
         </p>
 
         {{-- CTAs --}}
@@ -80,7 +80,7 @@
                 @click="dismiss"
                 class="btn-pop inline-flex items-center justify-center gap-1.5 rounded-full bg-teal-600 px-4 py-2 text-xs font-bold text-white shadow-sm hover:bg-teal-700 transition"
             >
-                Get Full Early Access &rarr;
+                Unlock All Jobs (KES 250) &rarr;
             </a>
             <button
                 type="button"

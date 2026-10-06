@@ -88,7 +88,7 @@
                     <x-icon name="sparkle" class="h-4 w-4" />
                 </span>
                 <p class="leading-relaxed">
-                    <strong class="font-bold text-slate-900">Pro Early Access:</strong> Full access to apply to all 800+ remote jobs immediately &mdash; no 48-hour wait on newly posted roles.
+                    <strong class="font-bold text-slate-900">Pro Membership:</strong> Instant apply access to all 800+ verified remote jobs & direct employer listings &mdash; beat 500+ applicants with priority delivery & AI CV tailoring.
                 </p>
             </div>
             <a href="{{ url('/pricing') }}" class="btn-pop inline-flex items-center gap-1.5 rounded-full bg-slate-900 px-5 py-2.5 text-xs font-bold text-white hover:bg-slate-800 transition shrink-0 shadow-2xs">

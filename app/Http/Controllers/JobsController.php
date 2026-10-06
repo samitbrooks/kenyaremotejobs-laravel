@@ -135,8 +135,7 @@ class JobsController extends Controller
         $canApply = $admin
             || (bool) $user?->subscribed
             || (bool) $user?->onTrial()
-            || (bool) ($user && $user->jobUnlocks()->where('job_listing_id', $job->id)->exists())
-            || (! $isEmployerDirect && ! $isEarlyAccess);
+            || (bool) ($user && $user->jobUnlocks()->where('job_listing_id', $job->id)->exists());
 
         $profile = Matching::parseProfileCookie($request->cookie(Matching::COOKIE_NAME));
         $matchPercent = $profile ? Matching::computeMatchPercent($profile, $job->only(['tags', 'title', 'description'])) : null;

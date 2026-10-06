@@ -44,6 +44,106 @@
         </div>
     </div>
 
+    {{-- Google Search Console SEO Analytics --}}
+    <div class="mt-10 rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-8 shadow-sm">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
+            <div>
+                <div class="flex items-center gap-2">
+                    <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-teal-50 text-teal-700">
+                        <x-icon name="sparkle" class="h-4 w-4" />
+                    </span>
+                    <h2 class="text-xl font-extrabold text-slate-900">Google Search Console Performance</h2>
+                </div>
+                <p class="mt-1 text-xs text-slate-500">
+                    Organic search metrics &amp; search queries from Google for property: <code class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-slate-800">{{ $gscSiteUrl }}</code>
+                </p>
+            </div>
+            <div class="flex items-center gap-2">
+                @if (!empty($gscMetrics['success']))
+                    <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-3 py-1 text-xs font-bold text-emerald-800">
+                        <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        Connected to GSC
+                    </span>
+                @else
+                    <span class="inline-flex items-center gap-1.5 rounded-full bg-amber-50 border border-amber-200 px-3 py-1 text-xs font-bold text-amber-800">
+                        <span class="h-2 w-2 rounded-full bg-amber-500"></span>
+                        GSC Setup Required
+                    </span>
+                @endif
+            </div>
+        </div>
+
+        @if (!empty($gscMetrics['success']))
+            {{-- Performance Metrics Row --}}
+            <div class="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
+                <div class="rounded-2xl bg-slate-50 p-4 border border-slate-200/60">
+                    <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Organic Clicks (28d)</p>
+                    <p class="mt-1 text-2xl font-black text-slate-900">{{ number_format($gscMetrics['totals']['clicks'] ?? 0) }}</p>
+                </div>
+                <div class="rounded-2xl bg-slate-50 p-4 border border-slate-200/60">
+                    <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Total Impressions</p>
+                    <p class="mt-1 text-2xl font-black text-slate-900">{{ number_format($gscMetrics['totals']['impressions'] ?? 0) }}</p>
+                </div>
+                <div class="rounded-2xl bg-slate-50 p-4 border border-slate-200/60">
+                    <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Average CTR</p>
+                    <p class="mt-1 text-2xl font-black text-teal-600">{{ $gscMetrics['totals']['ctr'] ?? 0 }}%</p>
+                </div>
+                <div class="rounded-2xl bg-slate-50 p-4 border border-slate-200/60">
+                    <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Average Position</p>
+                    <p class="mt-1 text-2xl font-black text-slate-900">{{ $gscMetrics['totals']['position'] ?? 0 }}</p>
+                </div>
+            </div>
+
+            {{-- Top Search Queries Table --}}
+            @if (!empty($gscMetrics['rows']))
+                <div class="mt-6 overflow-x-auto">
+                    <h3 class="text-sm font-bold text-slate-900 mb-3">Top Organic Search Queries</h3>
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-slate-50 text-slate-500 uppercase tracking-wider font-semibold border-b border-slate-200/80">
+                            <tr>
+                                <th class="px-4 py-2.5">Search Query</th>
+                                <th class="px-4 py-2.5 text-right">Clicks</th>
+                                <th class="px-4 py-2.5 text-right">Impressions</th>
+                                <th class="px-4 py-2.5 text-right">CTR</th>
+                                <th class="px-4 py-2.5 text-right">Avg Position</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            @foreach ($gscMetrics['rows'] as $row)
+                                <tr class="hover:bg-slate-50/60 transition">
+                                    <td class="px-4 py-2.5 font-bold text-slate-800">{{ $row['keys'][0] ?? '(not set)' }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold text-slate-900">{{ number_format($row['clicks'] ?? 0) }}</td>
+                                    <td class="px-4 py-2.5 text-right text-slate-600">{{ number_format($row['impressions'] ?? 0) }}</td>
+                                    <td class="px-4 py-2.5 text-right text-teal-600 font-semibold">{{ round(($row['ctr'] ?? 0) * 100, 2) }}%</td>
+                                    <td class="px-4 py-2.5 text-right text-slate-700">{{ round($row['position'] ?? 0, 1) }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @endif
+        @else
+            <div class="mt-6 rounded-2xl bg-amber-50/60 border border-amber-200/70 p-5">
+                <div class="flex items-start gap-3">
+                    <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-amber-500 text-white font-bold text-sm">!</span>
+                    <div class="text-xs text-amber-950 space-y-1.5">
+                        <p class="font-bold text-sm text-amber-900">Google Search Console Integration Status</p>
+                        <p class="text-slate-600">
+                            {{ $gscMetrics['message'] ?? 'Service Account authorization is being connected.' }}
+                        </p>
+                        <div class="pt-2">
+                            <p class="font-semibold text-slate-800">To finalize the connection:</p>
+                            <ol class="mt-1 list-decimal list-inside space-y-1 text-slate-600">
+                                <li>Enable the <strong>Google Search Console API</strong> on project <code class="font-mono text-slate-800">34788030047</code>.</li>
+                                <li>Add the Service Account (<code class="font-mono text-slate-800">google-indexing-bot@gen-lang-client-0673392033.iam.gserviceaccount.com</code>) to your property in <a href="https://search.google.com/search-console/users" target="_blank" rel="noopener" class="font-bold text-teal-700 underline">Search Console Users</a>.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+    </div>
+
     {{-- Main Jobs Explorer with Sources & Posting Order Filter --}}
     <div class="mt-10 rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-8 shadow-sm">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">

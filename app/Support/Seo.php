@@ -246,6 +246,7 @@ class Seo
                     'description' => config('site.default_description'),
                     'sameAs' => array_values(array_filter([
                         config('site.twitter_handle') ? 'https://x.com/'.ltrim(config('site.twitter_handle'), '@') : null,
+                        config('site.linkedin_url'),
                     ])),
                 ],
                 [

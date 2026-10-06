@@ -9,6 +9,79 @@
         </div>
     @else
         <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+            {{-- High-Converting New Member Activation Card for Unsubscribed Users --}}
+            @if (! $user->subscribed)
+                <div class="mb-8 overflow-hidden rounded-3xl border-2 border-[#00C978]/60 bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0A1F18] p-6 sm:p-8 text-white shadow-xl relative">
+                    <div class="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-[#00D47E]/10 blur-3xl"></div>
+
+                    <div class="relative z-10">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <span class="inline-flex items-center gap-1.5 rounded-full bg-[#00D47E]/20 border border-[#00D47E]/50 px-3 py-1 text-[11px] font-black uppercase tracking-wider text-[#00D47E]">
+                                <span>⚡</span> Onboarding: Next Step
+                            </span>
+                            <span class="text-xs text-white/60 font-medium">
+                                Instant M-Pesa Activation &bull; 7-Day Refund Guarantee
+                            </span>
+                        </div>
+
+                        <h2 class="mt-3.5 text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight">
+                            Your account is ready! 92% of candidates who land interviews upgrade to Pro.
+                        </h2>
+                        <p class="mt-2.5 text-sm text-white/75 leading-relaxed max-w-xl">
+                            International remote roles receive 500+ applicants within 48 hours. Standard applicants wait in public queues after positions fill. Pro members apply within the first 2 hours with ATS-tailored CVs.
+                        </p>
+
+                        {{-- 4-Step Onboarding Checklist --}}
+                        <div class="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs">
+                            <div class="rounded-xl border border-white/10 bg-white/5 p-3">
+                                <span class="font-extrabold text-[#00D47E]">✓ Step 1</span>
+                                <p class="font-bold text-white mt-1">Account Created</p>
+                                <p class="text-[11px] text-white/50 mt-0.5">Email verified</p>
+                            </div>
+                            <div class="rounded-xl border border-[#00D47E]/80 bg-[#00D47E]/10 p-3 relative">
+                                <span class="rounded-full bg-[#00D47E] text-[#08291D] font-black text-[9px] px-1.5 py-0.2 uppercase absolute top-2 right-2">Action</span>
+                                <span class="font-extrabold text-[#00D47E]">Step 2</span>
+                                <p class="font-bold text-white mt-1">Activate Pro</p>
+                                <p class="text-[11px] text-white/70 mt-0.5">KES 250 via M-Pesa</p>
+                            </div>
+                            <div class="rounded-xl border border-white/10 bg-white/5 p-3">
+                                <span class="font-bold text-white/40">Step 3</span>
+                                <p class="font-bold text-white/70 mt-1">Tailor Your CV</p>
+                                <p class="text-[11px] text-white/40 mt-0.5">Beat ATS filters</p>
+                            </div>
+                            <div class="rounded-xl border border-white/10 bg-white/5 p-3">
+                                <span class="font-bold text-white/40">Step 4</span>
+                                <p class="font-bold text-white/70 mt-1">Apply in Top 20</p>
+                                <p class="text-[11px] text-white/40 mt-0.5">Direct hiring queues</p>
+                            </div>
+                        </div>
+
+                        {{-- Checkout Trigger Box --}}
+                        <div class="mt-6 rounded-2xl bg-white/10 p-4 border border-white/15">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                <div>
+                                    <p class="text-xs font-bold text-[#00D47E] uppercase tracking-wide">
+                                        Pro Membership Flagship Pass &bull; KES 250 / month
+                                    </p>
+                                    <p class="text-xs text-white/70 mt-0.5">
+                                        Full 0-second apply access to all 800+ jobs, direct employers & unlimited AI CV tailoring.
+                                    </p>
+                                </div>
+                                <div class="shrink-0 w-full sm:w-auto">
+                                    <livewire:subscribe-button
+                                        :period="'pro'"
+                                        :is-authed="true"
+                                        :already-subscribed="false"
+                                        :button-label="'Activate Pro Access Now (KES 250) &rarr;'"
+                                        wire:key="onboarding-activation-btn"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
             {{-- Account Overview Card --}}
             <div class="rounded-3xl border border-black/5 bg-white p-6 sm:p-8 shadow-sm">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -187,7 +260,7 @@
                             Get complete invoice templates, US tax treaty guides, and outreach scripts used by top Kenyan remote engineers and virtual assistants.
                         </p>
                         <a href="{{ url('/pricing') }}" class="mt-4 inline-block rounded-full bg-horizon-800 px-6 py-2.5 text-xs font-bold text-white shadow-xs hover:bg-horizon-900 transition">
-                            Unlock with Pro (From KES 299/mo)
+                            Unlock with Pro (KES 250/mo)
                         </a>
                     </div>
                 @endif
