@@ -31,11 +31,11 @@
             <p class="mt-1 text-3xl font-extrabold text-emerald-700">{{ number_format($subscribed) }}</p>
         </div>
         <div class="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-xs">
-            <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Visitors (Last 7 Days)</p>
+            <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Page Views (Last 7 Days)</p>
             <p class="mt-1 text-3xl font-extrabold text-slate-900">{{ number_format($pageViews['last7Days']) }}</p>
         </div>
         <div class="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-xs">
-            <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Visitors (Last 30 Days)</p>
+            <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Page Views (Last 30 Days)</p>
             <p class="mt-1 text-3xl font-extrabold text-slate-900">{{ number_format($pageViews['last30Days']) }}</p>
         </div>
         <div class="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-xs sm:col-span-2">

@@ -41,6 +41,8 @@ class SeoEngineTest extends TestCase
         $response->assertSee('/remote-jobs/software-developer-kenya</loc>', false);
         $response->assertSee('/remote-jobs/virtual-assistant-kenya</loc>', false);
         $response->assertSee('/journal/complete-guide-to-legit-remote-jobs-in-kenya</loc>', false);
+        $response->assertSee('/journal/aeo-geo-aio-guide-ai-search-optimization</loc>', false);
+        $response->assertSee('/journal/generative-engine-optimization-geo-playbook</loc>', false);
     }
 
     public function test_robots_txt_points_to_sitemap_and_disallows_admin(): void
