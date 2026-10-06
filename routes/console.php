@@ -77,3 +77,14 @@ Schedule::call(function () {
     ->dailyAt('05:30')
     ->onOneServer()
     ->withoutOverlapping();
+
+// Automatically publishes 3 weekly high-yield SEO/AEO/GEO journal articles
+// on Monday, Wednesday, and Friday at 10:00 AM East Africa Time (07:00 UTC)
+Schedule::call(function () {
+    Artisan::call('journal:publish-scheduled');
+})
+    ->name('journal:publish-scheduled')
+    ->days([1, 3, 5])
+    ->at('07:00')
+    ->onOneServer()
+    ->withoutOverlapping();

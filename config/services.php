@@ -48,4 +48,8 @@ return [
         'key' => env('INDEXNOW_KEY', '7b4e07a3c39542a39281a8b34f71a0dc'),
     ],
 
+    'gemini' => [
+        'key' => env('GEMINI_API_KEY'),
+    ],
+
 ];
