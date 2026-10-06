@@ -33,13 +33,14 @@ class HomeController extends Controller
         }
         $heroPreview = $feed->take(3);
 
-        $unlockedIds = $user && ! $admin
+        $unlockedIds = $user && ! $user->hasActiveAccess()
             ? $user->jobUnlocks()->pluck('job_listing_id')->flip()
             : null;
 
-        $isUnlocked = fn (JobListing $job) => $admin
-            || $job->origin === 'employer'
-            || (bool) $unlockedIds?->has($job->id);
+        $isUnlocked = fn (JobListing $job) => (bool) (
+            $user?->hasActiveAccess()
+            || ($unlockedIds && $unlockedIds->has($job->id))
+        );
 
         $matchPercent = $profile
             ? fn (JobListing $job) => Matching::computeMatchPercent($profile, $job->only(['tags', 'title', 'description']))

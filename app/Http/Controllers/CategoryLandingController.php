@@ -50,14 +50,14 @@ class CategoryLandingController extends Controller
         $allCategories = collect(JobCategorySeo::all())->except($slug)->values()->all();
 
         $user = $request->user();
-        $admin = (bool) $user?->isAdmin();
-        $unlockedIds = $user && ! $admin
+        $unlockedIds = $user && ! $user->hasActiveAccess()
             ? $user->jobUnlocks()->pluck('job_listing_id')->flip()
             : null;
 
-        $isUnlocked = fn (JobListing $job) => $admin
-            || $job->origin === 'employer'
-            || (bool) $unlockedIds?->has($job->id);
+        $isUnlocked = fn (JobListing $job) => (bool) (
+            $user?->hasActiveAccess()
+            || ($unlockedIds && $unlockedIds->has($job->id))
+        );
 
         $profile = Matching::parseProfileCookie($request->cookie(Matching::COOKIE_NAME));
         $matchPercent = $profile

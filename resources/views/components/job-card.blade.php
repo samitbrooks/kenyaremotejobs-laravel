@@ -21,7 +21,7 @@
     {{-- Main Content Column --}}
     <div class="flex items-start sm:items-center gap-3.5 sm:gap-4 min-w-0 flex-1">
         {{-- Harmonized Graphic Vector Illustration --}}
-        <x-company-logo :company="$job->company" :size="48" class="shrink-0" />
+        <x-company-logo :company="$isUnlocked ? $job->company : ''" :size="48" class="shrink-0" />
 
         <div class="min-w-0 flex-1 space-y-1.5">
             {{-- Top Row: Job Title + Badges --}}
@@ -41,14 +41,18 @@
                     <span class="inline-flex items-center gap-1 rounded-full bg-blue-50 border border-blue-200/80 px-2.5 py-0.5 text-[11px] font-bold text-blue-800 shadow-2xs">
                         <x-icon name="announce" class="h-3 w-3 text-blue-600" /> Direct Employer
                     </span>
+                @elseif (! $isUnlocked)
+                    <span class="inline-flex items-center gap-1 rounded-full bg-amber-50 border border-amber-200/80 px-2.5 py-0.5 text-[11px] font-bold text-amber-800 shadow-2xs">
+                        <span class="text-amber-600 font-bold">🔒</span> Pro Access
+                    </span>
                 @elseif ($isEarlyAccess)
-                    <span class="inline-flex items-center gap-1 rounded-full bg-amber-50 border border-amber-200/80 px-2 py-0.5 text-[11px] font-bold text-amber-800 shadow-2xs">
+                    <span class="inline-flex items-center gap-1 rounded-full bg-amber-50 border border-amber-200/80 px-2.5 py-0.5 text-[11px] font-bold text-amber-800 shadow-2xs">
                         <span class="text-amber-500">⚡</span> Early Access ({{ $job->earlyAccessHoursRemaining() }}h left)
                     </span>
                 @endif
 
                 @if (is_int($matchPercent))
-                    <span class="inline-flex items-center gap-1 rounded-full bg-teal-50 border border-teal-200/80 px-2 py-0.5 text-[11px] font-bold text-teal-800">
+                    <span class="inline-flex items-center gap-1 rounded-full bg-teal-50 border border-teal-200/80 px-2.5 py-0.5 text-[11px] font-bold text-teal-800">
                         🎯 {{ $matchPercent }}% match
                     </span>
                 @endif
@@ -56,12 +60,20 @@
 
             {{-- Metadata Row: Company, Location, Timezone Fit, Tags --}}
             <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1.5 text-xs text-slate-600">
-                <span class="font-bold text-slate-800 flex items-center gap-1">
-                    {{ $job->company }}
-                    <svg class="h-3.5 w-3.5 text-teal-600 inline shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                    </svg>
-                </span>
+                @if ($isUnlocked)
+                    <span class="font-bold text-slate-800 flex items-center gap-1">
+                        {{ $job->company }}
+                        <svg class="h-3.5 w-3.5 text-teal-600 inline shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                @else
+                    <span class="inline-flex items-center gap-1 font-semibold text-slate-700" title="Unlock with Pro or 24-Hour Free Pass to reveal company name">
+                        <span class="text-amber-600">🔒</span>
+                        <span>Verified Employer</span>
+                        <span class="rounded bg-amber-100/90 border border-amber-300/60 px-1.5 py-0.2 text-[9px] font-extrabold uppercase tracking-wider text-amber-900">Pro Only</span>
+                    </span>
+                @endif
 
                 <span class="text-slate-300">•</span>
                 <span class="inline-flex items-center gap-1 rounded-md bg-slate-100/90 px-2 py-0.5 text-[11px] font-semibold text-slate-700">
@@ -118,7 +130,7 @@
             </span>
 
             <span class="inline-flex items-center gap-1.5 rounded-xl bg-slate-900 group-hover:bg-teal-600 text-white px-3.5 py-1.5 text-xs font-black shadow-xs group-hover:shadow-teal-600/20 group-hover:shadow-md transition-all duration-200">
-                <span>Apply</span>
+                <span>{{ $isUnlocked ? 'Apply' : 'View & Unlock' }}</span>
                 <svg class="h-3 w-3 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>

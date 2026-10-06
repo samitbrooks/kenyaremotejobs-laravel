@@ -89,14 +89,14 @@ class JobsController extends Controller
             ->values();
 
         $user = $request->user();
-        $admin = (bool) $user?->isAdmin();
-        $unlockedIds = $user && ! $admin
+        $unlockedIds = $user && ! $user->hasActiveAccess()
             ? $user->jobUnlocks()->pluck('job_listing_id')->flip()
             : null;
 
-        $isUnlocked = fn (JobListing $job) => $admin
-            || $job->origin === 'employer'
-            || (bool) $unlockedIds?->has($job->id);
+        $isUnlocked = fn (JobListing $job) => (bool) (
+            $user?->hasActiveAccess()
+            || ($unlockedIds && $unlockedIds->has($job->id))
+        );
 
         $matchPercent = $profile
             ? fn (JobListing $job) => Matching::computeMatchPercent($profile, $job->only(['tags', 'title', 'description']))
@@ -132,10 +132,10 @@ class JobsController extends Controller
 
         $isEarlyAccess = $job->isEarlyAccess();
         $isEmployerDirect = $job->origin === 'employer';
-        $canApply = $admin
-            || (bool) $user?->subscribed
-            || (bool) $user?->onTrial()
-            || (bool) ($user && $user->jobUnlocks()->where('job_listing_id', $job->id)->exists());
+        $canApply = (bool) (
+            $user?->hasActiveAccess()
+            || ($user && $user->jobUnlocks()->where('job_listing_id', $job->id)->exists())
+        );
 
         $profile = Matching::parseProfileCookie($request->cookie(Matching::COOKIE_NAME));
         $matchPercent = $profile ? Matching::computeMatchPercent($profile, $job->only(['tags', 'title', 'description'])) : null;
@@ -151,13 +151,14 @@ class JobsController extends Controller
             $relatedJobs = (clone $relatedQuery)->latest('posted_at')->take(3)->get();
         }
 
-        $unlockedIds = $user && ! $admin
+        $unlockedIds = $user && ! $user->hasActiveAccess()
             ? $user->jobUnlocks()->pluck('job_listing_id')->flip()
             : null;
 
-        $isUnlocked = fn (JobListing $j) => $admin
-            || $j->origin === 'employer'
-            || (bool) $unlockedIds?->has($j->id);
+        $isUnlocked = fn (JobListing $j) => (bool) (
+            $user?->hasActiveAccess()
+            || ($unlockedIds && $unlockedIds->has($j->id))
+        );
 
         return view('jobs.show', [
             'job' => $job,

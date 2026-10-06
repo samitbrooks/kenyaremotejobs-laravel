@@ -11,7 +11,8 @@
         : $redactor->redactEmployerIdentity($plainDescription, $job->company);
     $hourly = \App\Support\SalaryEstimate::estimateHourlyUsd($job->annual_salary_usd);
     $kesMonthly = \App\Support\SalaryEstimate::estimateMonthlyKes($job->annual_salary_usd, $job->salary);
-    $title = $job->title." at {$job->company} — Remote Job".($job->kenya_friendly ? ' (Kenya-Friendly)' : '');
+    $displayCompany = $canApply ? " at {$job->company}" : '';
+    $title = $job->title.$displayCompany." — Remote Job".($job->kenya_friendly ? ' (Kenya-Friendly)' : '');
     $preview = \App\Support\Format::truncate($plainDescription, 155);
 @endphp
 
@@ -36,10 +37,16 @@
 
         <x-reveal>
             <div class="mt-4 flex items-start gap-4">
-                <x-company-logo :company="$job->company" :size="64" />
+                <x-company-logo :company="$canApply ? $job->company : ''" :size="64" />
                 <div class="min-w-0 flex-1">
                     <h1 class="text-2xl font-extrabold sm:text-3xl text-slate-900">{{ $job->title }}</h1>
-                    <p class="mt-1 text-base font-medium text-slate-500">{{ $job->company }}</p>
+                    @if ($canApply)
+                        <p class="mt-1 text-base font-medium text-slate-500">{{ $job->company }}</p>
+                    @else
+                        <p class="mt-1.5 inline-flex items-center gap-1.5 rounded-full bg-amber-50 border border-amber-200/80 px-3 py-0.5 text-xs font-bold text-amber-900">
+                            <span class="text-amber-600">🔒</span> Company Name Hidden &middot; Unlocked with Pro or 24-Hour Free Pass
+                        </p>
+                    @endif
                 </div>
             </div>
 
@@ -123,7 +130,9 @@
 
             {{-- Full Role Description --}}
             <div class="mt-8 rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-8 shadow-sm">
-                <h2 class="mb-4 font-bold text-slate-900 text-lg sm:text-xl">About this role at {{ $job->company }}</h2>
+                <h2 class="mb-4 font-bold text-slate-900 text-lg sm:text-xl">
+                    About this role {{ $canApply ? 'at '.$job->company : '(Employer Details Hidden)' }}
+                </h2>
                 @if (\App\Support\Language::looksNonEnglish($plainDescription))
                     <livewire:translate-toggle :text="$displayPlainDescription" :blocks="$descriptionBlocks" />
                 @elseif ($descriptionBlocks)
@@ -172,10 +181,10 @@
                             🇰🇪 Verified Employer Actively Seeking Kenyan Talent &middot; Full Access with Pro
                         </div>
                         <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
-                            {{ $job->company }} is Exclusively Hiring in Kenya
+                            {{ $canApply ? $job->company : 'Verified Direct Employer' }} is Exclusively Hiring in Kenya
                         </h3>
                         <p class="mt-2.5 text-sm text-slate-600 max-w-lg mx-auto leading-relaxed">
-                            {{ $job->company }} is specifically recruiting Kenyan talent. <strong class="text-slate-900">Pro Early Access gives you full access to apply to all direct employer and remote listings</strong> across the site.
+                            This employer is specifically recruiting Kenyan talent. <strong class="text-slate-900">Pro Membership gives you full access to view company details and apply directly</strong> across the site.
                         </p>
 
                         <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3.5 max-w-lg mx-auto text-left text-xs font-medium text-slate-700">
@@ -189,7 +198,7 @@
                             </div>
                             <div class="rounded-2xl bg-slate-50/80 p-4 border border-slate-200/70 shadow-2xs">
                                 <p class="font-bold text-slate-900">✨ AI CV Copilot</p>
-                                <p class="text-slate-500 mt-1 leading-relaxed">Tailor your CV for {{ $job->company }} in 1 click.</p>
+                                <p class="text-slate-500 mt-1 leading-relaxed">Tailor your CV with our AI Copilot in 1 click.</p>
                             </div>
                         </div>
 
@@ -221,10 +230,10 @@
                             <x-icon name="sparkle" class="h-4 w-4 text-amber-600" /> Early Access &middot; Full Access to All 800+ Jobs
                         </div>
                         <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
-                            Beat 500+ Applicants to {{ $job->company }}
+                            {{ $canApply ? 'Beat 500+ Applicants to '.$job->company : 'Unlock Company Identity & 0-Second Direct Apply' }}
                         </h3>
                         <p class="mt-2.5 text-sm text-slate-600 max-w-lg mx-auto leading-relaxed">
-                            This role was published {{ \App\Support\Format::timeAgo($job->posted_at) }}. <strong class="text-slate-900">Global recruiters typically freeze applications after receiving the first 50 CVs.</strong> Pro members get immediate 0-second apply access today before public queues open and positions fill.
+                            This role was published {{ \App\Support\Format::timeAgo($job->posted_at) }}. <strong class="text-slate-900">Global recruiters typically freeze applications after receiving the first 50 CVs.</strong> Pro members and Free Pass holders reveal the employer identity and get immediate 0-second direct apply access before positions fill.
                         </p>
 
                         <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3.5 max-w-lg mx-auto text-left text-xs font-medium text-slate-700">

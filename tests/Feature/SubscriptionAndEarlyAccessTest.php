@@ -264,4 +264,53 @@ class SubscriptionAndEarlyAccessTest extends TestCase
         $this->assertEquals(0, $user->free_tailors_remaining);
         $this->assertFalse($user->canUseAiTailor());
     }
+
+    public function test_company_identity_is_masked_on_job_cards_for_unsubscribed_visitors(): void
+    {
+        $job = JobListing::create([
+            'id' => 'test-mask-job-1',
+            'origin' => 'scraper',
+            'tier' => 'basic',
+            'title' => 'Lead Data Scientist',
+            'company' => 'SecretAI Labs',
+            'location' => 'Worldwide',
+            'remote_type' => 'Full-time',
+            'description' => 'Machine learning role.',
+            'source_id' => 'mask-1',
+            'source_name' => 'RemoteOK',
+            'source_url' => 'https://example.com/jobs/mask-1',
+            'posted_at' => now()->subDays(5),
+            'kenya_friendly' => true,
+            'kenya_score' => 95,
+            'kenya_reasons' => ['Worldwide'],
+            'tags' => ['python', 'ml'],
+            'audience_segments' => [],
+        ]);
+
+        // Unauthenticated guest visits /jobs: card masks company as Verified Employer [Pro Only]
+        $guestResponse = $this->get('/jobs');
+        $guestResponse->assertStatus(200);
+        $guestResponse->assertSee('Lead Data Scientist');
+        $guestResponse->assertSee('Verified Employer');
+        $guestResponse->assertSee('Pro Only');
+        $guestResponse->assertDontSee('SecretAI Labs');
+
+        // Detail page masks company in header and displays trial/pro unlock buttons
+        $detailGuest = $this->get('/jobs/'.$job->id);
+        $detailGuest->assertStatus(200);
+        $detailGuest->assertSee('Lead Data Scientist');
+        $detailGuest->assertSee('Company Name Hidden');
+        $detailGuest->assertSee('Unlock Immediate Apply Access');
+
+        // Subscribed Pro user sees real company name on both pages
+        $proUser = User::factory()->create(['subscribed' => true]);
+        $proJobs = $this->actingAs($proUser)->get('/jobs');
+        $proJobs->assertStatus(200);
+        $proJobs->assertSee('SecretAI Labs');
+
+        $proDetail = $this->actingAs($proUser)->get('/jobs/'.$job->id);
+        $proDetail->assertStatus(200);
+        $proDetail->assertSee('SecretAI Labs');
+        $proDetail->assertSee('Apply Directly at SecretAI Labs');
+    }
 }

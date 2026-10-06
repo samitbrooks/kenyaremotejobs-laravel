@@ -57,11 +57,22 @@ class CollectionController extends Controller
             ? fn (JobListing $job) => Matching::computeMatchPercent($profile, $job->only(['tags', 'title', 'description']))
             : fn () => null;
 
+        $user = $request->user();
+        $unlockedIds = $user && ! $user->hasActiveAccess()
+            ? $user->jobUnlocks()->pluck('job_listing_id')->flip()
+            : null;
+
+        $isUnlocked = fn (JobListing $job) => (bool) (
+            $user?->hasActiveAccess()
+            || ($unlockedIds && $unlockedIds->has($job->id))
+        );
+
         return view('collections.show', [
             'collection' => $collection,
             'jobs' => $jobs,
             'otherCollections' => $otherCollections,
             'matchPercent' => $matchPercent,
+            'isUnlocked' => $isUnlocked,
         ]);
     }
 

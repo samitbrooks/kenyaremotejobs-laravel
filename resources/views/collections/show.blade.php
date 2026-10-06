@@ -84,7 +84,7 @@
                     @foreach ($jobs as $job)
                         <x-job-card 
                             :job="$job" 
-                            :unlocked="true" 
+                            :unlocked="isset($isUnlocked) ? $isUnlocked($job) : false" 
                             :matchPercent="$matchPercent ? $matchPercent($job) : null" 
                         />
                     @endforeach

@@ -2,7 +2,7 @@
 
 @php
     $rows = [
-        ['label' => 'Company', 'value' => $job->company],
+        ['label' => 'Company', 'value' => $canApply ? $job->company : '🔒 Hidden (Pro & Free Pass Access)'],
         ['label' => 'Location', 'value' => $job->location],
         ['label' => 'Remote type', 'value' => $job->remote_type],
     ];
