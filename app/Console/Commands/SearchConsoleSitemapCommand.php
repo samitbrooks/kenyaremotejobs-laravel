@@ -57,7 +57,11 @@ class SearchConsoleSitemapCommand extends Command
         }
 
         if ($action === 'submit') {
-            $sitemapUrl = (string) ($this->option('sitemap') ?: rtrim(config('site.url'), '/').'/sitemap.xml');
+            $defaultSitemap = str_starts_with(config('site.url'), 'http://localhost')
+                ? 'https://kenyaremotejobs.com/sitemap.xml'
+                : rtrim(config('site.url'), '/').'/sitemap.xml';
+
+            $sitemapUrl = (string) ($this->option('sitemap') ?: $defaultSitemap);
             $this->line("Submitting sitemap: {$sitemapUrl}...");
 
             $res = $gsc->submitSitemap($sitemapUrl, $siteUrl);

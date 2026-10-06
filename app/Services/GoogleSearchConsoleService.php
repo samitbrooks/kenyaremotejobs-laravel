@@ -129,7 +129,9 @@ class GoogleSearchConsoleService
         $encodedFeedpath = urlencode($feedpath);
 
         try {
-            $response = Http::withToken($token)->put(self::API_BASE."/sites/{$site}/sitemaps/{$encodedFeedpath}");
+            $response = Http::withToken($token)
+                ->withBody('', 'application/json')
+                ->put(self::API_BASE."/sites/{$site}/sitemaps/{$encodedFeedpath}");
 
             if ($response->successful() || $response->status() === 204) {
                 return [

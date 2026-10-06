@@ -514,6 +514,11 @@ class SeoEngineTest extends TestCase
 
     public function test_seo_gsc_sitemap_command_fails_gracefully_when_unconfigured(): void
     {
+        config([
+            'services.google_indexing.key_path' => '/nonexistent/path.json',
+            'services.google_indexing.credentials_json' => null,
+        ]);
+
         $this->artisan('seo:gsc-sitemap submit')
             ->expectsOutputToContain('Google Search Console Property:')
             ->assertExitCode(1);
