@@ -147,6 +147,37 @@ class SeoEngineTest extends TestCase
         $response->assertStatus(404);
     }
 
+    public function test_category_search_queries_are_301_redirected_to_programmatic_category_pages(): void
+    {
+        $writingResponse = $this->get('/jobs?q=Writing');
+        $writingResponse->assertStatus(301);
+        $writingResponse->assertRedirect('/remote-jobs/writing-content-kenya');
+
+        $supportResponse = $this->get('/jobs?q=Customer+Support');
+        $supportResponse->assertStatus(301);
+        $supportResponse->assertRedirect('/remote-jobs/customer-support-kenya');
+
+        $devResponse = $this->get('/jobs?q=developer');
+        $devResponse->assertStatus(301);
+        $devResponse->assertRedirect('/remote-jobs/software-developer-kenya');
+    }
+
+    public function test_new_categories_render_200_with_rich_schemas(): void
+    {
+        $aiResponse = $this->get('/remote-jobs/ai-training-annotation-kenya');
+        $aiResponse->assertStatus(200);
+        $aiResponse->assertSee('AI Training, Data Annotation');
+        $aiResponse->assertSee('FAQPage', false);
+
+        $designResponse = $this->get('/remote-jobs/graphic-design-kenya');
+        $designResponse->assertStatus(200);
+        $designResponse->assertSee('Graphic Design &amp; UI/UX', false);
+
+        $transcriptionResponse = $this->get('/remote-jobs/transcription-translation-kenya');
+        $transcriptionResponse->assertStatus(200);
+        $transcriptionResponse->assertSee('Audio Transcription');
+    }
+
     public function test_journal_article_renders_markdown_and_article_schema(): void
     {
         $this->seed(SeoPillarContentSeeder::class);
@@ -208,6 +239,48 @@ class SeoEngineTest extends TestCase
         $response->assertSee('directApply', false);
         $response->assertSee('<link rel="canonical"', false);
         $response->assertSee('/jobs/'.$job->id, false);
+    }
+
+    public function test_job_older_than_30_days_renders_as_expired_with_noindex_and_no_job_posting_schema(): void
+    {
+        $expiredJob = JobListing::create([
+            'id' => 'expired-test-job-999',
+            'source_name' => 'remoteok',
+            'source_id' => 'ro-999',
+            'source_url' => 'https://remoteok.com/remote-jobs/999',
+            'tier' => 'standard',
+            'title' => 'Expired Senior Copywriter',
+            'company' => 'Old Agency',
+            'description' => 'A past copywriting position.',
+            'tags' => ['Writing', 'Content'],
+            'location' => 'Worldwide',
+            'remote_type' => 'Full-time',
+            'salary' => '$3,000/mo',
+            'annual_salary_usd' => ['min' => 36000, 'max' => 36000],
+            'origin' => 'synced',
+            'kenya_friendly' => true,
+            'kenya_score' => 90,
+            'kenya_reasons' => ['Global remote'],
+            'audience_segments' => [],
+            'posted_at' => now()->subDays(35),
+        ]);
+
+        $response = $this->get('/jobs/'.$expiredJob->id);
+
+        $response->assertStatus(200);
+        $response->assertSee('This job posting has reached its deadline and is closed');
+        $response->assertSee('Position Closed');
+        $response->assertSee('content="noindex, follow"', false);
+        $response->assertDontSee('"@type": "JobPosting"', false);
+    }
+
+    public function test_non_existent_job_returns_410_gone_with_helpful_active_listings(): void
+    {
+        $response = $this->get('/jobs/completely-missing-job-id');
+
+        $response->assertStatus(410);
+        $response->assertSee('This Job Posting Has Closed or Expired');
+        $response->assertSee('content="noindex, follow"', false);
     }
 
     public function test_faqs_page_renders_with_faq_page_schema(): void

@@ -14,6 +14,12 @@ class AshbySource implements JobSource
      * Ashby provides a public, unauthenticated posting API for direct career board queries.
      */
     private const BOARDS = [
+        ['slug' => 'writer', 'source_name' => 'Writer'],
+        ['slug' => 'clickup', 'source_name' => 'ClickUp'],
+        ['slug' => 'notion', 'source_name' => 'Notion'],
+        ['slug' => 'docker', 'source_name' => 'Docker'],
+        ['slug' => 'buffer', 'source_name' => 'Buffer'],
+        ['slug' => 'quora', 'source_name' => 'Quora'],
         ['slug' => 'linear', 'source_name' => 'Linear'],
         ['slug' => 'supabase', 'source_name' => 'Supabase'],
         ['slug' => 'sentry', 'source_name' => 'Sentry'],

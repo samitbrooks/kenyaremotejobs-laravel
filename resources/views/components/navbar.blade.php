@@ -61,6 +61,20 @@
                         >
                             <div class="flex gap-4 rounded-3xl border border-slate-200/80 bg-white p-5 text-slate-900 shadow-2xl ring-1 ring-black/5">
                                 <div class="flex-1">
+                                    <div class="mb-3 rounded-2xl bg-gradient-to-r from-teal-50 via-emerald-50/60 to-white p-3 border border-teal-200/80 shadow-2xs">
+                                        <a href="{{ url('/remote-jobs/writing-content-kenya') }}" @click="jobsMenuOpen = false" class="flex items-center justify-between group">
+                                            <div class="flex items-center gap-2.5">
+                                                <div class="flex h-8 w-8 items-center justify-center rounded-xl bg-teal-600 text-white shadow-xs">
+                                                    <x-icon name="pen" class="h-4 w-4" />
+                                                </div>
+                                                <div>
+                                                    <span class="block text-xs font-bold text-slate-900 group-hover:text-teal-700 transition">Writing &amp; Content Jobs</span>
+                                                    <span class="block text-[11px] text-slate-500">Copywriting, technical writing &amp; blogs</span>
+                                                </div>
+                                            </div>
+                                            <span class="rounded-full bg-teal-600/10 px-2 py-0.5 text-[10px] font-bold text-teal-700 border border-teal-200/60">🔥 Top in KE</span>
+                                        </a>
+                                    </div>
                                     <p class="mb-2 px-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-400">Who it&rsquo;s for</p>
                                     @foreach (\App\Support\Audience::ORDER as $segment)
                                         <a href="{{ url('/jobs') }}?audience={{ $segment }}" @click="jobsMenuOpen = false" class="flex items-start gap-2.5 rounded-2xl p-2.5 transition hover:bg-teal-50/60 hover:text-teal-800">
@@ -172,6 +186,10 @@
                 <span class="text-xs transition-transform" :class="mobileJobsOpen ? 'rotate-180' : ''">&#9662;</span>
             </button>
             <div x-show="mobileJobsOpen" x-cloak class="flex flex-col gap-0.5 pl-3 border-l-2 border-teal-100 ml-2">
+                <a href="{{ url('/remote-jobs/writing-content-kenya') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center justify-between rounded-xl px-2.5 py-2 text-slate-900 bg-teal-50/80 border border-teal-200/70 font-semibold hover:bg-teal-100 transition mb-1">
+                    <span class="flex items-center gap-2"><x-icon name="pen" class="h-4 w-4 text-teal-600" /> Writing &amp; Content Jobs</span>
+                    <span class="rounded-full bg-teal-600 text-white px-2 py-0.5 text-[10px] font-bold">Top in KE</span>
+                </a>
                 <a href="{{ url('/jobs') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-slate-600 hover:bg-teal-50 hover:text-teal-800 transition">
                     <x-icon name="globe" class="h-4 w-4 text-teal-600" /> All Opportunities
                 </a>

@@ -16,12 +16,26 @@
     $preview = \App\Support\Format::truncate($plainDescription, 155);
 @endphp
 
-<x-layouts.app :title="$title" :description="$preview" :canonical="url('/jobs/'.$job->id)">
-    <script type="application/ld+json">{!! \App\Support\Seo::jobPostingJsonLd($job) !!}</script>
+<x-layouts.app :title="$title" :description="$preview" :canonical="url('/jobs/'.$job->id)" :noindex="$isExpired">
+    @if (! $isExpired)
+        <script type="application/ld+json">{!! \App\Support\Seo::jobPostingJsonLd($job) !!}</script>
+    @endif
     <script type="application/ld+json">{!! \App\Support\Seo::breadcrumbJsonLd($job) !!}</script>
 
     <div class="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-        @if (auth()->user()?->onTrial())
+        @if ($isExpired)
+            <div class="mb-5 rounded-2xl border border-amber-300 bg-amber-50/95 p-4 text-amber-950 shadow-xs flex items-start gap-3">
+                <span class="text-xl shrink-0">⚠️</span>
+                <div>
+                    <h2 class="text-sm font-bold text-amber-900">This job posting has reached its deadline and is closed</h2>
+                    <p class="mt-0.5 text-xs text-amber-800 leading-relaxed">
+                        This role was listed over 30 days ago and is no longer accepting new applications. Browse active opportunities open to Kenyan candidates below.
+                    </p>
+                </div>
+            </div>
+        @endif
+
+        @if (! $isExpired && auth()->user()?->onTrial())
             <div class="mb-4 rounded-2xl border border-teal-200 bg-gradient-to-r from-teal-50 via-emerald-50 to-teal-50 p-3.5 shadow-xs flex flex-wrap items-center justify-between gap-3">
                 <div class="flex items-center gap-2 text-xs text-teal-950 font-semibold">
                     <span class="inline-flex h-2 w-2 rounded-full bg-teal-500 animate-pulse shrink-0"></span>
@@ -42,6 +56,8 @@
                     <h1 class="text-2xl font-extrabold sm:text-3xl text-slate-900">{{ $job->title }}</h1>
                     @if ($canApply)
                         <p class="mt-1 text-base font-medium text-slate-500">{{ $job->company }}</p>
+                    @elseif ($isExpired)
+                        <p class="mt-1 text-base font-medium text-slate-500">{{ $job->company }} &middot; <span class="text-amber-800 font-semibold">Archived Posting</span></p>
                     @else
                         <p class="mt-1.5 inline-flex items-center gap-1.5 rounded-full bg-amber-50 border border-amber-200/80 px-3 py-0.5 text-xs font-bold text-amber-900">
                             <span class="text-amber-600">🔒</span> Company Name Hidden &middot; Unlocked with Pro or 24-Hour Free Pass
@@ -51,7 +67,11 @@
             </div>
 
             <div class="mt-4 flex flex-wrap items-center gap-2">
-                @if ($isEarlyAccess)
+                @if ($isExpired)
+                    <span class="inline-flex items-center gap-1 rounded-full bg-slate-100 border border-slate-300 px-3.5 py-1 text-xs font-semibold text-slate-600">
+                        Position Closed
+                    </span>
+                @elseif ($isEarlyAccess)
                     <span class="inline-flex items-center gap-1 rounded-full bg-amber-50 border border-amber-200/80 px-3.5 py-1 text-xs font-semibold text-amber-900">
                         <x-icon name="sparkle" class="h-3.5 w-3.5 text-amber-600" /> Early Access ({{ $job->earlyAccessHoursRemaining() }}h left)
                     </span>
@@ -144,11 +164,33 @@
 
             {{-- Application Section --}}
             <div class="mt-8">
-                @if ($canApply)
+                @if ($isExpired)
+                    <div class="rounded-3xl border border-slate-200/80 bg-slate-50 p-6 sm:p-10 text-center shadow-xs">
+                        <div class="inline-flex items-center gap-2 rounded-full bg-amber-100 border border-amber-300 px-4 py-1.5 text-xs font-bold text-amber-900 mb-4">
+                            ⚠️ Application Window Closed
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-slate-900">This position has expired or been filled</h3>
+                        <p class="mt-2 text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
+                            This vacancy was listed over 30 days ago. The hiring team is no longer reviewing applications for this cycle.
+                        </p>
+                        <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+                            <a href="{{ url('/jobs') }}" class="btn-pop rounded-full bg-teal-700 px-7 py-3 text-sm font-bold text-white hover:bg-teal-800 shadow-xs transition">
+                                Browse Current Live Remote Jobs &rarr;
+                            </a>
+                            <a href="{{ url('/collections') }}" class="rounded-full bg-white border border-slate-200/80 px-5 py-3 text-sm font-semibold text-slate-700 hover:border-teal-500 hover:text-teal-700 transition shadow-2xs">
+                                Curated Collections
+                            </a>
+                        </div>
+                    </div>
+                @elseif ($canApply)
                     <div class="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-10 text-center shadow-lg">
                         @if ($job->origin === 'employer')
                             <p class="mb-4 inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-4 py-1 text-xs font-bold text-emerald-800">
                                 🇰🇪 Verified Direct Employer &middot; Pro Access Active
+                            </p>
+                        @elseif ($job->isDirectAts())
+                            <p class="mb-4 inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-4 py-1 text-xs font-bold text-emerald-800">
+                                <x-icon name="check" class="h-4 w-4 text-emerald-600" /> Verified Direct Portal &middot; No 3rd-Party Account Needed
                             </p>
                         @elseif ($isEarlyAccess)
                             <p class="mb-4 inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-4 py-1 text-xs font-bold text-emerald-800">
@@ -157,17 +199,34 @@
                         @endif
                         <h3 class="text-2xl font-extrabold text-slate-900">Ready to submit your application?</h3>
                         <p class="mt-1.5 text-sm text-slate-500 max-w-md mx-auto leading-relaxed">
-                            Apply directly through {{ $job->company }}'s official recruitment portal.
+                            @if ($job->isDirectAts())
+                                Apply directly through {{ $job->company }}'s official recruitment portal without any middleman accounts.
+                            @else
+                                Apply directly to {{ $job->company }}.
+                            @endif
                         </p>
                         <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
                             <a
-                                href="{{ $job->source_url }}"
+                                href="{{ $job->directApplyUrl() }}"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 class="btn-pop inline-flex items-center justify-center gap-2 rounded-full bg-teal-600 px-8 py-3.5 text-center font-bold text-white shadow-md shadow-teal-600/20 transition hover:bg-teal-700"
                             >
                                 Apply Directly at {{ $job->company }} &#8599;
                             </a>
+
+                            @if ($job->isAggregator() && ! $job->isDirectAts())
+                                <a
+                                    href="https://www.google.com/search?q={{ urlencode($job->company . ' ' . $job->title . ' careers apply') }}"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="btn-pop inline-flex items-center justify-center gap-2 rounded-full bg-slate-100 hover:bg-slate-200 px-6 py-3.5 text-center text-sm font-semibold text-slate-800 transition"
+                                    title="Search employer's official careers portal directly to bypass 3rd party job board sign-up"
+                                >
+                                    Official {{ $job->company }} Search &#8599;
+                                </a>
+                            @endif
+
                             <livewire:track-application-button :job-id="$job->id" />
                         </div>
                         <p class="mt-4 text-xs text-slate-400">

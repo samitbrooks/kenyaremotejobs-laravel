@@ -27,12 +27,21 @@
             <div class="text-sm">
                 <p class="mb-3 text-xs font-bold uppercase tracking-wider text-slate-200">Popular Roles in Kenya</p>
                 <ul class="space-y-2">
+                    <li>
+                        <a href="{{ url('/remote-jobs/writing-content-kenya') }}" class="inline-flex items-center gap-1.5 font-bold text-teal-300 hover:text-teal-200 transition">
+                            <span>Writing &amp; Content Jobs</span>
+                            <span class="rounded bg-teal-500/20 border border-teal-500/40 px-1.5 py-0.2 text-[10px] font-semibold text-teal-200">🔥 Top in KE</span>
+                        </a>
+                    </li>
                     <li><a href="{{ url('/remote-jobs/customer-support-kenya') }}" class="hover:text-teal-400 transition">Customer Support Jobs</a></li>
                     <li><a href="{{ url('/remote-jobs/virtual-assistant-kenya') }}" class="hover:text-teal-400 transition">Virtual Assistant Jobs</a></li>
                     <li><a href="{{ url('/remote-jobs/software-developer-kenya') }}" class="hover:text-teal-400 transition">Software Developer Jobs</a></li>
+                    <li><a href="{{ url('/remote-jobs/ai-training-annotation-kenya') }}" class="hover:text-teal-400 transition">AI Training &amp; Annotation</a></li>
                     <li><a href="{{ url('/remote-jobs/data-entry-kenya') }}" class="hover:text-teal-400 transition">Data Entry &amp; Operations</a></li>
-                    <li><a href="{{ url('/remote-jobs/writing-content-kenya') }}" class="hover:text-teal-400 transition">Writing &amp; Content Jobs</a></li>
+                    <li><a href="{{ url('/remote-jobs/transcription-translation-kenya') }}" class="hover:text-teal-400 transition">Transcription &amp; Translation</a></li>
                     <li><a href="{{ url('/remote-jobs/digital-marketing-kenya') }}" class="hover:text-teal-400 transition">Digital Marketing Jobs</a></li>
+                    <li><a href="{{ url('/remote-jobs/graphic-design-kenya') }}" class="hover:text-teal-400 transition">Graphic Design &amp; UI/UX</a></li>
+                    <li><a href="{{ url('/remote-jobs/accounting-finance-kenya') }}" class="hover:text-teal-400 transition">Accounting &amp; Finance</a></li>
                     <li><a href="{{ url('/remote-jobs/entry-level-kenya') }}" class="hover:text-teal-400 transition">Entry-Level Remote Jobs</a></li>
                 </ul>
             </div>

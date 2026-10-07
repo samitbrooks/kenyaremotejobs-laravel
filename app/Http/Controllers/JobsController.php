@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\JobListing;
 use App\Services\CreditsService;
 use App\Support\Audience;
+use App\Support\JobCategorySeo;
 use App\Support\Matching;
 use Illuminate\Http\Request;
 
@@ -23,6 +24,15 @@ class JobsController extends Controller
             ? $request->query('audience')
             : null;
         $page = max(1, (int) $request->query('page', 1));
+
+        // 301 permanent redirect category queries to their dedicated programmatic SEO landing page
+        // (Transfers search impressions, resolves canonical clash, and boosts organic rankings)
+        if ($q !== '' && $tag === '' && $remoteType === '' && ! $kenyaFriendly && ! $freeOnly && ! $audience && $page === 1) {
+            $matchedCategorySlug = JobCategorySeo::findSlugForQuery($q);
+            if ($matchedCategorySlug) {
+                return redirect()->route('jobs.category', ['slug' => $matchedCategorySlug], 301);
+            }
+        }
 
         $profile = Matching::parseProfileCookie($request->cookie(Matching::COOKIE_NAME));
         $sortByMatch = $request->query('sort') === 'match' && $profile !== null;
@@ -128,11 +138,23 @@ class JobsController extends Controller
         $user = $request->user();
         $admin = (bool) $user?->isAdmin();
 
-        $job = $admin ? JobListing::findOrFail($id) : JobListing::visible()->findOrFail($id);
+        $job = JobListing::find($id);
 
-        $isEarlyAccess = $job->isEarlyAccess();
+        if (! $job) {
+            $activeJobs = JobListing::visible()->latest('posted_at')->take(6)->get();
+
+            return response()->view('jobs.expired', [
+                'activeJobs' => $activeJobs,
+                'requestedId' => $id,
+            ], 410);
+        }
+
+        $listingLifetimeDays = (int) config('jobs.listing_days', 30);
+        $isExpired = ! $admin && $job->posted_at && $job->posted_at->isBefore(now()->subDays($listingLifetimeDays));
+
+        $isEarlyAccess = ! $isExpired && $job->isEarlyAccess();
         $isEmployerDirect = $job->origin === 'employer';
-        $canApply = (bool) (
+        $canApply = ! $isExpired && (bool) (
             $user?->hasActiveAccess()
             || ($user && $user->jobUnlocks()->where('job_listing_id', $job->id)->exists())
         );
@@ -164,6 +186,7 @@ class JobsController extends Controller
             'job' => $job,
             'canApply' => $canApply,
             'isEarlyAccess' => $isEarlyAccess,
+            'isExpired' => $isExpired,
             'matchPercent' => $matchPercent,
             'relatedJobs' => $relatedJobs,
             'isUnlocked' => $isUnlocked,

@@ -128,7 +128,7 @@ class JobCategorySeo
                 'intro' => 'Kenyan writers are among the most sought-after English-language content creators in Africa. Explore remote copywriting, SEO article writing, technical documentation, and scriptwriting jobs open to global applicants without geographic restrictions.',
                 'keywords' => 'remote writing jobs kenya, online content writer kenya, freelance copywriting jobs kenya, technical writer remote kenya',
                 'salary_range' => '$1,000 - $3,500 / month (~KES 130,000 - 455,000)',
-                'search_terms' => ['writing', 'writer', 'content', 'copywriter', 'editor', 'editorial', 'technical writer'],
+                'search_terms' => ['writing', 'writer', 'content', 'copywriter', 'copywriting', 'editor', 'editorial', 'technical writer', 'author', 'documentation', 'scriptwriter', 'curriculum', 'journalist', 'proofreader', 'reviewer'],
                 'faqs' => [
                     [
                         'question' => 'How can I build a portfolio as a remote writer in Kenya?',
@@ -197,6 +197,109 @@ class JobCategorySeo
                     ],
                 ],
             ],
+
+            'graphic-design-kenya' => [
+                'slug' => 'graphic-design-kenya',
+                'name' => 'Design & Creative',
+                'title' => 'Remote Graphic Design & UI/UX Jobs in Kenya (2026)',
+                'h1' => 'Remote Graphic Design, UI/UX & Creative Jobs Open to Kenya',
+                'meta_description' => 'Browse remote graphic design, UI/UX, product design, and creative roles for Kenyans. Work with international brands and earn in USD from Nairobi or anywhere in Kenya.',
+                'badge' => 'Design & Creative',
+                'intro' => 'International tech companies and digital marketing agencies actively hire Kenyan visual designers, UI/UX practitioners, Figma specialists, and multimedia editors. These roles allow Kenyan creatives to build portfolios with world-class brands without geographical barriers.',
+                'keywords' => 'remote graphic design jobs kenya, ui ux jobs kenya remote, figma designer jobs nairobi, online creative jobs kenya',
+                'salary_range' => '$1,200 - $4,000 / month (~KES 155,000 - 520,000)',
+                'search_terms' => ['design', 'designer', 'ui/ux', 'graphic', 'figma', 'creative', 'illustrator', 'visual', 'video'],
+                'faqs' => [
+                    [
+                        'question' => 'What design tools are most in demand for remote design jobs in Kenya?',
+                        'answer' => 'Figma is the industry standard for product and UI/UX design. Adobe Creative Cloud (Illustrator, Photoshop, Premiere Pro) and Canva are essential for brand identity and social media content creation.',
+                    ],
+                    [
+                        'question' => 'Where should Kenyan designers host their portfolio?',
+                        'answer' => 'Behance, Dribbble, or a personal website built with Framer or Webflow. International clients look for 3 to 5 case studies demonstrating problem solving and business impact.',
+                    ],
+                ],
+            ],
+
+            'accounting-finance-kenya' => [
+                'slug' => 'accounting-finance-kenya',
+                'name' => 'Accounting & Finance',
+                'title' => 'Remote Accounting & Bookkeeping Jobs in Kenya (2026)',
+                'h1' => 'Remote Accounting, Bookkeeping & Financial Analyst Jobs in Kenya',
+                'meta_description' => 'Find legitimate remote accounting, QuickBooks bookkeeping, and financial analyst roles open to Kenyan CPAs and finance professionals. Verified USD payouts.',
+                'badge' => 'Accounting & Finance',
+                'intro' => 'US, UK, and European small-to-medium businesses frequently outsource bookkeeping, accounts payable/receivable, financial reconciliation, and payroll management to qualified Kenyan accountants and CPAs who provide rigorous accuracy and cost efficiency.',
+                'keywords' => 'remote accounting jobs kenya, remote bookkeeping jobs kenya, quickbooks remote kenya, online finance jobs nairobi',
+                'salary_range' => '$1,500 - $4,500 / month (~KES 195,000 - 585,000)',
+                'search_terms' => ['accounting', 'accountant', 'bookkeeper', 'finance', 'cpa', 'quickbooks', 'financial', 'audit', 'payroll'],
+                'faqs' => [
+                    [
+                        'question' => 'Can Kenyan CPAs work for US or UK companies remotely?',
+                        'answer' => 'Yes. While tax filing differs by country, general ledger bookkeeping, accounts reconciliation, and financial modeling are universal. Familiarity with US GAAP or IFRS and cloud software like QuickBooks Online or Xero is highly valued.',
+                    ],
+                ],
+            ],
+
+            'ai-training-annotation-kenya' => [
+                'slug' => 'ai-training-annotation-kenya',
+                'name' => 'AI Training & Annotation',
+                'title' => 'Remote AI Data Annotation & Training Jobs in Kenya (2026)',
+                'h1' => 'Remote AI Training, Data Annotation & Prompt Engineering Jobs in Kenya',
+                'meta_description' => 'Discover legitimate remote AI data labeling, RLHF prompt evaluation, and model training positions for Kenyans. Reliable USD payouts to PayPal, Payoneer and M-Pesa.',
+                'badge' => 'AI Training & Annotation',
+                'intro' => 'With the global boom in Large Language Models (LLMs), AI companies (such as Outlier, Scale AI, Alignerr, and Remotasks) actively hire thousands of Kenyan specialists for RLHF (Reinforcement Learning from Human Feedback), prompt evaluation, coding model tutoring, and domain-specific dataset labeling.',
+                'keywords' => 'ai training jobs kenya, rlhf remote jobs kenya, data annotation jobs nairobi, outlier ai kenya, prompt engineer remote kenya',
+                'salary_range' => '$800 - $2,500 / month (~KES 100,000 - 325,000)',
+                'search_terms' => ['ai', 'annotation', 'labeling', 'prompt', 'rlhf', 'evaluator', 'machine learning', 'data trainer'],
+                'faqs' => [
+                    [
+                        'question' => 'What is AI data annotation and RLHF work in Kenya?',
+                        'answer' => 'AI annotation involves reviewing and rating model outputs for accuracy, harmlessness, and helpfulness, writing high-quality answers to complex prompts, or labeling datasets. Subject matter experts in math, coding, literature, and science are in particularly high demand.',
+                    ],
+                    [
+                        'question' => 'How are Kenyan AI trainers paid?',
+                        'answer' => 'Payouts are typically weekly or bi-weekly via PayPal, Payoneer, or direct bank transfer, which can be withdrawn directly into Safaricom M-Pesa.',
+                    ],
+                ],
+            ],
+
+            'transcription-translation-kenya' => [
+                'slug' => 'transcription-translation-kenya',
+                'name' => 'Transcription & Translation',
+                'title' => 'Remote Audio Transcription & Translation Jobs in Kenya (2026)',
+                'h1' => 'Remote Audio Transcription, Captioning & Translation Jobs in Kenya',
+                'meta_description' => 'Legitimate remote audio transcription, video captioning, and English-Swahili translation jobs open to Kenyan freelancers. Flexible hours working from home.',
+                'badge' => 'Transcription & Translation',
+                'intro' => 'Kenyan linguists and fast typists are in high demand for legal, medical, academic, and general audio transcription, as well as English-Swahili localization and video subtitling for international media and research organizations.',
+                'keywords' => 'transcription jobs kenya, online transcriber kenya, english swahili translation jobs remote, captioning jobs nairobi',
+                'salary_range' => '$700 - $2,000 / month (~KES 90,000 - 260,000)',
+                'search_terms' => ['transcription', 'transcriber', 'translation', 'translator', 'captioning', 'subtitles', 'swahili', 'audio', 'linguist'],
+                'faqs' => [
+                    [
+                        'question' => 'How can I pass transcription tests for global platforms?',
+                        'answer' => 'Practice active listening, use noise-canceling headphones, master strict verbatim vs clean verbatim guidelines, and use tools like Express Scribe. A typing speed of 60+ WPM with 98% accuracy ensures passing.',
+                    ],
+                ],
+            ],
+
+            'human-resources-kenya' => [
+                'slug' => 'human-resources-kenya',
+                'name' => 'Human Resources & Recruiting',
+                'title' => 'Remote HR & Talent Acquisition Jobs in Kenya (2026)',
+                'h1' => 'Remote Human Resources, Talent Sourcing & Recruiter Jobs in Kenya',
+                'meta_description' => 'Browse international remote HR, technical recruiting, and people operations jobs open to Kenyan professionals. Work with global remote-first companies.',
+                'badge' => 'Human Resources & Recruiting',
+                'intro' => 'Global remote-first companies hire Kenyan HR coordinators, technical recruiters, and talent sourcers to manage international hiring pipelines, schedule interviews across time zones, and handle employee onboarding asynchronously.',
+                'keywords' => 'remote hr jobs kenya, remote technical recruiter kenya, talent acquisition remote nairobi, online human resources jobs kenya',
+                'salary_range' => '$1,500 - $4,200 / month (~KES 195,000 - 545,000)',
+                'search_terms' => ['hr', 'recruiter', 'recruiting', 'talent', 'human resources', 'sourcing', 'people operations', 'onboarding'],
+                'faqs' => [
+                    [
+                        'question' => 'What HR tools do remote companies expect candidates to know?',
+                        'answer' => 'Applicant Tracking Systems (ATS) such as Greenhouse, Lever, Ashby, and Workable, along with LinkedIn Recruiter, Deel, and Slack for asynchronous team coordination.',
+                    ],
+                ],
+            ],
         ];
     }
 
@@ -218,5 +321,89 @@ class JobCategorySeo
     public static function find(string $slug): ?array
     {
         return self::all()[$slug] ?? null;
+    }
+
+    /**
+     * Map common search queries to their dedicated programmatic SEO category landing slug.
+     */
+    public static function findSlugForQuery(string $query): ?string
+    {
+        $normalized = strtolower(trim($query));
+
+        $directMap = [
+            'writing' => 'writing-content-kenya',
+            'writer' => 'writing-content-kenya',
+            'content' => 'writing-content-kenya',
+            'copywriting' => 'writing-content-kenya',
+            'content writer' => 'writing-content-kenya',
+            'copywriter' => 'writing-content-kenya',
+            'technical writer' => 'writing-content-kenya',
+            'editorial' => 'writing-content-kenya',
+
+            'support' => 'customer-support-kenya',
+            'customer support' => 'customer-support-kenya',
+            'customer service' => 'customer-support-kenya',
+            'helpdesk' => 'customer-support-kenya',
+            'client success' => 'customer-support-kenya',
+
+            'virtual assistant' => 'virtual-assistant-kenya',
+            'va' => 'virtual-assistant-kenya',
+            'executive assistant' => 'virtual-assistant-kenya',
+            'admin assistant' => 'virtual-assistant-kenya',
+
+            'developer' => 'software-developer-kenya',
+            'software engineer' => 'software-developer-kenya',
+            'engineer' => 'software-developer-kenya',
+            'software developer' => 'software-developer-kenya',
+            'frontend' => 'software-developer-kenya',
+            'backend' => 'software-developer-kenya',
+            'fullstack' => 'software-developer-kenya',
+            'full stack' => 'software-developer-kenya',
+
+            'data entry' => 'data-entry-kenya',
+            'data clerk' => 'data-entry-kenya',
+
+            'marketing' => 'digital-marketing-kenya',
+            'digital marketing' => 'digital-marketing-kenya',
+            'social media' => 'digital-marketing-kenya',
+            'seo' => 'digital-marketing-kenya',
+
+            'sales' => 'sales-business-development-kenya',
+            'sdr' => 'sales-business-development-kenya',
+            'bdr' => 'sales-business-development-kenya',
+            'business development' => 'sales-business-development-kenya',
+
+            'entry level' => 'entry-level-kenya',
+            'junior' => 'entry-level-kenya',
+            'intern' => 'entry-level-kenya',
+            'internship' => 'entry-level-kenya',
+
+            'design' => 'graphic-design-kenya',
+            'designer' => 'graphic-design-kenya',
+            'graphic design' => 'graphic-design-kenya',
+            'ui/ux' => 'graphic-design-kenya',
+            'ui ux' => 'graphic-design-kenya',
+
+            'accounting' => 'accounting-finance-kenya',
+            'accountant' => 'accounting-finance-kenya',
+            'bookkeeper' => 'accounting-finance-kenya',
+            'finance' => 'accounting-finance-kenya',
+
+            'ai' => 'ai-training-annotation-kenya',
+            'ai training' => 'ai-training-annotation-kenya',
+            'annotation' => 'ai-training-annotation-kenya',
+            'data annotation' => 'ai-training-annotation-kenya',
+
+            'transcription' => 'transcription-translation-kenya',
+            'transcriber' => 'transcription-translation-kenya',
+            'translation' => 'transcription-translation-kenya',
+            'translator' => 'transcription-translation-kenya',
+
+            'hr' => 'human-resources-kenya',
+            'recruiter' => 'human-resources-kenya',
+            'human resources' => 'human-resources-kenya',
+        ];
+
+        return $directMap[$normalized] ?? null;
     }
 }

@@ -1,11 +1,14 @@
 @php
     $categories = [
-        ['icon' => 'code', 'label' => 'Engineering & Development', 'q' => 'engineer'],
-        ['icon' => 'headset', 'label' => 'Customer Support', 'q' => 'support'],
-        ['icon' => 'trending-up', 'label' => 'Sales', 'q' => 'sales'],
-        ['icon' => 'megaphone', 'label' => 'Marketing', 'q' => 'marketing'],
-        ['icon' => 'palette', 'label' => 'Design', 'q' => 'design'],
-        ['icon' => 'pen', 'label' => 'Writing & Content', 'q' => 'content'],
+        ['icon' => 'pen', 'label' => 'Writing & Content', 'slug' => 'writing-content-kenya'],
+        ['icon' => 'headset', 'label' => 'Customer Support', 'slug' => 'customer-support-kenya'],
+        ['icon' => 'user', 'label' => 'Virtual Assistant', 'slug' => 'virtual-assistant-kenya'],
+        ['icon' => 'code', 'label' => 'Software Engineering', 'slug' => 'software-developer-kenya'],
+        ['icon' => 'clipboard', 'label' => 'Data Entry & Ops', 'slug' => 'data-entry-kenya'],
+        ['icon' => 'megaphone', 'label' => 'Digital Marketing', 'slug' => 'digital-marketing-kenya'],
+        ['icon' => 'trending-up', 'label' => 'Sales & Business Dev', 'slug' => 'sales-business-development-kenya'],
+        ['icon' => 'palette', 'label' => 'Design & Creative', 'slug' => 'graphic-design-kenya'],
+        ['icon' => 'sparkle', 'label' => 'AI Training & Annotation', 'slug' => 'ai-training-annotation-kenya'],
     ];
 
     $trustFeatures = [
@@ -15,7 +18,7 @@
     ];
 
     $howItWorks = [
-        ['title' => 'Search & filter', 'body' => 'Browse remote roles from vetted global companies and hiring employers, all in one place — 100% free to search and view company names.'],
+        ['title' => 'Search & filter', 'body' => 'Browse remote roles from vetted global companies and hiring employers, all in one place — curated and updated hourly.'],
         ['title' => 'Spot your match', 'body' => 'Every listing gets a Kenya-Friendly Match badge when it\'s realistically open to your timezone and location.'],
         ['title' => 'Instant Apply Access', 'body' => 'Pro Membership gives you immediate apply access to all 800+ remote jobs & direct employer listings, with 1-click AI CV tailoring and priority recruiter delivery.'],
     ];
@@ -31,7 +34,7 @@
         ['question' => 'Can I really get a remote job while living in Kenya?', 'answer' => 'Yes — thousands of companies hire remote workers with no location restriction. The hard part is finding which listings actually mean it. That\'s what the Kenya-Friendly Match badge is for: we score every job for timezone overlap, location wording, and visa restrictions so you\'re not wasting time on roles that were never open to you.'],
         ['question' => 'Do these remote jobs require a US or EU visa?', 'answer' => 'Some do — and we flag those. Jobs that mention explicit US-only, EU-only, or visa-sponsorship restrictions are excluded from the Kenya-Friendly Match badge, so you can filter them out with one click on the jobs page.'],
         ['question' => 'What does \'Kenya-Friendly Match\' mean?', 'answer' => 'It\'s a badge we calculate automatically for every listing, based on whether the location is worldwide/global/Africa-open, whether the stated timezone window overlaps East Africa Time (UTC+3), and whether the description rules out candidates outside the US or EU.'],
-        ['question' => 'Is KenyaRemoteJobs free to use?', 'answer' => 'Yes! Browsing jobs, company names, and descriptions is 100% free. Pro Early Access gives you full access to apply to all 800+ remote jobs immediately (no 48h wait on fresh roles), direct Kenyan employer listings, and unlimited AI CV tailoring starting from KES 250/mo via M-Pesa.'],
+        ['question' => 'Is KenyaRemoteJobs free to use?', 'answer' => 'Yes! Browsing and discovering verified remote roles is 100% free. Pro Membership unlocks verified employer names, direct 0-second application links (no 48h wait on fresh roles), and direct recruiter apply portals starting from KES 250/mo via M-Pesa.'],
         ['question' => 'How are job listings sourced and verified?', 'answer' => 'We partner directly with remote-first employers and continuously track verified global hiring networks that actively employ international talent. Every role undergoes rigorous screening for East Africa Time (UTC+3) compatibility, legitimate compensation, and zero hidden visa restrictions so you only apply to roles realistically open to Kenyans.'],
     ];
 
@@ -120,12 +123,14 @@
                 {{-- Popular search tags as soft floating pills --}}
                 <div class="mt-4 flex flex-wrap items-center justify-center gap-1.5 text-xs text-slate-500">
                     <span class="font-medium text-slate-400 mr-1">Trending:</span>
-                    <a href="{{ url('/jobs') }}?q=Customer+Support" class="rounded-full bg-white border border-slate-200/70 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50/30 transition shadow-2xs">Customer Support</a>
-                    <a href="{{ url('/jobs') }}?q=Virtual+Assistant" class="rounded-full bg-white border border-slate-200/70 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50/30 transition shadow-2xs">Virtual Assistant</a>
-                    <a href="{{ url('/jobs') }}?q=Developer" class="rounded-full bg-white border border-slate-200/70 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50/30 transition shadow-2xs">Software Engineer</a>
-                    <a href="{{ url('/jobs') }}?q=Data+Entry" class="rounded-full bg-white border border-slate-200/70 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50/30 transition shadow-2xs">Data Entry</a>
-                    <a href="{{ url('/jobs') }}?q=Writing" class="rounded-full bg-white border border-slate-200/70 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50/30 transition shadow-2xs">Writing & Content</a>
-                    <a href="{{ url('/jobs') }}?q=Marketing" class="rounded-full bg-white border border-slate-200/70 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50/30 transition shadow-2xs">Marketing</a>
+                    <a href="{{ url('/remote-jobs/writing-content-kenya') }}" class="rounded-full bg-white border border-slate-200/70 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50/30 transition shadow-2xs font-medium">Writing &amp; Content</a>
+                    <a href="{{ url('/remote-jobs/customer-support-kenya') }}" class="rounded-full bg-white border border-slate-200/70 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50/30 transition shadow-2xs font-medium">Customer Support</a>
+                    <a href="{{ url('/remote-jobs/virtual-assistant-kenya') }}" class="rounded-full bg-white border border-slate-200/70 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50/30 transition shadow-2xs font-medium">Virtual Assistant</a>
+                    <a href="{{ url('/remote-jobs/software-developer-kenya') }}" class="rounded-full bg-white border border-slate-200/70 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50/30 transition shadow-2xs font-medium">Software Engineer</a>
+                    <a href="{{ url('/remote-jobs/data-entry-kenya') }}" class="rounded-full bg-white border border-slate-200/70 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50/30 transition shadow-2xs font-medium">Data Entry</a>
+                    <a href="{{ url('/remote-jobs/ai-training-annotation-kenya') }}" class="rounded-full bg-white border border-slate-200/70 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50/30 transition shadow-2xs font-medium">AI Training &amp; RLHF</a>
+                    <a href="{{ url('/remote-jobs/digital-marketing-kenya') }}" class="rounded-full bg-white border border-slate-200/70 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50/30 transition shadow-2xs font-medium">Marketing</a>
+                    <a href="{{ url('/remote-jobs/entry-level-kenya') }}" class="rounded-full bg-white border border-slate-200/70 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50/30 transition shadow-2xs font-medium">Entry Level</a>
                 </div>
 
                 {{-- Quick Trust Highlights Pill Bar --}}
@@ -193,7 +198,15 @@
                                     class="card-hover flex w-72 shrink-0 flex-col gap-1.5 rounded-2xl border border-slate-200/70 bg-white p-4 text-sm shadow-xs hover:border-teal-500/70 hover:shadow-md hover:-translate-y-0.5 transition-all"
                                 >
                                     <span class="truncate font-bold text-slate-900">{{ $job->title }}</span>
-                                    <span class="truncate text-xs font-medium text-slate-500">{{ $job->company }}</span>
+                                    @if ($isUnlocked($job))
+                                        <span class="truncate text-xs font-medium text-slate-600">{{ $job->company }}</span>
+                                    @else
+                                        <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-slate-700">
+                                            <span class="text-amber-600">🔒</span>
+                                            <span>Verified Employer</span>
+                                            <span class="rounded bg-amber-100/90 border border-amber-300/60 px-1 py-0.2 text-[9px] font-bold uppercase tracking-wider text-amber-900">Pro Only</span>
+                                        </span>
+                                    @endif
                                     <span class="mt-1 text-xs font-semibold text-teal-600">{{ \App\Support\Format::timeAgo($job->posted_at) }}</span>
                                 </a>
                             </x-reveal>
@@ -236,7 +249,7 @@
                     <ul class="space-y-1">
                         @foreach ($categories as $cat)
                             <li>
-                                <a href="{{ url('/jobs') }}?q={{ urlencode($cat['q']) }}" class="flex items-center gap-2.5 rounded-full px-3.5 py-2 text-sm text-slate-700 font-medium transition hover:bg-teal-50/70 hover:text-teal-800">
+                                <a href="{{ url('/remote-jobs/'.$cat['slug']) }}" class="flex items-center gap-2.5 rounded-full px-3.5 py-2 text-sm text-slate-700 font-medium transition hover:bg-teal-50/70 hover:text-teal-800">
                                     <x-icon :name="$cat['icon']" class="h-4 w-4 text-teal-600" />
                                     {{ $cat['label'] }}
                                 </a>
@@ -309,7 +322,7 @@
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach ($categories as $i => $cat)
                     <x-reveal :delay="$i * 60">
-                        <a href="{{ url('/jobs') }}?q={{ urlencode($cat['q']) }}" class="card-hover flex items-center justify-between gap-4 rounded-2xl border border-slate-200/70 bg-white p-5 shadow-xs hover:border-teal-500/60 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200">
+                        <a href="{{ url('/remote-jobs/'.$cat['slug']) }}" class="card-hover flex items-center justify-between gap-4 rounded-2xl border border-slate-200/70 bg-white p-5 shadow-xs hover:border-teal-500/60 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200">
                             <div class="flex items-center gap-4">
                                 <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-teal-50 text-teal-700 border border-teal-100 shadow-2xs">
                                     <x-icon :name="$cat['icon']" class="h-5 w-5" />

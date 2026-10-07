@@ -1,4 +1,11 @@
-@props(['title' => null, 'description' => null, 'canonical' => null, 'ogImage' => null, 'ogType' => 'website'])
+@props(['title' => null, 'description' => null, 'canonical' => null, 'ogImage' => null, 'ogType' => 'website', 'noindex' => false])
+
+@php
+    $resolvedCanonical = $canonical ?? url()->current();
+    if (str_starts_with((string) parse_url($resolvedCanonical, PHP_URL_HOST), 'www.')) {
+        $resolvedCanonical = (string) preg_replace('#^https?://www\.#', 'https://', $resolvedCanonical);
+    }
+@endphp
 
 <!DOCTYPE html>
 <html lang="en" class="h-full antialiased">
@@ -9,12 +16,12 @@
         <title>{{ $title ? "{$title} | ".config('site.name') : config('site.name')." — ".config('site.default_title') }}</title>
         <meta name="description" content="{{ $description ?? config('site.default_description') }}">
         <meta name="keywords" content="{{ config('site.keywords') }}">
-        <link rel="canonical" href="{{ $canonical ?? url()->current() }}">
+        <link rel="canonical" href="{{ $resolvedCanonical }}">
 
         {{-- Open Graph / Facebook --}}
         <meta property="og:type" content="{{ $ogType }}">
         <meta property="og:site_name" content="{{ config('site.name') }}">
-        <meta property="og:url" content="{{ $canonical ?? url()->current() }}">
+        <meta property="og:url" content="{{ $resolvedCanonical }}">
         <meta property="og:title" content="{{ $title ? "{$title} | ".config('site.name') : config('site.name').' — '.config('site.default_title') }}">
         <meta property="og:description" content="{{ $description ?? config('site.default_description') }}">
         <meta property="og:image" content="{{ $ogImage ?? url(config('site.default_og_image')) }}">
@@ -28,7 +35,7 @@
         <meta name="twitter:description" content="{{ $description ?? config('site.default_description') }}">
         <meta name="twitter:image" content="{{ $ogImage ?? url(config('site.default_og_image')) }}">
 
-        <meta name="robots" content="index, follow, max-image-preview:large">
+        <meta name="robots" content="{{ $noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large' }}">
 
         @if (config('site.google_site_verification'))
             <meta name="google-site-verification" content="{{ config('site.google_site_verification') }}">

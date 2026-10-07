@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\DirectAtsResolver;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -76,5 +77,24 @@ class JobListing extends Model
         $days = config('jobs.listing_days', 30);
 
         return $query->where('posted_at', '>=', now()->subDays($days));
+    }
+
+    public function isDirectAts(): bool
+    {
+        if (in_array($this->origin, ['employer', 'manual'])) {
+            return true;
+        }
+
+        return DirectAtsResolver::isDirectUrl($this->source_url);
+    }
+
+    public function isAggregator(): bool
+    {
+        return DirectAtsResolver::isAggregatorUrl($this->source_url);
+    }
+
+    public function directApplyUrl(): string
+    {
+        return DirectAtsResolver::resolve($this->source_url, $this->description);
     }
 }

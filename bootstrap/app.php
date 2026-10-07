@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\EnforceCanonicalHost;
 use App\Http\Middleware\EnsureUserIsAdmin;
 use App\Http\Middleware\EnsureUserIsSubscribed;
 use App\Http\Middleware\SecurityHeaders;
@@ -29,7 +30,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'subscribed' => EnsureUserIsSubscribed::class,
         ]);
 
-        $middleware->web(append: [
+        $middleware->web(prepend: [
+            EnforceCanonicalHost::class,
+        ], append: [
             TrackPageView::class,
             SecurityHeaders::class,
         ]);

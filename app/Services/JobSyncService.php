@@ -10,9 +10,8 @@ use App\Services\JobSources\AshbySource;
 use App\Services\JobSources\GreenhouseSource;
 use App\Services\JobSources\HackerNewsSource;
 use App\Services\JobSources\HimalayasSource;
-use App\Services\JobSources\JobicySource;
 use App\Services\JobSources\JobSource;
-use App\Services\JobSources\RemoteOkSource;
+use App\Services\JobSources\LeverSource;
 use App\Services\JobSources\RemotiveSource;
 use App\Support\Audience;
 use App\Support\Format;
@@ -38,14 +37,13 @@ class JobSyncService
     private function sources(): array
     {
         return [
-            ArbeitnowSource::class => new ArbeitnowSource,
-            RemoteOkSource::class => new RemoteOkSource,
-            RemotiveSource::class => new RemotiveSource,
-            JobicySource::class => new JobicySource,
-            HimalayasSource::class => new HimalayasSource,
             GreenhouseSource::class => new GreenhouseSource,
             AshbySource::class => new AshbySource,
+            LeverSource::class => new LeverSource,
             HackerNewsSource::class => new HackerNewsSource,
+            RemotiveSource::class => new RemotiveSource,
+            HimalayasSource::class => new HimalayasSource,
+            ArbeitnowSource::class => new ArbeitnowSource,
         ];
     }
 
@@ -106,6 +104,12 @@ class JobSyncService
         foreach ($this->sources() as $class => $source) {
             try {
                 foreach ($source->fetch() as $job) {
+                    // Resolve direct ATS link if available in description or URL
+                    $resolvedUrl = DirectAtsResolver::resolve($job['source_url'] ?? null, $job['description'] ?? null);
+                    if ($resolvedUrl) {
+                        $job['source_url'] = $resolvedUrl;
+                    }
+
                     // Keyed by id rather than pushed into an array: a
                     // paginated source (Himalayas, walked page by page while
                     // its live catalog keeps changing) can hand back the
@@ -157,6 +161,25 @@ class JobSyncService
             );
         }
 
-        JobListing::where('origin', 'synced')->whereNotIn('id', $keepIds)->delete();
+        $deletedIds = JobListing::where('origin', 'synced')->whereNotIn('id', $keepIds)->pluck('id');
+
+        if ($deletedIds->isNotEmpty()) {
+            $indexingService = app(GoogleIndexingService::class);
+            if ($indexingService->isConfigured()) {
+                $urlPrefix = str_starts_with(config('site.url'), 'http://localhost')
+                    ? 'https://kenyaremotejobs.com'
+                    : config('site.url');
+
+                foreach ($deletedIds->take(50) as $deletedId) {
+                    try {
+                        $indexingService->publishUrl("{$urlPrefix}/jobs/{$deletedId}", 'URL_DELETED');
+                    } catch (Throwable $e) {
+                        Log::warning('[job-sync] failed notifying Google Indexing of deleted URL', ['id' => $deletedId, 'error' => $e->getMessage()]);
+                    }
+                }
+            }
+
+            JobListing::whereIn('id', $deletedIds)->delete();
+        }
     }
 }

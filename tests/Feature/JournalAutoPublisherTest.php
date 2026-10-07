@@ -25,6 +25,8 @@ class JournalAutoPublisherTest extends TestCase
         $indexNowMock = Mockery::mock(IndexNowService::class);
         $indexNowMock->shouldReceive('submitUrls')->andReturn(['success' => true, 'message' => 'Submitted 1 URL']);
         $this->app->instance(IndexNowService::class, $indexNowMock);
+
+        BlogPost::query()->delete();
     }
 
     public function test_can_publish_scheduled_blog_post_via_artisan_command(): void
