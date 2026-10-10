@@ -88,3 +88,13 @@ Schedule::call(function () {
     ->at('07:00')
     ->onOneServer()
     ->withoutOverlapping();
+
+// Automatically broadcasts daily top verified remote jobs to the Telegram channel/group
+// at 9:00 AM East Africa Time (06:00 UTC)
+Schedule::call(function () {
+    Artisan::call('telegram:broadcast-jobs', ['--limit' => 5]);
+})
+    ->name('telegram:broadcast-jobs')
+    ->dailyAt('06:00')
+    ->onOneServer()
+    ->withoutOverlapping();

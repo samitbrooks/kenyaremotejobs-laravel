@@ -21,6 +21,7 @@ use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\UnsubscribeController;
 use App\Http\Controllers\Webhooks\MpesaCallbackController;
+use App\Http\Controllers\Webhooks\TelegramWebhookController;
 use App\Http\Controllers\Webhooks\WhatsAppWebhookController;
 use Illuminate\Support\Facades\Route;
 
@@ -132,6 +133,10 @@ Route::middleware('admin')->prefix('admin')->group(function () {
 // Meta WhatsApp Business Cloud API Webhook (Verification & Inbound Ingestion)
 Route::get('/webhooks/whatsapp', [WhatsAppWebhookController::class, 'verify']);
 Route::post('/webhooks/whatsapp', [WhatsAppWebhookController::class, 'receive']);
+
+// Telegram Bot API Webhook (Inbound Ingestion, Welcomes, Google AI Replies)
+Route::post('/webhooks/telegram', [TelegramWebhookController::class, 'handle']);
+Route::get('/webhooks/telegram', [TelegramWebhookController::class, 'status']);
 
 // Safaricom posts here directly (no browser session, no CSRF token to send)
 // — see App\Http\Controllers\Webhooks\MpesaCallbackController. {secret} is

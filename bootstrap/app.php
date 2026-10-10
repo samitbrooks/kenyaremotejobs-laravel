@@ -23,6 +23,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->preventRequestForgery(except: [
             'webhooks/mpesa/callback/*',
             'webhooks/whatsapp',
+            'webhooks/telegram',
         ]);
 
         $middleware->alias([
