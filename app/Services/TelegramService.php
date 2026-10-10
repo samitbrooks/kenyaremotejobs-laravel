@@ -321,22 +321,24 @@ class TelegramService
             $num = $index + 1;
             $kes = SalaryEstimate::estimateMonthlyKes($job->annual_salary_usd, $job->salary);
             $hourly = SalaryEstimate::estimateHourlyUsd($job->annual_salary_usd);
-            $payInfo = $kes ? "💰 <b>Est. Pay:</b> {$kes}" : ($hourly ? "💰 <b>Est. Rate:</b> ~${$hourly['min']}-${$hourly['max']}/hr" : '💰 <b>Pay:</b> Competitive USD/GBP/EUR');
+            $payInfo = $kes ? "💰 <b>Est. Pay:</b> {$kes}" : ($hourly ? "💰 <b>Est. Rate:</b> ~${$hourly['min']}-${$hourly['max']}/hr" : '💰 <b>Pay:</b> Competitive International USD/GBP Rate');
 
             $titleSafe = htmlspecialchars($job->title, ENT_QUOTES | ENT_SUBSTITUTE);
-            $companySafe = htmlspecialchars($job->company, ENT_QUOTES | ENT_SUBSTITUTE);
             $remoteType = htmlspecialchars($job->remote_type ?? 'Worldwide Remote', ENT_QUOTES | ENT_SUBSTITUTE);
             $jobUrl = url('/jobs/'.$job->id);
 
+            $category = ! empty($job->tags) && is_array($job->tags) ? htmlspecialchars($job->tags[0], ENT_QUOTES | ENT_SUBSTITUTE) : 'Global Remote';
+
             $html .= "<b>{$num}. {$titleSafe}</b>\n";
-            $html .= "🏢 <b>Company:</b> {$companySafe}\n";
+            $html .= "🏢 <b>Employer:</b> 🔒 <i>Verified Global Employer (Unlocked on Site)</i>\n";
+            $html .= "🏷️ <b>Category:</b> {$category}\n";
             $html .= "🌍 <b>Location:</b> {$remoteType} (EAT UTC+3 Friendly)\n";
             $html .= "{$payInfo}\n";
-            $html .= "👉 <a href=\"{$jobUrl}\">View & Apply Directly</a>\n\n";
+            $html .= "👉 <a href=\"{$jobUrl}\">Unlock Employer &amp; Apply Directly</a>\n\n";
         }
 
-        $html .= "⚡ <i>Want 48-Hour Early Access to apply before listings get saturated?</i>\n";
-        $html .= '👉 Join Pro: <a href="'.url('/pricing')."\">KenyaRemoteJobs.com/pricing</a>\n\n";
+        $html .= "⚡ <i>Full employer identity, ATS tips &amp; 0-second apply links are protected on the platform:</i>\n";
+        $html .= '👉 <b>Unlock All Roles:</b> <a href="'.url('/pricing')."\">KenyaRemoteJobs.com/pricing</a>\n\n";
         $html .= '💬 <i>Have career or payment questions? Type <code>/ask &lt;your question&gt;</code> right here in the chat!</i>';
 
         return $html;

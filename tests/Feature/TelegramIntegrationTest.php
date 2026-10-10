@@ -241,7 +241,8 @@ class TelegramIntegrationTest extends TestCase
         Http::assertSent(function ($request) {
             return str_contains($request->url(), 'sendMessage')
                 && str_contains($request['text'], 'Senior Laravel Engineer')
-                && str_contains($request['text'], 'Supabase Corp');
+                && str_contains($request['text'], 'Verified Global Employer')
+                && ! str_contains($request['text'], 'Supabase Corp');
         });
     }
 
