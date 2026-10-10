@@ -152,6 +152,32 @@
         </div>
     </section>
 
+    {{-- Official Telegram Channel Alert Banner --}}
+    <div class="mx-auto max-w-4xl px-4 -mt-5 sm:-mt-7 mb-4 relative z-10">
+        <div class="flex flex-wrap items-center justify-between gap-3.5 rounded-2xl border border-sky-200/80 bg-gradient-to-r from-sky-50/95 via-cyan-50/70 to-sky-50/95 p-3.5 sm:p-4 text-xs sm:text-sm text-slate-800 shadow-sm backdrop-blur-sm">
+            <div class="flex items-center gap-3">
+                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-sky-500 text-white shadow-xs shadow-sky-500/30">
+                    <svg class="h-4.5 w-4.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.458c.538-.196 1.006.128.832.939z"/></svg>
+                </span>
+                <div>
+                    <p class="font-extrabold text-sky-950 text-xs sm:text-sm">
+                        Get Daily Remote Job Drops &amp; AI Career Support on Telegram
+                    </p>
+                    <p class="text-[11px] sm:text-xs text-slate-600 mt-0.5">
+                        Free instant alerts when verified roles drop &bull; 24/7 Google AI career advice &bull; Pre-screened for Kenya
+                    </p>
+                </div>
+            </div>
+            <a
+                href="{{ config('site.telegram_url', 'https://t.me/kenyaremotejobs') }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-pop inline-flex items-center gap-1.5 rounded-full bg-sky-600 px-4 py-2 text-xs font-bold text-white shadow-xs shadow-sky-600/30 hover:bg-sky-700 transition shrink-0"
+            >
+                <span>Join @kenyaremotejobs</span> &rarr;
+            </a>
+        </div>
+    </div>
 
     {{-- Stat bar — clean borderless metric cards --}}
     <section class="px-4 py-8 sm:px-6">

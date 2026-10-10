@@ -133,6 +133,11 @@
                     <a href="{{ url('/pricing') }}" class="nav-underline text-slate-700 transition hover:text-teal-600 {{ request()->is('pricing') ? 'text-teal-600 font-bold' : '' }}">Pricing</a>
                     <a href="{{ url('/faqs') }}" class="nav-underline text-slate-700 transition hover:text-teal-600 {{ request()->is('faqs*') ? 'text-teal-600 font-bold' : '' }}">FAQs</a>
                     <a href="{{ url('/about') }}" class="nav-underline text-slate-700 transition hover:text-teal-600 {{ request()->is('about') ? 'text-teal-600 font-bold' : '' }}">About</a>
+
+                    <a href="{{ config('site.telegram_url', 'https://t.me/kenyaremotejobs') }}" target="_blank" rel="noopener noreferrer" class="hidden xl:inline-flex items-center gap-1.5 rounded-full bg-sky-50 border border-sky-200/80 px-3 py-1 text-xs font-bold text-sky-700 hover:bg-sky-100 hover:text-sky-800 transition shadow-2xs">
+                        <svg class="h-3.5 w-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.458c.538-.196 1.006.128.832.939z"/></svg>
+                        <span>Telegram</span>
+                    </a>
                 @endif
 
                 @if ($user?->isAdmin())
@@ -229,6 +234,14 @@
             <a href="{{ url('/pricing') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-teal-50 hover:text-teal-800 transition {{ request()->is('pricing') ? 'text-teal-600 font-bold' : '' }}">Pricing</a>
             <a href="{{ url('/faqs') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-teal-50 hover:text-teal-800 transition {{ request()->is('faqs*') ? 'text-teal-600 font-bold' : '' }}">FAQs</a>
             <a href="{{ url('/about') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-teal-50 hover:text-teal-800 transition {{ request()->is('about') ? 'text-teal-600 font-bold' : '' }}">About</a>
+
+            <a href="{{ config('site.telegram_url', 'https://t.me/kenyaremotejobs') }}" target="_blank" rel="noopener noreferrer" @click="open = false" class="flex items-center justify-between rounded-xl px-3 py-2 text-sky-900 bg-sky-50 border border-sky-200/80 font-bold hover:bg-sky-100 transition mt-1">
+                <span class="flex items-center gap-2">
+                    <svg class="h-4 w-4 fill-sky-500" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.458c.538-.196 1.006.128.832.939z"/></svg>
+                    <span>Join Telegram Channel</span>
+                </span>
+                <span class="rounded-full bg-sky-600 text-white px-2 py-0.5 text-[10px] font-bold">Daily Drops</span>
+            </a>
         @endif
 
         @if ($user?->isAdmin())

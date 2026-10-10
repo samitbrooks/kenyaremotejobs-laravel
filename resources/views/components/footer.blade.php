@@ -55,6 +55,12 @@
                     <li><a href="{{ url('/journal') }}" class="hover:text-teal-400 transition">The Journal (Guides &amp; Advice)</a></li>
                     <li><a href="{{ url('/match') }}" class="hover:text-teal-400 transition">Timezone &amp; CV Matcher</a></li>
                     <li><a href="{{ url('/resume-builder') }}" class="hover:text-teal-400 transition">CV &amp; Cover Letter Builder</a></li>
+                    <li>
+                        <a href="{{ config('site.telegram_url', 'https://t.me/kenyaremotejobs') }}" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 font-bold text-sky-400 hover:text-sky-300 transition">
+                            <span>✈️ Telegram Job Alerts</span>
+                            <span class="rounded bg-sky-500/20 border border-sky-500/40 px-1.5 py-0.2 text-[10px] font-semibold text-sky-300">Live Drops</span>
+                        </a>
+                    </li>
                     <li><a href="{{ url('/pricing') }}" class="hover:text-teal-400 transition">Pro Early Access Pricing</a></li>
                     <li><a href="{{ url('/faqs') }}" class="hover:text-teal-400 transition">Frequently Asked Questions</a></li>
                     <li><a href="{{ url('/surveys') }}" class="hover:text-teal-400 transition">Surveys &amp; Side Income</a></li>
@@ -75,6 +81,16 @@
         <div class="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-slate-800 pt-6 text-xs text-slate-500">
             <p>&copy; {{ now()->year }} KenyaRemoteJobs. All rights reserved.</p>
             <div class="flex items-center gap-4">
+                <a
+                    href="{{ config('site.telegram_url', 'https://t.me/kenyaremotejobs') }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1.5 text-sky-400 hover:text-sky-300 transition font-medium"
+                >
+                    <svg class="h-3.5 w-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.458c.538-.196 1.006.128.832.939z"/></svg>
+                    <span>Join on Telegram</span>
+                </a>
+                <span class="text-slate-700">&middot;</span>
                 <a
                     href="https://www.linkedin.com/company/kenyaremotejobs"
                     target="_blank"

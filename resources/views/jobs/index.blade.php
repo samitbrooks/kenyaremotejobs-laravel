@@ -96,6 +96,21 @@
             </a>
         </div>
 
+        {{-- Telegram Official Alerts Card --}}
+        <div class="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-sky-200/80 bg-gradient-to-r from-sky-50 via-cyan-50/40 to-sky-50 p-3.5 sm:p-4 text-xs sm:text-sm text-slate-800 shadow-2xs">
+            <div class="flex items-center gap-3">
+                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-sky-500 text-white shadow-2xs">
+                    <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.458c.538-.196 1.006.128.832.939z"/></svg>
+                </span>
+                <p class="leading-relaxed">
+                    <strong class="font-bold text-sky-950">Join our Official Telegram Channel:</strong> Get instant alerts the moment fresh remote jobs open to Kenya drop &bull; Pre-screened for UTC+3 &bull; 100% Free.
+                </p>
+            </div>
+            <a href="{{ config('site.telegram_url', 'https://t.me/kenyaremotejobs') }}" target="_blank" rel="noopener noreferrer" class="btn-pop inline-flex items-center gap-1.5 rounded-full bg-sky-600 px-4 py-2 text-xs font-bold text-white hover:bg-sky-700 transition shrink-0 shadow-2xs">
+                <span>Join @kenyaremotejobs</span> &rarr;
+            </a>
+        </div>
+
         <form action="{{ url('/jobs') }}" method="GET" class="mt-6 grid grid-cols-1 gap-3 rounded-2xl border border-slate-200/70 bg-white p-4 sm:p-5 shadow-xs sm:grid-cols-[2fr_1fr_1fr_auto] sm:items-center">
             <div class="relative flex items-center">
                 <x-icon name="search" class="pointer-events-none absolute left-3.5 h-4 w-4 text-slate-400" />

@@ -11,5 +11,7 @@ return [
     'default_og_image' => env('SITE_OG_IMAGE', '/images/og-banner.png'),
     'twitter_handle' => env('SITE_TWITTER_HANDLE', '@KenyaRemoteJobs'),
     'linkedin_url' => env('SITE_LINKEDIN_URL', 'https://www.linkedin.com/company/kenyaremotejobs'),
+    'telegram_url' => env('SITE_TELEGRAM_URL', 'https://t.me/kenyaremotejobs'),
+    'telegram_channel' => env('SITE_TELEGRAM_CHANNEL', '@kenyaremotejobs'),
     'keywords' => 'remote jobs kenya, online jobs kenya, work from home kenya, remote tech jobs nairobi, virtual assistant kenya, freelance kenya',
 ];
