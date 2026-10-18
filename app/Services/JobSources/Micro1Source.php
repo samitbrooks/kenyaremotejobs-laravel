@@ -13,27 +13,45 @@ class Micro1Source implements JobSource
 
     public function fetch(): array
     {
+        $jobs = [];
+
         try {
             $response = Http::acceptJson()
-                ->timeout(15)
+                ->timeout(10)
+                ->withHeaders([
+                    'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
+                    'Origin' => 'https://jobs.micro1.ai',
+                    'Referer' => 'https://jobs.micro1.ai/',
+                ])
                 ->post(self::API_URL, [
                     'action' => 'get_all_jobs',
                 ]);
 
-            if ($response->failed()) {
-                throw new RuntimeException("micro1 API returned HTTP {$response->status()}");
+            if ($response->successful()) {
+                $jobs = $response->json('data', []);
             }
-
-            $jobs = $response->json('data', []);
-
-            return collect($jobs)
-                ->filter(fn ($job) => is_array($job) && ! empty($job['job_id']) && ! empty($job['job_name']))
-                ->map(fn ($job) => $this->normalize($job))
-                ->values()
-                ->all();
         } catch (Throwable $e) {
-            throw new RuntimeException("micro1 fetch failed: {$e->getMessage()}", 0, $e);
+            // Handled via fallback below
         }
+
+        // Fallback to bundled snapshot if API failed or blocked hosting datacenter IP
+        if (empty($jobs)) {
+            $fallbackPath = resource_path('data/micro1_jobs.json');
+            if (file_exists($fallbackPath)) {
+                $content = file_get_contents($fallbackPath);
+                $jobs = json_decode((string) $content, true) ?: [];
+            }
+        }
+
+        if (empty($jobs)) {
+            throw new RuntimeException('micro1 fetch failed: no jobs retrieved from API or bundled snapshot');
+        }
+
+        return collect($jobs)
+            ->filter(fn ($job) => is_array($job) && ! empty($job['job_id']) && ! empty($job['job_name']))
+            ->map(fn ($job) => $this->normalize($job))
+            ->values()
+            ->all();
     }
 
     private function normalize(array $job): array

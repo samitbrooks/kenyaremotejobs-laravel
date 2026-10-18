@@ -1,0 +1,3041 @@
+[
+    {
+        "job_id": "254e0a96-f823-486f-b0f5-cc82dca09427",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 150,
+            "min": 120
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Investment Banking Associate",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-17 10:29:01",
+        "skills": [
+            "financial modeling",
+            "valuation analysis",
+            "deal execution",
+            "market analysis",
+            "financial statement analysis",
+            "written communication",
+            "attention to detail",
+            "feedback delivery",
+            "remote collaboration",
+            "industry documentation knowledge"
+        ],
+        "job_tags": null,
+        "role_type": "expert",
+        "domain_slug": "finance",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/254e0a96-f823-486f-b0f5-cc82dca09427?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "fb77a0c4-ed02-404f-90e4-f62aff0c5271",
+        "ideal_monthly_salary_min": "3000.00",
+        "ideal_monthly_salary_max": "10000.00",
+        "ideal_hourly_rate": {
+            "max": 90,
+            "min": 80
+        },
+        "ideal_yearly_compensation": {
+            "max": 500000,
+            "min": 300000
+        },
+        "job_name": "Strategic Project Lead, Coding/SWE",
+        "company_name": "micro1",
+        "engagement_type": "full-time",
+        "location_type": "remote",
+        "date_posted": "2026-10-17 06:43:57",
+        "skills": [
+            "Leadership & Team Management",
+            "Data Operations",
+            "Human Data"
+        ],
+        "job_tags": [
+            "Core team"
+        ],
+        "role_type": "expert",
+        "domain_slug": "other",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/fb77a0c4-ed02-404f-90e4-f62aff0c5271?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "00276647-e6e5-467b-92d8-1018fe2c7278",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 125,
+            "min": 80
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "US-Licensed Physician",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-16 21:03:26",
+        "skills": [
+            "Hospitalist Experience",
+            "Internal Medicine",
+            "Pediatrics",
+            "Family Medicine",
+            "Board Certification"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "medicine",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/00276647-e6e5-467b-92d8-1018fe2c7278?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "ab08cc42-f7e0-4565-b306-11e55beb613f",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 120,
+            "min": 60
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "PhysioNet Competitor (Biomedical Signal Processing & ML)",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-16 19:10:57",
+        "skills": [
+            "Biotechnology",
+            "Biology",
+            "Machine Learning"
+        ],
+        "job_tags": null,
+        "role_type": "expert",
+        "domain_slug": "applied-engineering",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/ab08cc42-f7e0-4565-b306-11e55beb613f?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "7944c9e5-73a0-45a0-b298-d93be3db08ed",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 120,
+            "min": 60
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "STEM Expert (MSc./PhD)",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-16 15:37:45",
+        "skills": [
+            "Biology"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "other",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/7944c9e5-73a0-45a0-b298-d93be3db08ed?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "be0ac227-30ab-4126-bde8-e1e0660c940f",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 120,
+            "min": 60
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "ML Engineer (MSc. or PhD)",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-16 15:30:36",
+        "skills": [
+            "Machine Learning"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "ai-machine-learning",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/be0ac227-30ab-4126-bde8-e1e0660c940f?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "1fdcfc88-24fa-4378-9e5a-2ca0ac983f8e",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 120,
+            "min": 60
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Puzzle Solver (Coding)",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-16 15:30:18",
+        "skills": [
+            "Python",
+            "C++"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "software-engineering",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/1fdcfc88-24fa-4378-9e5a-2ca0ac983f8e?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "44fc17a0-8964-4970-979b-dd975baad36d",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 120,
+            "min": 60
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Mechanical Engineering Expert (MSc. or PhD)",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-16 15:29:22",
+        "skills": [
+            "Python",
+            "Mechanical Engineering"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "other",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/44fc17a0-8964-4970-979b-dd975baad36d?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "99ef9e98-e4de-4503-b2e3-980390dab872",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 120,
+            "min": 80
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Aerodynamics Expert (MSc. or PhD)",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-16 15:28:59",
+        "skills": [
+            "Python",
+            "Aerodynamics"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "other",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/99ef9e98-e4de-4503-b2e3-980390dab872?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "aa1993c5-2079-40ac-ad0a-09ebfd77960d",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 120,
+            "min": 60
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Hardware Expert (MSc. or PhD)",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-16 15:28:34",
+        "skills": [
+            "RTL",
+            "Hardware"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "other",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/aa1993c5-2079-40ac-ad0a-09ebfd77960d?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "0733d72e-0d2a-4420-9f18-f2bb3d889d47",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 90,
+            "min": 45
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "STEM Expert \u2013 Chemistry & Computational Chemistry (PhD)",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-16 04:07:26",
+        "skills": [
+            "Computational Chemistry",
+            "Structural Bioinformatics",
+            "Cheminformatics",
+            "Proteomics & Metabolomics",
+            "Documentation",
+            "Verbal communication",
+            "Biology",
+            "organic chemistry",
+            "physical chemistry"
+        ],
+        "job_tags": [],
+        "role_type": "specialist",
+        "domain_slug": "applied-engineering",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/0733d72e-0d2a-4420-9f18-f2bb3d889d47?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "d7372be7-b297-494d-9f74-20f297d6792a",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 90,
+            "min": 45
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "STEM Expert \u2013 Biology & Bioinformatics (PhD)",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-16 03:28:41",
+        "skills": [
+            "scientific software configuration",
+            "ai/ml-assisted chemistry workflows",
+            "quantitative analysis",
+            "analytical reasoning",
+            "scientific programming",
+            "written communication",
+            "verbal communication",
+            "documentation",
+            "problem-solving"
+        ],
+        "job_tags": [],
+        "role_type": "specialist",
+        "domain_slug": "applied-engineering",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/d7372be7-b297-494d-9f74-20f297d6792a?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "9f07b919-4451-402f-ae2d-ccec576dbdc1",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 120,
+            "min": 63
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "QA Engineer ",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-16 00:23:03",
+        "skills": [
+            "software quality assurance",
+            "test case design",
+            "test execution",
+            "defect reporting",
+            "data annotation",
+            "data labeling",
+            "ai model evaluation",
+            "documentation",
+            "english communication",
+            "cross-functional collaboration"
+        ],
+        "job_tags": null,
+        "role_type": "specialist",
+        "domain_slug": "software-engineering",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/9f07b919-4451-402f-ae2d-ccec576dbdc1?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "8648356b-1e04-4d62-bfcc-c72c3d5993b0",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 70,
+            "min": 20
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "English Voice Recording",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-15 23:24:44",
+        "skills": [
+            "Native English",
+            "Sound recording",
+            "Clear and Natural spoken english",
+            "Attention to detail",
+            "Read Written text aloud smoothly"
+        ],
+        "job_tags": null,
+        "role_type": "generalist",
+        "domain_slug": "language-audio",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/8648356b-1e04-4d62-bfcc-c72c3d5993b0?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "5ba40f6e-b9a0-4a61-91fd-004516fb27f8",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 80,
+            "min": 40
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "App Security Expert",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-15 20:49:56",
+        "skills": [
+            "OSWE",
+            "LLM security",
+            "AI-SAST evaluation",
+            "AppSec",
+            "Agent security architecture"
+        ],
+        "job_tags": null,
+        "role_type": "expert",
+        "domain_slug": "cybersecurity",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/5ba40f6e-b9a0-4a61-91fd-004516fb27f8?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "dfb2a79d-fb7a-4b6f-b867-733289e253c7",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 90,
+            "min": 45
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Life Sciences Research Scientist (PhD): Wet Lab & Computational Biology",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-15 14:55:12",
+        "skills": [
+            "computational chemistry",
+            "molecular simulations",
+            "python",
+            "gaussian",
+            "gromacs",
+            "lammps",
+            "amber",
+            "orca",
+            "psi4",
+            "cheminformatics",
+            "electronic structure methods",
+            "scientific software configuration",
+            "molecular dynamics",
+            "drug discovery",
+            "ai/ml-assisted chemistry workflows",
+            "quantitative analysis",
+            "analytical reasoning",
+            "scientific programming",
+            "written communication",
+            "verbal communication",
+            "documentation",
+            "problem-solving"
+        ],
+        "job_tags": [],
+        "role_type": "specialist",
+        "domain_slug": "applied-engineering",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/dfb2a79d-fb7a-4b6f-b867-733289e253c7?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "22ab4fe5-f39d-4d8a-97f7-db7c16ff79e2",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 90,
+            "min": 45
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Clinical, Microbiome & Translational Research Scientist (PhD)",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-15 14:28:14",
+        "skills": [
+            "computational chemistry",
+            "molecular simulations",
+            "python",
+            "gaussian",
+            "gromacs",
+            "lammps",
+            "amber",
+            "orca",
+            "psi4",
+            "cheminformatics",
+            "electronic structure methods",
+            "scientific software configuration",
+            "molecular dynamics",
+            "drug discovery",
+            "ai/ml-assisted chemistry workflows",
+            "quantitative analysis",
+            "analytical reasoning",
+            "scientific programming",
+            "written communication",
+            "verbal communication",
+            "documentation",
+            "problem-solving"
+        ],
+        "job_tags": [],
+        "role_type": "specialist",
+        "domain_slug": "applied-engineering",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/22ab4fe5-f39d-4d8a-97f7-db7c16ff79e2?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "7365d348-e98a-4999-a018-2415a6a737ca",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 90,
+            "min": 45
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Computational Chemistry, Structural Biology & Drug Discovery Scientist (PhD)",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-15 14:19:22",
+        "skills": [
+            "Computational Chemistry",
+            "Structural Bioinformatics",
+            "Cheminformatics",
+            "Proteomics & Metabolomics",
+            "Documentation",
+            "Verbal communication",
+            "Drug Discovery",
+            "Biology",
+            "Metagenomics"
+        ],
+        "job_tags": null,
+        "role_type": "specialist",
+        "domain_slug": "applied-engineering",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/7365d348-e98a-4999-a018-2415a6a737ca?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "29120525-ef73-4aa9-9a77-9fa59009d4d3",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 90,
+            "min": 45
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Computational Biology & Bioinformatics Expert (PhD)",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-15 13:47:11",
+        "skills": [
+            "computational chemistry",
+            "molecular simulations",
+            "python",
+            "gaussian",
+            "gromacs",
+            "lammps",
+            "amber",
+            "orca",
+            "psi4",
+            "nwchem",
+            "rdkit",
+            "openbabel",
+            "cheminformatics",
+            "electronic structure methods",
+            "scientific software configuration",
+            "molecular dynamics",
+            "drug discovery",
+            "ai/ml-assisted chemistry workflows",
+            "quantitative analysis",
+            "analytical reasoning",
+            "scientific programming",
+            "written communication",
+            "verbal communication",
+            "documentation",
+            "problem-solving"
+        ],
+        "job_tags": [],
+        "role_type": "specialist",
+        "domain_slug": "applied-engineering",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/29120525-ef73-4aa9-9a77-9fa59009d4d3?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "a58e1af4-14c2-42a6-8e48-301448d8e61c",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 280,
+            "min": 245
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Applied Scientist",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-15 13:25:52",
+        "skills": [
+            "Python",
+            "Machine Learning",
+            "Statistics",
+            "Data Analysis",
+            "Experimentation",
+            "Pandas",
+            "Data Modeling"
+        ],
+        "job_tags": null,
+        "role_type": "expert",
+        "domain_slug": "software-engineering",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/a58e1af4-14c2-42a6-8e48-301448d8e61c?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "c3af6520-9ea8-4717-b8c6-2b9dee8ee470",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 130,
+            "min": 90
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Education Practitioner - Learning & Assessment Specialist",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-15 04:52:00",
+        "skills": [
+            "instructional designers",
+            "educators"
+        ],
+        "job_tags": [],
+        "role_type": "specialist",
+        "domain_slug": "education",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/c3af6520-9ea8-4717-b8c6-2b9dee8ee470?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "d484ab8c-eb8b-4b2f-b742-3d00719ca143",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 170,
+            "min": 100
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Lawyer",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-14 19:21:30",
+        "skills": [
+            "legal reasoning",
+            "issue-spotting",
+            "legal writing",
+            "document review",
+            "attention to detail",
+            "written communication",
+            "independent work",
+            "legal research",
+            "ai evaluation",
+            "legal technology"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "law",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/d484ab8c-eb8b-4b2f-b742-3d00719ca143?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "abdb5807-b650-4eb8-b4e4-20a5a834301d",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 170,
+            "min": 100
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Tax Attorney",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-14 18:52:33",
+        "skills": [
+            "tax law",
+            "legal research and analysis",
+            "legal document review",
+            "issue spotting",
+            "legal reasoning",
+            "written communication",
+            "attention to detail",
+            "tax compliance",
+            "tax planning",
+            "irs dispute resolution"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "law",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/abdb5807-b650-4eb8-b4e4-20a5a834301d?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "68d31799-41cb-4899-987b-527eba2ef40a",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 170,
+            "min": 100
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Employment Lawyer",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-14 18:47:07",
+        "skills": [
+            "employment law expertise",
+            "legal analysis",
+            "legal document review",
+            "issue spotting",
+            "legal reasoning",
+            "written communication",
+            "attention to detail",
+            "ai evaluation",
+            "feedback provision"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "law",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/68d31799-41cb-4899-987b-527eba2ef40a?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "47ae77fa-cc3b-40f5-bdc6-eca4d11cc73e",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 170,
+            "min": 100
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Personal Injury Lawyer ",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-14 18:35:16",
+        "skills": [
+            "legal reasoning",
+            "issue-spotting",
+            "document review",
+            "personal injury law",
+            "civil litigation",
+            "written communication",
+            "attention to detail",
+            "ai-generated content evaluation",
+            "legal research",
+            "providing structured feedback"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "law",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/47ae77fa-cc3b-40f5-bdc6-eca4d11cc73e?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "c81e832c-d6fd-4d6e-9f40-3df9bedbf18f",
+        "ideal_monthly_salary_min": "1000.00",
+        "ideal_monthly_salary_max": "10000.00",
+        "ideal_hourly_rate": {
+            "max": 125,
+            "min": 125
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Bilingual Medical Doctor (Korean)",
+        "company_name": "micro1",
+        "engagement_type": "part-time",
+        "location_type": "remote",
+        "date_posted": "2026-10-14 16:27:28",
+        "skills": [
+            "Diagnostic Analysis",
+            "Medicine",
+            "Physiology",
+            "Healthcare Protocols",
+            "Clinical Terminology",
+            "Korean language fluency"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "medicine",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/c81e832c-d6fd-4d6e-9f40-3df9bedbf18f?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "d8efbdbf-cb11-428d-bcef-7d9d8d197dfa",
+        "ideal_monthly_salary_min": "1000.00",
+        "ideal_monthly_salary_max": "10000.00",
+        "ideal_hourly_rate": {
+            "max": 125,
+            "min": 125
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Bilingual Medical Doctor (Japanese)",
+        "company_name": "micro1",
+        "engagement_type": "part-time",
+        "location_type": "remote",
+        "date_posted": "2026-10-14 16:20:53",
+        "skills": [
+            "Diagnostic Analysis",
+            "Medicine",
+            "Physiology",
+            "Healthcare Protocols",
+            "Clinical Terminology",
+            "Japanese language proficiency"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "medicine",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/d8efbdbf-cb11-428d-bcef-7d9d8d197dfa?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "f65069d1-f642-4b92-b8f2-76685acbe473",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 60,
+            "min": 40
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Agriculture, Forestry & Environmental Experts",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-14 12:38:31",
+        "skills": [
+            "Agricultural Engineering",
+            "Environmental Conservation"
+        ],
+        "job_tags": null,
+        "role_type": "specialist",
+        "domain_slug": "sciences-research",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/f65069d1-f642-4b92-b8f2-76685acbe473?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "678001af-5fc0-4173-8320-3b0dc183651d",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 70,
+            "min": 40
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Retail Trade & Operations Expert",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-14 12:24:41",
+        "skills": [
+            "Retail"
+        ],
+        "job_tags": null,
+        "role_type": "specialist",
+        "domain_slug": "retail-hospitality",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/678001af-5fc0-4173-8320-3b0dc183651d?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "f29dc369-f46f-443e-986b-7120eebe9225",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 100,
+            "min": 50
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Software Engineer (Open Source Contributor)",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-14 01:12:05",
+        "skills": [
+            "Python3",
+            "JAVA",
+            "Rust",
+            "Algorithms",
+            "Basics C++",
+            "Typescript",
+            "codebase refactoring",
+            "GitHub",
+            "Bug Fixing",
+            "Feature Implementation",
+            "Performance Optimization",
+            "Logical Thinking"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "software-engineering",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/f29dc369-f46f-443e-986b-7120eebe9225?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "51d28c89-faea-4ff7-8ea5-181b4a6dce86",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 300,
+            "min": 175
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Investment Banking \u2013 M&A Advisory.",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-14 01:04:20",
+        "skills": [
+            "financial modeling",
+            "excel",
+            "company and industry research",
+            "comparable company analysis",
+            "pitchbook preparation",
+            "transaction analysis",
+            "valuation methodologies",
+            "analytical review",
+            "written communication",
+            "verbal communication",
+            "presentation skills",
+            "attention to detail",
+            "problem-solving",
+            "scenario analysis",
+            "client deliverables preparation"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "finance",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/51d28c89-faea-4ff7-8ea5-181b4a6dce86?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "168285a8-8063-447f-b55b-222c1da4c7c2",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 100,
+            "min": 50
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Software Engineer (GitHub Contributor)",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-14 00:24:58",
+        "skills": [
+            "Python3",
+            "JAVA",
+            "Rust",
+            "Algorithms",
+            "Basics C++",
+            "Typescript",
+            "codebase refactoring",
+            "GitHub",
+            "Bug Fixing",
+            "Feature Implementation",
+            "Performance Optimization",
+            "Logical Thinking"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "software-engineering",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/168285a8-8063-447f-b55b-222c1da4c7c2?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "7159a597-764f-48c0-b8ee-1f5f60846f16",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": null,
+        "ideal_yearly_compensation": null,
+        "job_name": "Generalist, US Personal Finance ",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-14 00:08:58",
+        "skills": [
+            "Attention to Detail",
+            "Written Communication",
+            "Instruction Following",
+            "Personal Tax Filing Experience (2025 US Return)",
+            "Personal Finance/Household Budgeting",
+            "Online Banking & Financial Apps",
+            "Data Entry & Accuracy",
+            "Task Management/Deadline Delivery",
+            "Remote Work Discipline",
+            "Basic Spreadsheet/Documentation Skills"
+        ],
+        "job_tags": [],
+        "role_type": "specialist",
+        "domain_slug": "finance",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/7159a597-764f-48c0-b8ee-1f5f60846f16?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "2623e26a-77a6-4e1f-891e-eff91cf455f1",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 110,
+            "min": 90
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Personal Financial Advisor ",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-14 00:06:54",
+        "skills": [
+            "personal financial planning",
+            "investment strategies",
+            "regulatory compliance",
+            "written and verbal communication",
+            "analytical skills"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "finance",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/2623e26a-77a6-4e1f-891e-eff91cf455f1?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "30cdcad1-c75b-412d-94b6-2af95f118549",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 50,
+            "min": 50
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Recruiter (San Francisco based)",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-13 14:57:21",
+        "skills": [
+            "Sourcing",
+            "Recruitment pipeline",
+            "Remote work self-management",
+            "Stakeholder communication"
+        ],
+        "job_tags": [
+            "Extended team"
+        ],
+        "role_type": null,
+        "domain_slug": "other",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/30cdcad1-c75b-412d-94b6-2af95f118549?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "612ae8d5-8e3d-4750-b779-b3a0e3e02a52",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 60,
+            "min": 31
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Privacy Analyst",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-13 14:30:07",
+        "skills": [
+            "PII",
+            "Data Privacy",
+            "Document Review",
+            "Quality Assurance"
+        ],
+        "job_tags": [],
+        "role_type": "generalist",
+        "domain_slug": "data-analysis",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/612ae8d5-8e3d-4750-b779-b3a0e3e02a52?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "3cfe73e9-28fa-4b8f-a0b7-bdba2b00f3ef",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 400,
+            "min": 100
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Research Scientist - Computer Science & Computational Physics",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-13 00:15:06",
+        "skills": [
+            "Computational rigor",
+            "Complex problem solving - Research",
+            "Problem framing"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "sciences-research",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/3cfe73e9-28fa-4b8f-a0b7-bdba2b00f3ef?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "64592ac1-f184-4c0f-9e5d-796cccdd499b",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 30,
+            "min": 20
+        },
+        "ideal_yearly_compensation": {
+            "max": 250000,
+            "min": 160000
+        },
+        "job_name": "Data Partnerships Manager",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-13 00:14:55",
+        "skills": [
+            "Negotiation",
+            "Prospecting",
+            "Closing",
+            "Partnerships"
+        ],
+        "job_tags": [
+            "Core team"
+        ],
+        "role_type": "specialist",
+        "domain_slug": "sales-marketing",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/64592ac1-f184-4c0f-9e5d-796cccdd499b?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "83ed9d66-130e-4c8f-8e9f-b1d18acdcf98",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 400,
+            "min": 100
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Principal Research Scientist (Computer Science / Computational Physics)",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-13 00:12:38",
+        "skills": [
+            "Novelty judgment",
+            "Research direction",
+            "Computational rigor",
+            "Complex problem solving - Research"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "sciences-research",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/83ed9d66-130e-4c8f-8e9f-b1d18acdcf98?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "0406acdc-9e38-4f22-a8b5-9e9e228c9bb1",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 120,
+            "min": 60
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Competitive Data Scientist (Kaggle)",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-12 22:27:15",
+        "skills": [
+            "ML Engineering",
+            "Data Science",
+            "Mathematics",
+            "Coding"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "ai-machine-learning",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/0406acdc-9e38-4f22-a8b5-9e9e228c9bb1?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "29ba0d51-2d9f-412e-ad19-5f28a76ca96e",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 200,
+            "min": 150
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Junior Software Engineer",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-12 19:34:17",
+        "skills": [
+            "System Design",
+            "Code Review",
+            "Debugging",
+            "Algorithms",
+            "Data Structures",
+            "Software Architecture"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "software-engineering",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/29ba0d51-2d9f-412e-ad19-5f28a76ca96e?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "622203dd-c0fa-49fc-aae4-6bd742196597",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 200,
+            "min": 150
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Junior Data Scientist",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-12 19:31:07",
+        "skills": [
+            "Python",
+            "Machine Learning",
+            "Statistics",
+            "Data Analysis",
+            "Experimentation",
+            "Pandas",
+            "Data Modeling"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "software-engineering",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/622203dd-c0fa-49fc-aae4-6bd742196597?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "9f949afd-0b76-43d9-93aa-d94a6b479943",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 125,
+            "min": 80
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Physician AI Trainer \u2013 Hospital Medicine",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-12 18:20:25",
+        "skills": [
+            "Hospitalist Experience",
+            "Internal Medicine",
+            "Pediatrics",
+            "Family Medicine",
+            "Board Certification"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "medicine",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/9f949afd-0b76-43d9-93aa-d94a6b479943?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "fc2b7fdd-2071-416b-8985-23c2976b7d1b",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 125,
+            "min": 80
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Locum Tenens Hospitalist",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-12 18:10:41",
+        "skills": [
+            "Hospitalist Experience",
+            "Internal Medicine",
+            "Pediatrics",
+            "Family Medicine",
+            "Board Certification"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "medicine",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/fc2b7fdd-2071-416b-8985-23c2976b7d1b?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "d34e7bec-c2e6-434a-94cf-06355b71ea45",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 45,
+            "min": 30
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Postal Clerk",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-12 15:51:29",
+        "skills": [
+            "Postage",
+            "Shipping",
+            "Customs"
+        ],
+        "job_tags": [],
+        "role_type": "generalist",
+        "domain_slug": "other",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/d34e7bec-c2e6-434a-94cf-06355b71ea45?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "dc6478b1-00fc-4fd8-929a-6658e39f8553",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 125,
+            "min": 80
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Medical Specialist",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-12 15:43:18",
+        "skills": [
+            "Hospitalist Experience",
+            "Internal Medicine",
+            "Pediatrics",
+            "Family Medicine",
+            "Board Certification"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "medicine",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/dc6478b1-00fc-4fd8-929a-6658e39f8553?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "2332e3d6-3b9a-4f09-be33-a21b73150544",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 30,
+            "min": 20
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Usability Tester",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-12 15:41:15",
+        "skills": [],
+        "job_tags": [],
+        "role_type": "generalist",
+        "domain_slug": "generalist",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/2332e3d6-3b9a-4f09-be33-a21b73150544?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "a3f69448-b7a9-46b1-9104-17461122ca66",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 30,
+            "min": 20
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Spanish-Language Consumer Reviewer",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-12 15:32:46",
+        "skills": [],
+        "job_tags": [],
+        "role_type": "generalist",
+        "domain_slug": "generalist",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/a3f69448-b7a9-46b1-9104-17461122ca66?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "f6338e16-d6aa-4fab-bedc-f93a0c594294",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 30,
+            "min": 20
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Consumer Reviewer ",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-12 15:25:29",
+        "skills": [],
+        "job_tags": [],
+        "role_type": "generalist",
+        "domain_slug": "generalist",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/f6338e16-d6aa-4fab-bedc-f93a0c594294?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "5baacaee-bc03-4184-ba84-9b5fc84b3351",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 40,
+            "min": 30
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "211 Specialist",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-12 15:12:14",
+        "skills": [],
+        "job_tags": [],
+        "role_type": "specialist",
+        "domain_slug": "other",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/5baacaee-bc03-4184-ba84-9b5fc84b3351?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "dd877e32-2969-494a-af25-c40b2bb96abc",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 50,
+            "min": 35
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Bilingual (Spanish) Benefits Counselor",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-12 15:05:38",
+        "skills": [
+            "Medicare",
+            "Spanish",
+            "Benefits",
+            "Outreach"
+        ],
+        "job_tags": [],
+        "role_type": "specialist",
+        "domain_slug": "other",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/dd877e32-2969-494a-af25-c40b2bb96abc?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "c7ffca93-f98e-41e6-96db-a17c89b8606d",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 45,
+            "min": 30
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "National Park Ranger",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-12 14:57:42",
+        "skills": [
+            "Permits",
+            "Reservations",
+            "Safety"
+        ],
+        "job_tags": [],
+        "role_type": "specialist",
+        "domain_slug": "other",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/c7ffca93-f98e-41e6-96db-a17c89b8606d?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "bb117da1-3d6d-41d7-9bb5-69beff1f1104",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 50,
+            "min": 30
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Financial Aid Advisor",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-12 14:50:37",
+        "skills": [
+            "Repayment",
+            "PSLF",
+            "Default"
+        ],
+        "job_tags": [],
+        "role_type": "specialist",
+        "domain_slug": "other",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/bb117da1-3d6d-41d7-9bb5-69beff1f1104?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "657dcfd9-f374-4371-bf9b-9ba13557fe6f",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 50,
+            "min": 30
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "VA Eligibility Specialist",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-12 14:26:34",
+        "skills": [
+            "Eligibility",
+            "Enrollment",
+            "Healthcare"
+        ],
+        "job_tags": [],
+        "role_type": "specialist",
+        "domain_slug": "other",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/657dcfd9-f374-4371-bf9b-9ba13557fe6f?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "2582f414-1be9-4ac0-9375-01d2f3187217",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 60,
+            "min": 40
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Veterans Service Officer",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-12 14:18:18",
+        "skills": [
+            "Claims",
+            "Accreditation",
+            "Compensation",
+            "Survivors",
+            "Appeals"
+        ],
+        "job_tags": [],
+        "role_type": "specialist",
+        "domain_slug": "other",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/2582f414-1be9-4ac0-9375-01d2f3187217?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "cf02a995-bac4-4503-b872-cb8cdbc536de",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 70,
+            "min": 50
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Consular Officer / Passport Specialist",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-12 14:06:03",
+        "skills": [],
+        "job_tags": [],
+        "role_type": "specialist",
+        "domain_slug": "law",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/cf02a995-bac4-4503-b872-cb8cdbc536de?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "c3c2db93-38c2-4a62-8f9f-81b65cdb5c10",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 40,
+            "min": 30
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Passport Acceptance Agent",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-12 13:49:14",
+        "skills": [],
+        "job_tags": [],
+        "role_type": "specialist",
+        "domain_slug": "other",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/c3c2db93-38c2-4a62-8f9f-81b65cdb5c10?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "a6091fe2-e1e0-4460-b9db-6a513ceead46",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 60,
+            "min": 40
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Medicare Enrollment Specialist",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-12 13:33:20",
+        "skills": [
+            "Medicare",
+            "Enrollment",
+            "Coordination",
+            "Coverage",
+            "COBRA"
+        ],
+        "job_tags": [],
+        "role_type": "specialist",
+        "domain_slug": "medicine",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/a6091fe2-e1e0-4460-b9db-6a513ceead46?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "10b91117-cedd-42c0-a468-b056ad004ec3",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 60,
+            "min": 30
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "SHIP Medicare Counselor",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-12 13:04:07",
+        "skills": [
+            "Medicare",
+            "Medigap"
+        ],
+        "job_tags": [],
+        "role_type": "specialist",
+        "domain_slug": "medicine",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/10b91117-cedd-42c0-a468-b056ad004ec3?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "8f201c75-ddff-42d1-93a6-c88bb330b7cf",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 60,
+            "min": 31
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Data Privacy Analyst",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-12 07:13:16",
+        "skills": [
+            "PII",
+            "Attention to Detail",
+            "Document Review",
+            "Spot Checks",
+            "Data Privacy",
+            "eDiscovery"
+        ],
+        "job_tags": [],
+        "role_type": "generalist",
+        "domain_slug": "other",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/8f201c75-ddff-42d1-93a6-c88bb330b7cf?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "ec0bccad-838c-44ff-8945-0a6d409453df",
+        "ideal_monthly_salary_min": "5000.00",
+        "ideal_monthly_salary_max": "7000.00",
+        "ideal_hourly_rate": {
+            "max": 60,
+            "min": 40
+        },
+        "ideal_yearly_compensation": {
+            "max": 500000,
+            "min": 300000
+        },
+        "job_name": "Forward Deployed Engineer, U.S. Government",
+        "company_name": "micro1",
+        "engagement_type": "full-time",
+        "location_type": "hybrid",
+        "date_posted": "2026-10-10 06:03:30",
+        "skills": [
+            "Python",
+            "LLM Systems",
+            "Data Pipelines",
+            "Distributed Systems"
+        ],
+        "job_tags": [
+            "Core team"
+        ],
+        "role_type": null,
+        "domain_slug": "ai-machine-learning",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/ec0bccad-838c-44ff-8945-0a6d409453df?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "90f04fad-832c-44b2-b942-311422a5841f",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 125,
+            "min": 80
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Internal Medicine Hospitalist",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-10 01:44:59",
+        "skills": [
+            "Quality Assurance",
+            "CDI",
+            "Inpatient Medicine",
+            "Clinical Documentation",
+            "Internal Medicine"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "medicine",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/90f04fad-832c-44b2-b942-311422a5841f?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "53c7be96-8120-4346-9b0d-ec8363614e08",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 125,
+            "min": 80
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Pediatric Hospitalist",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-10 01:23:16",
+        "skills": [
+            "Quality Assurance",
+            "CDI",
+            "Inpatient Medicine",
+            "Clinical Documentation",
+            "Pediatrics"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "medicine",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/53c7be96-8120-4346-9b0d-ec8363614e08?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "c8cdec0c-76b7-40ae-9764-fb170200408a",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 150,
+            "min": 80
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Quantitative Rates Researcher",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-09 23:07:14",
+        "skills": [
+            "python",
+            "r",
+            "pandas",
+            "numpy",
+            "scipy",
+            "fixed income analysis",
+            "rates markets expertise",
+            "systematic strategy backtesting",
+            "yield curve modeling",
+            "carry/roll-down analytics",
+            "relative value trading",
+            "sofr/eurodollar instruments",
+            "treasury futures",
+            "statistical rigor",
+            "factor modeling",
+            "alpha research",
+            "transaction cost analysis",
+            "liquidity assessment",
+            "model validation",
+            "written communication",
+            "attention to detail",
+            "quantitative research",
+            "data analysis",
+            "reviewing methodological issues (lookahead bias, overfitting, data snooping)",
+            "collaborative communication"
+        ],
+        "job_tags": null,
+        "role_type": "specialist",
+        "domain_slug": "finance",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/c8cdec0c-76b7-40ae-9764-fb170200408a?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "3fee8e97-5dce-42bd-a8a1-68133f04449a",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 100,
+            "min": 80
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Rates trader",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-09 23:01:10",
+        "skills": [
+            "interest rate swaps trading",
+            "swaptions trading",
+            "treasury futures trading",
+            "repo trading",
+            "sofr/eurodollar trading",
+            "algorithmic trading",
+            "systematic trading",
+            "rates market structure knowledge",
+            "trading risk management",
+            "quantitative strategy evaluation",
+            "written communication",
+            "verbal communication",
+            "market scenario analysis",
+            "technology collaboration",
+            "remote work discipline"
+        ],
+        "job_tags": [],
+        "role_type": "specialist",
+        "domain_slug": "finance",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/3fee8e97-5dce-42bd-a8a1-68133f04449a?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "ff33f551-ce15-4d0f-96a7-1b03b53776e4",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 125,
+            "min": 80
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Family Medicine Hospitalist",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-09 21:48:26",
+        "skills": [
+            "Family Medicine",
+            "Quality Assurance",
+            "CDI",
+            "Inpatient Medicine",
+            "Clinical Documentation"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "medicine",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/ff33f551-ce15-4d0f-96a7-1b03b53776e4?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "2fea94b5-2f19-4287-b776-f061b413a00f",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 45,
+            "min": 25
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "AI Agent Evaluator",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-09 21:20:03",
+        "skills": [
+            "ChatGPT",
+            "Muse",
+            "AI agents",
+            "Attention to Detail",
+            "Following Instructions",
+            "Screen Recording"
+        ],
+        "job_tags": [],
+        "role_type": "generalist",
+        "domain_slug": "generalist",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/2fea94b5-2f19-4287-b776-f061b413a00f?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "93ff19b0-13b0-414a-88c5-e6352b0acf3a",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 45,
+            "min": 25
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Everyday AI Agent Tester",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-09 21:08:44",
+        "skills": [
+            "ChatGPT",
+            "Muse",
+            "AI agents",
+            "Attention to Detail",
+            "Following Instructions",
+            "Screen Recording"
+        ],
+        "job_tags": [],
+        "role_type": "generalist",
+        "domain_slug": "generalist",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/93ff19b0-13b0-414a-88c5-e6352b0acf3a?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "ed3486a0-a402-431f-9a08-32077352c3f8",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": null,
+        "ideal_yearly_compensation": null,
+        "job_name": "Human Data Manager, New Grad",
+        "company_name": "micro1",
+        "engagement_type": "full-time",
+        "location_type": "remote",
+        "date_posted": "2026-10-09 19:18:56",
+        "skills": [
+            "Project Management",
+            "Data Operations",
+            "Quality Analyst",
+            "Human Data"
+        ],
+        "job_tags": [],
+        "role_type": "specialist",
+        "domain_slug": "generalist",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/ed3486a0-a402-431f-9a08-32077352c3f8?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "cf5d4a0d-4d70-4613-8123-c7d7919ea7a4",
+        "ideal_monthly_salary_min": "3000.00",
+        "ideal_monthly_salary_max": "5000.00",
+        "ideal_hourly_rate": {
+            "max": 60,
+            "min": 40
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Human Data Manager",
+        "company_name": "micro1",
+        "engagement_type": "full-time",
+        "location_type": "remote",
+        "date_posted": "2026-10-09 19:18:27",
+        "skills": [
+            "Project Management",
+            "Data Operations",
+            "Quality Analysis",
+            "Human Data"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "generalist",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/cf5d4a0d-4d70-4613-8123-c7d7919ea7a4?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "40652c88-e755-454c-b41b-d50f8bc34198",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 120,
+            "min": 100
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Hospitalist Physician",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-08 15:14:07",
+        "skills": [
+            "FHIR Records",
+            "History of Present Illness",
+            "Past Medical History",
+            "Rubric",
+            "Inpatient/Hospitalist experience",
+            "Quality Assurance"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "medicine",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/40652c88-e755-454c-b41b-d50f8bc34198?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "dd0fdcbd-a2f8-4f74-8a93-8e7cf04f2dbe",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 120,
+            "min": 100
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Family Medicine Physician (MD)",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-08 14:38:28",
+        "skills": [
+            "clinical annotation",
+            "medical record review",
+            "evidence-based medicine",
+            "clinical judgment",
+            "written communication",
+            "verbal communication",
+            "attention to detail",
+            "collaboration",
+            "clinical data validation",
+            "primary care expertise"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "medicine",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/dd0fdcbd-a2f8-4f74-8a93-8e7cf04f2dbe?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "c25ab1f0-c287-4061-b30b-e13c32372fc2",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 70,
+            "min": 60
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Registered Nurse",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-08 14:22:41",
+        "skills": [
+            "inpatient clinical expertise",
+            "clinical documentation review",
+            "annotation of medical records",
+            "nursing judgment",
+            "evaluation of ai-generated clinical outputs",
+            "attention to detail",
+            "written and verbal communication",
+            "feedback provision",
+            "knowledge of inpatient workflows",
+            "collaboration with stakeholders"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "medicine",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/c25ab1f0-c287-4061-b30b-e13c32372fc2?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "9461932b-7cfe-41c8-b7db-4d0b0d599187",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 70,
+            "min": 50
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Medical Coder (CCS / CIC)",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-08 09:51:47",
+        "skills": [
+            "icd-10-cm coding",
+            "icd-10-pcs coding",
+            "ms-drg assignment",
+            "clinical documentation review",
+            "ccs or cic certification",
+            "coding guideline interpretation",
+            "medical record annotation",
+            "written and verbal communication",
+            "attention to detail",
+            "data quality assurance"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "medicine",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/9461932b-7cfe-41c8-b7db-4d0b0d599187?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "0c6952e3-b783-407c-a451-b92996992038",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 170,
+            "min": 80
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Litigation Attorney",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-08 07:09:52",
+        "skills": [
+            "Litigation Strategy",
+            "Legal Research",
+            "Legal",
+            "Case Management",
+            "Case Analysis"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "law",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/0c6952e3-b783-407c-a451-b92996992038?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "0f607154-b56d-4894-9415-9cc861f24d17",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 60,
+            "min": 50
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Senior Data Analyst",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-08 00:48:02",
+        "skills": [
+            "Personal Identifiable Information",
+            "Quality Assurance",
+            "Attention to Detail",
+            "Data Analysis",
+            "Business Data Sets"
+        ],
+        "job_tags": [],
+        "role_type": "generalist",
+        "domain_slug": "business-operations",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/0f607154-b56d-4894-9415-9cc861f24d17?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "479e1aa8-2d92-42b7-a77c-aa83369cece8",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 40,
+            "min": 20
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Recruitment Marketing Specialist",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-07 20:47:52",
+        "skills": [
+            "Recruitment marketing",
+            "Project Management",
+            "Campaing performance monitoring"
+        ],
+        "job_tags": [
+            "Extended team"
+        ],
+        "role_type": null,
+        "domain_slug": "sales-marketing",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/479e1aa8-2d92-42b7-a77c-aa83369cece8?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "404112c9-2082-4e4e-b9f1-a04b8a58a317",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 300,
+            "min": 175
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Equity/Investment Research Analyst",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-07 20:04:46",
+        "skills": [
+            "equity research",
+            "financial modeling",
+            "earnings analysis",
+            "peer benchmarking",
+            "sector expertise",
+            "investment thesis development",
+            "written communication",
+            "verbal communication",
+            "data analysis",
+            "valuation analysis"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "finance",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/404112c9-2082-4e4e-b9f1-a04b8a58a317?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "65311636-4135-402d-8c84-cee8b2dcefdc",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 125,
+            "min": 70
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Hospitalist Physician",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-07 18:52:14",
+        "skills": [
+            "FHIR Records",
+            "History of Present Illness",
+            "Past Medical History",
+            "Rubric",
+            "Inpatient/Hospitalist experience",
+            "Quality Assurance"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "medicine",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/65311636-4135-402d-8c84-cee8b2dcefdc?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "3ca164ec-a540-4f18-b298-09c54c377eb2",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 60,
+            "min": 20
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Imagery Analyst - AI/ML Training Data",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-07 16:37:15",
+        "skills": [
+            "Data labeling",
+            "Data annotation",
+            "Labeling accuracy",
+            "Attention to detail"
+        ],
+        "job_tags": [],
+        "role_type": "generalist",
+        "domain_slug": "generalist",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/3ca164ec-a540-4f18-b298-09c54c377eb2?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "0c4c3fc4-e5e3-4d70-9436-4e2c873091a1",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 84,
+            "min": 63
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "QA Engineer \u2013 2D & Creative Applications",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-07 15:26:40",
+        "skills": [
+            "Quality Assurance (QA)",
+            "Software testing",
+            "2D Design tools",
+            "Creative applications",
+            "Manual Testing",
+            "Functional testing"
+        ],
+        "job_tags": [],
+        "role_type": "generalist",
+        "domain_slug": "software-engineering",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/0c4c3fc4-e5e3-4d70-9436-4e2c873091a1?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "865bada5-304f-4f28-aa8d-5b0331975b16",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 32,
+            "min": 20
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Medical Coder",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-07 14:44:54",
+        "skills": [
+            "CPT",
+            "ICD-10",
+            "AAPC Certification",
+            "Outpatient Coding",
+            "HCPCS"
+        ],
+        "job_tags": [],
+        "role_type": "generalist",
+        "domain_slug": "medicine",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/865bada5-304f-4f28-aa8d-5b0331975b16?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "31dc936e-0f29-441f-baf9-91c2ff9cc7d4",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 100,
+            "min": 50
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Senior Mobile Developer",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-07 14:09:41",
+        "skills": [
+            "Kotlin",
+            "Swift",
+            "Mobile"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "software-engineering",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/31dc936e-0f29-441f-baf9-91c2ff9cc7d4?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "15258a67-70c6-418b-aabc-af3bb643a336",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": null,
+        "ideal_yearly_compensation": null,
+        "job_name": "Paid Photo Contributor Opportunity (Alaska-based)",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-07 14:05:59",
+        "skills": [
+            "digital photography",
+            "video recording",
+            "attention to detail",
+            "following instructions",
+            "independent work",
+            "image and video quality assessment",
+            "issue reporting"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "robotics",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/15258a67-70c6-418b-aabc-af3bb643a336?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "6fb2682b-0443-47ad-a9e4-dc56e26d053b",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": null,
+        "ideal_yearly_compensation": null,
+        "job_name": "Paid Photo Contributor Opportunity (Hawaii-based)",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-07 14:04:56",
+        "skills": [
+            "digital photography",
+            "video recording",
+            "attention to detail",
+            "following instructions",
+            "independent work",
+            "image and video quality assessment",
+            "issue reporting"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "robotics",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/6fb2682b-0443-47ad-a9e4-dc56e26d053b?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "190225df-d67a-402d-bd7f-d9c7c40bb693",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 70,
+            "min": 25
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Game Developer",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-07 13:55:08",
+        "skills": [
+            "Gameplay implementation",
+            "Test design",
+            "Game Engine expertise",
+            "Engine fluency",
+            "Game Development expertise"
+        ],
+        "job_tags": [],
+        "role_type": "specialist",
+        "domain_slug": "software-engineering",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/190225df-d67a-402d-bd7f-d9c7c40bb693?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "0c0c4da1-6f51-46c2-91f4-13373c7284f7",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 105,
+            "min": 35
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Graphic Designer ",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-06 21:49:17",
+        "skills": [
+            "graphic design"
+        ],
+        "job_tags": [],
+        "role_type": "generalist",
+        "domain_slug": "data-analysis",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/0c0c4da1-6f51-46c2-91f4-13373c7284f7?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "422d20e5-6f6e-4644-9a9b-53b32b3c1a50",
+        "ideal_monthly_salary_min": "1000.00",
+        "ideal_monthly_salary_max": "10000.00",
+        "ideal_hourly_rate": {
+            "max": 230,
+            "min": 230
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Medical Doctor - Physician Expert ",
+        "company_name": "micro1",
+        "engagement_type": "part-time",
+        "location_type": "remote",
+        "date_posted": "2026-10-06 21:00:20",
+        "skills": [
+            "Diagnostic Analysis",
+            "Medicine",
+            "Physiology",
+            "Healthcare Protocols",
+            "Clinical Terminology"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "medicine",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/422d20e5-6f6e-4644-9a9b-53b32b3c1a50?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "9a648ee0-2d83-4453-89f5-19df3deb295c",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 110,
+            "min": 80
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "SaaS Contracts Counsel",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-06 16:20:10",
+        "skills": [
+            "SaaS",
+            "Software as a Service",
+            "NDA",
+            "MSA",
+            "DPA",
+            "Non-disclosure agreement"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "law",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/9a648ee0-2d83-4453-89f5-19df3deb295c?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "cbbe4909-70e3-4917-a26b-bc82d89fbb1b",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 30,
+            "min": 25
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Swiss German Transcription Expert",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-06 05:08:20",
+        "skills": [
+            "AI Training",
+            "Attention to detail",
+            "Audio Transcritption"
+        ],
+        "job_tags": null,
+        "role_type": "generalist",
+        "domain_slug": "language-audio",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/cbbe4909-70e3-4917-a26b-bc82d89fbb1b?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "6634c1b6-553f-4d60-a692-be005464a798",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 100,
+            "min": 30
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Software Engineer \u2013 Backend",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-06 03:27:25",
+        "skills": [
+            "Python3",
+            "JAVA",
+            "Rust",
+            "Algorithms",
+            "Basics C++",
+            "Typescript",
+            "bug fixing",
+            "feature implementation",
+            "codebase refactoring",
+            "performance optimization"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "software-engineering",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/6634c1b6-553f-4d60-a692-be005464a798?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "9460e294-b244-4e38-be35-25aa48c231d4",
+        "ideal_monthly_salary_min": "3000.00",
+        "ideal_monthly_salary_max": "10000.00",
+        "ideal_hourly_rate": {
+            "max": 90,
+            "min": 80
+        },
+        "ideal_yearly_compensation": {
+            "max": 550000,
+            "min": 400000
+        },
+        "job_name": "Strategic Project Lead, Finance Expertise",
+        "company_name": "micro1",
+        "engagement_type": "full-time",
+        "location_type": "remote",
+        "date_posted": "2026-10-06 01:08:20",
+        "skills": [
+            "Leadership & Team Management",
+            "Data Operations",
+            "Human Data"
+        ],
+        "job_tags": [
+            "Core team"
+        ],
+        "role_type": null,
+        "domain_slug": "other",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/9460e294-b244-4e38-be35-25aa48c231d4?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "d4d12ad4-ce15-4a6f-892d-eb3c51d131cd",
+        "ideal_monthly_salary_min": "3000.00",
+        "ideal_monthly_salary_max": "10000.00",
+        "ideal_hourly_rate": {
+            "max": 90,
+            "min": 80
+        },
+        "ideal_yearly_compensation": {
+            "max": 550000,
+            "min": 400000
+        },
+        "job_name": "Strategic Project Lead, MD/Health",
+        "company_name": "micro1",
+        "engagement_type": "full-time",
+        "location_type": "remote",
+        "date_posted": "2026-10-06 01:07:52",
+        "skills": [
+            "Leadership & Team Management",
+            "Data Operations",
+            "Human Data"
+        ],
+        "job_tags": [
+            "Core team"
+        ],
+        "role_type": null,
+        "domain_slug": "other",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/d4d12ad4-ce15-4a6f-892d-eb3c51d131cd?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "b96eff39-99fd-4db6-a8dc-c3ea2a58bae1",
+        "ideal_monthly_salary_min": "3000.00",
+        "ideal_monthly_salary_max": "10000.00",
+        "ideal_hourly_rate": {
+            "max": 90,
+            "min": 80
+        },
+        "ideal_yearly_compensation": {
+            "max": 550000,
+            "min": 400000
+        },
+        "job_name": "Strategic Project Lead, J.D./Legal Expertise",
+        "company_name": "micro1",
+        "engagement_type": "full-time",
+        "location_type": "remote",
+        "date_posted": "2026-10-06 01:07:20",
+        "skills": [
+            "Leadership & Team Management",
+            "Data Operations",
+            "Human Data"
+        ],
+        "job_tags": [
+            "Core team"
+        ],
+        "role_type": "expert",
+        "domain_slug": "other",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/b96eff39-99fd-4db6-a8dc-c3ea2a58bae1?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "7c09cefc-fd08-4ee4-b792-48e3a4753e9c",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 300,
+            "min": 160
+        },
+        "ideal_yearly_compensation": {
+            "max": 300000,
+            "min": 220000
+        },
+        "job_name": "AI/ML Engineer, Internal Platforms",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-06 00:57:45",
+        "skills": [
+            "Python",
+            "LLMs",
+            "AWS",
+            "LangChain",
+            "FastAPI"
+        ],
+        "job_tags": [
+            "Core team"
+        ],
+        "role_type": null,
+        "domain_slug": "ai-machine-learning",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/7c09cefc-fd08-4ee4-b792-48e3a4753e9c?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "9ca6654e-b787-4571-9d2e-ef5bbb9ad2c7",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 105,
+            "min": 35
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Art Related Professional ",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-06 00:03:58",
+        "skills": [
+            "visual curation",
+            "artistic judgment",
+            "image evaluation",
+            "written communication",
+            "collaboration",
+            "photography",
+            "art direction",
+            "graphic design",
+            "illustration",
+            "visual trend awareness"
+        ],
+        "job_tags": [],
+        "role_type": "generalist",
+        "domain_slug": "arts-design",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/9ca6654e-b787-4571-9d2e-ef5bbb9ad2c7?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "941cd9a0-94f3-442e-a24a-24d37ca1aa43",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 70,
+            "min": 30
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Voice Actor/Coaches",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-05 22:34:36",
+        "skills": [
+            "Voice Acting",
+            "Voice Coaching",
+            "Vocal Pedagogy",
+            "Speech Analysis",
+            "Prosody & Intonation",
+            "Phonetics",
+            "Accent & Dialect Identification",
+            "Vocal Quality Assessment",
+            "Resonance & Voice Placement",
+            "Audio Engineering",
+            "Sound Engineering",
+            "Audio Quality Evaluation",
+            "Written Technical Analysis"
+        ],
+        "job_tags": [],
+        "role_type": "specialist",
+        "domain_slug": "language-audio",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/941cd9a0-94f3-442e-a24a-24d37ca1aa43?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "b7222393-60d2-4a14-b038-52eb7493c50b",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 170,
+            "min": 80
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": "Litigation Attorney",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-05 18:03:12",
+        "skills": [
+            "Litigation Strategy",
+            "Legal Writing",
+            "Issue Spotting",
+            "Legal Research",
+            "Civil Procedure"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "law",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/b7222393-60d2-4a14-b038-52eb7493c50b?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "6955441d-2506-4d09-8f85-9ef1a2d23ea2",
+        "ideal_monthly_salary_min": "5000.00",
+        "ideal_monthly_salary_max": "8000.00",
+        "ideal_hourly_rate": {
+            "max": 80,
+            "min": 60
+        },
+        "ideal_yearly_compensation": {
+            "max": 250000,
+            "min": 180000
+        },
+        "job_name": "Software Engineer, New Grad",
+        "company_name": "micro1",
+        "engagement_type": "full-time",
+        "location_type": "remote",
+        "date_posted": "2026-10-05 08:06:38",
+        "skills": [
+            "React",
+            "Node.js",
+            "AWS",
+            "PostgreSQL",
+            "AI native"
+        ],
+        "job_tags": [
+            "Core team"
+        ],
+        "role_type": null,
+        "domain_slug": "software-engineering",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/6955441d-2506-4d09-8f85-9ef1a2d23ea2?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    },
+    {
+        "job_id": "31082a46-eab6-4178-b046-b74021c3e881",
+        "ideal_monthly_salary_min": null,
+        "ideal_monthly_salary_max": null,
+        "ideal_hourly_rate": {
+            "max": 200,
+            "min": 100
+        },
+        "ideal_yearly_compensation": null,
+        "job_name": " Bilingual Cantonese Psychologist (PhD)",
+        "company_name": "micro1",
+        "engagement_type": null,
+        "location_type": null,
+        "date_posted": "2026-10-03 00:29:22",
+        "skills": [
+            "bilingual communication",
+            "ethical decision-making",
+            "cultural sensitivity",
+            "analytical evaluation",
+            "case study development",
+            "written and verbal communication",
+            "interdisciplinary collaboration",
+            "psychological assessment",
+            "documentation",
+            "Psychologist",
+            "Cantonese"
+        ],
+        "job_tags": [],
+        "role_type": "expert",
+        "domain_slug": "sciences-research",
+        "job_type": "REGULAR",
+        "company_logo": "https://micro1-portal-data.s3.amazonaws.com/assets/1744082236915-95e6b5c0-2d84-4d83-aac0-672c6abd08d0-micro1-single-logo.png",
+        "apply_url": "https://jobs.micro1.ai/post/31082a46-eab6-4178-b046-b74021c3e881?utm_source=micro1&utm_medium=job_portal",
+        "is_micro1_account": true
+    }
+]
