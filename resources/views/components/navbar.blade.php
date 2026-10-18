@@ -85,6 +85,7 @@
                                     <p class="mb-2 mt-4 px-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-400">Resources</p>
                                     @foreach ([
                                         ['href' => '/jobs', 'icon' => 'globe', 'label' => 'All Opportunities'],
+                                        ['href' => '/referrals', 'icon' => 'gift', 'label' => 'Refer & Earn (Free Pro)'],
                                         ['href' => '/companies', 'icon' => 'globe', 'label' => 'Hiring Companies'],
                                         ['href' => '/collections', 'icon' => 'sparkle', 'label' => 'Curated Collections'],
                                         ['href' => '/match', 'icon' => 'sparkle', 'label' => 'Match Score'],
@@ -120,10 +121,6 @@
                     <a href="{{ url('/collections') }}" class="nav-underline text-slate-700 transition hover:text-[#3444da] {{ request()->is('collections*') ? 'text-[#3444da] font-bold' : '' }}">Collections</a>
                     <a href="{{ url('/journal') }}" class="nav-underline text-slate-700 transition hover:text-[#3444da] {{ request()->is('journal*') ? 'text-[#3444da] font-bold' : '' }}">Journal</a>
                     <a href="{{ url('/pricing') }}" class="nav-underline text-slate-700 transition hover:text-[#3444da] {{ request()->is('pricing') ? 'text-[#3444da] font-bold' : '' }}">Pricing</a>
-                    <a href="{{ url('/referrals') }}" class="nav-underline text-slate-700 transition hover:text-[#3444da] {{ request()->is('referrals*') ? 'text-[#3444da] font-bold' : '' }} inline-flex items-center gap-1">
-                        <span>Refer &amp; Earn</span>
-                        <span class="rounded-full bg-emerald-500/10 px-1.5 py-0.2 text-[10px] font-bold text-emerald-600 border border-emerald-500/20">Free Pro</span>
-                    </a>
                     <a href="{{ url('/faqs') }}" class="nav-underline text-slate-700 transition hover:text-[#3444da] {{ request()->is('faqs*') ? 'text-[#3444da] font-bold' : '' }}">FAQs</a>
                     <a href="{{ url('/about') }}" class="nav-underline text-slate-700 transition hover:text-[#3444da] {{ request()->is('about') ? 'text-[#3444da] font-bold' : '' }}">About</a>
 
@@ -175,62 +172,62 @@
         </div>
 
         @if ($isEmployerContext)
-            <a href="{{ url('/employers') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-teal-50 hover:text-teal-800 transition">Overview</a>
-            <a href="{{ url('/employers/post') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-teal-50 hover:text-teal-800 transition">Post a Job</a>
-            <a href="{{ url('/employers/dashboard') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-teal-50 hover:text-teal-800 transition">Dashboard</a>
+            <a href="{{ url('/employers') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-[#eef0fe] hover:text-[#3444da] transition">Overview</a>
+            <a href="{{ url('/employers/post') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-[#eef0fe] hover:text-[#3444da] transition">Post a Job</a>
+            <a href="{{ url('/employers/dashboard') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-[#eef0fe] hover:text-[#3444da] transition">Dashboard</a>
         @else
-            <button type="button" @click="mobileJobsOpen = !mobileJobsOpen" :aria-expanded="mobileJobsOpen" class="flex items-center justify-between rounded-xl px-3 py-2 text-left text-slate-700 hover:bg-slate-50 hover:text-teal-700">
+            <button type="button" @click="mobileJobsOpen = !mobileJobsOpen" :aria-expanded="mobileJobsOpen" class="flex items-center justify-between rounded-xl px-3 py-2 text-left text-slate-700 hover:bg-slate-50 hover:text-[#3444da]">
                 Jobs
                 <span class="text-xs transition-transform" :class="mobileJobsOpen ? 'rotate-180' : ''">&#9662;</span>
             </button>
-            <div x-show="mobileJobsOpen" x-cloak class="flex flex-col gap-0.5 pl-3 border-l-2 border-teal-100 ml-2">
-                <a href="{{ url('/remote-jobs/writing-content-kenya') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center justify-between rounded-xl px-2.5 py-2 text-slate-900 bg-teal-50/80 border border-teal-200/70 font-semibold hover:bg-teal-100 transition mb-1">
-                    <span class="flex items-center gap-2"><x-icon name="pen" class="h-4 w-4 text-teal-600" /> Writing &amp; Content Jobs</span>
-                    <span class="rounded-full bg-teal-600 text-white px-2 py-0.5 text-[10px] font-bold">Top in KE</span>
+            <div x-show="mobileJobsOpen" x-cloak class="flex flex-col gap-0.5 pl-3 border-l-2 border-[#c7ccfb] ml-2">
+                <a href="{{ url('/remote-jobs/writing-content-kenya') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center justify-between rounded-xl px-2.5 py-2 text-slate-900 bg-[#eef0fe] border border-[#c7ccfb] font-semibold hover:bg-[#e0e4fd] transition mb-1">
+                    <span class="flex items-center gap-2"><x-icon name="pen" class="h-4 w-4 text-[#3444da]" /> Writing &amp; Content Jobs</span>
+                    <span class="rounded-full bg-[#3444da] text-white px-2 py-0.5 text-[10px] font-bold">Top in KE</span>
                 </a>
-                <a href="{{ url('/jobs') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-slate-600 hover:bg-teal-50 hover:text-teal-800 transition">
-                    <x-icon name="globe" class="h-4 w-4 text-teal-600" /> All Opportunities
+                <a href="{{ url('/jobs') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-slate-600 hover:bg-[#eef0fe] hover:text-[#3444da] transition">
+                    <x-icon name="globe" class="h-4 w-4 text-[#3444da]" /> All Opportunities
                 </a>
-                <a href="{{ url('/companies') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-slate-600 hover:bg-teal-50 hover:text-teal-800 transition">
-                    <x-icon name="globe" class="h-4 w-4 text-teal-600" /> Hiring Companies
+                <a href="{{ url('/referrals') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center justify-between rounded-xl px-2.5 py-1.5 text-slate-700 hover:bg-[#eef0fe] hover:text-[#3444da] transition">
+                    <span class="flex items-center gap-2"><x-icon name="gift" class="h-4 w-4 text-emerald-600" /> Refer &amp; Earn</span>
+                    <span class="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-bold text-emerald-600 border border-emerald-500/20">Free Pro</span>
                 </a>
-                <a href="{{ url('/collections') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-slate-600 hover:bg-teal-50 hover:text-teal-800 transition">
-                    <x-icon name="sparkle" class="h-4 w-4 text-teal-600" /> Curated Collections
+                <a href="{{ url('/companies') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-slate-600 hover:bg-[#eef0fe] hover:text-[#3444da] transition">
+                    <x-icon name="globe" class="h-4 w-4 text-[#3444da]" /> Hiring Companies
+                </a>
+                <a href="{{ url('/collections') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-slate-600 hover:bg-[#eef0fe] hover:text-[#3444da] transition">
+                    <x-icon name="sparkle" class="h-4 w-4 text-[#3444da]" /> Curated Collections
                 </a>
                 @foreach (\App\Support\Audience::ORDER as $segment)
-                    <a href="{{ url('/jobs') }}?audience={{ $segment }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-slate-600 hover:bg-teal-50 hover:text-teal-800 transition">
-                        <x-icon :name="\App\Support\Audience::ICONS[$segment]" class="h-4 w-4 text-teal-600" /> {{ \App\Support\Audience::LABELS[$segment] }}
+                    <a href="{{ url('/jobs') }}?audience={{ $segment }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-slate-600 hover:bg-[#eef0fe] hover:text-[#3444da] transition">
+                        <x-icon :name="\App\Support\Audience::ICONS[$segment]" class="h-4 w-4 text-[#3444da]" /> {{ \App\Support\Audience::LABELS[$segment] }}
                     </a>
                 @endforeach
-                <a href="{{ url('/match') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-slate-600 hover:bg-teal-50 hover:text-teal-800 transition">
-                    <x-icon name="sparkle" class="h-4 w-4 text-teal-600" /> Match Score
+                <a href="{{ url('/match') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-slate-600 hover:bg-[#eef0fe] hover:text-[#3444da] transition">
+                    <x-icon name="sparkle" class="h-4 w-4 text-[#3444da]" /> Match Score
                 </a>
-                <a href="{{ url('/resume-builder') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-slate-600 hover:bg-teal-50 hover:text-teal-800 transition">
-                    <x-icon name="pen" class="h-4 w-4 text-teal-600" /> CV Builder
+                <a href="{{ url('/resume-builder') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-slate-600 hover:bg-[#eef0fe] hover:text-[#3444da] transition">
+                    <x-icon name="pen" class="h-4 w-4 text-[#3444da]" /> CV Builder
                 </a>
-                <a href="{{ url('/journal') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-slate-600 hover:bg-teal-50 hover:text-teal-800 transition">
-                    <x-icon name="newspaper" class="h-4 w-4 text-teal-600" /> The Journal
+                <a href="{{ url('/journal') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-slate-600 hover:bg-[#eef0fe] hover:text-[#3444da] transition">
+                    <x-icon name="newspaper" class="h-4 w-4 text-[#3444da]" /> The Journal
                 </a>
-                <a href="{{ url('/pricing') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-slate-600 hover:bg-teal-50 hover:text-teal-800 transition">
-                    <x-icon name="card" class="h-4 w-4 text-teal-600" /> Pricing
+                <a href="{{ url('/pricing') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-slate-600 hover:bg-[#eef0fe] hover:text-[#3444da] transition">
+                    <x-icon name="card" class="h-4 w-4 text-[#3444da]" /> Pricing
                 </a>
-                <a href="{{ url('/faqs') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-slate-600 hover:bg-teal-50 hover:text-teal-800 transition">
-                    <x-icon name="bulb" class="h-4 w-4 text-teal-600" /> FAQs
+                <a href="{{ url('/faqs') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-slate-600 hover:bg-[#eef0fe] hover:text-[#3444da] transition">
+                    <x-icon name="bulb" class="h-4 w-4 text-[#3444da]" /> FAQs
                 </a>
-                <a href="{{ url('/surveys') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-slate-600 hover:bg-teal-50 hover:text-teal-800 transition">
-                    <x-icon name="coin" class="h-4 w-4 text-teal-600" /> Earn While You Search
+                <a href="{{ url('/surveys') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-slate-600 hover:bg-[#eef0fe] hover:text-[#3444da] transition">
+                    <x-icon name="coin" class="h-4 w-4 text-[#3444da]" /> Earn While You Search
                 </a>
             </div>
-            <a href="{{ url('/companies') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-teal-50 hover:text-teal-800 transition {{ request()->is('companies*') ? 'text-teal-600 font-bold' : '' }}">Companies</a>
-            <a href="{{ url('/collections') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-teal-50 hover:text-teal-800 transition {{ request()->is('collections*') ? 'text-teal-600 font-bold' : '' }}">Collections</a>
-            <a href="{{ url('/journal') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-teal-50 hover:text-teal-800 transition {{ request()->is('journal*') ? 'text-teal-600 font-bold' : '' }}">Journal</a>
-            <a href="{{ url('/pricing') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-teal-50 hover:text-teal-800 transition {{ request()->is('pricing') ? 'text-teal-600 font-bold' : '' }}">Pricing</a>
-            <a href="{{ url('/referrals') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-teal-50 hover:text-teal-800 transition flex items-center justify-between {{ request()->is('referrals*') ? 'text-teal-600 font-bold' : '' }}">
-                <span class="flex items-center gap-2"><x-icon name="sparkle" class="h-4 w-4 text-emerald-600" /> Refer &amp; Earn</span>
-                <span class="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-bold text-emerald-600 border border-emerald-500/20">Free Pro Days</span>
-            </a>
-            <a href="{{ url('/faqs') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-teal-50 hover:text-teal-800 transition {{ request()->is('faqs*') ? 'text-teal-600 font-bold' : '' }}">FAQs</a>
-            <a href="{{ url('/about') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-teal-50 hover:text-teal-800 transition {{ request()->is('about') ? 'text-teal-600 font-bold' : '' }}">About</a>
+            <a href="{{ url('/companies') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-[#eef0fe] hover:text-[#3444da] transition {{ request()->is('companies*') ? 'text-[#3444da] font-bold' : '' }}">Companies</a>
+            <a href="{{ url('/collections') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-[#eef0fe] hover:text-[#3444da] transition {{ request()->is('collections*') ? 'text-[#3444da] font-bold' : '' }}">Collections</a>
+            <a href="{{ url('/journal') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-[#eef0fe] hover:text-[#3444da] transition {{ request()->is('journal*') ? 'text-[#3444da] font-bold' : '' }}">Journal</a>
+            <a href="{{ url('/pricing') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-[#eef0fe] hover:text-[#3444da] transition {{ request()->is('pricing') ? 'text-[#3444da] font-bold' : '' }}">Pricing</a>
+            <a href="{{ url('/faqs') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-[#eef0fe] hover:text-[#3444da] transition {{ request()->is('faqs*') ? 'text-[#3444da] font-bold' : '' }}">FAQs</a>
+            <a href="{{ url('/about') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-[#eef0fe] hover:text-[#3444da] transition {{ request()->is('about') ? 'text-[#3444da] font-bold' : '' }}">About</a>
 
             <a href="{{ config('site.telegram_url', 'https://t.me/kenyaremotejobs') }}" target="_blank" rel="noopener noreferrer" @click="open = false" class="flex items-center justify-between rounded-xl px-3 py-2 text-sky-900 bg-sky-50 border border-sky-200/80 font-bold hover:bg-sky-100 transition mt-1">
                 <span class="flex items-center gap-2">
@@ -242,9 +239,9 @@
         @endif
 
         @if ($user?->isAdmin())
-            <a href="{{ url('/admin') }}" @click="open = false" class="rounded-xl px-3 py-2 font-bold text-teal-600 hover:bg-slate-50">Admin</a>
+            <a href="{{ url('/admin') }}" @click="open = false" class="rounded-xl px-3 py-2 font-bold text-[#3444da] hover:bg-slate-50">Admin</a>
         @endif
-        <a href="{{ url('/account') }}" @click="open = false" class="mt-3 rounded-full bg-gradient-to-r from-teal-600 to-teal-700 px-5 py-3 text-center font-bold text-white hover:from-teal-700 hover:to-teal-800 shadow-md shadow-teal-600/20">
+        <a href="{{ url('/account') }}" @click="open = false" class="mt-3 rounded-full bg-[#3444da] hover:bg-[#2633bf] px-5 py-3 text-center font-bold text-white shadow-md shadow-[#3444da]/20">
             {{ $accountLabel }}
         </a>
     </div>

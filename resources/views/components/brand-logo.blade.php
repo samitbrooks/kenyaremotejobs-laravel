@@ -22,9 +22,9 @@
             <img
                 src="{{ $logoPng }}"
                 alt="{{ config('site.name') }}"
-                class="h-8 sm:h-9 w-auto max-w-[210px] sm:max-w-[250px] object-contain transition-opacity duration-200 group-hover:opacity-90"
-                width="240"
-                height="64"
+                class="h-9 sm:h-10 w-auto max-w-[240px] sm:max-w-[280px] object-contain transition-opacity duration-200 group-hover:opacity-90"
+                width="280"
+                height="74"
                 loading="eager"
             >
         </picture>
