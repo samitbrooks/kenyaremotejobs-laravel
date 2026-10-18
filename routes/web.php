@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminTicketController;
 use App\Http\Controllers\AdminWhatsAppController;
 use App\Http\Controllers\AuthLinkController;
 use App\Http\Controllers\CareerBotController;
@@ -19,6 +20,7 @@ use App\Http\Controllers\JournalController;
 use App\Http\Controllers\PricingController;
 use App\Http\Controllers\ReferralController;
 use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\SupportTicketController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\UnsubscribeController;
 use App\Http\Controllers\Webhooks\MpesaCallbackController;
@@ -100,6 +102,14 @@ Route::get('/feed/jobs.rss', [FeedController::class, 'featured']);
 Route::get('/feed/featured-jobs.rss', [FeedController::class, 'featured']);
 Route::post('/api/career-bot', [CareerBotController::class, 'ask'])->middleware('throttle:60,1');
 
+// Support Ticket System (Help Desk & Customer Service)
+Route::redirect('/contact', '/support');
+Route::get('/support', [SupportTicketController::class, 'create'])->name('support.index');
+Route::post('/support', [SupportTicketController::class, 'store'])->name('support.store')->middleware('throttle:10,1');
+Route::post('/support/lookup', [SupportTicketController::class, 'lookup'])->name('support.lookup')->middleware('throttle:15,1');
+Route::get('/support/tickets/{ticketNumber}', [SupportTicketController::class, 'show'])->name('support.show');
+Route::post('/support/tickets/{ticketNumber}/reply', [SupportTicketController::class, 'reply'])->name('support.reply')->middleware('throttle:15,1');
+
 // Administrator Authentication (Protected with dedicated credentials and IP rate-limiting)
 Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.submit')->middleware('throttle:5,1');
@@ -125,6 +135,12 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::post('/email/test', [AdminController::class, 'sendTestEmail'])->name('admin.email.test');
     Route::post('/email/broadcast', [AdminController::class, 'sendCustomBroadcast'])->name('admin.email.broadcast');
     Route::get('/payments', [AdminController::class, 'payments']);
+
+    // Support Ticket System (Admin Help Desk & Resolution Hub)
+    Route::get('/tickets', [AdminTicketController::class, 'index'])->name('admin.tickets.index');
+    Route::get('/tickets/{ticket}', [AdminTicketController::class, 'show'])->name('admin.tickets.show');
+    Route::post('/tickets/{ticket}/reply', [AdminTicketController::class, 'reply'])->name('admin.tickets.reply');
+    Route::post('/tickets/{ticket}/status', [AdminTicketController::class, 'updateStatus'])->name('admin.tickets.status');
 
     // WhatsApp Business Hub (Meta Cloud API Web-Based Command Center)
     Route::get('/whatsapp', [AdminWhatsAppController::class, 'index'])->name('admin.whatsapp');

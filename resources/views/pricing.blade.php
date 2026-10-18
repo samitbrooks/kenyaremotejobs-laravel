@@ -176,8 +176,8 @@
                         <div class="flex items-start gap-3 rounded-2xl bg-slate-50/80 p-3.5 border border-slate-200/70">
                             <x-icon name="check" class="mt-0.5 shrink-0 text-[#3444da] h-4 w-4" />
                             <div>
-                                <strong class="font-extrabold text-slate-900 block">Application CRM & WhatsApp Support</strong>
-                                <span class="text-slate-600 text-xs leading-relaxed">Track application stages, salary negotiations, and message our candidate desk on WhatsApp.</span>
+                                <strong class="font-extrabold text-slate-900 block">Application CRM &amp; Priority Support</strong>
+                                <span class="text-slate-600 text-xs leading-relaxed">Track application stages, salary negotiations, and get direct assistance from our candidate desk.</span>
                             </div>
                         </div>
                     </div>
@@ -189,13 +189,11 @@
                             <span><strong>7-Day 100% Money-Back Guarantee:</strong> Full refund if you don't find verified roles.</span>
                         </div>
                         <a
-                            href="https://wa.me/254700000000?text=Hello%20KenyaRemoteJobs%20Team%2C%20I%20have%20a%20question%20before%20joining%20Pro"
-                            target="_blank"
-                            rel="noopener noreferrer"
+                            href="{{ route('support.index') }}"
                             class="inline-flex items-center gap-1.5 font-bold text-slate-700 hover:text-[#3444da] transition"
                         >
-                            <x-icon name="chat" class="h-3.5 w-3.5 text-[#25D366]" />
-                            <span>Ask on WhatsApp</span> &rarr;
+                            <x-icon name="document" class="h-3.5 w-3.5 text-[#3444da]" />
+                            <span>Ask Support Desk</span> &rarr;
                         </a>
                     </div>
                 </div>
@@ -460,7 +458,7 @@
                         <svg class="h-4 w-4 text-slate-400 transition group-open:rotate-180 group-open:text-[#3444da]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" /></svg>
                     </summary>
                     <p class="mt-3 text-sm leading-relaxed text-slate-600">
-                        If you join Pro and do not find verified remote jobs matching your discipline within 7 days, message our support team on WhatsApp or email support@kenyaremotejobs.com for an immediate 100% refund sent back to your M-Pesa line.
+                        If you join Pro and do not find verified remote jobs matching your discipline within 7 days, open a ticket on our Support Desk or email support@kenyaremotejobs.com for an immediate 100% refund sent back to your M-Pesa line.
                     </p>
                 </details>
 

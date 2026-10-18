@@ -43,7 +43,7 @@
                             <li class="flex items-center gap-2 text-[#3444da] font-semibold"><span>&check;</span> Instant 0-second apply access</li>
                             <li class="flex items-center gap-2 text-[#3444da] font-semibold"><span>&check;</span> 1-on-1 CV review to beat ATS</li>
                             <li class="flex items-center gap-2 text-[#3444da] font-semibold"><span>&check;</span> Unredacted direct recruiter links</li>
-                            <li class="flex items-center gap-2 text-[#3444da] font-semibold"><span>&check;</span> WhatsApp VIP Concierge desk</li>
+                            <li class="flex items-center gap-2 text-[#3444da] font-semibold"><span>&check;</span> Priority Support Desk &amp; CRM</li>
                         </ul>
                     </div>
                 </div>

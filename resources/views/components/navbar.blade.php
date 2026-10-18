@@ -93,6 +93,7 @@
                                         ['href' => '/journal', 'icon' => 'newspaper', 'label' => 'The Journal'],
                                         ['href' => '/pricing', 'icon' => 'card', 'label' => 'Pricing'],
                                         ['href' => '/faqs', 'icon' => 'bulb', 'label' => 'FAQs'],
+                                        ['href' => '/support', 'icon' => 'chat', 'label' => 'Help & Support Desk'],
                                         ['href' => '/surveys', 'icon' => 'coin', 'label' => 'Earn While Searching'],
                                     ] as $r)
                                         <a href="{{ url($r['href']) }}" @click="jobsMenuOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-sm text-slate-700 transition hover:bg-slate-50 hover:text-[#3444da]">
@@ -217,6 +218,9 @@
                 </a>
                 <a href="{{ url('/faqs') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-slate-600 hover:bg-[#eef0fe] hover:text-[#3444da] transition">
                     <x-icon name="bulb" class="h-4 w-4 text-[#3444da]" /> FAQs
+                </a>
+                <a href="{{ url('/support') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-slate-600 hover:bg-[#eef0fe] hover:text-[#3444da] transition">
+                    <x-icon name="chat" class="h-4 w-4 text-[#3444da]" /> Support Desk
                 </a>
                 <a href="{{ url('/surveys') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-slate-600 hover:bg-[#eef0fe] hover:text-[#3444da] transition">
                     <x-icon name="coin" class="h-4 w-4 text-[#3444da]" /> Earn While You Search

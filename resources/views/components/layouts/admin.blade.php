@@ -1,29 +1,35 @@
 @props(['title' => null])
 
 @php
+    $openTicketsCount = \App\Models\SupportTicket::whereIn('status', ['open', 'in_progress'])->count();
     $adminLinks = [
         ['href' => '/admin', 'label' => 'Dashboard'],
+        ['href' => '/admin/tickets', 'label' => 'Tickets', 'badge' => $openTicketsCount],
         ['href' => '/admin/jobs', 'label' => 'Jobs'],
         ['href' => '/admin/blog', 'label' => 'Journal'],
         ['href' => '/admin/users', 'label' => 'Users'],
         ['href' => '/admin/payments', 'label' => 'Payments'],
         ['href' => '/admin/email', 'label' => 'Email'],
-        ['href' => '/admin/whatsapp', 'label' => 'WhatsApp'],
     ];
 @endphp
 
 <x-layouts.app :title="$title" description="Admin">
-    <div class="bg-horizon-800 text-white">
+    <div class="bg-slate-900 text-white border-b border-slate-800">
         <nav class="mx-auto flex max-w-6xl items-center justify-between gap-5 px-4 py-3 text-sm font-medium sm:px-6">
-            <div class="flex items-center gap-5">
+            <div class="flex items-center gap-5 overflow-x-auto no-scrollbar">
                 <span class="text-xs uppercase tracking-wide text-white/50">Admin</span>
                 @foreach ($adminLinks as $link)
                     @php
                         $path = ltrim($link['href'], '/');
                         $patterns = $path === 'admin' ? [$path] : [$path, $path.'/*'];
                     @endphp
-                    <a href="{{ url($link['href']) }}" class="transition hover:text-sunrise-300 {{ request()->is(...$patterns) ? 'text-sunrise-300' : '' }}">
-                        {{ $link['label'] }}
+                    <a href="{{ url($link['href']) }}" class="transition flex items-center gap-1.5 hover:text-[#a3abf8] whitespace-nowrap {{ request()->is(...$patterns) ? 'text-[#a3abf8] font-bold' : 'text-slate-300' }}">
+                        <span>{{ $link['label'] }}</span>
+                        @if (! empty($link['badge']) && $link['badge'] > 0)
+                            <span class="rounded-full bg-[#3444da] text-white px-1.5 py-0.5 text-[10px] font-extrabold leading-none">
+                                {{ $link['badge'] }}
+                            </span>
+                        @endif
                     </a>
                 @endforeach
             </div>

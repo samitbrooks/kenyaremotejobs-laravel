@@ -278,4 +278,9 @@ class User extends Authenticatable
 
         return $days;
     }
+
+    public function supportTickets(): HasMany
+    {
+        return $this->hasMany(SupportTicket::class)->orderBy('created_at', 'desc');
+    }
 }

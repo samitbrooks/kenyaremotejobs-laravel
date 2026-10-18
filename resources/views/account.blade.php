@@ -307,6 +307,76 @@
                 @endif
             </div>
 
+            {{-- Support & Help Desk Tickets --}}
+            <div class="mt-8 rounded-3xl border border-black/5 bg-white p-6 sm:p-8 shadow-sm">
+                <div class="flex items-center justify-between pb-4 border-b border-black/5">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h2 class="text-lg font-bold text-foreground">Support &amp; Help Desk</h2>
+                            @php
+                                $openTicketsCount = ($supportTickets ?? collect())->filter(fn ($t) => in_array($t->status, ['open', 'in_progress']))->count();
+                            @endphp
+                            @if ($openTicketsCount > 0)
+                                <span class="rounded-full bg-amber-100 border border-amber-300 px-2 py-0.5 text-[10px] font-black text-amber-800">
+                                    {{ $openTicketsCount }} Active
+                                </span>
+                            @endif
+                        </div>
+                        <p class="text-xs text-foreground/60">Submit inquiries, request M-Pesa payment assistance, or get help with your account</p>
+                    </div>
+                    <a href="{{ url('/support') }}" class="btn-pop rounded-full bg-[#3444da] hover:bg-[#2633bf] px-4 py-1.5 text-xs font-bold text-white shadow-xs">
+                        + Open Ticket
+                    </a>
+                </div>
+
+                @if (($supportTickets ?? collect())->isEmpty())
+                    <div class="py-8 text-center">
+                        <div class="mx-auto flex h-10 w-10 items-center justify-center rounded-2xl bg-[#eef0fe] text-[#3444da]">
+                            <x-icon name="chat" class="h-5 w-5 text-[#3444da]" />
+                        </div>
+                        <p class="mt-2.5 text-sm font-semibold text-foreground">No support tickets yet</p>
+                        <p class="mt-0.5 text-xs text-foreground/50 max-w-sm mx-auto">
+                            Need help with M-Pesa billing, CV tailoring, or job application issues? Our support desk team is here to assist.
+                        </p>
+                        <a href="{{ url('/support') }}" class="mt-3 inline-block rounded-xl bg-slate-100 hover:bg-slate-200 px-3.5 py-1.5 text-xs font-semibold text-slate-800 transition">
+                            Create a Ticket &rarr;
+                        </a>
+                    </div>
+                @else
+                    <div class="mt-3 divide-y divide-black/5">
+                        @foreach ($supportTickets as $ticket)
+                            <div class="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                <div class="min-w-0 flex-1">
+                                    <div class="flex flex-wrap items-center gap-2">
+                                        <a href="{{ route('support.show', $ticket->ticket_number) }}" class="font-bold text-sm text-foreground hover:text-[#3444da] hover:underline truncate">
+                                            {{ $ticket->subject }}
+                                        </a>
+                                        <span class="font-mono text-[11px] text-slate-400">#{{ $ticket->ticket_number }}</span>
+                                    </div>
+                                    <div class="mt-1 flex flex-wrap items-center gap-2 text-xs text-slate-500">
+                                        <span class="rounded bg-slate-100 px-2 py-0.5 text-[10px] font-medium text-slate-600">
+                                            {{ $ticket->categoryLabel() }}
+                                        </span>
+                                        <span>&bull;</span>
+                                        <span>{{ $ticket->replies->count() }} {{ \Illuminate\Support\Str::plural('reply', $ticket->replies->count()) }}</span>
+                                        <span>&bull;</span>
+                                        <span>Updated {{ \App\Support\Format::timeAgo($ticket->updated_at) }}</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2 shrink-0">
+                                    <span class="rounded-full border px-2.5 py-0.5 text-[11px] font-bold {{ $ticket->statusBadgeClass() }}">
+                                        {{ $ticket->statusLabel() }}
+                                    </span>
+                                    <a href="{{ route('support.show', $ticket->ticket_number) }}" class="rounded-xl border border-slate-200 bg-white hover:bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-700 transition">
+                                        View &rarr;
+                                    </a>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+            </div>
+
             {{-- Unlocks & Purchase History (Legacy & Pro) --}}
             @if ($unlocks->isNotEmpty() || $purchases->isNotEmpty())
                 <div class="mt-8 rounded-3xl border border-black/5 bg-white p-6 sm:p-8 shadow-sm">

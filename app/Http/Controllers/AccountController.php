@@ -31,6 +31,7 @@ class AccountController extends Controller
         $unlocks = $user->jobUnlocks()->with('jobListing')->latest('unlocked_at')->get();
         $purchases = $user->creditPurchases()->latest('purchased_at')->get();
         $applications = $user->jobApplications()->with('jobListing')->latest('updated_at')->get();
+        $supportTickets = $user->supportTickets()->with('replies')->latest('updated_at')->take(10)->get();
 
         return view('account', [
             'user' => $user,
@@ -38,6 +39,7 @@ class AccountController extends Controller
             'balances' => $credits->balances($user),
             'purchases' => $purchases,
             'applications' => $applications,
+            'supportTickets' => $supportTickets,
         ]);
     }
 

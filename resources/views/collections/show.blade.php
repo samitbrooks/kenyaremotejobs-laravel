@@ -128,7 +128,7 @@
         <div class="mt-12">
             <x-job-alert-banner 
                 :title="'Subscribe to New ' . $collection['badge'] . ' Alerts'"
-                subtitle="Never miss an opening. Get instant email & WhatsApp notifications when matching international roles drop."
+                subtitle="Never miss an opening. Get instant email notifications when matching international roles drop."
             />
         </div>
 
