@@ -26,6 +26,8 @@ class DirectAtsResolver
         'pinpointhq.com',
         'personio.com',
         'teamtailor.com',
+        'micro1.ai',
+        'turing.com',
     ];
 
     /**

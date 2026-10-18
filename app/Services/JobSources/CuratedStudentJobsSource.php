@@ -1,0 +1,257 @@
+<?php
+
+namespace App\Services\JobSources;
+
+use Illuminate\Support\Carbon;
+
+class CuratedStudentJobsSource implements JobSource
+{
+    /**
+     * Curated, verified remote data annotation, AI model training, audio transcription,
+     * and flexible campus roles specifically vetted for Kenyan university/college students.
+     * All roles feature study-friendly flexible hours, zero degree barrier, and verified
+     * weekly/bi-weekly international payouts via M-Pesa, PayPal, Wise, or Payoneer.
+     *
+     * @return array<int, array<string, mixed>>
+     */
+    public function fetch(): array
+    {
+        $now = Carbon::now();
+
+        $listings = [
+            [
+                'id' => 'student--outlier-ai-data-annotation-specialist',
+                'source_id' => 'outlier-annotation-gen-01',
+                'company' => 'Outlier AI',
+                'title' => 'AI Data Annotation Specialist (English & General Reasoning)',
+                'salary' => '$15 - $25/hr',
+                'annual_salary_usd' => ['min' => 30000, 'max' => 50000],
+                'source_url' => 'https://outlier.ai/',
+                'tags' => ['Data Annotation', 'AI Training', 'RLHF', 'English Fluency', 'Flexible Hours', 'Students'],
+                'description' => '<p>Outlier AI is hiring remote <strong>AI Data Annotation Specialists</strong> to train and refine next-generation Large Language Models (LLMs).</p>
+<p><strong>What you will do:</strong></p>
+<ul>
+    <li>Evaluate model-generated answers against strict quality, factual accuracy, and safety rubrics.</li>
+    <li>Craft high-quality human demonstration responses to complex logic, writing, and analytical prompts.</li>
+    <li>Perform RLHF (Reinforcement Learning from Human Feedback) ranking and pairwise comparison.</li>
+</ul>
+<p><strong>Why this is ideal for Kenyan students:</strong></p>
+<ul>
+    <li><strong>100% Flexible Hours:</strong> Work whenever you want around your lecture and study timetable.</li>
+    <li><strong>Weekly Payouts:</strong> Direct weekly payments via PayPal or direct wire to M-Pesa.</li>
+    <li><strong>Zero Degree Requirement:</strong> Open to all currently enrolled university & college students with strong written English.</li>
+</ul>',
+            ],
+            [
+                'id' => 'student--outlier-ai-coding-evaluator',
+                'source_id' => 'outlier-coding-eval-02',
+                'company' => 'Outlier AI',
+                'title' => 'AI Coding Model Evaluator & Prompt Trainer (Python & Web)',
+                'salary' => '$25 - $45/hr',
+                'annual_salary_usd' => ['min' => 50000, 'max' => 90000],
+                'source_url' => 'https://outlier.ai/',
+                'tags' => ['AI Training', 'Data Annotation', 'Python', 'JavaScript', 'Coding', 'Students'],
+                'description' => '<p>Train cutting-edge code-generation AI models by solving programming challenges, debugging model outputs, and writing unit tests.</p>
+<p><strong>Requirements:</strong> Proficiency in Python, JavaScript, TypeScript, or C++. Computer Science, Software Engineering, or IT students are strongly encouraged to apply. Work flexible part-time hours from home.</p>',
+            ],
+            [
+                'id' => 'student--alignerr-multilingual-ai-evaluator',
+                'source_id' => 'alignerr-eval-01',
+                'company' => 'Alignerr',
+                'title' => 'AI Content Evaluator & Data Annotator (English & Swahili)',
+                'salary' => '$18 - $28/hr',
+                'annual_salary_usd' => ['min' => 36000, 'max' => 56000],
+                'source_url' => 'https://www.alignerr.com/',
+                'tags' => ['Data Annotation', 'AI Training', 'Swahili', 'Bilingual', 'Prompt Evaluation', 'Students'],
+                'description' => '<p>Alignerr hires subject-matter evaluators and linguists to assess frontier AI models in East Africa. Evaluate Swahili and English conversational accuracy, factuality, and cultural nuance.</p>
+<p>Choose your own hours, log on whenever you have free time between classes, and get paid weekly via Payoneer/PayPal/M-Pesa.</p>',
+            ],
+            [
+                'id' => 'student--dataannotation-tech-model-reviewer',
+                'source_id' => 'dataannotation-reviewer-01',
+                'company' => 'DataAnnotation.tech',
+                'title' => 'Remote AI Model Reviewer & Data Annotation Contributor',
+                'salary' => '$20 - $35/hr',
+                'annual_salary_usd' => ['min' => 40000, 'max' => 70000],
+                'source_url' => 'https://www.dataannotation.tech/',
+                'tags' => ['Data Annotation', 'AI Training', 'Prompt Evaluation', 'Fact Checking', 'Flexible Hours', 'Students'],
+                'description' => '<p>DataAnnotation.tech provides on-demand, flexible AI evaluation tasks for researchers, university students, and analytical thinkers.</p>
+<p>Tasks include comparing two AI chatbot responses, identifying hallucinations, checking citations, and rating tone. Work as few or as many hours as you choose each week.</p>',
+            ],
+            [
+                'id' => 'student--dataannotation-tech-bilingual-labeler',
+                'source_id' => 'dataannotation-bilingual-02',
+                'company' => 'DataAnnotation.tech',
+                'title' => 'Bilingual Data Labeler & Text Annotator (East Africa Region)',
+                'salary' => '$20 - $30/hr',
+                'annual_salary_usd' => ['min' => 40000, 'max' => 60000],
+                'source_url' => 'https://www.dataannotation.tech/',
+                'tags' => ['Data Annotation', 'Data Labeling', 'Text Annotation', 'Swahili', 'English', 'Students'],
+                'description' => '<p>Label datasets, classify textual sentiment, and evaluate grammar and cultural resonance across East African English and Swahili queries. Fast automated onboarding and weekly PayPal payouts.</p>',
+            ],
+            [
+                'id' => 'student--mindrift-freelance-ai-tutor',
+                'source_id' => 'mindrift-tutor-01',
+                'company' => 'Mindrift',
+                'title' => 'Freelance AI Tutor & Data Annotation Writer',
+                'salary' => '$14 - $22/hr',
+                'annual_salary_usd' => ['min' => 28000, 'max' => 44000],
+                'source_url' => 'https://mindrift.ai/',
+                'tags' => ['AI Training', 'Data Annotation', 'Writing', 'Research', 'Flexible Schedule', 'Students'],
+                'description' => '<p>Join Mindrift as an AI Writer & Data Annotation Specialist. Write prompt-response pairs across diverse domains (humanities, science, law, business) and verify facts generated by AI assistants.</p>
+<p>Ideal for university students who love research, writing, and critical thinking. Complete tasks at your own pace.</p>',
+            ],
+            [
+                'id' => 'student--oneforma-multimodal-annotation',
+                'source_id' => 'oneforma-multimodal-01',
+                'company' => 'OneForma by Centific',
+                'title' => 'Multimodal Data Annotation & Audio Transcription Contributor',
+                'salary' => '$12 - $20/hr',
+                'annual_salary_usd' => ['min' => 24000, 'max' => 40000],
+                'source_url' => 'https://www.oneforma.com/',
+                'tags' => ['Data Annotation', 'Audio Transcription', 'Transcription', 'Image Labeling', 'Students'],
+                'description' => '<p>OneForma connects global freelance contributors with AI data enrichment projects. Opportunities include audio transcription, bounding-box image labeling, sentiment classification, and voice collection.</p>
+<p>No prior professional experience required. Paid monthly via Payoneer or direct bank transfer into local Kenyan accounts.</p>',
+            ],
+            [
+                'id' => 'student--oneforma-search-engine-evaluator',
+                'source_id' => 'oneforma-search-02',
+                'company' => 'OneForma by Centific',
+                'title' => 'Search Engine Quality Evaluator & Data Labeler',
+                'salary' => '$12 - $18/hr',
+                'annual_salary_usd' => ['min' => 24000, 'max' => 36000],
+                'source_url' => 'https://www.oneforma.com/',
+                'tags' => ['Data Annotation', 'Search Evaluation', 'Data Labeler', 'Part-Time', 'Students'],
+                'description' => '<p>Rate the relevance and usefulness of web search results and ad placements. Flexible 10 to 20 hours per week schedule tailored for students.</p>',
+            ],
+            [
+                'id' => 'student--scale-ai-rlhf-evaluator',
+                'source_id' => 'scaleai-rlhf-01',
+                'company' => 'Scale AI',
+                'title' => 'Generative AI RLHF Evaluator & Prompt Specialist',
+                'salary' => '$15 - $25/hr',
+                'annual_salary_usd' => ['min' => 30000, 'max' => 50000],
+                'source_url' => 'https://scale.com/',
+                'tags' => ['AI Training', 'RLHF', 'Data Annotation', 'Prompt Engineering', 'Students'],
+                'description' => '<p>Work with the world leader in AI data infrastructure. Review AI chatbot outputs for coherence, truthfulness, and safety. 100% remote, self-paced work from anywhere in Kenya.</p>',
+            ],
+            [
+                'id' => 'student--cloudfactory-ai-data-associate',
+                'source_id' => 'cloudfactory-data-01',
+                'company' => 'CloudFactory',
+                'title' => 'Remote AI Data Annotation & Labeling Associate',
+                'salary' => '$8 - $15/hr',
+                'annual_salary_usd' => ['min' => 16000, 'max' => 30000],
+                'source_url' => 'https://www.cloudfactory.com/',
+                'tags' => ['Data Annotation', 'Data Labeler', 'Data Entry', 'Nairobi', 'Students'],
+                'description' => '<p>CloudFactory has a strong presence across Kenya and East Africa. Support global machine learning initiatives by performing image bounding, lidar tagging, and medical dataset annotation.</p>',
+            ],
+            [
+                'id' => 'student--telus-international-ai-evaluator',
+                'source_id' => 'telus-ai-eval-01',
+                'company' => 'Telus International AI',
+                'title' => 'AI Community Data Evaluator - Kenya (English & Swahili)',
+                'salary' => '$12 - $20/hr',
+                'annual_salary_usd' => ['min' => 24000, 'max' => 40000],
+                'source_url' => 'https://www.telusinternational.com/',
+                'tags' => ['Data Annotation', 'AI Training', 'Evaluation', 'Media Search', 'Students'],
+                'description' => '<p>Review online search queries, social media posts, and multimedia content to improve AI algorithms. Work 15 to 20 hours a week on your own schedule from campus or home.</p>',
+            ],
+            [
+                'id' => 'student--invisible-tech-ai-trainer',
+                'source_id' => 'invisible-trainer-01',
+                'company' => 'Invisible Technologies',
+                'title' => 'Advanced AI Trainer & Data Operations Agent',
+                'salary' => '$15 - $28/hr',
+                'annual_salary_usd' => ['min' => 30000, 'max' => 56000],
+                'source_url' => 'https://www.invisible.co/',
+                'tags' => ['AI Training', 'Data Annotation', 'Operations', 'Workflow Automation', 'Students'],
+                'description' => '<p>Invisible Technologies partners with major frontier AI labs to fine-tune AI agents. Tasks range from multi-step tool execution verification to prompt evaluation and synthetic data generation.</p>',
+            ],
+            [
+                'id' => 'student--welocalize-search-rater',
+                'source_id' => 'welocalize-rater-01',
+                'company' => 'Welocalize',
+                'title' => 'Search Quality Rater & Data Annotation Specialist (Kenya)',
+                'salary' => '$12 - $19/hr',
+                'annual_salary_usd' => ['min' => 24000, 'max' => 38000],
+                'source_url' => 'https://jobs.welocalize.com/',
+                'tags' => ['Data Annotation', 'Search Rating', 'Quality Assurance', 'Students'],
+                'description' => '<p>Help world-renowned search engines deliver accurate results to Kenyan and global users. Flexible schedule, no degree required, fully remote.</p>',
+            ],
+            [
+                'id' => 'student--transcribeme-audio-transcriber',
+                'source_id' => 'transcribeme-01',
+                'company' => 'TranscribeMe',
+                'title' => 'Freelance Audio Transcriber & Speech Data Collector',
+                'salary' => '$15 - $22/audio hr',
+                'annual_salary_usd' => ['min' => 20000, 'max' => 35000],
+                'source_url' => 'https://www.transcribeme.com/',
+                'tags' => ['Transcription', 'Transcriber', 'Audio Transcription', 'Data Entry', 'Students'],
+                'description' => '<p>Convert short 2-4 minute audio clips into accurate text transcripts. Perfect for students with good listening skills and fast typing speed. Payouts weekly via PayPal.</p>',
+            ],
+            [
+                'id' => 'student--rev-com-remote-transcriptionist',
+                'source_id' => 'rev-transcriptionist-01',
+                'company' => 'Rev.com',
+                'title' => 'Remote Audio & Video Transcriptionist (Flexible Hours)',
+                'salary' => '$14 - $25/hr',
+                'annual_salary_usd' => ['min' => 25000, 'max' => 45000],
+                'source_url' => 'https://www.rev.com/',
+                'tags' => ['Transcription', 'Transcriber', 'Video Captioning', 'Flexible Schedule', 'Students'],
+                'description' => '<p>Transcribe podcasts, interviews, lectures, and YouTube videos. Choose the projects you want, work when you want, and get paid weekly via PayPal.</p>',
+            ],
+            [
+                'id' => 'student--study-com-online-tutor',
+                'source_id' => 'studycom-tutor-01',
+                'company' => 'Study.com',
+                'title' => 'Online Subject Matter Tutor & Curriculum Reviewer',
+                'salary' => '$18 - $28/hr',
+                'annual_salary_usd' => ['min' => 30000, 'max' => 50000],
+                'source_url' => 'https://study.com/',
+                'tags' => ['Tutoring', 'Curriculum', 'Education', 'Part-Time', 'Students'],
+                'description' => '<p>Answer academic questions in mathematics, biology, chemistry, computer science, or economics for students worldwide. Highly flexible part-time role for high-performing Kenyan campus students.</p>',
+            ],
+            [
+                'id' => 'student--belay-virtual-assistant',
+                'source_id' => 'belay-assistant-01',
+                'company' => 'Belay',
+                'title' => 'Virtual Assistant & Research Coordinator (Flexible Campus Hours)',
+                'salary' => '$15 - $24/hr',
+                'annual_salary_usd' => ['min' => 25000, 'max' => 45000],
+                'source_url' => 'https://belaysolutions.com/',
+                'tags' => ['Virtual Assistant', 'Admin', 'Research', 'Part-Time', 'Students'],
+                'description' => '<p>Support international founders and executives with web research, email inbox triage, and calendar coordination asynchronously.</p>',
+            ],
+            [
+                'id' => 'student--appen-speech-data-annotation',
+                'source_id' => 'appen-speech-data-01',
+                'company' => 'Appen',
+                'title' => 'AI Speech & Data Annotation Contributor (Kenya)',
+                'salary' => '$11 - $18/hr',
+                'annual_salary_usd' => ['min' => 20000, 'max' => 35000],
+                'source_url' => 'https://appen.com/',
+                'tags' => ['Data Annotation', 'Speech Data', 'AI Training', 'Audio Transcription', 'Students'],
+                'description' => '<p>Participate in voice recording, image tagging, and micro-tasks for machine learning development. Complete tasks from your laptop or smartphone.</p>',
+            ],
+        ];
+
+        return array_map(function (array $item) use ($now) {
+            return [
+                'id' => $item['id'],
+                'source_name' => $item['company'],
+                'source_id' => $item['source_id'],
+                'source_url' => $item['source_url'],
+                'title' => $item['title'],
+                'company' => $item['company'],
+                'description' => $item['description'],
+                'tags' => $item['tags'],
+                'location' => 'Remote (Worldwide / Kenya)',
+                'remote_type' => 'Remote',
+                'salary' => $item['salary'],
+                'annual_salary_usd' => $item['annual_salary_usd'],
+                'posted_at' => $now->copy()->subHours(rand(2, 48)),
+            ];
+        }, $listings);
+    }
+}

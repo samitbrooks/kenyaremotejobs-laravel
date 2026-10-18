@@ -300,6 +300,37 @@ class JobCategorySeo
                     ],
                 ],
             ],
+
+            'online-jobs-for-students-kenya' => [
+                'slug' => 'online-jobs-for-students-kenya',
+                'name' => 'Students & Campus',
+                'title' => 'Online Jobs for Students in Kenya (2026) — Data Annotation, AI & Remote Work',
+                'h1' => 'Legit Online & Remote Jobs for Students in Kenya (Flexible & M-Pesa Payouts)',
+                'meta_description' => 'Browse verified remote jobs and online data annotation gigs for Kenyan university and college students. Flexible hours, no degree required, and weekly USD payouts via M-Pesa & PayPal.',
+                'badge' => 'Students & Campus',
+                'intro' => 'University and college students across Kenya (Nairobi, KU, Strathmore, JKUAT, Moi, Egerton, and beyond) are leveraging flexible remote work to earn international income in USD. Opportunities range from AI data annotation, prompt evaluation, and audio transcription to online tutoring, virtual assistance, and content writing—all designed to fit around lecture timetables with weekly mobile payouts.',
+                'keywords' => 'online jobs for students kenya, remote jobs for students kenya, data annotation jobs kenya, ai training jobs students kenya, online jobs in kenya for campus students paying via mpesa, remote internships kenya',
+                'salary_range' => '$600 - $2,200 / month (~KES 78,000 - 285,000)',
+                'search_terms' => ['student', 'students', 'campus', 'intern', 'internship', 'annotation', 'data annotation', 'ai training', 'prompt', 'rlhf', 'evaluator', 'transcription', 'part-time', 'entry level', 'typing', 'data entry', 'tutor'],
+                'faqs' => [
+                    [
+                        'question' => 'What are the best-paying online jobs for Kenyan university students?',
+                        'answer' => 'Data annotation and AI model training (with platforms like Outlier AI, Alignerr, DataAnnotation.tech, and Mindrift) are currently the highest-paying flexible options for Kenyan students, offering $15 to $35/hr. Audio transcription, virtual assistance, and SEO content writing are also popular, flexible roles that easily accommodate academic timetables.',
+                    ],
+                    [
+                        'question' => 'How do Kenyan students receive their earnings from remote jobs?',
+                        'answer' => 'Most global remote platforms pay weekly or bi-weekly via PayPal, Payoneer, Wise, or direct bank transfer. Using PayPal\'s official M-Pesa integration (Equity Bank or PayPal-to-M-Pesa service), funds are deposited directly into your Safaricom M-Pesa wallet in Kenya Shillings within minutes.',
+                    ],
+                    [
+                        'question' => 'Can I do data annotation and AI training with no prior experience?',
+                        'answer' => 'Yes. Most data annotation platforms do not require a completed degree or prior experience. They evaluate candidates through a short online assessment testing English comprehension, analytical reasoning, and attention to detail. Once passed, you can immediately begin claiming tasks on your own schedule.',
+                    ],
+                    [
+                        'question' => 'Can I balance these jobs with a full-time university course schedule?',
+                        'answer' => 'Absolutely. These roles operate on asynchronous, task-based or flexible hourly systems. You choose when to log on and work—whether in the evening, over weekends, or during semester breaks—without fixed 9-to-5 lock-in.',
+                    ],
+                ],
+            ],
         ];
     }
 
@@ -402,6 +433,18 @@ class JobCategorySeo
             'hr' => 'human-resources-kenya',
             'recruiter' => 'human-resources-kenya',
             'human resources' => 'human-resources-kenya',
+
+            'student' => 'online-jobs-for-students-kenya',
+            'students' => 'online-jobs-for-students-kenya',
+            'campus' => 'online-jobs-for-students-kenya',
+            'university' => 'online-jobs-for-students-kenya',
+            'university student' => 'online-jobs-for-students-kenya',
+            'university students' => 'online-jobs-for-students-kenya',
+            'college student' => 'online-jobs-for-students-kenya',
+            'college students' => 'online-jobs-for-students-kenya',
+            'student jobs' => 'online-jobs-for-students-kenya',
+            'online jobs for students' => 'online-jobs-for-students-kenya',
+            'jobs for students' => 'online-jobs-for-students-kenya',
         ];
 
         return $directMap[$normalized] ?? null;

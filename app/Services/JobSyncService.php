@@ -7,12 +7,15 @@ use App\Models\JobListing;
 use App\Models\SyncMeta;
 use App\Services\JobSources\ArbeitnowSource;
 use App\Services\JobSources\AshbySource;
+use App\Services\JobSources\CuratedStudentJobsSource;
 use App\Services\JobSources\GreenhouseSource;
 use App\Services\JobSources\HackerNewsSource;
 use App\Services\JobSources\HimalayasSource;
 use App\Services\JobSources\JobSource;
 use App\Services\JobSources\LeverSource;
+use App\Services\JobSources\Micro1Source;
 use App\Services\JobSources\RemotiveSource;
+use App\Services\JobSources\TuringSource;
 use App\Support\Audience;
 use App\Support\Format;
 use App\Support\JobTier;
@@ -44,6 +47,9 @@ class JobSyncService
             RemotiveSource::class => new RemotiveSource,
             HimalayasSource::class => new HimalayasSource,
             ArbeitnowSource::class => new ArbeitnowSource,
+            Micro1Source::class => new Micro1Source,
+            TuringSource::class => new TuringSource,
+            CuratedStudentJobsSource::class => new CuratedStudentJobsSource,
         ];
     }
 

@@ -6,6 +6,7 @@ use App\Mail\WelcomeEmail;
 use App\Models\User;
 use App\Services\CreditsService;
 use App\Services\JobRecommendationService;
+use App\Services\ReferralService;
 use App\Support\SafeUrl;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -91,6 +92,12 @@ class AccountController extends Controller
         RateLimiter::clear('auth-link:'.$email);
 
         if ($isNewAccount) {
+            try {
+                app(ReferralService::class)->processSignup($user, (string) $request->input('ref'), $request);
+            } catch (\Throwable $e) {
+                Log::warning('Referral award failed on signup: '.$e->getMessage(), ['user_id' => $user->id]);
+            }
+
             try {
                 Mail::to($user)->send(new WelcomeEmail($user));
             } catch (\Throwable $e) {

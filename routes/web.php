@@ -17,6 +17,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobsController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\PricingController;
+use App\Http\Controllers\ReferralController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\UnsubscribeController;
@@ -46,6 +47,7 @@ Route::get('/collections', [CollectionController::class, 'index'])->name('collec
 Route::get('/collections/{slug}', [CollectionController::class, 'show'])->name('collections.show');
 
 Route::get('/pricing', [PricingController::class, 'index'])->name('pricing');
+Route::get('/referrals', [ReferralController::class, 'index'])->name('referrals.index');
 
 Route::get('/account', [AccountController::class, 'show']);
 Route::post('/account/login', [AccountController::class, 'login'])

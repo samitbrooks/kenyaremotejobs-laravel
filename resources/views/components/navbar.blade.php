@@ -131,6 +131,10 @@
                     <a href="{{ url('/collections') }}" class="nav-underline text-slate-700 transition hover:text-teal-600 {{ request()->is('collections*') ? 'text-teal-600 font-bold' : '' }}">Collections</a>
                     <a href="{{ url('/journal') }}" class="nav-underline text-slate-700 transition hover:text-teal-600 {{ request()->is('journal*') ? 'text-teal-600 font-bold' : '' }}">Journal</a>
                     <a href="{{ url('/pricing') }}" class="nav-underline text-slate-700 transition hover:text-teal-600 {{ request()->is('pricing') ? 'text-teal-600 font-bold' : '' }}">Pricing</a>
+                    <a href="{{ url('/referrals') }}" class="nav-underline text-slate-700 transition hover:text-teal-600 {{ request()->is('referrals*') ? 'text-teal-600 font-bold' : '' }} inline-flex items-center gap-1">
+                        <span>Refer &amp; Earn</span>
+                        <span class="rounded-full bg-emerald-500/10 px-1.5 py-0.2 text-[10px] font-bold text-emerald-600 border border-emerald-500/20">Free Pro</span>
+                    </a>
                     <a href="{{ url('/faqs') }}" class="nav-underline text-slate-700 transition hover:text-teal-600 {{ request()->is('faqs*') ? 'text-teal-600 font-bold' : '' }}">FAQs</a>
                     <a href="{{ url('/about') }}" class="nav-underline text-slate-700 transition hover:text-teal-600 {{ request()->is('about') ? 'text-teal-600 font-bold' : '' }}">About</a>
 
@@ -144,7 +148,7 @@
                     <a href="{{ url('/admin') }}" class="text-xs font-bold text-teal-700 hover:underline">Admin</a>
                 @endif
 
-                <a href="{{ url('/account') }}" class="btn-pop rounded-full bg-gradient-to-r from-[#2e3760] to-[#ff3131] px-5 py-2 text-sm font-semibold text-white shadow-sm hover:shadow-md hover:shadow-[#ff3131]/20 transition hover:from-[#232b4b] hover:to-[#e11d27]">
+                <a href="{{ url('/account') }}" class="btn-pop rounded-full bg-[#3444da] hover:bg-[#2633bf] px-5 py-2 text-sm font-bold text-white shadow-sm hover:shadow-md hover:shadow-[#3444da]/25 transition">
                     @if ($user?->subscribed)
                         <span class="inline-flex items-center gap-1.5">My Account <x-icon name="star" class="h-3.5 w-3.5 text-amber-300" /></span>
                     @else
@@ -232,6 +236,10 @@
             <a href="{{ url('/collections') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-teal-50 hover:text-teal-800 transition {{ request()->is('collections*') ? 'text-teal-600 font-bold' : '' }}">Collections</a>
             <a href="{{ url('/journal') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-teal-50 hover:text-teal-800 transition {{ request()->is('journal*') ? 'text-teal-600 font-bold' : '' }}">Journal</a>
             <a href="{{ url('/pricing') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-teal-50 hover:text-teal-800 transition {{ request()->is('pricing') ? 'text-teal-600 font-bold' : '' }}">Pricing</a>
+            <a href="{{ url('/referrals') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-teal-50 hover:text-teal-800 transition flex items-center justify-between {{ request()->is('referrals*') ? 'text-teal-600 font-bold' : '' }}">
+                <span class="flex items-center gap-2"><x-icon name="sparkle" class="h-4 w-4 text-emerald-600" /> Refer &amp; Earn</span>
+                <span class="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-bold text-emerald-600 border border-emerald-500/20">Free Pro Days</span>
+            </a>
             <a href="{{ url('/faqs') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-teal-50 hover:text-teal-800 transition {{ request()->is('faqs*') ? 'text-teal-600 font-bold' : '' }}">FAQs</a>
             <a href="{{ url('/about') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-teal-50 hover:text-teal-800 transition {{ request()->is('about') ? 'text-teal-600 font-bold' : '' }}">About</a>
 

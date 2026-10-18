@@ -62,6 +62,7 @@
                         </a>
                     </li>
                     <li><a href="{{ url('/pricing') }}" class="hover:text-teal-400 transition">Pro Early Access Pricing</a></li>
+                    <li><a href="{{ url('/referrals') }}" class="hover:text-teal-400 transition font-bold text-emerald-400">🎁 Refer Friends &amp; Earn Free Pro</a></li>
                     <li><a href="{{ url('/faqs') }}" class="hover:text-teal-400 transition">Frequently Asked Questions</a></li>
                     <li><a href="{{ url('/surveys') }}" class="hover:text-teal-400 transition">Surveys &amp; Side Income</a></li>
                     <li><a href="{{ url('/about') }}" class="hover:text-teal-400 transition">About KenyaRemoteJobs</a></li>

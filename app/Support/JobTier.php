@@ -14,11 +14,17 @@ namespace App\Support;
 class JobTier
 {
     /**
-     * @param  array{min: ?int, max: ?int}|null  $annualSalaryUsd
+     * @param  array{min: ?int, max: ?int}|int|null  $annualSalaryUsd
      */
-    public static function compute(?array $annualSalaryUsd): string
+    public static function compute(array|int|null $annualSalaryUsd): string
     {
-        $figure = $annualSalaryUsd['max'] ?? $annualSalaryUsd['min'] ?? null;
+        if (is_int($annualSalaryUsd) || is_float($annualSalaryUsd)) {
+            $figure = (int) $annualSalaryUsd;
+        } elseif (is_array($annualSalaryUsd)) {
+            $figure = $annualSalaryUsd['max'] ?? $annualSalaryUsd['min'] ?? null;
+        } else {
+            $figure = null;
+        }
 
         if ($figure === null) {
             return 'basic';

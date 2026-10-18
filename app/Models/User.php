@@ -7,11 +7,14 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Carbon;
 
-#[Fillable(['name', 'email', 'password', 'subscribed', 'subscribed_at', 'survey_pass_purchased_at', 'trial_started_at', 'trial_ends_at', 'marketing_opt_out_at', 'last_job_digest_at', 'follow_up_sent_at', 'free_tailors_remaining'])]
+#[Fillable(['name', 'email', 'password', 'referral_code', 'referred_by_id', 'subscribed', 'subscribed_at', 'survey_pass_purchased_at', 'trial_started_at', 'trial_ends_at', 'pro_access_until', 'marketing_opt_out_at', 'last_job_digest_at', 'follow_up_sent_at', 'free_tailors_remaining'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -33,6 +36,8 @@ class User extends Authenticatable
             'survey_pass_purchased_at' => 'datetime',
             'trial_started_at' => 'datetime',
             'trial_ends_at' => 'datetime',
+            'pro_access_until' => 'datetime',
+            'referred_by_id' => 'integer',
             'marketing_opt_out_at' => 'datetime',
             'last_job_digest_at' => 'datetime',
             'follow_up_sent_at' => 'datetime',
@@ -80,9 +85,17 @@ class User extends Authenticatable
         return $minutes.' '.($minutes === 1 ? 'minute' : 'minutes');
     }
 
+    public function hasReferralProAccess(): bool
+    {
+        return $this->pro_access_until !== null && $this->pro_access_until->isFuture();
+    }
+
     public function hasActiveAccess(): bool
     {
-        return $this->isAdmin() || $this->subscribed || $this->onTrial();
+        return $this->isAdmin()
+            || $this->subscribed
+            || $this->onTrial()
+            || $this->hasReferralProAccess();
     }
 
     public function hasSurveyAccess(): bool
@@ -90,6 +103,7 @@ class User extends Authenticatable
         return $this->isAdmin()
             || $this->subscribed
             || $this->onTrial()
+            || $this->hasReferralProAccess()
             || $this->survey_pass_purchased_at !== null;
     }
 
@@ -171,5 +185,97 @@ class User extends Authenticatable
     public function isAdmin(): bool
     {
         return in_array(strtolower($this->email), config('jobs.admin_emails', []), true);
+    }
+
+    public function referrals(): HasMany
+    {
+        return $this->hasMany(Referral::class, 'referrer_id');
+    }
+
+    public function referredBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'referred_by_id');
+    }
+
+    public function receivedReferral(): HasOne
+    {
+        return $this->hasOne(Referral::class, 'referred_id');
+    }
+
+    public function referralCode(): string
+    {
+        if (! empty($this->referral_code)) {
+            return $this->referral_code;
+        }
+
+        $code = 'KRJ-'.strtoupper(substr(md5($this->id.'-'.$this->email.'-kenyaremotejobs'), 0, 7));
+        $this->forceFill(['referral_code' => $code])->save();
+
+        return $code;
+    }
+
+    public function referralLink(): string
+    {
+        return url('/?ref='.$this->referralCode());
+    }
+
+    public function whatsappShareUrl(): string
+    {
+        $message = "Hey! Check out Kenya Remote Jobs for high-paying remote roles verified for East Africa & direct employer links. Sign up with my link to get free Pro trial access and AI CV tailor credits:\n".$this->referralLink();
+
+        return 'https://wa.me/?text='.rawurlencode($message);
+    }
+
+    public function twitterShareUrl(): string
+    {
+        $text = 'Find high-paying remote roles open to East Africa & direct employer links on Kenya Remote Jobs. Join with my link for free Pro trial + AI CV tailors: '.$this->referralLink();
+
+        return 'https://twitter.com/intent/tweet?text='.rawurlencode($text);
+    }
+
+    public function telegramShareUrl(): string
+    {
+        $text = 'Find high-paying remote roles open to Kenya & East Africa on Kenya Remote Jobs. Join with my link for free Pro trial + AI CV tailors: '.$this->referralLink();
+
+        return 'https://t.me/share/url?url='.rawurlencode($this->referralLink()).'&text='.rawurlencode($text);
+    }
+
+    public function linkedinShareUrl(): string
+    {
+        return 'https://www.linkedin.com/sharing/share-offsite/?url='.rawurlencode($this->referralLink());
+    }
+
+    public function extendProAccess(int $days): Carbon
+    {
+        $base = ($this->pro_access_until && $this->pro_access_until->isFuture())
+            ? $this->pro_access_until
+            : Carbon::now();
+
+        $newExpiry = $base->copy()->addDays($days);
+        $this->forceFill(['pro_access_until' => $newExpiry])->save();
+
+        return $newExpiry;
+    }
+
+    public function addFreeTailors(int $count): void
+    {
+        $this->increment('free_tailors_remaining', $count);
+    }
+
+    public function earnedProDays(): int
+    {
+        $referrals = $this->referrals()->get();
+        $days = 0;
+
+        foreach ($referrals as $ref) {
+            if ($ref->trial_reward_applied) {
+                $days += 3;
+            }
+            if ($ref->conversion_reward_applied) {
+                $days += 14;
+            }
+        }
+
+        return $days;
     }
 }

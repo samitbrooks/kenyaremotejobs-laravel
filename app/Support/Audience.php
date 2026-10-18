@@ -62,6 +62,14 @@ class Audience
             'pursuing a degree', 'pursuing your degree', 'expected graduation',
             'graduating in', 'campus recruiting', 'college students',
             'university students', 'student talent', 'graduate program',
+            'fresh graduates', 'campus ambassador', 'student worker',
+            'data annotation', 'data annotator', 'data labeling', 'data labeler',
+            'image annotation', 'audio annotation', 'annotation', 'annotator',
+            'ai training', 'ai trainer', 'prompt evaluation', 'prompt evaluator',
+            'rlhf', 'model evaluator', 'ai data specialist', 'ai tutor',
+            'ai evaluator', 'ai data trainer', 'llm evaluation',
+            'transcription', 'transcriber', 'audio transcription',
+            'data entry', 'online data entry',
         ],
         // "no prior experience" deliberately excluded — a template used
         // across several Himalayas "AI training data" gigs says "no prior

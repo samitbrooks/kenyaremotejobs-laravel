@@ -48,32 +48,35 @@
     {{-- Live Activity Ticker --}}
     <x-live-ticker />
 
-    {{-- Hero — KenyaRemoteJobs brand aesthetic with unified floating pill search bar and spacious modern layout --}}
-    <section class="relative bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(255,49,49,0.08),rgba(46,55,96,0.05),rgba(255,255,255,0))] px-4 pt-14 pb-16 sm:px-6 sm:pt-20">
+    {{-- Hero — micro1-inspired high-tech aesthetic with floating search bar and geometric Outfit typography --}}
+    <section class="relative bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(52,68,218,0.1),rgba(238,240,254,0.4),rgba(248,249,253,0))] px-4 pt-14 pb-16 sm:px-6 sm:pt-20">
         <div class="relative mx-auto max-w-4xl text-center">
             <x-reveal>
-                <div class="inline-flex items-center gap-2 rounded-full bg-rose-50/80 border border-rose-200/70 px-4 py-1.5 text-xs font-bold text-[#be121c] shadow-2xs">
+                <a href="{{ url('/referrals') }}" class="group inline-flex items-center gap-2 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-4 py-1.5 text-xs font-bold text-[#3444da] hover:bg-[#e0e4fd] transition shadow-2xs">
                     <span class="relative flex h-2 w-2">
-                        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#ff3131] opacity-75"></span>
-                        <span class="relative inline-flex h-2 w-2 rounded-full bg-[#ff3131]"></span>
+                        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#3444da] opacity-75"></span>
+                        <span class="relative inline-flex h-2 w-2 rounded-full bg-[#3444da]"></span>
                     </span>
-                    <span>Kenya's #1 Verified Remote Job Board</span>
-                </div>
+                    <span>Refer &amp; Earn KES 500 &bull; Kenya's #1 Remote &amp; AI Talent Network</span>
+                    <svg class="h-3 w-3 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" viewBox="0 0 16 16" fill="none" stroke="currentColor">
+                        <path d="M4.7 11.6L11.2 5.1M5.6 4.7H11.3V10.4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
 
-                <h1 class="mt-5 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-6xl sm:leading-[1.12]">
-                    Remote jobs from employers
+                <h1 class="mt-6 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-6xl sm:leading-[1.12]">
+                    Remote Opportunities
                     <br class="hidden sm:inline">
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#2e3760] via-[#ff3131] to-[#e11d27]">who actually want Kenyan talent.</span>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-[#3444da] to-[#2633bf]">for Kenyan Talent.</span>
                 </h1>
 
-                <p class="mx-auto mt-5 max-w-2xl text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-                    Discover hand-curated international remote opportunities screened for East Africa Time (UTC+3) compatibility, competitive USD compensation, and zero foreign visa barriers.
+                <p class="mx-auto mt-4 max-w-2xl text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+                    Discover hand-curated international remote opportunities, data annotation gigs, and AI training roles screened for East Africa Time (UTC+3) compatibility, competitive USD compensation, and zero foreign visa barriers.
                 </p>
             </x-reveal>
 
-            {{-- Remote.co signature unified floating pill search bar --}}
+            {{-- micro1-Inspired Floating Search Bar --}}
             <x-reveal :delay="80" class="relative z-10 mx-auto mt-10">
-                <div class="rounded-3xl sm:rounded-full border border-slate-200/80 bg-white p-2 sm:p-2.5 shadow-[0_8px_30px_rgba(46,55,96,0.06)] hover:shadow-[0_12px_40px_rgba(255,49,49,0.12)] transition-shadow">
+                <div class="rounded-3xl sm:rounded-full border border-slate-200/90 bg-white p-2 sm:p-2.5 shadow-[0_12px_40px_rgba(52,68,218,0.08)] hover:shadow-[0_16px_48px_rgba(52,68,218,0.14)] transition-all">
                     <form action="{{ url('/jobs') }}" method="GET" class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
                         {{-- Keyword input --}}
                         <div class="relative flex-1 flex items-center pl-4">
@@ -81,7 +84,7 @@
                             <input
                                 type="text"
                                 name="q"
-                                placeholder="Job title, skill, or company…"
+                                placeholder="Job title, skill (e.g. Data Annotation, Python)…"
                                 class="w-full bg-transparent py-2.5 pl-3 pr-2 text-sm text-slate-900 placeholder:text-slate-400 border-none focus:outline-none focus:ring-0"
                             />
                         </div>
@@ -104,46 +107,46 @@
                         <div class="hidden sm:block h-7 w-px bg-slate-200/80"></div>
 
                         {{-- Kenya Friendly Toggle Pill --}}
-                        <label class="flex items-center justify-center gap-2 rounded-full bg-slate-50 hover:bg-slate-100/80 border border-slate-200/70 py-2 px-3.5 text-xs font-semibold text-slate-700 cursor-pointer transition shrink-0">
-                            <input type="checkbox" name="kenyaFriendly" value="true" class="h-4 w-4 rounded-full border-slate-300 text-[#ff3131] focus:ring-[#ff3131]">
+                        <label class="flex items-center justify-center gap-2 rounded-full bg-[#f8f9fd] hover:bg-[#eef0fe] border border-slate-200/80 py-2 px-3.5 text-xs font-semibold text-slate-700 cursor-pointer transition shrink-0">
+                            <input type="checkbox" name="kenyaFriendly" value="true" class="h-4 w-4 rounded-full border-slate-300 text-[#3444da] focus:ring-[#3444da]">
                             <span class="text-slate-700">Kenya-Friendly</span>
                             <x-icon.kenya-flag class="h-3.5 w-3.5 shrink-0" />
                         </label>
 
-                        {{-- Search CTA button --}}
+                        {{-- Search CTA button in micro1 electric cobalt --}}
                         <button
                             type="submit"
-                            class="btn-pop rounded-full bg-[#ff3131] px-7 py-3 text-sm font-bold text-white shadow-md shadow-[#ff3131]/25 hover:bg-[#e11d27] hover:shadow-lg transition-all shrink-0 text-center"
+                            class="btn-pop rounded-full bg-[#3444da] hover:bg-[#2633bf] px-8 py-3 text-sm font-bold text-white shadow-md shadow-[#3444da]/30 hover:shadow-lg transition-all shrink-0 text-center"
                         >
-                            Find Jobs
+                            Find Roles &rarr;
                         </button>
                     </form>
                 </div>
 
-                {{-- Popular search tags as soft floating pills --}}
-                <div class="mt-4 flex flex-wrap items-center justify-center gap-1.5 text-xs text-slate-500">
-                    <span class="font-medium text-slate-400 mr-1">Trending:</span>
-                    <a href="{{ url('/remote-jobs/writing-content-kenya') }}" class="rounded-full bg-white border border-slate-200/70 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50/30 transition shadow-2xs font-medium">Writing &amp; Content</a>
-                    <a href="{{ url('/remote-jobs/customer-support-kenya') }}" class="rounded-full bg-white border border-slate-200/70 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50/30 transition shadow-2xs font-medium">Customer Support</a>
-                    <a href="{{ url('/remote-jobs/virtual-assistant-kenya') }}" class="rounded-full bg-white border border-slate-200/70 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50/30 transition shadow-2xs font-medium">Virtual Assistant</a>
-                    <a href="{{ url('/remote-jobs/software-developer-kenya') }}" class="rounded-full bg-white border border-slate-200/70 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50/30 transition shadow-2xs font-medium">Software Engineer</a>
-                    <a href="{{ url('/remote-jobs/data-entry-kenya') }}" class="rounded-full bg-white border border-slate-200/70 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50/30 transition shadow-2xs font-medium">Data Entry</a>
-                    <a href="{{ url('/remote-jobs/ai-training-annotation-kenya') }}" class="rounded-full bg-white border border-slate-200/70 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50/30 transition shadow-2xs font-medium">AI Training &amp; RLHF</a>
-                    <a href="{{ url('/remote-jobs/digital-marketing-kenya') }}" class="rounded-full bg-white border border-slate-200/70 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50/30 transition shadow-2xs font-medium">Marketing</a>
-                    <a href="{{ url('/remote-jobs/entry-level-kenya') }}" class="rounded-full bg-white border border-slate-200/70 px-3 py-1 text-slate-600 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50/30 transition shadow-2xs font-medium">Entry Level</a>
+                {{-- micro1-Inspired Trending Role Capsules --}}
+                <div class="mt-5 flex flex-wrap items-center justify-center gap-1.5 text-xs">
+                    <span class="font-bold text-slate-400 uppercase tracking-wider text-[11px] mr-1">Trending:</span>
+                    <a href="{{ url('/jobs?audience=students&q=annotation') }}" class="jobs-skill-pill hover:border-[#3444da] hover:text-[#3444da] shadow-2xs">🎯 Data Annotation</a>
+                    <a href="{{ url('/jobs?audience=students') }}" class="jobs-skill-pill hover:border-[#3444da] hover:text-[#3444da] shadow-2xs">🎓 Student &amp; Campus</a>
+                    <a href="{{ url('/remote-jobs/ai-training-annotation-kenya') }}" class="jobs-skill-pill hover:border-[#3444da] hover:text-[#3444da] shadow-2xs">🤖 AI Training &amp; RLHF</a>
+                    <a href="{{ url('/remote-jobs/writing-content-kenya') }}" class="jobs-skill-pill hover:border-[#3444da] hover:text-[#3444da] shadow-2xs">Writing &amp; Content</a>
+                    <a href="{{ url('/remote-jobs/customer-support-kenya') }}" class="jobs-skill-pill hover:border-[#3444da] hover:text-[#3444da] shadow-2xs">Customer Support</a>
+                    <a href="{{ url('/remote-jobs/virtual-assistant-kenya') }}" class="jobs-skill-pill hover:border-[#3444da] hover:text-[#3444da] shadow-2xs">Virtual Assistant</a>
+                    <a href="{{ url('/remote-jobs/software-developer-kenya') }}" class="jobs-skill-pill hover:border-[#3444da] hover:text-[#3444da] shadow-2xs">Software Engineer</a>
+                    <a href="{{ url('/remote-jobs/entry-level-kenya') }}" class="jobs-skill-pill hover:border-[#3444da] hover:text-[#3444da] shadow-2xs">Entry Level</a>
                 </div>
 
-                {{-- Quick Trust Highlights Pill Bar --}}
+                {{-- Trust Highlights Pill Bar --}}
                 <div class="mt-8 flex flex-wrap items-center justify-center gap-4 text-xs font-medium text-slate-600">
-                    <span class="inline-flex items-center gap-1.5 rounded-full bg-white/90 border border-slate-200/70 px-3.5 py-1.5 shadow-2xs">
+                    <span class="inline-flex items-center gap-1.5 rounded-full bg-white border border-slate-200/80 px-3.5 py-1.5 shadow-2xs">
                         <x-icon name="check" class="h-3.5 w-3.5 text-emerald-600" />
                         UTC+3 Timezone Aligned
                     </span>
-                    <span class="inline-flex items-center gap-1.5 rounded-full bg-white/90 border border-slate-200/70 px-3.5 py-1.5 shadow-2xs">
+                    <span class="inline-flex items-center gap-1.5 rounded-full bg-white border border-slate-200/80 px-3.5 py-1.5 shadow-2xs">
                         <x-icon name="check" class="h-3.5 w-3.5 text-emerald-600" />
                         Zero Foreign Visa Roadblocks
                     </span>
-                    <span class="inline-flex items-center gap-1.5 rounded-full bg-white/90 border border-slate-200/70 px-3.5 py-1.5 shadow-2xs">
+                    <span class="inline-flex items-center gap-1.5 rounded-full bg-white border border-slate-200/80 px-3.5 py-1.5 shadow-2xs">
                         <x-icon name="check" class="h-3.5 w-3.5 text-emerald-600" />
                         Verified USD, M-Pesa &amp; Wise Rails
                     </span>

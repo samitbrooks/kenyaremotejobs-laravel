@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\CaptureReferralCode;
 use App\Http\Middleware\EnforceCanonicalHost;
 use App\Http\Middleware\EnsureUserIsAdmin;
 use App\Http\Middleware\EnsureUserIsSubscribed;
@@ -36,6 +37,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ], append: [
             TrackPageView::class,
             SecurityHeaders::class,
+            CaptureReferralCode::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

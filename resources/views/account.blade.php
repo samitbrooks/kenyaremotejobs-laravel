@@ -131,6 +131,44 @@
                 </div>
             </div>
 
+            {{-- Referral Awarding Card --}}
+            <div class="mt-8 rounded-3xl border border-emerald-500/30 bg-gradient-to-br from-emerald-950 via-slate-900 to-slate-950 p-6 sm:p-7 text-white shadow-sm relative overflow-hidden">
+                <div class="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-emerald-500/10 blur-3xl"></div>
+                <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="max-w-md">
+                        <div class="flex items-center gap-2">
+                            <span class="rounded-full bg-emerald-500/20 border border-emerald-500/40 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-emerald-300">
+                                🎁 Referral Rewards
+                            </span>
+                            <span class="text-xs text-white/60">
+                                {{ $user->referrals()->count() }} Joined &bull; +{{ $user->earnedProDays() }} Days Earned
+                            </span>
+                        </div>
+                        <h3 class="text-lg font-black text-white mt-1.5">Earn Free Pro Access &amp; AI Tailor Credits</h3>
+                        <p class="text-xs text-white/70 mt-1 leading-relaxed">
+                            Share your link with fellow Kenyan jobseekers. Earn +3 days Pro when a friend tests the free trial, and +14 days when they subscribe.
+                        </p>
+                    </div>
+
+                    <div class="shrink-0 flex flex-wrap items-center gap-2.5">
+                        <a
+                            href="{{ $user->whatsappShareUrl() }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white px-3.5 py-2 text-xs font-bold transition flex items-center gap-1.5 shadow-xs"
+                        >
+                            <span>Share WhatsApp</span>
+                        </a>
+                        <a
+                            href="{{ url('/referrals') }}"
+                            class="rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-4 py-2 text-xs font-black transition shadow-xs"
+                        >
+                            View Rewards &rarr;
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             {{-- Application CRM Tracker --}}
             <div class="mt-8 rounded-3xl border border-black/5 bg-white p-6 sm:p-8 shadow-sm">
                 <div class="flex items-center justify-between pb-4 border-b border-black/5">

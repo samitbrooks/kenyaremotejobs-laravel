@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Services\ReferralService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class FreeTrialController extends Controller
 {
@@ -46,6 +48,12 @@ class FreeTrialController extends Controller
         }
 
         $user->startFreeTrial(24);
+
+        try {
+            app(ReferralService::class)->processTrialActivation($user);
+        } catch (\Throwable $e) {
+            Log::warning('Referral trial award failed: '.$e->getMessage(), ['user_id' => $user->id]);
+        }
 
         $expiresAt = $user->trial_ends_at ? $user->trial_ends_at->format('M j, g:i A') : 'in 24 hours';
 
@@ -91,6 +99,12 @@ class FreeTrialController extends Controller
         }
 
         $user->startFreeTrial(24);
+
+        try {
+            app(ReferralService::class)->processTrialActivation($user);
+        } catch (\Throwable $e) {
+            Log::warning('Referral trial award failed: '.$e->getMessage(), ['user_id' => $user->id]);
+        }
 
         $expiresAt = $user->trial_ends_at ? $user->trial_ends_at->format('M j, g:i A') : 'in 24 hours';
 

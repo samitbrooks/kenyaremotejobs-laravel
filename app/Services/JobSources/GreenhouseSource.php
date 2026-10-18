@@ -19,7 +19,6 @@ class GreenhouseSource implements JobSource
     // nothing else needs to change.
     private const BOARDS = [
         ['slug' => 'gitlab', 'source_name' => 'GitLab'],
-        ['slug' => 'turing', 'source_name' => 'Turing'],
         ['slug' => 'canonical', 'source_name' => 'Canonical'],
         ['slug' => 'scaleai', 'source_name' => 'Scale AI'],
         ['slug' => 'webflow', 'source_name' => 'Webflow'],

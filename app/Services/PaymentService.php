@@ -166,6 +166,12 @@ class PaymentService
         $payment->user->update(['subscribed' => true, 'subscribed_at' => $payment->completed_at]);
 
         try {
+            app(ReferralService::class)->processSubscriptionPayment($payment->user);
+        } catch (\Throwable $e) {
+            Log::warning('Referral award failed on subscription: '.$e->getMessage(), ['user_id' => $payment->user_id]);
+        }
+
+        try {
             app(JobRecommendationService::class)->sendProRecommendationsToUser($payment->user, force: true);
         } catch (\Throwable $e) {
             Log::warning('Failed sending initial VIP pro recommendations on payment: '.$e->getMessage(), ['user_id' => $payment->user_id]);

@@ -8,6 +8,8 @@ use App\Services\JobSources\AshbySource;
 use App\Services\JobSources\GreenhouseSource;
 use App\Services\JobSources\HackerNewsSource;
 use App\Services\JobSources\LeverSource;
+use App\Services\JobSources\Micro1Source;
+use App\Services\JobSources\TuringSource;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
@@ -156,6 +158,8 @@ class DirectJobSourcesTest extends TestCase
         $this->assertTrue(DirectAtsResolver::isDirectUrl('https://boards.greenhouse.io/canonical/jobs/123'));
         $this->assertTrue(DirectAtsResolver::isDirectUrl('https://jobs.ashbyhq.com/writer/456'));
         $this->assertTrue(DirectAtsResolver::isDirectUrl('https://jobs.lever.co/superside/789/apply'));
+        $this->assertTrue(DirectAtsResolver::isDirectUrl('https://jobs.micro1.ai/post/job-123'));
+        $this->assertTrue(DirectAtsResolver::isDirectUrl('https://work.turing.com'));
         $this->assertTrue(DirectAtsResolver::isAggregatorUrl('https://remoteok.com/remote-jobs/123'));
         $this->assertTrue(DirectAtsResolver::isAggregatorUrl('https://jobicy.com/jobs/456'));
 
@@ -210,5 +214,92 @@ class DirectJobSourcesTest extends TestCase
         $response->assertDontSee('SecretTech Corp');
         $response->assertSee('Verified Employer');
         $response->assertSee('Pro Only');
+    }
+
+    public function test_micro1_source_fetches_and_normalizes_jobs(): void
+    {
+        Http::fake([
+            'https://prod-api.micro1.ai/api/v1/job/portal*' => Http::response([
+                'status' => 'success',
+                'data' => [
+                    [
+                        'job_id' => 'm1-job-999',
+                        'job_name' => 'Fullstack AI Engineer',
+                        'company_name' => 'micro1',
+                        'skills' => ['Python', 'FastAPI', 'Next.js'],
+                        'ideal_hourly_rate' => [
+                            'min' => 45,
+                            'max' => 70,
+                        ],
+                        'apply_url' => 'https://jobs.micro1.ai/post/m1-job-999',
+                        'date_posted' => '2026-10-10T12:00:00Z',
+                    ],
+                ],
+            ], 200),
+        ]);
+
+        $source = new Micro1Source;
+        $jobs = $source->fetch();
+
+        $this->assertCount(1, $jobs);
+        $job = $jobs[0];
+        $this->assertEquals('micro1--m1-job-999', $job['id']);
+        $this->assertEquals('micro1', $job['source_name']);
+        $this->assertEquals('Fullstack AI Engineer', $job['title']);
+        $this->assertEquals('micro1', $job['company']);
+        $this->assertEquals('$45 - $70/hr', $job['salary']);
+        $this->assertEquals(['min' => 90000, 'max' => 140000], $job['annual_salary_usd']);
+        $this->assertContains('Python', $job['tags']);
+        $this->assertStringContainsString('micro1.ai', $job['source_url']);
+    }
+
+    public function test_turing_source_fetches_greenhouse_and_work_turing_tracks(): void
+    {
+        Http::fake([
+            'https://api.greenhouse.io/v1/boards/turing/jobs*' => Http::response([
+                'jobs' => [
+                    [
+                        'id' => 98765,
+                        'title' => 'Senior AI Researcher',
+                        'location' => ['name' => 'Global - Remote'],
+                        'departments' => [['name' => 'AI Engineering']],
+                        'absolute_url' => 'https://job-boards.greenhouse.io/turing/jobs/98765',
+                        'content' => '<p>Research next-gen models.</p>',
+                        'updated_at' => '2026-10-01T10:00:00Z',
+                    ],
+                    [
+                        'id' => 54321,
+                        'title' => 'Office Receptionist',
+                        'location' => ['name' => 'Palo Alto, California'],
+                        'departments' => [['name' => 'Operations']],
+                        'absolute_url' => 'https://job-boards.greenhouse.io/turing/jobs/54321',
+                        'content' => '<p>Onsite only.</p>',
+                    ],
+                ],
+            ], 200),
+        ]);
+
+        $source = new TuringSource;
+        $jobs = $source->fetch();
+
+        $this->assertNotEmpty($jobs);
+        // Has the Greenhouse remote role
+        $ghMatches = array_filter($jobs, fn ($j) => $j['source_id'] === '98765');
+        $this->assertCount(1, $ghMatches);
+        $ghJob = array_values($ghMatches)[0];
+        $this->assertEquals('Senior AI Researcher', $ghJob['title']);
+        $this->assertEquals('Turing', $ghJob['company']);
+        $this->assertEquals('Global - Remote', $ghJob['location']);
+
+        // Excludes the non-remote role (54321)
+        $onsiteMatches = array_filter($jobs, fn ($j) => $j['source_id'] === '54321');
+        $this->assertEmpty($onsiteMatches);
+
+        // Has the work.turing.com tracks
+        $wtMatches = array_filter($jobs, fn ($j) => str_starts_with($j['source_id'], 'wt-'));
+        $this->assertGreaterThanOrEqual(4, count($wtMatches));
+        $firstWt = array_values($wtMatches)[0];
+        $this->assertEquals('https://work.turing.com', $firstWt['source_url']);
+        $this->assertEquals('Turing', $firstWt['company']);
     }
 }

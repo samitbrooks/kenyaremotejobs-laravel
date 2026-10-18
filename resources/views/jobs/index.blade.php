@@ -1,6 +1,11 @@
 @php
-    $title = $audience ? (\App\Support\Audience::LABELS[$audience] ?? $audience).' jobs' : 'Browse Online & Remote Jobs Open to Kenya';
-    $description = 'Search and filter online and remote jobs from verified global employers and distributed teams — filter by category, remote type, or Kenya-Friendly Match to find roles realistically open to you.';
+    $isStudentAudience = $audience === 'students';
+    $title = $isStudentAudience
+        ? 'Online & Remote Jobs for Students in Kenya (2026)'
+        : ($audience ? (\App\Support\Audience::LABELS[$audience] ?? $audience).' jobs' : 'Browse Online & Remote Jobs Open to Kenya');
+    $description = $isStudentAudience
+        ? 'Explore verified remote jobs, data annotation gigs, and part-time online roles open to Kenyan university and college students. Flexible hours around classes, weekly M-Pesa payouts, and no prior degree required.'
+        : 'Search and filter online and remote jobs from verified global employers and distributed teams — filter by category, remote type, or Kenya-Friendly Match to find roles realistically open to you.';
 
     $buildPageHref = function (int $targetPage) use ($q, $tag, $remoteType, $kenyaFriendly, $freeOnly, $audience) {
         $params = array_filter([
@@ -52,6 +57,53 @@
             {{ $total }} listings &middot; 100% transparent employer details &middot; Verified remote roles open to Kenyan applicants.
         </p>
 
+        @if ($isStudentAudience)
+            <div class="mt-6 rounded-3xl border border-teal-200/90 bg-gradient-to-br from-teal-50/80 via-emerald-50/40 to-white p-6 sm:p-8 shadow-xs">
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="inline-flex items-center gap-1.5 rounded-full bg-teal-100/80 border border-teal-300/80 px-3 py-1 text-xs font-black uppercase tracking-wider text-teal-900">
+                        🎓 Campus & Student Portal
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-100/80 border border-emerald-300/80 px-3 py-1 text-xs font-bold text-emerald-900">
+                        ✓ 100% Flexible Hours
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 rounded-full bg-amber-100/80 border border-amber-300/80 px-3 py-1 text-xs font-bold text-amber-900">
+                        ⚡ M-Pesa Weekly / Bi-Weekly Payouts
+                    </span>
+                </div>
+
+                <h2 class="mt-4 text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                    Legit Online Jobs for Kenyan Students (Data Annotation & AI Training)
+                </h2>
+
+                <p class="mt-2.5 text-sm sm:text-base text-slate-600 leading-relaxed max-w-3xl">
+                    Whether you are at the University of Nairobi, Kenyatta University, JKUAT, Strathmore, Moi, or on campus anywhere in Kenya, international companies hire Kenyan students for <strong>AI data annotation</strong>, <strong>RLHF prompt evaluation</strong>, <strong>audio transcription</strong>, and <strong>flexible virtual assistance</strong>. Work at your own pace between lectures and earn in USD.
+                </p>
+
+                {{-- Quick Student Filters --}}
+                <div class="mt-5 flex flex-wrap items-center gap-2">
+                    <span class="text-xs font-bold text-slate-500 mr-1">Quick Filters:</span>
+                    <a href="{{ url('/jobs?audience=students') }}" class="rounded-full px-3 py-1 text-xs font-bold transition {{ $q === '' ? 'bg-teal-700 text-white shadow-2xs' : 'bg-white border border-slate-200 text-slate-700 hover:bg-teal-50' }}">
+                        All Student Jobs ({{ $total }})
+                    </a>
+                    <a href="{{ url('/jobs?audience=students&q=annotation') }}" class="rounded-full px-3 py-1 text-xs font-bold transition {{ str_contains(strtolower($q), 'annotation') ? 'bg-teal-700 text-white shadow-2xs' : 'bg-white border border-slate-200 text-slate-700 hover:bg-teal-50' }}">
+                        🎯 Data Annotation & AI
+                    </a>
+                    <a href="{{ url('/jobs?audience=students&q=transcription') }}" class="rounded-full px-3 py-1 text-xs font-bold transition {{ str_contains(strtolower($q), 'transcription') ? 'bg-teal-700 text-white shadow-2xs' : 'bg-white border border-slate-200 text-slate-700 hover:bg-teal-50' }}">
+                        🎙 Audio Transcription
+                    </a>
+                    <a href="{{ url('/jobs?audience=students&q=writing') }}" class="rounded-full px-3 py-1 text-xs font-bold transition {{ str_contains(strtolower($q), 'writing') ? 'bg-teal-700 text-white shadow-2xs' : 'bg-white border border-slate-200 text-slate-700 hover:bg-teal-50' }}">
+                        ✍️ Content & Research
+                    </a>
+                    <a href="{{ url('/jobs?audience=students&q=assistant') }}" class="rounded-full px-3 py-1 text-xs font-bold transition {{ str_contains(strtolower($q), 'assistant') ? 'bg-teal-700 text-white shadow-2xs' : 'bg-white border border-slate-200 text-slate-700 hover:bg-teal-50' }}">
+                        💼 Virtual Assistant
+                    </a>
+                    <a href="{{ url('/remote-jobs/online-jobs-for-students-kenya') }}" class="rounded-full bg-slate-900 text-white px-3.5 py-1 text-xs font-bold hover:bg-slate-800 transition sm:ml-auto">
+                        Student FAQ & Salary Guide &rarr;
+                    </a>
+                </div>
+            </div>
+        @endif
+
         @if (auth()->user()?->onTrial())
             <div class="mt-4 rounded-2xl border border-teal-200 bg-gradient-to-r from-teal-50 via-emerald-50 to-teal-50 p-4 shadow-xs flex flex-wrap items-center justify-between gap-3">
                 <div class="flex items-center gap-2.5 text-xs text-teal-950 font-semibold">
@@ -82,16 +134,16 @@
             </p>
         @endif
 
-        <div class="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-amber-200/70 bg-gradient-to-r from-amber-50/80 via-orange-50/30 to-amber-50/80 p-4 sm:p-5 text-xs sm:text-sm text-slate-800 shadow-2xs">
+        <div class="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-3xl border border-[#c7ccfb] bg-gradient-to-r from-[#eef0fe] via-white to-[#eef0fe] p-4 sm:p-5 text-xs sm:text-sm text-slate-800 shadow-2xs">
             <div class="flex items-center gap-3">
-                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-amber-500 text-white shadow-2xs">
+                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#3444da] text-white shadow-xs">
                     <x-icon name="sparkle" class="h-4 w-4" />
                 </span>
                 <p class="leading-relaxed">
-                    <strong class="font-bold text-slate-900">Pro Membership:</strong> Instant apply access to all 800+ verified remote jobs & direct employer listings &mdash; beat 500+ applicants with priority delivery & AI CV tailoring.
+                    <strong class="font-bold text-slate-900">Pro Membership:</strong> Instant apply access to verified remote jobs & direct employer listings &mdash; beat 500+ applicants with priority delivery & AI CV tailoring.
                 </p>
             </div>
-            <a href="{{ url('/pricing') }}" class="btn-pop inline-flex items-center gap-1.5 rounded-full bg-slate-900 px-5 py-2.5 text-xs font-bold text-white hover:bg-slate-800 transition shrink-0 shadow-2xs">
+            <a href="{{ url('/pricing') }}" class="btn-pop inline-flex items-center gap-1.5 rounded-full bg-[#3444da] hover:bg-[#2633bf] px-5 py-2.5 text-xs font-bold text-white transition shrink-0 shadow-xs">
                 Unlock All Jobs &rarr;
             </a>
         </div>
