@@ -50,6 +50,19 @@
             <path d="M7 6.5 3.5 10 7 13.5M13 6.5 16.5 10 13 13.5" />
             @break
 
+        @case('clipboard')
+        @case('data-entry')
+            <path d="M13 4.5h1.5a1.5 1.5 0 0 1 1.5 1.5v10a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 4 16V6a1.5 1.5 0 0 1 1.5-1.5H7" />
+            <rect x="7" y="2.5" width="6" height="3.5" rx="1" />
+            <path d="M7.5 9.5h5M7.5 12.5h5M7.5 15.5h3" />
+            @break
+
+        @case('database')
+            <ellipse cx="10" cy="5" rx="6.5" ry="2.5" />
+            <path d="M3.5 5v5c0 1.4 2.9 2.5 6.5 2.5s6.5-1.1 6.5-2.5V5" />
+            <path d="M3.5 10v5c0 1.4 2.9 2.5 6.5 2.5s6.5-1.1 6.5-2.5v-5" />
+            @break
+
         @case('headset')
             <path d="M4 11v-1a6 6 0 0 1 12 0v1" />
             <rect x="3" y="11" width="3" height="4" rx="1" />

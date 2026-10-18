@@ -238,14 +238,14 @@
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach ($categories as $i => $cat)
                     <x-reveal :delay="$i * 60">
-                        <a href="{{ url('/remote-jobs/'.$cat['slug']) }}" class="card-hover flex items-center justify-between gap-4 rounded-2xl border border-slate-200/70 bg-white p-5 shadow-xs hover:border-teal-500/60 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200">
+                        <a href="{{ url('/remote-jobs/'.$cat['slug']) }}" class="card-hover flex items-center justify-between gap-4 rounded-2xl border border-slate-200/70 bg-white p-5 shadow-xs hover:border-[#3444da]/60 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group">
                             <div class="flex items-center gap-4">
-                                <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-teal-50 text-teal-700 border border-teal-100 shadow-2xs">
+                                <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#eef0fe] text-[#3444da] border border-[#c7ccfb]/60 shadow-2xs group-hover:scale-105 transition-transform">
                                     <x-icon :name="$cat['icon']" class="h-5 w-5" />
                                 </span>
-                                <span class="font-bold text-slate-800 text-sm hover:text-teal-700 transition-colors">{{ $cat['label'] }}</span>
+                                <span class="font-bold text-slate-800 text-sm group-hover:text-[#3444da] transition-colors">{{ $cat['label'] }}</span>
                             </div>
-                            <span class="flex h-8 w-8 items-center justify-center rounded-full bg-slate-50 text-slate-400 group-hover:bg-teal-50 group-hover:text-teal-700 transition-colors text-sm font-semibold">&rarr;</span>
+                            <span class="flex h-8 w-8 items-center justify-center rounded-full bg-slate-50 text-slate-400 group-hover:bg-[#3444da] group-hover:text-white transition-colors text-sm font-semibold">&rarr;</span>
                         </a>
                     </x-reveal>
                 @endforeach
