@@ -40,6 +40,10 @@ echo "-> Syncing public build assets to public_html..."
 cp -r public/build /home/kenyarem/public_html/
 cp -r public/images /home/kenyarem/public_html/ 2>/dev/null || true
 cp -f public/favicon.ico /home/kenyarem/public_html/favicon.ico 2>/dev/null || true
+cp -f public/images/favicon-32x32.png /home/kenyarem/public_html/favicon-32x32.png 2>/dev/null || true
+cp -f public/images/favicon-16x16.png /home/kenyarem/public_html/favicon-16x16.png 2>/dev/null || true
+cp -f public/images/apple-touch-icon.png /home/kenyarem/public_html/apple-touch-icon.png 2>/dev/null || true
+cp -f public/images/favicon.svg /home/kenyarem/public_html/favicon.svg 2>/dev/null || true
 
 echo "-> Running database migrations & seeders..."
 php artisan migrate --force
