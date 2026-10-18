@@ -28,8 +28,8 @@
                         <div>
                             <div class="flex flex-wrap items-center gap-2">
                                 <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900">{{ $company['name'] }}</h1>
-                                <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-200 px-3 py-0.5 text-xs font-bold text-emerald-900">
-                                    <x-icon name="check" class="h-3.5 w-3.5 text-emerald-600" />
+                                <span class="inline-flex items-center gap-1 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-3 py-0.5 text-xs font-bold text-[#3444da]">
+                                    <x-icon name="check" class="h-3.5 w-3.5 text-[#3444da]" />
                                     Hires in Kenya
                                 </span>
                             </div>
@@ -48,7 +48,7 @@
                         </a>
                         <a
                             href="#open-jobs"
-                            class="btn-pop inline-flex items-center gap-1.5 rounded-full bg-teal-600 px-5 py-2 text-xs font-bold text-white shadow-sm hover:bg-teal-700 transition"
+                            class="btn-pop inline-flex items-center gap-1.5 rounded-full bg-[#3444da] px-5 py-2 text-xs font-bold text-white shadow-md shadow-[#3444da]/20 hover:bg-[#2633bf] transition"
                         >
                             View Open Jobs &darr;
                         </a>
@@ -71,7 +71,7 @@
                     </div>
                     <div class="rounded-2xl bg-slate-50/70 p-4 border border-slate-200/70 shadow-2xs">
                         <p class="font-semibold text-slate-400 uppercase tracking-wider text-[10px]">Timezone Alignment</p>
-                        <p class="mt-1 font-bold text-emerald-800">EAT Compatible (UTC+3)</p>
+                        <p class="mt-1 font-bold text-[#3444da]">EAT Compatible (UTC+3)</p>
                     </div>
                 </div>
             </div>
@@ -123,7 +123,7 @@
                             <p class="font-semibold text-slate-500">Payment Rails</p>
                             <div class="mt-1 flex flex-wrap gap-1">
                                 @foreach ($company['payment_methods'] as $method)
-                                    <span class="rounded-md bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-800 border border-emerald-100">
+                                    <span class="rounded-md bg-[#eef0fe] px-2 py-0.5 text-[11px] font-semibold text-[#3444da] border border-[#c7ccfb]">
                                         {{ $method }}
                                     </span>
                                 @endforeach
@@ -141,7 +141,7 @@
                     <ul class="space-y-2 text-xs text-slate-600">
                         @foreach ($company['perks'] as $perk)
                             <li class="flex items-start gap-2">
-                                <x-icon name="check" class="h-3.5 w-3.5 shrink-0 text-emerald-600 mt-0.5" />
+                                <x-icon name="check" class="h-3.5 w-3.5 shrink-0 text-[#3444da] mt-0.5" />
                                 <span>{{ $perk }}</span>
                             </li>
                         @endforeach
@@ -164,7 +164,7 @@
 
             @if ($jobs->isEmpty())
                 <div class="mt-6 rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center">
-                    <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-teal-700">
+                    <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-[#3444da]">
                         <x-icon name="clock" class="h-6 w-6" />
                     </div>
                     <h3 class="mt-3 text-lg font-bold text-slate-900">No active vacancies at {{ $company['name'] }} right now</h3>
@@ -172,7 +172,7 @@
                         {{ $company['name'] }} recruits in seasonal waves. In the meantime, explore similar verified international remote roles:
                     </p>
                     <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
-                        <a href="{{ url('/jobs') }}" class="btn-pop rounded-full bg-teal-600 px-6 py-2.5 text-xs font-bold text-white hover:bg-teal-700">
+                        <a href="{{ url('/jobs') }}" class="btn-pop rounded-full bg-[#3444da] px-6 py-2.5 text-xs font-bold text-white shadow-md shadow-[#3444da]/20 hover:bg-[#2633bf]">
                             Browse All 800+ Remote Jobs &rarr;
                         </a>
                         <a href="{{ url('/companies') }}" class="rounded-full border border-slate-300 bg-white px-5 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50">
@@ -197,7 +197,7 @@
                         <h3 class="text-xl font-bold text-slate-900">Other Top Remote Companies Hiring in Kenya</h3>
                         <p class="text-xs text-slate-500">Explore more vetted international employers</p>
                     </div>
-                    <a href="{{ url('/companies') }}" class="text-xs font-semibold text-teal-700 hover:underline">
+                    <a href="{{ url('/companies') }}" class="text-xs font-semibold text-[#3444da] hover:underline">
                         View all companies &rarr;
                     </a>
                 </div>
@@ -206,9 +206,9 @@
                     @foreach ($otherCompanies as $other)
                         <a
                             href="{{ url('/companies/'.$other['slug']) }}"
-                            class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs transition hover:-translate-y-1 hover:border-teal-500 hover:shadow-md"
+                            class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs transition hover:-translate-y-1 hover:border-[#3444da]/50 hover:shadow-md"
                         >
-                            <p class="font-bold text-slate-900 group-hover:text-teal-700 transition-colors">{{ $other['name'] }}</p>
+                            <p class="font-bold text-slate-900 group-hover:text-[#3444da] transition-colors">{{ $other['name'] }}</p>
                             <p class="text-xs text-slate-500 mt-0.5">{{ $other['industry'] }}</p>
                             <p class="text-xs text-slate-600 mt-2 line-clamp-2">{{ $other['headline'] }}</p>
                         </a>

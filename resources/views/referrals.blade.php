@@ -2,13 +2,13 @@
     <div class="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:py-14">
         {{-- Hero Header --}}
         <div class="text-center max-w-2xl mx-auto mb-10">
-            <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3.5 py-1 text-xs font-bold text-emerald-700 uppercase tracking-wider mb-4">
-                <x-icon name="gift" class="h-3.5 w-3.5 text-emerald-700" /> Kenyan Jobseeker Referral Program
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-3.5 py-1 text-xs font-bold text-[#3444da] uppercase tracking-wider mb-4">
+                <x-icon name="gift" class="h-3.5 w-3.5 text-[#3444da]" /> Kenyan Jobseeker Referral Program
             </span>
-            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground tracking-tight leading-tight">
-                Refer Friends, <span class="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">Earn Free Pro Access</span>
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+                Refer Friends, <span class="text-[#3444da]">Earn Free Pro Access</span>
             </h1>
-            <p class="mt-3.5 text-base sm:text-lg text-foreground/70 leading-relaxed">
+            <p class="mt-3.5 text-base sm:text-lg text-slate-600 leading-relaxed">
                 Share verified, high-paying remote roles with your network. Every friend who signs up, tests the free trial, or subscribes unlocks free Pro days and AI CV tailor credits for you.
             </p>
         </div>
@@ -31,24 +31,24 @@
                     setTimeout(() => this.codeCopied = false, 2500);
                 }
             }"
-            class="overflow-hidden rounded-3xl border-2 border-emerald-500/30 bg-gradient-to-br from-slate-900 via-slate-850 to-emerald-950 p-6 sm:p-8 text-white shadow-xl relative mb-10"
+            class="overflow-hidden rounded-3xl border border-slate-200/80 bg-gradient-to-br from-[#f8f9fd] via-white to-[#eef0fe]/50 p-6 sm:p-8 text-slate-900 shadow-sm relative mb-10"
         >
-            <div class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-emerald-500/15 blur-3xl"></div>
-            <div class="pointer-events-none absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-teal-500/10 blur-3xl"></div>
+            <div class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#3444da]/5 blur-3xl"></div>
+            <div class="pointer-events-none absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-[#3444da]/5 blur-3xl"></div>
 
             <div class="relative z-10">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
                     <div>
-                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">Your Exclusive Invitation Link</span>
-                        <h2 class="text-xl sm:text-2xl font-black text-white mt-1">Share anywhere &bull; Track in real time</h2>
+                        <span class="text-xs font-bold uppercase tracking-wider text-[#3444da]">Your Exclusive Invitation Link</span>
+                        <h2 class="text-xl sm:text-2xl font-black text-slate-900 mt-1">Share anywhere &bull; Track in real time</h2>
                     </div>
-                    <div class="inline-flex items-center gap-2 bg-white/10 rounded-2xl px-4 py-2 border border-white/15 self-start sm:self-auto">
-                        <span class="text-xs text-white/60">Referral Code:</span>
-                        <span class="font-mono font-black text-emerald-300 text-sm sm:text-base tracking-wider">{{ $referralCode }}</span>
+                    <div class="inline-flex items-center gap-2 bg-[#eef0fe] rounded-2xl px-4 py-2 border border-[#c7ccfb] self-start sm:self-auto">
+                        <span class="text-xs text-slate-500">Referral Code:</span>
+                        <span class="font-mono font-black text-[#3444da] text-sm sm:text-base tracking-wider">{{ $referralCode }}</span>
                         <button
                             type="button"
                             @click="copyCode()"
-                            class="ml-1 text-xs text-white/80 hover:text-white transition underline"
+                            class="ml-1 text-xs text-[#3444da] hover:underline transition font-bold"
                             x-text="codeCopied ? 'Copied!' : 'Copy'"
                         ></button>
                     </div>
@@ -61,13 +61,13 @@
                             type="text"
                             readonly
                             :value="link"
-                            class="w-full rounded-2xl border border-white/20 bg-black/40 px-4 py-3.5 text-xs sm:text-sm font-mono text-emerald-200 select-all focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                            class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3.5 text-xs sm:text-sm font-mono text-slate-800 select-all focus:outline-none focus:ring-2 focus:ring-[#3444da]/20 focus:border-[#3444da]"
                         />
                     </div>
                     <button
                         type="button"
                         @click="copyLink()"
-                        class="btn-pop shrink-0 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black px-6 py-3.5 text-sm transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 active:scale-95"
+                        class="btn-pop shrink-0 rounded-2xl bg-[#3444da] hover:bg-[#2633bf] text-white font-bold px-6 py-3.5 text-sm transition flex items-center justify-center gap-2 shadow-md shadow-[#3444da]/20 active:scale-95"
                     >
                         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
@@ -77,8 +77,8 @@
                 </div>
 
                 {{-- Social 1-Click Share Buttons --}}
-                <div class="mt-6 pt-6 border-t border-white/10">
-                    <p class="text-xs font-bold uppercase tracking-wider text-white/60 mb-3">Instant 1-Click Share to Groups &amp; Contacts:</p>
+                <div class="mt-6 pt-6 border-t border-slate-100">
+                    <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Instant 1-Click Share to Groups &amp; Contacts:</p>
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                         <a
                             href="{{ $whatsappShareUrl }}"
@@ -141,14 +141,14 @@
             </div>
 
             <div class="rounded-3xl border border-black/5 bg-white p-5 shadow-xs">
-                <span class="text-xs font-bold text-emerald-600 uppercase tracking-wide">Free Pro Days Earned</span>
-                <p class="text-3xl font-black text-emerald-600 mt-2">+{{ $stats['earned_pro_days'] }} <span class="text-sm font-bold text-foreground/50">days</span></p>
+                <span class="text-xs font-bold text-[#3444da] uppercase tracking-wide">Free Pro Days Earned</span>
+                <p class="text-3xl font-black text-[#3444da] mt-2">+{{ $stats['earned_pro_days'] }} <span class="text-sm font-bold text-foreground/50">days</span></p>
                 <p class="text-[11px] text-foreground/60 mt-1">Full 0-second apply access</p>
             </div>
 
             <div class="rounded-3xl border border-black/5 bg-white p-5 shadow-xs">
-                <span class="text-xs font-bold text-teal-600 uppercase tracking-wide">AI Tailor Credits</span>
-                <p class="text-3xl font-black text-teal-600 mt-2">+{{ $stats['earned_ai_tailors'] }}</p>
+                <span class="text-xs font-bold text-[#3444da] uppercase tracking-wide">AI Tailor Credits</span>
+                <p class="text-3xl font-black text-[#3444da] mt-2">+{{ $stats['earned_ai_tailors'] }}</p>
                 <p class="text-[11px] text-foreground/60 mt-1">ATS CV tailoring passes</p>
             </div>
 
@@ -161,8 +161,8 @@
                     </p>
                     <p class="text-[11px] text-foreground/60 mt-1">Unlimited Pro subscription active</p>
                 @elseif ($user->hasReferralProAccess())
-                    <p class="text-base font-black text-emerald-600 mt-2 flex items-center gap-1.5">
-                        <x-icon name="sparkle" class="h-4 w-4 text-emerald-600" />
+                    <p class="text-base font-black text-[#3444da] mt-2 flex items-center gap-1.5">
+                        <x-icon name="sparkle" class="h-4 w-4 text-[#3444da]" />
                         <span>Pro Active</span>
                     </p>
                     <p class="text-[11px] text-foreground/60 mt-1">Until {{ $user->pro_access_until->format('M j, Y') }}</p>
@@ -181,7 +181,7 @@
         {{-- How It Works / Milestone Reward Rules --}}
         <div class="rounded-3xl border border-black/5 bg-white p-6 sm:p-8 shadow-sm mb-10">
             <div class="max-w-xl">
-                <span class="text-xs font-bold uppercase tracking-wider text-emerald-600">Rewarding Every Step</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-[#3444da]">Rewarding Every Step</span>
                 <h2 class="text-2xl font-black text-foreground tracking-tight mt-1">How the Referral Awarding System Works</h2>
                 <p class="text-xs sm:text-sm text-foreground/60 mt-1">
                     You don't have to wait for friends to pay to be rewarded. You earn benefits at every milestone:
@@ -216,14 +216,14 @@
                 </div>
 
                 {{-- Milestone 3 --}}
-                <div class="rounded-2xl border border-emerald-100 bg-emerald-50/50 p-5 relative">
-                    <span class="inline-flex items-center justify-center h-8 w-8 rounded-xl bg-emerald-600 text-white font-black text-sm mb-3">3</span>
+                <div class="rounded-2xl border border-[#c7ccfb] bg-[#eef0fe]/40 p-5 relative">
+                    <span class="inline-flex items-center justify-center h-8 w-8 rounded-xl bg-[#3444da] text-white font-black text-sm mb-3">3</span>
                     <h3 class="text-base font-bold text-slate-900">Friend Upgrades to Pro</h3>
                     <p class="mt-1 text-xs text-slate-600 leading-relaxed">
                         When your referred friend unlocks full monthly Pro membership (KES 250), you receive our biggest reward:
                     </p>
-                    <div class="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-emerald-600/10 px-2.5 py-1 text-xs font-bold text-emerald-900">
-                        <x-icon name="trophy" class="h-3.5 w-3.5 text-emerald-900" />
+                    <div class="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-[#eef0fe] border border-[#c7ccfb] px-2.5 py-1 text-xs font-bold text-[#3444da]">
+                        <x-icon name="trophy" class="h-3.5 w-3.5 text-[#3444da]" />
                         <span>+14 Full Days of Pro Access + 5 AI Tailors</span>
                     </div>
                 </div>
@@ -234,7 +234,7 @@
                     <x-icon name="bulb" class="h-4 w-4 text-amber-500 shrink-0 inline" />
                     <span><strong>Rewards Stack Automatically:</strong> Refer 2 friends who test the trial and you get 6 continuous days of full Pro access. Refer 2 who subscribe and you get nearly an entire month free!</span>
                 </span>
-                <a href="{{ url('/account') }}" class="font-bold text-emerald-700 hover:underline">View Account Dashboard &rarr;</a>
+                <a href="{{ url('/account') }}" class="font-bold text-[#3444da] hover:underline">View Account Dashboard &rarr;</a>
             </div>
         </div>
 
@@ -245,12 +245,12 @@
                     <h2 class="text-lg font-bold text-foreground">Your Referred Network</h2>
                     <p class="text-xs text-foreground/60">Candidate privacy is protected with email masking</p>
                 </div>
-                <span class="text-xs font-bold text-emerald-600">{{ count($stats['referrals']) }} registered</span>
+                <span class="text-xs font-bold text-[#3444da]">{{ count($stats['referrals']) }} registered</span>
             </div>
 
             @if (empty($stats['referrals']))
                 <div class="py-12 text-center max-w-sm mx-auto">
-                    <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 mb-3">
+                    <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[#eef0fe] text-[#3444da] mb-3">
                         <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                         </svg>

@@ -139,15 +139,15 @@
                 {{-- Trust Highlights Pill Bar --}}
                 <div class="mt-8 flex flex-wrap items-center justify-center gap-4 text-xs font-medium text-slate-600">
                     <span class="inline-flex items-center gap-1.5 rounded-full bg-white border border-slate-200/80 px-3.5 py-1.5 shadow-2xs">
-                        <x-icon name="check" class="h-3.5 w-3.5 text-emerald-600" />
+                        <x-icon name="check" class="h-3.5 w-3.5 text-[#3444da]" />
                         UTC+3 Timezone Aligned
                     </span>
                     <span class="inline-flex items-center gap-1.5 rounded-full bg-white border border-slate-200/80 px-3.5 py-1.5 shadow-2xs">
-                        <x-icon name="check" class="h-3.5 w-3.5 text-emerald-600" />
+                        <x-icon name="check" class="h-3.5 w-3.5 text-[#3444da]" />
                         Zero Foreign Visa Roadblocks
                     </span>
                     <span class="inline-flex items-center gap-1.5 rounded-full bg-white border border-slate-200/80 px-3.5 py-1.5 shadow-2xs">
-                        <x-icon name="check" class="h-3.5 w-3.5 text-emerald-600" />
+                        <x-icon name="check" class="h-3.5 w-3.5 text-[#3444da]" />
                         Verified USD, M-Pesa &amp; Wise Rails
                     </span>
                 </div>
@@ -256,8 +256,8 @@
     {{-- Not every "remote" job means Kenya — trust section --}}
     <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <x-reveal class="mx-auto mb-12 max-w-2xl text-center">
-            <span class="inline-flex items-center gap-1.5 rounded-full bg-teal-50 border border-teal-200/70 px-3.5 py-1 text-xs font-bold text-teal-800 mb-3">
-                <x-icon name="shield" class="h-3.5 w-3.5 text-teal-600" />
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-3.5 py-1 text-xs font-bold text-[#3444da] mb-3">
+                <x-icon name="shield" class="h-3.5 w-3.5 text-[#3444da]" />
                 Vetting Standards
             </span>
             <h2 class="text-3xl font-extrabold text-slate-900">Not every &ldquo;remote&rdquo; job means Kenya</h2>
@@ -266,8 +266,8 @@
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
             @foreach ($trustFeatures as $i => $f)
                 <x-reveal :delay="$i * 120">
-                    <div class="card-hover h-full rounded-2xl border border-slate-200/60 bg-white p-7 shadow-xs hover:border-teal-500/60 hover:shadow-md transition-all duration-200">
-                        <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-teal-50 text-teal-700 border border-teal-100 shadow-2xs">
+                    <div class="card-hover h-full rounded-2xl border border-slate-200/60 bg-white p-7 shadow-xs hover:border-[#3444da]/50 hover:shadow-md transition-all duration-200">
+                        <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#eef0fe] text-[#3444da] border border-[#c7ccfb] shadow-2xs">
                             <x-icon :name="$f['icon']" class="h-5 w-5" />
                         </span>
                         <h3 class="mt-5 font-bold text-slate-900 text-lg">{{ $f['title'] }}</h3>
@@ -277,7 +277,7 @@
             @endforeach
         </div>
         <x-reveal class="mt-8 text-center">
-            <a href="{{ url('/match') }}" class="inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-50/60 px-5 py-2.5 text-sm font-bold text-teal-800 hover:bg-teal-100 transition shadow-2xs">
+            <a href="{{ url('/match') }}" class="inline-flex items-center gap-2 rounded-full border border-[#c7ccfb] bg-[#eef0fe]/80 px-5 py-2.5 text-sm font-bold text-[#3444da] hover:bg-[#eef0fe] transition shadow-2xs">
                 <span>See how the Kenya-Friendly Match score works</span>
                 <span>&rarr;</span>
             </a>
@@ -288,8 +288,8 @@
     <section class="px-4 py-16 sm:px-6">
         <div class="mx-auto max-w-5xl">
             <x-reveal class="text-center mb-12">
-                <span class="inline-flex items-center gap-1.5 rounded-full bg-teal-50 border border-teal-200/70 px-3.5 py-1 text-xs font-bold text-teal-800 mb-2.5">
-                    <x-icon name="sparkle" class="h-3.5 w-3.5 text-teal-600" />
+                <span class="inline-flex items-center gap-1.5 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-3.5 py-1 text-xs font-bold text-[#3444da] mb-2.5">
+                    <x-icon name="sparkle" class="h-3.5 w-3.5 text-[#3444da]" />
                     Simple Process
                 </span>
                 <h2 class="text-3xl font-extrabold text-slate-900">How KenyaRemoteJobs Works</h2>
@@ -298,12 +298,12 @@
             <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
                 @foreach ($howItWorks as $i => $step)
                     <x-reveal :delay="$i * 100">
-                        <div class="relative h-full rounded-2xl border border-slate-200/70 bg-white p-7 shadow-xs hover:border-teal-500/60 hover:shadow-md transition-all">
+                        <div class="relative h-full rounded-2xl border border-slate-200/70 bg-white p-7 shadow-xs hover:border-[#3444da]/50 hover:shadow-md transition-all">
                             <div class="flex items-center gap-3 mb-4">
-                                <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-600 font-black text-white text-sm shadow-sm shadow-teal-600/30">
+                                <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#3444da] font-black text-white text-sm shadow-sm shadow-[#3444da]/20">
                                     {{ $i + 1 }}
                                 </span>
-                                <span class="text-xs font-bold uppercase tracking-wider text-teal-700">Step 0{{ $i + 1 }}</span>
+                                <span class="text-xs font-bold uppercase tracking-wider text-[#3444da]">Step 0{{ $i + 1 }}</span>
                             </div>
                             <h3 class="font-bold text-slate-900 text-lg">{{ $step['title'] }}</h3>
                             <p class="mt-2 text-sm text-slate-600 leading-relaxed font-normal">{{ $step['body'] }}</p>
@@ -324,8 +324,8 @@
     {{-- Testimonials --}}
     <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <x-reveal class="text-center mb-12">
-            <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-3.5 py-1 text-xs font-bold text-emerald-800 mb-2.5">
-                <x-icon name="check" class="h-3.5 w-3.5 text-emerald-600" />
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-3.5 py-1 text-xs font-bold text-[#3444da] mb-2.5">
+                <x-icon name="check" class="h-3.5 w-3.5 text-[#3444da]" />
                 Proven Results
             </span>
             <h2 class="text-3xl font-extrabold text-slate-900">Success Stories from Kenyan Talent</h2>
@@ -333,10 +333,10 @@
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
             @foreach ($testimonials as $i => $t)
                 <x-reveal :delay="$i * 120">
-                    <figure class="card-hover h-full rounded-2xl border border-slate-200/60 bg-white p-7 shadow-xs hover:border-teal-500/60 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+                    <figure class="card-hover h-full rounded-2xl border border-slate-200/60 bg-white p-7 shadow-xs hover:border-[#3444da]/50 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
                         <blockquote class="text-sm sm:text-base text-slate-700 leading-relaxed font-normal">&ldquo;{{ $t['quote'] }}&rdquo;</blockquote>
-                        <figcaption class="mt-6 pt-4 border-t border-slate-100 text-xs font-bold uppercase tracking-wider text-teal-700 flex items-center gap-2">
-                            <span class="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
+                        <figcaption class="mt-6 pt-4 border-t border-slate-100 text-xs font-bold uppercase tracking-wider text-[#3444da] flex items-center gap-2">
+                            <span class="flex h-6 w-6 items-center justify-center rounded-full bg-[#eef0fe] text-[#3444da]">
                                 <x-icon name="check" class="h-3.5 w-3.5" />
                             </span>
                             {{ $t['name'] }}
@@ -360,7 +360,7 @@
             @endforeach
         </div>
         <div class="mt-10 text-center">
-            <a href="{{ url('/faqs') }}" class="inline-flex items-center gap-1.5 rounded-full border border-slate-200/80 bg-white px-6 py-3 text-sm font-semibold text-slate-700 shadow-xs transition hover:bg-slate-50 hover:border-teal-500 hover:text-teal-700">
+            <a href="{{ url('/faqs') }}" class="inline-flex items-center gap-1.5 rounded-full border border-slate-200/80 bg-white px-6 py-3 text-sm font-semibold text-slate-700 shadow-xs transition hover:bg-slate-50 hover:border-[#3444da] hover:text-[#3444da]">
                 View all answered questions &rarr;
             </a>
         </div>
@@ -368,16 +368,16 @@
 
     {{-- Final CTA banner --}}
     <section class="px-4 pb-12 sm:px-6">
-        <x-reveal class="relative mx-auto max-w-6xl rounded-3xl bg-slate-900 border border-slate-800 px-8 py-16 text-center text-white shadow-2xl overflow-hidden">
-            <div class="pointer-events-none absolute -right-16 -bottom-16 h-64 w-64 rounded-full bg-teal-500/10 blur-3xl"></div>
-            <div class="pointer-events-none absolute -left-16 -top-16 h-64 w-64 rounded-full bg-indigo-500/10 blur-3xl"></div>
+        <x-reveal class="relative mx-auto max-w-6xl rounded-3xl bg-gradient-to-br from-[#f8f9fd] via-white to-[#eef0fe]/70 border border-slate-200/80 px-8 py-16 text-center text-slate-900 shadow-xl overflow-hidden">
+            <div class="pointer-events-none absolute -right-16 -bottom-16 h-64 w-64 rounded-full bg-[#3444da]/5 blur-3xl"></div>
+            <div class="pointer-events-none absolute -left-16 -top-16 h-64 w-64 rounded-full bg-[#3444da]/5 blur-3xl"></div>
 
             <div class="relative z-10">
-                <h2 class="text-3xl font-extrabold sm:text-4xl text-white">Make it easier for the right opportunity to find you.</h2>
-                <p class="mx-auto mt-4 max-w-xl text-slate-300 leading-relaxed font-normal">Get a match score against every listing, no CV upload required — takes under a minute.</p>
+                <h2 class="text-3xl font-extrabold sm:text-4xl text-slate-900">Make it easier for the right opportunity to find you.</h2>
+                <p class="mx-auto mt-4 max-w-xl text-slate-600 leading-relaxed font-normal">Get a match score against every listing, no CV upload required — takes under a minute.</p>
                 <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-                    <a href="{{ url('/match') }}" class="btn-pop rounded-full bg-teal-600 px-8 py-3.5 font-bold text-white shadow-md shadow-teal-600/30 transition hover:bg-teal-700">Get my match score &rarr;</a>
-                    <a href="{{ url('/jobs') }}" class="rounded-full border border-slate-700 bg-slate-800/80 px-8 py-3.5 font-semibold text-slate-200 transition hover:bg-slate-800 hover:text-white">Browse all jobs</a>
+                    <a href="{{ url('/match') }}" class="btn-pop rounded-full bg-[#3444da] hover:bg-[#2633bf] px-8 py-3.5 font-bold text-white shadow-md shadow-[#3444da]/20 transition">Get my match score &rarr;</a>
+                    <a href="{{ url('/jobs') }}" class="rounded-full border border-slate-300 bg-white px-8 py-3.5 font-semibold text-slate-700 transition hover:bg-slate-50 hover:text-[#3444da]">Browse all jobs</a>
                 </div>
             </div>
         </x-reveal>
@@ -385,17 +385,17 @@
 
     <section class="mx-auto max-w-6xl px-4 pb-16 sm:px-6">
         <x-reveal>
-            <a href="{{ url('/surveys') }}" class="flex flex-col items-start justify-between gap-4 rounded-2xl border border-slate-200/70 bg-white p-6 sm:p-7 shadow-xs transition-all hover:border-teal-500/70 hover:shadow-md hover:-translate-y-0.5 sm:flex-row sm:items-center">
+            <a href="{{ url('/surveys') }}" class="flex flex-col items-start justify-between gap-4 rounded-2xl border border-slate-200/70 bg-white p-6 sm:p-7 shadow-xs transition-all hover:border-[#3444da]/50 hover:shadow-md hover:-translate-y-0.5 sm:flex-row sm:items-center">
                 <div>
                     <p class="flex items-center gap-2.5 font-bold text-slate-900 text-base">
-                        <span class="flex h-8 w-8 items-center justify-center rounded-xl bg-teal-50 text-teal-600 border border-teal-100/80 shadow-2xs">
+                        <span class="flex h-8 w-8 items-center justify-center rounded-xl bg-[#eef0fe] text-[#3444da] border border-[#c7ccfb] shadow-2xs">
                             <x-icon name="bulb" class="h-4 w-4" />
                         </span>
                         <span>Earn while you search</span>
                     </p>
                     <p class="text-sm text-slate-500 mt-1 pl-10.5 leading-relaxed font-normal">A curated list of legit paid-survey platforms as a side-income supplement.</p>
                 </div>
-                <span class="shrink-0 text-sm font-bold text-teal-700">Explore &rarr;</span>
+                <span class="shrink-0 text-sm font-bold text-[#3444da]">Explore &rarr;</span>
             </a>
         </x-reveal>
     </section>

@@ -189,8 +189,8 @@
                     <x-icon name="globe" class="h-4 w-4 text-[#3444da]" /> All Opportunities
                 </a>
                 <a href="{{ url('/referrals') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center justify-between rounded-xl px-2.5 py-1.5 text-slate-700 hover:bg-[#eef0fe] hover:text-[#3444da] transition">
-                    <span class="flex items-center gap-2"><x-icon name="gift" class="h-4 w-4 text-emerald-600" /> Refer &amp; Earn</span>
-                    <span class="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-bold text-emerald-600 border border-emerald-500/20">Free Pro</span>
+                    <span class="flex items-center gap-2"><x-icon name="gift" class="h-4 w-4 text-[#3444da]" /> Refer &amp; Earn</span>
+                    <span class="rounded-full bg-[#eef0fe] px-2 py-0.5 text-[10px] font-bold text-[#3444da] border border-[#c7ccfb]">Free Pro</span>
                 </a>
                 <a href="{{ url('/companies') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-slate-600 hover:bg-[#eef0fe] hover:text-[#3444da] transition">
                     <x-icon name="globe" class="h-4 w-4 text-[#3444da]" /> Hiring Companies

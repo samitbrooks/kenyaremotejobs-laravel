@@ -55,20 +55,20 @@
             </article>
 
             {{-- In-article CTA --}}
-            <div class="mt-12 rounded-3xl border border-horizon-200 bg-gradient-to-r from-horizon-900 via-horizon-800 to-slate-900 p-8 text-white shadow-xl">
+            <div class="mt-12 rounded-3xl border border-slate-200/80 bg-gradient-to-br from-[#f8f9fd] via-white to-[#eef0fe]/70 p-8 shadow-xl">
                 <div class="max-w-xl">
-                    <span class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-sunrise-400">
+                    <span class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#3444da]">
                         <x-icon name="sparkle" class="h-3.5 w-3.5" /> Verified Remote Roles
                     </span>
-                    <h3 class="mt-2 text-2xl font-bold">Ready to find your next remote role?</h3>
-                    <p class="mt-2 text-sm text-white/70">
+                    <h3 class="mt-2 text-2xl font-bold text-slate-900">Ready to find your next remote role?</h3>
+                    <p class="mt-2 text-sm text-slate-600">
                         Browse 800+ international remote jobs specifically vetted for East Africa Timezone and Kenyan applicant eligibility.
                     </p>
                     <div class="mt-6 flex flex-wrap items-center gap-3">
-                        <a href="{{ url('/jobs') }}" class="btn-pop rounded-full bg-sunrise-500 px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-sunrise-600">
+                        <a href="{{ url('/jobs') }}" class="btn-pop rounded-full bg-[#3444da] hover:bg-[#2633bf] px-6 py-3 text-sm font-semibold text-white shadow-md transition">
                             Browse Open Remote Jobs &rarr;
                         </a>
-                        <a href="{{ url('/match') }}" class="rounded-full border border-white/20 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+                        <a href="{{ url('/match') }}" class="rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-800 transition hover:bg-slate-50 hover:border-[#3444da]">
                             Calculate CV Match Score
                         </a>
                     </div>

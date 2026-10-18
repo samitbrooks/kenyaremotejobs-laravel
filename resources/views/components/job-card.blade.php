@@ -51,7 +51,7 @@
                 @endif
 
                 @if ($job->kenya_friendly)
-                    <span class="inline-flex items-center gap-1 text-emerald-700 font-bold text-[10px] bg-emerald-50/90 border border-emerald-200/60 rounded-full px-2 py-0.5 shadow-2xs" title="East Africa Time (UTC+3) overlap & zero foreign visa requirements">
+                    <span class="inline-flex items-center gap-1 text-[#3444da] font-bold text-[10px] bg-[#eef0fe] border border-[#c7ccfb] rounded-full px-2 py-0.5 shadow-2xs" title="East Africa Time (UTC+3) overlap & zero foreign visa requirements">
                         <x-icon.kenya-flag class="h-2.5 w-2.5 inline" /> Kenya-Friendly
                     </span>
                 @endif

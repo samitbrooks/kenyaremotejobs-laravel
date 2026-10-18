@@ -77,30 +77,30 @@
                     </span>
                 @else
                     <span class="inline-flex items-center gap-1 rounded-full bg-slate-100/90 border border-slate-200/70 px-3.5 py-1 text-xs font-medium text-slate-700">
-                        <x-icon name="check" class="h-3.5 w-3.5 text-teal-600" /> Open to Apply
+                        <x-icon name="check" class="h-3.5 w-3.5 text-[#3444da]" /> Open to Apply
                     </span>
                 @endif
                 @if (is_int($matchPercent))
-                    <span class="inline-flex items-center gap-1 rounded-full bg-teal-50 border border-teal-200/80 px-3.5 py-1 text-xs font-bold text-teal-800">
-                        <x-icon name="sparkle" class="h-3.5 w-3.5 text-teal-600" /> {{ $matchPercent }}% match for you
+                    <span class="inline-flex items-center gap-1 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-3.5 py-1 text-xs font-bold text-[#3444da]">
+                        <x-icon name="sparkle" class="h-3.5 w-3.5 text-[#3444da]" /> {{ $matchPercent }}% match for you
                     </span>
                 @endif
                 @if ($kesMonthly)
-                    <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50/90 border border-emerald-200/80 px-3.5 py-1 text-xs font-bold text-emerald-950" title="Estimated monthly take-home in Kenyan Shillings (~130 KES/USD)">
-                        <x-icon name="coin" class="h-3.5 w-3.5 text-emerald-700" /> {{ $kesMonthly }}
+                    <span class="inline-flex items-center gap-1 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-3.5 py-1 text-xs font-bold text-slate-900" title="Estimated monthly take-home in Kenyan Shillings (~130 KES/USD)">
+                        <x-icon name="coin" class="h-3.5 w-3.5 text-[#3444da]" /> {{ $kesMonthly }}
                     </span>
                 @endif
                 @if ($hourly)
-                    <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50/90 border border-emerald-200/80 px-3.5 py-1 text-xs font-semibold text-emerald-800" title="Estimated from stated salary ÷ 2,080 hours/year">
-                        <x-icon name="coin" class="h-3.5 w-3.5 text-emerald-700" /> ~${{ $hourly['min'] }}-{{ $hourly['max'] }}/hr
+                    <span class="inline-flex items-center gap-1 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-3.5 py-1 text-xs font-semibold text-slate-900" title="Estimated from stated salary ÷ 2,080 hours/year">
+                        <x-icon name="coin" class="h-3.5 w-3.5 text-[#3444da]" /> ~${{ $hourly['min'] }}-{{ $hourly['max'] }}/hr
                     </span>
                 @endif
                 @if ($job->kenya_friendly)
                     <x-kenya-badge />
                 @endif
                 @if ($job->origin === 'employer')
-                    <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-200/80 px-3.5 py-1 text-xs font-bold text-emerald-800">
-                        <x-icon name="announce" class="h-3.5 w-3.5 text-emerald-700" /> Direct employer listing
+                    <span class="inline-flex items-center gap-1 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-3.5 py-1 text-xs font-bold text-[#3444da]">
+                        <x-icon name="announce" class="h-3.5 w-3.5 text-[#3444da]" /> Direct employer listing
                     </span>
                 @endif
                 <span class="text-sm font-medium text-slate-500">{{ $job->remote_type }}</span>
@@ -120,17 +120,17 @@
             @if (! empty($job->audience_segments))
                 <div class="mt-3 flex flex-wrap gap-1.5">
                     @foreach ($job->audience_segments as $segment)
-                        <a href="{{ url('/jobs') }}?audience={{ $segment }}" class="inline-flex items-center gap-1.5 rounded-full bg-slate-100/90 border border-slate-200/80 px-3 py-1 text-xs font-semibold text-slate-700 transition hover:bg-teal-50 hover:text-teal-800 hover:border-teal-300">
-                            <x-icon :name="\App\Support\Audience::ICONS[$segment] ?? 'globe'" class="h-3.5 w-3.5 text-teal-600" /> {{ \App\Support\Audience::LABELS[$segment] ?? $segment }}
+                        <a href="{{ url('/jobs') }}?audience={{ $segment }}" class="inline-flex items-center gap-1.5 rounded-full bg-slate-100/90 border border-slate-200/80 px-3 py-1 text-xs font-semibold text-slate-700 transition hover:bg-[#eef0fe] hover:text-[#3444da] hover:border-[#c7ccfb]">
+                            <x-icon :name="\App\Support\Audience::ICONS[$segment] ?? 'globe'" class="h-3.5 w-3.5 text-[#3444da]" /> {{ \App\Support\Audience::LABELS[$segment] ?? $segment }}
                         </a>
                     @endforeach
                 </div>
             @endif
 
             {{-- Smart Career Tools Bar: AI CV Tailoring & Application Tracker --}}
-            <div class="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-3xl border border-slate-200/80 bg-gradient-to-r from-teal-50/40 via-white to-slate-50/60 p-5 sm:p-6 shadow-sm">
+            <div class="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-3xl border border-slate-200/80 bg-gradient-to-r from-[#eef0fe]/40 via-white to-slate-50/60 p-5 sm:p-6 shadow-sm">
                 <div class="flex items-center gap-3.5">
-                    <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-teal-50 text-teal-700 border border-teal-100 shadow-2xs">
+                    <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#eef0fe] text-[#3444da] border border-[#c7ccfb] shadow-2xs">
                         <x-icon name="sparkle" class="h-5 w-5" />
                     </div>
                     <div>
@@ -185,16 +185,16 @@
                 @elseif ($canApply)
                     <div class="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-10 text-center shadow-lg">
                         @if ($job->origin === 'employer')
-                            <p class="mb-4 inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-4 py-1 text-xs font-bold text-emerald-800">
+                            <p class="mb-4 inline-flex items-center gap-1.5 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-4 py-1 text-xs font-bold text-[#3444da]">
                                 <x-icon.kenya-flag class="h-3.5 w-3.5 inline" /> Verified Direct Employer &middot; Pro Access Active
                             </p>
                         @elseif ($job->isDirectAts())
-                            <p class="mb-4 inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-4 py-1 text-xs font-bold text-emerald-800">
-                                <x-icon name="check" class="h-4 w-4 text-emerald-600" /> Verified Direct Portal &middot; No 3rd-Party Account Needed
+                            <p class="mb-4 inline-flex items-center gap-1.5 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-4 py-1 text-xs font-bold text-[#3444da]">
+                                <x-icon name="check" class="h-4 w-4 text-[#3444da]" /> Verified Direct Portal &middot; No 3rd-Party Account Needed
                             </p>
                         @elseif ($isEarlyAccess)
-                            <p class="mb-4 inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-4 py-1 text-xs font-bold text-emerald-800">
-                                <x-icon name="check" class="h-4 w-4 text-emerald-600" /> Pro Member Early Access Active
+                            <p class="mb-4 inline-flex items-center gap-1.5 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-4 py-1 text-xs font-bold text-[#3444da]">
+                                <x-icon name="check" class="h-4 w-4 text-[#3444da]" /> Pro Member Early Access Active
                             </p>
                         @endif
                         <h3 class="text-2xl font-extrabold text-slate-900">Ready to submit your application?</h3>
@@ -236,7 +236,7 @@
                 @elseif ($job->origin === 'employer')
                     {{-- Direct Employer Listing Seeking Kenyan Talent (Pro Exclusive) --}}
                     <div class="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-10 text-center shadow-xl">
-                        <div class="inline-flex items-center gap-2 rounded-full bg-emerald-50 border border-emerald-200 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-emerald-900 mb-4">
+                        <div class="inline-flex items-center gap-2 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#3444da] mb-4">
                             <x-icon.kenya-flag class="h-3.5 w-3.5 inline" /> Verified Employer Actively Seeking Kenyan Talent &middot; Full Access with Pro
                         </div>
                         <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
@@ -248,7 +248,7 @@
 
                         <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3.5 max-w-lg mx-auto text-left text-xs font-medium text-slate-700">
                             <div class="rounded-2xl bg-slate-50/80 p-4 border border-slate-200/70 shadow-2xs">
-                                <p class="font-bold text-slate-900 flex items-center gap-1.5"><x-icon name="check" class="h-4 w-4 text-emerald-600" /> No Visa Hurdles</p>
+                                <p class="font-bold text-slate-900 flex items-center gap-1.5"><x-icon name="check" class="h-4 w-4 text-[#3444da]" /> No Visa Hurdles</p>
                                 <p class="text-slate-500 mt-1 leading-relaxed">Employer is already set up to hire Kenyan remote contractors.</p>
                             </div>
                             <div class="rounded-2xl bg-slate-50/80 p-4 border border-slate-200/70 shadow-2xs">
@@ -320,7 +320,7 @@
                             @if (auth()->guest() || ! auth()->user()->hasUsedTrial())
                                 <a
                                     href="{{ route('trial.activate') }}"
-                                    class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-teal-600 bg-teal-50/70 px-6 py-3.5 text-sm font-bold text-teal-800 hover:bg-teal-100 transition"
+                                    class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-[#c7ccfb] bg-[#eef0fe] px-6 py-3.5 text-sm font-bold text-[#3444da] hover:bg-[#e0e4fd] transition shadow-2xs"
                                 >
                                     Start 24-Hour Free Pass &rarr;
                                 </a>
@@ -342,7 +342,7 @@
                         <h2 class="text-xl font-extrabold text-slate-900">Related Remote Jobs Open to Kenya</h2>
                         <p class="text-xs text-slate-500 mt-0.5">Explore similar international remote opportunities</p>
                     </div>
-                    <a href="{{ url('/jobs') }}" class="text-xs font-bold text-teal-700 hover:underline">
+                    <a href="{{ url('/jobs') }}" class="text-xs font-bold text-[#3444da] hover:underline">
                         See all jobs &rarr;
                     </a>
                 </div>

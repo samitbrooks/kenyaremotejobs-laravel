@@ -99,21 +99,21 @@ new class extends Component
     $price = $currentPlan['price_kes'] ?? 250;
     $label = $buttonLabel ?? ($currentPlan['button_text'] ?? 'Choose '.($currentPlan['label'] ?? 'Plan'));
     $btnClasses = match ($period) {
-        'starter' => 'bg-slate-950 text-white hover:bg-slate-800',
-        'pro', 'elite' => 'bg-[#00D47E] text-[#08291D] hover:bg-[#00BB6F] shadow-sm',
-        default => 'bg-[#00D47E] text-[#08291D] hover:bg-[#00BB6F]',
+        'starter' => 'bg-slate-900 text-white hover:bg-slate-800',
+        'pro', 'elite' => 'bg-[#3444da] text-white hover:bg-[#2633bf] shadow-md shadow-[#3444da]/25',
+        default => 'bg-[#3444da] text-white hover:bg-[#2633bf] shadow-md shadow-[#3444da]/25',
     };
 @endphp
 
 <div class="w-full">
     @if ($alreadySubscribed)
-        <button type="button" disabled class="w-full rounded-full border border-emerald-300 bg-emerald-50 px-5 py-2.5 text-[13px] font-extrabold text-emerald-800">
+        <button type="button" disabled class="w-full rounded-full border border-[#c7ccfb] bg-[#eef0fe] px-5 py-2.5 text-[13px] font-extrabold text-[#3444da]">
             You&rsquo;re Subscribed
         </button>
     @elseif ($pendingPaymentId)
-        <div wire:poll.3s="checkPaymentStatus" class="rounded-xl border border-[#00D47E]/40 bg-[#00D47E]/10 p-4 text-center text-xs">
-            <div class="flex items-center justify-center gap-1.5 font-bold text-[#08291D]">
-                <span class="inline-block h-2 w-2 rounded-full bg-[#00D47E] animate-ping"></span>
+        <div wire:poll.3s="checkPaymentStatus" class="rounded-xl border border-[#c7ccfb] bg-[#eef0fe] p-4 text-center text-xs">
+            <div class="flex items-center justify-center gap-1.5 font-bold text-[#3444da]">
+                <span class="inline-block h-2 w-2 rounded-full bg-[#3444da] animate-ping"></span>
                 Check your phone
             </div>
             <p class="mt-1 text-slate-700 leading-snug">
@@ -129,7 +129,7 @@ new class extends Component
                 type="tel"
                 wire:model="phone"
                 placeholder="07XXXXXXXX"
-                class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 placeholder:text-slate-400 focus:border-[#00D47E] focus:outline-none focus:ring-1 focus:ring-[#00D47E]"
+                class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 placeholder:text-slate-400 focus:border-[#3444da] focus:outline-none focus:ring-1 focus:ring-[#3444da]"
                 autofocus
             >
             <button

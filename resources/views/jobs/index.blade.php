@@ -64,7 +64,7 @@
                         Campus & Student Portal
                     </span>
                     <span class="inline-flex items-center gap-1.5 rounded-full bg-slate-100 border border-slate-200 px-3 py-1 text-xs font-medium text-slate-700">
-                        <x-icon name="check" class="h-3.5 w-3.5 text-emerald-600" /> 100% Flexible Hours
+                        <x-icon name="check" class="h-3.5 w-3.5 text-[#3444da]" /> 100% Flexible Hours
                     </span>
                     <span class="inline-flex items-center gap-1.5 rounded-full bg-slate-100 border border-slate-200 px-3 py-1 text-xs font-medium text-slate-700">
                         <x-icon name="lightning" class="h-3.5 w-3.5 text-[#3444da]" /> M-Pesa Weekly / Bi-Weekly Payouts
@@ -197,7 +197,7 @@
                 <label class="inline-flex items-center gap-2 rounded-full border border-slate-200/70 bg-slate-50/70 px-3.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-[#eef0fe] hover:border-[#c7ccfb] hover:text-[#3444da] cursor-pointer transition shadow-2xs">
                     <input type="checkbox" name="freeOnly" value="true" @checked($freeOnly) class="h-4 w-4 rounded-full border-slate-300 text-[#3444da] focus:ring-[#3444da]">
                     <span>Direct employer listings only</span>
-                    <x-icon name="announce" class="h-3.5 w-3.5 text-emerald-600" />
+                    <x-icon name="announce" class="h-3.5 w-3.5 text-[#3444da]" />
                 </label>
             </div>
         </form>

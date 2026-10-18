@@ -19,28 +19,28 @@
     <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
         {{-- Breadcrumb Navigation --}}
         <nav class="mb-6 flex items-center gap-2 text-xs font-semibold text-slate-500">
-            <a href="{{ url('/') }}" class="hover:text-teal-600 transition">Home</a>
+            <a href="{{ url('/') }}" class="hover:text-[#3444da] transition">Home</a>
             <span>&rsaquo;</span>
             <span class="text-slate-900 font-bold">Paid Surveys & Side Income</span>
         </nav>
 
         {{-- Verification Status Banner --}}
-        <div class="mb-8 rounded-2xl border border-teal-200/90 bg-gradient-to-r from-teal-50/90 via-emerald-50/80 to-teal-50/90 p-4 shadow-xs flex flex-wrap items-center justify-between gap-4">
+        <div class="mb-8 rounded-2xl border border-[#c7ccfb] bg-gradient-to-r from-[#eef0fe]/90 via-[#f8f9fd] to-[#eef0fe]/90 p-4 shadow-xs flex flex-wrap items-center justify-between gap-4">
             <div class="flex items-center gap-2.5">
                 <span class="relative flex h-3 w-3">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-3 w-3 bg-teal-600"></span>
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#3444da] opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-[#3444da]"></span>
                 </span>
-                <p class="text-xs sm:text-sm font-bold text-teal-950">
-                    Active &amp; Verified for Kenya <span class="font-normal text-teal-800">&middot; Daily availability verified: <span class="font-semibold text-teal-950">{{ $lastSyncedAt ?? now()->format('F j, Y') }}</span></span>
+                <p class="text-xs sm:text-sm font-bold text-slate-900">
+                    Active &amp; Verified for Kenya <span class="font-normal text-slate-600">&middot; Daily availability verified: <span class="font-semibold text-[#3444da]">{{ $lastSyncedAt ?? now()->format('F j, Y') }}</span></span>
                 </p>
             </div>
             @if ($hasAccess)
-                <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-600 px-3.5 py-1 text-xs font-black text-white shadow-2xs">
+                <span class="inline-flex items-center gap-1.5 rounded-full bg-[#3444da] px-3.5 py-1 text-xs font-black text-white shadow-2xs">
                     <x-icon name="check" class="h-3.5 w-3.5" /> VIP Vault Unlocked
                 </span>
             @else
-                <span class="inline-flex items-center gap-1.5 rounded-full bg-white/90 border border-teal-200 px-3 py-1 text-xs font-bold text-teal-800 shadow-2xs">
+                <span class="inline-flex items-center gap-1.5 rounded-full bg-white/90 border border-[#c7ccfb] px-3 py-1 text-xs font-bold text-[#3444da] shadow-2xs">
                     <x-icon.kenya-flag class="h-3.5 w-3.5 inline" /> 4 Free Previews &middot; 18 in Premium Vault
                 </span>
             @endif
@@ -48,14 +48,14 @@
 
         {{-- Unlocked Success Banner --}}
         @if (request()->query('unlocked'))
-            <div class="mb-8 rounded-3xl border border-emerald-300 bg-emerald-50 p-6 text-center shadow-md animate-fade-in">
-                <div class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 mb-2">
+            <div class="mb-8 rounded-3xl border border-[#c7ccfb] bg-[#eef0fe] p-6 text-center shadow-md animate-fade-in">
+                <div class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#3444da] mb-2">
                     <x-icon name="check" class="h-6 w-6" />
                 </div>
-                <h3 class="text-lg font-extrabold text-emerald-950 flex items-center justify-center gap-1.5">
-                    <x-icon name="sparkle" class="h-5 w-5 text-emerald-700" /> Survey Side-Income Vault Unlocked!
+                <h3 class="text-lg font-extrabold text-slate-900 flex items-center justify-center gap-1.5">
+                    <x-icon name="sparkle" class="h-5 w-5 text-[#3444da]" /> Survey Side-Income Vault Unlocked!
                 </h3>
-                <p class="text-xs sm:text-sm text-emerald-800 mt-1 max-w-lg mx-auto">
+                <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-lg mx-auto">
                     Your M-Pesa payment was confirmed. You now have unrestricted access to all 20+ verified research panels, Outlier AI tasks, and direct sign-up links.
                 </p>
             </div>
@@ -64,7 +64,7 @@
         {{-- Hero Header --}}
         <div class="max-w-3xl">
             <h1 class="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-                Earn While You Search <span class="text-teal-600">— Paid Surveys for Kenyans</span>
+                Earn While You Search <span class="text-[#3444da]">— Paid Surveys for Kenyans</span>
             </h1>
             <p class="mt-3 text-base text-slate-600 leading-relaxed font-normal">
                 Looking for your next remote role takes time. This hand-vetted directory gives Kenyan jobseekers legitimate, tested platforms to earn flexible side-income in USD, airtime, or crypto while you apply. Every platform below accepts Kenyan IP addresses without VPN trickery.
@@ -76,19 +76,19 @@
         {{-- Interactive Filter Bar --}}
         <div class="mt-8 flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-5">
             <div class="flex flex-wrap items-center gap-2">
-                <a href="{{ route('surveys') }}" class="rounded-full px-4 py-1.5 text-xs font-bold transition {{ ($activeCategory ?? 'all') === 'all' && ($activePayout ?? 'all') === 'all' ? 'bg-teal-700 text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200' }}">
+                <a href="{{ route('surveys') }}" class="rounded-full px-4 py-1.5 text-xs font-bold transition {{ ($activeCategory ?? 'all') === 'all' && ($activePayout ?? 'all') === 'all' ? 'bg-[#3444da] text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200' }}">
                     All Platforms ({{ count(\App\Support\SurveyPlatforms::all()) }})
                 </a>
-                <a href="{{ route('surveys', ['payout' => 'mpesa']) }}" class="inline-flex items-center gap-1 rounded-full px-4 py-1.5 text-xs font-bold transition {{ ($activePayout ?? '') === 'mpesa' ? 'bg-teal-700 text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200' }}">
+                <a href="{{ route('surveys', ['payout' => 'mpesa']) }}" class="inline-flex items-center gap-1 rounded-full px-4 py-1.5 text-xs font-bold transition {{ ($activePayout ?? '') === 'mpesa' ? 'bg-[#3444da] text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200' }}">
                     <x-icon.kenya-flag class="h-3 w-3 inline" /> M-Pesa / PayPal Compatible
                 </a>
-                <a href="{{ route('surveys', ['category' => 'research']) }}" class="inline-flex items-center gap-1 rounded-full px-4 py-1.5 text-xs font-bold transition {{ ($activeCategory ?? '') === 'research' ? 'bg-teal-700 text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200' }}">
+                <a href="{{ route('surveys', ['category' => 'research']) }}" class="inline-flex items-center gap-1 rounded-full px-4 py-1.5 text-xs font-bold transition {{ ($activeCategory ?? '') === 'research' ? 'bg-[#3444da] text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200' }}">
                     <x-icon name="dollar" class="h-3 w-3 inline" /> High-Paying ($50+)
                 </a>
-                <a href="{{ route('surveys', ['category' => 'microtasks']) }}" class="inline-flex items-center gap-1 rounded-full px-4 py-1.5 text-xs font-bold transition {{ ($activeCategory ?? '') === 'microtasks' ? 'bg-teal-700 text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200' }}">
+                <a href="{{ route('surveys', ['category' => 'microtasks']) }}" class="inline-flex items-center gap-1 rounded-full px-4 py-1.5 text-xs font-bold transition {{ ($activeCategory ?? '') === 'microtasks' ? 'bg-[#3444da] text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200' }}">
                     <x-icon name="lightning" class="h-3 w-3 inline" /> Microtasks &amp; AI
                 </a>
-                <a href="{{ route('surveys', ['payout' => 'crypto']) }}" class="inline-flex items-center gap-1 rounded-full px-4 py-1.5 text-xs font-bold transition {{ ($activePayout ?? '') === 'crypto' ? 'bg-teal-700 text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200' }}">
+                <a href="{{ route('surveys', ['payout' => 'crypto']) }}" class="inline-flex items-center gap-1 rounded-full px-4 py-1.5 text-xs font-bold transition {{ ($activePayout ?? '') === 'crypto' ? 'bg-[#3444da] text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200' }}">
                     <x-icon name="shield" class="h-3 w-3 inline" /> Crypto Payouts
                 </a>
             </div>
@@ -106,15 +106,15 @@
                 @endphp
 
                 <x-reveal :delay="min($i, 8) * 40">
-                    <div class="group relative flex h-full flex-col justify-between rounded-3xl border {{ $isLocked ? 'border-amber-200/70 bg-gradient-to-b from-white to-amber-50/20' : 'border-slate-200/90 bg-white' }} p-6 shadow-sm hover:shadow-xl hover:border-teal-500/60 hover:-translate-y-1 transition-all duration-200 overflow-hidden">
+                    <div class="group relative flex h-full flex-col justify-between rounded-3xl border {{ $isLocked ? 'border-amber-200/70 bg-gradient-to-b from-white to-amber-50/20' : 'border-slate-200/90 bg-white' }} p-6 shadow-sm hover:shadow-xl hover:border-[#3444da]/50 hover:-translate-y-1 transition-all duration-200 overflow-hidden">
                         <div>
                             {{-- Top Header Row: Name & Badges --}}
                             <div class="flex items-start justify-between gap-3">
                                 <div>
-                                    <h2 class="text-lg font-black text-slate-900 group-hover:text-teal-700 transition flex items-center gap-1.5">
+                                    <h2 class="text-lg font-black text-slate-900 group-hover:text-[#3444da] transition flex items-center gap-1.5">
                                         <span>{{ $platform['name'] }}</span>
                                         @if ($isLocked)
-                                            <x-icon name="lock" class="h-3.5 w-3.5 text-amber-500 inline" />
+                                             <x-icon name="lock" class="h-3.5 w-3.5 text-amber-500 inline" />
                                         @endif
                                     </h2>
                                     <div class="mt-1 flex items-center gap-1.5">
@@ -132,7 +132,7 @@
                                         VIP Vault
                                     </span>
                                 @elseif (! empty($platform['badge']))
-                                    <span class="inline-flex rounded-full bg-teal-50 border border-teal-200/80 px-2.5 py-0.5 text-[10px] font-bold text-teal-800 shrink-0 shadow-2xs">
+                                    <span class="inline-flex rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-2.5 py-0.5 text-[10px] font-bold text-[#3444da] shrink-0 shadow-2xs">
                                         {{ $platform['badge'] }}
                                     </span>
                                 @endif
@@ -156,7 +156,7 @@
                             <div class="mt-4 space-y-2 rounded-2xl bg-slate-50/80 p-3.5 border border-slate-100 text-xs">
                                 <div class="flex items-center justify-between text-slate-700">
                                     <span class="text-slate-400 font-medium">Earning Rate:</span>
-                                    <strong class="font-bold text-teal-800">{{ $platform['earning_potential'] ?? 'Varies per survey' }}</strong>
+                                    <strong class="font-bold text-[#3444da]">{{ $platform['earning_potential'] ?? 'Varies per survey' }}</strong>
                                 </div>
                                 <div class="flex items-center justify-between text-slate-700">
                                     <span class="text-slate-400 font-medium">Min. Cashout:</span>
@@ -172,7 +172,7 @@
                             <div class="mt-4 flex flex-wrap gap-1.5">
                                 @foreach ($platform['payouts'] as $payout)
                                     <span class="inline-flex items-center gap-1 rounded-full bg-slate-100/90 border border-slate-200/60 px-2.5 py-0.5 text-[11px] font-semibold text-slate-700">
-                                        <x-icon name="check" class="h-3 w-3 text-teal-600" /> {{ $payout }}
+                                        <x-icon name="check" class="h-3 w-3 text-[#3444da]" /> {{ $payout }}
                                     </span>
                                 @endforeach
                             </div>
@@ -184,7 +184,7 @@
                                 <a
                                     href="#unlock-vault"
                                     onclick="document.getElementById('unlock-vault')?.scrollIntoView({behavior: 'smooth'}); setTimeout(() => document.querySelector('#unlock-vault input[type=tel]')?.focus(), 300);"
-                                    class="btn-pop flex w-full items-center justify-center gap-2 rounded-full bg-slate-900 hover:bg-teal-700 px-4 py-2.5 text-xs font-extrabold text-white shadow-md transition"
+                                    class="btn-pop flex w-full items-center justify-center gap-2 rounded-full bg-slate-900 hover:bg-[#2633bf] px-4 py-2.5 text-xs font-extrabold text-white shadow-md transition"
                                 >
                                     <x-icon name="lock" class="h-3.5 w-3.5 text-white inline" />
                                     <span>Unlock Premium Paid Surveys (KES {{ $priceKes ?? 199 }})</span>
@@ -197,7 +197,7 @@
                                     href="{{ $platform['url'] }}"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    class="btn-pop flex w-full items-center justify-center gap-2 rounded-full bg-teal-600 hover:bg-teal-700 px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-teal-600/20 transition"
+                                    class="btn-pop flex w-full items-center justify-center gap-2 rounded-full bg-[#3444da] hover:bg-[#2633bf] px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-[#3444da]/20 transition"
                                 >
                                     <span>Sign Up on {{ $platform['name'] }}</span>
                                     <span>&rarr;</span>
@@ -220,15 +220,15 @@
         @endif
 
         {{-- Withdrawal Guide Callout --}}
-        <div class="mt-14 rounded-3xl border border-teal-200/80 bg-gradient-to-r from-teal-900 via-slate-900 to-teal-950 p-6 sm:p-10 text-white shadow-xl">
+        <div class="mt-14 rounded-3xl border border-slate-200/80 bg-gradient-to-br from-[#f8f9fd] via-white to-[#eef0fe]/50 p-6 sm:p-10 text-slate-900 shadow-sm">
             <div class="max-w-2xl">
-                <span class="inline-flex items-center gap-1.5 rounded-full bg-teal-500/20 px-3 py-1 text-xs font-bold text-teal-300">
+                <span class="inline-flex items-center gap-1.5 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-3 py-1 text-xs font-bold text-[#3444da]">
                     <x-icon.kenya-flag class="h-3.5 w-3.5 inline" /> M-Pesa Pro Tip
                 </span>
                 <h3 class="mt-3 text-xl sm:text-2xl font-black">
                     How to Convert Survey USD Directly to M-Pesa
                 </h3>
-                <p class="mt-2 text-sm text-slate-300 leading-relaxed font-normal">
+                <p class="mt-2 text-sm text-slate-600 leading-relaxed font-normal">
                     Most global survey sites pay via PayPal. Link your Kenyan PayPal account with your Safaricom M-Pesa number using the official Safaricom PayPal-to-M-Pesa portal. Withdrawals process in under 2 minutes at standard Central Bank exchange rates.
                 </p>
                 <div class="mt-5 flex flex-wrap items-center gap-3">
@@ -236,11 +236,11 @@
                         href="https://www.paypal-mobilemoney.com/m-pesa"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="btn-pop rounded-full bg-teal-400 px-5 py-2 text-xs font-extrabold text-slate-950 hover:bg-teal-300 transition"
+                        class="btn-pop rounded-full bg-[#3444da] px-5 py-2 text-xs font-extrabold text-white hover:bg-[#2633bf] shadow-md shadow-[#3444da]/20 transition"
                     >
                         Visit Safaricom PayPal-M-Pesa Portal &rarr;
                     </a>
-                    <a href="{{ url('/journal/complete-guide-to-legit-remote-jobs-in-kenya') }}" class="text-xs font-bold text-teal-300 hover:underline">
+                    <a href="{{ url('/journal/complete-guide-to-legit-remote-jobs-in-kenya') }}" class="text-xs font-bold text-[#3444da] hover:underline">
                         Read our Remote Payouts Guide &rarr;
                     </a>
                 </div>

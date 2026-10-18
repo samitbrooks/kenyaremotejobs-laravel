@@ -28,40 +28,40 @@
     >
         <div
             @click.away="open = false"
-            class="relative w-full max-w-md rounded-3xl bg-slate-900 border border-slate-800 p-6 sm:p-8 text-white shadow-2xl overflow-hidden"
+            class="relative w-full max-w-md rounded-3xl bg-white border border-slate-200/90 p-6 sm:p-8 text-slate-900 shadow-2xl overflow-hidden"
         >
             {{-- Close Button --}}
             <button
                 type="button"
                 @click="open = false"
-                class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl p-1"
+                class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-xl p-1"
             >
                 &times;
             </button>
 
             <div class="flex items-center gap-3 mb-4">
-                <span class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#25D366] text-white shadow-lg shadow-emerald-500/30">
+                <span class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#25D366] text-white shadow-lg shadow-green-500/20">
                     <x-icon name="chat" class="h-6 w-6 text-white" />
                 </span>
                 <div>
-                    <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400">Exclusive Broadcast</span>
-                    <h3 class="text-lg font-black text-white">VIP WhatsApp Job Alerts</h3>
+                    <span class="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-[#3444da] bg-[#eef0fe] px-2 py-0.5 rounded-full border border-[#c7ccfb]">Exclusive Broadcast</span>
+                    <h3 class="text-lg font-black text-slate-900 mt-1">VIP WhatsApp Job Alerts</h3>
                 </div>
             </div>
 
-            <p class="text-xs text-slate-300 leading-relaxed mb-5">
+            <p class="text-xs text-slate-600 leading-relaxed mb-5">
                 Join <strong>4,500+ Kenyan job seekers</strong> receiving real-time alerts the moment verified worldwide remote roles open to East Africa Time (UTC+3) are published.
             </p>
 
-            <div class="rounded-2xl border border-slate-800 bg-slate-950 p-4 space-y-2 text-xs text-slate-300 mb-6">
-                <div class="flex items-center gap-2 text-emerald-400 font-semibold">
-                    <x-icon name="check" class="h-4 w-4 shrink-0 text-emerald-400" /> Instant notification before public applications flood in
+            <div class="rounded-2xl border border-slate-200/80 bg-[#f8f9fd] p-4 space-y-2 text-xs text-slate-700 mb-6">
+                <div class="flex items-center gap-2 text-slate-800 font-semibold">
+                    <x-icon name="check" class="h-4 w-4 shrink-0 text-[#3444da]" /> Instant notification before public applications flood in
                 </div>
-                <div class="flex items-center gap-2 text-emerald-400 font-semibold">
-                    <x-icon name="check" class="h-4 w-4 shrink-0 text-emerald-400" /> Verified compensation in USD &amp; estimated KES take-home
+                <div class="flex items-center gap-2 text-slate-800 font-semibold">
+                    <x-icon name="check" class="h-4 w-4 shrink-0 text-[#3444da]" /> Verified compensation in USD &amp; estimated KES take-home
                 </div>
-                <div class="flex items-center gap-2 text-emerald-400 font-semibold">
-                    <x-icon name="check" class="h-4 w-4 shrink-0 text-emerald-400" /> Zero spam &bull; only Kenya-friendly vetted remote roles
+                <div class="flex items-center gap-2 text-slate-800 font-semibold">
+                    <x-icon name="check" class="h-4 w-4 shrink-0 text-[#3444da]" /> Zero spam &bull; only Kenya-friendly vetted remote roles
                 </div>
             </div>
 
@@ -69,12 +69,12 @@
                 href="https://wa.me/{{ preg_replace('/[^\d]/', '', config('whatsapp.default_channel_phone', '254700000000')) }}?text=Hello%20KenyaRemoteJobs%20Team!%20I%20would%20like%20to%20receive%20instant%20WhatsApp%20remote%20job%20alerts."
                 target="_blank"
                 rel="noopener"
-                class="btn-pop inline-flex items-center justify-center gap-2 w-full rounded-2xl bg-[#25D366] py-3.5 text-center text-xs font-black uppercase tracking-wider text-white shadow-lg shadow-emerald-600/30 hover:bg-[#20ba59] transition"
+                class="btn-pop inline-flex items-center justify-center gap-2 w-full rounded-2xl bg-[#25D366] py-3.5 text-center text-xs font-black uppercase tracking-wider text-white shadow-lg shadow-green-500/20 hover:bg-[#20ba59] transition"
             >
                 <x-icon name="chat" class="h-4 w-4" /> Join Instant WhatsApp Alerts &rarr;
             </a>
 
-            <p class="mt-3 text-center text-[10px] text-slate-500">
+            <p class="mt-3 text-center text-[10px] text-slate-400">
                 100% Free &bull; Mute or leave anytime &bull; Powered by Meta Cloud API
             </p>
         </div>

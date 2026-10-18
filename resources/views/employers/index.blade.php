@@ -75,54 +75,54 @@
     :canonical="url('/employers')"
 >
     {{-- Hero Section --}}
-    <section class="relative overflow-hidden bg-gradient-to-b from-horizon-950 via-horizon-900 to-slate-950 px-4 pb-20 pt-16 text-white sm:px-6 sm:pt-24">
+    <section class="relative overflow-hidden bg-gradient-to-b from-[#eef0fe]/70 via-[#f8f9fd] to-white px-4 pb-20 pt-16 text-slate-900 sm:px-6 sm:pt-24 border-b border-slate-200/80">
         {{-- Background Glow --}}
         <div class="pointer-events-none absolute inset-0 overflow-hidden">
-            <div class="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-sunrise-500/15 blur-3xl"></div>
-            <div class="absolute -left-24 bottom-0 h-96 w-96 rounded-full bg-indigo-500/15 blur-3xl"></div>
+            <div class="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-[#3444da]/10 blur-3xl"></div>
+            <div class="absolute -left-24 bottom-0 h-96 w-96 rounded-full bg-indigo-500/10 blur-3xl"></div>
         </div>
 
         <div class="relative mx-auto max-w-5xl text-center">
-            <span class="inline-flex items-center gap-1.5 rounded-full bg-sunrise-500/20 border border-sunrise-400/30 px-4 py-1 text-xs font-bold text-sunrise-300">
-                <x-icon name="globe" class="h-4 w-4 text-sunrise-400" />
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-4 py-1 text-xs font-bold text-[#3444da]">
+                <x-icon name="globe" class="h-4 w-4 text-[#3444da]" />
                 Trusted Remote Hiring Hub for East Africa
             </span>
 
-            <h1 class="mt-6 text-4xl font-black tracking-tight sm:text-6xl sm:leading-[1.1]">
+            <h1 class="mt-6 text-4xl font-black tracking-tight sm:text-6xl sm:leading-[1.1] text-slate-900">
                 Hire world-class remote talent in <br class="hidden sm:inline" />
-                <span class="gradient-sunrise bg-clip-text text-transparent">Kenya &amp; East Africa.</span>
+                <span class="text-[#3444da]">Kenya &amp; East Africa.</span>
             </h1>
 
-            <p class="mx-auto mt-6 max-w-2xl text-base text-white/75 sm:text-xl leading-relaxed">
+            <p class="mx-auto mt-6 max-w-2xl text-base text-slate-600 sm:text-xl leading-relaxed">
                 Connect your open remote roles directly with over 25,000 highly skilled, English-fluent Kenyan developers, designers, product managers, and support champions.
             </p>
 
             <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
-                <a href="{{ url('/employers/post') }}" class="btn-pop rounded-full bg-sunrise-500 px-8 py-4 font-bold text-white shadow-xl transition hover:bg-sunrise-600 text-base">
+                <a href="{{ url('/employers/post') }}" class="btn-pop rounded-full bg-[#3444da] hover:bg-[#2633bf] px-8 py-4 font-bold text-white shadow-xl transition text-base">
                     Post a Remote Job &rarr;
                 </a>
-                <a href="#why-kenya" class="rounded-full border border-white/20 px-6 py-4 text-sm font-semibold text-white transition hover:bg-white/10">
+                <a href="#why-kenya" class="rounded-full border border-slate-300 bg-white px-6 py-4 text-sm font-semibold text-slate-800 transition hover:bg-slate-50 hover:border-[#3444da]">
                     Why Global Companies Hire in Kenya &darr;
                 </a>
             </div>
 
             {{-- Social Proof Stat Bar --}}
-            <div class="mt-14 grid grid-cols-2 gap-4 border-t border-white/10 pt-10 sm:grid-cols-4">
+            <div class="mt-14 grid grid-cols-2 gap-4 border-t border-slate-200/80 pt-10 sm:grid-cols-4">
                 <div>
-                    <p class="text-3xl font-extrabold text-white">25,000+</p>
-                    <p class="text-xs text-white/60 mt-1">Active Kenyan Job Seekers</p>
+                    <p class="text-3xl font-extrabold text-slate-900">25,000+</p>
+                    <p class="text-xs text-slate-500 mt-1">Active Kenyan Job Seekers</p>
                 </div>
                 <div>
-                    <p class="text-3xl font-extrabold text-sunrise-400">#1</p>
-                    <p class="text-xs text-white/60 mt-1">Tech Talent Hub in East Africa</p>
+                    <p class="text-3xl font-extrabold text-[#3444da]">#1</p>
+                    <p class="text-xs text-slate-500 mt-1">Tech Talent Hub in East Africa</p>
                 </div>
                 <div>
-                    <p class="text-3xl font-extrabold text-emerald-400">UTC+3</p>
-                    <p class="text-xs text-white/60 mt-1">Ideal Synchronous Overlap</p>
+                    <p class="text-3xl font-extrabold text-[#3444da]">UTC+3</p>
+                    <p class="text-xs text-slate-500 mt-1">Ideal Synchronous Overlap</p>
                 </div>
                 <div>
-                    <p class="text-3xl font-extrabold text-indigo-400">100%</p>
-                    <p class="text-xs text-white/60 mt-1">Direct Application Links</p>
+                    <p class="text-3xl font-extrabold text-indigo-600">100%</p>
+                    <p class="text-xs text-slate-500 mt-1">Direct Application Links</p>
                 </div>
             </div>
         </div>
@@ -190,13 +190,13 @@
                         </thead>
                         <tbody class="divide-y divide-black/5 text-foreground/80">
                             @foreach ($timezones as $tz)
-                                <tr class="hover:bg-horizon-50/30 transition-colors">
+                                <tr class="hover:bg-[#eef0fe]/30 transition-colors">
                                     <td class="py-4 px-6 font-bold text-foreground">{{ $tz['city'] }}</td>
                                     <td class="py-4 px-6 text-xs text-foreground/70">{{ $tz['eat_hours'] }}</td>
-                                    <td class="py-4 px-6 text-xs font-medium text-horizon-900">{{ $tz['local_hours'] }}</td>
-                                    <td class="py-4 px-6 text-xs font-semibold text-emerald-700">{{ $tz['overlap'] }}</td>
+                                    <td class="py-4 px-6 text-xs font-medium text-slate-900">{{ $tz['local_hours'] }}</td>
+                                    <td class="py-4 px-6 text-xs font-semibold text-[#3444da]">{{ $tz['overlap'] }}</td>
                                     <td class="py-4 px-6">
-                                        <span class="inline-block rounded-full bg-emerald-100 border border-emerald-200 px-2.5 py-0.5 text-[11px] font-bold text-emerald-800">
+                                        <span class="inline-block rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-2.5 py-0.5 text-[11px] font-bold text-[#3444da]">
                                             {{ $tz['badge'] }}
                                         </span>
                                     </td>
@@ -212,8 +212,8 @@
     {{-- How It Works --}}
     <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <x-reveal class="text-center max-w-2xl mx-auto">
-            <span class="text-xs font-bold uppercase tracking-widest text-sunrise-600">Frictionless Hiring</span>
-            <h2 class="mt-2 text-3xl font-black text-horizon-950 sm:text-4xl">
+            <span class="text-xs font-bold uppercase tracking-widest text-[#3444da]">Frictionless Hiring</span>
+            <h2 class="mt-2 text-3xl font-black text-slate-900 sm:text-4xl">
                 How Posting on KenyaRemoteJobs Works
             </h2>
             <p class="mt-3 text-sm text-foreground/70">
@@ -224,8 +224,8 @@
         <div class="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             @foreach ($steps as $i => $step)
                 <x-reveal :delay="$i * 90" class="text-center">
-                    <div class="rounded-3xl border border-black/5 bg-white p-6 shadow-sm h-full">
-                        <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-horizon-900 to-slate-900 text-lg font-bold text-white shadow-md">
+                    <div class="rounded-3xl border border-slate-200/80 bg-white p-6 shadow-sm h-full">
+                        <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#3444da] text-lg font-bold text-white shadow-md">
                             {{ $i + 1 }}
                         </div>
                         <h3 class="font-bold text-base text-foreground">{{ $step['title'] }}</h3>
@@ -237,11 +237,11 @@
     </section>
 
     {{-- Transparent Pricing Plans --}}
-    <section class="bg-gradient-to-b from-white to-horizon-50/60 px-4 py-20 sm:px-6 border-t border-black/5">
+    <section class="bg-gradient-to-b from-white to-[#f8f9fd] px-4 py-20 sm:px-6 border-t border-slate-200/80">
         <div class="mx-auto max-w-4xl">
             <x-reveal class="text-center max-w-2xl mx-auto mb-12">
-                <span class="text-xs font-bold uppercase tracking-widest text-horizon-700">Straightforward Pricing</span>
-                <h2 class="mt-2 text-3xl font-black text-horizon-950 sm:text-4xl">
+                <span class="text-xs font-bold uppercase tracking-widest text-[#3444da]">Straightforward Pricing</span>
+                <h2 class="mt-2 text-3xl font-black text-slate-900 sm:text-4xl">
                     Simple, Transparent Job Posting Plans
                 </h2>
                 <p class="mt-3 text-sm text-foreground/70">
@@ -252,9 +252,9 @@
             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
                 @foreach (config('jobs.posting_plans') as $key => $pkg)
                     <x-reveal class="h-full">
-                        <div class="relative flex h-full flex-col justify-between rounded-3xl border {{ $pkg['featured'] ? 'border-2 border-sunrise-500 shadow-xl' : 'border-black/5 shadow-sm' }} bg-white p-8">
+                        <div class="relative flex h-full flex-col justify-between rounded-3xl border {{ $pkg['featured'] ? 'border-2 border-[#3444da] shadow-xl' : 'border-slate-200/80 shadow-sm' }} bg-white p-8">
                             @if ($pkg['featured'])
-                                <span class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-sunrise-500 px-4 py-0.5 text-xs font-bold text-white shadow-md inline-flex items-center gap-1">
+                                <span class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[#3444da] px-4 py-0.5 text-xs font-bold text-white shadow-md inline-flex items-center gap-1">
                                     <x-icon name="star" class="h-3 w-3 fill-white text-white" /> Most Popular Choice
                                 </span>
                             @endif
@@ -262,25 +262,25 @@
                             <div>
                                 <h3 class="font-bold text-xl text-foreground">{{ $pkg['label'] }}</h3>
                                 <div class="mt-4 flex items-baseline gap-2">
-                                    <span class="text-4xl font-extrabold text-horizon-950">KES {{ number_format($pkg['price_kes']) }}</span>
+                                    <span class="text-4xl font-extrabold text-slate-900">KES {{ number_format($pkg['price_kes']) }}</span>
                                     <span class="text-sm font-semibold text-foreground/50">(~${{ round($pkg['price_kes'] / 130) }} USD)</span>
                                 </div>
                                 <p class="mt-1 text-xs text-foreground/60">{{ $pkg['listing_days'] }} days of live candidate visibility</p>
 
-                                <ul class="mt-6 space-y-2.5 border-t border-black/5 pt-6 text-xs text-foreground/80">
+                                <ul class="mt-6 space-y-2.5 border-t border-slate-200/80 pt-6 text-xs text-foreground/80">
                                     @foreach ($pkg['features'] ?? [] as $feature)
                                         <li class="flex items-start gap-2">
-                                            <x-icon name="check" class="h-4 w-4 shrink-0 text-emerald-600 mt-0.5" />
+                                            <x-icon name="check" class="h-4 w-4 shrink-0 text-[#3444da] mt-0.5" />
                                             <span>{{ $feature }}</span>
                                         </li>
                                     @endforeach
                                 </ul>
                             </div>
 
-                            <div class="mt-8 pt-6 border-t border-black/5">
+                            <div class="mt-8 pt-6 border-t border-slate-200/80">
                                 <a
                                     href="{{ url('/employers/post?plan='.$key) }}"
-                                    class="btn-pop block w-full rounded-full {{ $pkg['featured'] ? 'bg-sunrise-500 hover:bg-sunrise-600 text-white' : 'bg-horizon-900 hover:bg-black text-white' }} py-3.5 text-center text-sm font-bold shadow-md transition"
+                                    class="btn-pop block w-full rounded-full {{ $pkg['featured'] ? 'bg-[#3444da] hover:bg-[#2633bf] text-white' : 'bg-slate-900 hover:bg-black text-white' }} py-3.5 text-center text-sm font-bold shadow-md transition"
                                 >
                                     Select {{ $pkg['label'] }} &rarr;
                                 </a>
@@ -294,16 +294,16 @@
 
     {{-- Final Employer CTA --}}
     <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <div class="rounded-3xl bg-gradient-to-r from-horizon-950 via-horizon-900 to-slate-900 p-8 text-center text-white shadow-2xl sm:p-12">
-            <h2 class="text-2xl font-black sm:text-4xl">Ready to Hire Exceptional Remote Talent?</h2>
-            <p class="mx-auto mt-3 max-w-xl text-sm text-white/70 sm:text-base">
+        <div class="rounded-3xl border border-slate-200/80 bg-gradient-to-br from-[#f8f9fd] via-white to-[#eef0fe]/70 p-8 text-center text-slate-900 shadow-xl sm:p-12">
+            <h2 class="text-2xl font-black sm:text-4xl text-slate-900">Ready to Hire Exceptional Remote Talent?</h2>
+            <p class="mx-auto mt-3 max-w-xl text-sm text-slate-600 sm:text-base">
                 Publish your role in minutes. Receive direct applications from qualified East African candidates already prepared for remote work.
             </p>
             <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
-                <a href="{{ url('/employers/post') }}" class="btn-pop rounded-full bg-sunrise-500 px-8 py-3.5 font-bold text-white shadow-lg transition hover:bg-sunrise-600">
+                <a href="{{ url('/employers/post') }}" class="btn-pop rounded-full bg-[#3444da] hover:bg-[#2633bf] px-8 py-3.5 font-bold text-white shadow-lg transition">
                     Post a Job Now &rarr;
                 </a>
-                <a href="{{ url('/employers/dashboard') }}" class="rounded-full border border-white/20 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10">
+                <a href="{{ url('/employers/dashboard') }}" class="rounded-full border border-slate-300 bg-white px-6 py-3.5 text-sm font-semibold text-slate-800 transition hover:bg-slate-50 hover:border-[#3444da]">
                     Employer Dashboard
                 </a>
             </div>

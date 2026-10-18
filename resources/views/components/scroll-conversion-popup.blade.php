@@ -58,8 +58,8 @@
         </button>
 
         {{-- Badge --}}
-        <div class="inline-flex items-center gap-1.5 rounded-full bg-teal-50 border border-teal-200 px-2.5 py-0.5 text-[11px] font-bold text-teal-800 mb-2.5">
-            <x-icon name="sparkle" class="h-3 w-3 text-teal-600" />
+        <div class="inline-flex items-center gap-1.5 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-2.5 py-0.5 text-[11px] font-bold text-[#3444da] mb-2.5">
+            <x-icon name="sparkle" class="h-3 w-3 text-[#3444da]" />
             <span>Instant Apply Access</span>
         </div>
 
@@ -78,7 +78,7 @@
             <a
                 href="{{ url('/pricing') }}"
                 @click="dismiss"
-                class="btn-pop inline-flex items-center justify-center gap-1.5 rounded-full bg-teal-600 px-4 py-2 text-xs font-bold text-white shadow-sm hover:bg-teal-700 transition"
+                class="btn-pop inline-flex items-center justify-center gap-1.5 rounded-full bg-[#3444da] hover:bg-[#2633bf] px-4 py-2 text-xs font-bold text-white shadow-md shadow-[#3444da]/20 transition"
             >
                 Unlock All Jobs (KES 250) &rarr;
             </a>

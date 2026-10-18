@@ -109,12 +109,12 @@ new class extends Component
                 <button
                     type="button"
                     wire:click="selectPlan('{{ $key }}')"
-                    class="rounded-2xl border-2 p-5 text-left transition {{ $plan === $key ? 'border-sunrise-500 bg-sunrise-50' : 'border-black/10 bg-white hover:border-black/20' }}"
+                    class="rounded-2xl border-2 p-5 text-left transition {{ $plan === $key ? 'border-[#3444da] bg-[#eef0fe]/50' : 'border-slate-200 bg-white hover:border-slate-300' }}"
                 >
-                    <p class="text-xs font-semibold uppercase tracking-wide text-sunrise-600">
+                    <p class="text-xs font-semibold uppercase tracking-wide text-[#3444da]">
                         {{ $pkg['label'] }}
                         @if ($pkg['featured'])
-                            <span class="ml-2 rounded-full bg-sunrise-500 px-2 py-0.5 text-[10px] text-white">Most visibility</span>
+                            <span class="ml-2 rounded-full bg-[#3444da] px-2 py-0.5 text-[10px] text-white">Most visibility</span>
                         @endif
                     </p>
                     <p class="mt-1 text-3xl font-bold">
@@ -123,7 +123,7 @@ new class extends Component
                     </p>
                     <ul class="mt-3 space-y-1 text-sm text-foreground/60">
                         @foreach ($pkg['features'] ?? [] as $feature)
-                            <li class="flex items-start gap-1.5"><x-icon name="check" class="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-600" /> {{ $feature }}</li>
+                            <li class="flex items-start gap-1.5"><x-icon name="check" class="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#3444da]" /> {{ $feature }}</li>
                         @endforeach
                     </ul>
                 </button>

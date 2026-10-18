@@ -44,12 +44,12 @@
         <x-reveal class="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-10 shadow-sm">
             <div class="max-w-3xl">
                 <div class="flex flex-wrap items-center gap-2.5">
-                    <span class="inline-flex items-center gap-1 rounded-full bg-teal-50 border border-teal-200/80 px-3.5 py-1 text-xs font-bold text-teal-800">
-                        <x-icon name="sparkle" class="h-3.5 w-3.5 text-teal-600" />
+                    <span class="inline-flex items-center gap-1 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-3.5 py-1 text-xs font-bold text-[#3444da]">
+                        <x-icon name="sparkle" class="h-3.5 w-3.5 text-[#3444da]" />
                         {{ $category['badge'] }}
                     </span>
-                    <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-200/80 px-3.5 py-1 text-xs font-semibold text-emerald-800">
-                        <x-icon name="check" class="h-3.5 w-3.5 text-emerald-600" />
+                    <span class="inline-flex items-center gap-1 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-3.5 py-1 text-xs font-semibold text-[#3444da]">
+                        <x-icon name="check" class="h-3.5 w-3.5 text-[#3444da]" />
                         Verified for Kenya &amp; EAT Timezone
                     </span>
                 </div>
@@ -65,7 +65,7 @@
                 <div class="mt-6 flex flex-wrap items-center gap-4 text-sm">
                     <div class="rounded-2xl border border-slate-200/80 bg-slate-50/60 px-5 py-3 shadow-2xs">
                         <span class="block text-xs font-medium text-slate-500">Typical Compensation</span>
-                        <strong class="font-bold text-emerald-700">{{ $category['salary_range'] }}</strong>
+                        <strong class="font-bold text-[#3444da]">{{ $category['salary_range'] }}</strong>
                     </div>
 
                     <div class="rounded-2xl border border-slate-200/80 bg-slate-50/60 px-5 py-3 shadow-2xs">
@@ -92,7 +92,7 @@
                         Real-time listings from global companies that hire remote talent living in Kenya.
                     </p>
                 </div>
-                <a href="{{ url('/jobs') }}" class="text-sm font-semibold text-teal-700 hover:text-teal-800 hover:underline">
+                <a href="{{ url('/jobs') }}" class="text-sm font-semibold text-[#3444da] hover:underline">
                     View all 800+ jobs &rarr;
                 </a>
             </div>
@@ -114,7 +114,7 @@
             @if ($totalPages > 1)
                 <div class="mt-10 flex flex-wrap items-center justify-center gap-2">
                     @if ($page > 1)
-                        <a href="{{ $buildPageHref($page - 1) }}" class="btn-pop rounded-full border border-slate-200/80 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-2xs hover:bg-teal-50 hover:border-teal-500 hover:text-teal-700 transition" aria-label="Previous page">
+                        <a href="{{ $buildPageHref($page - 1) }}" class="btn-pop rounded-full border border-slate-200/80 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-2xs hover:bg-[#eef0fe] hover:border-[#3444da] hover:text-[#3444da] transition" aria-label="Previous page">
                             &larr; Prev
                         </a>
                     @endif
@@ -126,7 +126,7 @@
                             <a
                                 href="{{ $buildPageHref($item) }}"
                                 @if ($item === $page) aria-current="page" @endif
-                                class="btn-pop rounded-full px-4 py-2 text-sm font-bold transition {{ $item === $page ? 'bg-teal-600 text-white shadow-sm shadow-teal-600/25' : 'border border-slate-200/80 bg-white text-slate-700 shadow-2xs hover:bg-teal-50 hover:border-teal-500 hover:text-teal-700' }}"
+                                class="btn-pop rounded-full px-4 py-2 text-sm font-bold transition {{ $item === $page ? 'bg-[#3444da] text-white shadow-sm shadow-[#3444da]/20' : 'border border-slate-200/80 bg-white text-slate-700 shadow-2xs hover:bg-[#eef0fe] hover:border-[#3444da] hover:text-[#3444da]' }}"
                             >
                                 {{ $item }}
                             </a>
@@ -134,7 +134,7 @@
                     @endforeach
 
                     @if ($page < $totalPages)
-                        <a href="{{ $buildPageHref($page + 1) }}" class="btn-pop rounded-full border border-slate-200/80 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-2xs hover:bg-teal-50 hover:border-teal-500 hover:text-teal-700 transition" aria-label="Next page">
+                        <a href="{{ $buildPageHref($page + 1) }}" class="btn-pop rounded-full border border-slate-200/80 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-2xs hover:bg-[#eef0fe] hover:border-[#3444da] hover:text-[#3444da] transition" aria-label="Next page">
                             Next &rarr;
                         </a>
                     @endif
@@ -146,7 +146,7 @@
         @if (! empty($category['faqs']))
             <section class="mt-16 rounded-2xl border border-slate-200 bg-white p-6 sm:p-10 shadow-sm">
                 <div class="max-w-3xl">
-                    <span class="text-xs font-bold uppercase tracking-wider text-teal-700">Got Questions?</span>
+                    <span class="text-xs font-bold uppercase tracking-wider text-[#3444da]">Got Questions?</span>
                     <h2 class="mt-1 text-2xl font-bold text-slate-900 sm:text-3xl">Frequently Asked Questions</h2>
                     <p class="mt-2 text-sm text-slate-600">
                         Common questions about finding and working in remote {{ strtolower($category['name']) }} roles from Kenya.
@@ -177,10 +177,10 @@
                 @foreach ($allCategories as $cat)
                     <a
                         href="{{ url('/remote-jobs/'.$cat['slug']) }}"
-                        class="group rounded-2xl border border-slate-200 bg-white p-4 shadow-2xs transition duration-200 hover:-translate-y-0.5 hover:border-teal-500 hover:shadow-md"
+                        class="group rounded-2xl border border-slate-200 bg-white p-4 shadow-2xs transition duration-200 hover:-translate-y-0.5 hover:border-[#3444da]/50 hover:shadow-md"
                     >
-                        <span class="text-xs font-semibold text-teal-700">{{ $cat['badge'] }}</span>
-                        <h3 class="mt-1 text-sm font-bold text-slate-900 group-hover:text-teal-700">
+                        <span class="text-xs font-semibold text-[#3444da]">{{ $cat['badge'] }}</span>
+                        <h3 class="mt-1 text-sm font-bold text-slate-900 group-hover:text-[#3444da]">
                             {{ $cat['name'] }} Jobs
                         </h3>
                         <p class="mt-1 text-xs text-slate-500 line-clamp-2">

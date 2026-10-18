@@ -16,8 +16,8 @@
 
         {{-- Hero Header --}}
         <x-reveal class="text-center max-w-2xl mx-auto">
-            <span class="inline-flex items-center gap-1 rounded-full bg-teal-50 border border-teal-200 px-3 py-1 text-xs font-bold text-teal-800">
-                <x-icon name="sparkle" class="h-3.5 w-3.5 text-teal-600" />
+            <span class="inline-flex items-center gap-1 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-3 py-1 text-xs font-bold text-[#3444da]">
+                <x-icon name="sparkle" class="h-3.5 w-3.5 text-[#3444da]" />
                 Help &amp; Documentation
             </span>
             <h1 class="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
@@ -33,7 +33,7 @@
             @foreach ($categories as $catKey => $category)
                 <section id="{{ $catKey }}" class="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-10 shadow-sm">
                     <div class="flex items-center gap-3.5 border-b border-slate-100 pb-5">
-                        <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-teal-50 text-teal-700 border border-teal-100 shadow-2xs">
+                        <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#eef0fe] text-[#3444da] border border-[#c7ccfb] shadow-2xs">
                             <x-icon :name="$category['icon']" class="h-5 w-5" />
                         </div>
                         <div>
@@ -56,16 +56,16 @@
         </div>
 
         {{-- Still have questions CTA --}}
-        <div class="mt-16 rounded-3xl border border-slate-800 bg-slate-900 p-8 sm:p-12 text-center text-white shadow-2xl">
-            <h2 class="text-2xl sm:text-3xl font-bold">Have a specific question not covered here?</h2>
-            <p class="mt-2.5 text-sm text-slate-300 max-w-lg mx-auto leading-relaxed">
+        <div class="mt-16 rounded-3xl border border-slate-200/80 bg-gradient-to-br from-[#f8f9fd] via-white to-[#eef0fe]/50 p-8 sm:p-12 text-center text-slate-900 shadow-sm">
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Have a specific question not covered here?</h2>
+            <p class="mt-2.5 text-sm text-slate-600 max-w-lg mx-auto leading-relaxed">
                 Daisy AI, our free Kenyan contractor advisor, can answer questions about tax withholding, Wise accounts, or tailoring your CV.
             </p>
             <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
-                <a href="{{ url('/pricing') }}" class="btn-pop rounded-full bg-teal-600 px-8 py-3.5 text-sm font-bold text-white shadow-md shadow-teal-600/20 hover:bg-teal-700 transition">
+                <a href="{{ url('/pricing') }}" class="btn-pop rounded-full bg-[#3444da] hover:bg-[#2633bf] px-8 py-3.5 text-sm font-bold text-white shadow-md shadow-[#3444da]/20 transition">
                     Explore Pro Membership &rarr;
                 </a>
-                <a href="{{ url('/journal') }}" class="rounded-full border border-slate-700 bg-slate-800/80 px-8 py-3.5 text-sm font-semibold text-slate-200 hover:bg-slate-800 hover:text-white transition">
+                <a href="{{ url('/journal') }}" class="rounded-full border border-slate-300 bg-white px-8 py-3.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition">
                     Read The Journal &rarr;
                 </a>
             </div>

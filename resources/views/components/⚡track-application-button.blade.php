@@ -131,16 +131,16 @@ new class extends Component
 
 <div class="relative inline-block text-left">
     @if ($applicationId)
-        <div class="inline-flex items-center rounded-xl border border-emerald-300 bg-emerald-50 p-1 shadow-sm">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold text-emerald-800">
-                <svg class="h-4 w-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div class="inline-flex items-center rounded-xl border border-[#c7ccfb] bg-[#eef0fe] p-1 shadow-sm">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold text-[#3444da]">
+                <svg class="h-4 w-4 text-[#3444da]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
                 Tracked:
             </span>
             <select
                 wire:change="updateStatus($event.target.value)"
-                class="rounded-lg border-none bg-white px-2.5 py-1 text-xs font-semibold text-emerald-900 shadow-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+                class="rounded-lg border-none bg-white px-2.5 py-1 text-xs font-semibold text-slate-800 shadow-xs focus:ring-2 focus:ring-[#3444da] focus:outline-none"
             >
                 <option value="applied" @selected($status === 'applied')>Applied</option>
                 <option value="interviewing" @selected($status === 'interviewing')>Interviewing</option>
@@ -152,9 +152,9 @@ new class extends Component
                 type="button"
                 wire:click="$toggle('showNotesModal')"
                 title="Application Notes & Recruiter Info"
-                class="ml-1 inline-flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-medium text-emerald-700 hover:bg-emerald-100 transition"
+                class="ml-1 inline-flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-medium text-[#3444da] hover:bg-white/60 transition"
             >
-                <x-icon name="pen" class="h-3 w-3 text-emerald-700" /> Notes
+                <x-icon name="pen" class="h-3 w-3 text-[#3444da]" /> Notes
             </button>
         </div>
     @else

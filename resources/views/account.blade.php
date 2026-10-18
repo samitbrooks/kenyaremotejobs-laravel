@@ -11,59 +11,59 @@
         <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
             {{-- High-Converting New Member Activation Card for Unsubscribed Users --}}
             @if (! $user->subscribed)
-                <div class="mb-8 overflow-hidden rounded-3xl border-2 border-[#00C978]/60 bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0A1F18] p-6 sm:p-8 text-white shadow-xl relative">
-                    <div class="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-[#00D47E]/10 blur-3xl"></div>
+                <div class="mb-8 overflow-hidden rounded-3xl border-2 border-[#3444da] bg-white p-6 sm:p-8 text-slate-900 shadow-xl shadow-[#3444da]/5 relative">
+                    <div class="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-[#3444da]/5 blur-3xl"></div>
 
                     <div class="relative z-10">
                         <div class="flex flex-wrap items-center justify-between gap-2">
-                            <span class="inline-flex items-center gap-1.5 rounded-full bg-[#00D47E]/20 border border-[#00D47E]/50 px-3 py-1 text-[11px] font-black uppercase tracking-wider text-[#00D47E]">
+                            <span class="inline-flex items-center gap-1.5 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-3 py-1 text-[11px] font-black uppercase tracking-wider text-[#3444da]">
                                 <x-icon name="lightning" class="h-3.5 w-3.5" /> Onboarding: Next Step
                             </span>
-                            <span class="text-xs text-white/60 font-medium">
+                            <span class="text-xs text-slate-500 font-medium">
                                 Instant M-Pesa Activation &bull; 7-Day Refund Guarantee
                             </span>
                         </div>
 
-                        <h2 class="mt-3.5 text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight">
+                        <h2 class="mt-3.5 text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-tight">
                             Your account is ready! 92% of candidates who land interviews upgrade to Pro.
                         </h2>
-                        <p class="mt-2.5 text-sm text-white/75 leading-relaxed max-w-xl">
+                        <p class="mt-2.5 text-sm text-slate-600 leading-relaxed max-w-xl">
                             International remote roles receive 500+ applicants within 48 hours. Standard applicants wait in public queues after positions fill. Pro members apply within the first 2 hours with ATS-tailored CVs.
                         </p>
 
                         {{-- 4-Step Onboarding Checklist --}}
                         <div class="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs">
-                            <div class="rounded-xl border border-white/10 bg-white/5 p-3">
-                                <span class="inline-flex items-center gap-1 font-extrabold text-[#00D47E]"><x-icon name="check" class="h-3.5 w-3.5" /> Step 1</span>
-                                <p class="font-bold text-white mt-1">Account Created</p>
-                                <p class="text-[11px] text-white/50 mt-0.5">Email verified</p>
+                            <div class="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3">
+                                <span class="inline-flex items-center gap-1 font-extrabold text-[#3444da]"><x-icon name="check" class="h-3.5 w-3.5" /> Step 1</span>
+                                <p class="font-bold text-slate-900 mt-1">Account Created</p>
+                                <p class="text-[11px] text-slate-500 mt-0.5">Email verified</p>
                             </div>
-                            <div class="rounded-xl border border-[#00D47E]/80 bg-[#00D47E]/10 p-3 relative">
-                                <span class="rounded-full bg-[#00D47E] text-[#08291D] font-black text-[9px] px-1.5 py-0.2 uppercase absolute top-2 right-2">Action</span>
-                                <span class="font-extrabold text-[#00D47E]">Step 2</span>
-                                <p class="font-bold text-white mt-1">Activate Pro</p>
-                                <p class="text-[11px] text-white/70 mt-0.5">KES 250 via M-Pesa</p>
+                            <div class="rounded-xl border-2 border-[#3444da] bg-[#eef0fe] p-3 relative">
+                                <span class="rounded-full bg-[#3444da] text-white font-black text-[9px] px-1.5 py-0.5 uppercase absolute top-2 right-2">Action</span>
+                                <span class="font-extrabold text-[#3444da]">Step 2</span>
+                                <p class="font-bold text-slate-900 mt-1">Activate Pro</p>
+                                <p class="text-[11px] text-[#3444da] font-semibold mt-0.5">KES 250 via M-Pesa</p>
                             </div>
-                            <div class="rounded-xl border border-white/10 bg-white/5 p-3">
-                                <span class="font-bold text-white/40">Step 3</span>
-                                <p class="font-bold text-white/70 mt-1">Tailor Your CV</p>
-                                <p class="text-[11px] text-white/40 mt-0.5">Beat ATS filters</p>
+                            <div class="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3">
+                                <span class="font-bold text-slate-400">Step 3</span>
+                                <p class="font-bold text-slate-700 mt-1">Tailor Your CV</p>
+                                <p class="text-[11px] text-slate-400 mt-0.5">Beat ATS filters</p>
                             </div>
-                            <div class="rounded-xl border border-white/10 bg-white/5 p-3">
-                                <span class="font-bold text-white/40">Step 4</span>
-                                <p class="font-bold text-white/70 mt-1">Apply in Top 20</p>
-                                <p class="text-[11px] text-white/40 mt-0.5">Direct hiring queues</p>
+                            <div class="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3">
+                                <span class="font-bold text-slate-400">Step 4</span>
+                                <p class="font-bold text-slate-700 mt-1">Apply in Top 20</p>
+                                <p class="text-[11px] text-slate-400 mt-0.5">Direct hiring queues</p>
                             </div>
                         </div>
 
                         {{-- Checkout Trigger Box --}}
-                        <div class="mt-6 rounded-2xl bg-white/10 p-4 border border-white/15">
+                        <div class="mt-6 rounded-2xl bg-[#f8f9fd] p-4 border border-slate-200/80">
                             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                                 <div>
-                                    <p class="text-xs font-bold text-[#00D47E] uppercase tracking-wide">
+                                    <p class="text-xs font-bold text-[#3444da] uppercase tracking-wide">
                                         Pro Membership Flagship Pass &bull; KES 250 / month
                                     </p>
-                                    <p class="text-xs text-white/70 mt-0.5">
+                                    <p class="text-xs text-slate-600 mt-0.5">
                                         Full 0-second apply access to all 800+ jobs, direct employers & unlimited AI CV tailoring.
                                     </p>
                                 </div>
@@ -89,8 +89,8 @@
                         <div class="flex items-center gap-2">
                             <h1 class="text-2xl font-bold text-foreground">My Account</h1>
                             @if ($user->subscribed)
-                                <span class="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-amber-500 to-sunrise-600 px-3 py-0.5 text-xs font-bold text-white shadow-xs">
-                                    <x-icon name="crown" class="h-3.5 w-3.5 text-white" /> Pro Member
+                                <span class="inline-flex items-center gap-1 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-3 py-0.5 text-xs font-bold text-[#3444da]">
+                                    <x-icon name="crown" class="h-3.5 w-3.5 text-[#3444da]" /> Pro Member
                                 </span>
                             @else
                                 <span class="rounded-full bg-black/5 px-2.5 py-0.5 text-xs font-semibold text-foreground/60">
@@ -103,7 +103,7 @@
 
                     <div class="flex items-center gap-3">
                         @if (! $user->subscribed)
-                            <a href="{{ url('/pricing') }}" class="btn-pop rounded-full gradient-sunrise px-5 py-2 text-xs font-bold text-white shadow-xs">
+                            <a href="{{ url('/pricing') }}" class="btn-pop rounded-full bg-[#3444da] hover:bg-[#2633bf] px-5 py-2 text-xs font-bold text-white shadow-xs">
                                 Upgrade to Pro &rarr;
                             </a>
                         @endif
@@ -112,10 +112,10 @@
                 </div>
 
                 {{-- Status Banner --}}
-                <div class="mt-6 rounded-2xl border p-4 {{ $user->subscribed ? 'border-emerald-200 bg-emerald-50/70 text-emerald-900' : 'border-horizon-200 bg-horizon-50/50 text-horizon-900' }}">
+                <div class="mt-6 rounded-2xl border p-4 {{ $user->subscribed ? 'border-[#c7ccfb] bg-[#eef0fe] text-slate-900' : 'border-slate-200 bg-slate-50/70 text-slate-800' }}">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-2">
-                            <x-icon name="{{ $user->subscribed ? 'check' : 'sparkle' }}" class="h-5 w-5 {{ $user->subscribed ? 'text-emerald-600' : 'text-horizon-600' }}" />
+                            <x-icon name="{{ $user->subscribed ? 'check' : 'sparkle' }}" class="h-5 w-5 {{ $user->subscribed ? 'text-[#3444da]' : 'text-[#3444da]' }}" />
                             <span class="text-sm font-semibold">
                                 @if ($user->subscribed)
                                     Pro Membership Active: Unlimited 48h Early Access & AI CV Tailoring
@@ -125,28 +125,28 @@
                             </span>
                         </div>
                         @if (! $user->subscribed)
-                            <a href="{{ url('/pricing') }}" class="text-xs font-bold text-sunrise-600 hover:underline">Go Unlimited &rarr;</a>
+                            <a href="{{ url('/pricing') }}" class="text-xs font-bold text-[#3444da] hover:underline">Go Unlimited &rarr;</a>
                         @endif
                     </div>
                 </div>
             </div>
 
             {{-- Referral Awarding Card --}}
-            <div class="mt-8 rounded-3xl border border-emerald-500/30 bg-gradient-to-br from-emerald-950 via-slate-900 to-slate-950 p-6 sm:p-7 text-white shadow-sm relative overflow-hidden">
-                <div class="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-emerald-500/10 blur-3xl"></div>
+            <div class="mt-8 rounded-3xl border border-slate-200/80 bg-gradient-to-br from-[#f8f9fd] via-white to-[#eef0fe]/50 p-6 sm:p-7 text-slate-900 shadow-sm relative overflow-hidden">
+                <div class="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#3444da]/5 blur-3xl"></div>
                 <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div class="max-w-md">
                         <div class="flex items-center gap-2">
-                            <span class="rounded-full bg-emerald-500/20 border border-emerald-500/40 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-emerald-300 flex items-center gap-1">
-                                <x-icon name="gift" class="h-3 w-3 text-emerald-300" />
+                            <span class="rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#3444da] flex items-center gap-1">
+                                <x-icon name="gift" class="h-3 w-3 text-[#3444da]" />
                                 <span>Referral Rewards</span>
                             </span>
-                            <span class="text-xs text-white/60">
+                            <span class="text-xs text-slate-500">
                                 {{ $user->referrals()->count() }} Joined &bull; +{{ $user->earnedProDays() }} Days Earned
                             </span>
                         </div>
-                        <h3 class="text-lg font-black text-white mt-1.5">Earn Free Pro Access &amp; AI Tailor Credits</h3>
-                        <p class="text-xs text-white/70 mt-1 leading-relaxed">
+                        <h3 class="text-lg font-black text-slate-900 mt-1.5">Earn Free Pro Access &amp; AI Tailor Credits</h3>
+                        <p class="text-xs text-slate-600 mt-1 leading-relaxed">
                             Share your link with fellow Kenyan jobseekers. Earn +3 days Pro when a friend tests the free trial, and +14 days when they subscribe.
                         </p>
                     </div>
@@ -162,7 +162,7 @@
                         </a>
                         <a
                             href="{{ url('/referrals') }}"
-                            class="rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-4 py-2 text-xs font-black transition shadow-xs"
+                            class="rounded-xl bg-[#3444da] hover:bg-[#2633bf] text-white px-4 py-2 text-xs font-bold transition shadow-xs"
                         >
                             View Rewards &rarr;
                         </a>
@@ -300,7 +300,7 @@
                         <p class="text-xs text-foreground/60 mt-1 max-w-md mx-auto">
                             Get complete invoice templates, US tax treaty guides, and outreach scripts used by top Kenyan remote engineers and virtual assistants.
                         </p>
-                        <a href="{{ url('/pricing') }}" class="mt-4 inline-block rounded-full bg-horizon-800 px-6 py-2.5 text-xs font-bold text-white shadow-xs hover:bg-horizon-900 transition">
+                        <a href="{{ url('/pricing') }}" class="mt-4 inline-block rounded-full bg-[#3444da] hover:bg-[#2633bf] px-6 py-2.5 text-xs font-bold text-white shadow-xs transition">
                             Unlock with Pro (KES 250/mo)
                         </a>
                     </div>

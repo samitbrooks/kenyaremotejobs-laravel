@@ -16,8 +16,8 @@
 
         {{-- Hero Header --}}
         <x-reveal class="text-center max-w-3xl mx-auto">
-            <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-3.5 py-1 text-xs font-bold text-emerald-800">
-                <x-icon name="check" class="h-3.5 w-3.5 text-emerald-600" />
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-3.5 py-1 text-xs font-bold text-[#3444da]">
+                <x-icon name="check" class="h-3.5 w-3.5 text-[#3444da]" />
                 Verified Employer Directory
             </span>
             <h1 class="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl leading-tight">
@@ -31,7 +31,7 @@
         {{-- Quick Stats Banner --}}
         <div class="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
             <div class="rounded-2xl border border-slate-200 bg-white p-4 text-center shadow-2xs">
-                <p class="text-2xl font-black text-teal-700">100%</p>
+                <p class="text-2xl font-black text-[#3444da]">100%</p>
                 <p class="text-xs text-slate-500 mt-0.5">Vetted for Kenya</p>
             </div>
             <div class="rounded-2xl border border-slate-200 bg-white p-4 text-center shadow-2xs">
@@ -39,7 +39,7 @@
                 <p class="text-xs text-slate-500 mt-0.5">Reliable Payments</p>
             </div>
             <div class="rounded-2xl border border-slate-200 bg-white p-4 text-center shadow-2xs">
-                <p class="text-2xl font-black text-emerald-700">0 Visa</p>
+                <p class="text-2xl font-black text-[#3444da]">0 Visa</p>
                 <p class="text-xs text-slate-500 mt-0.5">No Relocation Needed</p>
             </div>
             <div class="rounded-2xl border border-slate-200 bg-white p-4 text-center shadow-2xs">
@@ -54,23 +54,23 @@
                 <x-reveal :delay="min($i, 9) * 50" class="h-full">
                     <a
                         href="{{ url('/companies/'.$company['slug']) }}"
-                        class="group flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-6 shadow-2xs transition-all duration-200 hover:-translate-y-1 hover:border-teal-500 hover:shadow-md"
+                        class="group flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-6 shadow-2xs transition-all duration-200 hover:-translate-y-1 hover:border-[#3444da]/50 hover:shadow-md"
                     >
                         <div>
                             <div class="flex items-start justify-between gap-3">
                                 <div class="flex items-center gap-3">
-                                    <div class="flex h-12 w-12 items-center justify-center rounded-xl border border-slate-200 bg-slate-100 text-xl font-bold text-teal-800 shadow-2xs">
+                                    <div class="flex h-12 w-12 items-center justify-center rounded-xl border border-slate-200 bg-[#eef0fe] text-xl font-bold text-[#3444da] shadow-2xs">
                                         {{ substr($company['name'], 0, 1) }}
                                     </div>
                                     <div>
-                                        <h2 class="font-bold text-lg text-slate-900 group-hover:text-teal-700 transition-colors">
+                                        <h2 class="font-bold text-lg text-slate-900 group-hover:text-[#3444da] transition-colors">
                                             {{ $company['name'] }}
                                         </h2>
                                         <p class="text-xs text-slate-500">{{ $company['industry'] }}</p>
                                     </div>
                                 </div>
-                                <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-200 px-2 py-0.5 text-[11px] font-semibold text-emerald-800">
-                                    <x-icon name="check" class="h-3 w-3 text-emerald-600" /> Kenya Open
+                                <span class="inline-flex items-center gap-1 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-2 py-0.5 text-[11px] font-semibold text-[#3444da]">
+                                    <x-icon name="check" class="h-3 w-3 text-[#3444da]" /> Kenya Open
                                 </span>
                             </div>
 
@@ -90,7 +90,7 @@
                         </div>
 
                         <div class="mt-6 flex items-center justify-between border-t border-slate-100 pt-3">
-                            <span class="text-xs font-semibold text-teal-700 group-hover:underline">
+                            <span class="text-xs font-semibold text-[#3444da] group-hover:underline">
                                 Explore Company Profile &rarr;
                             </span>
                             @if ($company['open_jobs_count'] > 0)
@@ -105,16 +105,16 @@
         </div>
 
         {{-- B2B Employer CTA Banner --}}
-        <div class="mt-16 rounded-3xl border border-horizon-200 bg-gradient-to-r from-horizon-900 via-horizon-800 to-slate-900 p-8 text-white text-center shadow-xl sm:p-10">
-            <h2 class="text-2xl font-bold sm:text-3xl">Are you an employer hiring remote talent in Kenya?</h2>
-            <p class="mt-2 text-sm text-white/70 max-w-xl mx-auto">
+        <div class="mt-16 rounded-3xl border border-slate-200/80 bg-gradient-to-br from-[#f8f9fd] via-white to-[#eef0fe]/70 p-8 text-center shadow-xl sm:p-10">
+            <h2 class="text-2xl font-bold sm:text-3xl text-slate-900">Are you an employer hiring remote talent in Kenya?</h2>
+            <p class="mt-2 text-sm text-slate-600 max-w-xl mx-auto">
                 Get your company listed in our verified employer directory and deliver your open roles directly to over 25,000 skilled Kenyan professionals.
             </p>
             <div class="mt-6 flex flex-wrap items-center justify-center gap-4">
-                <a href="{{ url('/employers/post') }}" class="btn-pop rounded-full bg-sunrise-500 px-8 py-3.5 font-bold text-white shadow-lg transition hover:bg-sunrise-600">
+                <a href="{{ url('/employers/post') }}" class="btn-pop rounded-full bg-[#3444da] hover:bg-[#2633bf] px-8 py-3.5 font-bold text-white shadow-lg transition">
                     Post a Job &amp; Get Listed &rarr;
                 </a>
-                <a href="{{ url('/employers') }}" class="rounded-full border border-white/20 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10">
+                <a href="{{ url('/employers') }}" class="rounded-full border border-slate-300 bg-white px-6 py-3.5 text-sm font-semibold text-slate-800 transition hover:bg-slate-50 hover:border-[#3444da]">
                     Learn Why Companies Hire in Kenya
                 </a>
             </div>

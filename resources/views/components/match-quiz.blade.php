@@ -159,25 +159,25 @@
             <button
                 type="button"
                 @click="setup = 'yes'; step = 4"
-                class="rounded-2xl border border-slate-200 p-5 text-left transition hover:border-emerald-500 hover:bg-emerald-50/30 flex items-center justify-between"
+                class="rounded-2xl border border-slate-200 p-5 text-left transition hover:border-[#3444da] hover:bg-[#eef0fe]/40 flex items-center justify-between"
             >
                 <div>
                     <h4 class="font-bold text-slate-900 text-sm">Yes, Laptop + Home Internet</h4>
                     <p class="text-xs text-slate-500 mt-1">Ready to work from home</p>
                 </div>
-                <x-icon name="check" class="h-5 w-5 text-emerald-600 font-bold" />
+                <x-icon name="check" class="h-5 w-5 text-[#3444da] font-bold" />
             </button>
 
             <button
                 type="button"
                 @click="setup = 'backup'; step = 4"
-                class="rounded-2xl border border-slate-200 p-5 text-left transition hover:border-emerald-500 hover:bg-emerald-50/30 flex items-center justify-between"
+                class="rounded-2xl border border-slate-200 p-5 text-left transition hover:border-[#3444da] hover:bg-[#eef0fe]/40 flex items-center justify-between"
             >
                 <div>
                     <h4 class="font-bold text-slate-900 text-sm">Yes + Backup Power / MiFi</h4>
                     <p class="text-xs text-slate-500 mt-1">100% reliable uptime</p>
                 </div>
-                <x-icon name="lightning" class="h-5 w-5 text-emerald-600" />
+                <x-icon name="lightning" class="h-5 w-5 text-[#3444da]" />
             </button>
         </div>
         <button type="button" @click="step = 2" class="text-xs text-slate-400 hover:text-slate-600 font-semibold">&larr; Back</button>

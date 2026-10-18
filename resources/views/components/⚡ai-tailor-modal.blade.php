@@ -70,13 +70,13 @@ new class extends Component
     <button
         type="button"
         wire:click="open"
-        class="btn-pop group flex items-center justify-center gap-2 rounded-2xl border-2 border-horizon-300 bg-gradient-to-r from-horizon-50 to-indigo-50 px-5 py-3.5 text-sm font-bold text-horizon-900 shadow-sm transition hover:border-horizon-500 hover:shadow-md"
+        class="btn-pop group flex items-center justify-center gap-2 rounded-2xl border border-slate-200/90 bg-[#f8f9fd] px-5 py-3.5 text-sm font-bold text-slate-900 shadow-xs transition hover:border-[#3444da] hover:bg-[#eef0fe]/40"
     >
-        <span class="flex h-6 w-6 items-center justify-center rounded-lg bg-horizon-700 text-white shadow-xs">
+        <span class="flex h-6 w-6 items-center justify-center rounded-lg bg-[#3444da] text-white shadow-xs">
             <x-icon name="sparkle" class="h-3.5 w-3.5 animate-pulse" />
         </span>
         <span>Tailor CV &amp; Cover Letter with AI</span>
-        <span class="rounded-full bg-emerald-100 px-2 py-0.5 text-[11px] font-extrabold text-emerald-800">
+        <span class="rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-2 py-0.5 text-[11px] font-extrabold text-[#3444da]">
             Boost to 94%+
         </span>
     </button>
@@ -94,7 +94,7 @@ new class extends Component
 
                 @if (! $user?->canUseAiTailor())
                     <div class="py-6 text-center">
-                        <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-horizon-100 text-horizon-800">
+                        <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[#eef0fe] text-[#3444da]">
                             <x-icon name="sparkle" class="h-8 w-8" />
                         </div>
                         <h3 class="mt-4 text-2xl font-bold">You&rsquo;ve used your free AI tailoring</h3>
@@ -102,23 +102,23 @@ new class extends Component
                             Subscribers get unlimited 1-click AI resume &amp; cover letter tailoring on every job to bypass ATS filters and stand out to foreign recruiters.
                         </p>
                         <div class="mx-auto mt-6 max-w-xs">
-                            <a href="{{ url('/pricing') }}" class="btn-pop block rounded-full gradient-sunrise px-6 py-3 font-semibold text-white shadow-lg">
+                            <a href="{{ url('/pricing') }}" class="btn-pop block rounded-full bg-[#3444da] hover:bg-[#2633bf] px-6 py-3 font-semibold text-white shadow-lg">
                                 Upgrade to Pro &mdash; From KES 250
                             </a>
                         </div>
                     </div>
                 @elseif ($loading)
                     <div class="py-16 text-center">
-                        <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-horizon-100 text-horizon-700">
+                        <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#eef0fe] text-[#3444da]">
                             <x-icon name="sparkle" class="h-6 w-6 animate-spin" />
                         </div>
-                        <p class="mt-4 font-bold text-horizon-900">Tailoring your CV with AI...</p>
+                        <p class="mt-4 font-bold text-slate-900">Tailoring your CV with AI...</p>
                         <p class="mt-1 text-xs text-foreground/50">Extracting job keywords, optimizing ATS bullet points, and writing your cover letter</p>
                     </div>
                 @elseif ($tailored)
                     <div>
                         <div class="flex items-center gap-3">
-                            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-horizon-700 text-white">
+                            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#3444da] text-white">
                                 <x-icon name="sparkle" class="h-5 w-5" />
                             </span>
                             <div>
@@ -126,7 +126,7 @@ new class extends Component
                                 <p class="text-xs text-foreground/50">Optimized for ATS scanners and foreign hiring teams</p>
                             </div>
                             <div class="ml-auto text-right">
-                                <span class="inline-block rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800">
+                                <span class="inline-block rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-3 py-1 text-xs font-bold text-[#3444da]">
                                     {{ $tailored['match_score'] }}% ATS Match
                                 </span>
                             </div>

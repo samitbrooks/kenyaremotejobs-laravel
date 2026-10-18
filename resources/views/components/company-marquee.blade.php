@@ -40,7 +40,7 @@
             @for ($i = 0; $i < 2; $i++)
                 @foreach ($companies as $comp)
                     <div class="inline-flex items-center gap-2.5 rounded-2xl border border-slate-200/80 bg-white px-5 py-2.5 shadow-2xs shrink-0 hover:border-slate-300 transition">
-                        <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+                        <span class="h-2 w-2 rounded-full bg-[#3444da]"></span>
                         <div>
                             <span class="font-extrabold text-slate-900 text-sm tracking-tight">{{ $comp['name'] }}</span>
                             <span class="hidden sm:inline text-slate-400 text-xs font-normal"> &bull; {{ $comp['desc'] }}</span>

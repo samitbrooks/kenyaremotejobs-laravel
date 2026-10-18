@@ -114,20 +114,20 @@
             type="button"
             @click="toggle"
             aria-label="Open Daisy AI Career Advisor"
-            class="btn-pop group fixed bottom-5 right-5 z-50 flex items-center gap-2.5 rounded-full border-2 border-horizon-400/80 bg-gradient-to-r from-horizon-900 via-horizon-800 to-horizon-900 px-4 py-2.5 text-white shadow-xl transition hover:border-sunrise-400 hover:shadow-2xl hover:scale-105"
+            class="btn-pop group fixed bottom-5 right-5 z-50 flex items-center gap-2.5 rounded-full border border-slate-200/90 bg-white/95 px-4 py-2.5 text-slate-900 shadow-xl backdrop-blur-md transition hover:border-[#3444da] hover:shadow-2xl hover:scale-105"
         >
-            <span class="relative flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-tr from-sunrise-500 to-amber-400 text-white shadow-xs">
+            <span class="relative flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-tr from-[#3444da] to-[#2633bf] text-white shadow-xs">
                 <x-icon name="sparkle" class="h-4 w-4 animate-pulse" />
                 <span class="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
-                    <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-                    <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500"></span>
+                    <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#3444da] opacity-75"></span>
+                    <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#3444da]"></span>
                 </span>
             </span>
             <div class="text-left">
-                <p class="text-xs font-bold leading-tight tracking-wide flex items-center gap-1.5">
-                    Ask Daisy AI <span class="hidden sm:inline-flex items-center gap-1 text-[10px] uppercase font-extrabold tracking-wider text-sunrise-300"><x-icon.kenya-flag class="h-3 w-3 inline" /> Free Advisor</span>
+                <p class="text-xs font-bold leading-tight tracking-wide flex items-center gap-1.5 text-slate-900">
+                    Ask Daisy AI <span class="hidden sm:inline-flex items-center gap-1 text-[10px] uppercase font-extrabold tracking-wider text-[#3444da] bg-[#eef0fe] px-1.5 py-0.5 rounded-full border border-[#c7ccfb]"><x-icon.kenya-flag class="h-3 w-3 inline" /> Free Advisor</span>
                 </p>
-                <p class="text-[10px] text-white/70 leading-none mt-0.5 hidden sm:block">
+                <p class="text-[10px] text-slate-500 leading-none mt-0.5 hidden sm:block">
                     Remote Career, Wise &amp; Tax Guide
                 </p>
             </div>
@@ -144,23 +144,23 @@
         x-transition:leave="transition ease-in duration-200"
         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
         x-transition:leave-end="opacity-0 translate-y-4 scale-95"
-        class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col w-[390px] max-w-[calc(100vw-2rem)] rounded-3xl bg-white/95 backdrop-blur-lg border-2 border-horizon-200/90 shadow-2xl overflow-hidden"
+        class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col w-[390px] max-w-[calc(100vw-2rem)] rounded-3xl bg-white/95 backdrop-blur-lg border-2 border-slate-200/90 shadow-2xl overflow-hidden"
         :class="isMinimized ? 'h-auto' : 'h-[550px] max-h-[82vh]'"
     >
         {{-- Header --}}
-        <div class="flex items-center justify-between bg-gradient-to-r from-horizon-900 via-horizon-800 to-horizon-900 px-4 py-3 text-white shadow-xs select-none">
+        <div class="flex items-center justify-between bg-gradient-to-r from-[#3444da] to-[#2633bf] px-4 py-3 text-white shadow-xs select-none">
             <div class="flex items-center gap-2.5 min-w-0">
-                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-tr from-sunrise-500 to-amber-400 text-white shadow-xs">
+                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-white/15 text-white shadow-xs">
                     <x-icon name="sparkle" class="h-4 w-4" />
                 </span>
                 <div class="min-w-0">
                     <div class="flex items-center gap-1.5">
                         <p class="text-sm font-bold truncate">Daisy AI Career Advisor</p>
-                        <span class="inline-flex items-center gap-1 rounded-full bg-emerald-500/20 px-1.5 py-0.2 text-[9px] font-bold text-emerald-300 border border-emerald-400/30">
-                            <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span> Online
+                        <span class="inline-flex items-center gap-1 rounded-full bg-white/20 px-1.5 py-0.5 text-[9px] font-bold text-white border border-white/30">
+                            <span class="h-1.5 w-1.5 rounded-full bg-white"></span> Online
                         </span>
                     </div>
-                    <p class="text-[11px] text-white/70 truncate">Kenya Remote Jobs &amp; Contractor Assistant</p>
+                    <p class="text-[11px] text-white/80 truncate">Kenya Remote Jobs &amp; Contractor Assistant</p>
                 </div>
             </div>
             <div class="flex items-center gap-1 text-white/80 shrink-0">
@@ -186,34 +186,34 @@
         <template x-if="!isMinimized">
             <div class="flex flex-col flex-1 min-h-0">
                 {{-- Quick Actions Pill Bar --}}
-                <div class="flex items-center gap-1.5 overflow-x-auto px-3 py-2 bg-horizon-50/60 border-b border-horizon-100 text-xs text-foreground/80 no-scrollbar">
+                <div class="flex items-center gap-1.5 overflow-x-auto px-3 py-2 bg-slate-50/80 border-b border-slate-200/80 text-xs text-foreground/80 no-scrollbar">
                     <button
                         type="button"
                         @click="send('How do I receive payments from foreign clients in Kenya via Wise and M-Pesa?')"
-                        class="shrink-0 inline-flex items-center gap-1 rounded-full border border-horizon-200 bg-white px-2.5 py-1 text-[11px] font-medium hover:border-horizon-400 hover:bg-horizon-50 transition"
+                        class="shrink-0 inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[11px] font-medium text-slate-700 hover:border-[#3444da] hover:text-[#3444da] hover:bg-[#eef0fe]/40 transition"
                     >
-                        <x-icon name="dollar" class="h-3 w-3 text-emerald-600" /> Wise &amp; M-Pesa
+                        <x-icon name="dollar" class="h-3 w-3 text-[#3444da]" /> Wise &amp; M-Pesa
                     </button>
                     <button
                         type="button"
                         @click="send('How do I fill Form W-8BEN with my KRA PIN to avoid 30% US tax?')"
-                        class="shrink-0 inline-flex items-center gap-1 rounded-full border border-horizon-200 bg-white px-2.5 py-1 text-[11px] font-medium hover:border-horizon-400 hover:bg-horizon-50 transition"
+                        class="shrink-0 inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[11px] font-medium text-slate-700 hover:border-[#3444da] hover:text-[#3444da] hover:bg-[#eef0fe]/40 transition"
                     >
-                        <x-icon name="document" class="h-3 w-3 text-blue-600" /> W-8BEN Tax
+                        <x-icon name="document" class="h-3 w-3 text-[#3444da]" /> W-8BEN Tax
                     </button>
                     <button
                         type="button"
                         @click="send('Why should I get Pro Early Access and how does it give me full access?')"
-                        class="shrink-0 inline-flex items-center gap-1 rounded-full border border-horizon-200 bg-white px-2.5 py-1 text-[11px] font-medium hover:border-horizon-400 hover:bg-horizon-50 transition"
+                        class="shrink-0 inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[11px] font-medium text-slate-700 hover:border-[#3444da] hover:text-[#3444da] hover:bg-[#eef0fe]/40 transition"
                     >
-                        <x-icon name="lightning" class="h-3 w-3 text-amber-500" /> Pro Early Access
+                        <x-icon name="lightning" class="h-3 w-3 text-[#3444da]" /> Pro Early Access
                     </button>
                     <button
                         type="button"
                         @click="send('Which remote roles are actively hiring Kenyans right now?')"
-                        class="shrink-0 inline-flex items-center gap-1 rounded-full border border-horizon-200 bg-white px-2.5 py-1 text-[11px] font-medium hover:border-horizon-400 hover:bg-horizon-50 transition"
+                        class="shrink-0 inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[11px] font-medium text-slate-700 hover:border-[#3444da] hover:text-[#3444da] hover:bg-[#eef0fe]/40 transition"
                     >
-                        <x-icon name="sparkle" class="h-3 w-3 text-indigo-500" /> Matched Roles
+                        <x-icon name="sparkle" class="h-3 w-3 text-[#3444da]" /> Matched Roles
                     </button>
                 </div>
 
@@ -227,7 +227,7 @@
                             {{-- User Message --}}
                             <template x-if="msg.role === 'user'">
                                 <div class="flex justify-end">
-                                    <div class="max-w-[85%] rounded-2xl rounded-tr-xs bg-gradient-to-r from-sunrise-500 to-sunrise-600 px-3.5 py-2.5 text-white shadow-xs leading-relaxed text-xs" x-text="msg.content">
+                                    <div class="max-w-[85%] rounded-2xl rounded-tr-xs bg-[#3444da] px-3.5 py-2.5 text-white shadow-xs leading-relaxed text-xs" x-text="msg.content">
                                     </div>
                                 </div>
                             </template>
@@ -235,11 +235,11 @@
                             {{-- Bot Message --}}
                             <template x-if="msg.role === 'assistant'">
                                 <div class="flex gap-2 items-start">
-                                    <div class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-horizon-100 text-horizon-800 text-[10px] font-bold shadow-xs">
+                                    <div class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-[#eef0fe] text-[#3444da] text-[10px] font-bold shadow-xs">
                                         AI
                                     </div>
                                     <div class="max-w-[88%] space-y-2">
-                                        <div class="rounded-2xl rounded-tl-xs bg-horizon-50/70 border border-horizon-100/90 p-3 shadow-xs text-xs leading-relaxed text-foreground/90 space-y-1.5" x-html="formatMarkdown(msg.content)">
+                                        <div class="rounded-2xl rounded-tl-xs bg-[#f8f9fd] border border-slate-200/90 p-3 shadow-xs text-xs leading-relaxed text-slate-800 space-y-1.5" x-html="formatMarkdown(msg.content)">
                                         </div>
 
                                         {{-- Actions / Suggested Questions --}}
@@ -250,7 +250,7 @@
                                                         <template x-if="act.url">
                                                             <a
                                                                 :href="act.url"
-                                                                class="btn-pop inline-flex items-center gap-1 rounded-full bg-white border border-horizon-300 px-2.5 py-1 text-[11px] font-bold text-horizon-800 shadow-xs hover:border-horizon-500 hover:bg-horizon-50 transition"
+                                                                class="btn-pop inline-flex items-center gap-1 rounded-full bg-white border border-slate-200 px-2.5 py-1 text-[11px] font-bold text-slate-800 shadow-xs hover:border-[#3444da] hover:text-[#3444da] hover:bg-[#eef0fe]/40 transition"
                                                             >
                                                                 <span x-text="act.label"></span> &rarr;
                                                             </a>
@@ -259,7 +259,7 @@
                                                             <button
                                                                 type="button"
                                                                 @click="send(act.query)"
-                                                                class="btn-pop inline-flex items-center gap-1 rounded-full bg-white border border-horizon-300 px-2.5 py-1 text-[11px] font-bold text-horizon-800 shadow-xs hover:border-horizon-500 hover:bg-horizon-50 transition"
+                                                                class="btn-pop inline-flex items-center gap-1 rounded-full bg-white border border-slate-200 px-2.5 py-1 text-[11px] font-bold text-slate-800 shadow-xs hover:border-[#3444da] hover:text-[#3444da] hover:bg-[#eef0fe]/40 transition"
                                                             >
                                                                 <span x-text="act.label"></span>
                                                             </button>
@@ -276,40 +276,40 @@
 
                     {{-- Loading / Typing Indicator --}}
                     <div x-show="loading" x-cloak class="flex gap-2 items-center text-xs text-foreground/50">
-                        <div class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-horizon-100 text-horizon-800 text-[10px] font-bold">
+                        <div class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-[#eef0fe] text-[#3444da] text-[10px] font-bold">
                             AI
                         </div>
-                        <div class="flex items-center gap-1 rounded-full bg-horizon-50 border border-horizon-100 px-3 py-1.5">
-                            <span class="h-1.5 w-1.5 rounded-full bg-horizon-600 animate-bounce"></span>
-                            <span class="h-1.5 w-1.5 rounded-full bg-horizon-600 animate-bounce" style="animation-delay: 0.15s"></span>
-                            <span class="h-1.5 w-1.5 rounded-full bg-horizon-600 animate-bounce" style="animation-delay: 0.3s"></span>
+                        <div class="flex items-center gap-1 rounded-full bg-slate-100 border border-slate-200 px-3 py-1.5">
+                            <span class="h-1.5 w-1.5 rounded-full bg-[#3444da] animate-bounce"></span>
+                            <span class="h-1.5 w-1.5 rounded-full bg-[#3444da] animate-bounce" style="animation-delay: 0.15s"></span>
+                            <span class="h-1.5 w-1.5 rounded-full bg-[#3444da] animate-bounce" style="animation-delay: 0.3s"></span>
                         </div>
                     </div>
                 </div>
 
                 {{-- Input Bar --}}
-                <div class="border-t border-horizon-100/80 bg-white p-2.5">
+                <div class="border-t border-slate-200/80 bg-white p-2.5">
                     <form @submit.prevent="send()" class="flex items-center gap-2">
                         <input
                             type="text"
                             x-model="inputMessage"
                             placeholder="Ask Daisy about remote jobs, Wise, taxes, Pro..."
-                            class="flex-1 rounded-xl border border-black/10 bg-horizon-50/40 px-3 py-2 text-xs focus:bg-white focus:border-horizon-500 focus:outline-none focus:ring-1 focus:ring-horizon-500"
+                            class="flex-1 rounded-xl border border-slate-200 bg-slate-50/40 px-3 py-2 text-xs focus:bg-white focus:border-[#3444da] focus:outline-none focus:ring-1 focus:ring-[#3444da]"
                             autocomplete="off"
                         />
                         <button
                             type="submit"
                             :disabled="loading || !inputMessage.trim()"
-                            class="btn-pop inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-horizon-800 text-white shadow-xs hover:bg-horizon-900 transition disabled:opacity-50"
+                            class="btn-pop inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[#3444da] text-white shadow-xs hover:bg-[#2633bf] transition disabled:opacity-50"
                         >
                             <svg class="h-3.5 w-3.5 transform rotate-45 -translate-y-0.5 translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                                <path stroke_linecap="round" stroke_linejoin="round" stroke_width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                             </svg>
                         </button>
                     </form>
                     <div class="mt-1.5 flex items-center justify-between text-[10px] text-foreground/40 px-1">
                         <span>Daisy AI &bull; Free Career Assistant</span>
-                        <a href="{{ url('/pricing') }}" class="text-horizon-700 font-semibold hover:underline">Get Pro Early Access &rarr;</a>
+                        <a href="{{ url('/pricing') }}" class="text-[#3444da] font-semibold hover:underline">Get Pro Early Access &rarr;</a>
                     </div>
                 </div>
             </div>

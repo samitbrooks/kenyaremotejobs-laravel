@@ -52,20 +52,20 @@ new class extends Component
 
 <div class="w-full">
     @if ($pendingPaymentId)
-        <div wire:poll.3s="checkPaymentStatus" class="rounded-2xl border border-teal-300 bg-teal-50 p-5 text-center shadow-md">
-            <div class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-teal-100 text-teal-700 animate-bounce mb-2">
+        <div wire:poll.3s="checkPaymentStatus" class="rounded-2xl border border-[#c7ccfb] bg-[#eef0fe] p-5 text-center shadow-md">
+            <div class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#3444da] animate-bounce mb-2 shadow-2xs">
                 <x-icon name="coin" class="h-5 w-5" />
             </div>
-            <p class="font-extrabold text-teal-950 text-base">Check Your Phone</p>
-            <p class="mt-1 text-xs text-teal-800 leading-relaxed max-w-sm mx-auto">
+            <p class="font-extrabold text-slate-900 text-base">Check Your Phone</p>
+            <p class="mt-1 text-xs text-slate-700 leading-relaxed max-w-sm mx-auto">
                 An M-Pesa STK push for <strong>KES {{ $priceKes }}</strong> was sent to your phone. Enter your M-Pesa PIN to complete unlocking the survey vault.
             </p>
-            <p class="mt-3 text-[11px] text-teal-600 font-medium">Waiting for M-Pesa confirmation...</p>
+            <p class="mt-3 text-[11px] text-[#3444da] font-semibold">Waiting for M-Pesa confirmation...</p>
         </div>
     @else
-        <div class="rounded-3xl border-2 border-teal-500/80 bg-gradient-to-br from-white via-teal-50/30 to-emerald-50/40 p-6 sm:p-8 shadow-xl text-center">
-            <span class="inline-flex items-center gap-1.5 rounded-full bg-teal-100/80 border border-teal-200 px-3.5 py-1 text-xs font-black text-teal-900 shadow-2xs">
-                <x-icon name="lock" class="h-3.5 w-3.5 text-teal-900" /> Premium Survey &amp; Side-Income Vault
+        <div class="rounded-3xl border-2 border-[#3444da]/30 bg-gradient-to-br from-white via-[#f8f9fd] to-[#eef0fe]/40 p-6 sm:p-8 shadow-xl text-center">
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-3.5 py-1 text-xs font-black text-[#3444da] shadow-2xs">
+                <x-icon name="lock" class="h-3.5 w-3.5 text-[#3444da]" /> Premium Survey &amp; Side-Income Vault
             </span>
 
             <h3 class="mt-3 text-xl sm:text-2xl font-black text-slate-900">
@@ -77,12 +77,12 @@ new class extends Component
             </p>
 
             <div class="mt-4 flex items-center justify-center gap-2">
-                <span class="text-3xl font-black text-teal-700">KES {{ $priceKes }}</span>
+                <span class="text-3xl font-black text-[#3444da]">KES {{ $priceKes }}</span>
                 <span class="text-xs text-slate-400 font-bold uppercase tracking-wider">One-Time (Unlocks All)</span>
             </div>
 
-            <p class="mt-1 flex items-center justify-center gap-1 text-[11px] text-emerald-700 font-semibold">
-                <x-icon name="check" class="h-3.5 w-3.5 text-emerald-700" /> Included for free with active Pro membership
+            <p class="mt-1 flex items-center justify-center gap-1 text-[11px] text-[#3444da] font-semibold">
+                <x-icon name="check" class="h-3.5 w-3.5 text-[#3444da]" /> Included for free with active Pro membership
             </p>
 
             @if ($error || $paymentError)
@@ -104,14 +104,14 @@ new class extends Component
                                     wire:model="phone"
                                     placeholder="07XXXXXXXX"
                                     required
-                                    class="w-full rounded-full border border-slate-300 bg-white py-2.5 pl-20 pr-4 text-sm text-slate-800 placeholder-slate-400 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20 font-medium"
+                                    class="w-full rounded-full border border-slate-300 bg-white py-2.5 pl-20 pr-4 text-sm text-slate-800 placeholder-slate-400 focus:border-[#3444da] focus:outline-none focus:ring-2 focus:ring-[#3444da]/20 font-medium"
                                 />
                             </div>
                         @endif
 
                         <button
                             type="submit"
-                            class="btn-pop flex w-full items-center justify-center gap-2 rounded-full bg-emerald-600 hover:bg-emerald-700 py-3 px-6 text-sm font-extrabold text-white shadow-lg shadow-emerald-600/25 transition cursor-pointer"
+                            class="btn-pop flex w-full items-center justify-center gap-2 rounded-full bg-[#3444da] hover:bg-[#2633bf] py-3 px-6 text-sm font-extrabold text-white shadow-md shadow-[#3444da]/20 transition cursor-pointer"
                         >
                             <span>Lipa Na M-Pesa &middot; KES {{ $priceKes }} (Unlock All)</span>
                             <span>&rarr;</span>
@@ -120,7 +120,7 @@ new class extends Component
                 @else
                     <a
                         href="{{ url('/account?next=/surveys') }}"
-                        class="btn-pop flex w-full items-center justify-center gap-2 rounded-full bg-emerald-600 hover:bg-emerald-700 py-3 px-6 text-sm font-extrabold text-white shadow-lg shadow-emerald-600/25 transition cursor-pointer"
+                        class="btn-pop flex w-full items-center justify-center gap-2 rounded-full bg-[#3444da] hover:bg-[#2633bf] py-3 px-6 text-sm font-extrabold text-white shadow-md shadow-[#3444da]/20 transition cursor-pointer"
                     >
                         <span>Sign In to Unlock All Surveys with M-Pesa &rarr;</span>
                     </a>

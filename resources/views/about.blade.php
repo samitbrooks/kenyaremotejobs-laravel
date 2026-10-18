@@ -12,15 +12,15 @@
     title="About"
     description="Why KenyaRemoteJobs exists: closing the gap between global remote work and Kenyan jobseekers, one Kenya-Friendly Match at a time."
 >
-    <section class="bg-slate-900 relative overflow-hidden px-4 py-20 text-white sm:px-6 border-b border-slate-800">
-        <div class="pointer-events-none absolute -right-10 top-6 h-40 w-40 rounded-full bg-teal-500/10 blur-2xl"></div>
-        <div class="pointer-events-none absolute -left-6 bottom-0 h-48 w-48 rounded-full bg-indigo-500/10 blur-2xl"></div>
+    <section class="bg-gradient-to-b from-[#eef0fe]/70 via-[#f8f9fd] to-white relative overflow-hidden px-4 py-20 text-slate-900 sm:px-6 border-b border-slate-200/80">
+        <div class="pointer-events-none absolute -right-10 top-6 h-40 w-40 rounded-full bg-[#3444da]/5 blur-2xl"></div>
+        <div class="pointer-events-none absolute -left-6 bottom-0 h-48 w-48 rounded-full bg-[#3444da]/5 blur-2xl"></div>
 
         <x-reveal class="relative mx-auto max-w-3xl text-center">
-            <h1 class="text-3xl font-extrabold leading-tight sm:text-5xl text-white">
+            <h1 class="text-3xl font-extrabold leading-tight sm:text-5xl text-slate-900">
                 Built for the jobseeker in Nairobi, Kisumu, and every county in between.
             </h1>
-            <p class="mx-auto mt-5 max-w-xl text-lg text-slate-300">
+            <p class="mx-auto mt-5 max-w-xl text-lg text-slate-600">
                 Most remote job boards say &ldquo;work from anywhere&rdquo; and mean &ldquo;anywhere in the US.&rdquo; We built the one that actually checks.
             </p>
         </x-reveal>
@@ -37,9 +37,9 @@
                 </div>
             </x-reveal>
             <x-reveal :delay="120">
-                <div class="h-full rounded-3xl bg-slate-900 p-8 sm:p-10 text-white shadow-xl border border-slate-800">
-                    <p class="text-xs font-bold uppercase tracking-wider text-teal-400">The fix</p>
-                    <p class="mt-3 text-lg leading-relaxed text-slate-200 font-normal">
+                <div class="h-full rounded-3xl bg-gradient-to-br from-[#f8f9fd] via-white to-[#eef0fe]/70 p-8 sm:p-10 text-slate-900 shadow-sm border border-[#c7ccfb]">
+                    <p class="text-xs font-bold uppercase tracking-wider text-[#3444da]">The fix</p>
+                    <p class="mt-3 text-lg leading-relaxed text-slate-700 font-normal">
                         We monitor verified international employer networks and score every single role for how realistically open it is to East Africa &mdash; location, timezone overlap, and visa restrictions included &mdash; before you ever click apply.
                     </p>
                 </div>
@@ -55,11 +55,11 @@
             <div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
                 @foreach ($pillars as $i => $pillar)
                     <x-reveal :delay="$i * 120" class="text-center">
-                        <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-white border border-slate-200 text-teal-700 shadow-2xs">
+                        <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-white border border-slate-200 text-[#3444da] shadow-2xs">
                             @if ($pillar['icon'] === 'kenya-flag')
                                 <x-icon.kenya-flag class="h-6 w-6" />
                             @else
-                                <x-icon :name="$pillar['icon']" class="h-6 w-6 text-teal-700" />
+                                <x-icon :name="$pillar['icon']" class="h-6 w-6 text-[#3444da]" />
                             @endif
                         </div>
                         <h3 class="mb-2 font-bold text-slate-900">{{ $pillar['title'] }}</h3>
@@ -74,7 +74,7 @@
         <x-reveal>
             <div class="grid grid-cols-1 gap-6 rounded-3xl border border-slate-200/80 bg-white p-8 shadow-sm sm:grid-cols-3 sm:p-10">
                 <div>
-                    <p class="text-4xl font-bold text-teal-700"><x-count-up :value="$total" /></p>
+                    <p class="text-4xl font-bold text-[#3444da]"><x-count-up :value="$total" /></p>
                     <p class="mt-1 text-sm text-slate-500">live listings right now</p>
                 </div>
                 <div>
@@ -82,7 +82,7 @@
                     <p class="mt-1 text-sm text-slate-500">global hiring networks tracked</p>
                 </div>
                 <div>
-                    <p class="text-4xl font-bold text-emerald-700"><x-count-up :value="$totalKenyaFriendly" /></p>
+                    <p class="text-4xl font-bold text-[#3444da]"><x-count-up :value="$totalKenyaFriendly" /></p>
                     <p class="mt-1 text-sm text-slate-500">Kenya-Friendly Match badges live now</p>
                 </div>
             </div>
@@ -95,7 +95,7 @@
                 Work from Kenya. Work for the world. That&rsquo;s the whole idea.
             </p>
             <div class="mt-8 flex flex-wrap justify-center gap-3">
-                <a href="{{ url('/jobs') }}" class="btn-pop inline-block rounded-full bg-teal-600 px-8 py-3 font-semibold text-white shadow-sm transition hover:bg-teal-700">
+                <a href="{{ url('/jobs') }}" class="btn-pop inline-block rounded-full bg-[#3444da] px-8 py-3 font-bold text-white shadow-md shadow-[#3444da]/20 transition hover:bg-[#2633bf]">
                     Start browsing jobs &rarr;
                 </a>
                 <a href="{{ url('/pricing') }}" class="btn-pop inline-block rounded-full border border-black/10 px-8 py-3 font-semibold text-foreground transition hover:bg-black/5">
