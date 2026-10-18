@@ -5,7 +5,7 @@
     <div class="relative z-10">
         <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
             <span class="inline-flex items-center gap-1.5 rounded-full bg-amber-400/20 border border-amber-400/50 px-3.5 py-1 text-[11px] font-extrabold uppercase tracking-wider text-amber-300">
-                <span>👑</span> Transparent Membership ROI
+                <x-icon name="crown" class="h-3.5 w-3.5 text-amber-300" /> Transparent Membership ROI
             </span>
             <span class="text-xs text-slate-400 font-medium">
                 M-Pesa Instant Activation &bull; Zero Long-term Contract
@@ -74,7 +74,7 @@
 
                 <a
                     href="{{ url('/pricing') }}"
-                    class="btn-pop mt-5 block w-full rounded-xl bg-gradient-to-r from-amber-400 to-[#ff3131] py-3 text-center text-xs font-black uppercase tracking-wider text-slate-950 shadow-lg shadow-amber-400/20 hover:from-amber-300 hover:to-[#ff4545] transition"
+                    class="btn-pop mt-5 block w-full rounded-xl bg-[#3444da] py-3 text-center text-xs font-black uppercase tracking-wider text-white shadow-lg shadow-[#3444da]/20 hover:bg-[#2a38b7] transition"
                 >
                     Unlock Pro Early Access (KES 250) &rarr;
                 </a>

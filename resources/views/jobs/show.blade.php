@@ -25,7 +25,7 @@
     <div class="mx-auto max-w-3xl px-4 py-10 sm:px-6">
         @if ($isExpired)
             <div class="mb-5 rounded-2xl border border-amber-300 bg-amber-50/95 p-4 text-amber-950 shadow-xs flex items-start gap-3">
-                <span class="text-xl shrink-0">⚠️</span>
+                <x-icon name="warning" class="h-5 w-5 text-amber-600 shrink-0" />
                 <div>
                     <h2 class="text-sm font-bold text-amber-900">This job posting has reached its deadline and is closed</h2>
                     <p class="mt-0.5 text-xs text-amber-800 leading-relaxed">
@@ -36,31 +36,31 @@
         @endif
 
         @if (! $isExpired && auth()->user()?->onTrial())
-            <div class="mb-4 rounded-2xl border border-teal-200 bg-gradient-to-r from-teal-50 via-emerald-50 to-teal-50 p-3.5 shadow-xs flex flex-wrap items-center justify-between gap-3">
-                <div class="flex items-center gap-2 text-xs text-teal-950 font-semibold">
-                    <span class="inline-flex h-2 w-2 rounded-full bg-teal-500 animate-pulse shrink-0"></span>
+            <div class="mb-4 rounded-2xl border border-[#c7ccfb] bg-[#eef0fe]/80 p-3.5 shadow-xs flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center gap-2 text-xs text-slate-800 font-semibold">
+                    <span class="inline-flex h-2 w-2 rounded-full bg-[#3444da] animate-pulse shrink-0"></span>
                     <span><strong>24-Hour Free Pass Active:</strong> Unrestricted access to view company details and apply directly. Expires in {{ auth()->user()->trialRemainingHuman() }}.</span>
                 </div>
-                <a href="{{ route('pricing') }}" class="btn-pop rounded-full bg-teal-700 px-3 py-1 text-xs font-bold text-white hover:bg-teal-800 shadow-2xs transition">
+                <a href="{{ route('pricing') }}" class="btn-pop rounded-full bg-[#3444da] px-3.5 py-1 text-xs font-bold text-white hover:bg-[#2633bf] shadow-2xs transition">
                     Keep Access with Pro &rarr;
                 </a>
             </div>
         @endif
 
-        <a href="{{ url('/jobs') }}" class="text-sm font-semibold text-teal-700 hover:underline">&larr; Back to all jobs</a>
+        <a href="{{ url('/jobs') }}" class="text-sm font-semibold text-[#3444da] hover:underline">&larr; Back to all jobs</a>
 
         <x-reveal>
             <div class="mt-4 flex items-start gap-4">
                 <x-company-logo :company="$canApply ? $job->company : ''" :size="64" />
                 <div class="min-w-0 flex-1">
-                    <h1 class="text-2xl font-extrabold sm:text-3xl text-slate-900">{{ $job->title }}</h1>
+                    <h1 class="text-2xl font-extrabold sm:text-3xl text-slate-900 tracking-tight">{{ $job->title }}</h1>
                     @if ($canApply)
                         <p class="mt-1 text-base font-medium text-slate-500">{{ $job->company }}</p>
                     @elseif ($isExpired)
                         <p class="mt-1 text-base font-medium text-slate-500">{{ $job->company }} &middot; <span class="text-amber-800 font-semibold">Archived Posting</span></p>
                     @else
                         <p class="mt-1.5 inline-flex items-center gap-1.5 rounded-full bg-amber-50 border border-amber-200/80 px-3 py-0.5 text-xs font-bold text-amber-900">
-                            <span class="text-amber-600">🔒</span> Company Name Hidden &middot; Unlocked with Pro or 24-Hour Free Pass
+                            <x-icon name="lock" class="h-3.5 w-3.5 text-amber-600 inline" /> Company Name Hidden &middot; Unlocked with Pro or 24-Hour Free Pass
                         </p>
                     @endif
                 </div>
@@ -167,17 +167,17 @@
                 @if ($isExpired)
                     <div class="rounded-3xl border border-slate-200/80 bg-slate-50 p-6 sm:p-10 text-center shadow-xs">
                         <div class="inline-flex items-center gap-2 rounded-full bg-amber-100 border border-amber-300 px-4 py-1.5 text-xs font-bold text-amber-900 mb-4">
-                            ⚠️ Application Window Closed
+                            <x-icon name="warning" class="h-3.5 w-3.5 text-amber-700 inline" /> Application Window Closed
                         </div>
                         <h3 class="text-2xl font-extrabold text-slate-900">This position has expired or been filled</h3>
                         <p class="mt-2 text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
                             This vacancy was listed over 30 days ago. The hiring team is no longer reviewing applications for this cycle.
                         </p>
                         <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
-                            <a href="{{ url('/jobs') }}" class="btn-pop rounded-full bg-teal-700 px-7 py-3 text-sm font-bold text-white hover:bg-teal-800 shadow-xs transition">
+                            <a href="{{ url('/jobs') }}" class="btn-pop rounded-full bg-[#3444da] px-7 py-3 text-sm font-bold text-white hover:bg-[#2633bf] shadow-xs transition">
                                 Browse Current Live Remote Jobs &rarr;
                             </a>
-                            <a href="{{ url('/collections') }}" class="rounded-full bg-white border border-slate-200/80 px-5 py-3 text-sm font-semibold text-slate-700 hover:border-teal-500 hover:text-teal-700 transition shadow-2xs">
+                            <a href="{{ url('/collections') }}" class="rounded-full bg-white border border-slate-200/80 px-5 py-3 text-sm font-semibold text-slate-700 hover:border-[#3444da] hover:text-[#3444da] transition shadow-2xs">
                                 Curated Collections
                             </a>
                         </div>
@@ -186,7 +186,7 @@
                     <div class="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-10 text-center shadow-lg">
                         @if ($job->origin === 'employer')
                             <p class="mb-4 inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-4 py-1 text-xs font-bold text-emerald-800">
-                                🇰🇪 Verified Direct Employer &middot; Pro Access Active
+                                <x-icon.kenya-flag class="h-3.5 w-3.5 inline" /> Verified Direct Employer &middot; Pro Access Active
                             </p>
                         @elseif ($job->isDirectAts())
                             <p class="mb-4 inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-4 py-1 text-xs font-bold text-emerald-800">
@@ -210,7 +210,7 @@
                                 href="{{ $job->directApplyUrl() }}"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="btn-pop inline-flex items-center justify-center gap-2 rounded-full bg-teal-600 px-8 py-3.5 text-center font-bold text-white shadow-md shadow-teal-600/20 transition hover:bg-teal-700"
+                                class="btn-pop inline-flex items-center justify-center gap-2 rounded-full bg-[#3444da] hover:bg-[#2633bf] px-8 py-3.5 text-center font-bold text-white shadow-md shadow-[#3444da]/20 transition"
                             >
                                 Apply Directly at {{ $job->company }} &#8599;
                             </a>
@@ -237,7 +237,7 @@
                     {{-- Direct Employer Listing Seeking Kenyan Talent (Pro Exclusive) --}}
                     <div class="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-10 text-center shadow-xl">
                         <div class="inline-flex items-center gap-2 rounded-full bg-emerald-50 border border-emerald-200 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-emerald-900 mb-4">
-                            🇰🇪 Verified Employer Actively Seeking Kenyan Talent &middot; Full Access with Pro
+                            <x-icon.kenya-flag class="h-3.5 w-3.5 inline" /> Verified Employer Actively Seeking Kenyan Talent &middot; Full Access with Pro
                         </div>
                         <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
                             {{ $canApply ? $job->company : 'Verified Direct Employer' }} is Exclusively Hiring in Kenya
@@ -248,15 +248,15 @@
 
                         <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3.5 max-w-lg mx-auto text-left text-xs font-medium text-slate-700">
                             <div class="rounded-2xl bg-slate-50/80 p-4 border border-slate-200/70 shadow-2xs">
-                                <p class="font-bold text-slate-900">🇰🇪 No Visa Hurdles</p>
+                                <p class="font-bold text-slate-900 flex items-center gap-1.5"><x-icon name="check" class="h-4 w-4 text-emerald-600" /> No Visa Hurdles</p>
                                 <p class="text-slate-500 mt-1 leading-relaxed">Employer is already set up to hire Kenyan remote contractors.</p>
                             </div>
                             <div class="rounded-2xl bg-slate-50/80 p-4 border border-slate-200/70 shadow-2xs">
-                                <p class="font-bold text-slate-900">🎯 Direct Hiring Manager</p>
+                                <p class="font-bold text-slate-900 flex items-center gap-1.5"><x-icon name="target" class="h-4 w-4 text-[#3444da]" /> Direct Hiring Manager</p>
                                 <p class="text-slate-500 mt-1 leading-relaxed">Your application is delivered directly to their hiring inbox.</p>
                             </div>
                             <div class="rounded-2xl bg-slate-50/80 p-4 border border-slate-200/70 shadow-2xs">
-                                <p class="font-bold text-slate-900">✨ AI CV Copilot</p>
+                                <p class="font-bold text-slate-900 flex items-center gap-1.5"><x-icon name="sparkle" class="h-4 w-4 text-[#3444da]" /> AI CV Copilot</p>
                                 <p class="text-slate-500 mt-1 leading-relaxed">Tailor your CV with our AI Copilot in 1 click.</p>
                             </div>
                         </div>
@@ -264,14 +264,14 @@
                         <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
                             <a
                                 href="{{ url('/pricing') }}"
-                                class="btn-pop w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-teal-600 px-8 py-3.5 text-sm font-bold text-white shadow-md shadow-teal-600/20 hover:bg-teal-700 transition"
+                                class="btn-pop w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-[#3444da] hover:bg-[#2633bf] px-8 py-3.5 text-sm font-bold text-white shadow-md shadow-[#3444da]/20 transition"
                             >
                                 Get Full Access to All Jobs (KES 250/mo)
                             </a>
                             @if (auth()->guest() || ! auth()->user()->hasUsedTrial())
                                 <a
                                     href="{{ route('trial.activate') }}"
-                                    class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-teal-600 bg-teal-50/70 px-6 py-3.5 text-sm font-bold text-teal-800 hover:bg-teal-100 transition"
+                                    class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-[#c7ccfb] bg-[#eef0fe] px-6 py-3.5 text-sm font-bold text-[#3444da] hover:bg-[#e0e4fd] transition"
                                 >
                                     Start 24-Hour Free Pass &rarr;
                                 </a>
@@ -297,15 +297,15 @@
 
                         <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3.5 max-w-lg mx-auto text-left text-xs font-medium text-slate-700">
                             <div class="rounded-2xl bg-slate-50/80 p-4 border border-slate-200/70 shadow-2xs">
-                                <p class="font-bold text-slate-900">⚡ Top of Recruiter Inbox</p>
+                                <p class="font-bold text-slate-900 flex items-center gap-1.5"><x-icon name="lightning" class="h-4 w-4 text-amber-500" /> Top of Recruiter Inbox</p>
                                 <p class="text-slate-500 mt-1 leading-relaxed">First 20 applicants receive 80% of recruiter interviews.</p>
                             </div>
                             <div class="rounded-2xl bg-slate-50/80 p-4 border border-slate-200/70 shadow-2xs">
-                                <p class="font-bold text-slate-900">🎯 AI ATS Match Tailoring</p>
+                                <p class="font-bold text-slate-900 flex items-center gap-1.5"><x-icon name="target" class="h-4 w-4 text-[#3444da]" /> AI ATS Match Tailoring</p>
                                 <p class="text-slate-500 mt-1 leading-relaxed">Instant role-targeted bullets & cover letters.</p>
                             </div>
                             <div class="rounded-2xl bg-slate-50/80 p-4 border border-slate-200/70 shadow-2xs">
-                                <p class="font-bold text-slate-900">💼 Remote Contractor Toolkit</p>
+                                <p class="font-bold text-slate-900 flex items-center gap-1.5"><x-icon name="briefcase" class="h-4 w-4 text-[#3444da]" /> Remote Contractor Toolkit</p>
                                 <p class="text-slate-500 mt-1 leading-relaxed">USD invoices, W-8BEN guide & CRM pipeline.</p>
                             </div>
                         </div>
@@ -313,7 +313,7 @@
                         <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
                             <a
                                 href="{{ url('/pricing') }}"
-                                class="btn-pop w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-teal-600 px-8 py-3.5 text-sm font-bold text-white shadow-md shadow-teal-600/20 hover:bg-teal-700 transition"
+                                class="btn-pop w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-[#3444da] hover:bg-[#2633bf] px-8 py-3.5 text-sm font-bold text-white shadow-md shadow-[#3444da]/20 transition"
                             >
                                 Unlock Immediate Apply Access (KES 250) &rarr;
                             </a>

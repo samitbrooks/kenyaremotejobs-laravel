@@ -10,14 +10,16 @@
         {{-- Flash Session Alerts --}}
         @if (session('success'))
             <div class="rounded-2xl border border-emerald-200 bg-emerald-50/90 p-4 text-sm font-semibold text-emerald-900 shadow-xs flex items-start gap-3">
-                <span class="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-white text-xs font-bold">✓</span>
+                <span class="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-white shadow-xs">
+                    <x-icon name="check" class="h-3.5 w-3.5 text-white" />
+                </span>
                 <div class="pt-0.5 leading-relaxed">{{ session('success') }}</div>
             </div>
         @endif
 
         @if (session('error'))
             <div class="rounded-2xl border border-red-200 bg-red-50/90 p-4 text-sm font-semibold text-red-900 shadow-xs flex items-start gap-3">
-                <span class="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-red-600 text-white text-xs font-bold">✕</span>
+                <span class="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-red-600 text-white text-sm font-bold leading-none">&times;</span>
                 <div class="pt-0.5 leading-relaxed">{{ session('error') }}</div>
             </div>
         @endif
@@ -125,7 +127,7 @@
                             class="btn-pop rounded-xl bg-amber-500 px-3.5 py-2 text-xs font-bold text-slate-950 shadow-xs hover:bg-amber-400 transition"
                             title="Send VIP Pro real-time matches + concierge offers sample"
                         >
-                            👑 Pro VIP Sample
+                            Pro VIP Sample
                         </button>
                         <button
                             type="submit"
@@ -145,8 +147,8 @@
         <div class="rounded-2xl border-2 border-amber-500/70 bg-gradient-to-br from-slate-950 via-slate-900 to-amber-950/40 p-6 shadow-md text-white">
             <div class="flex flex-wrap items-center justify-between gap-2">
                 <div class="flex items-center gap-2.5">
-                    <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-amber-400 to-red-600 text-white font-black text-base shadow-md">
-                        👑
+                    <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-slate-800 border border-amber-500/40 text-amber-300 font-black text-base shadow-md">
+                        <x-icon name="crown" class="h-5 w-5 text-amber-300" />
                     </span>
                     <div>
                         <div class="flex items-center gap-2">
@@ -183,9 +185,9 @@
                         @csrf
                         <button
                             type="submit"
-                            class="btn-pop rounded-xl bg-gradient-to-r from-amber-500 to-red-600 px-5 py-2.5 text-xs font-extrabold text-white shadow-lg shadow-red-600/20 hover:from-amber-400 hover:to-red-500 transition active:scale-95"
+                            class="btn-pop inline-flex items-center gap-1.5 rounded-xl bg-[#3444da] hover:bg-[#2533b8] px-5 py-2.5 text-xs font-extrabold text-white shadow-lg shadow-[#3444da]/20 transition active:scale-95"
                         >
-                            ⚡ Send VIP Pro Matches Now &rarr;
+                            <x-icon name="lightning" class="h-3.5 w-3.5 text-amber-300" /> Send VIP Pro Matches Now &rarr;
                         </button>
                     </form>
                 </div>
@@ -193,11 +195,11 @@
         </div>
 
         {{-- Campaign 1: Daily Job Matches Digest --}}
-        <div class="rounded-2xl border-2 border-amber-300 bg-gradient-to-br from-amber-50/70 via-white to-orange-50/50 p-6 shadow-sm">
+        <div class="rounded-2xl border border-slate-200 bg-slate-50/70 p-6 shadow-sm">
             <div class="flex flex-wrap items-center justify-between gap-2">
                 <div class="flex items-center gap-2.5">
-                    <span class="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 text-white font-black text-sm shadow-xs">
-                        ⚡
+                    <span class="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-[#3444da] text-white font-black text-sm shadow-xs">
+                        <x-icon name="lightning" class="h-4 w-4 text-white" />
                     </span>
                     <div>
                         <h2 class="text-base font-bold text-slate-900">Daily Job Matches Digest (Daisy's Curation)</h2>
@@ -261,7 +263,9 @@
 
                     <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
                         <span>Schedule: <strong>Daily at 08:00 EAT</strong></span>
-                        <span class="text-emerald-700 font-bold">✓ Active in routes/console.php</span>
+                        <span class="inline-flex items-center gap-1 text-emerald-700 font-bold">
+                            <x-icon name="check" class="h-3.5 w-3.5 text-emerald-700" /> Active in routes/console.php
+                        </span>
                     </div>
                 </div>
             </div>
@@ -272,7 +276,7 @@
             <div class="flex flex-wrap items-center justify-between gap-2">
                 <div class="flex items-center gap-2">
                     <span class="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-orange-500 text-white font-extrabold text-sm shadow-xs">
-                        🎁
+                        <x-icon name="gift" class="h-4 w-4 text-white" />
                     </span>
                     <div>
                         <h2 class="text-base font-bold text-slate-900">FlexJobs-Style 24-Hour Free Trial Campaign</h2>
@@ -350,7 +354,7 @@
             <div class="flex flex-wrap items-center justify-between gap-2">
                 <div class="flex items-center gap-2">
                     <span class="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-teal-600 text-white font-extrabold text-sm shadow-xs">
-                        ✉
+                        <x-icon name="chat" class="h-4 w-4 text-white" />
                     </span>
                     <div>
                         <h2 class="text-base font-bold text-slate-900">FlexJobs-Style Follow-Up Campaign ("Still thinking about finding a remote job?")</h2>

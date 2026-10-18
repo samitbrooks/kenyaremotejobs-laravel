@@ -254,8 +254,8 @@
                     <x-reveal class="h-full">
                         <div class="relative flex h-full flex-col justify-between rounded-3xl border {{ $pkg['featured'] ? 'border-2 border-sunrise-500 shadow-xl' : 'border-black/5 shadow-sm' }} bg-white p-8">
                             @if ($pkg['featured'])
-                                <span class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-sunrise-500 px-4 py-0.5 text-xs font-bold text-white shadow-md">
-                                    ★ Most Popular Choice
+                                <span class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-sunrise-500 px-4 py-0.5 text-xs font-bold text-white shadow-md inline-flex items-center gap-1">
+                                    <x-icon name="star" class="h-3 w-3 fill-white text-white" /> Most Popular Choice
                                 </span>
                             @endif
 

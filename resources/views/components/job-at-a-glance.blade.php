@@ -2,7 +2,7 @@
 
 @php
     $rows = [
-        ['label' => 'Company', 'value' => $canApply ? $job->company : '🔒 Hidden (Pro & Free Pass Access)'],
+        ['label' => 'Company', 'value' => $canApply ? $job->company : 'Hidden (Pro & Free Pass Access)'],
         ['label' => 'Location', 'value' => $job->location],
         ['label' => 'Remote type', 'value' => $job->remote_type],
     ];
@@ -12,11 +12,11 @@
     $rows[] = ['label' => 'Posted', 'value' => \App\Support\Format::timeAgo($job->posted_at)];
 
     if ($job->origin === 'employer') {
-        $rows[] = ['label' => 'Application Status', 'value' => '🇰🇪 Direct Employer (Seeking Kenyan Talent — Pro Exclusive)'];
+        $rows[] = ['label' => 'Application Status', 'value' => 'Direct Employer (Seeking Kenyan Talent — Pro Exclusive)'];
     } elseif ($canApply) {
-        $rows[] = ['label' => 'Application Status', 'value' => '✓ Unlocked — Ready to Apply'];
+        $rows[] = ['label' => 'Application Status', 'value' => 'Unlocked — Ready to Apply'];
     } else {
-        $rows[] = ['label' => 'Application Status', 'value' => '🔒 Pro Membership & Free Pass Access'];
+        $rows[] = ['label' => 'Application Status', 'value' => 'Pro Membership & Free Pass Access'];
     }
 
     if ($job->origin === 'employer') {

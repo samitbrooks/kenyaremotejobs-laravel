@@ -3,18 +3,7 @@
         <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             <div>
                 <a href="{{ url('/') }}" class="inline-block transition-transform duration-150 hover:opacity-90 active:scale-95" aria-label="KenyaRemoteJobs Home">
-                    <picture>
-                        <source srcset="{{ asset('images/logo-white.webp') }}" type="image/webp">
-                        <img
-                            src="{{ asset('images/logo-white.png') }}"
-                            alt="KenyaRemoteJobs"
-                            class="h-8.5 w-auto object-contain"
-                            width="130"
-                            height="34"
-                            loading="lazy"
-                            decoding="async"
-                        />
-                    </picture>
+                    <x-brand-logo :dark="true" />
                 </a>
                 <p class="mt-3 text-sm leading-relaxed text-slate-400">
                     Work from Kenya. Work for the world. Hand-curated, verified remote jobs scored for timezone overlap and visa freedom.

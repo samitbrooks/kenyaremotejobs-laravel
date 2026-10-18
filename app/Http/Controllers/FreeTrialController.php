@@ -59,7 +59,7 @@ class FreeTrialController extends Controller
 
         return redirect('/jobs')->with(
             'success',
-            "🎉 Your 24-hour free trial is now active! You have full access to browse and apply to all remote jobs until {$expiresAt}."
+            "Your 24-hour free trial is now active! You have full access to browse and apply to all remote jobs until {$expiresAt}."
         );
     }
 
@@ -110,7 +110,7 @@ class FreeTrialController extends Controller
 
         return redirect('/jobs')->with(
             'success',
-            "🎉 Welcome, {$user->firstName()}! Your 24-hour free trial has been activated. Enjoy full access to all remote jobs until {$expiresAt}."
+            "Welcome, {$user->firstName()}! Your 24-hour free trial has been activated. Enjoy full access to all remote jobs until {$expiresAt}."
         );
     }
 }

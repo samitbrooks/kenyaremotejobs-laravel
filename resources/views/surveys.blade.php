@@ -37,11 +37,11 @@
             </div>
             @if ($hasAccess)
                 <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-600 px-3.5 py-1 text-xs font-black text-white shadow-2xs">
-                    ✓ VIP Vault Unlocked
+                    <x-icon name="check" class="h-3.5 w-3.5" /> VIP Vault Unlocked
                 </span>
             @else
                 <span class="inline-flex items-center gap-1.5 rounded-full bg-white/90 border border-teal-200 px-3 py-1 text-xs font-bold text-teal-800 shadow-2xs">
-                    🇰🇪 4 Free Previews &middot; 18 in Premium Vault
+                    <x-icon.kenya-flag class="h-3.5 w-3.5 inline" /> 4 Free Previews &middot; 18 in Premium Vault
                 </span>
             @endif
         </div>
@@ -52,7 +52,9 @@
                 <div class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 mb-2">
                     <x-icon name="check" class="h-6 w-6" />
                 </div>
-                <h3 class="text-lg font-extrabold text-emerald-950">🎉 Survey Side-Income Vault Unlocked!</h3>
+                <h3 class="text-lg font-extrabold text-emerald-950 flex items-center justify-center gap-1.5">
+                    <x-icon name="sparkle" class="h-5 w-5 text-emerald-700" /> Survey Side-Income Vault Unlocked!
+                </h3>
                 <p class="text-xs sm:text-sm text-emerald-800 mt-1 max-w-lg mx-auto">
                     Your M-Pesa payment was confirmed. You now have unrestricted access to all 20+ verified research panels, Outlier AI tasks, and direct sign-up links.
                 </p>
@@ -77,17 +79,17 @@
                 <a href="{{ route('surveys') }}" class="rounded-full px-4 py-1.5 text-xs font-bold transition {{ ($activeCategory ?? 'all') === 'all' && ($activePayout ?? 'all') === 'all' ? 'bg-teal-700 text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200' }}">
                     All Platforms ({{ count(\App\Support\SurveyPlatforms::all()) }})
                 </a>
-                <a href="{{ route('surveys', ['payout' => 'mpesa']) }}" class="rounded-full px-4 py-1.5 text-xs font-bold transition {{ ($activePayout ?? '') === 'mpesa' ? 'bg-teal-700 text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200' }}">
-                    🇰🇪 M-Pesa / PayPal Compatible
+                <a href="{{ route('surveys', ['payout' => 'mpesa']) }}" class="inline-flex items-center gap-1 rounded-full px-4 py-1.5 text-xs font-bold transition {{ ($activePayout ?? '') === 'mpesa' ? 'bg-teal-700 text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200' }}">
+                    <x-icon.kenya-flag class="h-3 w-3 inline" /> M-Pesa / PayPal Compatible
                 </a>
-                <a href="{{ route('surveys', ['category' => 'research']) }}" class="rounded-full px-4 py-1.5 text-xs font-bold transition {{ ($activeCategory ?? '') === 'research' ? 'bg-teal-700 text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200' }}">
-                    💰 High-Paying ($50+)
+                <a href="{{ route('surveys', ['category' => 'research']) }}" class="inline-flex items-center gap-1 rounded-full px-4 py-1.5 text-xs font-bold transition {{ ($activeCategory ?? '') === 'research' ? 'bg-teal-700 text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200' }}">
+                    <x-icon name="dollar" class="h-3 w-3 inline" /> High-Paying ($50+)
                 </a>
-                <a href="{{ route('surveys', ['category' => 'microtasks']) }}" class="rounded-full px-4 py-1.5 text-xs font-bold transition {{ ($activeCategory ?? '') === 'microtasks' ? 'bg-teal-700 text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200' }}">
-                    ⚡ Microtasks &amp; AI
+                <a href="{{ route('surveys', ['category' => 'microtasks']) }}" class="inline-flex items-center gap-1 rounded-full px-4 py-1.5 text-xs font-bold transition {{ ($activeCategory ?? '') === 'microtasks' ? 'bg-teal-700 text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200' }}">
+                    <x-icon name="lightning" class="h-3 w-3 inline" /> Microtasks &amp; AI
                 </a>
-                <a href="{{ route('surveys', ['payout' => 'crypto']) }}" class="rounded-full px-4 py-1.5 text-xs font-bold transition {{ ($activePayout ?? '') === 'crypto' ? 'bg-teal-700 text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200' }}">
-                    🪙 Crypto Payouts
+                <a href="{{ route('surveys', ['payout' => 'crypto']) }}" class="inline-flex items-center gap-1 rounded-full px-4 py-1.5 text-xs font-bold transition {{ ($activePayout ?? '') === 'crypto' ? 'bg-teal-700 text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200' }}">
+                    <x-icon name="shield" class="h-3 w-3 inline" /> Crypto Payouts
                 </a>
             </div>
 
@@ -112,13 +114,13 @@
                                     <h2 class="text-lg font-black text-slate-900 group-hover:text-teal-700 transition flex items-center gap-1.5">
                                         <span>{{ $platform['name'] }}</span>
                                         @if ($isLocked)
-                                            <span class="text-amber-500 text-xs" title="Locked">🔒</span>
+                                            <x-icon name="lock" class="h-3.5 w-3.5 text-amber-500 inline" />
                                         @endif
                                     </h2>
                                     <div class="mt-1 flex items-center gap-1.5">
-                                        <div class="flex text-amber-400 text-xs">
+                                        <div class="flex text-amber-400 gap-0.5">
                                             @for ($s = 0; $s < 5; $s++)
-                                                <span>★</span>
+                                                <x-icon name="star" class="h-3 w-3 fill-amber-400 text-amber-400" />
                                             @endfor
                                         </div>
                                         <span class="text-[11px] font-bold text-slate-500">{{ $platform['rating'] ?? 4.7 }}/5</span>
@@ -143,8 +145,8 @@
                                 </p>
                                 @if ($isLocked)
                                     <div class="absolute inset-0 flex items-center justify-center">
-                                        <span class="rounded-full bg-white/90 backdrop-blur-xs border border-amber-200 px-3 py-1 text-[11px] font-bold text-amber-900 shadow-xs">
-                                            🔒 Full Details Locked
+                                        <span class="inline-flex items-center gap-1 rounded-full bg-white/90 backdrop-blur-xs border border-amber-200 px-3 py-1 text-[11px] font-bold text-amber-900 shadow-xs">
+                                            <x-icon name="lock" class="h-3.5 w-3.5 text-amber-800" /> Full Details Locked
                                         </span>
                                     </div>
                                 @endif
@@ -184,7 +186,8 @@
                                     onclick="document.getElementById('unlock-vault')?.scrollIntoView({behavior: 'smooth'}); setTimeout(() => document.querySelector('#unlock-vault input[type=tel]')?.focus(), 300);"
                                     class="btn-pop flex w-full items-center justify-center gap-2 rounded-full bg-slate-900 hover:bg-teal-700 px-4 py-2.5 text-xs font-extrabold text-white shadow-md transition"
                                 >
-                                    <span>🔒 Unlock Premium Paid Surveys (KES {{ $priceKes ?? 199 }})</span>
+                                    <x-icon name="lock" class="h-3.5 w-3.5 text-white inline" />
+                                    <span>Unlock Premium Paid Surveys (KES {{ $priceKes ?? 199 }})</span>
                                 </a>
                                 <p class="mt-2 text-center text-[10px] text-slate-500 font-medium">
                                     Flat KES 199 unlocks <strong>all</strong> 18+ premium platforms (not per survey)
@@ -220,7 +223,7 @@
         <div class="mt-14 rounded-3xl border border-teal-200/80 bg-gradient-to-r from-teal-900 via-slate-900 to-teal-950 p-6 sm:p-10 text-white shadow-xl">
             <div class="max-w-2xl">
                 <span class="inline-flex items-center gap-1.5 rounded-full bg-teal-500/20 px-3 py-1 text-xs font-bold text-teal-300">
-                    🇰🇪 M-Pesa Pro Tip
+                    <x-icon.kenya-flag class="h-3.5 w-3.5 inline" /> M-Pesa Pro Tip
                 </span>
                 <h3 class="mt-3 text-xl sm:text-2xl font-black">
                     How to Convert Survey USD Directly to M-Pesa

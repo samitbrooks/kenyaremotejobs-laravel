@@ -3,7 +3,7 @@
         {{-- Hero Header --}}
         <div class="text-center max-w-2xl mx-auto mb-10">
             <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3.5 py-1 text-xs font-bold text-emerald-700 uppercase tracking-wider mb-4">
-                🎁 Kenyan Jobseeker Referral Program
+                <x-icon name="gift" class="h-3.5 w-3.5 text-emerald-700" /> Kenyan Jobseeker Referral Program
             </span>
             <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground tracking-tight leading-tight">
                 Refer Friends, <span class="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">Earn Free Pro Access</span>
@@ -72,7 +72,7 @@
                         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                         </svg>
-                        <span x-text="copied ? 'Link Copied to Clipboard! 🎉' : 'Copy Referral Link'"></span>
+                        <span x-text="copied ? 'Link Copied to Clipboard!' : 'Copy Referral Link'"></span>
                     </button>
                 </div>
 
@@ -156,12 +156,14 @@
                 <span class="text-xs font-bold text-foreground/50 uppercase tracking-wide">Your Pro Status</span>
                 @if ($user->subscribed)
                     <p class="text-base font-black text-amber-600 mt-2 flex items-center gap-1.5">
-                        <span>⭐ Pro Member</span>
+                        <x-icon name="star" class="h-4 w-4 text-amber-500" />
+                        <span>Pro Member</span>
                     </p>
                     <p class="text-[11px] text-foreground/60 mt-1">Unlimited Pro subscription active</p>
                 @elseif ($user->hasReferralProAccess())
                     <p class="text-base font-black text-emerald-600 mt-2 flex items-center gap-1.5">
-                        <span>🎉 Pro Active</span>
+                        <x-icon name="sparkle" class="h-4 w-4 text-emerald-600" />
+                        <span>Pro Active</span>
                     </p>
                     <p class="text-[11px] text-foreground/60 mt-1">Until {{ $user->pro_access_until->format('M j, Y') }}</p>
                 @elseif ($user->onTrial())
@@ -195,7 +197,8 @@
                         When someone joins Kenya Remote Jobs via your referral link, both of you are immediately awarded:
                     </p>
                     <div class="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-sky-600/10 px-2.5 py-1 text-xs font-bold text-sky-800">
-                        <span>✨ +2 AI CV Tailor Credits</span>
+                        <x-icon name="sparkle" class="h-3.5 w-3.5 text-sky-800" />
+                        <span>+2 AI CV Tailor Credits</span>
                     </div>
                 </div>
 
@@ -207,7 +210,8 @@
                         When your referred friend activates their 24-hour free trial pass to test the platform, you receive:
                     </p>
                     <div class="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-amber-600/10 px-2.5 py-1 text-xs font-bold text-amber-900">
-                        <span>🚀 +3 Full Days of Pro Access</span>
+                        <x-icon name="rocket" class="h-3.5 w-3.5 text-amber-900" />
+                        <span>+3 Full Days of Pro Access</span>
                     </div>
                 </div>
 
@@ -219,13 +223,17 @@
                         When your referred friend unlocks full monthly Pro membership (KES 250), you receive our biggest reward:
                     </p>
                     <div class="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-emerald-600/10 px-2.5 py-1 text-xs font-bold text-emerald-900">
-                        <span>🏆 +14 Full Days of Pro Access + 5 AI Tailors</span>
+                        <x-icon name="trophy" class="h-3.5 w-3.5 text-emerald-900" />
+                        <span>+14 Full Days of Pro Access + 5 AI Tailors</span>
                     </div>
                 </div>
             </div>
 
             <div class="mt-6 rounded-2xl bg-slate-50 border border-slate-200/80 p-4 text-xs text-slate-600 flex items-center justify-between flex-wrap gap-2">
-                <span>💡 <strong>Rewards Stack Automatically:</strong> Refer 2 friends who test the trial and you get 6 continuous days of full Pro access. Refer 2 who subscribe and you get nearly an entire month free!</span>
+                <span class="flex items-center gap-1.5">
+                    <x-icon name="bulb" class="h-4 w-4 text-amber-500 shrink-0 inline" />
+                    <span><strong>Rewards Stack Automatically:</strong> Refer 2 friends who test the trial and you get 6 continuous days of full Pro access. Refer 2 who subscribe and you get nearly an entire month free!</span>
+                </span>
                 <a href="{{ url('/account') }}" class="font-bold text-emerald-700 hover:underline">View Account Dashboard &rarr;</a>
             </div>
         </div>

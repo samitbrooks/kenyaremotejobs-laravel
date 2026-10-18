@@ -141,7 +141,7 @@
                     <ul class="space-y-2 text-xs text-slate-600">
                         @foreach ($company['perks'] as $perk)
                             <li class="flex items-start gap-2">
-                                <span class="text-emerald-600 font-bold">✓</span>
+                                <x-icon name="check" class="h-3.5 w-3.5 shrink-0 text-emerald-600 mt-0.5" />
                                 <span>{{ $perk }}</span>
                             </li>
                         @endforeach

@@ -10,7 +10,7 @@
             <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75"></span>
             <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-white"></span>
         </span>
-        <span class="text-base leading-none">💬</span>
+        <x-icon name="chat" class="h-4 w-4 text-white" />
         <span class="hidden sm:inline">WhatsApp Job Alerts</span>
     </button>
 
@@ -40,8 +40,8 @@
             </button>
 
             <div class="flex items-center gap-3 mb-4">
-                <span class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#25D366] text-white text-2xl shadow-lg shadow-emerald-500/30">
-                    💬
+                <span class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#25D366] text-white shadow-lg shadow-emerald-500/30">
+                    <x-icon name="chat" class="h-6 w-6 text-white" />
                 </span>
                 <div>
                     <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400">Exclusive Broadcast</span>
@@ -55,13 +55,13 @@
 
             <div class="rounded-2xl border border-slate-800 bg-slate-950 p-4 space-y-2 text-xs text-slate-300 mb-6">
                 <div class="flex items-center gap-2 text-emerald-400 font-semibold">
-                    <span>✓</span> Instant notification before public applications flood in
+                    <x-icon name="check" class="h-4 w-4 shrink-0 text-emerald-400" /> Instant notification before public applications flood in
                 </div>
                 <div class="flex items-center gap-2 text-emerald-400 font-semibold">
-                    <span>✓</span> Verified compensation in USD &amp; estimated KES take-home
+                    <x-icon name="check" class="h-4 w-4 shrink-0 text-emerald-400" /> Verified compensation in USD &amp; estimated KES take-home
                 </div>
                 <div class="flex items-center gap-2 text-emerald-400 font-semibold">
-                    <span>✓</span> Zero spam &bull; only Kenya-friendly vetted remote roles
+                    <x-icon name="check" class="h-4 w-4 shrink-0 text-emerald-400" /> Zero spam &bull; only Kenya-friendly vetted remote roles
                 </div>
             </div>
 
@@ -69,9 +69,9 @@
                 href="https://wa.me/{{ preg_replace('/[^\d]/', '', config('whatsapp.default_channel_phone', '254700000000')) }}?text=Hello%20KenyaRemoteJobs%20Team!%20I%20would%20like%20to%20receive%20instant%20WhatsApp%20remote%20job%20alerts."
                 target="_blank"
                 rel="noopener"
-                class="btn-pop block w-full rounded-2xl bg-[#25D366] py-3.5 text-center text-xs font-black uppercase tracking-wider text-white shadow-lg shadow-emerald-600/30 hover:bg-[#20ba59] transition"
+                class="btn-pop inline-flex items-center justify-center gap-2 w-full rounded-2xl bg-[#25D366] py-3.5 text-center text-xs font-black uppercase tracking-wider text-white shadow-lg shadow-emerald-600/30 hover:bg-[#20ba59] transition"
             >
-                💬 Join Instant WhatsApp Alerts &rarr;
+                <x-icon name="chat" class="h-4 w-4" /> Join Instant WhatsApp Alerts &rarr;
             </a>
 
             <p class="mt-3 text-center text-[10px] text-slate-500">

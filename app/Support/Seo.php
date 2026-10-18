@@ -263,7 +263,7 @@ class Seo
                     ],
                 ],
             ],
-        ]);
+        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
     }
 
     public static function articleJsonLd(BlogPost $post): string

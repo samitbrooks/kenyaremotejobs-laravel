@@ -23,7 +23,7 @@
                         {{ $collection['badge'] }}
                     </span>
                     <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-200 px-3 py-0.5 text-xs font-semibold text-emerald-800">
-                        ✓ Kenya Eligible &amp; Verified
+                        <x-icon name="check" class="h-3 w-3 text-emerald-600" /> Kenya Eligible &amp; Verified
                     </span>
                 </div>
 

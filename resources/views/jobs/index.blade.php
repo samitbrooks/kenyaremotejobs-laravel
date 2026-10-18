@@ -64,10 +64,10 @@
                         Campus & Student Portal
                     </span>
                     <span class="inline-flex items-center gap-1.5 rounded-full bg-slate-100 border border-slate-200 px-3 py-1 text-xs font-medium text-slate-700">
-                        ✓ 100% Flexible Hours
+                        <x-icon name="check" class="h-3.5 w-3.5 text-emerald-600" /> 100% Flexible Hours
                     </span>
                     <span class="inline-flex items-center gap-1.5 rounded-full bg-slate-100 border border-slate-200 px-3 py-1 text-xs font-medium text-slate-700">
-                        ⚡ M-Pesa Weekly / Bi-Weekly Payouts
+                        <x-icon name="lightning" class="h-3.5 w-3.5 text-[#3444da]" /> M-Pesa Weekly / Bi-Weekly Payouts
                     </span>
                 </div>
 

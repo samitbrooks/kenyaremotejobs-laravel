@@ -30,15 +30,15 @@
     {{-- Progress bar --}}
     <div class="mb-6 flex items-center justify-between border-b border-slate-100 pb-4">
         <div>
-            <span class="inline-flex items-center gap-1.5 rounded-full bg-rose-50 border border-rose-200/60 px-3 py-1 text-[11px] font-bold text-rose-700">
-                <span>⏱</span> 60-Second Readiness Check
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-[#eef0fe] border border-[#3444da]/20 px-3 py-1 text-[11px] font-bold text-[#3444da]">
+                <x-icon name="clock" class="h-3.5 w-3.5 text-[#3444da]" /> 60-Second Readiness Check
             </span>
             <h3 class="text-xl font-extrabold text-slate-900 mt-2">Find Your Remote Job Match Score</h3>
         </div>
         <div class="text-right">
             <span class="text-xs font-bold text-slate-400" x-text="step <= 3 ? 'Step ' + step + ' of 3' : 'Your Match Results'"></span>
             <div class="mt-1 h-2 w-28 rounded-full bg-slate-100 overflow-hidden">
-                <div class="h-full bg-gradient-to-r from-[#2e3760] to-[#ff3131] transition-all duration-300" :style="'width: ' + (step === 1 ? '33%' : (step === 2 ? '66%' : '100%'))"></div>
+                <div class="h-full bg-[#3444da] transition-all duration-300" :style="'width: ' + (step === 1 ? '33%' : (step === 2 ? '66%' : '100%'))"></div>
             </div>
         </div>
     </div>
@@ -50,10 +50,10 @@
             <button
                 type="button"
                 @click="field = 'support'; step = 2"
-                class="rounded-2xl border p-4 text-left transition hover:border-[#ff3131] hover:bg-rose-50/30 flex flex-col justify-between"
-                :class="field === 'support' ? 'border-[#ff3131] bg-rose-50/20' : 'border-slate-200'"
+                class="rounded-2xl border p-4 text-left transition hover:border-[#3444da] hover:bg-[#eef0fe]/40 flex flex-col justify-between"
+                :class="field === 'support' ? 'border-[#3444da] bg-[#eef0fe]/30' : 'border-slate-200'"
             >
-                <span class="text-2xl">🎧</span>
+                <x-icon name="headset" class="h-6 w-6 text-[#3444da]" />
                 <span class="font-bold text-xs sm:text-sm text-slate-900 mt-2">Customer Support &amp; Success</span>
                 <span class="text-[10px] text-slate-500 mt-0.5">High hiring volume</span>
             </button>
@@ -61,10 +61,10 @@
             <button
                 type="button"
                 @click="field = 'tech'; step = 2"
-                class="rounded-2xl border p-4 text-left transition hover:border-[#ff3131] hover:bg-rose-50/30 flex flex-col justify-between"
-                :class="field === 'tech' ? 'border-[#ff3131] bg-rose-50/20' : 'border-slate-200'"
+                class="rounded-2xl border p-4 text-left transition hover:border-[#3444da] hover:bg-[#eef0fe]/40 flex flex-col justify-between"
+                :class="field === 'tech' ? 'border-[#3444da] bg-[#eef0fe]/30' : 'border-slate-200'"
             >
-                <span class="text-2xl">💻</span>
+                <x-icon name="code" class="h-6 w-6 text-[#3444da]" />
                 <span class="font-bold text-xs sm:text-sm text-slate-900 mt-2">Software &amp; Cloud Tech</span>
                 <span class="text-[10px] text-slate-500 mt-0.5">Highest USD salary</span>
             </button>
@@ -72,10 +72,10 @@
             <button
                 type="button"
                 @click="field = 'va'; step = 2"
-                class="rounded-2xl border p-4 text-left transition hover:border-[#ff3131] hover:bg-rose-50/30 flex flex-col justify-between"
-                :class="field === 'va' ? 'border-[#ff3131] bg-rose-50/20' : 'border-slate-200'"
+                class="rounded-2xl border p-4 text-left transition hover:border-[#3444da] hover:bg-[#eef0fe]/40 flex flex-col justify-between"
+                :class="field === 'va' ? 'border-[#3444da] bg-[#eef0fe]/30' : 'border-slate-200'"
             >
-                <span class="text-2xl">📋</span>
+                <x-icon name="briefcase" class="h-6 w-6 text-[#3444da]" />
                 <span class="font-bold text-xs sm:text-sm text-slate-900 mt-2">Virtual Assistant &amp; Admin</span>
                 <span class="text-[10px] text-slate-500 mt-0.5">Fastest to start</span>
             </button>
@@ -83,10 +83,10 @@
             <button
                 type="button"
                 @click="field = 'marketing'; step = 2"
-                class="rounded-2xl border p-4 text-left transition hover:border-[#ff3131] hover:bg-rose-50/30 flex flex-col justify-between"
-                :class="field === 'marketing' ? 'border-[#ff3131] bg-rose-50/20' : 'border-slate-200'"
+                class="rounded-2xl border p-4 text-left transition hover:border-[#3444da] hover:bg-[#eef0fe]/40 flex flex-col justify-between"
+                :class="field === 'marketing' ? 'border-[#3444da] bg-[#eef0fe]/30' : 'border-slate-200'"
             >
-                <span class="text-2xl">📣</span>
+                <x-icon name="megaphone" class="h-6 w-6 text-[#3444da]" />
                 <span class="font-bold text-xs sm:text-sm text-slate-900 mt-2">Digital Marketing &amp; Social</span>
                 <span class="text-[10px] text-slate-500 mt-0.5">Creative growth roles</span>
             </button>
@@ -94,10 +94,10 @@
             <button
                 type="button"
                 @click="field = 'sales'; step = 2"
-                class="rounded-2xl border p-4 text-left transition hover:border-[#ff3131] hover:bg-rose-50/30 flex flex-col justify-between"
-                :class="field === 'sales' ? 'border-[#ff3131] bg-rose-50/20' : 'border-slate-200'"
+                class="rounded-2xl border p-4 text-left transition hover:border-[#3444da] hover:bg-[#eef0fe]/40 flex flex-col justify-between"
+                :class="field === 'sales' ? 'border-[#3444da] bg-[#eef0fe]/30' : 'border-slate-200'"
             >
-                <span class="text-2xl">📈</span>
+                <x-icon name="trending-up" class="h-6 w-6 text-[#3444da]" />
                 <span class="font-bold text-xs sm:text-sm text-slate-900 mt-2">Sales &amp; Lead Generation</span>
                 <span class="text-[10px] text-slate-500 mt-0.5">Commissions in USD</span>
             </button>
@@ -105,10 +105,10 @@
             <button
                 type="button"
                 @click="field = 'writing'; step = 2"
-                class="rounded-2xl border p-4 text-left transition hover:border-[#ff3131] hover:bg-rose-50/30 flex flex-col justify-between"
-                :class="field === 'writing' ? 'border-[#ff3131] bg-rose-50/20' : 'border-slate-200'"
+                class="rounded-2xl border p-4 text-left transition hover:border-[#3444da] hover:bg-[#eef0fe]/40 flex flex-col justify-between"
+                :class="field === 'writing' ? 'border-[#3444da] bg-[#eef0fe]/30' : 'border-slate-200'"
             >
-                <span class="text-2xl">✍️</span>
+                <x-icon name="pen" class="h-6 w-6 text-[#3444da]" />
                 <span class="font-bold text-xs sm:text-sm text-slate-900 mt-2">Content &amp; Copywriting</span>
                 <span class="text-[10px] text-slate-500 mt-0.5">Flexible schedules</span>
             </button>
@@ -122,9 +122,9 @@
             <button
                 type="button"
                 @click="experience = 'entry'; step = 3"
-                class="rounded-2xl border border-slate-200 p-5 text-left transition hover:border-[#ff3131] hover:bg-rose-50/20"
+                class="rounded-2xl border border-slate-200 p-5 text-left transition hover:border-[#3444da] hover:bg-[#eef0fe]/30"
             >
-                <span class="text-xl">🌱</span>
+                <x-icon name="user" class="h-5 w-5 text-[#3444da]" />
                 <h4 class="font-bold text-slate-900 mt-2 text-sm">Entry Level / Transitioning</h4>
                 <p class="text-xs text-slate-500 mt-1">0 - 2 years or eager learner</p>
             </button>
@@ -132,9 +132,9 @@
             <button
                 type="button"
                 @click="experience = 'mid'; step = 3"
-                class="rounded-2xl border border-slate-200 p-5 text-left transition hover:border-[#ff3131] hover:bg-rose-50/20"
+                class="rounded-2xl border border-slate-200 p-5 text-left transition hover:border-[#3444da] hover:bg-[#eef0fe]/30"
             >
-                <span class="text-xl">🚀</span>
+                <x-icon name="rocket" class="h-5 w-5 text-[#3444da]" />
                 <h4 class="font-bold text-slate-900 mt-2 text-sm">Mid-Level Professional</h4>
                 <p class="text-xs text-slate-500 mt-1">2 - 5 years demonstrable experience</p>
             </button>
@@ -142,9 +142,9 @@
             <button
                 type="button"
                 @click="experience = 'senior'; step = 3"
-                class="rounded-2xl border border-slate-200 p-5 text-left transition hover:border-[#ff3131] hover:bg-rose-50/20"
+                class="rounded-2xl border border-slate-200 p-5 text-left transition hover:border-[#3444da] hover:bg-[#eef0fe]/30"
             >
-                <span class="text-xl">👑</span>
+                <x-icon name="crown" class="h-5 w-5 text-[#3444da]" />
                 <h4 class="font-bold text-slate-900 mt-2 text-sm">Senior / Specialist</h4>
                 <p class="text-xs text-slate-500 mt-1">5+ years or team leadership</p>
             </button>
@@ -165,7 +165,7 @@
                     <h4 class="font-bold text-slate-900 text-sm">Yes, Laptop + Home Internet</h4>
                     <p class="text-xs text-slate-500 mt-1">Ready to work from home</p>
                 </div>
-                <span class="text-2xl text-emerald-600 font-bold">&check;</span>
+                <x-icon name="check" class="h-5 w-5 text-emerald-600 font-bold" />
             </button>
 
             <button
@@ -177,7 +177,7 @@
                     <h4 class="font-bold text-slate-900 text-sm">Yes + Backup Power / MiFi</h4>
                     <p class="text-xs text-slate-500 mt-1">100% reliable uptime</p>
                 </div>
-                <span class="text-2xl text-emerald-600 font-bold">⚡</span>
+                <x-icon name="lightning" class="h-5 w-5 text-emerald-600" />
             </button>
         </div>
         <button type="button" @click="step = 2" class="text-xs text-slate-400 hover:text-slate-600 font-semibold">&larr; Back</button>
@@ -185,13 +185,13 @@
 
     {{-- Step 4: Results Card --}}
     <div x-show="step === 4" x-transition class="text-center py-4">
-        <span class="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-100 text-2xl font-bold text-emerald-700 mb-3 shadow-inner">
-            🎉
+        <span class="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[#eef0fe] text-[#3444da] mb-3 shadow-inner">
+            <x-icon name="sparkle" class="h-7 w-7 text-[#3444da]" />
         </span>
         <h3 class="text-2xl font-black text-slate-900">Boom! You're in high demand.</h3>
         <p class="mt-2 text-sm text-slate-600 max-w-lg mx-auto leading-relaxed">
             Based on your skills &amp; experience, you qualify for
-            <strong class="text-emerald-700 font-extrabold" x-text="estimatedRoles + ' active Kenya-friendly roles'"></strong>
+            <strong class="text-[#3444da] font-extrabold" x-text="estimatedRoles + ' active Kenya-friendly roles'"></strong>
             with an estimated compensation of
             <strong class="text-slate-900 font-extrabold" x-text="averageSalaryKes + ' / month'"></strong>!
         </p>

@@ -21,7 +21,7 @@ new class extends Component
             $count = $syncService->sync(notifyPro: true);
             $this->result = $count === 0
                 ? 'Every upstream source failed or returned nothing — kept your existing listings, nothing was overwritten.'
-                : "✓ Real-time sync complete: {$count} jobs active & scored. Pro subscriber alerts processed.";
+                : "Real-time sync complete: {$count} jobs active & scored. Pro subscriber alerts processed.";
         } catch (\Throwable $e) {
             $this->error = 'Real-time sync failed: '.$e->getMessage();
         }
@@ -35,10 +35,10 @@ new class extends Component
         wire:click="resync"
         wire:loading.attr="disabled"
         wire:target="resync"
-        class="btn-pop rounded-full bg-gradient-to-r from-red-600 via-rose-600 to-[#2e3760] px-5 py-2 text-sm font-bold text-white shadow-md hover:shadow-lg hover:shadow-red-500/20 transition disabled:opacity-60 flex items-center gap-2"
+        class="btn-pop rounded-full bg-[#3444da] hover:bg-[#2533b8] px-5 py-2 text-sm font-bold text-white shadow-md hover:shadow-lg hover:shadow-[#3444da]/20 transition disabled:opacity-60 flex items-center gap-2"
     >
         <span wire:loading.remove wire:target="resync" class="flex items-center gap-1.5">
-            <span>⚡</span> Sync All Jobs Realtime
+            <x-icon name="lightning" class="h-4 w-4 text-white" /> Sync All Jobs Realtime
         </span>
         <span wire:loading wire:target="resync" class="flex items-center gap-1.5">
             <svg class="animate-spin -ml-1 mr-1 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">

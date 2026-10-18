@@ -5,7 +5,7 @@
             <div>
                 <h1 class="text-2xl font-bold tracking-tight text-slate-900 flex items-center gap-2.5">
                     <span class="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-600 text-white font-black text-sm shadow-sm">
-                        💬
+                        <x-icon name="chat" class="h-4 w-4 text-white" />
                     </span>
                     WhatsApp Business Hub
                 </h1>
@@ -121,7 +121,7 @@
                     <div class="p-4 border-b border-slate-200/80 flex flex-wrap items-center justify-between gap-3 bg-white">
                         <div class="flex items-center gap-2.5">
                             <div class="h-9 w-9 rounded-full bg-emerald-100 text-emerald-800 font-black text-xs flex items-center justify-center">
-                                💬
+                                <x-icon name="chat" class="h-4 w-4 text-emerald-700" />
                             </div>
                             <div>
                                 <h3 class="text-sm font-bold text-slate-900">+{{ $selectedPhone }}</h3>
@@ -136,7 +136,7 @@
                                 @click="open = !open"
                                 class="rounded-xl border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-100 flex items-center gap-1.5 transition"
                             >
-                                ⚡ Send Job Alert &dtrif;
+                                <x-icon name="lightning" class="h-3.5 w-3.5 text-amber-500" /> Send Job Alert &dtrif;
                             </button>
 
                             <div
@@ -212,8 +212,8 @@
                     </div>
                 @else
                     <div class="flex-1 flex flex-col items-center justify-center p-12 text-center">
-                        <div class="h-16 w-16 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-2xl font-bold mb-4">
-                            💬
+                        <div class="h-16 w-16 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mb-4">
+                            <x-icon name="chat" class="h-8 w-8 text-emerald-700" />
                         </div>
                         <h3 class="text-base font-bold text-slate-900">No Conversation Selected</h3>
                         <p class="mt-1 text-xs text-slate-500 max-w-sm">
@@ -227,7 +227,7 @@
         {{-- Configuration Guide Modal / Helper --}}
         <div class="rounded-2xl border border-slate-200/80 bg-slate-50/60 p-5 shadow-2xs text-xs text-slate-600">
             <h4 class="font-bold text-slate-800 text-sm flex items-center gap-1.5 mb-1.5">
-                <span>⚙</span> Meta WhatsApp Business Cloud API Integration Guide
+                <x-icon name="sparkle" class="h-4 w-4 text-slate-700" /> Meta WhatsApp Business Cloud API Integration Guide
             </h4>
             <p class="leading-relaxed">
                 To connect your live WhatsApp Business account without physical SIM/phone hardware, add the following credentials to your <code class="rounded bg-slate-200/70 px-1 py-0.5 text-slate-800 font-mono">.env</code>:

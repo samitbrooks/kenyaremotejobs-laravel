@@ -100,7 +100,7 @@
                                                 @endif
                                                 @if ($job->kenya_friendly)
                                                     <span style="color: #475569; margin: 0 5px;">&bull;</span>
-                                                    <span style="color: #f87171; font-weight: 700;">🇰🇪 Kenya-Friendly</span>
+                                                    <span style="color: #38bdf8; font-weight: 700;">Kenya-Friendly Verified</span>
                                                 @endif
                                             </div>
                                         </td>

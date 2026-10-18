@@ -35,7 +35,7 @@ class ProJobRecommendationsEmail extends Mailable implements ShouldQueue
 
         return new Envelope(
             from: new Address(config('mail.from.address'), 'Ivy from Kenya Remote Jobs VIP Desk'),
-            subject: "👑 VIP Pro Alert: {$jobCount} Real-Time Matches for You, {$firstName} (+ What We Can Do For You)",
+            subject: "VIP Pro Alert: {$jobCount} Real-Time Matches for You, {$firstName} (+ What We Can Do For You)",
             replyTo: [config('mail.from.address')],
         );
     }

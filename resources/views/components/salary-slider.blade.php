@@ -93,7 +93,7 @@
                 <div class="mt-5 pt-4 border-t border-slate-200">
                     <div class="flex items-center justify-between text-xs text-slate-600 mb-3">
                         <span class="flex items-center gap-1.5 font-bold text-[#3444da]">
-                            <span>✨</span> <span x-text="matchCount + ' active roles'"></span>
+                            <x-icon name="sparkle" class="h-3.5 w-3.5 text-[#3444da]" /> <span x-text="matchCount + ' active roles'"></span>
                         </span>
                         <span class="text-slate-400 font-medium">at or above this tier</span>
                     </div>

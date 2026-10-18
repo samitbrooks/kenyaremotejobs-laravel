@@ -65,7 +65,7 @@ new class extends Component
     @else
         <div class="rounded-3xl border-2 border-teal-500/80 bg-gradient-to-br from-white via-teal-50/30 to-emerald-50/40 p-6 sm:p-8 shadow-xl text-center">
             <span class="inline-flex items-center gap-1.5 rounded-full bg-teal-100/80 border border-teal-200 px-3.5 py-1 text-xs font-black text-teal-900 shadow-2xs">
-                🔒 Premium Survey &amp; Side-Income Vault
+                <x-icon name="lock" class="h-3.5 w-3.5 text-teal-900" /> Premium Survey &amp; Side-Income Vault
             </span>
 
             <h3 class="mt-3 text-xl sm:text-2xl font-black text-slate-900">
@@ -81,8 +81,8 @@ new class extends Component
                 <span class="text-xs text-slate-400 font-bold uppercase tracking-wider">One-Time (Unlocks All)</span>
             </div>
 
-            <p class="mt-1 text-[11px] text-emerald-700 font-semibold">
-                ✓ Included for free with active Pro membership
+            <p class="mt-1 flex items-center justify-center gap-1 text-[11px] text-emerald-700 font-semibold">
+                <x-icon name="check" class="h-3.5 w-3.5 text-emerald-700" /> Included for free with active Pro membership
             </p>
 
             @if ($error || $paymentError)
@@ -96,15 +96,15 @@ new class extends Component
                     <form wire:submit.prevent="buy" class="space-y-3">
                         @if (config('payments.default') === 'mpesa')
                             <div class="relative">
-                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-xs font-bold text-slate-400">
-                                    🇰🇪 +254
+                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-xs font-bold text-slate-400 gap-1">
+                                    <x-icon.kenya-flag class="h-3.5 w-3.5 inline" /> +254
                                 </div>
                                 <input
                                     type="tel"
                                     wire:model="phone"
                                     placeholder="07XXXXXXXX"
                                     required
-                                    class="w-full rounded-full border border-slate-300 bg-white py-2.5 pl-18 pr-4 text-sm text-slate-800 placeholder-slate-400 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20 font-medium"
+                                    class="w-full rounded-full border border-slate-300 bg-white py-2.5 pl-20 pr-4 text-sm text-slate-800 placeholder-slate-400 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20 font-medium"
                                 />
                             </div>
                         @endif
@@ -130,9 +130,9 @@ new class extends Component
                 @endauth
 
                 <div class="mt-4 flex items-center justify-center gap-4 text-[11px] text-slate-500">
-                    <span class="flex items-center gap-1">🔒 Instant M-Pesa STK Push</span>
+                    <span class="flex items-center gap-1"><x-icon name="lock" class="h-3 w-3 text-slate-500" /> Instant M-Pesa STK Push</span>
                     <span>&middot;</span>
-                    <span>⚡ All Platforms Revealed Instantly</span>
+                    <span class="flex items-center gap-1"><x-icon name="lightning" class="h-3 w-3 text-slate-500" /> All Platforms Revealed Instantly</span>
                 </div>
             </div>
         </div>

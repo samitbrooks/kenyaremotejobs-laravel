@@ -7,12 +7,12 @@
         messages: [
             {
                 role: 'assistant',
-                content: 'Hello! 👋 I am **Daisy AI**, your free KenyaRemoteJobs career advisor.\n\nAsk me anything about landing US/UK/EU remote jobs, getting paid via Wise & M-Pesa, or claiming 0% US withholding tax with your KRA PIN.',
+                content: 'Hello! I am **Daisy AI**, your free KenyaRemoteJobs career advisor.\n\nAsk me anything about landing US/UK/EU remote jobs, getting paid via Wise & M-Pesa, or claiming 0% US withholding tax with your KRA PIN.',
                 actions: [
-                    { label: '💸 Wise & M-Pesa Pay', query: 'How do I receive payments from foreign clients in Kenya via Wise and M-Pesa?' },
-                    { label: '📑 W-8BEN Tax Form', query: 'How do I fill Form W-8BEN with my KRA PIN to avoid 30% US tax?' },
-                    { label: '⚡ Pro 48h Early Access', query: 'Why should I get Pro Early Access and how does it give me full access?' },
-                    { label: '🎯 Top Jobs Hiring Now', query: 'Which remote roles are actively hiring Kenyans right now?' }
+                    { label: 'Wise & M-Pesa Pay', query: 'How do I receive payments from foreign clients in Kenya via Wise and M-Pesa?' },
+                    { label: 'W-8BEN Tax Form', query: 'How do I fill Form W-8BEN with my KRA PIN to avoid 30% US tax?' },
+                    { label: 'Pro 48h Early Access', query: 'Why should I get Pro Early Access and how does it give me full access?' },
+                    { label: 'Top Jobs Hiring Now', query: 'Which remote roles are actively hiring Kenyans right now?' }
                 ]
             }
         ],
@@ -125,7 +125,7 @@
             </span>
             <div class="text-left">
                 <p class="text-xs font-bold leading-tight tracking-wide flex items-center gap-1.5">
-                    Ask Daisy AI <span class="hidden sm:inline text-[10px] uppercase font-extrabold tracking-wider text-sunrise-300">🇰🇪 Free Advisor</span>
+                    Ask Daisy AI <span class="hidden sm:inline-flex items-center gap-1 text-[10px] uppercase font-extrabold tracking-wider text-sunrise-300"><x-icon.kenya-flag class="h-3 w-3 inline" /> Free Advisor</span>
                 </p>
                 <p class="text-[10px] text-white/70 leading-none mt-0.5 hidden sm:block">
                     Remote Career, Wise &amp; Tax Guide
@@ -190,30 +190,30 @@
                     <button
                         type="button"
                         @click="send('How do I receive payments from foreign clients in Kenya via Wise and M-Pesa?')"
-                        class="shrink-0 rounded-full border border-horizon-200 bg-white px-2.5 py-1 text-[11px] font-medium hover:border-horizon-400 hover:bg-horizon-50 transition"
+                        class="shrink-0 inline-flex items-center gap-1 rounded-full border border-horizon-200 bg-white px-2.5 py-1 text-[11px] font-medium hover:border-horizon-400 hover:bg-horizon-50 transition"
                     >
-                        💸 Wise &amp; M-Pesa
+                        <x-icon name="dollar" class="h-3 w-3 text-emerald-600" /> Wise &amp; M-Pesa
                     </button>
                     <button
                         type="button"
                         @click="send('How do I fill Form W-8BEN with my KRA PIN to avoid 30% US tax?')"
-                        class="shrink-0 rounded-full border border-horizon-200 bg-white px-2.5 py-1 text-[11px] font-medium hover:border-horizon-400 hover:bg-horizon-50 transition"
+                        class="shrink-0 inline-flex items-center gap-1 rounded-full border border-horizon-200 bg-white px-2.5 py-1 text-[11px] font-medium hover:border-horizon-400 hover:bg-horizon-50 transition"
                     >
-                        📑 W-8BEN Tax
+                        <x-icon name="document" class="h-3 w-3 text-blue-600" /> W-8BEN Tax
                     </button>
                     <button
                         type="button"
                         @click="send('Why should I get Pro Early Access and how does it give me full access?')"
-                        class="shrink-0 rounded-full border border-horizon-200 bg-white px-2.5 py-1 text-[11px] font-medium hover:border-horizon-400 hover:bg-horizon-50 transition"
+                        class="shrink-0 inline-flex items-center gap-1 rounded-full border border-horizon-200 bg-white px-2.5 py-1 text-[11px] font-medium hover:border-horizon-400 hover:bg-horizon-50 transition"
                     >
-                        ⚡ Pro Early Access
+                        <x-icon name="lightning" class="h-3 w-3 text-amber-500" /> Pro Early Access
                     </button>
                     <button
                         type="button"
                         @click="send('Which remote roles are actively hiring Kenyans right now?')"
-                        class="shrink-0 rounded-full border border-horizon-200 bg-white px-2.5 py-1 text-[11px] font-medium hover:border-horizon-400 hover:bg-horizon-50 transition"
+                        class="shrink-0 inline-flex items-center gap-1 rounded-full border border-horizon-200 bg-white px-2.5 py-1 text-[11px] font-medium hover:border-horizon-400 hover:bg-horizon-50 transition"
                     >
-                        🎯 Matched Roles
+                        <x-icon name="sparkle" class="h-3 w-3 text-indigo-500" /> Matched Roles
                     </button>
                 </div>
 

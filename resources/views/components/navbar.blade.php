@@ -11,18 +11,7 @@
 >
     <div class="relative mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
         <a href="{{ url('/') }}" class="shrink-0 flex items-center group transition-transform duration-150 active:scale-95" aria-label="KenyaRemoteJobs Home">
-            <picture>
-                <source srcset="{{ asset('images/logo.webp') }}" type="image/webp">
-                <img
-                    src="{{ asset('images/logo.png') }}"
-                    alt="KenyaRemoteJobs"
-                    class="h-9 sm:h-10 w-auto object-contain"
-                    width="152"
-                    height="40"
-                    loading="eager"
-                    decoding="async"
-                />
-            </picture>
+            <x-brand-logo />
         </a>
 
         <div class="flex flex-1 items-center justify-end gap-4">

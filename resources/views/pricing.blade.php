@@ -82,8 +82,8 @@
                 {{-- Left Column: Price & Action --}}
                 <div class="lg:col-span-5 flex flex-col justify-between h-full border-b lg:border-b-0 lg:border-r border-slate-100 pb-8 lg:pb-0 lg:pr-8">
                     <div>
-                        <div class="inline-flex items-center gap-2 rounded-full bg-emerald-50 border border-emerald-200 px-3 py-1 text-xs font-bold text-emerald-800">
-                            ⭐ Pro Membership Flagship Pass
+                        <div class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-3 py-1 text-xs font-bold text-emerald-800">
+                            <x-icon name="sparkle" class="h-3.5 w-3.5 text-emerald-700" /> Pro Membership Flagship Pass
                         </div>
                         <h2 class="mt-3 text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
                             Everything Unlocked. Instant 0-Second Apply Access.
@@ -112,15 +112,15 @@
                         <div class="flex items-center justify-between text-xs pt-2 text-slate-500">
                             <span>Prepay & Save:</span>
                             <div class="flex items-center gap-3">
-                                <a href="?plan=quarterly" class="font-bold text-slate-700 hover:text-teal-700 hover:underline">Quarterly: KES 499 (Save 33%)</a>
+                                <a href="?plan=quarterly" class="font-bold text-slate-700 hover:text-[#3444da] hover:underline">Quarterly: KES 499 (Save 33%)</a>
                                 <span>&bull;</span>
-                                <a href="?plan=yearly" class="font-bold text-slate-700 hover:text-teal-700 hover:underline">Yearly: KES 899 (Save 70%)</a>
+                                <a href="?plan=yearly" class="font-bold text-slate-700 hover:text-[#3444da] hover:underline">Yearly: KES 899 (Save 70%)</a>
                             </div>
                         </div>
 
                         {{-- Safaricom M-Pesa Security Badge --}}
                         <div class="mt-4 flex items-center justify-center gap-2 rounded-xl bg-slate-50 border border-slate-200 p-2.5 text-center text-xs text-slate-600">
-                            <span class="font-extrabold text-[#00A966]">📱 Safaricom M-Pesa:</span>
+                            <span class="font-extrabold text-[#00A966] inline-flex items-center gap-1"><x-icon name="phone" class="h-3.5 w-3.5 text-[#00A966]" /> Safaricom M-Pesa:</span>
                             <span>Instant STK push prompt sent directly to your phone.</span>
                         </div>
                     </div>
@@ -185,7 +185,7 @@
                     {{-- Trust Guarantees Row --}}
                     <div class="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-slate-100 pt-4 text-xs text-slate-600">
                         <div class="flex items-center gap-2">
-                            <span class="text-lg">🛡️</span>
+                            <x-icon name="shield" class="h-5 w-5 text-emerald-600 shrink-0" />
                             <span><strong>7-Day 100% Money-Back Guarantee:</strong> Full refund if you don't find verified roles.</span>
                         </div>
                         <a
@@ -194,7 +194,8 @@
                             rel="noopener noreferrer"
                             class="inline-flex items-center gap-1.5 font-bold text-[#08734E] hover:underline"
                         >
-                            <span>💬 Ask on WhatsApp</span> &rarr;
+                            <x-icon name="chat" class="h-3.5 w-3.5 text-[#08734E]" />
+                            <span>Ask on WhatsApp</span> &rarr;
                         </a>
                     </div>
                 </div>
@@ -206,7 +207,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 <div class="lg:col-span-7">
                     <span class="inline-flex items-center gap-1.5 rounded-full bg-amber-400/20 border border-amber-400/40 px-3 py-1 text-xs font-black uppercase tracking-wider text-amber-300">
-                        💰 The Return On Investment Math
+                        <x-icon name="coin" class="h-3.5 w-3.5 text-amber-300" /> The Return On Investment Math
                     </span>
                     <h3 class="mt-3 text-2xl sm:text-3xl font-black text-white tracking-tight">
                         Invest KES 250 Today to Land KES 250,000/mo.
@@ -358,7 +359,7 @@
                             <td class="p-4 font-bold text-slate-900">Full Access to Apply to All 800+ Jobs</td>
                             <td class="p-4 text-center text-slate-500">Wait 48h (Queue fills)</td>
                             <td class="p-4 text-center font-bold text-emerald-800 bg-emerald-50/60 border-x border-emerald-200">
-                                ✓ Instant 0-second apply
+                                <span class="inline-flex items-center justify-center gap-1.5"><x-icon name="check" class="h-4 w-4 text-emerald-600 inline" /> Instant 0-second apply</span>
                             </td>
                             <td class="p-4 text-center text-slate-500">Pay connects per bid</td>
                             <td class="p-4 text-center text-slate-500">10,000+ public applicants</td>
@@ -367,7 +368,7 @@
                             <td class="p-4 font-bold text-slate-900">Pro Exclusive: Employers Actively Seeking Kenyan Talent</td>
                             <td class="p-4 text-center text-slate-400">&ndash;</td>
                             <td class="p-4 text-center font-bold text-emerald-800 bg-emerald-50/60 border-x border-emerald-200">
-                                ✓ Direct hiring pipeline
+                                <span class="inline-flex items-center justify-center gap-1.5"><x-icon name="check" class="h-4 w-4 text-emerald-600 inline" /> Direct hiring pipeline</span>
                             </td>
                             <td class="p-4 text-center text-slate-400">&ndash;</td>
                             <td class="p-4 text-center text-slate-400">Rare / Unfiltered</td>
@@ -376,7 +377,7 @@
                             <td class="p-4 font-bold text-slate-900">Scam & Fee-Demand Protection</td>
                             <td class="p-4 text-center text-slate-600">Manual review</td>
                             <td class="p-4 text-center font-bold text-emerald-800 bg-emerald-50/60 border-x border-emerald-200">
-                                ✓ 100% Tax & Company Vetted
+                                <span class="inline-flex items-center justify-center gap-1.5"><x-icon name="check" class="h-4 w-4 text-emerald-600 inline" /> 100% Tax & Company Vetted</span>
                             </td>
                             <td class="p-4 text-center text-slate-500">High spam proposals</td>
                             <td class="p-4 text-center text-slate-500">Frequent ghost jobs</td>
@@ -385,7 +386,7 @@
                             <td class="p-4 font-bold text-slate-900">AI ATS CV Tailoring Copilot</td>
                             <td class="p-4 text-center text-slate-400">1 free check</td>
                             <td class="p-4 text-center font-bold text-emerald-800 bg-emerald-50/60 border-x border-emerald-200">
-                                ✓ Unlimited on all jobs
+                                <span class="inline-flex items-center justify-center gap-1.5"><x-icon name="check" class="h-4 w-4 text-emerald-600 inline" /> Unlimited on all jobs</span>
                             </td>
                             <td class="p-4 text-center text-slate-400">&ndash;</td>
                             <td class="p-4 text-center text-slate-500">Requires $39.99/mo Premium</td>
@@ -403,7 +404,7 @@
                             <td class="p-4 font-bold text-slate-900">Kenya Remote Contractor Toolkit</td>
                             <td class="p-4 text-center text-slate-400">&ndash;</td>
                             <td class="p-4 text-center font-bold text-emerald-800 bg-emerald-50/60 border-x border-emerald-200">
-                                ✓ W-8BEN & Invoicing included
+                                <span class="inline-flex items-center justify-center gap-1.5"><x-icon name="check" class="h-4 w-4 text-emerald-600 inline" /> W-8BEN & Invoicing included</span>
                             </td>
                             <td class="p-4 text-center text-slate-400">&ndash;</td>
                             <td class="p-4 text-center text-slate-400">&ndash;</td>

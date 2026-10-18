@@ -31,7 +31,7 @@
                                         <td style="vertical-align: middle;">
                                             <a href="{{ url('/') }}" style="text-decoration: none; display: block;">
                                                 <span style="font-size: 20px; font-weight: 800; letter-spacing: -0.5px; color: #ffffff;">
-                                                    Kenya<span style="color: #ff3131;">RemoteJobs</span>
+                                                    Kenya<span style="color: #3444da;">RemoteJobs</span>
                                                 </span>
                                             </a>
                                         </td>
@@ -76,7 +76,7 @@
                                                 @endif
                                                 @if ($job->kenya_friendly)
                                                     <span style="color: #475569; margin: 0 4px;">•</span>
-                                                    <span style="color: #ff3131; font-weight: 600;">🇰🇪 Kenya-Friendly</span>
+                                                    <span style="color: #38bdf8; font-weight: 600;">Kenya-Friendly Verified</span>
                                                 @endif
                                             </div>
                                         </td>
@@ -86,7 +86,7 @@
 
                             <!-- View All CTA Button -->
                             <div style="padding-top: 28px; padding-bottom: 24px;">
-                                <a href="{{ $jobsUrl }}" style="display: inline-block; background-color: #ff3131; color: #ffffff; text-decoration: none; font-size: 14px; font-weight: 700; padding: 12px 30px; border-radius: 8px; text-align: center; box-shadow: 0 4px 14px rgba(255, 49, 49, 0.3);">
+                                <a href="{{ $jobsUrl }}" style="display: inline-block; background-color: #3444da; color: #ffffff; text-decoration: none; font-size: 14px; font-weight: 700; padding: 12px 30px; border-radius: 8px; text-align: center; box-shadow: 0 4px 14px rgba(52, 68, 218, 0.3);">
                                     View All {{ $totalCount }} Roles &rarr;
                                 </a>
                             </div>

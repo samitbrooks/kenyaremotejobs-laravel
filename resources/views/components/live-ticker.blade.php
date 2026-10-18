@@ -1,11 +1,11 @@
 <div
     x-data="{
         activities: [
-            '🔥 A candidate in Nairobi just applied to Senior Customer Support ($2,400/mo)',
-            '⚡ New Kenya-Friendly Full-Stack role added 12 mins ago (KES 450,000/mo)',
-            '🇰🇪 Recruiter first-look window active for 18 fresh worldwide roles',
-            '✓ Faith from Mombasa landed a remote Virtual Assistant contract yesterday',
-            '💼 800+ international remote roles currently accepting Kenyan applications'
+            'A candidate in Nairobi just applied to Senior Customer Support ($2,400/mo)',
+            'New Kenya-Friendly Full-Stack role added 12 mins ago (KES 450,000/mo)',
+            'Recruiter first-look window active for 18 fresh worldwide roles',
+            'Faith from Mombasa landed a remote Virtual Assistant contract yesterday',
+            '800+ international remote roles currently accepting Kenyan applications'
         ],
         currentIndex: 0,
         init() {
@@ -59,10 +59,10 @@
             </span>
             <span class="text-slate-600">&bull;</span>
             <span class="flex items-center gap-1.5 text-amber-300">
-                <span>⚡</span> 48h Early Access Active
+                <x-icon name="lightning" class="h-3 w-3 text-amber-300" /> 48h Early Access Active
             </span>
             <span class="text-slate-600">&bull;</span>
-            <a href="{{ url('/pricing') }}" class="font-bold text-[#ff5757] hover:underline flex items-center gap-1">
+            <a href="{{ url('/pricing') }}" class="font-bold text-[#c7ccfb] hover:text-white hover:underline flex items-center gap-1">
                 Get VIP Pro Access &rarr;
             </a>
         </div>

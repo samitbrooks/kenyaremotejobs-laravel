@@ -34,19 +34,19 @@
                     </span>
                 @elseif ($job->source_name === 'micro1')
                     <span class="inline-flex items-center gap-1 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-2 py-0.5 text-[10px] font-bold text-[#3444da] shadow-2xs">
-                        <span class="font-black">⚡</span> micro1 verified
+                        <x-icon name="lightning" class="h-3 w-3 text-[#3444da]" /> micro1 verified
                     </span>
                 @elseif ($job->source_name === 'Turing')
                     <span class="inline-flex items-center gap-1 rounded-full bg-indigo-50 border border-indigo-200/80 px-2 py-0.5 text-[10px] font-bold text-indigo-800 shadow-2xs">
-                        <span class="text-indigo-600 font-bold">✦</span> Turing
+                        <x-icon name="sparkle" class="h-3 w-3 text-indigo-600" /> Turing
                     </span>
                 @elseif (! $isUnlocked)
                     <span class="inline-flex items-center gap-1 rounded-full bg-amber-50 border border-amber-200/80 px-2 py-0.5 text-[10px] font-bold text-amber-800 shadow-2xs">
-                        <span class="text-amber-600 font-bold">🔒</span> Pro Access
+                        <x-icon name="lock" class="h-3 w-3 text-amber-600" /> Pro Access
                     </span>
                 @elseif ($isEarlyAccess)
                     <span class="inline-flex items-center gap-1 rounded-full bg-amber-50 border border-amber-200/80 px-2 py-0.5 text-[10px] font-bold text-amber-800 shadow-2xs">
-                        <span class="text-amber-500">⚡</span> Early Access
+                        <x-icon name="lightning" class="h-3 w-3 text-amber-500" /> Early Access
                     </span>
                 @endif
 
@@ -75,7 +75,7 @@
                     </span>
                 @else
                     <span class="inline-flex items-center gap-1 font-semibold text-slate-700" title="Unlock with Pro or 24-Hour Free Pass to reveal company name">
-                        <span class="text-amber-600">🔒</span>
+                        <x-icon name="lock" class="h-3 w-3 text-amber-600" />
                         <span>Verified Employer</span>
                         <span class="rounded bg-amber-100/90 border border-amber-300/60 px-1.5 py-0.2 text-[9px] font-extrabold uppercase tracking-wider text-amber-900">Pro Only</span>
                     </span>

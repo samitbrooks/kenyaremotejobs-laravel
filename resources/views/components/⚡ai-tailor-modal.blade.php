@@ -151,7 +151,7 @@ new class extends Component
                                     @click="navigator.clipboard.writeText(`{{ implode("\n", $tailored['tailored_bullets']) }}`); $wire.markCopied('bullets')"
                                     class="text-xs font-semibold text-sunrise-600 hover:underline"
                                 >
-                                    {{ $copied === 'bullets' ? '✓ Copied!' : 'Copy bullets' }}
+                                    {{ $copied === 'bullets' ? 'Copied!' : 'Copy bullets' }}
                                 </button>
                             </div>
                             <p class="mt-0.5 text-xs text-foreground/40">Paste these directly into your CV work experience section:</p>
@@ -175,7 +175,7 @@ new class extends Component
                                     @click="navigator.clipboard.writeText(`{{ addslashes($tailored['tailored_cover_letter']) }}`); $wire.markCopied('letter')"
                                     class="text-xs font-semibold text-sunrise-600 hover:underline"
                                 >
-                                    {{ $copied === 'letter' ? '✓ Copied!' : 'Copy letter' }}
+                                    {{ $copied === 'letter' ? 'Copied!' : 'Copy letter' }}
                                 </button>
                             </div>
                             <div class="mt-2 rounded-2xl border border-black/5 bg-black/[0.02] p-4 text-xs whitespace-pre-line leading-relaxed text-foreground/80">

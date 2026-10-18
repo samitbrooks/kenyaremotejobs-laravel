@@ -70,7 +70,7 @@
                                     </div>
                                 </div>
                                 <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-200 px-2 py-0.5 text-[11px] font-semibold text-emerald-800">
-                                    ✓ Kenya Open
+                                    <x-icon name="check" class="h-3 w-3 text-emerald-600" /> Kenya Open
                                 </span>
                             </div>
 

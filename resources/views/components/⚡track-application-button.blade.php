@@ -143,8 +143,8 @@ new class extends Component
                 class="rounded-lg border-none bg-white px-2.5 py-1 text-xs font-semibold text-emerald-900 shadow-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none"
             >
                 <option value="applied" @selected($status === 'applied')>Applied</option>
-                <option value="interviewing" @selected($status === 'interviewing')>Interviewing 🎯</option>
-                <option value="offered" @selected($status === 'offered')>Offer Received 🎉</option>
+                <option value="interviewing" @selected($status === 'interviewing')>Interviewing</option>
+                <option value="offered" @selected($status === 'offered')>Offer Received</option>
                 <option value="saved" @selected($status === 'saved')>Saved / Drafting</option>
                 <option value="rejected" @selected($status === 'rejected')>Archived</option>
             </select>
@@ -152,9 +152,9 @@ new class extends Component
                 type="button"
                 wire:click="$toggle('showNotesModal')"
                 title="Application Notes & Recruiter Info"
-                class="ml-1 rounded-lg px-2 py-1 text-xs font-medium text-emerald-700 hover:bg-emerald-100 transition"
+                class="ml-1 inline-flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-medium text-emerald-700 hover:bg-emerald-100 transition"
             >
-                ✏️ Notes
+                <x-icon name="pen" class="h-3 w-3 text-emerald-700" /> Notes
             </button>
         </div>
     @else
@@ -176,8 +176,8 @@ new class extends Component
             <div class="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl animate-in fade-in zoom-in-95 duration-150">
                 <div class="flex items-center justify-between pb-3 border-b border-black/5">
                     <h3 class="font-bold text-foreground">Application CRM Notes</h3>
-                    <button type="button" wire:click="$set('showNotesModal', false)" class="text-foreground/40 hover:text-foreground">
-                        ✕
+                    <button type="button" wire:click="$set('showNotesModal', false)" class="text-foreground/40 hover:text-foreground text-lg leading-none">
+                        &times;
                     </button>
                 </div>
 
