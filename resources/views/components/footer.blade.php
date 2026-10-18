@@ -39,7 +39,6 @@
                 <p class="mb-3 text-xs font-bold uppercase tracking-wider text-slate-200">Jobseeker Hub</p>
                 <ul class="space-y-2">
                     <li><a href="{{ url('/jobs') }}" class="hover:text-white transition">Browse all remote jobs</a></li>
-                    <li><a href="{{ url('/companies') }}" class="hover:text-white transition">Companies hiring in Kenya</a></li>
                     <li><a href="{{ url('/collections') }}" class="hover:text-white transition">Curated job collections</a></li>
                     <li><a href="{{ url('/journal') }}" class="hover:text-white transition">The Journal (Guides &amp; Advice)</a></li>
                     <li><a href="{{ url('/match') }}" class="hover:text-white transition">Timezone &amp; CV Matcher</a></li>

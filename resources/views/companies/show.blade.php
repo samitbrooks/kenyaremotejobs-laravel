@@ -12,7 +12,7 @@
         <nav aria-label="Breadcrumb" class="mb-6 flex items-center gap-2 text-xs text-foreground/50">
             <a href="{{ url('/') }}" class="hover:text-foreground">Home</a>
             <span>&rsaquo;</span>
-            <a href="{{ url('/companies') }}" class="hover:text-foreground">Companies</a>
+            <a href="{{ url('/jobs') }}" class="hover:text-foreground">Jobs</a>
             <span>&rsaquo;</span>
             <span class="font-medium text-foreground/80 truncate">{{ $company['name'] }}</span>
         </nav>
@@ -39,12 +39,10 @@
 
                     <div class="flex items-center gap-3">
                         <a
-                            href="{{ $company['website'] }}"
-                            target="_blank"
-                            rel="noopener noreferrer"
+                            href="{{ url('/jobs') }}"
                             class="inline-flex items-center gap-1.5 rounded-full border border-slate-200/80 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-50"
                         >
-                            Official Website &#8599;
+                            All Jobs &rarr;
                         </a>
                         <a
                             href="#open-jobs"
@@ -175,8 +173,8 @@
                         <a href="{{ url('/jobs') }}" class="btn-pop rounded-full bg-[#3444da] px-6 py-2.5 text-xs font-bold text-white shadow-md shadow-[#3444da]/20 hover:bg-[#2633bf]">
                             Browse All 800+ Remote Jobs &rarr;
                         </a>
-                        <a href="{{ url('/companies') }}" class="rounded-full border border-slate-300 bg-white px-5 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50">
-                            View Other Hiring Companies
+                        <a href="{{ url('/pricing') }}" class="rounded-full border border-slate-300 bg-white px-5 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50">
+                            Upgrade to Pro for Direct Apply &rarr;
                         </a>
                     </div>
                 </div>
@@ -197,8 +195,8 @@
                         <h3 class="text-xl font-bold text-slate-900">Other Top Remote Companies Hiring in Kenya</h3>
                         <p class="text-xs text-slate-500">Explore more vetted international employers</p>
                     </div>
-                    <a href="{{ url('/companies') }}" class="text-xs font-semibold text-[#3444da] hover:underline">
-                        View all companies &rarr;
+                    <a href="{{ url('/jobs') }}" class="text-xs font-semibold text-[#3444da] hover:underline">
+                        View all remote jobs &rarr;
                     </a>
                 </div>
 

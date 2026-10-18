@@ -86,7 +86,6 @@
                                     @foreach ([
                                         ['href' => '/jobs', 'icon' => 'globe', 'label' => 'All Opportunities'],
                                         ['href' => '/referrals', 'icon' => 'gift', 'label' => 'Refer & Earn (Free Pro)'],
-                                        ['href' => '/companies', 'icon' => 'globe', 'label' => 'Hiring Companies'],
                                         ['href' => '/collections', 'icon' => 'sparkle', 'label' => 'Curated Collections'],
                                         ['href' => '/match', 'icon' => 'sparkle', 'label' => 'Match Score'],
                                         ['href' => '/resume-builder', 'icon' => 'pen', 'label' => 'CV Builder'],
@@ -118,7 +117,6 @@
                         </div>
                     </div>
 
-                    <a href="{{ url('/companies') }}" class="nav-underline text-slate-700 transition hover:text-[#3444da] {{ request()->is('companies*') ? 'text-[#3444da] font-bold' : '' }}">Companies</a>
                     <a href="{{ url('/collections') }}" class="nav-underline text-slate-700 transition hover:text-[#3444da] {{ request()->is('collections*') ? 'text-[#3444da] font-bold' : '' }}">Collections</a>
                     <a href="{{ url('/journal') }}" class="nav-underline text-slate-700 transition hover:text-[#3444da] {{ request()->is('journal*') ? 'text-[#3444da] font-bold' : '' }}">Journal</a>
                     <a href="{{ url('/pricing') }}" class="nav-underline text-slate-700 transition hover:text-[#3444da] {{ request()->is('pricing') ? 'text-[#3444da] font-bold' : '' }}">Pricing</a>
@@ -193,9 +191,6 @@
                     <span class="flex items-center gap-2"><x-icon name="gift" class="h-4 w-4 text-[#3444da]" /> Refer &amp; Earn</span>
                     <span class="rounded-full bg-[#eef0fe] px-2 py-0.5 text-[10px] font-bold text-[#3444da] border border-[#c7ccfb]">Free Pro</span>
                 </a>
-                <a href="{{ url('/companies') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-slate-600 hover:bg-[#eef0fe] hover:text-[#3444da] transition">
-                    <x-icon name="globe" class="h-4 w-4 text-[#3444da]" /> Hiring Companies
-                </a>
                 <a href="{{ url('/collections') }}" @click="open = false; mobileJobsOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-slate-600 hover:bg-[#eef0fe] hover:text-[#3444da] transition">
                     <x-icon name="sparkle" class="h-4 w-4 text-[#3444da]" /> Curated Collections
                 </a>
@@ -226,7 +221,6 @@
                     <x-icon name="coin" class="h-4 w-4 text-[#3444da]" /> Earn While You Search
                 </a>
             </div>
-            <a href="{{ url('/companies') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-[#eef0fe] hover:text-[#3444da] transition {{ request()->is('companies*') ? 'text-[#3444da] font-bold' : '' }}">Companies</a>
             <a href="{{ url('/collections') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-[#eef0fe] hover:text-[#3444da] transition {{ request()->is('collections*') ? 'text-[#3444da] font-bold' : '' }}">Collections</a>
             <a href="{{ url('/journal') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-[#eef0fe] hover:text-[#3444da] transition {{ request()->is('journal*') ? 'text-[#3444da] font-bold' : '' }}">Journal</a>
             <a href="{{ url('/pricing') }}" @click="open = false" class="rounded-xl px-3 py-2 text-slate-700 hover:bg-[#eef0fe] hover:text-[#3444da] transition {{ request()->is('pricing') ? 'text-[#3444da] font-bold' : '' }}">Pricing</a>
