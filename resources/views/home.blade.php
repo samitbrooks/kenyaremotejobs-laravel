@@ -126,9 +126,9 @@
                 {{-- micro1-Inspired Trending Role Capsules --}}
                 <div class="mt-5 flex flex-wrap items-center justify-center gap-1.5 text-xs">
                     <span class="font-bold text-slate-400 uppercase tracking-wider text-[11px] mr-1">Trending:</span>
-                    <a href="{{ url('/jobs?audience=students&q=annotation') }}" class="jobs-skill-pill hover:border-[#3444da] hover:text-[#3444da] shadow-2xs">🎯 Data Annotation</a>
-                    <a href="{{ url('/jobs?audience=students') }}" class="jobs-skill-pill hover:border-[#3444da] hover:text-[#3444da] shadow-2xs">🎓 Student &amp; Campus</a>
-                    <a href="{{ url('/remote-jobs/ai-training-annotation-kenya') }}" class="jobs-skill-pill hover:border-[#3444da] hover:text-[#3444da] shadow-2xs">🤖 AI Training &amp; RLHF</a>
+                    <a href="{{ url('/jobs?audience=students&q=annotation') }}" class="jobs-skill-pill hover:border-[#3444da] hover:text-[#3444da] shadow-2xs">Data Annotation</a>
+                    <a href="{{ url('/jobs?audience=students') }}" class="jobs-skill-pill hover:border-[#3444da] hover:text-[#3444da] shadow-2xs">Student &amp; Campus</a>
+                    <a href="{{ url('/remote-jobs/ai-training-annotation-kenya') }}" class="jobs-skill-pill hover:border-[#3444da] hover:text-[#3444da] shadow-2xs">AI Training &amp; RLHF</a>
                     <a href="{{ url('/remote-jobs/writing-content-kenya') }}" class="jobs-skill-pill hover:border-[#3444da] hover:text-[#3444da] shadow-2xs">Writing &amp; Content</a>
                     <a href="{{ url('/remote-jobs/customer-support-kenya') }}" class="jobs-skill-pill hover:border-[#3444da] hover:text-[#3444da] shadow-2xs">Customer Support</a>
                     <a href="{{ url('/remote-jobs/virtual-assistant-kenya') }}" class="jobs-skill-pill hover:border-[#3444da] hover:text-[#3444da] shadow-2xs">Virtual Assistant</a>
@@ -155,15 +155,15 @@
         </div>
     </section>
 
-    {{-- Official Telegram Channel Alert Banner --}}
+    {{-- Official Telegram Channel Alert Banner — micro1 cobalt harmony --}}
     <div class="mx-auto max-w-4xl px-4 -mt-5 sm:-mt-7 mb-4 relative z-10">
-        <div class="flex flex-wrap items-center justify-between gap-3.5 rounded-2xl border border-sky-200/80 bg-gradient-to-r from-sky-50/95 via-cyan-50/70 to-sky-50/95 p-3.5 sm:p-4 text-xs sm:text-sm text-slate-800 shadow-sm backdrop-blur-sm">
+        <div class="flex flex-wrap items-center justify-between gap-3.5 rounded-2xl border border-[#c7ccfb] bg-[#eef0fe]/80 p-3.5 sm:p-4 text-xs sm:text-sm text-slate-800 shadow-xs backdrop-blur-sm">
             <div class="flex items-center gap-3">
-                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-sky-500 text-white shadow-xs shadow-sky-500/30">
+                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#3444da] text-white shadow-xs">
                     <svg class="h-4.5 w-4.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.458c.538-.196 1.006.128.832.939z"/></svg>
                 </span>
                 <div>
-                    <p class="font-extrabold text-sky-950 text-xs sm:text-sm">
+                    <p class="font-extrabold text-slate-900 text-xs sm:text-sm">
                         Get Daily Remote Job Drops &amp; AI Career Support on Telegram
                     </p>
                     <p class="text-[11px] sm:text-xs text-slate-600 mt-0.5">
@@ -175,163 +175,50 @@
                 href="{{ config('site.telegram_url', 'https://t.me/kenyaremotejobs') }}"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="btn-pop inline-flex items-center gap-1.5 rounded-full bg-sky-600 px-4 py-2 text-xs font-bold text-white shadow-xs shadow-sky-600/30 hover:bg-sky-700 transition shrink-0"
+                class="btn-pop inline-flex items-center gap-1.5 rounded-full bg-[#3444da] hover:bg-[#2633bf] px-4 py-2 text-xs font-bold text-white shadow-xs transition shrink-0"
             >
                 <span>Join @kenyaremotejobs</span> &rarr;
             </a>
         </div>
     </div>
 
-    {{-- Stat bar — clean borderless metric cards --}}
-    <section class="px-4 py-8 sm:px-6">
-        <div class="mx-auto grid max-w-4xl grid-cols-1 gap-4 text-center sm:grid-cols-3">
-            <div class="rounded-2xl border border-slate-200/60 bg-white/80 p-5 shadow-xs">
-                <p class="text-3xl font-extrabold text-slate-900"><x-count-up :value="$total" /></p>
-                <p class="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">Live listings</p>
-            </div>
-            <div class="rounded-2xl border border-slate-200/60 bg-white/80 p-5 shadow-xs">
-                <p class="text-3xl font-extrabold text-slate-900"><x-count-up :value="$totalKenyaFriendly" /></p>
-                <p class="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">Kenya-Friendly Matches</p>
-            </div>
-            <div class="rounded-2xl border border-slate-200/60 bg-white/80 p-5 shadow-xs">
-                <p class="text-3xl font-extrabold text-slate-900"><x-count-up :value="$totalFree" /></p>
-                <p class="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">Free to view now</p>
-            </div>
-        </div>
-    </section>
-
-    {{-- USD to KES Remote Salary Multiplier Slider --}}
-    <section class="px-4 py-4 sm:px-6">
-        <div class="mx-auto max-w-6xl">
-            <x-salary-slider />
-        </div>
-    </section>
-
-    {{-- Just posted — a real, live feed of the newest listings --}}
-    @if ($justPosted->isNotEmpty())
-        <section class="px-4 py-6 sm:px-6">
-            <div class="mx-auto max-w-6xl">
-                <x-reveal class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-700">
-                    <span class="relative flex h-2 w-2" aria-hidden="true">
-                        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-                        <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
-                    </span>
-                    Just posted
-                </x-reveal>
-                <div class="relative mt-4">
-                    <div class="flex gap-4 overflow-x-auto pb-2">
-                        @foreach ($justPosted as $i => $job)
-                            <x-reveal :delay="$i * 60" class="shrink-0">
-                                <a
-                                    href="{{ url('/jobs/'.$job->id) }}"
-                                    class="card-hover flex w-72 shrink-0 flex-col gap-1.5 rounded-2xl border border-slate-200/70 bg-white p-4 text-sm shadow-xs hover:border-teal-500/70 hover:shadow-md hover:-translate-y-0.5 transition-all"
-                                >
-                                    <span class="truncate font-bold text-slate-900">{{ $job->title }}</span>
-                                    @if ($isUnlocked($job))
-                                        <span class="truncate text-xs font-medium text-slate-600">{{ $job->company }}</span>
-                                    @else
-                                        <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-slate-700">
-                                            <span class="text-amber-600">🔒</span>
-                                            <span>Verified Employer</span>
-                                            <span class="rounded bg-amber-100/90 border border-amber-300/60 px-1 py-0.2 text-[9px] font-bold uppercase tracking-wider text-amber-900">Pro Only</span>
-                                        </span>
-                                    @endif
-                                    <span class="mt-1 text-xs font-semibold text-teal-600">{{ \App\Support\Format::timeAgo($job->posted_at) }}</span>
-                                </a>
-                            </x-reveal>
-                        @endforeach
-                    </div>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-white to-transparent" aria-hidden="true"></div>
-                </div>
-            </div>
-        </section>
-    @endif
-
-    {{-- Find your next remote role — sidebar + sleek horizontal list feed --}}
-    <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-        <x-reveal class="mb-6 flex items-center justify-between">
-            <h2 class="text-2xl font-extrabold text-slate-900">{{ $hasProfile ? 'Your best-matching jobs' : 'Find your next remote role' }}</h2>
-            <span class="text-xs font-medium text-slate-400">Verified & updated hourly</span>
-        </x-reveal>
-
-        <div class="grid grid-cols-1 gap-8 lg:grid-cols-[250px_1fr]">
-            <x-reveal class="space-y-6">
-                <div>
-                    <p class="mb-3 text-xs font-bold uppercase tracking-wider text-slate-400">Browse by audience</p>
-                    <ul class="space-y-1">
-                        @foreach ($audienceCounts as $a)
-                            <li>
-                                <a href="{{ url('/jobs') }}?audience={{ $a['segment'] }}" class="flex items-center justify-between rounded-full px-3.5 py-2 text-sm text-slate-700 transition hover:bg-teal-50/70 hover:text-teal-800">
-                                    <span class="flex items-center gap-2 font-medium">
-                                        <x-icon :name="\App\Support\Audience::ICONS[$a['segment']]" class="h-4 w-4 text-teal-600" />
-                                        {{ \App\Support\Audience::LABELS[$a['segment']] }}
-                                    </span>
-                                    <span class="text-xs text-slate-400 font-semibold">{{ $a['count'] }}</span>
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-
-                <div>
-                    <p class="mb-3 text-xs font-bold uppercase tracking-wider text-slate-400">Popular categories</p>
-                    <ul class="space-y-1">
-                        @foreach ($categories as $cat)
-                            <li>
-                                <a href="{{ url('/remote-jobs/'.$cat['slug']) }}" class="flex items-center gap-2.5 rounded-full px-3.5 py-2 text-sm text-slate-700 font-medium transition hover:bg-teal-50/70 hover:text-teal-800">
-                                    <x-icon :name="$cat['icon']" class="h-4 w-4 text-teal-600" />
-                                    {{ $cat['label'] }}
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-
-                <div class="rounded-2xl border border-slate-200/70 bg-white p-5 shadow-xs">
-                    <div class="flex items-center justify-between mb-3">
-                        <p class="text-xs font-bold uppercase tracking-wider text-slate-900">Curated Collections</p>
-                        <a href="{{ url('/collections') }}" class="text-[11px] font-bold text-teal-600 hover:underline">All &rarr;</a>
-                    </div>
-                    <ul class="space-y-1">
-                        @foreach (\App\Support\JobCollectionSeo::all() as $col)
-                            <li>
-                                <a href="{{ url('/collections/'.$col['slug']) }}" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-xs text-slate-700 font-medium transition hover:bg-slate-50 hover:text-teal-700">
-                                    <x-icon :name="$col['icon']" class="h-3.5 w-3.5 text-teal-600 shrink-0" />
-                                    <span class="truncate">{{ $col['badge'] }}</span>
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                    <div class="mt-3 border-t border-slate-100 pt-3">
-                        <a href="{{ url('/companies') }}" class="flex items-center justify-between text-xs font-bold text-slate-900 hover:text-teal-600 transition">
-                            <span>Hiring Companies Directory</span>
-                            <span>&rarr;</span>
-                        </a>
-                    </div>
-                </div>
-            </x-reveal>
-
+    {{-- Featured Opportunities — micro1 3-Column Card Grid --}}
+    <section class="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
             <div>
-                @if ($feed->isEmpty())
-                    <p class="rounded-2xl border border-slate-200/70 bg-white p-8 text-center text-slate-500 shadow-xs">
-                        Jobs are syncing — check back in a moment, or <a href="{{ url('/jobs') }}" class="text-teal-600 font-semibold underline">browse everything</a>.
-                    </p>
-                @else
-                    {{-- Remote.co style streamlined vertical list feed --}}
-                    <div class="space-y-3">
-                        @foreach ($feed as $i => $job)
-                            <x-reveal :delay="min($i, 6) * 40">
-                                <x-job-card :job="$job" :unlocked="$isUnlocked($job)" :match-percent="$matchPercent($job)" />
-                            </x-reveal>
-                        @endforeach
-                    </div>
-                @endif
-                <div class="mt-8 text-center">
-                    <a href="{{ url('/jobs') }}" class="btn-pop inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white px-8 py-3 text-sm font-bold text-slate-800 shadow-xs hover:bg-teal-50 hover:border-teal-500 hover:text-teal-700 transition">
-                        See all {{ $total }} remote jobs &rarr;
-                    </a>
-                </div>
+                <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Available Opportunities</h2>
+                <p class="text-sm text-slate-500 mt-1">Vetted high-paying remote positions, AI training roles, and student contracts</p>
             </div>
+            <div class="flex items-center gap-3">
+                <span class="inline-flex items-center gap-1.5 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-4 py-1.5 text-xs font-bold text-[#3444da]">
+                    <span class="h-2 w-2 rounded-full bg-[#3444da] animate-pulse"></span>
+                    <span>{{ $total }} Live Listings</span>
+                </span>
+                <a href="{{ url('/jobs') }}" class="hidden sm:inline-flex items-center gap-1 text-xs font-bold text-[#3444da] hover:underline">
+                    <span>View all</span> &rarr;
+                </a>
+            </div>
+        </div>
+
+        @if ($feed->isEmpty())
+            <p class="rounded-2xl border border-slate-200/70 bg-white p-12 text-center text-slate-500 shadow-xs">
+                Jobs are syncing — check back in a moment, or <a href="{{ url('/jobs') }}" class="text-[#3444da] font-semibold underline">browse everything</a>.
+            </p>
+        @else
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                @foreach ($feed as $i => $job)
+                    <x-reveal :delay="min($i, 9) * 30">
+                        <x-job-card :job="$job" :unlocked="$isUnlocked($job)" :match-percent="$matchPercent($job)" />
+                    </x-reveal>
+                @endforeach
+            </div>
+        @endif
+
+        <div class="mt-12 text-center">
+            <a href="{{ url('/jobs') }}" class="btn-pop inline-flex items-center gap-2 rounded-full bg-[#3444da] hover:bg-[#2633bf] px-9 py-3.5 text-sm font-bold text-white shadow-md shadow-[#3444da]/25 hover:shadow-lg transition">
+                <span>Browse All {{ $total }} Remote Jobs</span>
+                <span>&rarr;</span>
+            </a>
         </div>
     </section>
 

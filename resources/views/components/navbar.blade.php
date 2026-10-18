@@ -37,17 +37,17 @@
 
             <nav class="hidden items-center gap-6 text-sm font-medium md:flex">
                 @if ($isEmployerContext)
-                    <a href="{{ url('/employers') }}" class="nav-underline text-slate-700 transition hover:text-teal-600 {{ request()->is('employers') ? 'text-teal-600 font-bold' : '' }}">Overview</a>
-                    <a href="{{ url('/employers/post') }}" class="nav-underline text-slate-700 transition hover:text-teal-600 {{ request()->is('employers/post') ? 'text-teal-600 font-bold' : '' }}">Post a Job</a>
-                    <a href="{{ url('/employers/dashboard') }}" class="nav-underline text-slate-700 transition hover:text-teal-600 {{ request()->is('employers/dashboard') ? 'text-teal-600 font-bold' : '' }}">Dashboard</a>
-                    <a href="{{ url('/journal') }}" class="nav-underline text-slate-700 transition hover:text-teal-600">Journal</a>
+                    <a href="{{ url('/employers') }}" class="nav-underline text-slate-700 transition hover:text-[#3444da] {{ request()->is('employers') ? 'text-[#3444da] font-bold' : '' }}">Overview</a>
+                    <a href="{{ url('/employers/post') }}" class="nav-underline text-slate-700 transition hover:text-[#3444da] {{ request()->is('employers/post') ? 'text-[#3444da] font-bold' : '' }}">Post a Job</a>
+                    <a href="{{ url('/employers/dashboard') }}" class="nav-underline text-slate-700 transition hover:text-[#3444da] {{ request()->is('employers/dashboard') ? 'text-[#3444da] font-bold' : '' }}">Dashboard</a>
+                    <a href="{{ url('/journal') }}" class="nav-underline text-slate-700 transition hover:text-[#3444da]">Journal</a>
                 @else
                     <div class="relative" @mouseenter="jobsMenuOpen = true" @mouseleave="jobsMenuOpen = false">
                         <button
                             type="button"
                             @click="jobsMenuOpen = !jobsMenuOpen"
                             :aria-expanded="jobsMenuOpen"
-                            class="flex items-center gap-1 text-slate-700 transition hover:text-teal-600 font-medium py-1"
+                            class="flex items-center gap-1 text-slate-700 transition hover:text-[#3444da] font-medium py-1"
                         >
                             Jobs
                             <span class="text-xs transition-transform" :class="jobsMenuOpen ? 'rotate-180' : ''">&#9662;</span>
@@ -61,24 +61,24 @@
                         >
                             <div class="flex gap-4 rounded-3xl border border-slate-200/80 bg-white p-5 text-slate-900 shadow-2xl ring-1 ring-black/5">
                                 <div class="flex-1">
-                                    <div class="mb-3 rounded-2xl bg-gradient-to-r from-teal-50 via-emerald-50/60 to-white p-3 border border-teal-200/80 shadow-2xs">
+                                    <div class="mb-3 rounded-2xl bg-[#eef0fe]/80 p-3 border border-[#c7ccfb] shadow-2xs">
                                         <a href="{{ url('/remote-jobs/writing-content-kenya') }}" @click="jobsMenuOpen = false" class="flex items-center justify-between group">
                                             <div class="flex items-center gap-2.5">
-                                                <div class="flex h-8 w-8 items-center justify-center rounded-xl bg-teal-600 text-white shadow-xs">
+                                                <div class="flex h-8 w-8 items-center justify-center rounded-xl bg-[#3444da] text-white shadow-xs">
                                                     <x-icon name="pen" class="h-4 w-4" />
                                                 </div>
                                                 <div>
-                                                    <span class="block text-xs font-bold text-slate-900 group-hover:text-teal-700 transition">Writing &amp; Content Jobs</span>
+                                                    <span class="block text-xs font-bold text-slate-900 group-hover:text-[#3444da] transition">Writing &amp; Content Jobs</span>
                                                     <span class="block text-[11px] text-slate-500">Copywriting, technical writing &amp; blogs</span>
                                                 </div>
                                             </div>
-                                            <span class="rounded-full bg-teal-600/10 px-2 py-0.5 text-[10px] font-bold text-teal-700 border border-teal-200/60">🔥 Top in KE</span>
+                                            <span class="rounded-full bg-[#3444da]/10 px-2 py-0.5 text-[10px] font-bold text-[#3444da] border border-[#3444da]/20">Top in KE</span>
                                         </a>
                                     </div>
                                     <p class="mb-2 px-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-400">Who it&rsquo;s for</p>
                                     @foreach (\App\Support\Audience::ORDER as $segment)
-                                        <a href="{{ url('/jobs') }}?audience={{ $segment }}" @click="jobsMenuOpen = false" class="flex items-start gap-2.5 rounded-2xl p-2.5 transition hover:bg-teal-50/60 hover:text-teal-800">
-                                            <x-icon :name="\App\Support\Audience::ICONS[$segment]" class="mt-0.5 h-5 w-5 text-teal-600" />
+                                        <a href="{{ url('/jobs') }}?audience={{ $segment }}" @click="jobsMenuOpen = false" class="flex items-start gap-2.5 rounded-2xl p-2.5 transition hover:bg-[#eef0fe]/70 hover:text-[#3444da]">
+                                            <x-icon :name="\App\Support\Audience::ICONS[$segment]" class="mt-0.5 h-5 w-5 text-[#3444da]" />
                                             <span class="min-w-0">
                                                 <span class="block text-sm font-semibold text-slate-900">{{ \App\Support\Audience::LABELS[$segment] }}</span>
                                                 <span class="block text-xs text-slate-500">{{ \App\Support\Audience::DESCRIPTIONS[$segment] }}</span>
@@ -90,7 +90,7 @@
                                 <div class="w-44 shrink-0">
                                     <p class="mb-2 px-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-400">Remote type</p>
                                     @foreach (['remote' => 'Remote', 'full-time' => 'Full-time', 'part-time' => 'Part-time', 'contract' => 'Contract'] as $value => $label)
-                                        <a href="{{ url('/jobs') }}?remoteType={{ $value }}" @click="jobsMenuOpen = false" class="block rounded-xl px-2.5 py-2 text-sm text-slate-700 transition hover:bg-slate-50 hover:text-teal-700">{{ $label }}</a>
+                                        <a href="{{ url('/jobs') }}?remoteType={{ $value }}" @click="jobsMenuOpen = false" class="block rounded-xl px-2.5 py-2 text-sm text-slate-700 transition hover:bg-slate-50 hover:text-[#3444da]">{{ $label }}</a>
                                     @endforeach
 
                                     <p class="mb-2 mt-4 px-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-400">Resources</p>
@@ -105,20 +105,20 @@
                                         ['href' => '/faqs', 'icon' => 'bulb', 'label' => 'FAQs'],
                                         ['href' => '/surveys', 'icon' => 'coin', 'label' => 'Earn While Searching'],
                                     ] as $r)
-                                        <a href="{{ url($r['href']) }}" @click="jobsMenuOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-sm text-slate-700 transition hover:bg-slate-50 hover:text-teal-700">
-                                            <x-icon :name="$r['icon']" class="h-4 w-4 text-teal-600" /> {{ $r['label'] }}
+                                        <a href="{{ url($r['href']) }}" @click="jobsMenuOpen = false" class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-sm text-slate-700 transition hover:bg-slate-50 hover:text-[#3444da]">
+                                            <x-icon :name="$r['icon']" class="h-4 w-4 text-[#3444da]" /> {{ $r['label'] }}
                                         </a>
                                     @endforeach
                                 </div>
 
                                 <div class="flex w-48 shrink-0 flex-col gap-3">
                                     <a href="{{ url('/employers') }}" @click="jobsMenuOpen = false" class="flex-1 rounded-2xl bg-slate-900 p-4 text-white transition hover:bg-slate-800 shadow-sm">
-                                        <p class="text-[11px] font-bold uppercase tracking-wider text-teal-400">For Employers</p>
+                                        <p class="text-[11px] font-bold uppercase tracking-wider text-slate-300">For Employers</p>
                                         <p class="mt-1 text-sm font-bold">Hire Kenya &amp; EA talent</p>
-                                        <p class="mt-2 text-xs font-semibold text-teal-300 underline">Post a job &rarr;</p>
+                                        <p class="mt-2 text-xs font-semibold text-[#c7ccfb] underline">Post a job &rarr;</p>
                                     </a>
-                                    <a href="{{ url('/match') }}" @click="jobsMenuOpen = false" class="flex-1 rounded-2xl bg-teal-600 p-4 text-white transition hover:bg-teal-700 shadow-sm">
-                                        <p class="text-[11px] font-bold uppercase tracking-wider text-teal-100">For Candidates</p>
+                                    <a href="{{ url('/match') }}" @click="jobsMenuOpen = false" class="flex-1 rounded-2xl bg-[#3444da] p-4 text-white transition hover:bg-[#2633bf] shadow-sm">
+                                        <p class="text-[11px] font-bold uppercase tracking-wider text-white/80">For Candidates</p>
                                         <p class="mt-1 text-sm font-bold">Stand out, get matched</p>
                                         <p class="mt-2 text-xs font-semibold underline">Get my score &rarr;</p>
                                     </a>
@@ -127,16 +127,16 @@
                         </div>
                     </div>
 
-                    <a href="{{ url('/companies') }}" class="nav-underline text-slate-700 transition hover:text-teal-600 {{ request()->is('companies*') ? 'text-teal-600 font-bold' : '' }}">Companies</a>
-                    <a href="{{ url('/collections') }}" class="nav-underline text-slate-700 transition hover:text-teal-600 {{ request()->is('collections*') ? 'text-teal-600 font-bold' : '' }}">Collections</a>
-                    <a href="{{ url('/journal') }}" class="nav-underline text-slate-700 transition hover:text-teal-600 {{ request()->is('journal*') ? 'text-teal-600 font-bold' : '' }}">Journal</a>
-                    <a href="{{ url('/pricing') }}" class="nav-underline text-slate-700 transition hover:text-teal-600 {{ request()->is('pricing') ? 'text-teal-600 font-bold' : '' }}">Pricing</a>
-                    <a href="{{ url('/referrals') }}" class="nav-underline text-slate-700 transition hover:text-teal-600 {{ request()->is('referrals*') ? 'text-teal-600 font-bold' : '' }} inline-flex items-center gap-1">
+                    <a href="{{ url('/companies') }}" class="nav-underline text-slate-700 transition hover:text-[#3444da] {{ request()->is('companies*') ? 'text-[#3444da] font-bold' : '' }}">Companies</a>
+                    <a href="{{ url('/collections') }}" class="nav-underline text-slate-700 transition hover:text-[#3444da] {{ request()->is('collections*') ? 'text-[#3444da] font-bold' : '' }}">Collections</a>
+                    <a href="{{ url('/journal') }}" class="nav-underline text-slate-700 transition hover:text-[#3444da] {{ request()->is('journal*') ? 'text-[#3444da] font-bold' : '' }}">Journal</a>
+                    <a href="{{ url('/pricing') }}" class="nav-underline text-slate-700 transition hover:text-[#3444da] {{ request()->is('pricing') ? 'text-[#3444da] font-bold' : '' }}">Pricing</a>
+                    <a href="{{ url('/referrals') }}" class="nav-underline text-slate-700 transition hover:text-[#3444da] {{ request()->is('referrals*') ? 'text-[#3444da] font-bold' : '' }} inline-flex items-center gap-1">
                         <span>Refer &amp; Earn</span>
                         <span class="rounded-full bg-emerald-500/10 px-1.5 py-0.2 text-[10px] font-bold text-emerald-600 border border-emerald-500/20">Free Pro</span>
                     </a>
-                    <a href="{{ url('/faqs') }}" class="nav-underline text-slate-700 transition hover:text-teal-600 {{ request()->is('faqs*') ? 'text-teal-600 font-bold' : '' }}">FAQs</a>
-                    <a href="{{ url('/about') }}" class="nav-underline text-slate-700 transition hover:text-teal-600 {{ request()->is('about') ? 'text-teal-600 font-bold' : '' }}">About</a>
+                    <a href="{{ url('/faqs') }}" class="nav-underline text-slate-700 transition hover:text-[#3444da] {{ request()->is('faqs*') ? 'text-[#3444da] font-bold' : '' }}">FAQs</a>
+                    <a href="{{ url('/about') }}" class="nav-underline text-slate-700 transition hover:text-[#3444da] {{ request()->is('about') ? 'text-[#3444da] font-bold' : '' }}">About</a>
 
                     <a href="{{ config('site.telegram_url', 'https://t.me/kenyaremotejobs') }}" target="_blank" rel="noopener noreferrer" class="hidden xl:inline-flex items-center gap-1.5 rounded-full bg-sky-50 border border-sky-200/80 px-3 py-1 text-xs font-bold text-sky-700 hover:bg-sky-100 hover:text-sky-800 transition shadow-2xs">
                         <svg class="h-3.5 w-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.458c.538-.196 1.006.128.832.939z"/></svg>
@@ -145,7 +145,7 @@
                 @endif
 
                 @if ($user?->isAdmin())
-                    <a href="{{ url('/admin') }}" class="text-xs font-bold text-teal-700 hover:underline">Admin</a>
+                    <a href="{{ url('/admin') }}" class="text-xs font-bold text-[#3444da] hover:underline">Admin</a>
                 @endif
 
                 <a href="{{ url('/account') }}" class="btn-pop rounded-full bg-[#3444da] hover:bg-[#2633bf] px-5 py-2 text-sm font-bold text-white shadow-sm hover:shadow-md hover:shadow-[#3444da]/25 transition">

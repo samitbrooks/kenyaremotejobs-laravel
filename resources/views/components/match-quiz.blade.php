@@ -199,7 +199,7 @@
         <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
             <a
                 href="{{ url('/jobs') }}"
-                class="btn-pop w-full sm:w-auto rounded-full bg-gradient-to-r from-red-600 to-[#2e3760] px-8 py-3.5 text-sm font-extrabold text-white shadow-lg shadow-red-500/25 hover:from-red-500 hover:to-[#3b477a] transition"
+                class="btn-pop w-full sm:w-auto rounded-full bg-[#3444da] hover:bg-[#2633bf] px-8 py-3.5 text-sm font-extrabold text-white shadow-lg shadow-[#3444da]/25 transition"
             >
                 View Your Matching Roles Now &rarr;
             </a>
