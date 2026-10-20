@@ -159,7 +159,7 @@ new class extends Component
             wire:click="promptCheckout"
             class="w-full rounded-full px-5 py-2.5 text-[13px] font-extrabold transition {{ $btnClasses }}"
         >
-            {{ $label }}
+            {!! $label !!}
         </button>
         @if ($error)
             <p class="mt-2 text-center text-xs text-rose-600 font-medium">{{ $error }}</p>

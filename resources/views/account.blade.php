@@ -72,7 +72,7 @@
                                         :period="'pro'"
                                         :is-authed="true"
                                         :already-subscribed="false"
-                                        :button-label="'Activate Pro Access Now (KES 250) &rarr;'"
+                                        :button-label="'Activate Pro Access Now (KES 250) →'"
                                         wire:key="onboarding-activation-btn"
                                     />
                                 </div>

@@ -104,7 +104,7 @@
                             :period="'pro'"
                             :is-authed="(bool) $user"
                             :already-subscribed="(bool) $user?->subscribed"
-                            :button-label="'Unlock Pro Access Now (KES 250) &rarr;'"
+                            :button-label="'Unlock Pro Access Now (KES 250) →'"
                             wire:key="pricing-flagship-pro-btn"
                         />
 
@@ -493,7 +493,7 @@
                     :period="'pro'"
                     :is-authed="(bool) $user"
                     :already-subscribed="(bool) $user?->subscribed"
-                    :button-label="'Get Started with Pro (KES 250) &rarr;'"
+                    :button-label="'Get Started with Pro (KES 250) →'"
                     wire:key="pricing-bottom-cta"
                 />
             </div>
