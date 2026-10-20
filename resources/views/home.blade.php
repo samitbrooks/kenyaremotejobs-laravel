@@ -187,7 +187,7 @@
         <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
             <div>
                 <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Available Opportunities</h2>
-                <p class="text-sm text-slate-500 mt-1">Vetted high-paying remote positions, AI training roles, and student contracts</p>
+                <p class="text-sm text-slate-500 mt-1">Vetted entry-level remote positions, AI training &amp; data annotation, and flexible campus contracts open to Kenya</p>
             </div>
             <div class="flex items-center gap-3">
                 <span class="inline-flex items-center gap-1.5 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-4 py-1.5 text-xs font-bold text-[#3444da]">
@@ -198,6 +198,28 @@
                     <span>View all</span> &rarr;
                 </a>
             </div>
+        </div>
+
+        {{-- Quick Accessibility Filter Pills --}}
+        <div class="mb-6 flex flex-wrap items-center gap-2 text-xs">
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-[#3444da] text-white px-3.5 py-1.5 font-bold shadow-xs">
+                <x-icon name="sparkle" class="h-3.5 w-3.5" /> High-Acceptance Roles
+            </span>
+            <a href="{{ url('/remote-jobs/ai-training-annotation-kenya') }}" class="jobs-skill-pill hover:border-[#3444da] hover:text-[#3444da]">
+                AI Model Training &amp; Annotation
+            </a>
+            <a href="{{ url('/jobs?audience=students') }}" class="jobs-skill-pill hover:border-[#3444da] hover:text-[#3444da]">
+                Student &amp; Campus Friendly
+            </a>
+            <a href="{{ url('/remote-jobs/writing-content-kenya') }}" class="jobs-skill-pill hover:border-[#3444da] hover:text-[#3444da]">
+                Writing &amp; Transcription
+            </a>
+            <a href="{{ url('/jobs?audience=highschool') }}" class="jobs-skill-pill hover:border-[#3444da] hover:text-[#3444da]">
+                No Degree Required
+            </a>
+            <a href="{{ url('/jobs?audience=part-time') }}" class="jobs-skill-pill hover:border-[#3444da] hover:text-[#3444da]">
+                Flexible Part-Time
+            </a>
         </div>
 
         @if ($feed->isEmpty())

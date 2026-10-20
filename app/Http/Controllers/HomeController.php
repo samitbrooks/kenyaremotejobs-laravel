@@ -21,15 +21,22 @@ class HomeController extends Controller
 
         if ($profile) {
             $feed = JobListing::visible()->where('kenya_friendly', true)->get()
-                ->sortByDesc(fn (JobListing $job) => Matching::computeMatchPercent($profile, $job->only(['tags', 'title', 'description'])))
-                ->take(8)
+                ->sortByDesc(fn (JobListing $job) => Matching::computeMatchPercent($profile, $job->only(['tags', 'title', 'description'])) + ($job->accessibilityScore() / 10))
+                ->take(12)
                 ->values();
         } else {
-            $feed = JobListing::visible()->where('kenya_friendly', true)->latest('posted_at')->limit(8)->get();
+            // Prioritize accessible, high-acceptance roles (data annotation, AI training, student & campus, transcription)
+            $feed = JobListing::visible()->where('kenya_friendly', true)->get()
+                ->sortBy([
+                    fn (JobListing $a, JobListing $b) => $b->accessibilityScore() <=> $a->accessibilityScore(),
+                    fn (JobListing $a, JobListing $b) => ($b->posted_at?->timestamp ?? 0) <=> ($a->posted_at?->timestamp ?? 0),
+                ])
+                ->take(12)
+                ->values();
         }
 
         if ($feed->isEmpty()) {
-            $feed = JobListing::visible()->latest('posted_at')->limit(8)->get();
+            $feed = JobListing::visible()->latest('posted_at')->limit(12)->get();
         }
         $heroPreview = $feed->take(3);
 

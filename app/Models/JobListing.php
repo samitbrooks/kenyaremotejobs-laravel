@@ -97,4 +97,64 @@ class JobListing extends Model
     {
         return DirectAtsResolver::resolve($this->source_url, $this->description);
     }
+
+    /**
+     * Compute an accessibility score for homepage prioritization:
+     * Heavily favors data annotation, AI training, student/campus, entry-level,
+     * transcription, customer support, and writing roles that any random Kenyan or student can get.
+     * Heavily penalizes senior, lead, executive, and specialized enterprise roles.
+     */
+    public function accessibilityScore(): int
+    {
+        $score = 0;
+        $titleLower = strtolower($this->title);
+        $tagsLower = array_map('strtolower', $this->tags ?? []);
+        $segments = $this->audience_segments ?? [];
+
+        // Highest priority: Curated student / AI / annotation roles
+        if (str_starts_with($this->id, 'student--')) {
+            $score += 150;
+        }
+
+        // Student, highschool leaver, beginner, part-time segments
+        if (in_array('students', $segments)) {
+            $score += 50;
+        }
+        if (in_array('highschool', $segments)) {
+            $score += 45;
+        }
+        if (in_array('part-time', $segments)) {
+            $score += 30;
+        }
+        if (in_array('career-changers', $segments)) {
+            $score += 25;
+        }
+
+        // Specific high-accessibility tags
+        foreach ($tagsLower as $tag) {
+            if (str_contains($tag, 'data annotation') || str_contains($tag, 'ai training') || str_contains($tag, 'rlhf')) {
+                $score += 60;
+            } elseif (str_contains($tag, 'transcription') || str_contains($tag, 'label') || str_contains($tag, 'rater') || str_contains($tag, 'prompt')) {
+                $score += 40;
+            } elseif (str_contains($tag, 'student') || str_contains($tag, 'writing') || str_contains($tag, 'content') || str_contains($tag, 'entry') || str_contains($tag, 'support') || str_contains($tag, 'tutoring')) {
+                $score += 25;
+            }
+        }
+
+        // High-accessibility title keywords
+        if (preg_match('/\b(data annotation|ai training|annotator|rlhf|prompt|model evaluator|model reviewer)\b/i', $titleLower)) {
+            $score += 70;
+        } elseif (preg_match('/\b(transcription|transcriber|captioner|rater|evaluator|labeler|data entry|tutor)\b/i', $titleLower)) {
+            $score += 45;
+        } elseif (preg_match('/\b(virtual assistant|copywriter|content writer|writer|customer support|support specialist|chat agent|intern|junior|entry level)\b/i', $titleLower)) {
+            $score += 30;
+        }
+
+        // Heavy penalty for senior, lead, staff, principal, director, vp, architect, manager bigwig roles
+        if (preg_match('/\b(senior|sr\.|lead|principal|staff|director|vp|vice president|head of|manager|architect|executive|cfo|cto|coo|chief)\b/i', $titleLower)) {
+            $score -= 120;
+        }
+
+        return $score;
+    }
 }
