@@ -426,7 +426,7 @@ class SeoEngineTest extends TestCase
         $response->assertStatus(404);
     }
 
-    public function test_kes_salary_estimate_badge_appears_on_job_card(): void
+    public function test_salary_estimate_badge_appears_with_hourly_rate_and_no_absurd_kes(): void
     {
         $job = JobListing::create([
             'id' => 'kes-test-job-1',
@@ -453,7 +453,8 @@ class SeoEngineTest extends TestCase
         $response = $this->withHeaders(['User-Agent' => 'Googlebot'])->get('/jobs/'.$job->id);
 
         $response->assertStatus(200);
-        $response->assertSee('~KES 910,000 - 1,300,000/mo', false);
+        $response->assertSee('$40 - $58/hr', false);
+        $response->assertDontSee('~KES 910,000 - 1,300,000/mo', false);
     }
 
     public function test_employers_page_renders_kenya_value_propositions_and_timezone_matrix(): void

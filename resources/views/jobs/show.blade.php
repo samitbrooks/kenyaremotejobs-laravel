@@ -7,8 +7,8 @@
         ? \App\Support\DescriptionBlocks::redact($rawDescriptionBlocks, $job->company)
         : null;
     $displayPlainDescription = $redactor->redactEmployerIdentity($plainDescription, $job->company);
-    $hourly = \App\Support\SalaryEstimate::estimateHourlyUsd($job->annual_salary_usd);
-    $kesMonthly = \App\Support\SalaryEstimate::estimateMonthlyKes($job->annual_salary_usd, $job->salary);
+    $hourly = \App\Support\SalaryEstimate::estimateHourlyUsd($job->annual_salary_usd, $job->salary);
+    $hourlyFormatted = \App\Support\SalaryEstimate::formatHourly($hourly);
     $displayCompany = '';
     $title = $job->title." — Remote Job".($job->kenya_friendly ? ' (Kenya-Friendly)' : '');
     $preview = \App\Support\Format::truncate($plainDescription, 155);
@@ -84,14 +84,9 @@
                         <x-icon name="sparkle" class="h-3.5 w-3.5 text-[#3444da]" /> {{ $matchPercent }}% match for you
                     </span>
                 @endif
-                @if ($kesMonthly)
-                    <span class="inline-flex items-center gap-1 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-3.5 py-1 text-xs font-bold text-slate-900" title="Estimated monthly take-home in Kenyan Shillings (~130 KES/USD)">
-                        <x-icon name="coin" class="h-3.5 w-3.5 text-[#3444da]" /> {{ $kesMonthly }}
-                    </span>
-                @endif
-                @if ($hourly)
-                    <span class="inline-flex items-center gap-1 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-3.5 py-1 text-xs font-semibold text-slate-900" title="Estimated from stated salary ÷ 2,080 hours/year">
-                        <x-icon name="coin" class="h-3.5 w-3.5 text-[#3444da]" /> ~${{ $hourly['min'] }}-{{ $hourly['max'] }}/hr
+                @if ($hourlyFormatted)
+                    <span class="inline-flex items-center gap-1 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-3.5 py-1 text-xs font-semibold text-slate-900" title="Estimated rate per hour in USD">
+                        <x-icon name="coin" class="h-3.5 w-3.5 text-[#3444da]" /> {{ $hourlyFormatted }}
                     </span>
                 @endif
                 @if ($job->kenya_friendly)

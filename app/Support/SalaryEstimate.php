@@ -18,29 +18,90 @@ class SalaryEstimate
      * @param  array{min: ?float, max: ?float}|int|float|null  $annual
      * @return array{min: float, max: float}|null
      */
-    public static function estimateHourlyUsd(array|int|float|null $annual): ?array
+    public static function estimateHourlyUsd(array|int|float|null $annual = null, ?string $salaryString = null): ?array
     {
         if (is_numeric($annual)) {
             $annual = ['min' => (float) $annual, 'max' => (float) $annual];
         }
 
-        if (! is_array($annual)) {
+        if (is_array($annual)) {
+            $lo = $annual['min'] ?? $annual['max'] ?? null;
+            $hi = $annual['max'] ?? $annual['min'] ?? null;
+            if ($lo !== null && $hi !== null && ($lo >= self::MIN_PLAUSIBLE_ANNUAL_USD || $hi >= self::MIN_PLAUSIBLE_ANNUAL_USD)) {
+                return [
+                    'min' => round($lo / self::HOURS_PER_YEAR),
+                    'max' => round($hi / self::HOURS_PER_YEAR),
+                ];
+            }
+        }
+
+        if ($salaryString) {
+            // Match explicit hourly rate e.g. "$15 - $25/hr", "$50-$75 /hour", "$20/hr"
+            if (preg_match('/\$([0-9]+(?:\.[0-9]+)?)(?:\s*-\s*\$?([0-9]+(?:\.[0-9]+)?))?\s*\/(?:hr|hour)/i', $salaryString, $matches)) {
+                $lo = (float) $matches[1];
+                $hi = isset($matches[2]) && $matches[2] !== '' ? (float) $matches[2] : $lo;
+
+                return [
+                    'min' => $lo,
+                    'max' => $hi,
+                ];
+            }
+
+            // Match annual "k" notation e.g. "$35.3k - $52k", "$50k - $80k", "$35,3k- $52k"
+            $normalizedSalary = str_replace(',', '.', $salaryString);
+            if (preg_match('/\$([0-9]+(?:\.[0-9]+)?)\s*k(?:\s*-\s*\$?([0-9]+(?:\.[0-9]+)?)\s*k)?/i', $normalizedSalary, $matches)) {
+                $lo = ((float) $matches[1]) * 1000;
+                $hi = isset($matches[2]) && $matches[2] !== '' ? ((float) $matches[2]) * 1000 : $lo;
+
+                return [
+                    'min' => round($lo / self::HOURS_PER_YEAR),
+                    'max' => round($hi / self::HOURS_PER_YEAR),
+                ];
+            }
+
+            // Match standard annual range e.g. "$50,000 - $80,000"
+            if (preg_match('/\$([0-9]{1,3}(?:,[0-9]{3})+)(?:\s*-\s*\$?([0-9]{1,3}(?:,[0-9]{3})+))?/i', $salaryString, $matches)) {
+                $lo = (float) str_replace(',', '', $matches[1]);
+                $hi = isset($matches[2]) && $matches[2] !== '' ? (float) str_replace(',', '', $matches[2]) : $lo;
+
+                if ($lo >= self::MIN_PLAUSIBLE_ANNUAL_USD || $hi >= self::MIN_PLAUSIBLE_ANNUAL_USD) {
+                    return [
+                        'min' => round($lo / self::HOURS_PER_YEAR),
+                        'max' => round($hi / self::HOURS_PER_YEAR),
+                    ];
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Formats an hourly estimate into a clean string e.g. "$20 - $35/hr" or "$25/hr".
+     *
+     * @param  array{min: float|int, max: float|int}|null  $hourly
+     */
+    public static function formatHourly(?array $hourly): ?string
+    {
+        if (! $hourly) {
             return null;
         }
 
-        $lo = $annual['min'] ?? $annual['max'] ?? null;
-        $hi = $annual['max'] ?? $annual['min'] ?? null;
-        if ($lo === null || $hi === null) {
-            return null;
-        }
-        if ($lo < self::MIN_PLAUSIBLE_ANNUAL_USD && $hi < self::MIN_PLAUSIBLE_ANNUAL_USD) {
+        $min = $hourly['min'];
+        $max = $hourly['max'];
+
+        if ($min <= 0 && $max <= 0) {
             return null;
         }
 
-        return [
-            'min' => round($lo / self::HOURS_PER_YEAR, 2),
-            'max' => round($hi / self::HOURS_PER_YEAR, 2),
-        ];
+        $minStr = ($min == (int) $min) ? (string) (int) $min : number_format($min, 2);
+        $maxStr = ($max == (int) $max) ? (string) (int) $max : number_format($max, 2);
+
+        if ($min === $max || $minStr === $maxStr) {
+            return '$'.$minStr.'/hr';
+        }
+
+        return '$'.$minStr.' - $'.$maxStr.'/hr';
     }
 
     /**

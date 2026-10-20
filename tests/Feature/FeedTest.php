@@ -69,8 +69,8 @@ class FeedTest extends TestCase
 
         $response = $this->get('/feed/featured.rss');
 
-        $response->assertStatus(200);
-        $response->assertSee('Senior Support Specialist (~KES', false);
+        $response->assertSee('Senior Support Specialist ($14 - $17/hr)', false);
+        $response->assertDontSee('~KES', false);
         $response->assertDontSee('at Acme Global', false);
         $response->assertDontSee('US Only Tax Attorney', false);
         $response->assertSee('utm_source=linkedin', false);

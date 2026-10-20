@@ -79,8 +79,8 @@
                             <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-bottom: 28px;">
                                 @forelse ($jobs as $job)
                                     @php
-                                        $kesMonthly = \App\Support\SalaryEstimate::estimateMonthlyKes($job->annual_salary_usd, $job->salary);
-                                        $hourly = \App\Support\SalaryEstimate::estimateHourlyUsd($job->annual_salary_usd);
+                                        $hourly = \App\Support\SalaryEstimate::estimateHourlyUsd($job->annual_salary_usd, $job->salary);
+                                        $hourlyStr = \App\Support\SalaryEstimate::formatHourly($hourly);
                                     @endphp
                                     <tr>
                                         <td style="padding: 14px 0; border-bottom: 1px solid #242730;">
@@ -91,12 +91,12 @@
                                                 <span style="color: #e2e8f0; font-weight: 600;">Verified Direct Employer</span>
                                                 <span style="color: #475569; margin: 0 5px;">&bull;</span>
                                                 <span>{{ $job->remote_type }}</span>
-                                                @if ($kesMonthly)
+                                                @if ($hourlyStr)
                                                     <span style="color: #475569; margin: 0 5px;">&bull;</span>
-                                                    <span style="color: #34d399; font-weight: 700;">{{ $kesMonthly }}</span>
-                                                @elseif ($hourly)
+                                                    <span style="color: #34d399; font-weight: 700;">{{ $hourlyStr }}</span>
+                                                @elseif ($job->salary)
                                                     <span style="color: #475569; margin: 0 5px;">&bull;</span>
-                                                    <span style="color: #34d399; font-weight: 700;">~${{ $hourly['min'] }}-{{ $hourly['max'] }}/hr</span>
+                                                    <span style="color: #34d399; font-weight: 700;">{{ $job->salary }}</span>
                                                 @endif
                                                 @if ($job->kenya_friendly)
                                                     <span style="color: #475569; margin: 0 5px;">&bull;</span>

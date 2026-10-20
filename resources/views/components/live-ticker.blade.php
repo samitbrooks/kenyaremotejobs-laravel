@@ -2,7 +2,7 @@
     x-data="{
         activities: [
             'A candidate in Nairobi just applied to Senior Customer Support ($2,400/mo)',
-            'New Kenya-Friendly Full-Stack role added 12 mins ago (KES 450,000/mo)',
+            'New Kenya-Friendly Full-Stack role added 12 mins ago ($25 - $45/hr)',
             'Recruiter first-look window active for 18 fresh worldwide roles',
             'Faith from Mombasa landed a remote Virtual Assistant contract yesterday',
             '800+ international remote roles currently accepting Kenyan applications'

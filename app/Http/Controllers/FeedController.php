@@ -30,20 +30,20 @@ class FeedController extends Controller
         $jobs = $query->latest('posted_at')->take($limit)->get();
 
         $items = $jobs->map(function (JobListing $job) use ($siteUrl) {
-            $kesMonthly = SalaryEstimate::estimateMonthlyKes($job->annual_salary_usd, $job->salary);
-            $hourly = SalaryEstimate::estimateHourlyUsd($job->annual_salary_usd);
+            $hourly = SalaryEstimate::estimateHourlyUsd($job->annual_salary_usd, $job->salary);
+            $hourlyStr = SalaryEstimate::formatHourly($hourly);
 
             $salaryBadge = '';
-            if ($kesMonthly) {
-                $salaryBadge = " ({$kesMonthly})";
-            } elseif ($hourly) {
-                $salaryBadge = ' (~$'.$hourly['min'].'-'.$hourly['max'].'/hr)';
+            if ($hourlyStr) {
+                $salaryBadge = " ({$hourlyStr})";
+            } elseif ($job->salary) {
+                $salaryBadge = " ({$job->salary})";
             }
 
             $cleanTitle = "🇰🇪 {$job->title}{$salaryBadge}";
             $jobUrl = "{$siteUrl}/jobs/{$job->id}?utm_source=linkedin&utm_medium=rss_feed&utm_campaign=featured_jobs";
 
-            $compensationLine = $kesMonthly ? "Compensation: {$kesMonthly}" : ($job->salary ? "Compensation: {$job->salary}" : 'Compensation: Competitive international rates (USD / Wise / M-Pesa)');
+            $compensationLine = $hourlyStr ? "Compensation: {$hourlyStr}" : ($job->salary ? "Compensation: {$job->salary}" : 'Compensation: Competitive international rates (USD / Wise / Payoneer)');
 
             $plainDesc = Format::stripHtml($job->description ?? '');
             $excerpt = Format::truncate($plainDesc, 180);

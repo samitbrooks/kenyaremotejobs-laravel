@@ -352,9 +352,9 @@ class TelegramService
 
         foreach ($jobs as $index => $job) {
             $num = $index + 1;
-            $kes = SalaryEstimate::estimateMonthlyKes($job->annual_salary_usd, $job->salary);
-            $hourly = SalaryEstimate::estimateHourlyUsd($job->annual_salary_usd);
-            $payInfo = $kes ? "💰 <b>Est. Pay:</b> {$kes}" : ($hourly ? "💰 <b>Est. Rate:</b> ~${$hourly['min']}-${$hourly['max']}/hr" : '💰 <b>Pay:</b> Competitive International USD/GBP Rate');
+            $hourly = SalaryEstimate::estimateHourlyUsd($job->annual_salary_usd, $job->salary);
+            $hourlyStr = SalaryEstimate::formatHourly($hourly);
+            $payInfo = $hourlyStr ? "💰 <b>Est. Rate:</b> {$hourlyStr}" : ($job->salary ? "💰 <b>Pay:</b> {$job->salary}" : '💰 <b>Pay:</b> Competitive International USD Rate');
 
             $titleSafe = htmlspecialchars($job->title, ENT_QUOTES | ENT_SUBSTITUTE);
             $remoteType = htmlspecialchars($job->remote_type ?? 'Worldwide Remote', ENT_QUOTES | ENT_SUBSTITUTE);

@@ -5,11 +5,11 @@
     $plainDescription = \App\Support\Format::stripHtml($job->description ?? '');
     $preview = \App\Support\Format::truncate($plainDescription, 110);
     $visibleTags = $job->tags ?? [];
-    $hourly = \App\Support\SalaryEstimate::estimateHourlyUsd($job->annual_salary_usd);
-    $kesMonthly = \App\Support\SalaryEstimate::estimateMonthlyKes($job->annual_salary_usd, $job->salary);
+    $hourly = \App\Support\SalaryEstimate::estimateHourlyUsd($job->annual_salary_usd, $job->salary);
+    $hourlyFormatted = \App\Support\SalaryEstimate::formatHourly($hourly);
     $isNew = $job->posted_at->gt(now()->subDay());
     $isEarlyAccess = $job->isEarlyAccess();
-    $displaySalary = $job->salary ?: ($hourly ? '$' . $hourly['min'] . ' - $' . $hourly['max'] . '/hr' : null);
+    $displaySalary = $hourlyFormatted ?: ($job->salary ?: null);
 @endphp
 
 <a
@@ -97,30 +97,10 @@
     {{-- Bottom Section: Compensation + micro1 CTA Button --}}
     <div class="pt-3.5 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
         <div class="min-w-0">
-            @if ($displaySalary && str_contains($displaySalary, '/hr'))
+            @if ($displaySalary)
                 <div class="text-xs sm:text-sm font-extrabold text-slate-900 truncate">
                     <span class="text-xs font-medium text-slate-400 mr-1">Pay:</span>
                     <span class="text-[#3444da] font-black">{{ $displaySalary }}</span>
-                </div>
-                @if ($kesMonthly)
-                    <span class="text-[11px] font-semibold text-slate-400 block truncate">
-                        ~{{ $kesMonthly }}
-                    </span>
-                @endif
-            @elseif ($kesMonthly)
-                <div class="text-xs sm:text-sm font-extrabold text-slate-900 truncate">
-                    <span class="text-xs font-medium text-slate-400 mr-1">Comp:</span>
-                    <span class="text-slate-900 font-black">{{ $kesMonthly }}</span>
-                </div>
-                @if ($displaySalary)
-                    <span class="text-[11px] font-semibold text-slate-400 block truncate">
-                        {{ $displaySalary }}
-                    </span>
-                @endif
-            @elseif ($hourly)
-                <div class="text-xs sm:text-sm font-extrabold text-slate-900 truncate">
-                    <span class="text-xs font-medium text-slate-400 mr-1">Pay:</span>
-                    <span class="text-[#3444da] font-black">~${{ $hourly['min'] }}-{{ $hourly['max'] }}/hr</span>
                 </div>
             @else
                 <span class="text-xs font-bold text-slate-700">Competitive Pay</span>
