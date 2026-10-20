@@ -16,7 +16,12 @@ namespace App\Services;
 // KIRA/Bjak self-declared-name case, the Moniepoint/TeamApt alias case).
 class Redactor
 {
-    private const KNOWN_SOURCE_NAMES = ['Himalayas', 'Remote OK', 'RemoteOK', 'Remotive', 'Arbeitnow', 'Jobicy'];
+    private const KNOWN_SOURCE_NAMES = [
+        'Himalayas', 'Remote OK', 'RemoteOK', 'Remotive', 'Arbeitnow', 'Jobicy', 'Turing', 'Micro1',
+        'Outlier', 'Outlier AI', 'Alignerr', 'Mindrift', 'DataAnnotation', 'DataAnnotation.tech',
+        'Remotasks', 'Invisible Technologies', 'Scale AI', 'CloudFactory', 'Telus International',
+        'Welocalize', 'TranscribeMe', 'Rev.com', 'Appen', 'Study.com', 'Belay',
+    ];
 
     // Corporate-suffix words are too generic to redact on their own — doing
     // so would nuke unrelated text in every *other* listing ("we use modern

@@ -52,7 +52,8 @@ class JobMatchesDigestTest extends TestCase
         $mailable->assertSeeInHtml('JOB MATCHES');
         $mailable->assertSeeInHtml('New roles for you, Sammie.');
         $mailable->assertSeeInHtml('Recruiting &amp; Candidate Coordination Virtual Assistant', false);
-        $mailable->assertSeeInHtml('Remote Talent Co');
+        $mailable->assertSeeInHtml('Verified Direct Employer');
+        $mailable->assertDontSeeInHtml('Remote Talent Co');
         $mailable->assertSeeInHtml('View All 167 Roles');
         $mailable->assertSeeInHtml('Does your CV meet remote-work hiring standards?');
         $mailable->assertSeeInHtml('Evaluate your CV');

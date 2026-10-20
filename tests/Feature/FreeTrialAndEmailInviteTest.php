@@ -83,7 +83,8 @@ class FreeTrialAndEmailInviteTest extends TestCase
 
         $detailResponse = $this->actingAs($user)->get('/jobs/'.$job->id);
         $detailResponse->assertStatus(200);
-        $detailResponse->assertSee('Global Remote Co');
+        $detailResponse->assertSee('Verified Direct Employer');
+        $detailResponse->assertDontSee('Global Remote Co');
         $detailResponse->assertSee('24-Hour Free Pass Active');
     }
 
@@ -149,7 +150,8 @@ class FreeTrialAndEmailInviteTest extends TestCase
         $mailable->assertHasSubject('Sami, we found remote and/or flexible jobs you might like!');
         $mailable->assertSeeInHtml('Dear Sami,');
         $mailable->assertSeeInHtml('Senior Laravel Engineer');
-        $mailable->assertSeeInHtml('Global Remote Co');
+        $mailable->assertSeeInHtml('Verified Direct Employer');
+        $mailable->assertDontSeeInHtml('Global Remote Co');
         $mailable->assertSeeInHtml('Claim Your 24-Hour Free Trial!');
         $mailable->assertSeeInHtml('FIND A BETTER WAY TO WORK');
     }

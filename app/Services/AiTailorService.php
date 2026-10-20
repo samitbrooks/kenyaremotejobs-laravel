@@ -36,7 +36,7 @@ class AiTailorService
     {
         $prompt = "You are an elite remote career coach and ATS optimization specialist helping a top-tier Kenyan candidate apply for a global remote job.\n\n"
             ."Job Title: {$job->title}\n"
-            ."Company: {$job->company}\n"
+            ."Employer: Verified Direct Employer\n"
             ."Location: {$job->location} (Remote: {$job->remote_type})\n"
             .'Job Tags: '.implode(', ', $job->tags ?? [])."\n"
             ."Job Description:\n".Format::stripHtml(mb_substr($job->description, 0, 3000))."\n\n"
@@ -48,7 +48,7 @@ class AiTailorService
             ."1. match_score: integer between 90 and 97 (showing the boosted ATS score after tailoring)\n"
             ."2. key_requirements: array of 4-6 concise keywords/requirements extracted from the job\n"
             ."3. tailored_bullets: array of 3-5 high-impact, action-oriented resume bullet points highlighting relevant achievements matching this role\n"
-            ."4. tailored_cover_letter: a compelling 3-paragraph cover letter specifically addressed to {$job->company} hiring team, highlighting timezone readiness (East Africa Time / UTC+3) and proven remote independence.\n"
+            ."4. tailored_cover_letter: a compelling 3-paragraph cover letter addressed to the hiring team, highlighting timezone readiness (East Africa Time / UTC+3) and proven remote independence.\n"
             ."5. kenya_advantage: a concise 1-sentence interview talking point emphasizing their timezone overlap with Europe/UK/US East mornings.\n"
             .'Return ONLY valid JSON.';
 
@@ -104,10 +104,10 @@ class AiTailorService
             'Architected proactive documentation and standard operating procedures that reduced onboarding friction and accelerated sprint velocity.',
         ];
 
-        $coverLetter = "Dear {$company} Hiring Team,\n\n"
-            ."I am writing to express my strong interest in the {$title} role. Having followed {$company}'s trajectory, I am deeply impressed by your commitment to high-impact distributed teams. With hands-on experience in ".implode(', ', array_slice($tags, 0, 3)).", I am confident in my ability to hit the ground running and deliver immediate value to your organization.\n\n"
+        $coverLetter = "Dear Hiring Team,\n\n"
+            ."I am writing to express my strong interest in the {$title} role. Having reviewed the role objectives, I am deeply impressed by your team's commitment to high-impact distributed collaboration. With hands-on experience in ".implode(', ', array_slice($tags, 0, 3)).", I am confident in my ability to hit the ground running and deliver immediate value to your organization.\n\n"
             ."In my previous remote engagements, I have built a track record of driving results autonomously while maintaining clear, transparent asynchronous communication. Operating from Kenya on East Africa Time (EAT / UTC+3), I offer seamless workday overlap with both European afternoon cycles and US Eastern morning standups, allowing for real-time collaboration alongside deep focused work.\n\n"
-            ."I welcome the opportunity to discuss how my background in {$primarySkill} and disciplined remote execution align with {$company}'s upcoming milestones. Thank you for your time and consideration.\n\n"
+            ."I welcome the opportunity to discuss how my background in {$primarySkill} and disciplined remote execution align with your upcoming milestones. Thank you for your time and consideration.\n\n"
             ."Warm regards,\nCandidate";
 
         return [

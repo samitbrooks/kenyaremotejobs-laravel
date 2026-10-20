@@ -101,9 +101,9 @@ class ProJobRecommendationsTest extends TestCase
 
         $rendered = $mailable->render();
 
-        // Verifies real-time matched jobs are present
         $this->assertStringContainsString('Senior Cloud Architect', $rendered);
-        $this->assertStringContainsString('Acme Cloud Global', $rendered);
+        $this->assertStringContainsString('Verified Direct Employer', $rendered);
+        $this->assertStringNotContainsString('Acme Cloud Global', $rendered);
 
         // Verifies the "What We Can Do For You" retention concierge services are present
         $this->assertStringContainsString('What Our VIP Concierge Team Can Do For You', $rendered);

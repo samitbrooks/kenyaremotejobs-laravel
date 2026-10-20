@@ -38,11 +38,12 @@ class AdminPanelAndJobsSubscriptionTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('Software Engineer');
 
-        // Attempting to visit /jobs/{id} succeeds with 200 OK, details visible, apply url gated
+        // Attempting to visit /jobs/{id} succeeds with 200 OK, details visible, employer masked, apply url gated
         $detailResponse = $this->get('/jobs/'.$job->id);
         $detailResponse->assertStatus(200);
         $detailResponse->assertSee('Software Engineer');
-        $detailResponse->assertSee('Tech Corp');
+        $detailResponse->assertSee('Verified Direct Employer');
+        $detailResponse->assertDontSee('Tech Corp');
         $detailResponse->assertDontSee('https://example.com/apply');
     }
 
@@ -79,8 +80,10 @@ class AdminPanelAndJobsSubscriptionTest extends TestCase
 
         $detailResponse = $this->actingAs($subscriber)->get('/jobs/'.$job->id);
         $detailResponse->assertStatus(200);
-        $detailResponse->assertSee('Design Studio');
-        $detailResponse->assertSee('Apply Directly at Design Studio');
+        $detailResponse->assertSee('Product Designer');
+        $detailResponse->assertSee('Verified Direct Employer');
+        $detailResponse->assertDontSee('Design Studio');
+        $detailResponse->assertSee('Apply Directly');
     }
 
     public function test_guest_accessing_admin_is_redirected_to_admin_credentials_login(): void

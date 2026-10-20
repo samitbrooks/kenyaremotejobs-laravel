@@ -37,8 +37,8 @@
                         <x-icon name="lightning" class="h-3 w-3 text-[#3444da]" /> micro1 verified
                     </span>
                 @elseif ($job->source_name === 'Turing')
-                    <span class="inline-flex items-center gap-1 rounded-full bg-indigo-50 border border-indigo-200/80 px-2 py-0.5 text-[10px] font-bold text-indigo-800 shadow-2xs">
-                        <x-icon name="sparkle" class="h-3 w-3 text-indigo-600" /> Turing
+                    <span class="inline-flex items-center gap-1 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-2 py-0.5 text-[10px] font-bold text-[#3444da] shadow-2xs">
+                        <x-icon name="sparkle" class="h-3 w-3 text-[#3444da]" /> Global Talent Network
                     </span>
                 @elseif (! $isUnlocked)
                     <span class="inline-flex items-center gap-1 rounded-full bg-amber-50 border border-amber-200/80 px-2 py-0.5 text-[10px] font-bold text-amber-800 shadow-2xs">
@@ -65,21 +65,12 @@
             </h3>
 
             <div class="flex items-center gap-2 text-xs text-slate-500">
-                <x-company-logo :company="$isUnlocked ? $job->company : ''" :size="20" class="shrink-0 rounded-md" />
-                @if ($isUnlocked)
-                    <span class="font-semibold text-slate-700 flex items-center gap-1 truncate">
-                        {{ $job->company }}
-                        <svg class="h-3.5 w-3.5 text-[#3444da] inline shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                        </svg>
-                    </span>
-                @else
-                    <span class="inline-flex items-center gap-1 font-semibold text-slate-700" title="Unlock with Pro or 24-Hour Free Pass to reveal company name">
-                        <x-icon name="lock" class="h-3 w-3 text-amber-600" />
-                        <span>Verified Employer</span>
-                        <span class="rounded bg-amber-100/90 border border-amber-300/60 px-1.5 py-0.2 text-[9px] font-extrabold uppercase tracking-wider text-amber-900">Pro Only</span>
-                    </span>
-                @endif
+                <x-company-logo :company="''" :size="20" class="shrink-0 rounded-md" />
+                <span class="inline-flex items-center gap-1 font-semibold text-slate-700">
+                    <x-icon name="shield" class="h-3.5 w-3.5 text-[#3444da]" />
+                    <span>Verified Direct Employer</span>
+                    <span class="rounded bg-[#eef0fe] border border-[#c7ccfb] px-1.5 py-0.2 text-[9px] font-extrabold uppercase tracking-wider text-[#3444da]">Vetted</span>
+                </span>
             </div>
         </div>
 
@@ -138,7 +129,7 @@
 
         <div class="shrink-0">
             <span class="jobs-micro-cta">
-                <span>{{ $isUnlocked ? 'Apply' : 'View & Unlock' }}</span>
+                <span>{{ $isUnlocked ? 'Apply Directly' : 'View Role' }}</span>
                 <svg class="h-3.5 w-3.5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>

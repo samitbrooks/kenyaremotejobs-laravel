@@ -40,7 +40,7 @@ class FeedController extends Controller
                 $salaryBadge = ' (~$'.$hourly['min'].'-'.$hourly['max'].'/hr)';
             }
 
-            $cleanTitle = "🇰🇪 {$job->title} at {$job->company}{$salaryBadge}";
+            $cleanTitle = "🇰🇪 {$job->title}{$salaryBadge}";
             $jobUrl = "{$siteUrl}/jobs/{$job->id}?utm_source=linkedin&utm_medium=rss_feed&utm_campaign=featured_jobs";
 
             $compensationLine = $kesMonthly ? "Compensation: {$kesMonthly}" : ($job->salary ? "Compensation: {$job->salary}" : 'Compensation: Competitive international rates (USD / Wise / M-Pesa)');
@@ -53,7 +53,7 @@ class FeedController extends Controller
                 '🚨 NEW VERIFIED REMOTE ROLE (Open to Kenya 🇰🇪)',
                 '',
                 "Role: {$job->title}",
-                "Company: {$job->company}",
+                'Employer: Verified Direct Employer',
                 "Type: 100% Remote ({$job->remote_type})",
                 $compensationLine,
                 '',
@@ -76,7 +76,7 @@ class FeedController extends Controller
                 'link' => $jobUrl,
                 'guid' => "{$siteUrl}/jobs/{$job->id}",
                 'pubDate' => $job->posted_at->toRfc2822String(),
-                'company' => $job->company,
+                'company' => 'Verified Direct Employer',
                 'location' => $job->location ?? 'Remote (Kenya-Friendly)',
                 'description' => $socialBody,
                 'categories' => array_slice($job->tags ?? ['Remote', 'Kenya'], 0, 4),

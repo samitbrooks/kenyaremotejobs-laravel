@@ -57,7 +57,8 @@ class SubscriptionAndEarlyAccessTest extends TestCase
         $detailResponse = $this->get('/jobs/'.$job->id);
         $detailResponse->assertStatus(200);
         $detailResponse->assertSee('Remote Python Developer');
-        $detailResponse->assertSee('PyCorp Ltd');
+        $detailResponse->assertSee('Verified Direct Employer');
+        $detailResponse->assertDontSee('PyCorp Ltd');
         $detailResponse->assertSee('Python developer needed.');
         $detailResponse->assertSee('Early Access');
         $detailResponse->assertDontSee('https://example.com/jobs/py-1');
@@ -93,8 +94,9 @@ class SubscriptionAndEarlyAccessTest extends TestCase
         $response = $this->actingAs($proUser)->get('/jobs/'.$job->id);
 
         $response->assertStatus(200);
-        $response->assertSee('Acme Global Corp');
-        $response->assertSee('Apply Directly at Acme Global Corp');
+        $response->assertSee('Verified Direct Employer');
+        $response->assertDontSee('Acme Global Corp');
+        $response->assertSee('Apply Directly');
         $response->assertSee('https://example.com/jobs/123');
     }
 
@@ -123,7 +125,7 @@ class SubscriptionAndEarlyAccessTest extends TestCase
         // Unauthenticated visitor can view job details, but apply action is gated behind Early Access
         $guestResponse = $this->get('/jobs/'.$freshJob->id);
         $guestResponse->assertStatus(200);
-        $guestResponse->assertDontSee('Apply Directly at CloudScale Ltd');
+        $guestResponse->assertDontSee('Apply Directly');
         $guestResponse->assertSee('Early Access');
 
         // Subscribed Pro member can access and see early access indicator
@@ -135,7 +137,7 @@ class SubscriptionAndEarlyAccessTest extends TestCase
         $proResponse = $this->actingAs($proUser)->get('/jobs/'.$freshJob->id);
         $proResponse->assertStatus(200);
         $proResponse->assertSee('Pro Member Early Access Active');
-        $proResponse->assertSee('Apply Directly at CloudScale Ltd');
+        $proResponse->assertSee('Apply Directly');
     }
 
     public function test_direct_employer_listing_applications_accessible_to_pro_members(): void
@@ -174,7 +176,7 @@ class SubscriptionAndEarlyAccessTest extends TestCase
         $proResponse = $this->actingAs($proUser)->get('/jobs/'.$employerJob->id);
         $proResponse->assertStatus(200);
         $proResponse->assertSee('Verified Direct Employer');
-        $proResponse->assertSee('Apply Directly at KenyanFintech Co');
+        $proResponse->assertSee('Apply Directly');
         $proResponse->assertSee('https://kenyanfintech.com/careers/apply');
     }
 
@@ -287,30 +289,32 @@ class SubscriptionAndEarlyAccessTest extends TestCase
             'audience_segments' => [],
         ]);
 
-        // Unauthenticated guest visits /jobs: card masks company as Verified Employer [Pro Only]
+        // Unauthenticated guest visits /jobs: card masks company as Verified Direct Employer
         $guestResponse = $this->get('/jobs');
         $guestResponse->assertStatus(200);
         $guestResponse->assertSee('Lead Data Scientist');
-        $guestResponse->assertSee('Verified Employer');
-        $guestResponse->assertSee('Pro Only');
+        $guestResponse->assertSee('Verified Direct Employer');
         $guestResponse->assertDontSee('SecretAI Labs');
 
-        // Detail page masks company in header and displays trial/pro unlock buttons
+        // Detail page masks company in header and displays unlock buttons
         $detailGuest = $this->get('/jobs/'.$job->id);
         $detailGuest->assertStatus(200);
         $detailGuest->assertSee('Lead Data Scientist');
-        $detailGuest->assertSee('Company Name Hidden');
+        $detailGuest->assertSee('Verified Direct Employer');
         $detailGuest->assertSee('Unlock Immediate Apply Access');
+        $detailGuest->assertDontSee('SecretAI Labs');
 
-        // Subscribed Pro user sees real company name on both pages
+        // Subscribed Pro user gets direct apply access without employer leaks
         $proUser = User::factory()->create(['subscribed' => true]);
         $proJobs = $this->actingAs($proUser)->get('/jobs');
         $proJobs->assertStatus(200);
-        $proJobs->assertSee('SecretAI Labs');
+        $proJobs->assertSee('Verified Direct Employer');
+        $proJobs->assertDontSee('SecretAI Labs');
 
         $proDetail = $this->actingAs($proUser)->get('/jobs/'.$job->id);
         $proDetail->assertStatus(200);
-        $proDetail->assertSee('SecretAI Labs');
-        $proDetail->assertSee('Apply Directly at SecretAI Labs');
+        $proDetail->assertSee('Verified Direct Employer');
+        $proDetail->assertSee('Apply Directly');
+        $proDetail->assertDontSee('SecretAI Labs');
     }
 }

@@ -22,13 +22,13 @@ class CuratedStudentJobsSource implements JobSource
             [
                 'id' => 'student--outlier-ai-data-annotation-specialist',
                 'source_id' => 'outlier-annotation-gen-01',
-                'company' => 'Outlier AI',
+                'company' => 'Verified Frontier AI Lab',
                 'title' => 'AI Data Annotation Specialist (English & General Reasoning)',
                 'salary' => '$15 - $25/hr',
                 'annual_salary_usd' => ['min' => 30000, 'max' => 50000],
                 'source_url' => 'https://outlier.ai/',
                 'tags' => ['Data Annotation', 'AI Training', 'RLHF', 'English Fluency', 'Flexible Hours', 'Students'],
-                'description' => '<p>Outlier AI is hiring remote <strong>AI Data Annotation Specialists</strong> to train and refine next-generation Large Language Models (LLMs).</p>
+                'description' => '<p>A leading frontier AI research lab is hiring remote <strong>AI Data Annotation Specialists</strong> to train and refine next-generation Large Language Models (LLMs).</p>
 <p><strong>What you will do:</strong></p>
 <ul>
     <li>Evaluate model-generated answers against strict quality, factual accuracy, and safety rubrics.</li>
@@ -45,7 +45,7 @@ class CuratedStudentJobsSource implements JobSource
             [
                 'id' => 'student--outlier-ai-coding-evaluator',
                 'source_id' => 'outlier-coding-eval-02',
-                'company' => 'Outlier AI',
+                'company' => 'Verified Frontier AI Lab',
                 'title' => 'AI Coding Model Evaluator & Prompt Trainer (Python & Web)',
                 'salary' => '$25 - $45/hr',
                 'annual_salary_usd' => ['min' => 50000, 'max' => 90000],
@@ -57,31 +57,31 @@ class CuratedStudentJobsSource implements JobSource
             [
                 'id' => 'student--alignerr-multilingual-ai-evaluator',
                 'source_id' => 'alignerr-eval-01',
-                'company' => 'Alignerr',
+                'company' => 'Verified Global AI Platform',
                 'title' => 'AI Content Evaluator & Data Annotator (English & Swahili)',
                 'salary' => '$18 - $28/hr',
                 'annual_salary_usd' => ['min' => 36000, 'max' => 56000],
                 'source_url' => 'https://www.alignerr.com/',
                 'tags' => ['Data Annotation', 'AI Training', 'Swahili', 'Bilingual', 'Prompt Evaluation', 'Students'],
-                'description' => '<p>Alignerr hires subject-matter evaluators and linguists to assess frontier AI models in East Africa. Evaluate Swahili and English conversational accuracy, factuality, and cultural nuance.</p>
+                'description' => '<p>A premier global AI evaluation platform hires subject-matter evaluators and linguists to assess frontier AI models in East Africa. Evaluate Swahili and English conversational accuracy, factuality, and cultural nuance.</p>
 <p>Choose your own hours, log on whenever you have free time between classes, and get paid weekly via Payoneer/PayPal/M-Pesa.</p>',
             ],
             [
                 'id' => 'student--dataannotation-tech-model-reviewer',
                 'source_id' => 'dataannotation-reviewer-01',
-                'company' => 'DataAnnotation.tech',
+                'company' => 'Verified AI Evaluation Lab',
                 'title' => 'Remote AI Model Reviewer & Data Annotation Contributor',
                 'salary' => '$20 - $35/hr',
                 'annual_salary_usd' => ['min' => 40000, 'max' => 70000],
                 'source_url' => 'https://www.dataannotation.tech/',
                 'tags' => ['Data Annotation', 'AI Training', 'Prompt Evaluation', 'Fact Checking', 'Flexible Hours', 'Students'],
-                'description' => '<p>DataAnnotation.tech provides on-demand, flexible AI evaluation tasks for researchers, university students, and analytical thinkers.</p>
+                'description' => '<p>A leading international AI evaluation network provides on-demand, flexible AI evaluation tasks for researchers, university students, and analytical thinkers.</p>
 <p>Tasks include comparing two AI chatbot responses, identifying hallucinations, checking citations, and rating tone. Work as few or as many hours as you choose each week.</p>',
             ],
             [
                 'id' => 'student--dataannotation-tech-bilingual-labeler',
                 'source_id' => 'dataannotation-bilingual-02',
-                'company' => 'DataAnnotation.tech',
+                'company' => 'Verified AI Evaluation Lab',
                 'title' => 'Bilingual Data Labeler & Text Annotator (East Africa Region)',
                 'salary' => '$20 - $30/hr',
                 'annual_salary_usd' => ['min' => 40000, 'max' => 60000],
@@ -92,31 +92,31 @@ class CuratedStudentJobsSource implements JobSource
             [
                 'id' => 'student--mindrift-freelance-ai-tutor',
                 'source_id' => 'mindrift-tutor-01',
-                'company' => 'Mindrift',
+                'company' => 'Verified AI Writing Network',
                 'title' => 'Freelance AI Tutor & Data Annotation Writer',
                 'salary' => '$14 - $22/hr',
                 'annual_salary_usd' => ['min' => 28000, 'max' => 44000],
                 'source_url' => 'https://mindrift.ai/',
                 'tags' => ['AI Training', 'Data Annotation', 'Writing', 'Research', 'Flexible Schedule', 'Students'],
-                'description' => '<p>Join Mindrift as an AI Writer & Data Annotation Specialist. Write prompt-response pairs across diverse domains (humanities, science, law, business) and verify facts generated by AI assistants.</p>
+                'description' => '<p>Join as a Freelance AI Writer & Data Annotation Specialist. Write prompt-response pairs across diverse domains (humanities, science, law, business) and verify facts generated by AI assistants.</p>
 <p>Ideal for university students who love research, writing, and critical thinking. Complete tasks at your own pace.</p>',
             ],
             [
                 'id' => 'student--oneforma-multimodal-annotation',
                 'source_id' => 'oneforma-multimodal-01',
-                'company' => 'OneForma by Centific',
+                'company' => 'Verified Multimodal AI Lab',
                 'title' => 'Multimodal Data Annotation & Audio Transcription Contributor',
                 'salary' => '$12 - $20/hr',
                 'annual_salary_usd' => ['min' => 24000, 'max' => 40000],
                 'source_url' => 'https://www.oneforma.com/',
                 'tags' => ['Data Annotation', 'Audio Transcription', 'Transcription', 'Image Labeling', 'Students'],
-                'description' => '<p>OneForma connects global freelance contributors with AI data enrichment projects. Opportunities include audio transcription, bounding-box image labeling, sentiment classification, and voice collection.</p>
+                'description' => '<p>A global data enrichment network connects freelance contributors with AI data enrichment projects. Opportunities include audio transcription, bounding-box image labeling, sentiment classification, and voice collection.</p>
 <p>No prior professional experience required. Paid monthly via Payoneer or direct bank transfer into local Kenyan accounts.</p>',
             ],
             [
                 'id' => 'student--oneforma-search-engine-evaluator',
                 'source_id' => 'oneforma-search-02',
-                'company' => 'OneForma by Centific',
+                'company' => 'Verified Search Intelligence Network',
                 'title' => 'Search Engine Quality Evaluator & Data Labeler',
                 'salary' => '$12 - $18/hr',
                 'annual_salary_usd' => ['min' => 24000, 'max' => 36000],
@@ -127,29 +127,29 @@ class CuratedStudentJobsSource implements JobSource
             [
                 'id' => 'student--scale-ai-rlhf-evaluator',
                 'source_id' => 'scaleai-rlhf-01',
-                'company' => 'Scale AI',
+                'company' => 'Verified Frontier AI Infrastructure Lab',
                 'title' => 'Generative AI RLHF Evaluator & Prompt Specialist',
                 'salary' => '$15 - $25/hr',
                 'annual_salary_usd' => ['min' => 30000, 'max' => 50000],
                 'source_url' => 'https://scale.com/',
                 'tags' => ['AI Training', 'RLHF', 'Data Annotation', 'Prompt Engineering', 'Students'],
-                'description' => '<p>Work with the world leader in AI data infrastructure. Review AI chatbot outputs for coherence, truthfulness, and safety. 100% remote, self-paced work from anywhere in Kenya.</p>',
+                'description' => '<p>Work with an international leader in AI data infrastructure. Review AI chatbot outputs for coherence, truthfulness, and safety. 100% remote, self-paced work from anywhere in Kenya.</p>',
             ],
             [
                 'id' => 'student--cloudfactory-ai-data-associate',
                 'source_id' => 'cloudfactory-data-01',
-                'company' => 'CloudFactory',
+                'company' => 'Verified Global Data Operations',
                 'title' => 'Remote AI Data Annotation & Labeling Associate',
                 'salary' => '$8 - $15/hr',
                 'annual_salary_usd' => ['min' => 16000, 'max' => 30000],
                 'source_url' => 'https://www.cloudfactory.com/',
                 'tags' => ['Data Annotation', 'Data Labeler', 'Data Entry', 'Nairobi', 'Students'],
-                'description' => '<p>CloudFactory has a strong presence across Kenya and East Africa. Support global machine learning initiatives by performing image bounding, lidar tagging, and medical dataset annotation.</p>',
+                'description' => '<p>A premier global data operations platform supports machine learning initiatives by performing image bounding, lidar tagging, and medical dataset annotation across East Africa.</p>',
             ],
             [
                 'id' => 'student--telus-international-ai-evaluator',
                 'source_id' => 'telus-ai-eval-01',
-                'company' => 'Telus International AI',
+                'company' => 'Verified International AI Solutions',
                 'title' => 'AI Community Data Evaluator - Kenya (English & Swahili)',
                 'salary' => '$12 - $20/hr',
                 'annual_salary_usd' => ['min' => 24000, 'max' => 40000],
@@ -160,18 +160,18 @@ class CuratedStudentJobsSource implements JobSource
             [
                 'id' => 'student--invisible-tech-ai-trainer',
                 'source_id' => 'invisible-trainer-01',
-                'company' => 'Invisible Technologies',
+                'company' => 'Verified AI Operations Network',
                 'title' => 'Advanced AI Trainer & Data Operations Agent',
                 'salary' => '$15 - $28/hr',
                 'annual_salary_usd' => ['min' => 30000, 'max' => 56000],
                 'source_url' => 'https://www.invisible.co/',
                 'tags' => ['AI Training', 'Data Annotation', 'Operations', 'Workflow Automation', 'Students'],
-                'description' => '<p>Invisible Technologies partners with major frontier AI labs to fine-tune AI agents. Tasks range from multi-step tool execution verification to prompt evaluation and synthetic data generation.</p>',
+                'description' => '<p>A leading AI operations network partners with major frontier AI labs to fine-tune AI agents. Tasks range from multi-step tool execution verification to prompt evaluation and synthetic data generation.</p>',
             ],
             [
                 'id' => 'student--welocalize-search-rater',
                 'source_id' => 'welocalize-rater-01',
-                'company' => 'Welocalize',
+                'company' => 'Verified Quality Evaluation Lab',
                 'title' => 'Search Quality Rater & Data Annotation Specialist (Kenya)',
                 'salary' => '$12 - $19/hr',
                 'annual_salary_usd' => ['min' => 24000, 'max' => 38000],
@@ -182,7 +182,7 @@ class CuratedStudentJobsSource implements JobSource
             [
                 'id' => 'student--transcribeme-audio-transcriber',
                 'source_id' => 'transcribeme-01',
-                'company' => 'TranscribeMe',
+                'company' => 'Verified Audio Intelligence Network',
                 'title' => 'Freelance Audio Transcriber & Speech Data Collector',
                 'salary' => '$15 - $22/audio hr',
                 'annual_salary_usd' => ['min' => 20000, 'max' => 35000],
@@ -193,18 +193,18 @@ class CuratedStudentJobsSource implements JobSource
             [
                 'id' => 'student--rev-com-remote-transcriptionist',
                 'source_id' => 'rev-transcriptionist-01',
-                'company' => 'Rev.com',
+                'company' => 'Verified Speech & Media Transcription Lab',
                 'title' => 'Remote Audio & Video Transcriptionist (Flexible Hours)',
                 'salary' => '$14 - $25/hr',
                 'annual_salary_usd' => ['min' => 25000, 'max' => 45000],
                 'source_url' => 'https://www.rev.com/',
                 'tags' => ['Transcription', 'Transcriber', 'Video Captioning', 'Flexible Schedule', 'Students'],
-                'description' => '<p>Transcribe podcasts, interviews, lectures, and YouTube videos. Choose the projects you want, work when you want, and get paid weekly via PayPal.</p>',
+                'description' => '<p>Transcribe podcasts, interviews, lectures, and video media. Choose the projects you want, work when you want, and get paid weekly via PayPal.</p>',
             ],
             [
                 'id' => 'student--study-com-online-tutor',
                 'source_id' => 'studycom-tutor-01',
-                'company' => 'Study.com',
+                'company' => 'Verified Global Learning Platform',
                 'title' => 'Online Subject Matter Tutor & Curriculum Reviewer',
                 'salary' => '$18 - $28/hr',
                 'annual_salary_usd' => ['min' => 30000, 'max' => 50000],
@@ -215,7 +215,7 @@ class CuratedStudentJobsSource implements JobSource
             [
                 'id' => 'student--belay-virtual-assistant',
                 'source_id' => 'belay-assistant-01',
-                'company' => 'Belay',
+                'company' => 'Verified Executive Operations Network',
                 'title' => 'Virtual Assistant & Research Coordinator (Flexible Campus Hours)',
                 'salary' => '$15 - $24/hr',
                 'annual_salary_usd' => ['min' => 25000, 'max' => 45000],
@@ -226,7 +226,7 @@ class CuratedStudentJobsSource implements JobSource
             [
                 'id' => 'student--appen-speech-data-annotation',
                 'source_id' => 'appen-speech-data-01',
-                'company' => 'Appen',
+                'company' => 'Verified Machine Learning Data Partner',
                 'title' => 'AI Speech & Data Annotation Contributor (Kenya)',
                 'salary' => '$11 - $18/hr',
                 'annual_salary_usd' => ['min' => 20000, 'max' => 35000],
@@ -239,7 +239,7 @@ class CuratedStudentJobsSource implements JobSource
         return array_map(function (array $item) use ($now) {
             return [
                 'id' => $item['id'],
-                'source_name' => $item['company'],
+                'source_name' => 'Verified Remote Partner',
                 'source_id' => $item['source_id'],
                 'source_url' => $item['source_url'],
                 'title' => $item['title'],

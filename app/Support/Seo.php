@@ -4,7 +4,7 @@ namespace App\Support;
 
 use App\Models\BlogPost;
 use App\Models\JobListing;
-use Illuminate\Support\Str;
+use App\Services\Redactor;
 
 /**
  * JSON-LD builders live in a plain .php file, not a .blade.php one — Blade's
@@ -49,18 +49,14 @@ class Seo
     public static function jobPostingJsonLd(JobListing $job): string
     {
         $at = '@';
-        $plainDescription = Format::stripHtml($job->description ?? '');
-        $matchedCompany = CompanyDirectory::find(Str::slug($job->company));
+        $redactor = app(Redactor::class);
+        $plainDescription = $redactor->redactEmployerIdentity(Format::stripHtml($job->description ?? ''), $job->company);
 
         $hiringOrg = [
             $at.'type' => 'Organization',
-            'name' => $job->company,
-            'sameAs' => $matchedCompany['website'] ?? config('site.url'),
+            'name' => 'Verified Direct Employer',
+            'sameAs' => config('site.url'),
         ];
-
-        if (! empty($matchedCompany['logo'])) {
-            $hiringOrg['logo'] = $matchedCompany['logo'];
-        }
 
         $data = [
             $at.'context' => 'https://schema.org',

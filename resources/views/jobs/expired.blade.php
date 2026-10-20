@@ -54,7 +54,10 @@
                                             {{ $job->title }}
                                         </a>
                                     </h3>
-                                    <p class="mt-1 text-xs text-slate-500 font-medium">{{ $job->company }}</p>
+                                    <p class="mt-1 text-xs text-slate-500 font-medium flex items-center gap-1">
+                                        <x-icon name="shield" class="h-3 w-3 text-[#3444da]" />
+                                        <span>Verified Direct Employer</span>
+                                    </p>
                                 </div>
                                 @if ($job->kenya_friendly)
                                     <span class="inline-flex items-center gap-1 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-2 py-0.5 text-[11px] font-bold text-[#3444da] shrink-0">

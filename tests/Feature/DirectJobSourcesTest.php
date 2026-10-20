@@ -212,8 +212,8 @@ class DirectJobSourcesTest extends TestCase
         $response->assertOk();
         // The company name SecretTech Corp must NOT be visible to guest in Just Posted or feed
         $response->assertDontSee('SecretTech Corp');
-        $response->assertSee('Verified Employer');
-        $response->assertSee('Pro Only');
+        $response->assertSee('Verified Direct Employer');
+        $response->assertSee('Vetted');
     }
 
     public function test_micro1_source_fetches_and_normalizes_jobs(): void

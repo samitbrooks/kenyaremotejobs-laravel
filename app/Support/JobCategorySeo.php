@@ -247,8 +247,8 @@ class JobCategorySeo
                 'h1' => 'Remote AI Training, Data Annotation & Prompt Engineering Jobs in Kenya',
                 'meta_description' => 'Discover legitimate remote AI data labeling, RLHF prompt evaluation, and model training positions for Kenyans. Reliable USD payouts to PayPal, Payoneer and M-Pesa.',
                 'badge' => 'AI Training & Annotation',
-                'intro' => 'With the global boom in Large Language Models (LLMs), AI companies (such as Outlier, Scale AI, Alignerr, and Remotasks) actively hire thousands of Kenyan specialists for RLHF (Reinforcement Learning from Human Feedback), prompt evaluation, coding model tutoring, and domain-specific dataset labeling.',
-                'keywords' => 'ai training jobs kenya, rlhf remote jobs kenya, data annotation jobs nairobi, outlier ai kenya, prompt engineer remote kenya',
+                'intro' => 'With the global boom in Large Language Models (LLMs), leading international AI research labs and model training platforms actively hire thousands of Kenyan specialists for RLHF (Reinforcement Learning from Human Feedback), prompt evaluation, coding model tutoring, and domain-specific dataset labeling.',
+                'keywords' => 'ai training jobs kenya, rlhf remote jobs kenya, data annotation jobs nairobi, remote ai trainer kenya, prompt engineer remote kenya',
                 'salary_range' => '$800 - $2,500 / month (~KES 100,000 - 325,000)',
                 'search_terms' => ['ai', 'annotation', 'labeling', 'prompt', 'rlhf', 'evaluator', 'machine learning', 'data trainer'],
                 'faqs' => [
@@ -315,7 +315,7 @@ class JobCategorySeo
                 'faqs' => [
                     [
                         'question' => 'What are the best-paying online jobs for Kenyan university students?',
-                        'answer' => 'Data annotation and AI model training (with platforms like Outlier AI, Alignerr, DataAnnotation.tech, and Mindrift) are currently the highest-paying flexible options for Kenyan students, offering $15 to $35/hr. Audio transcription, virtual assistance, and SEO content writing are also popular, flexible roles that easily accommodate academic timetables.',
+                        'answer' => 'Data annotation and AI model training (with top global AI labs and model evaluation platforms) are currently the highest-paying flexible options for Kenyan students, offering $15 to $35/hr. Audio transcription, virtual assistance, and SEO content writing are also popular, flexible roles that easily accommodate academic timetables.',
                     ],
                     [
                         'question' => 'How do Kenyan students receive their earnings from remote jobs?',

@@ -242,8 +242,8 @@ class SeoRichResultsTest extends TestCase
         $response = $this->get('/jobs/'.$job->id);
         $response->assertStatus(200);
 
-        // Ensures schema matches visible HTML and does not cloak company name
-        $response->assertSee('"name":"GitLab"', false);
-        $response->assertDontSee('Verified Remote Employer (via', false);
+        // Ensures schema matches masked HTML and protects employer identity
+        $response->assertSee('"name":"Verified Direct Employer"', false);
+        $response->assertDontSee('"name":"GitLab"', false);
     }
 }

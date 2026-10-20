@@ -64,7 +64,7 @@
                                                 {{ $job->title }}
                                             </a>
                                             <div style="color: #94a3b8; font-size: 12px; margin-top: 5px; line-height: 1.4;">
-                                                <span style="color: #cbd5e1; font-weight: 500;">{{ $job->company }}</span>
+                                                <span style="color: #cbd5e1; font-weight: 500;">Verified Direct Employer</span>
                                                 <span style="color: #475569; margin: 0 4px;">•</span>
                                                 <span>{{ $job->remote_type }}</span>
                                                 @if ($kesMonthly)

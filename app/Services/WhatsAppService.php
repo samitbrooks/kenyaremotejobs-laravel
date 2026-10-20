@@ -154,7 +154,7 @@ class WhatsAppService
 
         $message = "⚡ *New Remote Opportunity for Kenya!* \n\n"
             ."📌 *Role:* {$job->title}\n"
-            ."🏢 *Company:* {$job->company}\n"
+            ."🏢 *Employer:* 🔒 Verified Direct Employer (Protected)\n"
             ."🌍 *Location:* {$job->remote_type}\n"
             ."{$compString}\n"
             ."🇰🇪 *Timezone:* East Africa Time (UTC+3) Compatible\n\n"

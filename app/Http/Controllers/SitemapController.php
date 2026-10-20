@@ -211,7 +211,7 @@ class SitemapController extends Controller
         } else {
             foreach ($recentJobs as $job) {
                 $salary = $job->salary ? " | Pay: {$job->salary}" : '';
-                $lines[] = "- [{$job->title} at {$job->company}]({$url}/jobs/{$job->id}) ({$job->remote_type}{$salary})";
+                $lines[] = "- [{$job->title}]({$url}/jobs/{$job->id}) ({$job->remote_type}{$salary})";
                 $lines[] = "  Location: {$job->location} | Score: {$job->kenya_score}/100";
             }
         }

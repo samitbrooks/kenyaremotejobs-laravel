@@ -3,16 +3,14 @@
     $plainDescription = \App\Support\Format::stripHtml($job->description ?? '');
     $visibleTags = $job->tags ?? [];
     $rawDescriptionBlocks = \App\Support\DescriptionBlocks::parse($job->description ?? '');
-    $descriptionBlocks = $canApply || ! $rawDescriptionBlocks
-        ? $rawDescriptionBlocks
-        : \App\Support\DescriptionBlocks::redact($rawDescriptionBlocks, $job->company);
-    $displayPlainDescription = $canApply
-        ? $plainDescription
-        : $redactor->redactEmployerIdentity($plainDescription, $job->company);
+    $descriptionBlocks = $rawDescriptionBlocks
+        ? \App\Support\DescriptionBlocks::redact($rawDescriptionBlocks, $job->company)
+        : null;
+    $displayPlainDescription = $redactor->redactEmployerIdentity($plainDescription, $job->company);
     $hourly = \App\Support\SalaryEstimate::estimateHourlyUsd($job->annual_salary_usd);
     $kesMonthly = \App\Support\SalaryEstimate::estimateMonthlyKes($job->annual_salary_usd, $job->salary);
-    $displayCompany = $canApply ? " at {$job->company}" : '';
-    $title = $job->title.$displayCompany." — Remote Job".($job->kenya_friendly ? ' (Kenya-Friendly)' : '');
+    $displayCompany = '';
+    $title = $job->title." — Remote Job".($job->kenya_friendly ? ' (Kenya-Friendly)' : '');
     $preview = \App\Support\Format::truncate($plainDescription, 155);
 @endphp
 
@@ -51,18 +49,19 @@
 
         <x-reveal>
             <div class="mt-4 flex items-start gap-4">
-                <x-company-logo :company="$canApply ? $job->company : ''" :size="64" />
+                <x-company-logo :company="''" :size="64" />
                 <div class="min-w-0 flex-1">
                     <h1 class="text-2xl font-extrabold sm:text-3xl text-slate-900 tracking-tight">{{ $job->title }}</h1>
-                    @if ($canApply)
-                        <p class="mt-1 text-base font-medium text-slate-500">{{ $job->company }}</p>
-                    @elseif ($isExpired)
-                        <p class="mt-1 text-base font-medium text-slate-500">{{ $job->company }} &middot; <span class="text-amber-800 font-semibold">Archived Posting</span></p>
-                    @else
-                        <p class="mt-1.5 inline-flex items-center gap-1.5 rounded-full bg-amber-50 border border-amber-200/80 px-3 py-0.5 text-xs font-bold text-amber-900">
-                            <x-icon name="lock" class="h-3.5 w-3.5 text-amber-600 inline" /> Company Name Hidden &middot; Unlocked with Pro or 24-Hour Free Pass
-                        </p>
-                    @endif
+                    <div class="flex items-center gap-2 mt-1.5 text-xs text-slate-500">
+                        <span class="inline-flex items-center gap-1.5 font-semibold text-slate-700">
+                            <x-icon name="shield" class="h-4 w-4 text-[#3444da]" />
+                            <span>Verified Direct Employer</span>
+                            <span class="rounded bg-[#eef0fe] border border-[#c7ccfb] px-1.5 py-0.2 text-[9px] font-extrabold uppercase tracking-wider text-[#3444da]">Vetted</span>
+                        </span>
+                        @if ($isExpired)
+                            <span>&middot; <span class="text-amber-800 font-semibold">Archived Posting</span></span>
+                        @endif
+                    </div>
                 </div>
             </div>
 
@@ -151,7 +150,7 @@
             {{-- Full Role Description --}}
             <div class="mt-8 rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-8 shadow-sm">
                 <h2 class="mb-4 font-bold text-slate-900 text-lg sm:text-xl">
-                    About this role {{ $canApply ? 'at '.$job->company : '(Employer Details Hidden)' }}
+                    About this role (Direct Employer Details Protected)
                 </h2>
                 @if (\App\Support\Language::looksNonEnglish($plainDescription))
                     <livewire:translate-toggle :text="$displayPlainDescription" :blocks="$descriptionBlocks" />
@@ -199,11 +198,7 @@
                         @endif
                         <h3 class="text-2xl font-extrabold text-slate-900">Ready to submit your application?</h3>
                         <p class="mt-1.5 text-sm text-slate-500 max-w-md mx-auto leading-relaxed">
-                            @if ($job->isDirectAts())
-                                Apply directly through {{ $job->company }}'s official recruitment portal without any middleman accounts.
-                            @else
-                                Apply directly to {{ $job->company }}.
-                            @endif
+                            Apply directly through the official recruitment portal without any middleman accounts.
                         </p>
                         <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
                             <a
@@ -212,20 +207,8 @@
                                 rel="noopener noreferrer"
                                 class="btn-pop inline-flex items-center justify-center gap-2 rounded-full bg-[#3444da] hover:bg-[#2633bf] px-8 py-3.5 text-center font-bold text-white shadow-md shadow-[#3444da]/20 transition"
                             >
-                                Apply Directly at {{ $job->company }} &#8599;
+                                Apply Directly &#8599;
                             </a>
-
-                            @if ($job->isAggregator() && ! $job->isDirectAts())
-                                <a
-                                    href="https://www.google.com/search?q={{ urlencode($job->company . ' ' . $job->title . ' careers apply') }}"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="btn-pop inline-flex items-center justify-center gap-2 rounded-full bg-slate-100 hover:bg-slate-200 px-6 py-3.5 text-center text-sm font-semibold text-slate-800 transition"
-                                    title="Search employer's official careers portal directly to bypass 3rd party job board sign-up"
-                                >
-                                    Official {{ $job->company }} Search &#8599;
-                                </a>
-                            @endif
 
                             <livewire:track-application-button :job-id="$job->id" />
                         </div>
@@ -240,7 +223,7 @@
                             <x-icon.kenya-flag class="h-3.5 w-3.5 inline" /> Verified Employer Actively Seeking Kenyan Talent &middot; Full Access with Pro
                         </div>
                         <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
-                            {{ $canApply ? $job->company : 'Verified Direct Employer' }} is Exclusively Hiring in Kenya
+                            Verified Direct Employer is Exclusively Hiring in Kenya
                         </h3>
                         <p class="mt-2.5 text-sm text-slate-600 max-w-lg mx-auto leading-relaxed">
                             This employer is specifically recruiting Kenyan talent. <strong class="text-slate-900">Pro Membership gives you full access to view company details and apply directly</strong> across the site.
@@ -289,7 +272,7 @@
                             <x-icon name="sparkle" class="h-4 w-4 text-amber-600" /> Early Access &middot; Full Access to All 800+ Jobs
                         </div>
                         <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
-                            {{ $canApply ? 'Beat 500+ Applicants to '.$job->company : 'Unlock Company Identity & 0-Second Direct Apply' }}
+                            {{ $canApply ? 'Beat 500+ Applicants & 0-Second Direct Apply' : 'Unlock 0-Second Direct Apply' }}
                         </h3>
                         <p class="mt-2.5 text-sm text-slate-600 max-w-lg mx-auto leading-relaxed">
                             This role was published {{ \App\Support\Format::timeAgo($job->posted_at) }}. <strong class="text-slate-900">Global recruiters typically freeze applications after receiving the first 50 CVs.</strong> Pro members and Free Pass holders reveal the employer identity and get immediate 0-second direct apply access before positions fill.

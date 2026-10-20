@@ -6,6 +6,7 @@ use App\Models\JobListing;
 use App\Models\TelegramMessage;
 use App\Support\SalaryEstimate;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Throwable;
@@ -274,12 +275,31 @@ class TelegramService
             ];
         }
 
-        /** @var Collection<int, JobListing> $jobs */
-        $jobs = JobListing::visible()
-            ->where('kenya_friendly', true)
+        $recentlyBroadcastIds = (array) Cache::get('telegram_recent_broadcasted_job_ids', []);
+
+        $baseQuery = JobListing::visible()
+            ->where('kenya_friendly', true);
+
+        // Fetch jobs not broadcast in the recent window for varied 5x daily drops
+        $freshJobs = (clone $baseQuery)
+            ->when(! empty($recentlyBroadcastIds), fn ($q) => $q->whereNotIn('id', $recentlyBroadcastIds))
             ->orderByDesc('posted_at')
             ->take($limit)
             ->get();
+
+        if ($freshJobs->count() >= $limit) {
+            $jobs = $freshJobs;
+        } else {
+            // If fewer than limit fresh jobs exist, merge with latest to fulfill limit and cycle cache
+            $needed = $limit - $freshJobs->count();
+            $backfill = (clone $baseQuery)
+                ->when(! empty($recentlyBroadcastIds), fn ($q) => $q->whereIn('id', $recentlyBroadcastIds))
+                ->orderByDesc('posted_at')
+                ->take($needed)
+                ->get();
+            $jobs = $freshJobs->merge($backfill);
+            $recentlyBroadcastIds = [];
+        }
 
         if ($jobs->isEmpty()) {
             return [
@@ -288,6 +308,10 @@ class TelegramService
                 'error' => 'No recent active jobs available to broadcast',
             ];
         }
+
+        // Keep last 40 broadcast IDs in cache for continuous rotation
+        $updatedBroadcastIds = array_slice(array_merge($recentlyBroadcastIds, $jobs->pluck('id')->all()), -40);
+        Cache::put('telegram_recent_broadcasted_job_ids', $updatedBroadcastIds, now()->addHours(36));
 
         $formattedText = $this->formatJobDigest($jobs);
 
@@ -312,10 +336,19 @@ class TelegramService
      */
     public function formatJobDigest(Collection $jobs): string
     {
-        $today = now()->format('D, M j, Y');
+        $eatHour = (int) now('Africa/Nairobi')->format('H');
+        $dropLabel = match (true) {
+            $eatHour < 10 => '🌅 MORNING JOBS DROP',
+            $eatHour < 13 => '⚡ MID-DAY JOBS DROP',
+            $eatHour < 16 => '🚀 AFTERNOON JOBS DROP',
+            $eatHour < 19 => '🎯 EVENING JOBS DROP',
+            default => '🌙 NIGHT JOBS DROP',
+        };
+
+        $today = now('Africa/Nairobi')->format('D, M j, Y');
 
         $html = "🇰🇪 <b>TODAY'S VERIFIED REMOTE JOBS FOR KENYANS</b>\n";
-        $html .= "📅 <i>{$today} | Verified Global Roles</i>\n\n";
+        $html .= "📅 <i>{$today} | {$dropLabel}</i>\n\n";
 
         foreach ($jobs as $index => $job) {
             $num = $index + 1;

@@ -118,8 +118,8 @@ class SeoEngineTest extends TestCase
         $response->assertSee('KRA PIN', false);
         $response->assertSee('Payout Methods', false);
         $response->assertSee('Wise', false);
-        $response->assertSee('## 2. Active Verified Kenya-Friendly Roles', false);
-        $response->assertSee('Senior Remote Laravel Engineer at Acme Global', false);
+        $response->assertSee('Senior Remote Laravel Engineer', false);
+        $response->assertDontSee('at Acme Global', false);
         $response->assertSee('## 3. Remote Companies Vetted for Kenya', false);
         $response->assertSee('GitLab', false);
         $response->assertSee('Automattic', false);
@@ -624,8 +624,8 @@ class SeoEngineTest extends TestCase
         $response = $this->get('/companies/gitlab');
 
         $response->assertStatus(200);
-        $response->assertSee('Verified Employer');
-        $response->assertSee('Pro Only');
-        $response->assertSee('View &amp; Unlock', false);
+        $response->assertSee('Verified Direct Employer');
+        $response->assertSee('Vetted');
+        $response->assertSee('View Role');
     }
 }

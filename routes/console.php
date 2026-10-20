@@ -89,12 +89,20 @@ Schedule::call(function () {
     ->onOneServer()
     ->withoutOverlapping();
 
-// Automatically broadcasts daily top verified remote jobs to the Telegram channel/group
-// at 9:00 AM East Africa Time (06:00 UTC)
-Schedule::call(function () {
-    Artisan::call('telegram:broadcast-jobs', ['--limit' => 5]);
-})
-    ->name('telegram:broadcast-jobs')
-    ->dailyAt('06:00')
-    ->onOneServer()
-    ->withoutOverlapping();
+// Automatically broadcasts top verified remote jobs to the Telegram channel/group
+// 5 times daily at peak East Africa Time (UTC+3) engagement hours:
+// 1. 08:00 AM EAT (05:00 UTC) - Morning Commute Drop
+// 2. 11:00 AM EAT (08:00 UTC) - Mid-Morning Workday Drop
+// 3. 02:00 PM EAT (11:00 UTC) - Afternoon Lunch Break Drop
+// 4. 05:00 PM EAT (14:00 UTC) - Evening Rush Hour Drop
+// 5. 08:00 PM EAT (17:00 UTC) - Prime Time Evening Drop
+$telegramBroadcastHoursUtc = ['05:00', '08:00', '11:00', '14:00', '17:00'];
+foreach ($telegramBroadcastHoursUtc as $utcTime) {
+    Schedule::call(function () {
+        Artisan::call('telegram:broadcast-jobs', ['--limit' => 5]);
+    })
+        ->name("telegram:broadcast-jobs-{$utcTime}")
+        ->dailyAt($utcTime)
+        ->onOneServer()
+        ->withoutOverlapping();
+}
