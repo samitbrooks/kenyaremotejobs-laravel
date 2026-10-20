@@ -85,9 +85,14 @@ class JobsController extends Controller
                 ->slice(($page - 1) * self::PAGE_SIZE, self::PAGE_SIZE)
                 ->values();
         } else {
-            $jobs = $query->latest('posted_at')
-                ->forPage($page, self::PAGE_SIZE)
-                ->get();
+            // Prioritize accessible, high-acceptance roles (data annotation, AI training, student, entry-level)
+            $jobs = $query->get()
+                ->sortBy([
+                    fn (JobListing $a, JobListing $b) => $b->accessibilityScore() <=> $a->accessibilityScore(),
+                    fn (JobListing $a, JobListing $b) => ($b->posted_at?->timestamp ?? 0) <=> ($a->posted_at?->timestamp ?? 0),
+                ])
+                ->slice(($page - 1) * self::PAGE_SIZE, self::PAGE_SIZE)
+                ->values();
         }
 
         $tags = JobListing::pluck('tags')
