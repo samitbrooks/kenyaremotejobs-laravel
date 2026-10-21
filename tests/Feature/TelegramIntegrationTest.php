@@ -259,4 +259,224 @@ class TelegramIntegrationTest extends TestCase
             ->expectsOutputToContain('Webhook set successfully')
             ->assertExitCode(0);
     }
+
+    public function test_telegram_broadcast_prioritizes_data_annotation_tutoring_and_ai_teaching(): void
+    {
+        // 1. General role
+        JobListing::query()->create([
+            'id' => 'tg-gen-1',
+            'title' => 'Senior Vice President of Engineering',
+            'company' => 'Acme Corp',
+            'description' => 'Enterprise corporate executive role.',
+            'location' => 'Worldwide Remote',
+            'remote_type' => 'Worldwide Remote',
+            'salary' => '$150k',
+            'annual_salary_usd' => ['min' => 150000, 'max' => 180000],
+            'posted_at' => now()->subMinutes(5), // very fresh
+            'kenya_friendly' => true,
+            'kenya_score' => 80,
+            'kenya_reasons' => ['Worldwide remote'],
+            'tags' => ['Management', 'Engineering'],
+            'audience_segments' => ['tech'],
+            'origin' => 'direct',
+            'source_name' => 'direct',
+            'source_id' => 'g1',
+            'source_url' => 'https://example.com/apply',
+        ]);
+
+        // 2. Data Annotation
+        JobListing::query()->create([
+            'id' => 'tg-annot-1',
+            'title' => 'AI Data Annotation Specialist (English & General Reasoning)',
+            'company' => 'Outlier',
+            'description' => 'Annotate multimodal datasets and evaluation tasks.',
+            'location' => 'Worldwide Remote',
+            'remote_type' => 'Worldwide Remote',
+            'salary' => '$20/hr',
+            'annual_salary_usd' => ['min' => 38000, 'max' => 48000],
+            'posted_at' => now()->subHours(5),
+            'kenya_friendly' => true,
+            'kenya_score' => 95,
+            'kenya_reasons' => ['High accessibility', 'Worldwide remote'],
+            'tags' => ['Data Annotation', 'AI', 'RLHF'],
+            'audience_segments' => ['students', 'highschool'],
+            'origin' => 'direct',
+            'source_name' => 'direct',
+            'source_id' => 'a1',
+            'source_url' => 'https://example.com/apply',
+        ]);
+
+        // 3. Online Tutoring
+        JobListing::query()->create([
+            'id' => 'tg-tutor-1',
+            'title' => 'Online Subject Matter Tutor & Curriculum Reviewer',
+            'company' => 'Study.com',
+            'description' => 'Help students globally with STEM and commerce subjects.',
+            'location' => 'Worldwide Remote',
+            'remote_type' => 'Worldwide Remote',
+            'salary' => '$25/hr',
+            'annual_salary_usd' => ['min' => 45000, 'max' => 55000],
+            'posted_at' => now()->subHours(6),
+            'kenya_friendly' => true,
+            'kenya_score' => 95,
+            'kenya_reasons' => ['Student friendly', 'Worldwide remote'],
+            'tags' => ['Tutoring', 'Education', 'Teaching'],
+            'audience_segments' => ['students'],
+            'origin' => 'direct',
+            'source_name' => 'direct',
+            'source_id' => 't1',
+            'source_url' => 'https://example.com/apply',
+        ]);
+
+        // 4. AI Teaching / RLHF
+        JobListing::query()->create([
+            'id' => 'tg-ai-1',
+            'title' => 'Generative AI RLHF Evaluator & Prompt Specialist',
+            'company' => 'Scale AI',
+            'description' => 'Evaluate generative models and prompt responses.',
+            'location' => 'Worldwide Remote',
+            'remote_type' => 'Worldwide Remote',
+            'salary' => '$30/hr',
+            'annual_salary_usd' => ['min' => 50000, 'max' => 65000],
+            'posted_at' => now()->subHours(7),
+            'kenya_friendly' => true,
+            'kenya_score' => 95,
+            'kenya_reasons' => ['AI training', 'Worldwide remote'],
+            'tags' => ['AI Training', 'Prompt Engineering', 'RLHF'],
+            'audience_segments' => ['students'],
+            'origin' => 'direct',
+            'source_name' => 'direct',
+            'source_id' => 'ai1',
+            'source_url' => 'https://example.com/apply',
+        ]);
+
+        Http::fake([
+            'api.telegram.org/*/sendMessage' => Http::response([
+                'ok' => true,
+                'result' => [
+                    'message_id' => 1005,
+                    'chat' => ['id' => -100123456789, 'type' => 'channel'],
+                ],
+            ], 200),
+        ]);
+
+        $this->artisan('telegram:broadcast-jobs', [
+            '--limit' => 4,
+            '--chat' => '@kenyaremotejobs',
+        ])
+            ->assertExitCode(0);
+
+        Http::assertSent(function ($request) {
+            $text = $request['text'];
+
+            return str_contains($text, 'High-Yield Spotlight')
+                && str_contains($text, 'DATA ANNOTATION &amp; RLHF')
+                && str_contains($text, 'ONLINE TUTORING &amp; TEACHING')
+                && str_contains($text, 'AI TEACHING &amp; MODEL TRAINING')
+                && str_contains($text, 'Browse 100+ AI Training &amp; Annotation Roles')
+                && str_contains($text, 'Browse Online Tutoring &amp; Student Gigs');
+        });
+    }
+
+    public function test_telegram_webhook_handles_aitraining_command(): void
+    {
+        JobListing::query()->create([
+            'id' => 'tg-ai-drop-1',
+            'title' => 'AI Model Reviewer & Data Annotation Contributor',
+            'company' => 'DataAnnotation Tech',
+            'description' => 'Review and train LLMs.',
+            'location' => 'Worldwide Remote',
+            'remote_type' => 'Worldwide Remote',
+            'salary' => '$25/hr',
+            'annual_salary_usd' => ['min' => 45000, 'max' => 55000],
+            'posted_at' => now()->subHour(),
+            'kenya_friendly' => true,
+            'kenya_score' => 95,
+            'kenya_reasons' => ['AI training', 'Worldwide remote'],
+            'tags' => ['AI Training', 'Data Annotation', 'RLHF'],
+            'audience_segments' => ['students'],
+            'origin' => 'direct',
+            'source_name' => 'direct',
+            'source_id' => 'ai_drop',
+            'source_url' => 'https://example.com/apply',
+        ]);
+
+        Http::fake([
+            'api.telegram.org/*/sendMessage' => Http::response([
+                'ok' => true,
+                'result' => ['message_id' => 1006, 'chat' => ['id' => 999, 'type' => 'private']],
+            ], 200),
+        ]);
+
+        $payload = [
+            'update_id' => 2001,
+            'message' => [
+                'message_id' => 77,
+                'chat' => ['id' => 999, 'type' => 'private'],
+                'text' => '/aitraining',
+            ],
+        ];
+
+        $response = $this->postJson('/webhooks/telegram', $payload, [
+            'X-Telegram-Bot-Api-Secret-Token' => 'test_secret_abc123',
+        ]);
+
+        $response->assertStatus(200);
+
+        Http::assertSent(function ($request) {
+            return str_contains($request['text'], 'TOP VERIFIED AI DATA ANNOTATION')
+                && str_contains($request['text'], 'AI Model Reviewer');
+        });
+    }
+
+    public function test_telegram_webhook_handles_tutoring_command(): void
+    {
+        JobListing::query()->create([
+            'id' => 'tg-tutor-drop-1',
+            'title' => 'Online Academic Q&A Tutor (Commerce & Math)',
+            'company' => 'Studypool',
+            'description' => 'Answer student academic queries.',
+            'location' => 'Worldwide Remote',
+            'remote_type' => 'Worldwide Remote',
+            'salary' => '$20/hr',
+            'annual_salary_usd' => ['min' => 35000, 'max' => 45000],
+            'posted_at' => now()->subHour(),
+            'kenya_friendly' => true,
+            'kenya_score' => 95,
+            'kenya_reasons' => ['Tutoring', 'Worldwide remote'],
+            'tags' => ['Tutoring', 'Education'],
+            'audience_segments' => ['students'],
+            'origin' => 'direct',
+            'source_name' => 'direct',
+            'source_id' => 'tutor_drop',
+            'source_url' => 'https://example.com/apply',
+        ]);
+
+        Http::fake([
+            'api.telegram.org/*/sendMessage' => Http::response([
+                'ok' => true,
+                'result' => ['message_id' => 1007, 'chat' => ['id' => 999, 'type' => 'private']],
+            ], 200),
+        ]);
+
+        $payload = [
+            'update_id' => 2002,
+            'message' => [
+                'message_id' => 78,
+                'chat' => ['id' => 999, 'type' => 'private'],
+                'text' => '/tutoring',
+            ],
+        ];
+
+        $response = $this->postJson('/webhooks/telegram', $payload, [
+            'X-Telegram-Bot-Api-Secret-Token' => 'test_secret_abc123',
+        ]);
+
+        $response->assertStatus(200);
+
+        Http::assertSent(function ($request) {
+            return str_contains($request['text'], 'TOP VERIFIED ONLINE TUTORING')
+                && str_contains($request['text'], 'Online Academic Q&amp;A Tutor');
+        });
+    }
 }

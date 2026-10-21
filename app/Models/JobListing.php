@@ -132,20 +132,20 @@ class JobListing extends Model
 
         // Specific high-accessibility tags
         foreach ($tagsLower as $tag) {
-            if (str_contains($tag, 'data annotation') || str_contains($tag, 'ai training') || str_contains($tag, 'rlhf')) {
-                $score += 60;
-            } elseif (str_contains($tag, 'transcription') || str_contains($tag, 'label') || str_contains($tag, 'rater') || str_contains($tag, 'prompt')) {
+            if (str_contains($tag, 'data annotation') || str_contains($tag, 'ai training') || str_contains($tag, 'rlhf') || str_contains($tag, 'tutoring') || str_contains($tag, 'tutor') || str_contains($tag, 'ai teaching')) {
+                $score += 65;
+            } elseif (str_contains($tag, 'transcription') || str_contains($tag, 'label') || str_contains($tag, 'rater') || str_contains($tag, 'prompt') || str_contains($tag, 'teaching')) {
                 $score += 40;
-            } elseif (str_contains($tag, 'student') || str_contains($tag, 'writing') || str_contains($tag, 'content') || str_contains($tag, 'entry') || str_contains($tag, 'support') || str_contains($tag, 'tutoring')) {
+            } elseif (str_contains($tag, 'student') || str_contains($tag, 'writing') || str_contains($tag, 'content') || str_contains($tag, 'entry') || str_contains($tag, 'support')) {
                 $score += 25;
             }
         }
 
         // High-accessibility title keywords
-        if (preg_match('/\b(data annotation|ai training|annotator|rlhf|prompt|model evaluator|model reviewer)\b/i', $titleLower)) {
-            $score += 70;
-        } elseif (preg_match('/\b(transcription|transcriber|captioner|rater|evaluator|labeler|data entry|tutor)\b/i', $titleLower)) {
-            $score += 45;
+        if (preg_match('/\b(data annotation|ai training|annotator|rlhf|prompt|model evaluator|model reviewer|ai tutor|ai teaching|tutor|tutoring)\b/i', $titleLower)) {
+            $score += 80;
+        } elseif (preg_match('/\b(transcription|transcriber|captioner|rater|evaluator|labeler|data entry|teaching|teacher|curriculum)\b/i', $titleLower)) {
+            $score += 50;
         } elseif (preg_match('/\b(virtual assistant|copywriter|content writer|writer|customer support|support specialist|chat agent|intern|junior|entry level)\b/i', $titleLower)) {
             $score += 30;
         }
@@ -156,5 +156,72 @@ class JobListing extends Model
         }
 
         return $score;
+    }
+
+    /**
+     * Checks if this job listing belongs to an emphasized remote domain:
+     * Data Annotation, Online Tutoring, or AI Teaching / Model Training.
+     */
+    public function isTelegramEmphasized(): bool
+    {
+        return $this->telegramEmphasisCategory() !== null;
+    }
+
+    /**
+     * Identifies the primary emphasis category for Telegram broadcasts and alerts.
+     */
+    public function telegramEmphasisCategory(): ?string
+    {
+        $haystack = mb_strtolower($this->title.' '.implode(' ', (array) ($this->tags ?? [])));
+
+        $hasTutoring = (bool) preg_match('/\b(tutor|tutoring|online tutor|academic tutor|curriculum reviewer|academic q&a|teacher|teaching|education practitioner)\b/i', $haystack);
+        $hasAnnotation = (bool) preg_match('/\b(data annotation|annotator|annotation|data labeler|data labeling|image annotation|audio annotation|multimodal annotation|lidar|transcription|transcriber|search rater|quality rater)\b/i', $haystack);
+        $hasAi = (bool) preg_match('/\b(ai training|ai trainer|ai tutor|ai teaching|prompt evaluator|prompt trainer|prompt specialist|prompt engineering|rlhf|model evaluator|model reviewer|llm evaluation|ai reasoning|ai evaluator|ai agent tester)\b/i', $haystack);
+
+        if ($hasAi && $hasTutoring) {
+            return 'AI Tutoring & Model Evaluation';
+        }
+
+        if ($hasTutoring) {
+            return 'Online Tutoring & Teaching';
+        }
+
+        if ($hasAnnotation) {
+            return 'Data Annotation & RLHF';
+        }
+
+        if ($hasAi) {
+            return 'AI Teaching & Model Training';
+        }
+
+        return null;
+    }
+
+    /**
+     * Returns an eye-catching Telegram HTML highlight badge for emphasized roles.
+     */
+    public function telegramEmphasisBadge(): ?string
+    {
+        return match ($this->telegramEmphasisCategory()) {
+            'AI Tutoring & Model Evaluation' => '🤖 <b>FOCUS: AI TUTORING &amp; MODEL EVALUATION</b>',
+            'Online Tutoring & Teaching' => '📚 <b>FOCUS: ONLINE TUTORING &amp; TEACHING</b>',
+            'Data Annotation & RLHF' => '🏷️ <b>FOCUS: DATA ANNOTATION &amp; RLHF</b>',
+            'AI Teaching & Model Training' => '🤖 <b>FOCUS: AI TEACHING &amp; MODEL TRAINING</b>',
+            default => null,
+        };
+    }
+
+    /**
+     * Returns a punchy value-proposition micro-highlight for Kenyan candidates.
+     */
+    public function telegramEmphasisHighlight(): ?string
+    {
+        return match ($this->telegramEmphasisCategory()) {
+            'AI Tutoring & Model Evaluation' => '✨ <i>Train AI models with your academic reasoning skills • High USD pay</i>',
+            'Online Tutoring & Teaching' => '🎓 <i>Share your subject expertise • Flexible hours • Student/campus friendly</i>',
+            'Data Annotation & RLHF' => '✨ <i>No degree required • Weekly USD/M-Pesa payouts • Work from home</i>',
+            'AI Teaching & Model Training' => '🧠 <i>Train frontier LLMs • Prompt evaluation • Flexible hours from Kenya</i>',
+            default => null,
+        };
     }
 }

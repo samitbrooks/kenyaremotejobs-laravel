@@ -45,8 +45,9 @@ class KenyaCareerBotService
             ."- Tax / Forms: For US clients, Kenyan remote contractors fill IRS Form W-8BEN to claim 0% US withholding tax as non-resident foreign contractors (enter your Kenyan KRA PIN in Part I Line 6a).\n"
             ."- Timezone Advantage: Nairobi is East Africa Time (EAT / UTC+3), giving 4-5 hours daily working overlap with London, Berlin, Amsterdam and 3 hours with New York/Boston mornings. Frame this as superior to Asian timezones.\n"
             ."- KenyaRemoteJobs Pro: Plans start at KES 299/month (via M-Pesa). Unlocks 48-Hour Early Access (apply before 500+ applicants flood recruiter inboxes), full access to all 800+ remote listings, direct Kenyan employer postings, and unlimited AI CV ATS tailoring.\n"
+            ."- High-Yield Opportunities: Emphasize that remote AI training/teaching, data annotation, RLHF evaluation, and online subject-matter tutoring are huge opportunities for Kenyans ($15-$40/hr) with no visa barriers and flexible hours.\n"
             ."- Keep responses concise, formatted in clean Markdown with bullet points, under 180 words.\n"
-            .'- Always suggest relevant platform links: /jobs, /pricing, /match, /resume-builder.';
+            .'- Always suggest relevant platform links: /jobs, /pricing, /match, /resume-builder, /remote-jobs/ai-training-annotation-kenya.';
 
         $contents = [];
         foreach (array_slice($history, -4) as $item) {
@@ -156,6 +157,24 @@ class KenyaCareerBotService
                 'suggested_actions' => [
                     ['label' => 'Build AI Cover Letter', 'url' => '/resume-builder'],
                     ['label' => 'Search Europe & US Remote Jobs', 'url' => '/jobs'],
+                ],
+            ];
+        }
+
+        // 5. Data Annotation, AI Model Training & Online Tutoring
+        if (str_contains($lower, 'annotation') || str_contains($lower, 'annotat') || str_contains($lower, 'tutor') || str_contains($lower, 'teach') || str_contains($lower, 'ai train') || str_contains($lower, 'rlhf') || str_contains($lower, 'label') || str_contains($lower, 'outlier') || str_contains($lower, 'alignerr') || str_contains($lower, 'mindrift') || str_contains($lower, 'dataannotation')) {
+            return [
+                'reply' => "**AI Training, Data Annotation & Online Tutoring are booming in Kenya!**\n\n"
+                    ."International AI labs and tutoring platforms actively hire Kenyans to train frontier models and tutor global students:\n"
+                    ."• **AI Model Training & RLHF ($18 – $40/hr):** Platforms like Outlier, Alignerr, Mindrift, and DataAnnotation.tech hire Kenyans for prompt evaluation, coding reasoning, and English/Swahili text rating.\n"
+                    ."• **Data Annotation & Labeling ($12 – $25/hr):** Image segmentation, audio transcription, LiDAR tagging, and text labeling with companies like CloudFactory, Scale AI, and OneForma. No degree required!\n"
+                    ."• **Online Tutoring & Academic Teaching ($15 – $35/hr):** Platforms like Study.com and Studypool hire Kenyans to answer subject-matter Q&As in math, science, English, and commerce with flexible campus hours.\n"
+                    ."• **Payouts:** Paid weekly or bi-weekly directly to **PayPal or Wise, converting instantly to M-Pesa**.\n\n"
+                    .'💡 *Check our dedicated curated hubs for direct verified apply links:*',
+                'suggested_actions' => [
+                    ['label' => 'Browse AI Training & Annotation Roles', 'url' => '/remote-jobs/ai-training-annotation-kenya'],
+                    ['label' => 'Explore Student & Tutoring Gigs', 'url' => '/jobs?audience=students'],
+                    ['label' => 'View All Verified Remote Jobs', 'url' => '/jobs'],
                 ],
             ];
         }

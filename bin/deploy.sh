@@ -59,6 +59,9 @@ php artisan view:cache
 echo "-> Running remote job sync..."
 php artisan jobs:sync
 
+echo "-> Submitting sitemap to Google Search Console..."
+php artisan seo:gsc-sitemap submit || true
+
 echo ""
 echo "=================================================="
 echo " Deployment & Remote Job Sync Complete! "
