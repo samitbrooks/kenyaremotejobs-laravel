@@ -1,4 +1,4 @@
-@props(['dark' => false, 'iconOnly' => false, 'class' => ''])
+@props(['dark' => false, 'iconOnly' => false, 'class' => '', 'imgClass' => ''])
 
 @php
     $logoSrc = $dark ? asset('images/logo-white.webp') : asset('images/logo.webp');
@@ -11,7 +11,7 @@
         <img
             src="{{ $iconSrc }}"
             alt="{{ config('site.name') }}"
-            class="h-8 w-8 object-contain transition-transform duration-200 group-hover:scale-105"
+            class="h-8 w-8 object-contain transition-transform duration-200 group-hover:scale-105 {{ $imgClass }}"
             width="32"
             height="32"
             loading="eager"
@@ -22,7 +22,7 @@
             <img
                 src="{{ $logoPng }}"
                 alt="{{ config('site.name') }}"
-                class="h-9 sm:h-10 w-auto max-w-[240px] sm:max-w-[280px] object-contain transition-opacity duration-200 group-hover:opacity-90"
+                class="h-9 sm:h-10 w-auto max-w-[240px] sm:max-w-[280px] object-contain transition-opacity duration-200 group-hover:opacity-90 {{ $imgClass }}"
                 width="280"
                 height="74"
                 loading="eager"

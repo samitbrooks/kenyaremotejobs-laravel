@@ -100,16 +100,19 @@
                             </svg>
                         </button>
 
-                        {{-- Breadcrumbs & Module Title --}}
-                        <div class="flex items-center gap-2">
-                            <span class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-400">
-                                <svg class="h-3.5 w-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                                    <polyline points="9 22 9 12 15 12 15 22" />
-                                </svg>
+                        {{-- Mobile Brand Logo --}}
+                        <a href="{{ url('/admin') }}" class="lg:hidden flex items-center gap-1.5" aria-label="KenyaRemoteJobs Admin Dashboard">
+                            <x-brand-logo img-class="h-7 w-auto max-w-[150px]" />
+                            <span class="rounded bg-[#3444da]/15 px-1 py-0.2 text-[9px] font-black uppercase tracking-wider text-[#3444da] border border-[#3444da]/30">MIS</span>
+                        </a>
+
+                        {{-- Desktop Breadcrumbs & Module Title --}}
+                        <div class="hidden lg:flex items-center gap-2">
+                            <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-400">
+                                <img src="{{ asset('images/logo-icon.png') }}" class="h-4 w-4 object-contain" alt="">
                                 MIS Portal
                             </span>
-                            <span class="hidden sm:inline text-slate-300">/</span>
+                            <span class="text-slate-300">/</span>
                             <h2 class="text-sm font-extrabold text-slate-900 flex items-center gap-2">
                                 {{ $activeLabel }}
                             </h2>

@@ -95,21 +95,10 @@
 <div class="flex h-full flex-col justify-between overflow-y-auto no-scrollbar">
     <div>
         {{-- Brand / Header --}}
-        <div class="flex items-center justify-between border-b border-slate-800/80 px-5 py-4">
-            <a href="{{ url('/admin') }}" class="flex items-center gap-3 group">
-                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#3444da] to-[#1f277c] text-white shadow-md shadow-[#3444da]/20 ring-1 ring-white/15 transition group-hover:scale-105">
-                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
-                        <path d="m9 12 2 2 4-4" />
-                    </svg>
-                </div>
-                <div>
-                    <div class="flex items-center gap-1.5">
-                        <span class="text-sm font-black tracking-tight text-white">Kenya<span class="text-[#3444da]">Remote</span></span>
-                        <span class="rounded bg-[#3444da]/20 px-1 py-0.2 text-[9px] font-extrabold uppercase tracking-wider text-[#a3abf8] border border-[#3444da]/30">MIS</span>
-                    </div>
-                    <p class="text-[11px] font-medium text-slate-400">Management Information System</p>
-                </div>
+        <div class="flex items-center justify-between border-b border-slate-800/80 px-4 py-4">
+            <a href="{{ url('/admin') }}" class="flex items-center gap-2 group transition-transform duration-150 active:scale-95" aria-label="KenyaRemoteJobs Admin Dashboard">
+                <x-brand-logo :dark="true" img-class="h-8 sm:h-9 w-auto max-w-[170px] sm:max-w-[190px]" />
+                <span class="rounded bg-[#3444da]/30 px-1.5 py-0.5 text-[9px] font-black uppercase tracking-wider text-[#a3abf8] border border-[#3444da]/40 shadow-xs">MIS</span>
             </a>
 
             @if ($isMobile)
