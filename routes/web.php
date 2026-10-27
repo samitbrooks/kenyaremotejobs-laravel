@@ -100,7 +100,7 @@ Route::get('/llms-full.txt', [SitemapController::class, 'llmsFull'])->name('llms
 Route::get('/feed/featured.rss', [FeedController::class, 'featured'])->name('feed.featured');
 Route::get('/feed/jobs.rss', [FeedController::class, 'featured']);
 Route::get('/feed/featured-jobs.rss', [FeedController::class, 'featured']);
-Route::post('/api/career-bot', [CareerBotController::class, 'ask'])->middleware('throttle:60,1');
+Route::post('/api/career-bot', [CareerBotController::class, 'ask'])->middleware('throttle:15,1');
 
 // Support Ticket System (Help Desk & Customer Service)
 Route::redirect('/contact', '/support');
@@ -149,12 +149,12 @@ Route::middleware('admin')->prefix('admin')->group(function () {
 });
 
 // Meta WhatsApp Business Cloud API Webhook (Verification & Inbound Ingestion)
-Route::get('/webhooks/whatsapp', [WhatsAppWebhookController::class, 'verify']);
-Route::post('/webhooks/whatsapp', [WhatsAppWebhookController::class, 'receive']);
+Route::get('/webhooks/whatsapp', [WhatsAppWebhookController::class, 'verify'])->middleware('throttle:60,1');
+Route::post('/webhooks/whatsapp', [WhatsAppWebhookController::class, 'receive'])->middleware('throttle:60,1');
 
 // Telegram Bot API Webhook (Inbound Ingestion, Welcomes, Google AI Replies)
-Route::post('/webhooks/telegram', [TelegramWebhookController::class, 'handle']);
-Route::get('/webhooks/telegram', [TelegramWebhookController::class, 'status']);
+Route::post('/webhooks/telegram', [TelegramWebhookController::class, 'handle'])->middleware('throttle:60,1');
+Route::get('/webhooks/telegram', [TelegramWebhookController::class, 'status'])->middleware('throttle:60,1');
 
 // Safaricom posts here directly (no browser session, no CSRF token to send)
 // — see App\Http\Controllers\Webhooks\MpesaCallbackController. {secret} is
@@ -164,4 +164,4 @@ Route::get('/webhooks/telegram', [TelegramWebhookController::class, 'status']);
 // Exempted from CSRF via preventRequestForgery(except:) in bootstrap/app.php,
 // not a route-level withoutMiddleware() — Laravel 13's CSRF middleware
 // (PreventRequestForgery) reads its exclusion list from there.
-Route::post('/webhooks/mpesa/callback/{secret}', MpesaCallbackController::class);
+Route::post('/webhooks/mpesa/callback/{secret}', MpesaCallbackController::class)->middleware('throttle:60,1');

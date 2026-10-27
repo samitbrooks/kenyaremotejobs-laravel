@@ -11,10 +11,10 @@ class CareerBotController extends Controller
     public function ask(Request $request, KenyaCareerBotService $bot): JsonResponse
     {
         $validated = $request->validate([
-            'message' => 'required|string|max:1000',
-            'history' => 'nullable|array|max:10',
+            'message' => 'required|string|max:500',
+            'history' => 'nullable|array|max:4',
             'history.*.role' => 'required_with:history|string|in:user,model,assistant',
-            'history.*.content' => 'required_with:history|string|max:2000',
+            'history.*.content' => 'required_with:history|string|max:500',
         ]);
 
         $result = $bot->ask($validated['message'], $validated['history'] ?? []);

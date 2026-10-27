@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\LoginLinkEmail;
 use App\Mail\WelcomeEmail;
 use App\Models\User;
 use App\Services\CreditsService;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 
 class AccountController extends Controller
@@ -84,22 +86,17 @@ class AccountController extends Controller
                 'name' => $displayName,
                 'email' => $email,
                 'password' => Str::random(40),
-                'email_verified_at' => now(),
+                'email_verified_at' => null,
             ]);
-        }
 
-        Auth::login($user, remember: true);
-        $request->session()->regenerate();
-
-        RateLimiter::clear('auth-link:'.$email);
-
-        if ($isNewAccount) {
             try {
-                app(ReferralService::class)->processSignup($user, (string) $request->input('ref'), $request);
+                app(ReferralService::class)->processSignup($user, $request->input('ref') ?: null, $request);
             } catch (\Throwable $e) {
                 Log::warning('Referral award failed on signup: '.$e->getMessage(), ['user_id' => $user->id]);
             }
+        }
 
+        if ($isNewAccount) {
             try {
                 Mail::to($user)->send(new WelcomeEmail($user));
             } catch (\Throwable $e) {
@@ -113,6 +110,23 @@ class AccountController extends Controller
             }
         }
 
-        return redirect(SafeUrl::redirectPath($redirectTo, '/account'));
+        RateLimiter::clear('auth-link:'.$email);
+
+        $safeRedirect = SafeUrl::redirectPath($redirectTo, '/account');
+        $signedUrl = URL::temporarySignedRoute(
+            'auth.link',
+            now()->addMinutes(30),
+            ['user' => $user->id, 'redirectTo' => $safeRedirect]
+        );
+
+        try {
+            Mail::to($user->email)->send(new LoginLinkEmail($user, $signedUrl, $isNewAccount));
+        } catch (\Throwable $e) {
+            Log::warning('Login link email failed to send: '.$e->getMessage(), ['user_id' => $user->id]);
+        }
+
+        return redirect($safeRedirect)
+            ->with('sentTo', $email)
+            ->with('info', "We sent a secure login link to {$email}. Please click it in your email to access your account.");
     }
 }

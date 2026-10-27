@@ -2,13 +2,17 @@
 
 namespace Tests\Feature;
 
+use App\Mail\LoginLinkEmail;
+use App\Models\BlogPost;
 use App\Models\JobListing;
 use App\Models\PageView;
 use App\Models\User;
+use App\Payments\PaymentGateway;
 use App\Support\SafeUrl;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -53,13 +57,31 @@ class SecurityEnforcementTest extends TestCase
 
     public function test_candidate_login_sanitizes_malicious_open_redirects(): void
     {
+        Mail::fake();
+
         $response = $this->post(route('account.login'), [
             'email' => 'candidate@example.com',
             'redirectTo' => '//malicious-phishing.com/steal-creds',
         ]);
 
         $response->assertRedirect('/account');
-        $this->assertAuthenticated();
+        $this->assertGuest();
+
+        $user = User::where('email', 'candidate@example.com')->firstOrFail();
+        Mail::assertSent(LoginLinkEmail::class, function ($mail) {
+            return $mail->hasTo('candidate@example.com')
+                && str_contains($mail->url, 'redirectTo=%2Faccount');
+        });
+
+        $signedUrl = URL::temporarySignedRoute(
+            'auth.link',
+            now()->addMinutes(30),
+            ['user' => $user->id, 'redirectTo' => SafeUrl::redirectPath('//malicious-phishing.com/steal-creds', '/account')]
+        );
+
+        $linkResponse = $this->get($signedUrl);
+        $linkResponse->assertRedirect('/account');
+        $this->assertAuthenticatedAs($user);
     }
 
     public function test_admin_login_sanitizes_malicious_open_redirects(): void
@@ -334,5 +356,65 @@ class SecurityEnforcementTest extends TestCase
         $view = PageView::latest('id')->first();
         $this->assertNotNull($view);
         $this->assertLessThanOrEqual(250, strlen($view->path));
+    }
+
+    public function test_whatsapp_webhook_fails_closed_when_app_secret_is_not_configured(): void
+    {
+        Config::set('whatsapp.app_secret', '');
+
+        $response = $this->postJson('/webhooks/whatsapp', ['entry' => []]);
+        $response->assertStatus(403);
+    }
+
+    public function test_telegram_webhook_fails_closed_when_webhook_secret_is_not_configured(): void
+    {
+        Config::set('telegram.webhook_secret', '');
+
+        $response = $this->postJson('/webhooks/telegram', ['update_id' => 1]);
+        $response->assertStatus(403);
+    }
+
+    public function test_survey_paywall_does_not_leak_premium_descriptions_or_schema_urls(): void
+    {
+        $response = $this->get('/surveys');
+        $response->assertStatus(200);
+
+        // Premium platforms should not have direct descriptions exposed in DOM
+        $response->assertDontSee('Norwegian consumer research panel with a localized portal exclusively for Kenyan respondents');
+
+        // Premium URLs should not be leaked in Schema.org ItemList JSON-LD
+        $response->assertDontSee('"https:\/\/www.triaba.com\/ke"', false);
+    }
+
+    public function test_journal_markdown_strips_malicious_script_tags(): void
+    {
+        $post = BlogPost::create([
+            'slug' => 'security-xss-test',
+            'title' => 'Security XSS Test Post',
+            'author_name' => 'Daisy',
+            'excerpt' => 'Testing markdown sanitization.',
+            'category' => 'Security',
+            'read_time_minutes' => 3,
+            'content' => "Hello world\n\n<script>alert('XSS')</script>\n\n<a href=\"javascript:alert('pwned')\">Click me</a>",
+            'published' => true,
+            'published_at' => now(),
+        ]);
+
+        $response = $this->get('/journal/'.$post->slug);
+        $response->assertStatus(200);
+        $response->assertDontSee('<script>', false);
+        $response->assertDontSee("alert('XSS')", false);
+        $response->assertDontSee('javascript:', false);
+    }
+
+    public function test_production_environment_rejects_mock_payment_gateway(): void
+    {
+        $this->app->detectEnvironment(fn () => 'production');
+        Config::set('payments.default', 'mock');
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Mock payment gateway is strictly forbidden in production');
+
+        $this->app->make(PaymentGateway::class);
     }
 }

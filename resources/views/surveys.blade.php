@@ -138,10 +138,10 @@
                                 @endif
                             </div>
 
-                            {{-- Description (Blurred if locked) --}}
+                            {{-- Description (Placeholder if locked) --}}
                             <div class="mt-3.5 relative">
                                 <p class="text-xs text-slate-600 leading-relaxed font-normal {{ $isLocked ? 'filter blur-[3.5px] select-none opacity-40' : '' }}">
-                                    {{ $platform['description'] }}
+                                    {{ $isLocked ? 'Unlock VIP Vault access to reveal complete platform guide, insider referral codes, and verified Kenya withdrawal steps.' : $platform['description'] }}
                                 </p>
                                 @if ($isLocked)
                                     <div class="absolute inset-0 flex items-center justify-center">

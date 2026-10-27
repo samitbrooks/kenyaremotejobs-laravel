@@ -51,7 +51,10 @@
 
             {{-- Formatted Content with Semantic HTML Typography --}}
             <article class="mt-8 space-y-4 text-base leading-relaxed text-foreground/80 [&>h2]:mt-8 [&>h2]:text-2xl [&>h2]:font-bold [&>h2]:text-horizon-900 [&>h3]:mt-6 [&>h3]:text-xl [&>h3]:font-bold [&>h3]:text-horizon-800 [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:space-y-2 [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:space-y-2 [&>p]:leading-relaxed [&>blockquote]:border-l-4 [&>blockquote]:border-horizon-400 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-foreground/70 [&>a]:text-sunrise-600 [&>a]:underline hover:[&>a]:text-sunrise-700">
-                {!! \Illuminate\Support\Str::markdown($post->content) !!}
+                {!! \Illuminate\Support\Str::markdown($post->content, [
+                    'html_input' => 'strip',
+                    'allow_unsafe_links' => false,
+                ]) !!}
             </article>
 
             {{-- In-article CTA --}}

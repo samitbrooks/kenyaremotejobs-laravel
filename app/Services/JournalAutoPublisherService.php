@@ -223,9 +223,12 @@ Return ONLY a valid JSON object with these exact keys:
 }
 PROMPT;
 
-        $response = Http::withHeaders(['Content-Type' => 'application/json'])
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'x-goog-api-key' => $apiKey,
+        ])
             ->timeout(30)
-            ->post("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={$apiKey}", [
+            ->post('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent', [
                 'contents' => [
                     ['parts' => [['text' => $prompt]]],
                 ],

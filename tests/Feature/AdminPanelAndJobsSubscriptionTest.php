@@ -151,7 +151,7 @@ class AdminPanelAndJobsSubscriptionTest extends TestCase
             'audience_segments' => [],
         ]);
 
-        $response = $this->actingAs($admin)->get('/admin');
+        $response = $this->actingAs($admin)->withSession(['admin_authenticated' => true])->get('/admin');
         $response->assertStatus(200);
         $response->assertSee('Admin Dashboard');
         $response->assertSee('All Job Listings');
@@ -208,13 +208,13 @@ class AdminPanelAndJobsSubscriptionTest extends TestCase
         ]);
 
         // Filter only Himalayas
-        $response = $this->actingAs($admin)->get('/admin?source=Himalayas');
+        $response = $this->actingAs($admin)->withSession(['admin_authenticated' => true])->get('/admin?source=Himalayas');
         $response->assertStatus(200);
         $response->assertSee('Unique Himalayas Listing');
         $response->assertDontSee('Unique Jobicy Listing');
 
         // Filter only Jobicy
-        $responseJobicy = $this->actingAs($admin)->get('/admin?source=Jobicy');
+        $responseJobicy = $this->actingAs($admin)->withSession(['admin_authenticated' => true])->get('/admin?source=Jobicy');
         $responseJobicy->assertStatus(200);
         $responseJobicy->assertSee('Unique Jobicy Listing');
         $responseJobicy->assertDontSee('Unique Himalayas Listing');
@@ -267,13 +267,13 @@ class AdminPanelAndJobsSubscriptionTest extends TestCase
         ]);
 
         // Default: newest first
-        $newestResponse = $this->actingAs($admin)->get('/admin?order=newest');
+        $newestResponse = $this->actingAs($admin)->withSession(['admin_authenticated' => true])->get('/admin?order=newest');
         $newestResponse->assertStatus(200);
         $newestContent = $newestResponse->getContent();
         $this->assertTrue(strpos($newestContent, 'Brand New Chronological Job') < strpos($newestContent, 'Oldest Chronological Job'));
 
         // Oldest first
-        $oldestResponse = $this->actingAs($admin)->get('/admin?order=oldest');
+        $oldestResponse = $this->actingAs($admin)->withSession(['admin_authenticated' => true])->get('/admin?order=oldest');
         $oldestResponse->assertStatus(200);
         $oldestContent = $oldestResponse->getContent();
         $this->assertTrue(strpos($oldestContent, 'Oldest Chronological Job') < strpos($oldestContent, 'Brand New Chronological Job'));

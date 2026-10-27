@@ -39,7 +39,9 @@ class TelegramIntegrationTest extends TestCase
             ], 200),
         ]);
 
-        $response = $this->getJson('/webhooks/telegram');
+        $response = $this->getJson('/webhooks/telegram', [
+            'X-Telegram-Bot-Api-Secret-Token' => 'test_secret_abc123',
+        ]);
 
         $response->assertStatus(200);
         $response->assertJson([
@@ -47,6 +49,12 @@ class TelegramIntegrationTest extends TestCase
             'bot_username' => 'KenyaRemoteJobsBot',
             'channel_id' => '@kenyaremotejobs',
         ]);
+    }
+
+    public function test_telegram_webhook_status_endpoint_rejects_unauthorized_access(): void
+    {
+        $response = $this->getJson('/webhooks/telegram');
+        $response->assertStatus(403);
     }
 
     public function test_telegram_webhook_rejects_invalid_secret_token(): void

@@ -52,9 +52,12 @@ class AiTailorService
             ."5. kenya_advantage: a concise 1-sentence interview talking point emphasizing their timezone overlap with Europe/UK/US East mornings.\n"
             .'Return ONLY valid JSON.';
 
-        $response = Http::withHeaders(['Content-Type' => 'application/json'])
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'x-goog-api-key' => $apiKey,
+        ])
             ->timeout(15)
-            ->post("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={$apiKey}", [
+            ->post('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent', [
                 'contents' => [
                     ['parts' => [['text' => $prompt]]],
                 ],

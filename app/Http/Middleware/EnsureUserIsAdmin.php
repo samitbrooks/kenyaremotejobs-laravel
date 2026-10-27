@@ -29,7 +29,7 @@ class EnsureUserIsAdmin
                 ->with('error', 'Access denied. You must be an administrator to access the Admin Panel.');
         }
 
-        if ($request->hasSession() && $request->session()->has('admin_authenticated') && ! $request->session()->get('admin_authenticated')) {
+        if (! $request->hasSession() || ! $request->session()->get('admin_authenticated', false)) {
             return redirect()->guest(route('admin.login', ['next' => $request->getRequestUri()]))
                 ->with('info', 'Please log in with your administrator credentials to access the Admin Panel.');
         }

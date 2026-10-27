@@ -429,6 +429,10 @@ class SurveyPlatforms
         $position = 1;
 
         foreach (self::all() as $platform) {
+            if (! empty($platform['is_premium'])) {
+                continue;
+            }
+
             $items[] = [
                 $at.'type' => 'ListItem',
                 'position' => $position++,

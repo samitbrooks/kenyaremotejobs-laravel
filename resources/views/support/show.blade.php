@@ -138,8 +138,9 @@
                 <h3 class="text-lg font-bold text-slate-900 mb-1">Add Follow-Up Message</h3>
                 <p class="text-xs text-slate-500 mb-4">Have extra details or need clarification? Post a message below.</p>
 
-                <form method="POST" action="{{ route('support.reply', ['ticketNumber' => $ticket->ticket_number, 'token' => $accessToken]) }}">
+                <form method="POST" action="{{ route('support.reply', ['ticketNumber' => $ticket->ticket_number]) }}">
                     @csrf
+                    <input type="hidden" name="token" value="{{ $accessToken }}">
                     <div>
                         <textarea
                             name="message"

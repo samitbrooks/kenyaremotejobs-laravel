@@ -10,6 +10,7 @@ use App\Services\PaymentService;
 use Database\Seeders\SeoPillarContentSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\URL;
 use Tests\TestCase;
 
 class SeoEngineTest extends TestCase
@@ -472,7 +473,7 @@ class SeoEngineTest extends TestCase
         $response->assertSee('/employers/post', false);
     }
 
-    public function test_user_can_sign_up_and_be_instantly_authenticated(): void
+    public function test_user_can_sign_up_and_authenticate_via_secure_link(): void
     {
         $response = $this->post('/account/login', [
             'name' => 'Samit Brooks',
@@ -481,14 +482,24 @@ class SeoEngineTest extends TestCase
         ]);
 
         $response->assertRedirect('/jobs/himalayas--professional-services-engineer');
-        $this->assertAuthenticated();
+        $this->assertGuest();
 
         $user = User::where('email', 'samitbrooks@gmail.com')->first();
         $this->assertNotNull($user);
         $this->assertEquals('Samit Brooks', $user->name);
+
+        $signedUrl = URL::temporarySignedRoute(
+            'auth.link',
+            now()->addMinutes(30),
+            ['user' => $user->id, 'redirectTo' => '/jobs/himalayas--professional-services-engineer']
+        );
+
+        $authResponse = $this->get($signedUrl);
+        $authResponse->assertRedirect('/jobs/himalayas--professional-services-engineer');
+        $this->assertAuthenticatedAs($user);
     }
 
-    public function test_existing_user_can_log_in_instantly(): void
+    public function test_existing_user_authenticates_via_secure_link(): void
     {
         $user = User::create([
             'name' => 'Existing User',
@@ -503,6 +514,16 @@ class SeoEngineTest extends TestCase
         ]);
 
         $response->assertRedirect('/account');
+        $this->assertGuest();
+
+        $signedUrl = URL::temporarySignedRoute(
+            'auth.link',
+            now()->addMinutes(30),
+            ['user' => $user->id, 'redirectTo' => '/account']
+        );
+
+        $authResponse = $this->get($signedUrl);
+        $authResponse->assertRedirect('/account');
         $this->assertAuthenticatedAs($user);
     }
 

@@ -242,8 +242,8 @@ class Translator
 
     private function callGeminiTranslate(string $apiKey, string $text): string
     {
-        $response = Http::timeout(10)->post(
-            "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={$apiKey}",
+        $response = Http::withHeaders(['x-goog-api-key' => $apiKey])->timeout(10)->post(
+            'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent',
             [
                 'contents' => [
                     [

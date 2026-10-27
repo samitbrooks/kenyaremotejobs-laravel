@@ -61,9 +61,12 @@ class KenyaCareerBotService
             'parts' => [['text' => $message]],
         ];
 
-        $res = Http::withHeaders(['Content-Type' => 'application/json'])
+        $res = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'x-goog-api-key' => $apiKey,
+        ])
             ->timeout(12)
-            ->post("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={$apiKey}", [
+            ->post('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent', [
                 'system_instruction' => [
                     'parts' => [['text' => $systemInstruction]],
                 ],

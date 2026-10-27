@@ -36,29 +36,38 @@ new class extends Component
         $this->error = null;
         $user = auth()->user();
 
-        if ($user->jobUnlocks()->where('job_listing_id', $this->jobId)->exists()) {
-            $this->unlocked = true;
-            $this->redirect("/jobs/{$this->jobId}", navigate: false);
+        $job = \App\Models\JobListing::find($this->jobId);
+        if (! $job) {
+            $this->error = 'Job listing not found.';
 
             return;
         }
 
-        if (! $credits->hasAvailableCredit($user, $this->tier)) {
-            $this->error = "No {$this->tier} credits available. Buy a package first.";
+        $authoritativeTier = $job->tier ?? 'basic';
+
+        if ($user->jobUnlocks()->where('job_listing_id', $job->id)->exists()) {
+            $this->unlocked = true;
+            $this->redirect("/jobs/{$job->id}", navigate: false);
+
+            return;
+        }
+
+        if (! $credits->hasAvailableCredit($user, $authoritativeTier)) {
+            $this->error = "No {$authoritativeTier} credits available. Buy a package first.";
 
             return;
         }
 
         JobUnlock::create([
             'user_id' => $user->id,
-            'job_listing_id' => $this->jobId,
-            'tier' => $this->tier,
+            'job_listing_id' => $job->id,
+            'tier' => $authoritativeTier,
             'amount_kes' => 0,
             'unlocked_at' => now(),
         ]);
 
         $this->unlocked = true;
-        $this->redirect("/jobs/{$this->jobId}", navigate: false);
+        $this->redirect("/jobs/{$job->id}", navigate: false);
     }
 };
 ?>

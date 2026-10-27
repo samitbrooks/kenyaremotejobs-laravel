@@ -18,6 +18,7 @@ class WhatsAppBusinessTest extends TestCase
         parent::setUp();
         Config::set('jobs.admin_emails', ['superadmin@kenyaremotejobs.com']);
         Config::set('whatsapp.webhook_verify_token', 'test_verify_token_123');
+        Config::set('whatsapp.app_secret', 'test_app_secret_123');
     }
 
     public function test_meta_webhook_verification_succeeds_with_correct_token(): void
@@ -75,7 +76,21 @@ class WhatsAppBusinessTest extends TestCase
             ],
         ];
 
-        $response = $this->postJson('/webhooks/whatsapp', $payload);
+        $json = json_encode($payload);
+        $signature = 'sha256='.hash_hmac('sha256', $json, 'test_app_secret_123');
+
+        $response = $this->call(
+            'POST',
+            '/webhooks/whatsapp',
+            [],
+            [],
+            [],
+            [
+                'CONTENT_TYPE' => 'application/json',
+                'HTTP_X_HUB_SIGNATURE_256' => $signature,
+            ],
+            $json
+        );
 
         $response->assertStatus(200);
         $this->assertDatabaseHas('whatsapp_messages', [
@@ -105,7 +120,7 @@ class WhatsAppBusinessTest extends TestCase
             'status' => 'received',
         ]);
 
-        $response = $this->actingAs($admin)->get(route('admin.whatsapp'));
+        $response = $this->actingAs($admin)->withSession(['admin_authenticated' => true])->get(route('admin.whatsapp'));
 
         $response->assertStatus(200);
         $response->assertSee('WhatsApp Business Hub');
@@ -120,7 +135,7 @@ class WhatsAppBusinessTest extends TestCase
             'password' => Hash::make('password123'),
         ]);
 
-        $response = $this->actingAs($admin)->post(route('admin.whatsapp.send'), [
+        $response = $this->actingAs($admin)->withSession(['admin_authenticated' => true])->post(route('admin.whatsapp.send'), [
             'phone_number' => '0712345678',
             'message' => 'Hello from KenyaRemoteJobs Admin! We have 3 new customer support roles open today.',
         ]);

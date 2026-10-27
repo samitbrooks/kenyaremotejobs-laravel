@@ -18,9 +18,17 @@ class AppServiceProvider extends ServiceProvider
     {
         // Every call site depends on PaymentGateway, not a concrete class —
         // this is the only place that knows which implementation is live.
-        $this->app->bind(PaymentGateway::class, fn () => match (config('payments.default')) {
-            'mpesa' => new DarajaGateway,
-            default => new MockGateway,
+        $this->app->bind(PaymentGateway::class, function () {
+            $gateway = config('payments.default');
+
+            if ($this->app->isProduction() && ($gateway === 'mock' || ! $gateway)) {
+                throw new \RuntimeException('Mock payment gateway is strictly forbidden in production. Configure PAYMENT_GATEWAY=mpesa in .env');
+            }
+
+            return match ($gateway) {
+                'mpesa' => new DarajaGateway,
+                default => new MockGateway,
+            };
         });
     }
 

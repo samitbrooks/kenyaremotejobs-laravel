@@ -32,5 +32,6 @@
         <env name="PULSE_ENABLED" value="false"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
         <env name="NIGHTWATCH_ENABLED" value="false"/>
+        <env name="INDEXNOW_KEY" value="7b4e07a3c39542a39281a8b34f71a0dc"/>
     </php>
 </phpunit>

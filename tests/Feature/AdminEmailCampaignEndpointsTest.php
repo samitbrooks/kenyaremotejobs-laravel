@@ -17,6 +17,12 @@ class AdminEmailCampaignEndpointsTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->withSession(['admin_authenticated' => true]);
+    }
+
     private function createSampleJob(): JobListing
     {
         return JobListing::create([

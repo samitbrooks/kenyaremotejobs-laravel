@@ -245,25 +245,8 @@ class SitemapController extends Controller
         $lines[] = '- Toluna Influencers Kenya (https://www.toluna.com): Local consumer brand studies. Payouts via PayPal to M-Pesa & Safaricom airtime ($10 min).';
         $lines[] = '- Swagbucks (https://www.swagbucks.com): Global GPT platform. Daily polls, web surveys. Payouts via PayPal to M-Pesa ($5 min).';
         $lines[] = '';
-        $lines[] = '### Tier 2: Premium Survey & Side-Income Vault (Unlocked via Flat KES 199 Lipa Na M-Pesa Pass)';
-        $lines[] = '- Prolific (https://www.prolific.com): High-paying academic research studies (Oxford/Cambridge/Stanford). Zero screenouts once invited. Payouts via PayPal to M-Pesa (£6 min). Pay: $6 – $15/study.';
-        $lines[] = '- Outlier AI / Remotasks (https://outlier.ai): Scale AI RLHF model training and reasoning reviews. Pay: $8.00 – $25.00/hr via PayPal/AirTM to M-Pesa.';
-        $lines[] = '- Respondent.io (https://www.respondent.io): Executive & professional user research interviews. Pay: $50 – $200 per 45-min study via PayPal.';
-        $lines[] = '- UserTesting (https://www.usertesting.com): Website and mobile app audio usability feedback. Pay: $10 – $60/test via PayPal.';
-        $lines[] = '- Clickworker & UHRS (https://www.clickworker.com): Search engine evaluation and AI training tasks. Pay: $4 – $12/hr via PayPal/Payoneer.';
-        $lines[] = '- AfriSight Panel (https://afrisight.com): Dedicated Pan-African market research panel. Direct M-Pesa payouts (KES 500 min). Pay: KES 50 – KES 350/survey.';
-        $lines[] = '- MetroOpinion Kenya (https://www.metroopinion.com/ke/): Dedicated Kenyan survey portal. Payouts via PayPal to M-Pesa ($5 min). Pay: KES 100 – KES 450/survey.';
-        $lines[] = '- TGM Panel Kenya (https://tgmpanel.co.ke): Dedicated Kenyan research hub for telecoms & digital banking opinions. Payouts via PayPal ($10 min).';
-        $lines[] = '- Triaba Kenya (https://www.triaba.com/ke): Norwegian Cint-partnered Kenyan portal. Payouts via PayPal ($10 min). Pay: $0.50 – $2.25/survey.';
-        $lines[] = '- OneForma (https://www.oneforma.com): Centific AI transcription, translation, and data collection. Pay: $5 – $15/hr via Payoneer/PayPal.';
-        $lines[] = '- Timebucks (https://timebucks.com): Micro-tasks & surveys with automatic weekly payouts via AirTM/Crypto ($5 min).';
-        $lines[] = '- Surveytime (https://surveytime.io): Instant flat $1.00 payment per completed survey directly to PayPal with $0 minimum.';
-        $lines[] = '- Toloka AI (https://toloka.ai): Global crowdsourced AI data labeling tasks. Payouts via AirTM to M-Pesa ($1 min). Pay: $2 – $8/hr.';
-        $lines[] = '- Mobrog Kenya (https://www.mobrog.com/ke): German consumer panel with mobile app surveys for Kenyans. Payouts via PayPal/Skrill ($6.25 min).';
-        $lines[] = '- TestingTime (https://www.testingtime.com): Live European 1-on-1 usability sessions. Pay: €20 – €50/study via PayPal.';
-        $lines[] = '- Prime Opinion (https://www.primeopinion.com): High survey completion rates with instant PayPal cashouts ($5 min).';
-        $lines[] = '- Attapoll (https://www.attapoll.app): Mobile-first poll app with $3 low cashout threshold via PayPal to M-Pesa.';
-        $lines[] = '- PrizeRebel (https://www.prizerebel.com): Daily survey routers (Dynata, Cint, BitLabs) with 24h PayPal payouts ($5 min).';
+        $lines[] = '### Tier 2: Premium Survey & Side-Income Vault (18+ Verified Platforms)';
+        $lines[] = 'Available to members via the Paid Surveys Vault on KenyaRemoteJobs. Features full direct links, step-by-step registration guides, verified Kenya IP eligibility, and payment withdrawal walkthroughs for Prolific, Outlier AI, Respondent.io, UserTesting, Clickworker UHRS, AfriSight, MetroOpinion, TGM Panel Kenya, Triaba Kenya, OneForma, Timebucks, Surveytime, Toloka AI, Mobrog, TestingTime, Prime Opinion, Attapoll, and PrizeRebel.';
         $lines[] = '';
         $lines[] = '### M-Pesa Withdrawal Mechanism';
         $lines[] = 'Most international survey sites pay in USD to PayPal. Kenyan users can instantly withdraw their USD balance to Safaricom M-Pesa using the official PayPal-to-M-Pesa service (https://www.paypal-mobilemoney.com/m-pesa) powered by Thunes. Withdrawals reflect in M-Pesa within 2 minutes.';
@@ -288,9 +271,9 @@ class SitemapController extends Controller
      */
     public function indexNowKey(?string $key = null)
     {
-        $expectedKey = (string) config('services.indexnow.key', '7b4e07a3c39542a39281a8b34f71a0dc');
+        $expectedKey = (string) config('services.indexnow.key');
 
-        if ($key !== null && $key !== '' && $key !== $expectedKey) {
+        if ($expectedKey === '' || ($key !== null && $key !== '' && $key !== $expectedKey)) {
             abort(404);
         }
 

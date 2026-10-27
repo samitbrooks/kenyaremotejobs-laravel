@@ -19,7 +19,7 @@ return [
 
     'business_account_id' => env('WHATSAPP_BUSINESS_ACCOUNT_ID'),
 
-    'webhook_verify_token' => env('WHATSAPP_WEBHOOK_VERIFY_TOKEN', 'krj-wa-verify-token'),
+    'webhook_verify_token' => env('WHATSAPP_WEBHOOK_VERIFY_TOKEN'),
 
     'app_secret' => env('WHATSAPP_APP_SECRET'),
 

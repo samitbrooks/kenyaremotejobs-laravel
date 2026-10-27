@@ -70,7 +70,8 @@ class SupportTicketController extends Controller
         }
 
         // Keep access token in session
-        if ($request->query('token') === $ticket->access_token) {
+        $token = $request->query('token') ?? $request->input('token');
+        if ($token && hash_equals($ticket->access_token, (string) $token)) {
             session()->put("ticket_token_{$ticket->ticket_number}", $ticket->access_token);
         }
 
@@ -92,6 +93,7 @@ class SupportTicketController extends Controller
 
         $validated = $request->validate([
             'message' => ['required', 'string', 'min:2', 'max:5000'],
+            'token' => ['nullable', 'string'],
         ]);
 
         $senderName = $request->user()?->name ?? $ticket->name;
@@ -153,8 +155,9 @@ class SupportTicketController extends Controller
             return true;
         }
 
-        // Check token from query param
-        if ($request->query('token') && hash_equals($ticket->access_token, (string) $request->query('token'))) {
+        // Check token from request body (POST) or query param
+        $token = $request->input('token') ?? $request->query('token');
+        if ($token && hash_equals($ticket->access_token, (string) $token)) {
             return true;
         }
 
