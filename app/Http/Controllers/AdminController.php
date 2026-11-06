@@ -15,6 +15,7 @@ use App\Services\CreditsService;
 use App\Services\GoogleSearchConsoleService;
 use App\Services\JobRecommendationService;
 use App\Services\JobSyncService;
+use App\Support\JobCategory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -80,6 +81,13 @@ class AdminController extends Controller
      *     order: string,
      *     kenyaFriendly: bool,
      *     sources: array<string, int>,
+     *     category: string,
+     *     categories: array<string, string>,
+     *     categoryCounts: array<string, int>,
+     *     jobCategories: array<string, string>,
+     *     groupBy: string,
+     *     jobGroups: \Illuminate\Support\Collection,
+     *     groupTotals: \Illuminate\Support\Collection,
      * }
      */
     private function getFilteredJobs(Request $request): array
@@ -89,6 +97,12 @@ class AdminController extends Controller
         $order = trim((string) $request->query('order', 'newest'));
         $kenyaFriendly = $request->query('kenya_friendly') === 'true' || $request->query('kenya_friendly') === '1';
         $page = max(1, (int) $request->query('page', 1));
+
+        $categories = JobCategory::labels();
+        $requestedCategory = $request->query('category', '');
+        $category = is_string($requestedCategory) && array_key_exists($requestedCategory, $categories) ? $requestedCategory : '';
+        $requestedGroup = $request->query('group_by', 'none');
+        $groupBy = is_string($requestedGroup) && in_array($requestedGroup, ['none', 'category', 'source'], true) ? $requestedGroup : 'none';
 
         $query = JobListing::query();
 
@@ -108,6 +122,17 @@ class AdminController extends Controller
             $query->where('kenya_friendly', true);
         }
 
+        $categoryCounts = array_fill_keys(array_keys($categories), 0);
+        $jobCategories = [];
+        foreach ((clone $query)->get(['id', 'title', 'tags']) as $listing) {
+            $assignedCategory = JobCategory::classify($listing->title, $listing->tags ?? []);
+            $jobCategories[$listing->id] = $assignedCategory;
+            $categoryCounts[$assignedCategory]++;
+        }
+        if ($category !== '') {
+            $query->whereIn('id', array_keys(array_filter($jobCategories, fn (string $assignedCategory): bool => $assignedCategory === $category)));
+        }
+
         match ($order) {
             'oldest' => $query->orderBy('posted_at', 'asc'),
             'recent_sync' => $query->orderByDesc('updated_at'),
@@ -119,7 +144,21 @@ class AdminController extends Controller
         $totalPages = max(1, (int) ceil($total / self::PAGE_SIZE));
         $page = min($page, $totalPages);
 
-        $jobs = $query->forPage($page, self::PAGE_SIZE)->get();
+        $query->orderBy('id');
+        $groupKey = fn (JobListing $listing): string => match ($groupBy) {
+            'category' => $categories[$jobCategories[$listing->id]],
+            'source' => $listing->source_name,
+            default => 'All listings',
+        };
+        $groupTotals = collect();
+        if ($groupBy === 'none') {
+            $jobs = $query->forPage($page, self::PAGE_SIZE)->get();
+        } else {
+            $orderedJobs = $query->get()->sortBy($groupKey, SORT_NATURAL | SORT_FLAG_CASE)->values();
+            $groupTotals = $orderedJobs->countBy($groupKey);
+            $jobs = $orderedJobs->slice(($page - 1) * self::PAGE_SIZE, self::PAGE_SIZE)->values();
+        }
+        $jobGroups = $jobs->groupBy($groupKey);
 
         $bySource = JobListing::selectRaw('source_name, count(*) as c')
             ->groupBy('source_name')
@@ -137,6 +176,13 @@ class AdminController extends Controller
             'order' => $order,
             'kenyaFriendly' => $kenyaFriendly,
             'sources' => $bySource,
+            'category' => $category,
+            'categories' => $categories,
+            'categoryCounts' => $categoryCounts,
+            'jobCategories' => $jobCategories,
+            'groupBy' => $groupBy,
+            'jobGroups' => $jobGroups,
+            'groupTotals' => $groupTotals,
         ];
     }
 
