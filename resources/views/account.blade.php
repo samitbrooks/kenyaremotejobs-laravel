@@ -9,78 +9,23 @@
         </div>
     @else
         <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
-            {{-- High-Converting New Member Activation Card for Unsubscribed Users --}}
-            @if (! $user->subscribed)
-                <div class="mb-8 overflow-hidden rounded-3xl border-2 border-[#3444da] bg-white p-6 sm:p-8 text-slate-900 shadow-xl shadow-[#3444da]/5 relative">
-                    <div class="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-[#3444da]/5 blur-3xl"></div>
-
-                    <div class="relative z-10">
-                        <div class="flex flex-wrap items-center justify-between gap-2">
-                            <span class="inline-flex items-center gap-1.5 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-3 py-1 text-[11px] font-black uppercase tracking-wider text-[#3444da]">
-                                <x-icon name="lightning" class="h-3.5 w-3.5" /> Onboarding: Next Step
-                            </span>
-                            <span class="text-xs text-slate-500 font-medium">
-                                Instant M-Pesa Activation &bull; 7-Day Refund Guarantee
-                            </span>
-                        </div>
-
-                        <h2 class="mt-3.5 text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-tight">
-                            Your account is ready! 92% of candidates who land interviews upgrade to Pro.
-                        </h2>
-                        <p class="mt-2.5 text-sm text-slate-600 leading-relaxed max-w-xl">
-                            International remote roles receive 500+ applicants within 48 hours. Standard applicants wait in public queues after positions fill. Pro members apply within the first 2 hours with ATS-tailored CVs.
-                        </p>
-
-                        {{-- 4-Step Onboarding Checklist --}}
-                        <div class="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs">
-                            <div class="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3">
-                                <span class="inline-flex items-center gap-1 font-extrabold text-[#3444da]"><x-icon name="check" class="h-3.5 w-3.5" /> Step 1</span>
-                                <p class="font-bold text-slate-900 mt-1">Account Created</p>
-                                <p class="text-[11px] text-slate-500 mt-0.5">Email verified</p>
-                            </div>
-                            <div class="rounded-xl border-2 border-[#3444da] bg-[#eef0fe] p-3 relative">
-                                <span class="rounded-full bg-[#3444da] text-white font-black text-[9px] px-1.5 py-0.5 uppercase absolute top-2 right-2">Action</span>
-                                <span class="font-extrabold text-[#3444da]">Step 2</span>
-                                <p class="font-bold text-slate-900 mt-1">Activate Pro</p>
-                                <p class="text-[11px] text-[#3444da] font-semibold mt-0.5">KES 250 via M-Pesa</p>
-                            </div>
-                            <div class="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3">
-                                <span class="font-bold text-slate-400">Step 3</span>
-                                <p class="font-bold text-slate-700 mt-1">Tailor Your CV</p>
-                                <p class="text-[11px] text-slate-400 mt-0.5">Beat ATS filters</p>
-                            </div>
-                            <div class="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3">
-                                <span class="font-bold text-slate-400">Step 4</span>
-                                <p class="font-bold text-slate-700 mt-1">Apply in Top 20</p>
-                                <p class="text-[11px] text-slate-400 mt-0.5">Direct hiring queues</p>
-                            </div>
-                        </div>
-
-                        {{-- Checkout Trigger Box --}}
-                        <div class="mt-6 rounded-2xl bg-[#f8f9fd] p-4 border border-slate-200/80">
-                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                                <div>
-                                    <p class="text-xs font-bold text-[#3444da] uppercase tracking-wide">
-                                        Pro Membership Flagship Pass &bull; KES 250 / month
-                                    </p>
-                                    <p class="text-xs text-slate-600 mt-0.5">
-                                        Full 0-second apply access to all 800+ jobs, direct employers & unlimited AI CV tailoring.
-                                    </p>
-                                </div>
-                                <div class="shrink-0 w-full sm:w-auto">
-                                    <livewire:subscribe-button
-                                        :period="'pro'"
-                                        :is-authed="true"
-                                        :already-subscribed="false"
-                                        :button-label="'Activate Pro Access Now (KES 250) →'"
-                                        wire:key="onboarding-activation-btn"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endif
+            <div class="mb-8 rounded-3xl border border-[#c7ccfb] bg-[#eef0fe] p-6">
+                <h1 class="text-2xl font-semibold text-slate-900">Your next application starts with one useful step</h1>
+                @if ($user->onTrial())
+                    <p class="mt-3 text-sm text-slate-700">Your 24-hour pass is active: {{ $user->trialRemainingHuman() }} left. Choose a role, try CV tailoring, open the application portal, and save your progress.</p>
+                @elseif (! $user->hasActiveAccess() && ! $user->hasUsedTrial())
+                    <p class="mt-3 text-sm text-slate-700">Find a suitable role first, then try the full application workflow with your 24-hour free pass. No payment needed to start.</p>
+                    <a href="{{ route('trial.activate') }}" class="mt-4 inline-block rounded-lg bg-[#3444da] px-5 py-2.5 text-sm font-bold text-white">Start my 24-hour free pass &rarr;</a>
+                @elseif (! $user->hasActiveAccess())
+                    <p class="mt-3 text-sm text-slate-700">Keep preparing with Pro: application links, CV tailoring, cover letters, and your application tracker. Choose a plan when you are ready.</p>
+                    <a href="{{ route('pricing') }}" class="mt-4 inline-block rounded-lg bg-[#3444da] px-5 py-2.5 text-sm font-bold text-white">Continue with Pro — KES 250/month &rarr;</a>
+                @else
+                    <p class="mt-3 text-sm text-slate-700">Your application access is active. Use your plan below to prepare and track your next application.</p>
+                @endif
+                <a href="{{ url('/match') }}" class="mt-4 inline-block px-3 text-sm font-bold text-[#3444da]">Find roles for my skills &rarr;</a>
+            </div>
+            <x-job-search-plan :has-profile="(bool) $user->job_search_profile" :saved-count="$applications->count()" :applied-count="$applications->whereIn('status', ['applied', 'interviewing', 'offered'])->count()" />
+            <livewire:alert-preferences />
 
             {{-- Account Overview Card --}}
             <div class="rounded-3xl border border-black/5 bg-white p-6 sm:p-8 shadow-sm">
@@ -103,7 +48,7 @@
 
                     <div class="flex items-center gap-3">
                         @if (! $user->subscribed)
-                            <a href="{{ url('/pricing') }}" class="btn-pop rounded-full bg-[#3444da] hover:bg-[#2633bf] px-5 py-2 text-xs font-bold text-white shadow-xs">
+                            <a href="{{ url('/pricing') }}" class="btn-pop rounded-lg bg-[#3444da] hover:bg-[#2633bf] px-5 py-2 text-xs font-bold text-white shadow-xs">
                                 Upgrade to Pro &rarr;
                             </a>
                         @endif
@@ -118,7 +63,7 @@
                             <x-icon name="{{ $user->subscribed ? 'check' : 'sparkle' }}" class="h-5 w-5 {{ $user->subscribed ? 'text-[#3444da]' : 'text-[#3444da]' }}" />
                             <span class="text-sm font-semibold">
                                 @if ($user->subscribed)
-                                    Pro Membership Active: Unlimited 48h Early Access & AI CV Tailoring
+                                    Pro Membership Active: Application Access & AI CV Tailoring
                                 @else
                                     {{ $user->free_tailors_remaining ?? 1 }} Free AI CV Tailoring credit available
                                 @endif
@@ -132,8 +77,7 @@
             </div>
 
             {{-- Referral Awarding Card --}}
-            <div class="mt-8 rounded-3xl border border-slate-200/80 bg-gradient-to-br from-[#f8f9fd] via-white to-[#eef0fe]/50 p-6 sm:p-7 text-slate-900 shadow-sm relative overflow-hidden">
-                <div class="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#3444da]/5 blur-3xl"></div>
+            <div class="mt-8 rounded-3xl border border-slate-200/80 p-6 sm:p-7 text-slate-900 shadow-sm relative overflow-hidden">
                 <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div class="max-w-md">
                         <div class="flex items-center gap-2">
@@ -145,7 +89,7 @@
                                 {{ $user->referrals()->count() }} Joined &bull; +{{ $user->earnedProDays() }} Days Earned
                             </span>
                         </div>
-                        <h3 class="text-lg font-black text-slate-900 mt-1.5">Earn Free Pro Access &amp; AI Tailor Credits</h3>
+                        <h3 class="text-lg font-semibold text-slate-900 mt-1.5">Earn Free Pro Access &amp; AI Tailor Credits</h3>
                         <p class="text-xs text-slate-600 mt-1 leading-relaxed">
                             Share your link with fellow Kenyan jobseekers. Earn +3 days Pro when a friend tests the free trial, and +14 days when they subscribe.
                         </p>
@@ -170,6 +114,7 @@
                 </div>
             </div>
 
+            <div id="applications"></div>
             {{-- Application CRM Tracker --}}
             <div class="mt-8 rounded-3xl border border-black/5 bg-white p-6 sm:p-8 shadow-sm">
                 <div class="flex items-center justify-between pb-4 border-b border-black/5">
@@ -205,7 +150,7 @@
                                             <a href="{{ url('/jobs/'.$app->jobListing->id) }}" class="font-bold text-sm text-foreground hover:text-sunrise-600 hover:underline truncate">
                                                 {{ $app->jobListing->title }}
                                             </a>
-                                            <span class="text-xs text-foreground/60">&middot; {{ $app->jobListing->company }}</span>
+                                            <span class="text-xs text-foreground/60">&middot; Employer details hidden</span>
                                         @else
                                             <span class="text-sm font-medium text-foreground/50 italic">Archived listing</span>
                                         @endif
@@ -300,7 +245,7 @@
                         <p class="text-xs text-foreground/60 mt-1 max-w-md mx-auto">
                             Get complete invoice templates, US tax treaty guides, and outreach scripts used by top Kenyan remote engineers and virtual assistants.
                         </p>
-                        <a href="{{ url('/pricing') }}" class="mt-4 inline-block rounded-full bg-[#3444da] hover:bg-[#2633bf] px-6 py-2.5 text-xs font-bold text-white shadow-xs transition">
+                        <a href="{{ url('/pricing') }}" class="mt-4 inline-block rounded-lg bg-[#3444da] hover:bg-[#2633bf] px-6 py-2.5 text-xs font-bold text-white shadow-xs transition">
                             Unlock with Pro (KES 250/mo)
                         </a>
                     </div>
@@ -317,14 +262,14 @@
                                 $openTicketsCount = ($supportTickets ?? collect())->filter(fn ($t) => in_array($t->status, ['open', 'in_progress']))->count();
                             @endphp
                             @if ($openTicketsCount > 0)
-                                <span class="rounded-full bg-amber-100 border border-amber-300 px-2 py-0.5 text-[10px] font-black text-amber-800">
+                                <span class="rounded-full bg-amber-100 border border-amber-300 px-2 py-0.5 text-[10px] font-semibold text-amber-800">
                                     {{ $openTicketsCount }} Active
                                 </span>
                             @endif
                         </div>
                         <p class="text-xs text-foreground/60">Submit inquiries, request M-Pesa payment assistance, or get help with your account</p>
                     </div>
-                    <a href="{{ url('/support') }}" class="btn-pop rounded-full bg-[#3444da] hover:bg-[#2633bf] px-4 py-1.5 text-xs font-bold text-white shadow-xs">
+                    <a href="{{ url('/support') }}" class="btn-pop rounded-lg bg-[#3444da] hover:bg-[#2633bf] px-4 py-1.5 text-xs font-bold text-white shadow-xs">
                         + Open Ticket
                     </a>
                 </div>
@@ -386,7 +331,7 @@
                             <li class="py-2.5 flex items-center justify-between text-xs text-foreground/60">
                                 <div>
                                     <span class="font-medium text-foreground">{{ $u->jobListing?->title ?? 'Listing' }}</span>
-                                    <span class="text-foreground/40">&middot; {{ $u->jobListing?->company ?? '' }}</span>
+                                    <span class="text-foreground/40">&middot; Employer details hidden</span>
                                 </div>
                                 <span>{{ \App\Support\Format::timeAgo($u->unlocked_at) }}</span>
                             </li>

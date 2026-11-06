@@ -19,7 +19,7 @@ class ActionCenterAndScrollPopupTest extends TestCase
         $response = $this->get('/');
         $response->assertStatus(200);
         $response->assertSee('Ask Daisy AI');
-        $response->assertSee('80% of Remote Hires Apply in the First 48 Hours');
+        $response->assertSee('Prepare your next remote job application');
 
         $subscriber = User::factory()->create(['subscribed' => true]);
         $jobsResponse = $this->actingAs($subscriber)->get('/jobs');
@@ -47,12 +47,14 @@ class ActionCenterAndScrollPopupTest extends TestCase
         $this->assertStringContainsString('KRA PIN', $result['reply']);
     }
 
-    public function test_career_bot_service_explains_pro_early_access(): void
+    public function test_career_bot_service_explains_membership_without_promising_public_release(): void
     {
         $bot = app(KenyaCareerBotService::class);
         $result = $bot->ask('Why should I get Pro Early Access and how does it give me full access?');
 
-        $this->assertStringContainsString('48-Hour Early Access', $result['reply']);
+        $this->assertStringContainsString('regardless of listing age', $result['reply']);
+        $this->assertStringNotContainsString('before public release', $result['reply']);
+        $this->assertStringContainsString('KES 250/mo', $result['reply']);
         $this->assertStringContainsString('Full Access to All 800+ Jobs', $result['reply']);
     }
 

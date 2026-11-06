@@ -2,11 +2,14 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use App\Payments\DarajaGateway;
 use App\Payments\MockGateway;
 use App\Payments\PaymentGateway;
 use App\Support\NoInlineMarkdown;
+use Illuminate\Mail\Events\MessageSending;
 use Illuminate\Mail\Markdown;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -37,6 +40,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Event::listen(MessageSending::class, function (MessageSending $event): ?bool {
+            $recipients = array_merge($event->message->getTo(), $event->message->getCc(), $event->message->getBcc());
+            $emails = array_map(fn ($address) => strtolower($address->getAddress()), $recipients);
+
+            return User::query()->whereIn('email', $emails)->whereNotNull('banned_at')->exists() ? false : null;
+        });
+
         // MailServiceProvider is a DeferrableProvider — it only registers its
         // own Markdown::class singleton the first time something actually
         // resolves it, which would silently clobber a binding set here in

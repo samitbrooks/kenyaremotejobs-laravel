@@ -25,7 +25,7 @@ trait HasPendingPayment
             return;
         }
 
-        $payment = Payment::find($this->pendingPaymentId);
+        $payment = Payment::where('user_id', auth()->id())->find($this->pendingPaymentId);
 
         if (! $payment || $payment->isFailed()) {
             $this->pendingPaymentId = null;

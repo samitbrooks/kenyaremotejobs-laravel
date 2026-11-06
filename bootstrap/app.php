@@ -4,6 +4,7 @@ use App\Http\Middleware\CaptureReferralCode;
 use App\Http\Middleware\EnforceCanonicalHost;
 use App\Http\Middleware\EnsureUserIsAdmin;
 use App\Http\Middleware\EnsureUserIsSubscribed;
+use App\Http\Middleware\RejectBannedUsers;
 use App\Http\Middleware\SecurityHeaders;
 use App\Http\Middleware\TrackPageView;
 use Illuminate\Foundation\Application;
@@ -35,6 +36,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web(prepend: [
             EnforceCanonicalHost::class,
         ], append: [
+            RejectBannedUsers::class,
             TrackPageView::class,
             SecurityHeaders::class,
             CaptureReferralCode::class,

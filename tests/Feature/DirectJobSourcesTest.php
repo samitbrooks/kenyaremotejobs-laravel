@@ -253,7 +253,7 @@ class DirectJobSourcesTest extends TestCase
         $this->assertStringContainsString('micro1.ai', $job['source_url']);
     }
 
-    public function test_turing_source_fetches_greenhouse_and_work_turing_tracks(): void
+    public function test_turing_source_fetches_live_jobs_without_synthetic_work_tracks(): void
     {
         Http::fake([
             'https://api.greenhouse.io/v1/boards/turing/jobs*' => Http::response([
@@ -295,11 +295,6 @@ class DirectJobSourcesTest extends TestCase
         $onsiteMatches = array_filter($jobs, fn ($j) => $j['source_id'] === '54321');
         $this->assertEmpty($onsiteMatches);
 
-        // Has the work.turing.com tracks
-        $wtMatches = array_filter($jobs, fn ($j) => str_starts_with($j['source_id'], 'wt-'));
-        $this->assertGreaterThanOrEqual(4, count($wtMatches));
-        $firstWt = array_values($wtMatches)[0];
-        $this->assertEquals('https://work.turing.com', $firstWt['source_url']);
-        $this->assertEquals('Turing', $firstWt['company']);
+        $this->assertSame([], array_values(array_filter($jobs, fn ($job) => str_starts_with($job['source_id'], 'wt-'))));
     }
 }

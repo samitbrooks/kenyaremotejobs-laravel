@@ -2,6 +2,7 @@
 
 namespace App\Services\JobSources;
 
+use App\Support\KenyaRelevance;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -15,6 +16,7 @@ class LeverSource implements JobSource
      * Every listing links directly to the employer's official Lever application form.
      */
     private const BOARDS = [
+        ['slug' => 'weloglobal', 'source_name' => 'Welo Global', 'kenya_only' => true],
         ['slug' => 'brafton', 'source_name' => 'Brafton'],
         ['slug' => 'superside', 'source_name' => 'Superside'],
         ['slug' => 'appen', 'source_name' => 'Appen'],
@@ -28,6 +30,10 @@ class LeverSource implements JobSource
         foreach (self::BOARDS as $board) {
             try {
                 $boardJobs = $this->fetchBoard($board);
+                if ($board['kenya_only'] ?? false) {
+                    $boardJobs = array_values(array_filter($boardJobs, fn (array $job): bool => KenyaRelevance::score($job)['kenyaFriendly']
+                        && ! preg_match('/talent (?:network|pool|community)|join (?:the|our).*network/i', $job['title'])));
+                }
                 array_push($jobs, ...$boardJobs);
             } catch (Throwable $e) {
                 Log::warning('[lever] a board failed', ['slug' => $board['slug'], 'error' => $e->getMessage()]);
@@ -111,6 +117,10 @@ class LeverSource implements JobSource
 
         $applyUrl = $job['applyUrl'] ?? $job['hostedUrl'] ?? "https://jobs.lever.co/{$slug}/{$job['id']}/apply";
 
+        $description = ($job['description'] ?? $job['descriptionPlain'] ?? '')
+            .collect($job['lists'] ?? [])->map(fn (array $list): string => '<h3>'.e($list['text'] ?? '').'</h3><ul>'.($list['content'] ?? '').'</ul>')->implode('')
+            .($job['additional'] ?? '');
+
         return [
             'id' => "lever-{$slug}--{$job['id']}",
             'source_name' => $sourceName,
@@ -118,13 +128,14 @@ class LeverSource implements JobSource
             'source_url' => $applyUrl,
             'title' => $job['text'] ?? 'Remote Role',
             'company' => $sourceName,
-            'description' => $job['description'] ?? $job['descriptionPlain'] ?? '',
+            'description' => $description,
             'tags' => $tags,
             'location' => $location ?: 'Remote',
             'remote_type' => 'Remote',
             'salary' => null,
             'annual_salary_usd' => null,
             'posted_at' => $createdAt,
+            'last_seen_at' => now(),
         ];
     }
 }

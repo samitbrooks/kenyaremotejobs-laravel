@@ -48,12 +48,19 @@ new class extends Component
 
         $this->loading = true;
         $job = JobListing::findOrFail($this->jobId);
-        $profile = Matching::parseProfileCookie(request()->cookie(Matching::COOKIE_NAME));
+        $profile = Matching::profileFor(request()->cookie(Matching::COOKIE_NAME), auth()->user());
 
         $ai = app(AiTailorService::class);
         $this->tailored = $ai->tailor($job, $profile, $this->userNotes ?: null);
 
-        // Deduct free credit if not subscribed
+        $redactor = app(\App\Services\Redactor::class);
+        array_walk_recursive($this->tailored, function (mixed &$value) use ($redactor, $job): void {
+            if (is_string($value)) {
+                $value = $redactor->redactEmployerIdentity($value, $job->company);
+            }
+        });
+
+        // Deduct a free credit only when the user has no active access.
         $user->useAiTailor();
         $this->loading = false;
     }
@@ -76,17 +83,17 @@ new class extends Component
             <x-icon name="sparkle" class="h-3.5 w-3.5 animate-pulse" />
         </span>
         <span>Tailor CV &amp; Cover Letter with AI</span>
-        <span class="rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-2 py-0.5 text-[11px] font-extrabold text-[#3444da]">
-            Boost to 94%+
+        <span class="rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-2 py-0.5 text-[11px] font-semibold text-[#3444da]">
+            Review AI suggestions
         </span>
     </button>
 
     {{-- Modal Drawer --}}
     @if ($isOpen)
         <div class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/60 p-4 backdrop-blur-xs">
-            <div class="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl bg-white p-6 shadow-2xl sm:p-8">
+            <div class="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl bg-white p-6 shadow-sm sm:p-8">
                 {{-- Close button --}}
-                <button type="button" wire:click="close" class="absolute top-6 right-6 flex h-8 w-8 items-center justify-center rounded-full bg-black/5 text-foreground/50 hover:bg-black/10 hover:text-foreground">
+                <button type="button" wire:click="close" class="absolute top-6 right-6 flex h-8 w-8 items-center justify-center rounded-lg bg-black/5 text-foreground/50 hover:bg-black/10 hover:text-foreground">
                     &times;
                 </button>
 
@@ -102,7 +109,7 @@ new class extends Component
                             Subscribers get unlimited 1-click AI resume &amp; cover letter tailoring on every job to bypass ATS filters and stand out to foreign recruiters.
                         </p>
                         <div class="mx-auto mt-6 max-w-xs">
-                            <a href="{{ url('/pricing') }}" class="btn-pop block rounded-full bg-[#3444da] hover:bg-[#2633bf] px-6 py-3 font-semibold text-white shadow-lg">
+                            <a href="{{ url('/pricing') }}" class="btn-pop block rounded-lg bg-[#3444da] hover:bg-[#2633bf] px-6 py-3 font-semibold text-white shadow-sm">
                                 Upgrade to Pro &mdash; From KES 250
                             </a>
                         </div>
@@ -127,7 +134,7 @@ new class extends Component
                             </div>
                             <div class="ml-auto text-right">
                                 <span class="inline-block rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-3 py-1 text-xs font-bold text-[#3444da]">
-                                    {{ $tailored['match_score'] }}% ATS Match
+                                    Draft for your review
                                 </span>
                             </div>
                         </div>
@@ -154,7 +161,7 @@ new class extends Component
                                     {{ $copied === 'bullets' ? 'Copied!' : 'Copy bullets' }}
                                 </button>
                             </div>
-                            <p class="mt-0.5 text-xs text-foreground/40">Paste these directly into your CV work experience section:</p>
+                            <p class="mt-0.5 text-xs text-foreground/40">Check every statement against your real experience before adding it to your CV.</p>
                             <div class="mt-2 space-y-2 rounded-2xl border border-black/5 bg-black/[0.02] p-4 text-xs leading-relaxed text-foreground/80">
                                 @foreach ($tailored['tailored_bullets'] as $bullet)
                                     <div class="flex items-start gap-2">
@@ -184,10 +191,10 @@ new class extends Component
                         </div>
 
                         <div class="mt-6 flex gap-3">
-                            <a href="{{ url('/resume-builder') }}" class="btn-pop flex-1 rounded-full gradient-sunrise px-5 py-2.5 text-center text-xs font-semibold text-white shadow-md">
+                            <a href="{{ url('/resume-builder') }}" class="btn-pop flex-1 rounded-lg gradient-sunrise px-5 py-2.5 text-center text-xs font-semibold text-white shadow-sm">
                                 Open in CV Builder &rarr;
                             </a>
-                            <button type="button" wire:click="close" class="rounded-full border border-black/10 px-5 py-2.5 text-xs font-semibold text-foreground/60 hover:bg-black/5">
+                            <button type="button" wire:click="close" class="rounded-lg border border-black/10 px-5 py-2.5 text-xs font-semibold text-foreground/60 hover:bg-black/5">
                                 Done
                             </button>
                         </div>

@@ -7,13 +7,16 @@
         ? 'Explore verified remote jobs, data annotation gigs, and part-time online roles open to Kenyan university and college students. Flexible hours around classes, weekly M-Pesa payouts, and no prior degree required.'
         : 'Search and filter online and remote jobs from verified global employers and distributed teams — filter by category, remote type, or Kenya-Friendly Match to find roles realistically open to you.';
 
-    $buildPageHref = function (int $targetPage) use ($q, $tag, $remoteType, $kenyaFriendly, $freeOnly, $audience) {
+    $buildPageHref = function (int $targetPage) use ($q, $tag, $remoteType, $kenyaFriendly, $freeOnly, $audience, $onlineWorkOnly, $directApplyOnly, $sortByMatch) {
         $params = array_filter([
             'q' => $q ?: null,
             'tag' => $tag ?: null,
             'remoteType' => $remoteType ?: null,
             'kenyaFriendly' => $kenyaFriendly ? 'true' : null,
             'freeOnly' => $freeOnly ? 'true' : null,
+            'onlineWork' => $onlineWorkOnly ? 'true' : null,
+            'directApply' => $directApplyOnly ? 'true' : null,
+            'sort' => $sortByMatch ? 'match' : null,
             'audience' => $audience,
             'page' => $targetPage,
         ]);
@@ -47,18 +50,23 @@
     <script type="application/ld+json">{!! \App\Support\Seo::itemListJsonLd($jobs, $title, $description) !!}</script>
     <script type="application/ld+json">{!! \App\Support\Seo::jobsIndexBreadcrumbJsonLd($audience ? $title : null, $canonicalUrl) !!}</script>
     <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-        <h1 class="flex items-center gap-2.5 text-3xl font-extrabold text-slate-900 tracking-tight">
+        <h1 class="flex items-center gap-2.5 text-3xl font-semibold text-slate-900 tracking-tight">
             @if ($audience)
                 <x-icon :name="\App\Support\Audience::ICONS[$audience] ?? 'globe'" class="h-7 w-7 text-[#3444da]" />
             @endif
             {{ $title }}
         </h1>
         <p class="mt-1 text-sm text-slate-500 font-medium">
-            {{ $total }} listings &middot; 100% transparent employer details &middot; Verified remote roles open to Kenyan applicants.
+            {{ $total }} listings &middot; Browse requirements for free &middot; Employer identities stay hidden &middot; Confirm Kenya eligibility for each role.
         </p>
 
+        <div class="mt-4 rounded-2xl border border-[#c7ccfb] bg-[#eef0fe] p-4 text-sm text-slate-700">
+            <p>Looking for practical online work? Start with customer support, virtual assistance, transcription, content work, and data annotation. Each role still has its own skills and equipment requirements.</p>
+            <a href="{{ route('jobs.index', ['onlineWork' => 'true', 'directApply' => 'true', 'kenyaFriendly' => 'true']) }}" class="mt-2 inline-block font-bold text-[#3444da]">Browse online work with employer application links &rarr;</a>
+        </div>
+
         @if ($isStudentAudience)
-            <div class="mt-6 rounded-3xl border border-[#e6e8f2] bg-white p-6 sm:p-8 shadow-[0_4px_20px_rgba(15,23,42,0.04)]">
+            <div class="mt-6 rounded-3xl border border-[#e6e8f2] bg-white p-6 sm:p-8">
                 <div class="flex flex-wrap items-center gap-2">
                     <span class="inline-flex items-center gap-1.5 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-3 py-1 text-xs font-bold text-[#3444da]">
                         Campus & Student Portal
@@ -71,7 +79,7 @@
                     </span>
                 </div>
 
-                <h2 class="mt-4 text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                <h2 class="mt-4 text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight">
                     Legit Online Jobs for Kenyan Students (Data Annotation & AI Training)
                 </h2>
 
@@ -82,22 +90,22 @@
                 {{-- Quick Student Filters --}}
                 <div class="mt-5 flex flex-wrap items-center gap-2">
                     <span class="text-xs font-bold text-slate-500 mr-1">Quick Filters:</span>
-                    <a href="{{ url('/jobs?audience=students') }}" class="rounded-full px-3.5 py-1 text-xs font-bold transition {{ $q === '' ? 'bg-[#3444da] text-white shadow-xs' : 'bg-[#eef0fe] text-[#3444da] hover:bg-[#3444da] hover:text-white' }}">
+                    <a href="{{ url('/jobs?audience=students') }}" class="rounded-lg px-3.5 py-1 text-xs font-bold transition {{ $q === '' ? 'bg-[#3444da] text-white shadow-xs' : 'bg-[#eef0fe] text-[#3444da] hover:bg-[#3444da] hover:text-white' }}">
                         All Student Jobs ({{ $total }})
                     </a>
-                    <a href="{{ url('/jobs?audience=students&q=annotation') }}" class="rounded-full px-3.5 py-1 text-xs font-bold transition {{ str_contains(strtolower($q), 'annotation') ? 'bg-[#3444da] text-white shadow-xs' : 'bg-[#eef0fe] text-[#3444da] hover:bg-[#3444da] hover:text-white' }}">
+                    <a href="{{ url('/jobs?audience=students&q=annotation') }}" class="rounded-lg px-3.5 py-1 text-xs font-bold transition {{ str_contains(strtolower($q), 'annotation') ? 'bg-[#3444da] text-white shadow-xs' : 'bg-[#eef0fe] text-[#3444da] hover:bg-[#3444da] hover:text-white' }}">
                         Data Annotation & AI
                     </a>
-                    <a href="{{ url('/jobs?audience=students&q=transcription') }}" class="rounded-full px-3.5 py-1 text-xs font-bold transition {{ str_contains(strtolower($q), 'transcription') ? 'bg-[#3444da] text-white shadow-xs' : 'bg-[#eef0fe] text-[#3444da] hover:bg-[#3444da] hover:text-white' }}">
+                    <a href="{{ url('/jobs?audience=students&q=transcription') }}" class="rounded-lg px-3.5 py-1 text-xs font-bold transition {{ str_contains(strtolower($q), 'transcription') ? 'bg-[#3444da] text-white shadow-xs' : 'bg-[#eef0fe] text-[#3444da] hover:bg-[#3444da] hover:text-white' }}">
                         Audio Transcription
                     </a>
-                    <a href="{{ url('/jobs?audience=students&q=writing') }}" class="rounded-full px-3.5 py-1 text-xs font-bold transition {{ str_contains(strtolower($q), 'writing') ? 'bg-[#3444da] text-white shadow-xs' : 'bg-[#eef0fe] text-[#3444da] hover:bg-[#3444da] hover:text-white' }}">
+                    <a href="{{ url('/jobs?audience=students&q=writing') }}" class="rounded-lg px-3.5 py-1 text-xs font-bold transition {{ str_contains(strtolower($q), 'writing') ? 'bg-[#3444da] text-white shadow-xs' : 'bg-[#eef0fe] text-[#3444da] hover:bg-[#3444da] hover:text-white' }}">
                         Content & Research
                     </a>
-                    <a href="{{ url('/jobs?audience=students&q=assistant') }}" class="rounded-full px-3.5 py-1 text-xs font-bold transition {{ str_contains(strtolower($q), 'assistant') ? 'bg-[#3444da] text-white shadow-xs' : 'bg-[#eef0fe] text-[#3444da] hover:bg-[#3444da] hover:text-white' }}">
+                    <a href="{{ url('/jobs?audience=students&q=assistant') }}" class="rounded-lg px-3.5 py-1 text-xs font-bold transition {{ str_contains(strtolower($q), 'assistant') ? 'bg-[#3444da] text-white shadow-xs' : 'bg-[#eef0fe] text-[#3444da] hover:bg-[#3444da] hover:text-white' }}">
                         Virtual Assistant
                     </a>
-                    <a href="{{ url('/remote-jobs/online-jobs-for-students-kenya') }}" class="rounded-full bg-slate-900 text-white px-3.5 py-1 text-xs font-bold hover:bg-slate-800 transition sm:ml-auto">
+                    <a href="{{ url('/remote-jobs/online-jobs-for-students-kenya') }}" class="rounded-lg bg-slate-900 text-white px-3.5 py-1 text-xs font-bold hover:bg-slate-800 transition sm:ml-auto">
                         Student FAQ & Salary Guide &rarr;
                     </a>
                 </div>
@@ -110,7 +118,7 @@
                     <span class="inline-flex h-2.5 w-2.5 rounded-full bg-[#3444da] animate-pulse shrink-0"></span>
                     <span><strong>24-Hour Free Pass Active:</strong> You have unrestricted access to browse, search, and apply to all roles until <strong>{{ auth()->user()->trial_ends_at?->format('M j, g:i A') }}</strong> ({{ auth()->user()->trialRemainingHuman() }} left).</span>
                 </div>
-                <a href="{{ route('pricing') }}" class="btn-pop rounded-full bg-[#3444da] px-4 py-1.5 text-xs font-bold text-white hover:bg-[#2633bf] shadow-xs transition">
+                <a href="{{ route('pricing') }}" class="btn-pop rounded-lg bg-[#3444da] px-4 py-1.5 text-xs font-bold text-white hover:bg-[#2633bf] shadow-xs transition">
                     Lock In Pro Membership &rarr;
                 </a>
             </div>
@@ -135,7 +143,7 @@
         @endif
 
 
-        <div class="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-3xl border border-[#c7ccfb] bg-gradient-to-r from-[#eef0fe] via-white to-[#eef0fe] p-4 sm:p-5 text-xs sm:text-sm text-slate-800 shadow-2xs">
+        <div class="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-3xl border border-[#c7ccfb] p-4 sm:p-5 text-xs sm:text-sm text-slate-800 shadow-2xs">
             <div class="flex items-center gap-3">
                 <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#3444da] text-white shadow-xs">
                     <x-icon name="sparkle" class="h-4 w-4" />
@@ -144,7 +152,7 @@
                     <strong class="font-bold text-slate-900">Pro Membership:</strong> Instant apply access to verified remote jobs & direct employer listings &mdash; beat 500+ applicants with priority delivery & AI CV tailoring.
                 </p>
             </div>
-            <a href="{{ url('/pricing') }}" class="btn-pop inline-flex items-center gap-1.5 rounded-full bg-[#3444da] hover:bg-[#2633bf] px-5 py-2.5 text-xs font-bold text-white transition shrink-0 shadow-xs">
+            <a href="{{ url('/pricing') }}" class="btn-pop inline-flex items-center gap-1.5 rounded-lg bg-[#3444da] hover:bg-[#2633bf] px-5 py-2.5 text-xs font-bold text-white transition shrink-0 shadow-xs">
                 Unlock All Jobs &rarr;
             </a>
         </div>
@@ -159,7 +167,7 @@
                     <strong class="font-bold text-slate-900">Join our Official Telegram Channel:</strong> Get instant alerts the moment fresh remote jobs open to Kenya drop &bull; Pre-screened for UTC+3 &bull; 100% Free.
                 </p>
             </div>
-            <a href="{{ config('site.telegram_url', 'https://t.me/kenyaremotejobs') }}" target="_blank" rel="noopener noreferrer" class="btn-pop inline-flex items-center gap-1.5 rounded-full bg-[#3444da] px-4 py-2 text-xs font-bold text-white hover:bg-[#2633bf] transition shrink-0 shadow-2xs">
+            <a href="{{ config('site.telegram_url', 'https://t.me/kenyaremotejobs') }}" target="_blank" rel="noopener noreferrer" class="btn-pop inline-flex items-center gap-1.5 rounded-lg bg-[#3444da] px-4 py-2 text-xs font-bold text-white hover:bg-[#2633bf] transition shrink-0 shadow-2xs">
                 <span>Join @kenyaremotejobs</span> &rarr;
             </a>
         </div>
@@ -167,35 +175,44 @@
         <form action="{{ url('/jobs') }}" method="GET" class="mt-6 grid grid-cols-1 gap-3 rounded-[20px] border border-[#e6e8f2] bg-white p-4 sm:p-5 shadow-xs sm:grid-cols-[2fr_1fr_1fr_auto] sm:items-center">
             <div class="relative flex items-center">
                 <x-icon name="search" class="pointer-events-none absolute left-3.5 h-4 w-4 text-slate-400" />
-                <input type="text" name="q" value="{{ $q }}" placeholder="Search job titles, skills, companies…" class="w-full rounded-full border border-slate-200/80 bg-slate-50/50 pl-10 pr-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-[#3444da] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#3444da]/20 transition">
+                <input type="text" name="q" value="{{ $q }}" placeholder="Search job titles, skills, companies…" class="w-full rounded-lg border border-slate-200/80 bg-slate-50/50 pl-10 pr-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-[#3444da] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#3444da]/20 transition">
             </div>
 
-            <select name="tag" class="rounded-full border border-slate-200/80 bg-slate-50/50 px-4 py-2.5 text-sm text-slate-700 focus:border-[#3444da] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#3444da]/20 transition cursor-pointer">
+            <select name="tag" class="rounded-lg border border-slate-200/80 bg-slate-50/50 px-4 py-2.5 text-sm text-slate-700 focus:border-[#3444da] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#3444da]/20 transition cursor-pointer">
                 <option value="">All categories</option>
                 @foreach ($tags as $t)
                     <option value="{{ $t }}" @selected($tag === $t)>{{ $t }}</option>
                 @endforeach
             </select>
 
-            <select name="remoteType" class="rounded-full border border-slate-200/80 bg-slate-50/50 px-4 py-2.5 text-sm text-slate-700 focus:border-[#3444da] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#3444da]/20 transition cursor-pointer">
+            <select name="remoteType" class="rounded-lg border border-slate-200/80 bg-slate-50/50 px-4 py-2.5 text-sm text-slate-700 focus:border-[#3444da] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#3444da]/20 transition cursor-pointer">
                 <option value="">Any remote type</option>
                 <option value="remote" @selected($remoteType === 'remote')>Remote</option>
                 <option value="full-time" @selected($remoteType === 'full-time')>Full-time</option>
                 <option value="contract" @selected($remoteType === 'contract')>Contract</option>
             </select>
 
-            <button type="submit" class="btn-pop rounded-full bg-[#3444da] hover:bg-[#2633bf] px-7 py-2.5 text-sm font-bold text-white shadow-md shadow-[#3444da]/20 transition">
+            <button type="submit" class="btn-pop rounded-lg bg-[#3444da] hover:bg-[#2633bf] px-7 py-2.5 text-sm font-bold text-white shadow-sm transition">
                 Filter
             </button>
 
             <div class="flex flex-wrap gap-2 sm:col-span-4 pt-1">
+                @if ($sortByMatch) <input type="hidden" name="sort" value="match"> @endif
+                <label class="inline-flex items-center gap-2 rounded-full border border-slate-200 px-3.5 py-1.5 text-xs font-semibold text-slate-700">
+                    <input type="checkbox" name="onlineWork" value="true" @checked($onlineWorkOnly) class="rounded border-slate-300 text-[#3444da]">
+                    Online work: support, admin, writing &amp; annotation
+                </label>
+                <label class="inline-flex items-center gap-2 rounded-full border border-slate-200 px-3.5 py-1.5 text-xs font-semibold text-slate-700">
+                    <input type="checkbox" name="directApply" value="true" @checked($directApplyOnly) class="rounded border-slate-300 text-[#3444da]">
+                    Employer application pages only
+                </label>
                 <label class="inline-flex items-center gap-2 rounded-full border border-slate-200/70 bg-slate-50/70 px-3.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-[#eef0fe] hover:border-[#c7ccfb] hover:text-[#3444da] cursor-pointer transition shadow-2xs">
-                    <input type="checkbox" name="kenyaFriendly" value="true" @checked($kenyaFriendly) class="h-4 w-4 rounded-full border-slate-300 text-[#3444da] focus:ring-[#3444da]">
+                    <input type="checkbox" name="kenyaFriendly" value="true" @checked($kenyaFriendly) class="h-4 w-4 rounded-lg border-slate-300 text-[#3444da] focus:ring-[#3444da]">
                     <span>Show only Kenya-Friendly Matches</span>
                     <x-icon.kenya-flag class="h-3.5 w-3.5" />
                 </label>
                 <label class="inline-flex items-center gap-2 rounded-full border border-slate-200/70 bg-slate-50/70 px-3.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-[#eef0fe] hover:border-[#c7ccfb] hover:text-[#3444da] cursor-pointer transition shadow-2xs">
-                    <input type="checkbox" name="freeOnly" value="true" @checked($freeOnly) class="h-4 w-4 rounded-full border-slate-300 text-[#3444da] focus:ring-[#3444da]">
+                    <input type="checkbox" name="freeOnly" value="true" @checked($freeOnly) class="h-4 w-4 rounded-lg border-slate-300 text-[#3444da] focus:ring-[#3444da]">
                     <span>Direct employer listings only</span>
                     <x-icon name="announce" class="h-3.5 w-3.5 text-[#3444da]" />
                 </label>
@@ -207,7 +224,7 @@
                 No jobs match those filters yet. Try widening your search.
             </p>
         @else
-            <div class="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
                 @foreach ($jobs as $i => $job)
                     <x-reveal :delay="min($i, 9) * 30">
                         <x-job-card :job="$job" :unlocked="$isUnlocked($job)" :match-percent="$matchPercent($job)" />
@@ -219,7 +236,7 @@
         @if ($totalPages > 1)
             <div class="mt-12 flex flex-wrap items-center justify-center gap-2">
                 @if ($page > 1)
-                    <a href="{{ $buildPageHref($page - 1) }}" class="btn-pop rounded-full border border-slate-200/80 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-2xs hover:bg-[#eef0fe] hover:border-[#3444da] hover:text-[#3444da] transition" aria-label="Previous page">
+                    <a href="{{ $buildPageHref($page - 1) }}" class="btn-pop rounded-lg border border-slate-200/80 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-2xs hover:bg-[#eef0fe] hover:border-[#3444da] hover:text-[#3444da] transition" aria-label="Previous page">
                         &larr; Prev
                     </a>
                 @endif
@@ -231,7 +248,7 @@
                         <a
                             href="{{ $buildPageHref($item) }}"
                             @if ($item === $page) aria-current="page" @endif
-                            class="btn-pop rounded-full px-4 py-2 text-sm font-bold transition {{ $item === $page ? 'bg-[#3444da] text-white shadow-sm shadow-[#3444da]/25' : 'border border-slate-200/80 bg-white text-slate-700 shadow-2xs hover:bg-[#eef0fe] hover:border-[#3444da] hover:text-[#3444da]' }}"
+                            class="btn-pop rounded-lg px-4 py-2 text-sm font-bold transition {{ $item === $page ? 'bg-[#3444da] text-white shadow-sm' : 'border border-slate-200/80 bg-white text-slate-700 shadow-2xs hover:bg-[#eef0fe] hover:border-[#3444da] hover:text-[#3444da]' }}"
                         >
                             {{ $item }}
                         </a>
@@ -239,7 +256,7 @@
                 @endforeach
 
                 @if ($page < $totalPages)
-                    <a href="{{ $buildPageHref($page + 1) }}" class="btn-pop rounded-full border border-slate-200/80 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-2xs hover:bg-[#eef0fe] hover:border-[#3444da] hover:text-[#3444da] transition" aria-label="Next page">
+                    <a href="{{ $buildPageHref($page + 1) }}" class="btn-pop rounded-lg border border-slate-200/80 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-2xs hover:bg-[#eef0fe] hover:border-[#3444da] hover:text-[#3444da] transition" aria-label="Next page">
                         Next &rarr;
                     </a>
                 @endif

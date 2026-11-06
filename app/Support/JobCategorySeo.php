@@ -331,6 +331,33 @@ class JobCategorySeo
                     ],
                 ],
             ],
+
+            'student-jobs-kenya' => [
+                'slug' => 'student-jobs-kenya',
+                'name' => 'Campus & Student Jobs',
+                'title' => 'Student & Campus Remote Jobs in Kenya (2026) — Part-Time, Internships & AI Gigs',
+                'h1' => 'Remote Student Jobs & Campus Work Open to Kenya',
+                'meta_description' => 'Discover verified remote student jobs, campus internships, flexible part-time gigs, and online tasks for Kenyan university students. Earn in USD via M-Pesa.',
+                'badge' => 'Campus & Student Jobs',
+                'intro' => 'Earning while studying is now accessible for Kenyan university and college students (UoN, KU, Strathmore, JKUAT, USIU, Moi, Egerton). Explore curated remote internships, flexible campus gigs, online tutoring, data entry, and AI evaluation opportunities that adapt to lecture timetables and exam schedules.',
+                'keywords' => 'student jobs kenya, campus jobs kenya, campus student jobs kenya, online jobs for campus students in kenya, university student remote jobs nairobi, part time jobs for students kenya, remote internships kenya',
+                'salary_range' => '$500 - $2,200 / month (~KES 65,000 - 285,000)',
+                'search_terms' => ['student', 'students', 'campus', 'intern', 'internship', 'undergraduate', 'part-time', 'entry level', 'tutor', 'tutoring', 'annotation', 'transcription', 'data entry'],
+                'faqs' => [
+                    [
+                        'question' => 'What kinds of remote jobs can campus students in Kenya do?',
+                        'answer' => 'Kenyan university students excel at AI data annotation, online tutoring, audio transcription, customer chat support, content writing, and virtual internships. These roles are 100% remote and offer task-based or flexible hourly shifts.',
+                    ],
+                    [
+                        'question' => 'Do campus student jobs require previous work experience?',
+                        'answer' => 'No. Most student opportunities look for basic digital literacy, good English writing and comprehension, and reliability. Most platforms provide quick onboarding assessments rather than requiring a CV.',
+                    ],
+                    [
+                        'question' => 'How are campus students paid in Kenya?',
+                        'answer' => 'Earnings are paid in USD via PayPal, Payoneer, Wise, or direct bank transfer, and can be instantly transferred into your Safaricom M-Pesa wallet.',
+                    ],
+                ],
+            ],
         ];
     }
 
@@ -434,17 +461,20 @@ class JobCategorySeo
             'recruiter' => 'human-resources-kenya',
             'human resources' => 'human-resources-kenya',
 
-            'student' => 'online-jobs-for-students-kenya',
-            'students' => 'online-jobs-for-students-kenya',
-            'campus' => 'online-jobs-for-students-kenya',
-            'university' => 'online-jobs-for-students-kenya',
-            'university student' => 'online-jobs-for-students-kenya',
-            'university students' => 'online-jobs-for-students-kenya',
-            'college student' => 'online-jobs-for-students-kenya',
-            'college students' => 'online-jobs-for-students-kenya',
-            'student jobs' => 'online-jobs-for-students-kenya',
-            'online jobs for students' => 'online-jobs-for-students-kenya',
-            'jobs for students' => 'online-jobs-for-students-kenya',
+            'student' => 'student-jobs-kenya',
+            'students' => 'student-jobs-kenya',
+            'campus' => 'student-jobs-kenya',
+            'campus jobs' => 'student-jobs-kenya',
+            'campus student' => 'student-jobs-kenya',
+            'campus student jobs' => 'student-jobs-kenya',
+            'university' => 'student-jobs-kenya',
+            'university student' => 'student-jobs-kenya',
+            'university students' => 'student-jobs-kenya',
+            'college student' => 'student-jobs-kenya',
+            'college students' => 'student-jobs-kenya',
+            'student jobs' => 'student-jobs-kenya',
+            'online jobs for students' => 'student-jobs-kenya',
+            'jobs for students' => 'student-jobs-kenya',
         ];
 
         return $directMap[$normalized] ?? null;

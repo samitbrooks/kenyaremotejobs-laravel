@@ -44,10 +44,10 @@ class KenyaCareerBotService
             ."- Payment methods: Wise (fastest, best rate), Payoneer, direct Wire to Kenyan bank accounts (Equity, KCB, Absa, Stanbic USD accounts), and local M-Pesa withdrawals via Wise/Payoneer.\n"
             ."- Tax / Forms: For US clients, Kenyan remote contractors fill IRS Form W-8BEN to claim 0% US withholding tax as non-resident foreign contractors (enter your Kenyan KRA PIN in Part I Line 6a).\n"
             ."- Timezone Advantage: Nairobi is East Africa Time (EAT / UTC+3), giving 4-5 hours daily working overlap with London, Berlin, Amsterdam and 3 hours with New York/Boston mornings. Frame this as superior to Asian timezones.\n"
-            ."- KenyaRemoteJobs Pro: Plans start at KES 299/month (via M-Pesa). Unlocks 48-Hour Early Access (apply before 500+ applicants flood recruiter inboxes), full access to all 800+ remote listings, direct Kenyan employer postings, and unlimited AI CV ATS tailoring.\n"
-            ."- High-Yield Opportunities: Emphasize that remote AI training/teaching, data annotation, RLHF evaluation, and online subject-matter tutoring are huge opportunities for Kenyans ($15-$40/hr) with no visa barriers and flexible hours.\n"
+            ."- KenyaRemoteJobs Pro: Plans start at KES 250/month (via M-Pesa). Includes application links across current listings and AI CV tailoring. Listing age does not grant free application access. Membership does not guarantee interviews or employment.\n"
+            ."- High-Yield Opportunities: Emphasize that remote AI training/teaching, data annotation, RLHF evaluation, online subject-matter tutoring, and flexible campus/student gigs are huge opportunities for Kenyans ($15-$40/hr) with no visa barriers and flexible hours.\n"
             ."- Keep responses concise, formatted in clean Markdown with bullet points, under 180 words.\n"
-            .'- Always suggest relevant platform links: /jobs, /pricing, /match, /resume-builder, /remote-jobs/ai-training-annotation-kenya.';
+            .'- Always suggest relevant platform links: /jobs, /pricing, /match, /resume-builder, /remote-jobs/student-jobs-kenya, /remote-jobs/ai-training-annotation-kenya.';
 
         $contents = [];
         foreach (array_slice($history, -4) as $item) {
@@ -133,14 +133,14 @@ class KenyaCareerBotService
         if (str_contains($lower, 'pro') || str_contains($lower, 'price') || str_contains($lower, 'pricing') || str_contains($lower, 'early access') || str_contains($lower, 'cost') || str_contains($lower, 'subscription') || str_contains($lower, 'fee')) {
             return [
                 'reply' => "**Why serious job seekers upgrade to Pro:**\n\n"
-                    ."When global remote jobs open, **over 500 applicants apply within 72 hours**. Hiring teams interview on a rolling basis and close listings once they find 10–20 strong candidates.\n\n"
+                    ."Browse job requirements for free, then choose Pro if application access and career tools would help your search. Membership does not guarantee interviews or employment.\n\n"
                     ."**Pro gives you:**\n"
                     ."• **Full Access to All 800+ Jobs:** Immediate apply access to every listing.\n"
-                    ."• **48-Hour Early Access Window:** Apply to fresh roles before public release.\n"
+                    ."• **Application Access:** Application links across current listings, regardless of listing age.\n"
                     ."• **Direct Kenyan Employer Roles:** Apply to companies actively recruiting local talent.\n"
-                    ."• **1-Click AI CV & Cover Letter Tailoring:** 94%+ ATS keyword alignment.\n"
+                    ."• **1-Click AI CV & Cover Letter Tailoring:** Review tailored suggestions before applying.\n"
                     ."• **Remote Contractor Toolkit:** USD invoice generator & W-8BEN guide.\n\n"
-                    .'*Plans start at KES 299/mo (just KES 10/day) via instant M-Pesa STK push.*',
+                    .'*Plans start at KES 250/mo via M-Pesa STK push.*',
                 'suggested_actions' => [
                     ['label' => 'Get Full Access to All Jobs', 'url' => '/pricing'],
                     ['label' => 'Browse Jobs First', 'url' => '/jobs'],
@@ -223,7 +223,7 @@ class KenyaCareerBotService
                 ."I can help you with:\n"
                 ."• **Foreign Payments:** How to receive USD/EUR via Wise, Payoneer & M-Pesa.\n"
                 ."• **US Taxes:** How to complete IRS Form W-8BEN with your KRA PIN.\n"
-                ."• **Pro Early Access:** How to apply in the first 48 hours before 500+ candidates flood in.\n"
+                ."• **Pro Membership:** Application links, AI CV tailoring, and application tracking.\n"
                 ."• **Job Recommendations:** Finding roles that match your skills with EAT timezone overlap.\n\n"
                 .'What can I help you with today?',
             'suggested_actions' => [

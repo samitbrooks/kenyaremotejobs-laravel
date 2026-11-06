@@ -96,7 +96,7 @@
                     @if ($ticket->user)
                         <span class="inline-flex items-center gap-1 font-bold text-slate-900">
                             Registered Member
-                            @if ($ticket->user->isSubscribed())
+                            @if ($ticket->user->subscribed)
                                 <span class="rounded-full bg-[#eef0fe] text-[#3444da] border border-[#c7ccfb] px-2 py-0.2 text-[10px] font-bold">Pro Active</span>
                             @endif
                         </span>

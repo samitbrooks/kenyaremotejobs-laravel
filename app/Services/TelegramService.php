@@ -145,7 +145,11 @@ class TelegramService
     {
         return $this->callApi('setMyCommands', [
             'commands' => [
-                ['command' => 'jobs', 'description' => 'Top remote jobs (AI training, tutoring, annotation & tech)'],
+                ['command' => 'jobs', 'description' => 'Current roles, with practical online work first'],
+                ['command' => 'online', 'description' => 'Support, admin, writing, transcription and annotation'],
+                ['command' => 'direct', 'description' => 'Roles with employer application pages'],
+                ['command' => 'students', 'description' => 'Campus and student-oriented opportunities'],
+                ['command' => 'tech', 'description' => 'Software and specialist technical careers'],
                 ['command' => 'aitraining', 'description' => 'Browse AI data annotation & RLHF model training roles'],
                 ['command' => 'tutoring', 'description' => 'Browse online tutoring, academic & teaching positions'],
                 ['command' => 'ask', 'description' => 'Ask Google AI career bot about remote work & payments'],
@@ -165,11 +169,11 @@ class TelegramService
         $this->setMyCommands();
 
         $this->callApi('setMyDescription', [
-            'description' => "Official Kenya Remote Jobs Bot 🇰🇪🚀\n\nDaily verified global remote jobs paying in USD, GBP, and EUR for East African professionals. High focus on AI model training, data annotation, online tutoring, software development, and virtual assistance.\n\nPowered by Daisy AI to answer your career, Wise/M-Pesa, and CV questions 24/7.",
+            'description' => "Official Kenya Remote Jobs Bot 🇰🇪🚀\n\nExplore current remote roles with Kenya location signals. Practical online work comes first: customer support, admin, writing, transcription and annotation. Review each role’s eligibility and requirements. Employer identities stay hidden on our site.\n\nPowered by Daisy AI to answer your career, Wise/M-Pesa, and CV questions 24/7.",
         ]);
 
         return $this->callApi('setMyShortDescription', [
-            'short_description' => 'Verified remote jobs for Kenyans (AI training, data annotation, tutoring & tech) + 24/7 AI career help.',
+            'short_description' => 'Online work and remote careers for Kenya. Job requirements, application options and Daisy AI career help.',
         ]);
     }
 
@@ -261,8 +265,7 @@ class TelegramService
     }
 
     /**
-     * Broadcasts the latest verified remote jobs to the configured channel/group,
-     * heavily prioritizing Data Annotation, Online Tutoring, and AI Teaching roles.
+     * Broadcasts current roles with practical online work first.
      *
      * @return array{success: bool, count: int, error: ?string}
      */
@@ -290,10 +293,6 @@ class TelegramService
             ];
         }
 
-        // Keep last 40 broadcast IDs in cache for continuous rotation across 5x daily drops
-        $updatedBroadcastIds = array_slice(array_merge($recentlyBroadcastIds, $jobs->pluck('id')->all()), -40);
-        Cache::put('telegram_recent_broadcasted_job_ids', $updatedBroadcastIds, now()->addHours(36));
-
         $formattedText = $this->formatJobDigest($jobs);
 
         $result = $this->sendMessage(
@@ -303,6 +302,12 @@ class TelegramService
             messageType: 'broadcast'
         );
 
+        if ($result['success']) {
+            // Keep last 40 broadcast IDs in cache for continuous rotation across 5x daily drops
+            $updatedBroadcastIds = array_slice(array_merge($recentlyBroadcastIds, $jobs->pluck('id')->all()), -40);
+            Cache::put('telegram_recent_broadcasted_job_ids', $updatedBroadcastIds, now()->addHours(36));
+        }
+
         return [
             'success' => $result['success'],
             'count' => $jobs->count(),
@@ -311,8 +316,8 @@ class TelegramService
     }
 
     /**
-     * Intelligently selects a high-yield, balanced mix of verified remote jobs,
-     * ensuring prominent emphasis on Data Annotation, Online Tutoring, and AI Teaching roles.
+     * Prioritises practical online roles and employer applications. When there
+     * are fewer practical roles, fills remaining slots from other current careers.
      *
      * @param  array<int, string>  $recentlyBroadcastIds
      * @return Collection<int, JobListing>
@@ -329,18 +334,36 @@ class TelegramService
             return collect();
         }
 
-        // Partition into emphasized domains (Data Annotation, Online Tutoring, AI Teaching) vs general remote
+        $limit = max(0, $limit);
+        if ($limit === 0) {
+            return collect();
+        }
+        $practical = $allCandidates->filter(fn (JobListing $job): bool => $job->isAccessibleOnlineWork())
+            ->sortByDesc(fn (JobListing $job): int => $job->accessibilityScore());
+        $freshPractical = $practical->whereNotIn('id', $recentlyBroadcastIds);
+        if ($freshPractical->count() >= $limit) {
+            return $freshPractical->take($limit)->values();
+        }
+        if ($practical->count() >= $limit) {
+            return $freshPractical->merge($practical)->unique('id')->take($limit)->values();
+        }
+
+        // Partition into student/flexible focus roles vs global tech/career roles
         $emphasizedPool = $allCandidates->filter(fn (JobListing $job) => $job->isTelegramEmphasized())
             ->sortByDesc(fn (JobListing $job) => $job->accessibilityScore());
 
         $generalPool = $allCandidates->reject(fn (JobListing $job) => $job->isTelegramEmphasized())
             ->sortByDesc('posted_at');
 
-        // Target at least 60% of the drop for high-demand emphasized roles
-        $targetEmphasized = max(1, (int) ceil($limit * 0.6));
-        $targetGeneral = max(0, $limit - $targetEmphasized);
+        // Target a balanced hybrid mix (e.g. ~50%-60% student/accessible gigs and ~40%-50% global career roles)
+        $targetEmphasized = max(1, (int) ceil($limit * 0.5));
+        if ($limit === 4 && $emphasizedPool->count() >= 3 && $generalPool->count() >= 1) {
+            $targetEmphasized = 3;
+        }
+        $targetGeneral = max(1, $limit - $targetEmphasized);
 
         // Sub-partition emphasized jobs by specific focus areas to ensure diversity:
+        // - Student & Campus Jobs
         // - Online Tutoring & Teaching
         // - Data Annotation & RLHF
         // - AI Teaching & Model Training
@@ -348,6 +371,8 @@ class TelegramService
             $selected = collect();
 
             $categories = [
+                'Transcription & Captioning',
+                'Student & Campus Jobs',
                 'Online Tutoring & Teaching',
                 'Data Annotation & RLHF',
                 'AI Teaching & Model Training',
@@ -402,7 +427,7 @@ class TelegramService
         }
 
         // Return up to limit, putting the highlighted AI/Annotation/Tutoring roles at the top!
-        return $totalChosen->take($limit);
+        return $freshPractical->merge($practical)->merge($totalChosen)->unique('id')->take($limit)->values();
     }
 
     /**
@@ -429,43 +454,43 @@ class TelegramService
         if ($customHeader) {
             $html .= "{$customHeader}\n\n";
         } else {
-            $html .= "🔥 <b>High-Yield Spotlight:</b> <i>Verified Data Annotation, AI Teaching &amp; Online Tutoring Roles (USD Payouts • Flexible Hours • EAT UTC+3 Friendly)</i>\n\n";
+            $html .= "🌐 <b>Practical Online Work &amp; Remote Careers:</b> <i>Review requirements, Kenya location signals and application options.</i>\n\n";
         }
 
+        $redactor = app(Redactor::class);
         foreach ($jobs as $index => $job) {
             $num = $index + 1;
             $hourly = SalaryEstimate::estimateHourlyUsd($job->annual_salary_usd, $job->salary);
             $hourlyStr = SalaryEstimate::formatHourly($hourly);
-            $payInfo = $hourlyStr ? "💰 <b>Est. Rate:</b> {$hourlyStr}" : ($job->salary ? "💰 <b>Pay:</b> {$job->salary}" : '💰 <b>Pay:</b> Competitive International USD Rate');
+            $salarySafe = htmlspecialchars($redactor->redactEmployerIdentity($job->salary ?? '', $job->company), ENT_QUOTES | ENT_SUBSTITUTE);
+            $payInfo = $hourlyStr ? "💰 <b>Est. Rate:</b> {$hourlyStr}" : ($job->salary ? "💰 <b>Pay:</b> {$salarySafe}" : '💰 <b>Pay:</b> Not stated by employer');
 
-            $titleSafe = htmlspecialchars($job->title, ENT_QUOTES | ENT_SUBSTITUTE);
-            $remoteType = htmlspecialchars($job->remote_type ?? 'Worldwide Remote', ENT_QUOTES | ENT_SUBSTITUTE);
+            $titleSafe = htmlspecialchars(mb_substr($redactor->redactEmployerIdentity($job->title, $job->company), 0, 120), ENT_QUOTES | ENT_SUBSTITUTE);
+            $remoteType = htmlspecialchars(mb_substr($redactor->redactEmployerIdentity($job->location ?: 'Location not specified', $job->company), 0, 100), ENT_QUOTES | ENT_SUBSTITUTE);
             $jobUrl = url('/jobs/'.$job->id);
 
-            $category = ! empty($job->tags) && is_array($job->tags) ? htmlspecialchars($job->tags[0], ENT_QUOTES | ENT_SUBSTITUTE) : 'Global Remote';
-
-            $emphasisBadge = $job->telegramEmphasisBadge();
-            $emphasisHighlight = $job->telegramEmphasisHighlight();
+            $categoryBadge = $redactor->redactEmployerIdentity($job->telegramCategoryBadge(), $job->company);
 
             $html .= "<b>{$num}. {$titleSafe}</b>\n";
-            if ($emphasisBadge) {
-                $html .= "{$emphasisBadge}\n";
+            if ($categoryBadge) {
+                $html .= "{$categoryBadge}\n";
             }
-            $html .= "🏢 <b>Employer:</b> 🔒 <i>Verified Global Employer (Unlocked on Site)</i>\n";
-            $html .= "🏷️ <b>Category:</b> {$category}\n";
-            $html .= "🌍 <b>Location:</b> {$remoteType} (EAT UTC+3 Friendly)\n";
+            $html .= "🏢 <b>Employer:</b> 🔒 <i>Employer identity protected</i>\n";
+            $html .= "🌍 <b>Location:</b> {$remoteType} — confirm eligibility\n";
             $html .= "{$payInfo}\n";
-            if ($emphasisHighlight) {
-                $html .= "{$emphasisHighlight}\n";
-            }
-            $html .= "👉 <a href=\"{$jobUrl}\">Unlock Employer &amp; Apply Directly</a>\n\n";
+            $html .= $job->isDirectAts()
+                ? "🔗 <b>Application:</b> Employer application page (account or assessment may be required)\n"
+                : "🔗 <b>Application:</b> Hiring platform or listing site (additional steps may apply)\n";
+            $html .= "👉 <a href=\"{$jobUrl}\">View role &amp; application options</a>\n\n";
         }
 
-        $html .= "🎯 <b>Targeted Opportunities for Kenyans:</b>\n";
-        $html .= '🤖 <a href="'.url('/remote-jobs/ai-training-annotation-kenya')."\">Browse 100+ AI Training &amp; Annotation Roles</a>\n";
+        $html .= "🎯 <b>Curated Job Hubs for Kenyans:</b>\n";
+        $html .= '🎓 <a href="'.url('/remote-jobs/student-jobs-kenya')."\">Browse Campus &amp; Student Remote Jobs</a>\n";
+        $html .= '🤖 <a href="'.url('/remote-jobs/ai-training-annotation-kenya')."\">Browse AI Training &amp; Annotation Roles</a>\n";
         $html .= '📚 <a href="'.url('/jobs?audience=students&q=tutoring')."\">Browse Online Tutoring &amp; Student Gigs</a>\n";
-        $html .= '💼 <a href="'.url('/jobs')."\">View All 400+ Verified Remote Roles</a>\n\n";
-        $html .= "⚡ <i>Full employer identity, ATS tips &amp; 0-second apply links are protected on the platform:</i>\n";
+        $html .= '💻 <a href="'.url('/remote-jobs/software-developer-kenya')."\">Browse Remote Tech &amp; Engineering Careers</a>\n";
+        $html .= '💼 <a href="'.url('/jobs')."\">View Current Remote Roles</a>\n\n";
+        $html .= "⚡ <i>Employer identities remain hidden. Pro includes application access and career tools from KES 250/month:</i>\n";
         $html .= '👉 <b>Unlock All Roles:</b> <a href="'.url('/pricing')."\">KenyaRemoteJobs.com/pricing</a>\n\n";
         $html .= '💬 <i>Have career or payment questions? Type <code>/ask &lt;your question&gt;</code> right here in the chat!</i>';
 
@@ -505,14 +530,14 @@ class TelegramService
 
                     $name = htmlspecialchars($newMember['first_name'] ?? 'there', ENT_QUOTES | ENT_SUBSTITUTE);
                     $welcomeText = "👋 <b>Karibu sana, {$name}!</b> Welcome to the Kenya Remote Jobs Community 🇰🇪✨\n\n"
-                        ."Here you get daily verified remote opportunities open to East African professionals, paying in USD, GBP, and EUR.\n\n"
+                        ."Explore current remote opportunities with Kenya location signals. Review requirements and application options for every role.\n\n"
                         ."📌 <b>Quick Tips to Get Started:</b>\n"
                         ."• Verified jobs dropped 5x daily right here in this channel (heavily featuring AI data annotation, online tutoring, tech & customer support).\n"
                         ."• Use <code>/jobs</code> to see current top roles.\n"
                         ."• Use <code>/aitraining</code> for AI data annotation & RLHF roles.\n"
                         ."• Use <code>/tutoring</code> for online tutoring & teaching positions.\n"
                         ."• Ask any career, CV, or payment question anytime with <code>/ask &lt;question&gt;</code>.\n"
-                        .'• Need tailored CVs & 48-hour early access? Check <a href="'.url('/pricing').'">KenyaRemoteJobs.com</a>';
+                        .'• Need tailored CVs & application access? Check <a href="'.url('/pricing').'">KenyaRemoteJobs.com</a>';
 
                     $this->sendMessage(
                         chatId: $chatId,
@@ -556,12 +581,16 @@ class TelegramService
             if ($command === '/start') {
                 $reply = "🇰🇪 <b>Welcome to Kenya Remote Jobs Assistant!</b>\n\n"
                     ."I am Daisy AI, your 24/7 remote career bot. Here is what I can do for you:\n\n"
-                    ."🔍 <code>/jobs</code> — Latest verified remote jobs (AI training, tutoring, annotation & tech)\n"
+                    ."🔍 <code>/jobs</code> — Practical online work first, plus remote careers\n"
+                    ."🧰 <code>/online</code> — Practical support, admin, writing and annotation roles\n"
+                    ."🔗 <code>/direct</code> — Employer application pages\n"
+                    ."🎓 <code>/students</code> — Flexible campus & student jobs (internships, tutoring, entry-level)\n"
+                    ."💻 <code>/tech</code> — Software engineering & specialist technical roles\n"
                     ."🤖 <code>/aitraining</code> — Latest verified AI data annotation & RLHF training jobs\n"
                     ."📚 <code>/tutoring</code> — Latest verified online tutoring & teaching positions\n"
                     ."💡 <code>/ask &lt;question&gt;</code> — Ask Google AI any career, CV, Wise, M-Pesa, or tax question\n"
                     ."ℹ️ <code>/help</code> — Community guidelines & helpful links\n\n"
-                    .'Ready to level up? Visit <a href="'.url('/jobs').'">KenyaRemoteJobs.com</a> to browse 800+ roles.';
+                    .'Ready to level up? Visit <a href="'.url('/jobs').'">KenyaRemoteJobs.com</a> to browse current roles and start your seven-day application plan.';
 
                 $this->sendMessage($chatId, $reply, 'HTML', $messageId, 'command');
 
@@ -570,19 +599,42 @@ class TelegramService
 
             if ($command === '/help') {
                 $reply = "📋 <b>Kenya Remote Jobs Bot Commands:</b>\n\n"
-                    ."• <code>/jobs</code> — Top 3 latest verified remote positions (prioritizing AI, data annotation & tutoring)\n"
-                    ."• <code>/aitraining</code> — High-paying AI data annotation, prompt & model evaluation roles\n"
+                    ."• <code>/jobs</code> — Current roles with practical online work first\n"
+                    ."• <code>/online</code> — Practical online work\n"
+                    ."• <code>/direct</code> — Employer application pages\n"
+                    ."• <code>/students</code> — Flexible campus & student jobs (internships, tutoring, entry-level)\n"
+                    ."• <code>/tech</code> — Global software engineering & technical remote roles\n"
+                    ."• <code>/aitraining</code> — AI annotation and model evaluation roles; requirements vary\n"
                     ."• <code>/tutoring</code> — Online tutoring, curriculum & academic subject gigs\n"
                     ."• <code>/ask &lt;your question&gt;</code> — Instant answers on remote working, payments, W-8BEN, CVs, etc.\n"
                     ."• <code>/start</code> — Bot welcome menu\n\n"
                     ."👑 <b>Specialized Career Hubs:</b>\n"
+                    .'• Campus & Student Jobs: <a href="'.url('/remote-jobs/student-jobs-kenya')."\">KenyaRemoteJobs.com/student-jobs</a>\n"
                     .'• AI Training & Annotation: <a href="'.url('/remote-jobs/ai-training-annotation-kenya')."\">KenyaRemoteJobs.com/ai-training</a>\n"
-                    .'• Student & Campus Tutoring: <a href="'.url('/jobs?audience=students')."\">KenyaRemoteJobs.com/students</a>\n"
+                    .'• Tech & Software Engineering: <a href="'.url('/remote-jobs/software-developer-kenya')."\">KenyaRemoteJobs.com/software-developer</a>\n"
+                    .'• Student & Campus Tutoring: <a href="'.url('/jobs?audience=students&q=tutoring')."\">KenyaRemoteJobs.com/tutoring</a>\n"
                     .'• Browse All Jobs: <a href="'.url('/jobs')."\">KenyaRemoteJobs.com/jobs</a>\n"
+                    .'• Find matching roles: <a href="'.url('/match')."\">Match my skills</a>\n"
+                    .'• Seven-day application plan: <a href="'.url('/account#search-plan')."\">Open my plan</a>\n"
                     .'• Upgrade to Pro: <a href="'.url('/pricing')."\">KenyaRemoteJobs.com/pricing</a>\n"
                     .'• AI CV Tailor: <a href="'.url('/resume-builder').'">KenyaRemoteJobs.com/resume-builder</a>';
 
                 $this->sendMessage($chatId, $reply, 'HTML', $messageId, 'command');
+
+                return;
+            }
+
+            if ($command === '/online' || $command === '/direct') {
+                $jobs = JobListing::visible()->where('kenya_friendly', true)->get()
+                    ->filter(fn (JobListing $job): bool => $command === '/direct' ? $job->isDirectAts() : $job->isAccessibleOnlineWork())
+                    ->sortByDesc(fn (JobListing $job): int => $job->accessibilityScore())->take(3)->values();
+                if ($jobs->isEmpty()) {
+                    $this->sendMessage($chatId, 'No matching current roles found. Try /jobs or check back later.', 'HTML', $messageId, 'command');
+
+                    return;
+                }
+                $header = $command === '/direct' ? '<b>ROLES WITH EMPLOYER APPLICATION PAGES</b>' : '<b>PRACTICAL ONLINE WORK</b>';
+                $this->sendMessage($chatId, $this->formatJobDigest($jobs, $header), 'HTML', $messageId, 'command');
 
                 return;
             }
@@ -603,6 +655,56 @@ class TelegramService
                 return;
             }
 
+            if ($command === '/students' || $command === '/student' || $command === '/campus' || $command === '/studentjobs') {
+                /** @var Collection<int, JobListing> $jobs */
+                $jobs = JobListing::visible()
+                    ->where('kenya_friendly', true)
+                    ->get()
+                    ->filter(fn (JobListing $j): bool => $j->accessibilityScore() >= 0)
+                    ->filter(fn (JobListing $j) => $j->telegramEmphasisCategory() === 'Student & Campus Jobs'
+                        || in_array('students', (array) ($j->audience_segments ?? []), true)
+                        || str_contains(mb_strtolower($j->title.' '.implode(' ', (array) ($j->tags ?? []))), 'student')
+                        || str_contains(mb_strtolower($j->title.' '.implode(' ', (array) ($j->tags ?? []))), 'campus')
+                        || str_contains(mb_strtolower($j->title.' '.implode(' ', (array) ($j->tags ?? []))), 'intern')
+                    )
+                    ->sortByDesc(fn (JobListing $j) => $j->accessibilityScore())
+                    ->take(3);
+
+                if ($jobs->isEmpty()) {
+                    $this->sendMessage($chatId, 'No current student-oriented roles found. Try /online for practical online work.', 'HTML', $messageId, 'command');
+
+                    return;
+                }
+
+                $customHeader = "🎓 <b>TOP VERIFIED CAMPUS &amp; STUDENT REMOTE JOBS</b>\n<i>Check each listing for experience, qualifications, equipment and availability</i>";
+                $reply = $this->formatJobDigest($jobs, $customHeader);
+                $this->sendMessage($chatId, $reply, 'HTML', $messageId, 'command');
+
+                return;
+            }
+
+            if ($command === '/tech' || $command === '/software' || $command === '/dev' || $command === '/engineering') {
+                /** @var Collection<int, JobListing> $jobs */
+                $jobs = JobListing::visible()
+                    ->where('kenya_friendly', true)
+                    ->get()
+                    ->filter(fn (JobListing $j): bool => (bool) preg_match('/\b(software|engineer|developer|devops|technical|data scientist|cybersecurity)\b/i', $j->title))
+                    ->sortByDesc('posted_at')
+                    ->take(3);
+
+                if ($jobs->isEmpty()) {
+                    $this->sendMessage($chatId, 'No current technical roles found. Try /online for practical online work.', 'HTML', $messageId, 'command');
+
+                    return;
+                }
+
+                $customHeader = "💻 <b>TOP VERIFIED REMOTE TECH &amp; SOFTWARE ENGINEERING ROLES</b>\n<i>Specialist roles • Review required skills, experience and stated pay</i>";
+                $reply = $this->formatJobDigest($jobs, $customHeader);
+                $this->sendMessage($chatId, $reply, 'HTML', $messageId, 'command');
+
+                return;
+            }
+
             if ($command === '/aitraining' || $command === '/annotation' || $command === '/annotate') {
                 /** @var Collection<int, JobListing> $jobs */
                 $jobs = JobListing::visible()
@@ -618,7 +720,7 @@ class TelegramService
                     return;
                 }
 
-                $customHeader = "🤖 <b>TOP VERIFIED AI DATA ANNOTATION &amp; TRAINING JOBS</b>\n<i>Flexible hours • Earn in USD ($15 - $40/hr) • Work from anywhere in Kenya</i>";
+                $customHeader = "🤖 <b>TOP VERIFIED AI DATA ANNOTATION &amp; TRAINING JOBS</b>\n<i>Skills, location eligibility, assessment and pay depend on the role</i>";
                 $reply = $this->formatJobDigest($jobs, $customHeader);
                 $this->sendMessage($chatId, $reply, 'HTML', $messageId, 'command');
 
@@ -640,7 +742,7 @@ class TelegramService
                     return;
                 }
 
-                $customHeader = "📚 <b>TOP VERIFIED ONLINE TUTORING &amp; TEACHING GIGS</b>\n<i>Flexible academic hours • Student &amp; graduate friendly • Earn in USD</i>";
+                $customHeader = "📚 <b>TOP VERIFIED ONLINE TUTORING &amp; TEACHING GIGS</b>\n<i>Check subject expertise, qualifications and working hours</i>";
                 $reply = $this->formatJobDigest($jobs, $customHeader);
                 $this->sendMessage($chatId, $reply, 'HTML', $messageId, 'command');
 

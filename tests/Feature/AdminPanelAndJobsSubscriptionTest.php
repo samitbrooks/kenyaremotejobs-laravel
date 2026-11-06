@@ -83,7 +83,7 @@ class AdminPanelAndJobsSubscriptionTest extends TestCase
         $detailResponse->assertSee('Product Designer');
         $detailResponse->assertSee('Verified Direct Employer');
         $detailResponse->assertDontSee('Design Studio');
-        $detailResponse->assertSee('Apply Directly');
+        $detailResponse->assertSee('Continue to application site');
     }
 
     public function test_guest_accessing_admin_is_redirected_to_admin_credentials_login(): void

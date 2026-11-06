@@ -37,10 +37,9 @@ class CategoryLandingController extends Controller
         $totalPages = max(1, (int) ceil($totalJobs / self::PAGE_SIZE));
         $page = min($page, $totalPages);
 
-        $jobs = (clone $query)
-            ->latest('posted_at')
-            ->forPage($page, self::PAGE_SIZE)
-            ->get();
+        $jobs = (clone $query)->latest('posted_at')->get()
+            ->sortByDesc(fn (JobListing $job): int => $job->accessibilityScore())
+            ->slice(($page - 1) * self::PAGE_SIZE, self::PAGE_SIZE)->values();
 
         // Fallback: If no direct matches, show latest visible listings so the page is never empty
         if ($jobs->isEmpty()) {
@@ -59,7 +58,7 @@ class CategoryLandingController extends Controller
             || ($unlockedIds && $unlockedIds->has($job->id))
         );
 
-        $profile = Matching::parseProfileCookie($request->cookie(Matching::COOKIE_NAME));
+        $profile = Matching::profileFor($request->cookie(Matching::COOKIE_NAME), $request->user());
         $matchPercent = $profile
             ? fn (JobListing $job) => Matching::computeMatchPercent($profile, $job->only(['tags', 'title', 'description']))
             : fn () => null;

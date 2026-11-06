@@ -7,7 +7,6 @@ use App\Models\JobListing;
 use App\Models\SyncMeta;
 use App\Services\JobSources\ArbeitnowSource;
 use App\Services\JobSources\AshbySource;
-use App\Services\JobSources\CuratedStudentJobsSource;
 use App\Services\JobSources\GreenhouseSource;
 use App\Services\JobSources\HackerNewsSource;
 use App\Services\JobSources\HimalayasSource;
@@ -16,11 +15,13 @@ use App\Services\JobSources\LeverSource;
 use App\Services\JobSources\Micro1Source;
 use App\Services\JobSources\RemotiveSource;
 use App\Services\JobSources\TuringSource;
+use App\Services\JobSources\WorkableSource;
 use App\Support\Audience;
 use App\Support\Format;
 use App\Support\JobTier;
 use App\Support\KenyaRelevance;
 use App\Support\Mojibake;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Throwable;
@@ -37,8 +38,15 @@ class JobSyncService
     /**
      * @return array<class-string, JobSource>
      */
-    private function sources(): array
+    private function sources(bool $directOnlineOnly = false): array
     {
+        if ($directOnlineOnly) {
+            return [
+                AshbySource::class => new AshbySource([['slug' => 'clipboard', 'source_name' => 'Clipboard', 'kenya_only' => true]]),
+                WorkableSource::class => new WorkableSource,
+            ];
+        }
+
         return [
             GreenhouseSource::class => new GreenhouseSource,
             AshbySource::class => new AshbySource,
@@ -49,13 +57,13 @@ class JobSyncService
             ArbeitnowSource::class => new ArbeitnowSource,
             Micro1Source::class => new Micro1Source,
             TuringSource::class => new TuringSource,
-            CuratedStudentJobsSource::class => new CuratedStudentJobsSource,
+            WorkableSource::class => new WorkableSource,
         ];
     }
 
-    public function sync(bool $notifyPro = false): int
+    public function sync(bool $notifyPro = false, bool $directOnlineOnly = false): int
     {
-        $fetched = $this->fetchAllSources();
+        $fetched = $this->fetchAllSources($directOnlineOnly);
         $hiddenIds = HiddenJob::pluck('id')->flip();
 
         $stored = collect($fetched)
@@ -85,9 +93,11 @@ class JobSyncService
             return 0;
         }
 
-        $this->upsertSyncedJobs($stored);
+        $this->upsertSyncedJobs($stored, pruneMissing: ! $directOnlineOnly);
 
-        SyncMeta::where('id', 1)->update(['last_synced_at' => now()]);
+        if (! $directOnlineOnly) {
+            SyncMeta::where('id', 1)->update(['last_synced_at' => now()]);
+        }
 
         if ($notifyPro) {
             try {
@@ -103,11 +113,11 @@ class JobSyncService
     /**
      * @return array<int, array<string, mixed>>
      */
-    private function fetchAllSources(): array
+    private function fetchAllSources(bool $directOnlineOnly = false): array
     {
         $jobs = [];
 
-        foreach ($this->sources() as $class => $source) {
+        foreach ($this->sources($directOnlineOnly) as $class => $source) {
             try {
                 foreach ($source->fetch() as $job) {
                     // Resolve direct ATS link if available in description or URL
@@ -149,14 +159,14 @@ class JobSyncService
     }
 
     /**
-     * Upserts every freshly-fetched job (origin='synced'), then deletes only
-     * the synced rows that didn't come back this time — a listing delisted
-     * upstream disappears, same as before. Admin-authored ("manual") and
+     * Upserts every freshly-fetched job (origin='synced'), then removes missing synced rows.
+     * Recently confirmed employer-feed rows get a 36-hour grace period so
+     * a partial provider outage cannot immediately erase live vacancies. Admin-authored ("manual") and
      * employer rows are never touched here, and hidden-job ids are assumed
      * to already be filtered out of $jobs by the caller so they don't
      * reappear.
      */
-    private function upsertSyncedJobs(Collection $jobs): void
+    private function upsertSyncedJobs(Collection $jobs, bool $pruneMissing = true): void
     {
         $keepIds = $jobs->pluck('id');
 
@@ -167,7 +177,21 @@ class JobSyncService
             );
         }
 
-        $deletedIds = JobListing::where('origin', 'synced')->whereNotIn('id', $keepIds)->pluck('id');
+        JobListing::where('origin', 'synced')->where(function (Builder $query): void {
+            $query->where('id', 'like', 'student--%')->orWhere('id', 'like', 'turing--wt-%');
+        })->delete();
+
+        JobListing::where('origin', 'synced')->where('id', 'like', 'ashby-clipboard--%')
+            ->where('kenya_friendly', false)->delete();
+
+        if (! $pruneMissing) {
+            return;
+        }
+
+        $deletedIds = JobListing::where('origin', 'synced')->whereNotIn('id', $keepIds)
+            ->where(function (Builder $query): void {
+                $query->whereNull('last_seen_at')->orWhere('last_seen_at', '<', now()->subHours(36));
+            })->pluck('id');
 
         if ($deletedIds->isNotEmpty()) {
             $indexingService = app(GoogleIndexingService::class);

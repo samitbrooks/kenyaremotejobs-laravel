@@ -553,7 +553,7 @@ Use our [CV ATS Match Calculator](https://kenyaremotejobs.com/match) to compare 
 ---
 
 ## Accelerate Your Search
-Build a recruiter-ready international resume with our [AI Resume Builder](https://kenyaremotejobs.com/resume-builder) or upgrade to [KenyaRemoteJobs Pro](https://kenyaremotejobs.com/pricing) to apply 48 hours before the public.
+Build a recruiter-ready international resume with our [AI Resume Builder](https://kenyaremotejobs.com/resume-builder) or upgrade to [KenyaRemoteJobs Pro](https://kenyaremotejobs.com/pricing) for application links and career tools. Membership does not guarantee interviews or employment.
 MD
             ],
 

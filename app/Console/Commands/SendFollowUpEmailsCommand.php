@@ -23,7 +23,7 @@ class SendFollowUpEmailsCommand extends Command
         $force = (bool) $this->option('force');
 
         $query = User::query()
-            ->whereNull('marketing_opt_out_at')
+            ->whereNull('banned_at')->whereNull('marketing_opt_out_at')
             ->where('subscribed', false);
 
         if ($targetEmail) {

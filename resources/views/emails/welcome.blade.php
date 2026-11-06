@@ -15,7 +15,7 @@ A couple of things worth knowing:
 New listings don't stay up forever — unlock the ones you want with credits (or go unlimited with a subscription) before they disappear.
 </x-mail::panel>
 
-Titles, companies, and full descriptions are always free to read. What's gated while a listing is new is just the employer's name and the apply link.
+Job titles, descriptions, and requirements are free to browse. Application links require Pro access, an active trial or referral pass, or an individual job unlock. Membership does not guarantee an interview or employment.
 
 Thanks,<br>
 Daisy from Kenya Remote Jobs

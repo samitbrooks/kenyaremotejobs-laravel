@@ -6,6 +6,7 @@ use App\Mail\JobMatchesDigestEmail;
 use App\Mail\ProJobRecommendationsEmail;
 use App\Models\JobListing;
 use App\Models\User;
+use App\Support\Matching;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -20,42 +21,34 @@ class JobRecommendationService
      */
     public function getRecommendedJobsForUser(User $user, int $limit = 18): Collection
     {
-        return JobListing::query()
+        $query = JobListing::visible()
             ->whereNotNull('title')
             ->where('title', '!=', '')
-            ->orderByDesc('origin')
             ->orderByDesc('kenya_friendly')
-            ->orderByDesc('posted_at')
-            ->limit($limit)
-            ->get();
+            ->latest('posted_at');
+
+        $profile = Matching::profileFor(null, $user);
+        if (! $profile || ($profile['skills'] === [] && $profile['roles'] === [])) {
+            return $query->get()->sortByDesc(fn (JobListing $job): int => $job->accessibilityScore())->take($limit)->values();
+        }
+
+        $jobs = $query->get()->filter(fn (JobListing $job): bool => Matching::computeMatchPercent($profile, $job->only(['tags', 'title', 'description'])) > 0)
+            ->sortByDesc(fn (JobListing $job): int => Matching::computeMatchPercent($profile, $job->only(['tags', 'title', 'description'])));
+
+        return $jobs->take($limit)->values();
     }
 
     /**
-     * Returns top suited remote opportunities specifically tailored for Pro subscribers,
-     * highlighting highest compensation, Kenya-friendly matches, and Early Access openings.
-     *
      * @return Collection<int, JobListing>
      */
     public function getProRecommendedJobsForUser(User $user, int $limit = 15): Collection
     {
-        return JobListing::query()
-            ->whereNotNull('title')
-            ->where('title', '!=', '')
-            ->orderByDesc('kenya_friendly')
-            ->orderByDesc('annual_salary_usd')
-            ->orderByDesc('posted_at')
-            ->limit($limit)
-            ->get();
+        return $this->getRecommendedJobsForUser($user, $limit);
     }
 
-    /**
-     * Returns the total active open roles count across the platform.
-     */
     public function getTotalOpenRolesCount(): int
     {
-        $count = JobListing::query()->count();
-
-        return $count > 0 ? $count : 167;
+        return JobListing::visible()->count();
     }
 
     /**
@@ -150,7 +143,7 @@ class JobRecommendationService
     {
         $subscribers = User::query()
             ->where('subscribed', true)
-            ->whereNull('marketing_opt_out_at')
+            ->whereNull('banned_at')->whereNull('marketing_opt_out_at')
             ->get();
 
         $sentCount = 0;

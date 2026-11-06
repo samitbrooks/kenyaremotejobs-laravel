@@ -11,7 +11,7 @@ new class extends Component
 
     public ?int $applicationId = null;
 
-    public string $status = 'applied';
+    public string $status = 'saved';
 
     public string $notes = '';
 
@@ -43,7 +43,7 @@ new class extends Component
 
     public function toggleTrack(): void
     {
-        if (! $this->isAuthed) {
+        if (! auth()->check()) {
             $this->redirect('/account?next=/jobs/'.$this->jobId, navigate: false);
 
             return;
@@ -61,12 +61,12 @@ new class extends Component
         $app = JobApplication::create([
             'user_id' => $user->id,
             'job_listing_id' => $this->jobId,
-            'status' => 'applied',
-            'applied_at' => now(),
+            'status' => 'saved',
+            'applied_at' => null,
         ]);
 
         $this->applicationId = $app->id;
-        $this->status = 'applied';
+        $this->status = 'saved';
         $this->savedSuccess = true;
     }
 
@@ -120,7 +120,7 @@ new class extends Component
             ->delete();
 
         $this->applicationId = null;
-        $this->status = 'applied';
+        $this->status = 'saved';
         $this->notes = '';
         $this->recruiterContact = '';
         $this->showNotesModal = false;
@@ -173,7 +173,7 @@ new class extends Component
     {{-- Notes & Recruiter CRM Modal --}}
     @if ($showNotesModal)
         <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-xs">
-            <div class="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl animate-in fade-in zoom-in-95 duration-150">
+            <div class="w-full max-w-md rounded-2xl bg-white p-6 shadow-sm animate-in fade-in zoom-in-95 duration-150">
                 <div class="flex items-center justify-between pb-3 border-b border-black/5">
                     <h3 class="font-bold text-foreground">Application CRM Notes</h3>
                     <button type="button" wire:click="$set('showNotesModal', false)" class="text-foreground/40 hover:text-foreground text-lg leading-none">
@@ -197,7 +197,7 @@ new class extends Component
                         <textarea
                             wire:model="notes"
                             rows="4"
-                            placeholder="e.g. Applied via early access. Screening call scheduled for Thursday 4PM EAT. Stated salary range: $3,500/mo."
+                            placeholder="e.g. Applied via Pro access. Screening call scheduled for Thursday 4PM EAT. Stated salary range: $3,500/mo."
                             class="w-full rounded-xl border border-black/10 px-3 py-2 text-sm focus:border-sunrise-500 focus:outline-none focus:ring-1 focus:ring-sunrise-500"
                         ></textarea>
                     </div>

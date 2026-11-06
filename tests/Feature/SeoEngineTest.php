@@ -648,6 +648,6 @@ class SeoEngineTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('Verified Direct Employer');
         $response->assertSee('Vetted');
-        $response->assertSee('View Role');
+        $response->assertSee('View role');
     }
 }

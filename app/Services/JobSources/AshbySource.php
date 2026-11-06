@@ -2,6 +2,7 @@
 
 namespace App\Services\JobSources;
 
+use App\Support\KenyaRelevance;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -14,6 +15,7 @@ class AshbySource implements JobSource
      * Ashby provides a public, unauthenticated posting API for direct career board queries.
      */
     private const BOARDS = [
+        ['slug' => 'clipboard', 'source_name' => 'Clipboard', 'kenya_only' => true],
         ['slug' => 'writer', 'source_name' => 'Writer'],
         ['slug' => 'clickup', 'source_name' => 'ClickUp'],
         ['slug' => 'notion', 'source_name' => 'Notion'],
@@ -34,11 +36,16 @@ class AshbySource implements JobSource
         ['slug' => 'vapi', 'source_name' => 'Vapi'],
     ];
 
+    /**
+     * @param  array<int, array{slug: string, source_name: string, kenya_only?: bool}>|null  $boards
+     */
+    public function __construct(private ?array $boards = null) {}
+
     public function fetch(): array
     {
         $jobs = [];
 
-        foreach (self::BOARDS as $board) {
+        foreach ($this->boards ?? self::BOARDS as $board) {
             try {
                 $boardJobs = $this->fetchBoard($board);
                 array_push($jobs, ...$boardJobs);
@@ -81,6 +88,7 @@ class AshbySource implements JobSource
                 return str_contains($location, 'remote') || str_contains($location, 'anywhere') || str_contains($location, 'worldwide');
             })
             ->map(fn ($job) => $this->normalize($job, $board['source_name'], $board['slug']))
+            ->filter(fn (array $job): bool => ! ($board['kenya_only'] ?? false) || KenyaRelevance::score($job)['kenyaFriendly'])
             ->values()
             ->all();
     }
@@ -99,7 +107,7 @@ class AshbySource implements JobSource
             'id' => "ashby-{$slug}--{$job['id']}",
             'source_name' => $sourceName,
             'source_id' => (string) $job['id'],
-            'source_url' => $job['jobUrl'] ?? $job['applyUrl'] ?? "https://jobs.ashbyhq.com/{$slug}/{$job['id']}",
+            'source_url' => $job['applyUrl'] ?? $job['jobUrl'] ?? "https://jobs.ashbyhq.com/{$slug}/{$job['id']}",
             'title' => $job['title'],
             'company' => $sourceName,
             'description' => $job['descriptionHtml'] ?? $job['descriptionPlain'] ?? '',
@@ -109,6 +117,7 @@ class AshbySource implements JobSource
             'salary' => null,
             'annual_salary_usd' => null,
             'posted_at' => $publishedAt,
+            'last_seen_at' => now(),
         ];
     }
 }

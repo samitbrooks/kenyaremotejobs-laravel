@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Services\ReferralService;
+use App\Support\SafeUrl;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,23 +19,24 @@ class FreeTrialController extends Controller
     public function activate(Request $request): RedirectResponse
     {
         $user = $request->user();
+        $destination = SafeUrl::redirectPath($request->query('next'), '/jobs');
 
         if (! $user) {
-            return redirect('/account?next=%2Ftrial%2Factivate&trial=1')->with(
+            return redirect('/account?'.http_build_query(['next' => '/trial/activate'.($destination !== '/jobs' ? '?'.http_build_query(['next' => $destination]) : ''), 'trial' => 1]))->with(
                 'info',
                 'Enter your email below to activate your 24-hour free trial pass instantly.'
             );
         }
 
         if ($user->subscribed) {
-            return redirect('/jobs')->with(
+            return redirect($destination)->with(
                 'info',
                 'You already have unlimited Pro membership access!'
             );
         }
 
         if ($user->onTrial()) {
-            return redirect('/jobs')->with(
+            return redirect($destination)->with(
                 'info',
                 "Your 24-hour free trial is already active (expires in {$user->trialRemainingHuman()})."
             );
@@ -57,7 +59,7 @@ class FreeTrialController extends Controller
 
         $expiresAt = $user->trial_ends_at ? $user->trial_ends_at->format('M j, g:i A') : 'in 24 hours';
 
-        return redirect('/jobs')->with(
+        return redirect($destination)->with(
             'success',
             "Your 24-hour free trial is now active! You have full access to browse and apply to all remote jobs until {$expiresAt}."
         );
@@ -73,6 +75,8 @@ class FreeTrialController extends Controller
             return redirect()->route('admin.login', ['next' => '/jobs'])
                 ->with('info', 'Administrator accounts must authenticate via the secure Admin Portal with credentials.');
         }
+
+        abort_if($user->isBanned(), 403, 'This account is blocked.');
 
         Auth::login($user, remember: true);
         $request->session()->regenerate();

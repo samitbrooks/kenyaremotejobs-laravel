@@ -4,6 +4,7 @@ use App\Support\Matching;
 use App\Support\MatchOptions;
 use Illuminate\Support\Facades\Cookie;
 use Livewire\Component;
+use Illuminate\Validation\Rule;
 
 new class extends Component
 {
@@ -17,7 +18,7 @@ new class extends Component
 
     public function mount(): void
     {
-        $profile = Matching::parseProfileCookie(request()->cookie(Matching::COOKIE_NAME));
+        $profile = Matching::profileFor(request()->cookie(Matching::COOKIE_NAME), auth()->user());
         if ($profile) {
             $this->skills = $profile['skills'];
             $this->roles = $profile['roles'];
@@ -47,9 +48,26 @@ new class extends Component
 
     public function save(): void
     {
+        $this->validate([
+            'skills' => ['array', 'max:40'],
+            'skills.*' => ['string', Rule::in(array_merge(...array_values(MatchOptions::SKILL_GROUPS)))],
+            'roles' => ['array', 'max:25'],
+            'roles.*' => ['string', Rule::in(MatchOptions::ROLE_OPTIONS)],
+            'yearsExperience' => ['integer', Rule::in(array_column(MatchOptions::EXPERIENCE_BANDS, 'years'))],
+        ]);
+
+        if ($this->skills === [] && $this->roles === []) {
+            $this->addError('skills', 'Choose at least one skill or role to see relevant matches.');
+
+            return;
+        }
+
+        $profile = ['skills' => $this->skills, 'roles' => $this->roles, 'yearsExperience' => $this->yearsExperience];
+        auth()->user()?->update(['job_search_profile' => $profile]);
+
         Cookie::queue(Cookie::make(
             Matching::COOKIE_NAME,
-            json_encode(['skills' => $this->skills, 'roles' => $this->roles, 'yearsExperience' => $this->yearsExperience]),
+            json_encode($profile),
             Matching::COOKIE_MINUTES,
             httpOnly: true,
         ));
@@ -60,6 +78,7 @@ new class extends Component
     public function clear(): void
     {
         Cookie::queue(Cookie::forget(Matching::COOKIE_NAME));
+        auth()->user()?->update(['job_search_profile' => null]);
         $this->skills = [];
         $this->roles = [];
         $this->yearsExperience = 0;
@@ -69,6 +88,8 @@ new class extends Component
 ?>
 
 <form wire:submit="save" class="rounded-2xl border border-black/5 bg-white p-6 shadow-sm sm:p-8">
+    @error('skills') <p role="alert" class="mb-3 text-sm text-rose-700">{{ $message }}</p> @enderror
+    @if ($errors->any()) <p role="alert" class="mb-3 text-sm text-rose-700">Please check your skills, roles, and experience selection.</p> @endif
     <fieldset>
         <legend class="text-sm font-semibold">Your skills</legend>
         <p class="mt-0.5 text-xs text-foreground/40">Pick as many as apply.</p>
@@ -82,7 +103,7 @@ new class extends Component
                                 type="button"
                                 wire:click="toggleSkill('{{ $skill }}')"
                                 aria-pressed="{{ in_array($skill, $skills, true) ? 'true' : 'false' }}"
-                                class="rounded-full border px-3 py-1.5 text-sm font-medium transition {{ in_array($skill, $skills, true) ? 'border-sunrise-500 bg-sunrise-500 text-white' : 'border-black/10 bg-white text-foreground/70 hover:border-sunrise-300 hover:text-foreground' }}"
+                                class="rounded-lg border px-3 py-1.5 text-sm font-medium transition {{ in_array($skill, $skills, true) ? 'border-sunrise-500 bg-sunrise-500 text-white' : 'border-black/10 bg-white text-foreground/70 hover:border-sunrise-300 hover:text-foreground' }}"
                             >
                                 {{ $skill }}
                             </button>
@@ -102,7 +123,7 @@ new class extends Component
                     type="button"
                     wire:click="toggleRole('{{ $role }}')"
                     aria-pressed="{{ in_array($role, $roles, true) ? 'true' : 'false' }}"
-                    class="rounded-full border px-3 py-1.5 text-sm font-medium transition {{ in_array($role, $roles, true) ? 'border-sunrise-500 bg-sunrise-500 text-white' : 'border-black/10 bg-white text-foreground/70 hover:border-sunrise-300 hover:text-foreground' }}"
+                    class="rounded-lg border px-3 py-1.5 text-sm font-medium transition {{ in_array($role, $roles, true) ? 'border-sunrise-500 bg-sunrise-500 text-white' : 'border-black/10 bg-white text-foreground/70 hover:border-sunrise-300 hover:text-foreground' }}"
                 >
                     {{ $role }}
                 </button>
@@ -118,7 +139,7 @@ new class extends Component
                     type="button"
                     wire:click="setExperience({{ $band['years'] }})"
                     aria-pressed="{{ $yearsExperience === $band['years'] ? 'true' : 'false' }}"
-                    class="rounded-full border px-3 py-1.5 text-sm font-medium transition {{ $yearsExperience === $band['years'] ? 'border-sunrise-500 bg-sunrise-500 text-white' : 'border-black/10 bg-white text-foreground/70 hover:border-sunrise-300 hover:text-foreground' }}"
+                    class="rounded-lg border px-3 py-1.5 text-sm font-medium transition {{ $yearsExperience === $band['years'] ? 'border-sunrise-500 bg-sunrise-500 text-white' : 'border-black/10 bg-white text-foreground/70 hover:border-sunrise-300 hover:text-foreground' }}"
                 >
                     {{ $band['label'] }}
                 </button>
@@ -131,7 +152,7 @@ new class extends Component
         @disabled(count($skills) === 0 && count($roles) === 0)
         wire:loading.attr="disabled"
         wire:target="save"
-        class="btn-pop mt-6 w-full rounded-full gradient-sunrise px-6 py-3 font-semibold text-white shadow-lg disabled:opacity-60"
+        class="btn-pop mt-6 w-full rounded-lg gradient-sunrise px-6 py-3 font-semibold text-white shadow-sm disabled:opacity-60"
     >
         <span wire:loading.remove wire:target="save">Show my matches</span>
         <span wire:loading wire:target="save">Matching&hellip;</span>

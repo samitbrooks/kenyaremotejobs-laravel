@@ -16,6 +16,26 @@
         <livewire:admin-subscription-toggle :user-id="$user->id" :subscribed="$user->subscribed" />
     </div>
 
+    @unless ($user->isAdmin())
+        <div class="mt-6 rounded-2xl border border-black/5 bg-white p-6 shadow-sm">
+            <h2 class="font-semibold">Account access</h2>
+            <p class="mt-1 text-sm text-foreground/60">
+                {{ $user->isBanned() ? 'Banned. Sign-in and site emails are blocked.' : 'Ban this account to block sign-in and all site emails.' }}
+            </p>
+            @if (session('success'))
+                <p role="status" class="mt-2 text-sm text-emerald-700">{{ session('success') }}</p>
+            @endif
+            <form method="POST" action="{{ route('admin.users.ban', $user) }}" class="mt-3">
+                @csrf
+                @method('PATCH')
+                <input type="hidden" name="banned" value="{{ $user->isBanned() ? '0' : '1' }}">
+                <button class="rounded-xl border border-red-200 px-4 py-2 text-sm font-semibold text-red-700 hover:bg-red-50">
+                    {{ $user->isBanned() ? 'Unban user' : 'Ban user' }}
+                </button>
+            </form>
+        </div>
+    @endunless
+
     <div class="mt-8 rounded-2xl border border-black/5 bg-white p-6 shadow-sm">
         <h2 class="font-semibold">Credit balance</h2>
         <div class="mt-3 grid grid-cols-3 gap-3">

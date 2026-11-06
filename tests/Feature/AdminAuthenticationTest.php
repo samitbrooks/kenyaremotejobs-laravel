@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -180,5 +181,48 @@ class AdminAuthenticationTest extends TestCase
         $response = $this->actingAs($admin)->get('/admin');
 
         $response->assertRedirect(route('admin.login', ['next' => '/admin']));
+    }
+
+    public function test_admin_can_ban_and_unban_a_user(): void
+    {
+        $admin = User::factory()->create(['email' => 'admin@example.com']);
+        $user = User::factory()->create();
+        $banUrl = route('admin.users.ban', $user);
+
+        $this->actingAs($user)->patch($banUrl, ['banned' => true])
+            ->assertRedirect(route('admin.login'));
+        $this->assertFalse($user->fresh()->isBanned());
+
+        $this->actingAs($admin)->withSession(['admin_authenticated' => true])
+            ->patch($banUrl, ['banned' => true])->assertRedirect();
+        $this->assertTrue($user->fresh()->isBanned());
+
+        $this->actingAs($user->fresh())->get('/account')->assertForbidden();
+        $this->assertGuest();
+
+        foreach (['auth.link', 'trial.claim'] as $route) {
+            $link = URL::temporarySignedRoute($route, now()->addMinutes(10), ['user' => $user->id]);
+            $this->get($link)->assertForbidden();
+            $this->assertGuest();
+        }
+
+        $this->actingAs($admin)->withSession(['admin_authenticated' => true])
+            ->patch($banUrl, ['banned' => false])->assertRedirect();
+        $this->assertFalse($user->fresh()->isBanned());
+        $this->actingAs($user->fresh())->get('/account')->assertOk();
+    }
+
+    public function test_mail_transport_suppresses_messages_to_banned_users(): void
+    {
+        $user = User::factory()->create(['banned_at' => now()]);
+        $mailer = Mail::mailer('array');
+
+        $mailer->raw('Queued update', fn ($message) => $message->to($user->email)->subject('Update'));
+        $this->assertCount(0, $mailer->getSymfonyTransport()->messages());
+
+        $user->forceFill(['banned_at' => null])->save();
+
+        $mailer->raw('New update', fn ($message) => $message->to($user->email)->subject('Update'));
+        $this->assertCount(1, $mailer->getSymfonyTransport()->messages());
     }
 }

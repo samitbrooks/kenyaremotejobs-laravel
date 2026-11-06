@@ -150,6 +150,24 @@ class AdminController extends Controller
         return view('admin.users', ['users' => User::latest()->get()]);
     }
 
+    public function updateUserBan(Request $request, User $user): RedirectResponse
+    {
+        abort_if($user->isAdmin(), 403);
+
+        $request->validate(['banned' => ['required', 'boolean']]);
+        $banned = $request->boolean('banned');
+
+        $user->forceFill(['banned_at' => $banned ? ($user->banned_at ?? now()) : null]);
+
+        if ($banned) {
+            $user->setRememberToken(null);
+        }
+
+        $user->save();
+
+        return back()->with('success', $banned ? 'User banned and email delivery blocked.' : 'User unbanned.');
+    }
+
     public function userShow(User $user, CreditsService $credits)
     {
         return view('admin.user-show', [
@@ -238,7 +256,7 @@ class AdminController extends Controller
     {
         $target = $request->input('target', 'free');
         $query = User::query()
-            ->whereNull('marketing_opt_out_at')
+            ->whereNull('banned_at')->whereNull('marketing_opt_out_at')
             ->where('subscribed', false);
 
         if ($target === 'pending') {
@@ -273,7 +291,7 @@ class AdminController extends Controller
     public function sendFollowUpBroadcast(Request $request): RedirectResponse
     {
         $recipients = User::query()
-            ->whereNull('marketing_opt_out_at')
+            ->whereNull('banned_at')->whereNull('marketing_opt_out_at')
             ->where('subscribed', false)
             ->whereNull('follow_up_sent_at')
             ->where(function ($sub) {
@@ -304,7 +322,7 @@ class AdminController extends Controller
         $isForce = (bool) $request->boolean('force', false);
 
         $query = User::query()
-            ->whereNull('marketing_opt_out_at')
+            ->whereNull('banned_at')->whereNull('marketing_opt_out_at')
             ->when(! $isForce, function ($q) {
                 $q->where(function ($sub) {
                     $sub->whereNull('last_job_digest_at')
@@ -436,7 +454,7 @@ class AdminController extends Controller
         $audience = $validated['audience'];
         $recipients = User::query()
             ->when($audience !== 'all', fn ($q) => $q->where('subscribed', $audience === 'subscribed'))
-            ->whereNull('marketing_opt_out_at')
+            ->whereNull('banned_at')->whereNull('marketing_opt_out_at')
             ->get();
 
         if ($recipients->isEmpty()) {

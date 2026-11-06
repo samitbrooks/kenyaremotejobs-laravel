@@ -21,8 +21,8 @@ class SubscriptionAndEarlyAccessTest extends TestCase
         $response->assertSee('Remote Career Accelerator');
         $response->assertSee('M-Pesa Supported');
         $response->assertSee('Free vs Pro Membership');
-        $response->assertSee('Full Access to Apply to All 800+ Jobs');
-        $response->assertSee('Pro Exclusive: Employers Actively Seeking Kenyan Talent');
+        $response->assertSee('Application links across current job listings');
+        $response->assertSee('Explore international and Kenyan employer listings');
         $response->assertSee('Included with Pro');
     }
 
@@ -60,7 +60,7 @@ class SubscriptionAndEarlyAccessTest extends TestCase
         $detailResponse->assertSee('Verified Direct Employer');
         $detailResponse->assertDontSee('PyCorp Ltd');
         $detailResponse->assertSee('Python developer needed.');
-        $detailResponse->assertSee('Early Access');
+        $detailResponse->assertSee('Pro Access');
         $detailResponse->assertDontSee('https://example.com/jobs/py-1');
     }
 
@@ -96,7 +96,7 @@ class SubscriptionAndEarlyAccessTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('Verified Direct Employer');
         $response->assertDontSee('Acme Global Corp');
-        $response->assertSee('Apply Directly');
+        $response->assertSee('Continue to application site');
         $response->assertSee('https://example.com/jobs/123');
     }
 
@@ -126,7 +126,7 @@ class SubscriptionAndEarlyAccessTest extends TestCase
         $guestResponse = $this->get('/jobs/'.$freshJob->id);
         $guestResponse->assertStatus(200);
         $guestResponse->assertDontSee('Apply Directly');
-        $guestResponse->assertSee('Early Access');
+        $guestResponse->assertSee('Pro Access');
 
         // Subscribed Pro member can access and see early access indicator
         $proUser = User::factory()->create([
@@ -136,8 +136,8 @@ class SubscriptionAndEarlyAccessTest extends TestCase
 
         $proResponse = $this->actingAs($proUser)->get('/jobs/'.$freshJob->id);
         $proResponse->assertStatus(200);
-        $proResponse->assertSee('Pro Member Early Access Active');
-        $proResponse->assertSee('Apply Directly');
+        $proResponse->assertSee('Pro Membership Active');
+        $proResponse->assertSee('Continue to application site');
     }
 
     public function test_direct_employer_listing_applications_accessible_to_pro_members(): void
@@ -222,7 +222,7 @@ class SubscriptionAndEarlyAccessTest extends TestCase
         $response = $this->actingAs($user)->get('/account');
         $response->assertStatus(200);
         $response->assertSee('Customer Success Specialist');
-        $response->assertSee('GlobalSupport Inc');
+        $response->assertDontSee('GlobalSupport Inc');
         $response->assertSee('recruiter@globalsupport.com');
         $response->assertSee('Screening call completed');
     }
@@ -314,7 +314,7 @@ class SubscriptionAndEarlyAccessTest extends TestCase
         $proDetail = $this->actingAs($proUser)->get('/jobs/'.$job->id);
         $proDetail->assertStatus(200);
         $proDetail->assertSee('Verified Direct Employer');
-        $proDetail->assertSee('Apply Directly');
+        $proDetail->assertSee('Continue to application site');
         $proDetail->assertDontSee('SecretAI Labs');
     }
 }

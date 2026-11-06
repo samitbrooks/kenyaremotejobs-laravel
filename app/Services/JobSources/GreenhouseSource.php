@@ -94,6 +94,7 @@ class GreenhouseSource implements JobSource
             // salary field.
             'annual_salary_usd' => null,
             'posted_at' => $job['updated_at'],
+            'last_seen_at' => now(),
         ];
     }
 }

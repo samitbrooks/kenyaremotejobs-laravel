@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\WelcomeEmail;
 use App\Models\User;
 use App\Services\JobRecommendationService;
+use App\Support\Matching;
 use App\Support\SafeUrl;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,10 +28,17 @@ class AuthLinkController extends Controller
                 ->with('info', 'Administrator accounts must authenticate via the secure Admin Portal with credentials.');
         }
 
+        abort_if($user->isBanned(), 403, 'This account is blocked.');
+
         $firstConfirmation = $user->email_verified_at === null;
 
         if ($firstConfirmation) {
             $user->forceFill(['email_verified_at' => now()])->save();
+        }
+
+        $profile = Matching::parseProfileCookie($request->cookie(Matching::COOKIE_NAME));
+        if ($profile && ! $user->job_search_profile) {
+            $user->update(['job_search_profile' => $profile]);
         }
 
         Auth::login($user, remember: true);

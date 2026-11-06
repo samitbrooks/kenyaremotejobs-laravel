@@ -41,6 +41,9 @@ Route::get('/jobs', [JobsController::class, 'index'])->name('jobs.index');
 Route::get('/jobs/{id}', [JobsController::class, 'show'])->name('jobs.show');
 
 Route::get('/remote-jobs/{slug}', [CategoryLandingController::class, 'show'])->name('jobs.category');
+Route::redirect('/students', '/remote-jobs/student-jobs-kenya');
+Route::redirect('/campus', '/remote-jobs/student-jobs-kenya');
+Route::redirect('/student-jobs', '/remote-jobs/student-jobs-kenya');
 
 Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
 Route::get('/companies/{slug}', [CompanyController::class, 'show'])->name('companies.show');
@@ -127,6 +130,7 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/blog/{post:id}/edit', [AdminController::class, 'blogEdit']);
     Route::get('/users', [AdminController::class, 'users']);
     Route::get('/users/{user}', [AdminController::class, 'userShow']);
+    Route::patch('/users/{user}/ban', [AdminController::class, 'updateUserBan'])->name('admin.users.ban');
     Route::get('/email', [AdminController::class, 'email'])->name('admin.email');
     Route::post('/email/trial', [AdminController::class, 'sendFreeTrialBroadcast'])->name('admin.email.trial');
     Route::post('/email/follow-up', [AdminController::class, 'sendFollowUpBroadcast'])->name('admin.email.follow-up');

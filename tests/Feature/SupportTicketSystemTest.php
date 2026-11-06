@@ -228,12 +228,20 @@ class SupportTicketSystemTest extends TestCase
             'email' => 'admin@kenyaremotejobs.com',
         ]);
 
+        $customer = User::factory()->create(['subscribed' => true]);
         $ticket = SupportTicket::factory()->create([
+            'user_id' => $customer->id,
             'email' => 'customer@example.com',
             'name' => 'Customer Name',
             'status' => 'open',
             'subject' => 'Need help upgrading',
         ]);
+
+        $this->actingAs($admin)
+            ->withSession(['admin_authenticated' => true])
+            ->get(route('admin.tickets.show', $ticket))
+            ->assertOk()
+            ->assertSee('Pro Active');
 
         $response = $this->actingAs($admin)
             ->withSession(['admin_authenticated' => true])

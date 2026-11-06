@@ -19,12 +19,11 @@ return [
     // Optional environment fallback password for initial admin portal setup/bootstrap
     'admin_password' => env('ADMIN_PASSWORD'),
 
-    // All listings remain active on the site for 30 days.
+    // Listings expire after 30 days unless a live employer feed still lists them.
     'listing_days' => 30,
 
-    // Fresh listings posted in the last 48 hours are in Early Access for
-    // Pro subscribers (recruiter first-look window). After 48 hours,
-    // the apply link opens freely to all registered visitors.
+    // The legacy freshness badge uses this window. Listing age does not
+    // grant free application access; access is checked separately.
     'early_access_hours' => 48,
 
     // A purchase grants N unlock credits for one tier, spendable on any job
@@ -65,11 +64,11 @@ return [
             'button_text' => 'Get Pro Access — KES 250/mo',
             'note' => 'Instant M-Pesa STK push • 7-day money-back guarantee',
             'features' => [
-                'Instant 0-second apply access to all 800+ verified remote jobs (bypass the 48h wait).',
+                'Application links across current job listings.',
                 'Direct Kenyan employer listings actively seeking talent in Nairobi & across Kenya.',
-                'Unlimited AI CV & ATS tailoring copilot (beat screening algorithms).',
+                'Unlimited AI CV tailoring suggestions for your applications.',
                 'Tailored cover letters generated for every role you apply to.',
-                'Kenya Remote Contractor Toolkit: USD invoicing templates, Wise/Payoneer setup, W-8BEN tax guide.',
+                'Kenya Remote Contractor Toolkit: USD invoicing templates, Wise/Payoneer setup, contractor guides.',
                 'VIP WhatsApp support & application CRM tracker.',
             ],
         ],

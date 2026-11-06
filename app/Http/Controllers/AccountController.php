@@ -73,6 +73,8 @@ class AccountController extends Controller
         }
 
         $user = User::where('email', $email)->first();
+        abort_if($user?->isBanned(), 403, 'This account is blocked.');
+
         $isNewAccount = ! $user;
 
         if (! $user) {

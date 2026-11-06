@@ -2,119 +2,61 @@
 
 @php
     $isUnlocked = (bool) $unlocked;
+    $redactor = app(\App\Services\Redactor::class);
     $plainDescription = \App\Support\Format::stripHtml($job->description ?? '');
-    $preview = \App\Support\Format::truncate($plainDescription, 110);
-    $visibleTags = $job->tags ?? [];
+    $preview = \App\Support\Format::truncate($redactor->redactEmployerIdentity($plainDescription, $job->company), 150);
+    $visibleTags = $redactor->redactTags($job->tags ?? [], $job->company);
     $hourly = \App\Support\SalaryEstimate::estimateHourlyUsd($job->annual_salary_usd, $job->salary);
     $hourlyFormatted = \App\Support\SalaryEstimate::formatHourly($hourly);
-    $isNew = $job->posted_at->gt(now()->subDay());
-    $isEarlyAccess = $job->isEarlyAccess();
     $displaySalary = $hourlyFormatted ?: ($job->salary ?: null);
 @endphp
 
-<a
-    href="{{ url('/jobs/'.$job->id) }}"
-    class="group jobs-micro-card relative flex flex-col justify-between p-5 rounded-[20px] bg-white border border-[#e6e8f2] shadow-[0_2px_12px_rgba(15,23,42,0.04)] hover:border-[#3444da] hover:shadow-[0_16px_36px_rgba(52,68,218,0.12)] hover:-translate-y-1 transition-all h-full min-h-[18.5rem] overflow-hidden"
->
-    {{-- Left Accent Micro-Glow on Hover --}}
-    <span class="absolute left-0 top-3 bottom-3 w-1.5 rounded-r-full bg-[#3444da] opacity-0 group-hover:opacity-100 transition-opacity duration-200" aria-hidden="true"></span>
-
-    {{-- Top & Middle Content Section --}}
-    <div class="space-y-3">
-        {{-- Top Meta Row: Date, Platform/Origin Badges --}}
-        <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
-            <span class="text-xs font-medium text-slate-400 whitespace-nowrap">
-                {{ \App\Support\Format::timeAgo($job->posted_at) }}
-            </span>
-
-            <div class="flex flex-wrap items-center gap-1.5">
-                @if ($job->origin === 'employer')
-                    <span class="inline-flex items-center gap-1 rounded-full bg-blue-50 border border-blue-200/80 px-2 py-0.5 text-[10px] font-bold text-blue-800 shadow-2xs">
-                        <x-icon name="announce" class="h-3 w-3 text-blue-600" /> Direct Employer
-                    </span>
-                @elseif ($job->source_name === 'micro1')
-                    <span class="inline-flex items-center gap-1 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-2 py-0.5 text-[10px] font-bold text-[#3444da] shadow-2xs">
-                        <x-icon name="lightning" class="h-3 w-3 text-[#3444da]" /> micro1 verified
-                    </span>
-                @elseif ($job->source_name === 'Turing')
-                    <span class="inline-flex items-center gap-1 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-2 py-0.5 text-[10px] font-bold text-[#3444da] shadow-2xs">
-                        <x-icon name="sparkle" class="h-3 w-3 text-[#3444da]" /> Global Talent Network
-                    </span>
-                @elseif (! $isUnlocked)
-                    <span class="inline-flex items-center gap-1 rounded-full bg-amber-50 border border-amber-200/80 px-2 py-0.5 text-[10px] font-bold text-amber-800 shadow-2xs">
-                        <x-icon name="lock" class="h-3 w-3 text-amber-600" /> Pro Access
-                    </span>
-                @elseif ($isEarlyAccess)
-                    <span class="inline-flex items-center gap-1 rounded-full bg-amber-50 border border-amber-200/80 px-2 py-0.5 text-[10px] font-bold text-amber-800 shadow-2xs">
-                        <x-icon name="lightning" class="h-3 w-3 text-amber-500" /> Early Access
-                    </span>
-                @endif
-
-                @if ($job->kenya_friendly)
-                    <span class="inline-flex items-center gap-1 text-[#3444da] font-bold text-[10px] bg-[#eef0fe] border border-[#c7ccfb] rounded-full px-2 py-0.5 shadow-2xs" title="East Africa Time (UTC+3) overlap & zero foreign visa requirements">
-                        <x-icon.kenya-flag class="h-2.5 w-2.5 inline" /> Kenya-Friendly
-                    </span>
-                @endif
-            </div>
-        </div>
-
-        {{-- Role Title & Company Logo / Info --}}
-        <div class="space-y-1.5">
-            <h3 class="font-bold text-slate-900 group-hover:text-[#3444da] transition-colors text-base sm:text-lg tracking-tight leading-snug line-clamp-2">
-                {{ $job->title }}
-            </h3>
-
-            <div class="flex items-center gap-2 text-xs text-slate-500">
-                <x-company-logo :company="''" :size="20" class="shrink-0 rounded-md" />
-                <span class="inline-flex items-center gap-1 font-semibold text-slate-700">
-                    <x-icon name="shield" class="h-3.5 w-3.5 text-[#3444da]" />
-                    <span>Verified Direct Employer</span>
-                    <span class="rounded bg-[#eef0fe] border border-[#c7ccfb] px-1.5 py-0.2 text-[9px] font-extrabold uppercase tracking-wider text-[#3444da]">Vetted</span>
-                </span>
-            </div>
-        </div>
-
-        {{-- micro1 Signature: "Required skills" capsules list --}}
-        @if (count($visibleTags) > 0)
-            <div class="pt-1">
-                <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Required skills</div>
-                <div class="flex flex-wrap items-center gap-1.5">
-                    @foreach (array_slice($visibleTags, 0, 3) as $tag)
-                        <span class="jobs-skill-pill">
-                            {{ $tag }}
-                        </span>
-                    @endforeach
-                    @if (count($visibleTags) > 3)
-                        <span class="jobs-skill-pill font-bold text-slate-500">
-                            +{{ count($visibleTags) - 3 }}
-                        </span>
-                    @endif
-                </div>
-            </div>
+<a href="{{ url('/jobs/'.$job->id) }}" class="group jobs-micro-card flex h-full flex-col p-5 sm:p-6">
+    <div class="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
+        <span>{{ \App\Support\Format::timeAgo($job->posted_at) }}</span>
+        @if ($job->kenya_friendly)
+            <span class="font-medium text-[#3444da]" title="Location and timezone wording signals; confirm eligibility with the employer.">Kenya-Friendly</span>
         @endif
     </div>
 
-    {{-- Bottom Section: Compensation + micro1 CTA Button --}}
-    <div class="pt-3.5 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
-        <div class="min-w-0">
-            @if ($displaySalary)
-                <div class="text-xs sm:text-sm font-extrabold text-slate-900 truncate">
-                    <span class="text-xs font-medium text-slate-400 mr-1">Pay:</span>
-                    <span class="text-[#3444da] font-black">{{ $displaySalary }}</span>
-                </div>
-            @else
-                <span class="text-xs font-bold text-slate-700">Competitive Pay</span>
+    <h3 class="mt-3 text-lg font-semibold leading-snug text-slate-900 group-hover:text-[#3444da]">
+        {{ $redactor->redactEmployerIdentity($job->title, $job->company) }}
+    </h3>
+    <p class="mt-2 text-xs text-slate-500">Verified Direct Employer <span class="mx-1 text-slate-300">&middot;</span> Vetted</p>
+    <p class="mt-3 line-clamp-2 text-sm leading-relaxed text-slate-600">{{ $preview }}</p>
+
+    @if (count($visibleTags) > 0)
+        <div class="mt-4 flex flex-wrap gap-1.5">
+            @foreach (array_slice($visibleTags, 0, 3) as $tag)
+                <span class="jobs-skill-pill">{{ $tag }}</span>
+            @endforeach
+            @if (count($visibleTags) > 3)
+                <span class="px-1 py-1 text-xs text-slate-500">+{{ count($visibleTags) - 3 }}</span>
             @endif
         </div>
+    @endif
 
-        <div class="shrink-0">
-            <span class="jobs-micro-cta">
-                <svg class="h-3.5 w-3.5 shrink-0 transform group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                <span>{{ $isUnlocked ? 'Apply Directly' : 'View Role' }}</span>
-            </span>
-        </div>
+    <div class="mb-4 mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-500">
+        @if ($job->isDirectAts())
+            <span>Employer application</span>
+        @endif
+        @if (! $isUnlocked)
+            <span>Pro Access</span>
+        @endif
+        @if (is_int($matchPercent))
+            <span class="font-medium text-[#3444da]">{{ $matchPercent }}% keyword match</span>
+        @endif
+    </div>
+
+    <div class="mt-auto flex items-center justify-between gap-3 border-t border-slate-100 pt-4 text-sm">
+        <span class="font-medium text-slate-900">
+            @if ($displaySalary)
+                @if ($hourlyFormatted) <span class="text-xs font-normal text-slate-500">Est.</span> @endif
+                {{ $redactor->redactEmployerIdentity($displaySalary, $job->company) }}
+            @else
+                <span class="text-xs font-normal text-slate-500">Pay not listed</span>
+            @endif
+        </span>
+        <span class="jobs-micro-cta">{{ $isUnlocked ? 'View application' : 'View role' }} &rarr;</span>
     </div>
 </a>

@@ -20,6 +20,8 @@ class JobsController extends Controller
         $remoteType = trim((string) $request->query('remoteType', ''));
         $kenyaFriendly = $request->query('kenyaFriendly') === 'true';
         $freeOnly = $request->query('freeOnly') === 'true';
+        $onlineWorkOnly = $request->query('onlineWork') === 'true';
+        $directApplyOnly = $request->query('directApply') === 'true';
         $audience = in_array($request->query('audience'), Audience::ORDER, true)
             ? $request->query('audience')
             : null;
@@ -27,14 +29,14 @@ class JobsController extends Controller
 
         // 301 permanent redirect category queries to their dedicated programmatic SEO landing page
         // (Transfers search impressions, resolves canonical clash, and boosts organic rankings)
-        if ($q !== '' && $tag === '' && $remoteType === '' && ! $kenyaFriendly && ! $freeOnly && ! $audience && $page === 1) {
+        if ($q !== '' && $tag === '' && $remoteType === '' && ! $kenyaFriendly && ! $freeOnly && ! $audience && ! $onlineWorkOnly && ! $directApplyOnly && $page === 1) {
             $matchedCategorySlug = JobCategorySeo::findSlugForQuery($q);
             if ($matchedCategorySlug) {
                 return redirect()->route('jobs.category', ['slug' => $matchedCategorySlug], 301);
             }
         }
 
-        $profile = Matching::parseProfileCookie($request->cookie(Matching::COOKIE_NAME));
+        $profile = Matching::profileFor($request->cookie(Matching::COOKIE_NAME), $request->user());
         $sortByMatch = $request->query('sort') === 'match' && $profile !== null;
 
         $query = JobListing::visible();
@@ -71,29 +73,24 @@ class JobsController extends Controller
             $query->whereJsonContains('audience_segments', $audience);
         }
 
-        $total = (clone $query)->count();
+        $candidates = $query->get();
+        if ($onlineWorkOnly) {
+            $candidates = $candidates->filter(fn (JobListing $job): bool => $job->isAccessibleOnlineWork());
+        }
+        if ($directApplyOnly) {
+            $candidates = $candidates->filter(fn (JobListing $job): bool => $job->isDirectAts());
+        }
+        $total = $candidates->count();
         $totalPages = max(1, (int) ceil($total / self::PAGE_SIZE));
         $page = min($page, $totalPages);
 
-        if ($sortByMatch) {
-            // A "best for you" ranking has to happen across the whole
-            // filtered catalog, not just within whatever page would've been
-            // shown by date — so this sorts in memory before slicing,
-            // rather than paginating in the database first.
-            $jobs = $query->get()
-                ->sortByDesc(fn (JobListing $job) => Matching::computeMatchPercent($profile, $job->only(['tags', 'title', 'description'])))
-                ->slice(($page - 1) * self::PAGE_SIZE, self::PAGE_SIZE)
-                ->values();
-        } else {
-            // Prioritize accessible, high-acceptance roles (data annotation, AI training, student, entry-level)
-            $jobs = $query->get()
-                ->sortBy([
-                    fn (JobListing $a, JobListing $b) => $b->accessibilityScore() <=> $a->accessibilityScore(),
-                    fn (JobListing $a, JobListing $b) => ($b->posted_at?->timestamp ?? 0) <=> ($a->posted_at?->timestamp ?? 0),
-                ])
-                ->slice(($page - 1) * self::PAGE_SIZE, self::PAGE_SIZE)
-                ->values();
-        }
+        $ranked = $sortByMatch
+            ? $candidates->sortByDesc(fn (JobListing $job): int => Matching::computeMatchPercent($profile, $job->only(['tags', 'title', 'description'])))
+            : $candidates->sortBy([
+                fn (JobListing $a, JobListing $b): int => $b->accessibilityScore() <=> $a->accessibilityScore(),
+                fn (JobListing $a, JobListing $b): int => ($b->posted_at?->timestamp ?? 0) <=> ($a->posted_at?->timestamp ?? 0),
+            ]);
+        $jobs = $ranked->slice(($page - 1) * self::PAGE_SIZE, self::PAGE_SIZE)->values();
 
         $tags = JobListing::pluck('tags')
             ->flatten()
@@ -130,6 +127,8 @@ class JobsController extends Controller
             'remoteType' => $remoteType,
             'kenyaFriendly' => $kenyaFriendly,
             'freeOnly' => $freeOnly,
+            'onlineWorkOnly' => $onlineWorkOnly,
+            'directApplyOnly' => $directApplyOnly,
             'audience' => $audience,
             'sortByMatch' => $sortByMatch,
             'hasProfile' => (bool) $profile,
@@ -154,8 +153,7 @@ class JobsController extends Controller
             ], 410);
         }
 
-        $listingLifetimeDays = (int) config('jobs.listing_days', 30);
-        $isExpired = ! $admin && $job->posted_at && $job->posted_at->isBefore(now()->subDays($listingLifetimeDays));
+        $isExpired = ! $admin && ! $job->isCurrentlyVisible();
 
         $isEarlyAccess = ! $isExpired && $job->isEarlyAccess();
         $isEmployerDirect = $job->origin === 'employer';
@@ -164,7 +162,7 @@ class JobsController extends Controller
             || ($user && $user->jobUnlocks()->where('job_listing_id', $job->id)->exists())
         );
 
-        $profile = Matching::parseProfileCookie($request->cookie(Matching::COOKIE_NAME));
+        $profile = Matching::profileFor($request->cookie(Matching::COOKIE_NAME), $request->user());
         $matchPercent = $profile ? Matching::computeMatchPercent($profile, $job->only(['tags', 'title', 'description'])) : null;
 
         $firstTag = is_array($job->tags) && ! empty($job->tags) ? $job->tags[0] : null;

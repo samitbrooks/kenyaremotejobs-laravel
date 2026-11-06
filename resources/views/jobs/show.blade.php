@@ -37,9 +37,9 @@
             <div class="mb-4 rounded-2xl border border-[#c7ccfb] bg-[#eef0fe]/80 p-3.5 shadow-xs flex flex-wrap items-center justify-between gap-3">
                 <div class="flex items-center gap-2 text-xs text-slate-800 font-semibold">
                     <span class="inline-flex h-2 w-2 rounded-full bg-[#3444da] animate-pulse shrink-0"></span>
-                    <span><strong>24-Hour Free Pass Active:</strong> Unrestricted access to view company details and apply directly. Expires in {{ auth()->user()->trialRemainingHuman() }}.</span>
+                    <span><strong>24-Hour Free Pass Active:</strong> Access to application links and career tools. Employer identity stays hidden here. Expires in {{ auth()->user()->trialRemainingHuman() }}.</span>
                 </div>
-                <a href="{{ route('pricing') }}" class="btn-pop rounded-full bg-[#3444da] px-3.5 py-1 text-xs font-bold text-white hover:bg-[#2633bf] shadow-2xs transition">
+                <a href="{{ route('pricing') }}" class="btn-pop rounded-lg bg-[#3444da] px-3.5 py-1 text-xs font-bold text-white hover:bg-[#2633bf] shadow-2xs transition">
                     Keep Access with Pro &rarr;
                 </a>
             </div>
@@ -51,12 +51,12 @@
             <div class="mt-4 flex items-start gap-4">
                 <x-company-logo :company="''" :size="64" />
                 <div class="min-w-0 flex-1">
-                    <h1 class="text-2xl font-extrabold sm:text-3xl text-slate-900 tracking-tight">{{ $job->title }}</h1>
+                    <h1 class="text-2xl font-semibold sm:text-3xl text-slate-900 tracking-tight">{{ $job->title }}</h1>
                     <div class="flex items-center gap-2 mt-1.5 text-xs text-slate-500">
                         <span class="inline-flex items-center gap-1.5 font-semibold text-slate-700">
                             <x-icon name="shield" class="h-4 w-4 text-[#3444da]" />
                             <span>Verified Direct Employer</span>
-                            <span class="rounded bg-[#eef0fe] border border-[#c7ccfb] px-1.5 py-0.2 text-[9px] font-extrabold uppercase tracking-wider text-[#3444da]">Vetted</span>
+                            <span class="rounded bg-[#eef0fe] border border-[#c7ccfb] px-1.5 py-0.2 text-[9px] font-semibold uppercase tracking-wider text-[#3444da]">Vetted</span>
                         </span>
                         @if ($isExpired)
                             <span>&middot; <span class="text-amber-800 font-semibold">Archived Posting</span></span>
@@ -72,7 +72,7 @@
                     </span>
                 @elseif ($isEarlyAccess)
                     <span class="inline-flex items-center gap-1 rounded-full bg-amber-50 border border-amber-200/80 px-3.5 py-1 text-xs font-semibold text-amber-900">
-                        <x-icon name="sparkle" class="h-3.5 w-3.5 text-amber-600" /> Early Access ({{ $job->earlyAccessHoursRemaining() }}h left)
+                        <x-icon name="sparkle" class="h-3.5 w-3.5 text-amber-600" /> Recently posted
                     </span>
                 @else
                     <span class="inline-flex items-center gap-1 rounded-full bg-slate-100/90 border border-slate-200/70 px-3.5 py-1 text-xs font-medium text-slate-700">
@@ -98,7 +98,7 @@
                     </span>
                 @endif
                 <span class="text-sm font-medium text-slate-500">{{ $job->remote_type }}</span>
-                <span class="text-sm font-medium text-slate-500">&middot; {{ $job->location }}</span>
+                <span class="text-sm font-medium text-slate-500">&middot; {{ $redactor->redactEmployerIdentity($job->location, $job->company) }}</span>
                 @if ($job->salary)
                     <span class="text-sm font-medium text-slate-500">&middot; {{ $job->salary }}</span>
                 @endif
@@ -114,22 +114,35 @@
             @if (! empty($job->audience_segments))
                 <div class="mt-3 flex flex-wrap gap-1.5">
                     @foreach ($job->audience_segments as $segment)
-                        <a href="{{ url('/jobs') }}?audience={{ $segment }}" class="inline-flex items-center gap-1.5 rounded-full bg-slate-100/90 border border-slate-200/80 px-3 py-1 text-xs font-semibold text-slate-700 transition hover:bg-[#eef0fe] hover:text-[#3444da] hover:border-[#c7ccfb]">
+                        <a href="{{ url('/jobs') }}?audience={{ $segment }}" class="inline-flex items-center gap-1.5 rounded-lg bg-slate-100/90 border border-slate-200/80 px-3 py-1 text-xs font-semibold text-slate-700 transition hover:bg-[#eef0fe] hover:text-[#3444da] hover:border-[#c7ccfb]">
                             <x-icon :name="\App\Support\Audience::ICONS[$segment] ?? 'globe'" class="h-3.5 w-3.5 text-[#3444da]" /> {{ \App\Support\Audience::LABELS[$segment] ?? $segment }}
                         </a>
                     @endforeach
                 </div>
             @endif
 
+            <x-job-eligibility :job="$job" />
+            @if (! $isExpired)
+                <div class="mt-5 rounded-2xl border border-[#c7ccfb] bg-[#eef0fe] p-5 text-sm text-slate-700">
+                    <h2 class="font-bold text-slate-900">Your application workflow</h2>
+                    <ol class="mt-2 flex flex-wrap gap-4"><li>1. Check requirements</li><li>2. Tailor your CV below</li><li>3. Apply through the portal</li><li>4. Track your progress</li></ol>
+                    @if (! auth()->user()?->hasActiveAccess() && ! auth()->user()?->hasUsedTrial())
+                        <a href="{{ route('trial.activate', ['next' => route('jobs.show', ['id' => $job->id], false)]) }}" class="mt-3 inline-block font-bold text-[#3444da]">Try all four steps with a 24-hour free pass &rarr;</a>
+                    @elseif (auth()->user()?->onTrial())
+                        <a href="{{ route('pricing') }}" class="mt-3 inline-block font-bold text-[#3444da]">Keep these tools after your trial — see Pro plans &rarr;</a>
+                    @endif
+                </div>
+            @endif
+
             {{-- Smart Career Tools Bar: AI CV Tailoring & Application Tracker --}}
-            <div class="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-3xl border border-slate-200/80 bg-gradient-to-r from-[#eef0fe]/40 via-white to-slate-50/60 p-5 sm:p-6 shadow-sm">
+            <div class="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-3xl border border-slate-200/80 p-5 sm:p-6 shadow-sm">
                 <div class="flex items-center gap-3.5">
                     <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#eef0fe] text-[#3444da] border border-[#c7ccfb] shadow-2xs">
                         <x-icon name="sparkle" class="h-5 w-5" />
                     </div>
                     <div>
                         <p class="text-xs font-bold uppercase tracking-wider text-slate-900">AI Application Copilot</p>
-                        <p class="text-xs text-slate-500 mt-0.5">Generate role-tailored resume bullets & cover letter to pass ATS</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Prepare role-focused CV bullets and a cover letter to review</p>
                     </div>
                 </div>
                 <div class="flex flex-wrap items-center gap-2.5">
@@ -163,37 +176,37 @@
                         <div class="inline-flex items-center gap-2 rounded-full bg-amber-100 border border-amber-300 px-4 py-1.5 text-xs font-bold text-amber-900 mb-4">
                             <x-icon name="warning" class="h-3.5 w-3.5 text-amber-700 inline" /> Application Window Closed
                         </div>
-                        <h3 class="text-2xl font-extrabold text-slate-900">This position has expired or been filled</h3>
+                        <h3 class="text-2xl font-semibold text-slate-900">This position has expired or been filled</h3>
                         <p class="mt-2 text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
                             This vacancy was listed over 30 days ago. The hiring team is no longer reviewing applications for this cycle.
                         </p>
                         <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
-                            <a href="{{ url('/jobs') }}" class="btn-pop rounded-full bg-[#3444da] px-7 py-3 text-sm font-bold text-white hover:bg-[#2633bf] shadow-xs transition">
+                            <a href="{{ url('/jobs') }}" class="btn-pop rounded-lg bg-[#3444da] px-7 py-3 text-sm font-bold text-white hover:bg-[#2633bf] shadow-xs transition">
                                 Browse Current Live Remote Jobs &rarr;
                             </a>
-                            <a href="{{ url('/collections') }}" class="rounded-full bg-white border border-slate-200/80 px-5 py-3 text-sm font-semibold text-slate-700 hover:border-[#3444da] hover:text-[#3444da] transition shadow-2xs">
+                            <a href="{{ url('/collections') }}" class="rounded-lg bg-white border border-slate-200/80 px-5 py-3 text-sm font-semibold text-slate-700 hover:border-[#3444da] hover:text-[#3444da] transition shadow-2xs">
                                 Curated Collections
                             </a>
                         </div>
                     </div>
                 @elseif ($canApply)
-                    <div class="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-10 text-center shadow-lg">
+                    <div class="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-10 text-center shadow-sm">
                         @if ($job->origin === 'employer')
                             <p class="mb-4 inline-flex items-center gap-1.5 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-4 py-1 text-xs font-bold text-[#3444da]">
                                 <x-icon.kenya-flag class="h-3.5 w-3.5 inline" /> Verified Direct Employer &middot; Pro Access Active
                             </p>
                         @elseif ($job->isDirectAts())
                             <p class="mb-4 inline-flex items-center gap-1.5 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-4 py-1 text-xs font-bold text-[#3444da]">
-                                <x-icon name="check" class="h-4 w-4 text-[#3444da]" /> Verified Direct Portal &middot; No 3rd-Party Account Needed
+                                <x-icon name="check" class="h-4 w-4 text-[#3444da]" /> Employer Application Page
                             </p>
                         @elseif ($isEarlyAccess)
                             <p class="mb-4 inline-flex items-center gap-1.5 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-4 py-1 text-xs font-bold text-[#3444da]">
-                                <x-icon name="check" class="h-4 w-4 text-[#3444da]" /> Pro Member Early Access Active
+                                <x-icon name="check" class="h-4 w-4 text-[#3444da]" /> Pro Membership Active
                             </p>
                         @endif
-                        <h3 class="text-2xl font-extrabold text-slate-900">Ready to submit your application?</h3>
+                        <h3 class="text-2xl font-semibold text-slate-900">Ready to submit your application?</h3>
                         <p class="mt-1.5 text-sm text-slate-500 max-w-md mx-auto leading-relaxed">
-                            Apply directly through the official recruitment portal without any middleman accounts.
+                            {{ $job->isDirectAts() ? 'Continue to the employer’s application page. The employer may require an account or assessment.' : 'This opportunity uses a hiring platform or another listing site. You may need a separate account or further application steps.' }}
                         </p>
                         <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
                             <a
@@ -202,7 +215,7 @@
                                 rel="noopener noreferrer"
                                 class="btn-pop inline-flex items-center justify-center gap-2 rounded-full bg-[#3444da] hover:bg-[#2633bf] px-8 py-3.5 text-center font-bold text-white shadow-md shadow-[#3444da]/20 transition"
                             >
-                                Apply Directly &#8599;
+                                {{ $job->isDirectAts() ? 'Apply Directly' : 'Continue to application site' }} &#8599;
                             </a>
 
                             <livewire:track-application-button :job-id="$job->id" />
@@ -213,15 +226,15 @@
                     </div>
                 @elseif ($job->origin === 'employer')
                     {{-- Direct Employer Listing Seeking Kenyan Talent (Pro Exclusive) --}}
-                    <div class="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-10 text-center shadow-xl">
+                    <div class="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-10 text-center shadow-sm">
                         <div class="inline-flex items-center gap-2 rounded-full bg-[#eef0fe] border border-[#c7ccfb] px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#3444da] mb-4">
                             <x-icon.kenya-flag class="h-3.5 w-3.5 inline" /> Verified Employer Actively Seeking Kenyan Talent &middot; Full Access with Pro
                         </div>
-                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                        <h3 class="text-2xl sm:text-3xl font-semibold text-slate-900">
                             Verified Direct Employer is Exclusively Hiring in Kenya
                         </h3>
                         <p class="mt-2.5 text-sm text-slate-600 max-w-lg mx-auto leading-relaxed">
-                            This employer is specifically recruiting Kenyan talent. <strong class="text-slate-900">Pro Membership gives you full access to view company details and apply directly</strong> across the site.
+                            This employer is specifically recruiting Kenyan talent. <strong class="text-slate-900">Pro Membership gives you access to application links and career tools</strong> across the site.
                         </p>
 
                         <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3.5 max-w-lg mx-auto text-left text-xs font-medium text-slate-700">
@@ -242,13 +255,13 @@
                         <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
                             <a
                                 href="{{ url('/pricing') }}"
-                                class="btn-pop w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-[#3444da] hover:bg-[#2633bf] px-8 py-3.5 text-sm font-bold text-white shadow-md shadow-[#3444da]/20 transition"
+                                class="btn-pop w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-[#3444da] hover:bg-[#2633bf] px-8 py-3.5 text-sm font-bold text-white shadow-sm transition"
                             >
                                 Get Full Access to All Jobs (KES 250/mo)
                             </a>
                             @if (auth()->guest() || ! auth()->user()->hasUsedTrial())
                                 <a
-                                    href="{{ route('trial.activate') }}"
+                                    href="{{ route('trial.activate', ['next' => route('jobs.show', ['id' => $job->id], false)]) }}"
                                     class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-[#c7ccfb] bg-[#eef0fe] px-6 py-3.5 text-sm font-bold text-[#3444da] hover:bg-[#e0e4fd] transition"
                                 >
                                     Start 24-Hour Free Pass &rarr;
@@ -261,12 +274,12 @@
                         </p>
                     </div>
                 @else
-                    {{-- Early Access High-Converting Box --}}
-                    <div class="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-10 text-center shadow-xl">
+                    {{-- Pro Access High-Converting Box --}}
+                    <div class="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-10 text-center shadow-sm">
                         <div class="inline-flex items-center gap-2 rounded-full bg-amber-50 border border-amber-200 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-amber-900 mb-4">
-                            <x-icon name="sparkle" class="h-4 w-4 text-amber-600" /> Early Access &middot; Full Access to All 800+ Jobs
+                            <x-icon name="sparkle" class="h-4 w-4 text-amber-600" /> Pro Access &middot; Application Access & Career Tools
                         </div>
-                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                        <h3 class="text-2xl sm:text-3xl font-semibold text-slate-900">
                             {{ $canApply ? 'Beat 500+ Applicants & 0-Second Direct Apply' : 'Unlock 0-Second Direct Apply' }}
                         </h3>
                         <p class="mt-2.5 text-sm text-slate-600 max-w-lg mx-auto leading-relaxed">
@@ -291,13 +304,13 @@
                         <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
                             <a
                                 href="{{ url('/pricing') }}"
-                                class="btn-pop w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-[#3444da] hover:bg-[#2633bf] px-8 py-3.5 text-sm font-bold text-white shadow-md shadow-[#3444da]/20 transition"
+                                class="btn-pop w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-[#3444da] hover:bg-[#2633bf] px-8 py-3.5 text-sm font-bold text-white shadow-sm transition"
                             >
                                 Unlock Immediate Apply Access (KES 250) &rarr;
                             </a>
                             @if (auth()->guest() || ! auth()->user()->hasUsedTrial())
                                 <a
-                                    href="{{ route('trial.activate') }}"
+                                    href="{{ route('trial.activate', ['next' => route('jobs.show', ['id' => $job->id], false)]) }}"
                                     class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-[#c7ccfb] bg-[#eef0fe] px-6 py-3.5 text-sm font-bold text-[#3444da] hover:bg-[#e0e4fd] transition shadow-2xs"
                                 >
                                     Start 24-Hour Free Pass &rarr;
@@ -317,7 +330,7 @@
             <section class="mt-14 border-t border-slate-200 pt-10">
                 <div class="flex items-center justify-between">
                     <div>
-                        <h2 class="text-xl font-extrabold text-slate-900">Related Remote Jobs Open to Kenya</h2>
+                        <h2 class="text-xl font-semibold text-slate-900">Related Remote Jobs Open to Kenya</h2>
                         <p class="text-xs text-slate-500 mt-0.5">Explore similar international remote opportunities</p>
                     </div>
                     <a href="{{ url('/jobs') }}" class="text-xs font-bold text-[#3444da] hover:underline">

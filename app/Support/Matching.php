@@ -2,6 +2,8 @@
 
 namespace App\Support;
 
+use App\Models\User;
+
 /**
  * Ported from the Next.js version's src/lib/matching.ts. Deterministic
  * keyword overlap — no external API, so it costs nothing to run per job.
@@ -90,6 +92,15 @@ class Matching
             + $roleScore * (count($roles) > 0 ? $weights['role'] : 0)) / $totalWeight;
 
         return (int) round($weighted * 100);
+    }
+
+    /**
+     * @return array{skills: array<int, string>, roles: array<int, string>, yearsExperience: int}|null
+     */
+    public static function profileFor(?string $cookie, ?User $user = null): ?array
+    {
+        return self::parseProfileCookie($cookie)
+            ?? self::parseProfileCookie(json_encode($user?->job_search_profile));
     }
 
     private static function normalize(string $value): string

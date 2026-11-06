@@ -30,7 +30,7 @@ class FaqController extends Controller
                     ],
                     [
                         'question' => 'Is KenyaRemoteJobs free to use?',
-                        'answer' => 'Yes! Searching jobs, viewing company names, reading descriptions, and applying to direct employer listings is 100% free. We also offer Pro Early Access starting from KES 299/month (via M-Pesa), which gives you full instant access to apply to freshly posted remote jobs during the 48-hour recruiter early-look window, plus unlimited AI CV tailoring.',
+                        'answer' => 'Browsing job titles, descriptions, and requirements is free. Pro membership starts at KES 250/month via M-Pesa and includes application links and AI CV tailoring. Application access requires membership, an active trial or referral pass, or an individual job unlock; listings do not become free to apply to after 48 hours.',
                     ],
                     [
                         'question' => 'How are job listings sourced and verified?',
@@ -52,8 +52,8 @@ class FaqController extends Controller
                         'answer' => 'No. Jobs flagged as Kenya-Friendly do not require US or EU work authorization. Companies hire Kenyan talent either as independent international contractors (B2B) or through global Employer of Record (EOR) services like Deel, Remote.com, or OysterHR.',
                     ],
                     [
-                        'question' => 'What is Pro Early Access?',
-                        'answer' => 'When a new job is first posted, the first 20 applicants receive over 80% of recruiter interviews. Pro Early Access grants you immediate access to apply to freshly posted jobs during their initial 48-hour window before they open to the general public.',
+                        'question' => 'What is Pro membership?',
+                        'answer' => 'Pro includes application links across current listings, AI CV tailoring, cover letters, and application tracking. You pay for platform access and tools. Employers make their own hiring decisions; membership does not guarantee interviews, a job offer, or a salary.',
                     ],
                     [
                         'question' => 'How does the AI CV & Cover Letter Copilot work?',

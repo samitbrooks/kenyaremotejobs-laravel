@@ -14,7 +14,6 @@ class DirectAtsResolver
         'ashbyhq.com',
         'lever.co',
         'apply.workable.com',
-        'workable.com',
         'bamboohr.com',
         'smartrecruiters.com',
         'recruitee.com',
@@ -41,33 +40,47 @@ class DirectAtsResolver
         'remotive.com',
         'remotive.io',
         'arbeitnow.com',
+        'jobs.workable.com',
+        'linkedin.com',
+        'indeed.com',
+        'glassdoor.com',
+        'flexjobs.com',
+        'news.ycombinator.com',
     ];
 
     public static function isDirectUrl(?string $url): bool
     {
-        if (! $url) {
-            return false;
-        }
-
-        $urlLower = mb_strtolower($url);
-        foreach (self::DIRECT_PATTERNS as $pattern) {
-            if (str_contains($urlLower, $pattern)) {
-                return true;
-            }
-        }
-
-        return false;
+        return self::matchesHost($url, self::DIRECT_PATTERNS);
     }
 
     public static function isAggregatorUrl(?string $url): bool
     {
-        if (! $url) {
+        return self::matchesHost($url, self::AGGREGATOR_PATTERNS);
+    }
+
+    public static function isHiringPlatformUrl(?string $url): bool
+    {
+        return self::matchesHost($url, ['micro1.ai', 'turing.com', 'outlier.ai', 'alignerr.com', 'dataannotation.tech', 'oneforma.com', 'appen.com']);
+    }
+
+    public static function isEmployerApplicationUrl(?string $url): bool
+    {
+        return self::isDirectUrl($url)
+            && ! self::isHiringPlatformUrl($url)
+            && strlen(trim((string) parse_url($url, PHP_URL_PATH), '/')) > 0;
+    }
+
+    /**
+     * @param  array<int, string>  $domains
+     */
+    private static function matchesHost(?string $url, array $domains): bool
+    {
+        if (! $url || ! in_array(strtolower((string) parse_url($url, PHP_URL_SCHEME)), ['http', 'https'], true)) {
             return false;
         }
-
-        $urlLower = mb_strtolower($url);
-        foreach (self::AGGREGATOR_PATTERNS as $pattern) {
-            if (str_contains($urlLower, $pattern)) {
+        $host = strtolower(rtrim((string) parse_url($url, PHP_URL_HOST), '.'));
+        foreach ($domains as $domain) {
+            if ($host === $domain || str_ends_with($host, '.'.$domain)) {
                 return true;
             }
         }
@@ -100,9 +113,12 @@ class DirectAtsResolver
      */
     public static function extractDirectLink(string $content): ?string
     {
-        $patterns = implode('|', array_map('preg_quote', self::DIRECT_PATTERNS));
-        if (preg_match('/https?:\/\/[^\s"\'<>]*(?:'.$patterns.')[^\s"\'<>]*/i', $content, $matches)) {
-            return rtrim($matches[0], '.,;)');
+        preg_match_all('/https?:\/\/[^\s"\'<>]+/i', html_entity_decode($content, ENT_QUOTES | ENT_HTML5), $matches);
+        foreach ($matches[0] as $match) {
+            $url = rtrim($match, '.,;)');
+            if (self::isEmployerApplicationUrl($url)) {
+                return $url;
+            }
         }
 
         return null;

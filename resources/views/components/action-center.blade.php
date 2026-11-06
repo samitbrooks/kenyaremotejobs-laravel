@@ -11,7 +11,7 @@
                 actions: [
                     { label: 'Wise & M-Pesa Pay', query: 'How do I receive payments from foreign clients in Kenya via Wise and M-Pesa?' },
                     { label: 'W-8BEN Tax Form', query: 'How do I fill Form W-8BEN with my KRA PIN to avoid 30% US tax?' },
-                    { label: 'Pro 48h Early Access', query: 'Why should I get Pro Early Access and how does it give me full access?' },
+                    { label: 'Pro Membership', query: 'Why should I get Pro Membership and how does it give me full access?' },
                     { label: 'Top Jobs Hiring Now', query: 'Which remote roles are actively hiring Kenyans right now?' }
                 ]
             }
@@ -114,18 +114,18 @@
             type="button"
             @click="toggle"
             aria-label="Open Daisy AI Career Advisor"
-            class="btn-pop group fixed bottom-5 right-5 z-50 flex items-center gap-2.5 rounded-full border border-slate-200/90 bg-white/95 px-4 py-2.5 text-slate-900 shadow-xl backdrop-blur-md transition hover:border-[#3444da] hover:shadow-2xl hover:scale-105"
+            class="btn-pop group fixed bottom-5 right-5 z-50 flex items-center gap-2.5 rounded-lg border border-slate-200/90 bg-white/95 px-4 py-2.5 text-slate-900 shadow-sm transition hover:border-[#3444da] hover:shadow-sm"
         >
-            <span class="relative flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-tr from-[#3444da] to-[#2633bf] text-white shadow-xs">
+            <span class="relative flex h-7 w-7 items-center justify-center rounded-full text-white shadow-xs">
                 <x-icon name="sparkle" class="h-4 w-4 animate-pulse" />
                 <span class="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
-                    <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#3444da] opacity-75"></span>
+                    <span class="absolute inline-flex h-full w-full rounded-full bg-[#3444da] opacity-75"></span>
                     <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#3444da]"></span>
                 </span>
             </span>
             <div class="text-left">
                 <p class="text-xs font-bold leading-tight tracking-wide flex items-center gap-1.5 text-slate-900">
-                    Ask Daisy AI <span class="hidden sm:inline-flex items-center gap-1 text-[10px] uppercase font-extrabold tracking-wider text-[#3444da] bg-[#eef0fe] px-1.5 py-0.5 rounded-full border border-[#c7ccfb]"><x-icon.kenya-flag class="h-3 w-3 inline" /> Free Advisor</span>
+                    Ask Daisy AI <span class="hidden sm:inline-flex items-center gap-1 text-[10px] uppercase font-semibold tracking-wider text-[#3444da] bg-[#eef0fe] px-1.5 py-0.5 rounded-full border border-[#c7ccfb]"><x-icon.kenya-flag class="h-3 w-3 inline" /> Free Advisor</span>
                 </p>
                 <p class="text-[10px] text-slate-500 leading-none mt-0.5 hidden sm:block">
                     Remote Career, Wise &amp; Tax Guide
@@ -144,11 +144,11 @@
         x-transition:leave="transition ease-in duration-200"
         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
         x-transition:leave-end="opacity-0 translate-y-4 scale-95"
-        class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col w-[390px] max-w-[calc(100vw-2rem)] rounded-3xl bg-white/95 backdrop-blur-lg border-2 border-slate-200/90 shadow-2xl overflow-hidden"
+        class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col w-[390px] max-w-[calc(100vw-2rem)] rounded-3xl bg-white/95 backdrop-blur-lg border-2 border-slate-200/90 shadow-sm overflow-hidden"
         :class="isMinimized ? 'h-auto' : 'h-[550px] max-h-[82vh]'"
     >
         {{-- Header --}}
-        <div class="flex items-center justify-between bg-gradient-to-r from-[#3444da] to-[#2633bf] px-4 py-3 text-white shadow-xs select-none">
+        <div class="flex items-center justify-between px-4 py-3 text-white shadow-xs select-none">
             <div class="flex items-center gap-2.5 min-w-0">
                 <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-white/15 text-white shadow-xs">
                     <x-icon name="sparkle" class="h-4 w-4" />
@@ -190,28 +190,28 @@
                     <button
                         type="button"
                         @click="send('How do I receive payments from foreign clients in Kenya via Wise and M-Pesa?')"
-                        class="shrink-0 inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[11px] font-medium text-slate-700 hover:border-[#3444da] hover:text-[#3444da] hover:bg-[#eef0fe]/40 transition"
+                        class="shrink-0 inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-[11px] font-medium text-slate-700 hover:border-[#3444da] hover:text-[#3444da] hover:bg-[#eef0fe]/40 transition"
                     >
                         <x-icon name="dollar" class="h-3 w-3 text-[#3444da]" /> Wise &amp; M-Pesa
                     </button>
                     <button
                         type="button"
                         @click="send('How do I fill Form W-8BEN with my KRA PIN to avoid 30% US tax?')"
-                        class="shrink-0 inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[11px] font-medium text-slate-700 hover:border-[#3444da] hover:text-[#3444da] hover:bg-[#eef0fe]/40 transition"
+                        class="shrink-0 inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-[11px] font-medium text-slate-700 hover:border-[#3444da] hover:text-[#3444da] hover:bg-[#eef0fe]/40 transition"
                     >
                         <x-icon name="document" class="h-3 w-3 text-[#3444da]" /> W-8BEN Tax
                     </button>
                     <button
                         type="button"
-                        @click="send('Why should I get Pro Early Access and how does it give me full access?')"
-                        class="shrink-0 inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[11px] font-medium text-slate-700 hover:border-[#3444da] hover:text-[#3444da] hover:bg-[#eef0fe]/40 transition"
+                        @click="send('Why should I get Pro Membership and how does it give me full access?')"
+                        class="shrink-0 inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-[11px] font-medium text-slate-700 hover:border-[#3444da] hover:text-[#3444da] hover:bg-[#eef0fe]/40 transition"
                     >
-                        <x-icon name="lightning" class="h-3 w-3 text-[#3444da]" /> Pro Early Access
+                        <x-icon name="lightning" class="h-3 w-3 text-[#3444da]" /> Pro Membership
                     </button>
                     <button
                         type="button"
                         @click="send('Which remote roles are actively hiring Kenyans right now?')"
-                        class="shrink-0 inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[11px] font-medium text-slate-700 hover:border-[#3444da] hover:text-[#3444da] hover:bg-[#eef0fe]/40 transition"
+                        class="shrink-0 inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-[11px] font-medium text-slate-700 hover:border-[#3444da] hover:text-[#3444da] hover:bg-[#eef0fe]/40 transition"
                     >
                         <x-icon name="sparkle" class="h-3 w-3 text-[#3444da]" /> Matched Roles
                     </button>
@@ -250,7 +250,7 @@
                                                         <template x-if="act.url">
                                                             <a
                                                                 :href="act.url"
-                                                                class="btn-pop inline-flex items-center gap-1 rounded-full bg-white border border-slate-200 px-2.5 py-1 text-[11px] font-bold text-slate-800 shadow-xs hover:border-[#3444da] hover:text-[#3444da] hover:bg-[#eef0fe]/40 transition"
+                                                                class="btn-pop inline-flex items-center gap-1 rounded-lg bg-white border border-slate-200 px-2.5 py-1 text-[11px] font-bold text-slate-800 shadow-xs hover:border-[#3444da] hover:text-[#3444da] hover:bg-[#eef0fe]/40 transition"
                                                             >
                                                                 <span x-text="act.label"></span> &rarr;
                                                             </a>
@@ -259,7 +259,7 @@
                                                             <button
                                                                 type="button"
                                                                 @click="send(act.query)"
-                                                                class="btn-pop inline-flex items-center gap-1 rounded-full bg-white border border-slate-200 px-2.5 py-1 text-[11px] font-bold text-slate-800 shadow-xs hover:border-[#3444da] hover:text-[#3444da] hover:bg-[#eef0fe]/40 transition"
+                                                                class="btn-pop inline-flex items-center gap-1 rounded-lg bg-white border border-slate-200 px-2.5 py-1 text-[11px] font-bold text-slate-800 shadow-xs hover:border-[#3444da] hover:text-[#3444da] hover:bg-[#eef0fe]/40 transition"
                                                             >
                                                                 <span x-text="act.label"></span>
                                                             </button>
@@ -309,7 +309,7 @@
                     </form>
                     <div class="mt-1.5 flex items-center justify-between text-[10px] text-foreground/40 px-1">
                         <span>Daisy AI &bull; Free Career Assistant</span>
-                        <a href="{{ url('/pricing') }}" class="text-[#3444da] font-semibold hover:underline">Get Pro Early Access &rarr;</a>
+                        <a href="{{ url('/pricing') }}" class="text-[#3444da] font-semibold hover:underline">Get Pro Membership &rarr;</a>
                     </div>
                 </div>
             </div>

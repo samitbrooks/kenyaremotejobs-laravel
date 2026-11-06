@@ -3,7 +3,7 @@
 @php
     $rows = [
         ['label' => 'Employer', 'value' => 'Verified Direct Employer (Protected)'],
-        ['label' => 'Location', 'value' => $job->location],
+        ['label' => 'Location', 'value' => app(\App\Services\Redactor::class)->redactEmployerIdentity($job->location, $job->company)],
         ['label' => 'Remote type', 'value' => $job->remote_type],
     ];
     if ($job->salary) {
@@ -22,7 +22,7 @@
     if ($job->origin === 'employer') {
         $rows[] = ['label' => 'Vetting', 'value' => 'Verified Direct Employer (Seeking Kenyan Talent)'];
     } elseif ($job->kenya_friendly) {
-        $rows[] = ['label' => 'Vetting', 'value' => 'Verified Kenya-Friendly Match (EAT Timezone & Visa Cleared)'];
+        $rows[] = ['label' => 'Vetting', 'value' => 'Automated Kenya-friendly signals — confirm eligibility'];
     }
 @endphp
 

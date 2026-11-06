@@ -14,7 +14,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
 
-#[Fillable(['name', 'email', 'password', 'referral_code', 'referred_by_id', 'subscribed', 'subscribed_at', 'survey_pass_purchased_at', 'trial_started_at', 'trial_ends_at', 'pro_access_until', 'marketing_opt_out_at', 'last_job_digest_at', 'follow_up_sent_at', 'free_tailors_remaining'])]
+#[Fillable(['name', 'email', 'password', 'referral_code', 'referred_by_id', 'subscribed', 'subscribed_at', 'survey_pass_purchased_at', 'trial_started_at', 'trial_ends_at', 'pro_access_until', 'marketing_opt_out_at', 'last_job_digest_at', 'follow_up_sent_at', 'free_tailors_remaining', 'job_search_profile'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -39,9 +39,11 @@ class User extends Authenticatable
             'pro_access_until' => 'datetime',
             'referred_by_id' => 'integer',
             'marketing_opt_out_at' => 'datetime',
+            'banned_at' => 'datetime',
             'last_job_digest_at' => 'datetime',
             'follow_up_sent_at' => 'datetime',
             'free_tailors_remaining' => 'integer',
+            'job_search_profile' => 'array',
         ];
     }
 
@@ -135,9 +137,14 @@ class User extends Authenticatable
         return ucwords(str_replace(['.', '_', '-'], ' ', $emailParts[0] ?? 'there'));
     }
 
+    public function isBanned(): bool
+    {
+        return $this->banned_at !== null;
+    }
+
     public function receivesMarketingEmail(): bool
     {
-        return $this->marketing_opt_out_at === null;
+        return ! $this->isBanned() && $this->marketing_opt_out_at === null;
     }
 
     public function jobApplications(): HasMany
@@ -147,12 +154,12 @@ class User extends Authenticatable
 
     public function canUseAiTailor(): bool
     {
-        return $this->subscribed || ($this->free_tailors_remaining ?? 0) > 0;
+        return $this->hasActiveAccess() || ($this->free_tailors_remaining ?? 0) > 0;
     }
 
     public function useAiTailor(): void
     {
-        if (! $this->subscribed && ($this->free_tailors_remaining ?? 0) > 0) {
+        if (! $this->hasActiveAccess() && ($this->free_tailors_remaining ?? 0) > 0) {
             $this->decrement('free_tailors_remaining');
         }
     }

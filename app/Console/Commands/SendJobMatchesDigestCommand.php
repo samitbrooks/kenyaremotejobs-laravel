@@ -70,7 +70,7 @@ class SendJobMatchesDigestCommand extends Command
 
         // Query eligible registered users
         $query = User::query()
-            ->whereNull('marketing_opt_out_at')
+            ->whereNull('banned_at')->whereNull('marketing_opt_out_at')
             ->when($userId, fn ($q) => $q->where('id', $userId))
             ->when(! $isForce, function ($q) {
                 $q->where(function ($sub) {

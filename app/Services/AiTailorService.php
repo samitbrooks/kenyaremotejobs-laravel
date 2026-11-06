@@ -34,7 +34,7 @@ class AiTailorService
 
     private function callGemini(string $apiKey, JobListing $job, ?array $profile, ?string $userExperience): ?array
     {
-        $prompt = "You are an elite remote career coach and ATS optimization specialist helping a top-tier Kenyan candidate apply for a global remote job.\n\n"
+        $prompt = "Help a Kenyan candidate prepare an honest application. Use only the candidate experience supplied. Never invent achievements, employers, qualifications, or metrics. Use clearly bracketed placeholders for missing evidence. Never reveal the employer name, website, or contact information in output.\n\n"
             ."Job Title: {$job->title}\n"
             ."Employer: Verified Direct Employer\n"
             ."Location: {$job->location} (Remote: {$job->remote_type})\n"
@@ -47,7 +47,7 @@ class AiTailorService
             ."\nProvide a JSON response with these exact keys:\n"
             ."1. match_score: integer between 90 and 97 (showing the boosted ATS score after tailoring)\n"
             ."2. key_requirements: array of 4-6 concise keywords/requirements extracted from the job\n"
-            ."3. tailored_bullets: array of 3-5 high-impact, action-oriented resume bullet points highlighting relevant achievements matching this role\n"
+            ."3. tailored_bullets: array of 3-5 suggested CV bullets based only on supplied experience; bracket missing facts and never invent achievements\n"
             ."4. tailored_cover_letter: a compelling 3-paragraph cover letter addressed to the hiring team, highlighting timezone readiness (East Africa Time / UTC+3) and proven remote independence.\n"
             ."5. kenya_advantage: a concise 1-sentence interview talking point emphasizing their timezone overlap with Europe/UK/US East mornings.\n"
             .'Return ONLY valid JSON.';
@@ -101,17 +101,16 @@ class AiTailorService
         ])), 0, 5);
 
         $bullets = [
-            "Spearheaded remote delivery of high-priority {$title} initiatives, leveraging {$primarySkill} to increase team execution efficiency by 30%.",
-            "Partnered across global cross-functional stakeholders using {$secondarySkill} and structured async updates, maintaining 99%+ on-time milestone delivery.",
-            'Optimized daily workflows for East Africa Time (UTC+3) cross-timezone overlap, ensuring seamless handoffs between European and North American teams.',
-            'Architected proactive documentation and standard operating procedures that reduced onboarding friction and accelerated sprint velocity.',
+            "Used {$primarySkill} to [describe work you actually completed] for [your real project or team].",
+            "Applied {$secondarySkill} to [describe a problem you solved], resulting in [an outcome you can support].",
+            'Documented [a real process or resolution] so [describe who benefited and how].',
+            'Coordinated [a real task or project] with [your team], using [tools you have actually used].',
         ];
 
         $coverLetter = "Dear Hiring Team,\n\n"
-            ."I am writing to express my strong interest in the {$title} role. Having reviewed the role objectives, I am deeply impressed by your team's commitment to high-impact distributed collaboration. With hands-on experience in ".implode(', ', array_slice($tags, 0, 3)).", I am confident in my ability to hit the ground running and deliver immediate value to your organization.\n\n"
-            ."In my previous remote engagements, I have built a track record of driving results autonomously while maintaining clear, transparent asynchronous communication. Operating from Kenya on East Africa Time (EAT / UTC+3), I offer seamless workday overlap with both European afternoon cycles and US Eastern morning standups, allowing for real-time collaboration alongside deep focused work.\n\n"
-            ."I welcome the opportunity to discuss how my background in {$primarySkill} and disciplined remote execution align with your upcoming milestones. Thank you for your time and consideration.\n\n"
-            ."Warm regards,\nCandidate";
+            ."I am applying for the {$title} role. My experience in [your relevant work or project] includes [a concrete example matching a stated requirement].\n\n"
+            ."I have used {$primarySkill} to [describe work you actually completed]. [Explain how your skills meet the role requirements and confirm your availability for the stated working hours.]\n\n"
+            ."Thank you for considering my application. I would welcome the opportunity to discuss my experience.\n\nKind regards,\n[Your name]";
 
         return [
             'match_score' => 94,

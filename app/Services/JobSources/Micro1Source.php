@@ -34,17 +34,8 @@ class Micro1Source implements JobSource
             // Handled via fallback below
         }
 
-        // Fallback to bundled snapshot if API failed or blocked hosting datacenter IP
         if (empty($jobs)) {
-            $fallbackPath = resource_path('data/micro1_jobs.json');
-            if (file_exists($fallbackPath)) {
-                $content = file_get_contents($fallbackPath);
-                $jobs = json_decode((string) $content, true) ?: [];
-            }
-        }
-
-        if (empty($jobs)) {
-            throw new RuntimeException('micro1 fetch failed: no jobs retrieved from API or bundled snapshot');
+            throw new RuntimeException('micro1 fetch failed: no current jobs retrieved from the live API');
         }
 
         return collect($jobs)

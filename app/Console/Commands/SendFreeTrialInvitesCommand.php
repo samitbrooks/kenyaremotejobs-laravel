@@ -24,7 +24,7 @@ class SendFreeTrialInvitesCommand extends Command
         $dryRun = (bool) $this->option('dry-run');
 
         $query = User::query()
-            ->whereNull('marketing_opt_out_at')
+            ->whereNull('banned_at')->whereNull('marketing_opt_out_at')
             ->where('subscribed', false);
 
         if ($targetEmail) {

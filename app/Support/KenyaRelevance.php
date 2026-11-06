@@ -8,6 +8,9 @@ namespace App\Support;
 class KenyaRelevance
 {
     private const POSITIVE_LOCATION_SIGNALS = [
+        'kenya',
+        'nairobi',
+        'emea',
         'worldwide',
         'anywhere',
         'global',
@@ -112,6 +115,14 @@ class KenyaRelevance
 
         if ($hasHardExclusion) {
             $score = max(0, $score - 5);
+        }
+
+        $hasKenyaLocation = (bool) preg_match('/\b(kenya|nairobi)\b/i', $location);
+        $hasBroadLocation = (bool) preg_match('/\b(worldwide|anywhere|global|emea)\b/i', $location);
+        $hasRestrictedCountry = (bool) preg_match('/\b(south africa|nigeria|ghana|egypt|philippines|india|pakistan|united states|united kingdom|canada|australia|germany)\b/i', $location);
+        if ($hasRestrictedCountry && ! $hasKenyaLocation && ! $hasBroadLocation) {
+            $hasHardExclusion = true;
+            $reasons[] = 'Location names another country; Kenya eligibility is not established.';
         }
 
         $kenyaFriendly = ! $hasHardExclusion && $score >= 2;

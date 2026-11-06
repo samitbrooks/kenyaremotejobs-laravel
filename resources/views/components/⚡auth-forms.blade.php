@@ -79,6 +79,12 @@ new class extends Component
         RateLimiter::clear('auth-link:'.$email);
 
         $user = User::where('email', $email)->first();
+        if ($user?->isBanned()) {
+            $this->error = 'This account is blocked.';
+
+            return;
+        }
+
         $isNewAccount = ! $user;
 
         if (! $user) {

@@ -17,7 +17,7 @@ class HomeController extends Controller
         $totalKenyaFriendly = JobListing::visible()->where('kenya_friendly', true)->count();
         $totalFree = JobListing::visible()->where('origin', 'employer')->count();
 
-        $profile = Matching::parseProfileCookie(request()->cookie(Matching::COOKIE_NAME));
+        $profile = Matching::profileFor(request()->cookie(Matching::COOKIE_NAME), auth()->user());
 
         if ($profile) {
             $feed = JobListing::visible()->where('kenya_friendly', true)->get()
@@ -25,14 +25,13 @@ class HomeController extends Controller
                 ->take(12)
                 ->values();
         } else {
-            // Prioritize accessible, high-acceptance roles (data annotation, AI training, student & campus, transcription)
-            $feed = JobListing::visible()->where('kenya_friendly', true)->get()
+            $candidates = JobListing::visible()->where('kenya_friendly', true)->get();
+            $onlineWork = $candidates->filter(fn (JobListing $job): bool => $job->isAccessibleOnlineWork());
+            $feed = ($onlineWork->isNotEmpty() ? $onlineWork : $candidates)
                 ->sortBy([
-                    fn (JobListing $a, JobListing $b) => $b->accessibilityScore() <=> $a->accessibilityScore(),
-                    fn (JobListing $a, JobListing $b) => ($b->posted_at?->timestamp ?? 0) <=> ($a->posted_at?->timestamp ?? 0),
-                ])
-                ->take(12)
-                ->values();
+                    fn (JobListing $a, JobListing $b): int => $b->accessibilityScore() <=> $a->accessibilityScore(),
+                    fn (JobListing $a, JobListing $b): int => ($b->posted_at?->timestamp ?? 0) <=> ($a->posted_at?->timestamp ?? 0),
+                ])->take(12)->values();
         }
 
         if ($feed->isEmpty()) {
@@ -61,7 +60,7 @@ class HomeController extends Controller
             ->filter(fn ($a) => $a['count'] > 0)
             ->values();
 
-        $justPosted = JobListing::visible()->latest('posted_at')->limit(5)->get();
+        $justPosted = $feed->sortByDesc('posted_at')->take(5)->values();
 
         return view('home', [
             'total' => $total,
