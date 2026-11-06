@@ -37,7 +37,7 @@ class KenyaCareerBotService
      */
     private function callGemini(string $apiKey, string $message, array $history): ?array
     {
-        $systemInstruction = "You are 'Daisy AI', the expert remote career advisor on KenyaRemoteJobs.com.\n"
+        $systemInstruction = "You are 'Kazi', the free AI career assistant on KenyaRemoteJobs.com. Your help is available without registration or membership. Never require payment to answer a question. Pro membership is separate from this free assistant.\n"
             ."Your mission is to guide Kenyan and East African professionals into landing high-paying global remote roles (US, UK, Europe, Canada, Worldwide).\n"
             ."Tone: Warm, highly practical, Kenyan-grounded, encouraging, and authoritative on remote contracting.\n"
             ."Key Knowledge:\n"
@@ -219,16 +219,16 @@ class KenyaCareerBotService
 
         // Default warm response
         return [
-            'reply' => "Hello! I am **Daisy AI**, your KenyaRemoteJobs career advisor 🇰🇪\n\n"
+            'reply' => "Hello! I am **Kazi**, your free KenyaRemoteJobs career assistant 🇰🇪\n\n"
                 ."I can help you with:\n"
                 ."• **Foreign Payments:** How to receive USD/EUR via Wise, Payoneer & M-Pesa.\n"
                 ."• **US Taxes:** How to complete IRS Form W-8BEN with your KRA PIN.\n"
-                ."• **Pro Membership:** Application links, AI CV tailoring, and application tracking.\n"
+                ."• **Application Planning:** Shortlist suitable roles and prepare your next application.\n"
                 ."• **Job Recommendations:** Finding roles that match your skills with EAT timezone overlap.\n\n"
                 .'What can I help you with today?',
             'suggested_actions' => [
-                ['label' => 'Browse 800+ Jobs', 'url' => '/jobs'],
-                ['label' => 'Check Pro Membership', 'url' => '/pricing'],
+                ['label' => 'Browse current jobs', 'url' => '/jobs'],
+                ['label' => 'Find my matches', 'url' => '/match'],
             ],
         ];
     }
@@ -242,7 +242,7 @@ class KenyaCareerBotService
 
         if (str_contains($lower, 'job') || str_contains($lower, 'find') || str_contains($lower, 'work')) {
             return [
-                ['label' => 'Browse 800+ Jobs', 'url' => '/jobs'],
+                ['label' => 'Browse current jobs', 'url' => '/jobs'],
                 ['label' => 'Find Your Match', 'url' => '/match'],
             ];
         }
@@ -255,7 +255,7 @@ class KenyaCareerBotService
         }
 
         return [
-            ['label' => 'Browse 800+ Jobs', 'url' => '/jobs'],
+            ['label' => 'Browse current jobs', 'url' => '/jobs'],
             ['label' => 'Unlock Pro Full Access', 'url' => '/pricing'],
         ];
     }

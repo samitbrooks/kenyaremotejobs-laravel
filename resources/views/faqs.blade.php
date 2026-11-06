@@ -59,7 +59,7 @@
         <div class="mt-16 rounded-3xl border border-slate-200/80 bg-gradient-to-br from-[#f8f9fd] via-white to-[#eef0fe]/50 p-8 sm:p-12 text-center text-slate-900 shadow-sm">
             <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Have a specific question not covered here?</h2>
             <p class="mt-2.5 text-sm text-slate-600 max-w-lg mx-auto leading-relaxed">
-                Daisy AI, our free Kenyan contractor advisor, can answer questions about tax withholding, Wise accounts, or tailoring your CV.
+                Kazi, our free Kenyan contractor advisor, can answer questions about tax withholding, Wise accounts, or tailoring your CV.
             </p>
             <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
                 <a href="{{ url('/pricing') }}" class="btn-pop rounded-full bg-[#3444da] hover:bg-[#2633bf] px-8 py-3.5 text-sm font-bold text-white shadow-md shadow-[#3444da]/20 transition">

@@ -18,13 +18,13 @@ class ActionCenterAndScrollPopupTest extends TestCase
     {
         $response = $this->get('/');
         $response->assertStatus(200);
-        $response->assertSee('Ask Daisy AI');
+        $response->assertSee('Ask Kazi');
         $response->assertSee('Prepare your next remote job application');
 
         $subscriber = User::factory()->create(['subscribed' => true]);
         $jobsResponse = $this->actingAs($subscriber)->get('/jobs');
         $jobsResponse->assertStatus(200);
-        $jobsResponse->assertSee('Ask Daisy AI');
+        $jobsResponse->assertSee('Ask Kazi');
     }
 
     public function test_career_bot_service_answers_foreign_payments(): void
@@ -74,12 +74,12 @@ class ActionCenterAndScrollPopupTest extends TestCase
         $this->assertStringContainsString('M-Pesa', $response->json('reply'));
     }
 
-    public function test_career_bot_service_identifies_as_daisy_ai(): void
+    public function test_career_bot_service_identifies_as_kazi(): void
     {
         $bot = app(KenyaCareerBotService::class);
         $result = $bot->ask('Hello, who are you?');
 
-        $this->assertStringContainsString('Daisy AI', $result['reply']);
+        $this->assertStringContainsString('Kazi', $result['reply']);
     }
 
     public function test_career_bot_api_validation(): void
@@ -115,5 +115,24 @@ class ActionCenterAndScrollPopupTest extends TestCase
         $loginMail = new LoginLinkEmail($user, 'https://kenyaremotejobs.com/auth/verify', true);
         $this->assertSame('Daisy from Kenya Remote Jobs', $loginMail->envelope()->from->name);
         $loginMail->assertSeeInHtml('Daisy from Kenya Remote Jobs');
+    }
+
+    public function test_kazi_is_available_to_guests_without_a_membership(): void
+    {
+        $this->mock(KenyaCareerBotService::class)->shouldReceive('ask')->once()
+            ->with('Hello Kazi', [])->andReturn(['reply' => 'Kazi is free to chat with.', 'suggested_actions' => []]);
+
+        $this->postJson('/api/career-bot', ['message' => 'Hello Kazi'])
+            ->assertOk()->assertJsonPath('reply', 'Kazi is free to chat with.');
+
+        $this->assertGuest();
+        $this->assertDatabaseCount('users', 0);
+    }
+
+    public function test_kazi_panel_explains_free_access_and_provides_minimise_controls(): void
+    {
+        $this->get('/')->assertSee('Ask Kazi')->assertSee('Free — no membership needed.')
+            ->assertSee('Minimise Kazi conversation')->assertSee('Restore Kazi conversation')
+            ->assertDontSee('Daisy AI');
     }
 }

@@ -169,11 +169,11 @@ class TelegramService
         $this->setMyCommands();
 
         $this->callApi('setMyDescription', [
-            'description' => "Official Kenya Remote Jobs Bot 🇰🇪🚀\n\nExplore current remote roles with Kenya location signals. Practical online work comes first: customer support, admin, writing, transcription and annotation. Review each role’s eligibility and requirements. Employer identities stay hidden on our site.\n\nPowered by Daisy AI to answer your career, Wise/M-Pesa, and CV questions 24/7.",
+            'description' => "Official Kenya Remote Jobs Bot 🇰🇪🚀\n\nExplore current remote roles with Kenya location signals. Practical online work comes first: customer support, admin, writing, transcription and annotation. Review each role’s eligibility and requirements. Employer identities stay hidden on our site.\n\nPowered by Kazi to answer your career, Wise/M-Pesa, and CV questions 24/7.",
         ]);
 
         return $this->callApi('setMyShortDescription', [
-            'short_description' => 'Online work and remote careers for Kenya. Job requirements, application options and Daisy AI career help.',
+            'short_description' => 'Online work and remote careers for Kenya. Job requirements, application options and Kazi career help.',
         ]);
     }
 
@@ -580,7 +580,7 @@ class TelegramService
 
             if ($command === '/start') {
                 $reply = "🇰🇪 <b>Welcome to Kenya Remote Jobs Assistant!</b>\n\n"
-                    ."I am Daisy AI, your 24/7 remote career bot. Here is what I can do for you:\n\n"
+                    ."I am Kazi, your 24/7 remote career bot. Here is what I can do for you:\n\n"
                     ."🔍 <code>/jobs</code> — Practical online work first, plus remote careers\n"
                     ."🧰 <code>/online</code> — Practical support, admin, writing and annotation roles\n"
                     ."🔗 <code>/direct</code> — Employer application pages\n"

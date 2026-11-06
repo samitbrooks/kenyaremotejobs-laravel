@@ -169,7 +169,7 @@ class SitemapController extends Controller
         $lines[] = '';
         $lines[] = '## Optional';
         $lines[] = "- [About {$siteName}]({$url}/about): Mission, background, and platform overview.";
-        $lines[] = "- [Interactive Career Advisor Bot]({$url}/api/career-bot): API endpoint powering Daisy AI, the local career advisor for Kenyan professionals.";
+        $lines[] = "- [Interactive Career Advisor Bot]({$url}/api/career-bot): API endpoint powering Kazi, the local career advisor for Kenyan professionals.";
 
         return Response::make(implode("\n", $lines), 200, [
             'Content-Type' => 'text/plain; charset=utf-8',
