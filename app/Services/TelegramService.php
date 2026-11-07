@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Models\JobListing;
 use App\Models\TelegramMessage;
-use App\Support\SalaryEstimate;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
@@ -460,11 +459,6 @@ class TelegramService
         $redactor = app(Redactor::class);
         foreach ($jobs as $index => $job) {
             $num = $index + 1;
-            $hourly = SalaryEstimate::estimateHourlyUsd($job->annual_salary_usd, $job->salary);
-            $hourlyStr = SalaryEstimate::formatHourly($hourly);
-            $salarySafe = htmlspecialchars($redactor->redactEmployerIdentity($job->salary ?? '', $job->company), ENT_QUOTES | ENT_SUBSTITUTE);
-            $payInfo = $hourlyStr ? "💰 <b>Est. Rate:</b> {$hourlyStr}" : ($job->salary ? "💰 <b>Pay:</b> {$salarySafe}" : '💰 <b>Pay:</b> Not stated by employer');
-
             $titleSafe = htmlspecialchars(mb_substr($redactor->redactEmployerIdentity($job->title, $job->company), 0, 120), ENT_QUOTES | ENT_SUBSTITUTE);
             $remoteType = htmlspecialchars(mb_substr($redactor->redactEmployerIdentity($job->location ?: 'Location not specified', $job->company), 0, 100), ENT_QUOTES | ENT_SUBSTITUTE);
             $jobUrl = url('/jobs/'.$job->id);
@@ -477,7 +471,6 @@ class TelegramService
             }
             $html .= "🏢 <b>Employer:</b> 🔒 <i>Employer identity protected</i>\n";
             $html .= "🌍 <b>Location:</b> {$remoteType} — confirm eligibility\n";
-            $html .= "{$payInfo}\n";
             $html .= $job->isDirectAts()
                 ? "🔗 <b>Application:</b> Employer application page (account or assessment may be required)\n"
                 : "🔗 <b>Application:</b> Hiring platform or listing site (additional steps may apply)\n";

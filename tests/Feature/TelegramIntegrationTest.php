@@ -730,11 +730,18 @@ class TelegramIntegrationTest extends TestCase
     {
         $job = $this->createTelegramRole('private', ['title' => 'HiddenBrand Customer Support', 'tags' => ['HiddenBrand'], 'location' => 'Kenya — HiddenBrand Ltd']);
 
-        $digest = app(TelegramService::class)->formatJobDigest(collect([$job]));
+        $statedPayJob = $this->createTelegramRole('stated-pay', ['salary' => '70K-80K']);
+        $estimatedPayJob = $this->createTelegramRole('estimated-pay', ['salary' => '$80k - $110k', 'annual_salary_usd' => ['min' => 80000, 'max' => 110000]]);
+
+        $digest = app(TelegramService::class)->formatJobDigest(collect([$job, $statedPayJob, $estimatedPayJob]));
 
         $this->assertStringNotContainsString('HiddenBrand', $digest);
         $this->assertStringNotContainsString('jobs.ashbyhq.com', $digest);
-        $this->assertStringContainsString('Not stated by employer', $digest);
+        $this->assertStringNotContainsString('Not stated by employer', $digest);
+        $this->assertStringNotContainsString('<b>Pay:</b>', $digest);
+        $this->assertStringNotContainsString('<b>Est. Rate:</b>', $digest);
+        $this->assertStringNotContainsString('70K-80K', $digest);
+        $this->assertStringNotContainsString('$80k - $110k', $digest);
         $this->assertStringContainsString('Employer application page (account or assessment may be required)', $digest);
         $this->assertStringContainsString('Employer identities remain hidden', $digest);
         $this->assertStringNotContainsString('No degree required', $digest);
